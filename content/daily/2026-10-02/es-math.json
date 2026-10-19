@@ -1,0 +1,16 @@
+{
+  "id": "math:2026-10-02:universal",
+  "date": "2026-10-02",
+  "locale": "es",
+  "kind": "math",
+  "numbers": [
+    100,
+    8,
+    1,
+    9,
+    9,
+    8
+  ],
+  "target": 809,
+  "reference": "(100 × 8) + (1 × 9)"
+}

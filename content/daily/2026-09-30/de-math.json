@@ -1,0 +1,16 @@
+{
+  "id": "math:2026-09-30:universal",
+  "date": "2026-09-30",
+  "locale": "de",
+  "kind": "math",
+  "numbers": [
+    50,
+    6,
+    1,
+    1,
+    7,
+    9
+  ],
+  "target": 301,
+  "reference": "(50 × 6) + (1 × 1)"
+}

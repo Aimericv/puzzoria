@@ -1,0 +1,13 @@
+{
+  "all": {"games":["ranking","rather"],"labels":{"en":"All categories","fr":"Toutes les catégories","es":"Todas las categorías","de":"Alle Kategorien"}},
+  "food": {"games":["ranking"],"labels":{"en":"Food","fr":"Cuisine","es":"Comida","de":"Essen"}},
+  "countries": {"games":["ranking"],"labels":{"en":"Countries to visit","fr":"Pays à visiter","es":"Países para visitar","de":"Reiseziele"}},
+  "gaming": {"games":["ranking","rather"],"labels":{"en":"Gaming","fr":"Jeux vidéo","es":"Videojuegos","de":"Gaming"}},
+  "movies": {"games":["ranking"],"labels":{"en":"Movies","fr":"Films","es":"Películas","de":"Filme"}},
+  "random": {"games":["ranking","rather"],"labels":{"en":"Random","fr":"Aléatoire","es":"Aleatorio","de":"Zufällig"}},
+  "animals": {"games":["ranking"],"labels":{"en":"Animals","fr":"Animaux","es":"Animales","de":"Tiere"}},
+  "funny": {"games":["rather"],"labels":{"en":"Funny","fr":"Drôle","es":"Divertido","de":"Lustig"}},
+  "difficult": {"games":["rather"],"labels":{"en":"Hard choices","fr":"Choix difficiles","es":"Decisiones difíciles","de":"Schwere Entscheidungen"}},
+  "life": {"games":["rather"],"labels":{"en":"Life","fr":"Vie","es":"Vida","de":"Leben"}},
+  "money": {"games":["rather"],"labels":{"en":"Money","fr":"Argent","es":"Dinero","de":"Geld"}}
+}

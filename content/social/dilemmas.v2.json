@@ -1,0 +1,572 @@
+[
+  [
+    "free-travel-v2",
+    "money",
+    "adventure",
+    "security",
+    [
+      "Travel anywhere for free",
+      "Voyager partout gratuitement",
+      "Viajar gratis a cualquier lugar",
+      "Überall kostenlos reisen"
+    ],
+    [
+      "Eat anywhere for free",
+      "Manger partout gratuitement",
+      "Comer gratis en cualquier lugar",
+      "Überall kostenlos essen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "passive-job-v2",
+    "money",
+    "freedom",
+    "social",
+    [
+      "Receive €2,000 monthly without working",
+      "Recevoir 2 000 € par mois sans travailler",
+      "Recibir 2.000 € al mes sin trabajar",
+      "Monatlich 2.000 € ohne Arbeit erhalten"
+    ],
+    [
+      "Earn €8,000 monthly doing a job you love",
+      "Gagner 8 000 € par mois dans un métier que tu adores",
+      "Ganar 8.000 € al mes en un trabajo que te encanta",
+      "Monatlich 8.000 € im geliebten Beruf verdienen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "dream-car-v2",
+    "money",
+    "adventure",
+    "security",
+    [
+      "Own your dream car",
+      "Posséder la voiture de tes rêves",
+      "Tener el coche de tus sueños",
+      "Dein Traumauto besitzen"
+    ],
+    [
+      "Never pay rent again",
+      "Ne plus jamais payer de loyer",
+      "No volver a pagar alquiler",
+      "Nie wieder Miete zahlen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "cash-trip-v2",
+    "money",
+    "security",
+    "adventure",
+    [
+      "Receive €5,000 today",
+      "Recevoir 5 000 € aujourd’hui",
+      "Recibir 5.000 € hoy",
+      "Heute 5.000 € bekommen"
+    ],
+    [
+      "Take a fully paid six-month trip",
+      "Partir six mois en voyage tous frais payés",
+      "Viajar seis meses con todos los gastos pagados",
+      "Sechs Monate mit bezahlten Reisekosten verreisen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "time-salary-v2",
+    "money",
+    "freedom",
+    "security",
+    [
+      "Work half as much for the same salary",
+      "Travailler deux fois moins pour le même salaire",
+      "Trabajar la mitad con el mismo sueldo",
+      "Für dasselbe Gehalt halb so viel arbeiten"
+    ],
+    [
+      "Double your salary with the same working hours",
+      "Doubler ton salaire sans changer tes horaires",
+      "Duplicar tu sueldo con el mismo horario",
+      "Bei gleichen Arbeitszeiten doppelt verdienen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "pause-rewind-v2",
+    "funny",
+    "freedom",
+    "security",
+    [
+      "Pause time for ten minutes each day",
+      "Arrêter le temps dix minutes par jour",
+      "Pausar el tiempo diez minutos al día",
+      "Die Zeit täglich zehn Minuten anhalten"
+    ],
+    [
+      "Undo one mistake each day",
+      "Annuler une erreur par jour",
+      "Deshacer un error al día",
+      "Täglich einen Fehler rückgängig machen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "tiny-giant-v2",
+    "funny",
+    "adventure",
+    "security",
+    [
+      "Be tiny for one day",
+      "Être minuscule pendant une journée",
+      "Ser diminuto durante un día",
+      "Einen Tag winzig sein"
+    ],
+    [
+      "Be a giant for one day",
+      "Être géant pendant une journée",
+      "Ser gigante durante un día",
+      "Einen Tag ein Riese sein"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "rhyme-subtitles-v2",
+    "funny",
+    "social",
+    "security",
+    [
+      "Everything you say rhymes",
+      "Tout ce que tu dis rime",
+      "Todo lo que dices rima",
+      "Alles Gesagte reimt sich"
+    ],
+    [
+      "Everything you say appears as subtitles",
+      "Tout ce que tu dis s’affiche en sous-titres",
+      "Todo lo que dices aparece subtitulado",
+      "Alles Gesagte erscheint als Untertitel"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "teleport-fly-v2",
+    "funny",
+    "freedom",
+    "adventure",
+    [
+      "Teleport once a day",
+      "Te téléporter une fois par jour",
+      "Teletransportarte una vez al día",
+      "Dich einmal täglich teleportieren"
+    ],
+    [
+      "Fly as slowly as you walk",
+      "Voler aussi lentement que tu marches",
+      "Volar tan despacio como caminas",
+      "So langsam fliegen, wie du gehst"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "robot-dragon-v2",
+    "funny",
+    "security",
+    "adventure",
+    [
+      "Have a robot assistant",
+      "Avoir un robot assistant",
+      "Tener un robot asistente",
+      "Einen Roboterassistenten haben"
+    ],
+    [
+      "Have a friendly miniature dragon",
+      "Avoir un petit dragon amical",
+      "Tener un pequeño dragón amistoso",
+      "Einen freundlichen Minidrachen haben"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "mountain-sea-v2",
+    "life",
+    "adventure",
+    "freedom",
+    [
+      "Live in the mountains",
+      "Vivre à la montagne",
+      "Vivir en la montaña",
+      "In den Bergen leben"
+    ],
+    [
+      "Live by the sea",
+      "Vivre au bord de la mer",
+      "Vivir junto al mar",
+      "Am Meer leben"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "four-days-v2",
+    "life",
+    "freedom",
+    "security",
+    [
+      "Work four long days a week",
+      "Travailler quatre longues journées par semaine",
+      "Trabajar cuatro días largos a la semana",
+      "Vier lange Tage pro Woche arbeiten"
+    ],
+    [
+      "Work five short days a week",
+      "Travailler cinq courtes journées par semaine",
+      "Trabajar cinco días cortos a la semana",
+      "Fünf kurze Tage pro Woche arbeiten"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "plan-spontaneous-v2",
+    "life",
+    "security",
+    "adventure",
+    [
+      "Plan every holiday in detail",
+      "Planifier chaque voyage en détail",
+      "Planear cada viaje al detalle",
+      "Jeden Urlaub genau planen"
+    ],
+    [
+      "Choose your destination at the last minute",
+      "Choisir ta destination au dernier moment",
+      "Elegir tu destino a última hora",
+      "Dein Reiseziel spontan wählen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "small-large-v2",
+    "life",
+    "social",
+    "freedom",
+    [
+      "Have many casual friends",
+      "Avoir beaucoup d’amis occasionnels",
+      "Tener muchos amigos ocasionales",
+      "Viele lockere Freundschaften haben"
+    ],
+    [
+      "Have a small circle of very close friends",
+      "Avoir quelques amis très proches",
+      "Tener unos pocos amigos muy cercanos",
+      "Wenige sehr enge Freunde haben"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "garden-view-v2",
+    "life",
+    "security",
+    "adventure",
+    [
+      "Have your own garden",
+      "Avoir ton propre jardin",
+      "Tener tu propio jardín",
+      "Einen eigenen Garten haben"
+    ],
+    [
+      "Have a breathtaking view from your window",
+      "Avoir une vue extraordinaire depuis ta fenêtre",
+      "Tener vistas increíbles desde tu ventana",
+      "Eine atemberaubende Aussicht haben"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "remember-forget-v2",
+    "difficult",
+    "security",
+    "freedom",
+    [
+      "Remember everything you read",
+      "Te souvenir de tout ce que tu lis",
+      "Recordar todo lo que lees",
+      "Alles Gelesene behalten"
+    ],
+    [
+      "Forget any memory you choose",
+      "Oublier les souvenirs de ton choix",
+      "Olvidar los recuerdos que elijas",
+      "Beliebige Erinnerungen vergessen können"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "no-sleep-v2",
+    "difficult",
+    "freedom",
+    "security",
+    [
+      "Never need to sleep",
+      "Ne plus avoir besoin de dormir",
+      "No necesitar dormir nunca",
+      "Nie schlafen müssen"
+    ],
+    [
+      "Always wake up completely rested",
+      "Toujours te réveiller parfaitement reposé",
+      "Despertarte siempre completamente descansado",
+      "Immer vollkommen erholt aufwachen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "expert-curious-v2",
+    "difficult",
+    "security",
+    "adventure",
+    [
+      "Know everything about one subject",
+      "Tout savoir sur un seul sujet",
+      "Saberlo todo sobre un tema",
+      "Alles über ein Thema wissen"
+    ],
+    [
+      "Know a little about every subject",
+      "En savoir un peu sur tous les sujets",
+      "Saber un poco de todos los temas",
+      "Über jedes Thema ein wenig wissen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "home-adventure-v2",
+    "difficult",
+    "security",
+    "adventure",
+    [
+      "Keep a perfect home forever",
+      "Garder un logement parfait toute ta vie",
+      "Tener un hogar perfecto para siempre",
+      "Für immer ein perfektes Zuhause behalten"
+    ],
+    [
+      "Explore a new country every month",
+      "Explorer un nouveau pays chaque mois",
+      "Explorar un país nuevo cada mes",
+      "Jeden Monat ein neues Land entdecken"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "perfect-first-v2",
+    "difficult",
+    "security",
+    "adventure",
+    [
+      "Succeed at every familiar task",
+      "Réussir tout ce que tu sais déjà faire",
+      "Tener éxito en todo lo que ya sabes hacer",
+      "Bei jeder vertrauten Aufgabe Erfolg haben"
+    ],
+    [
+      "Learn every new task twice as fast",
+      "Apprendre deux fois plus vite chaque nouvelle activité",
+      "Aprender cada actividad nueva el doble de rápido",
+      "Jede neue Tätigkeit doppelt so schnell lernen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "boss-puzzle-v2",
+    "gaming",
+    "adventure",
+    "security",
+    [
+      "Fight a challenging boss",
+      "Affronter un boss difficile",
+      "Enfrentarte a un jefe difícil",
+      "Gegen einen schwierigen Boss kämpfen"
+    ],
+    [
+      "Solve a clever puzzle",
+      "Résoudre une énigme ingénieuse",
+      "Resolver un acertijo ingenioso",
+      "Ein cleveres Rätsel lösen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "coop-competitive-v2",
+    "gaming",
+    "social",
+    "adventure",
+    [
+      "Win together in co-op",
+      "Gagner ensemble en coopération",
+      "Ganar juntos en cooperativo",
+      "Gemeinsam im Koop gewinnen"
+    ],
+    [
+      "Beat your friends in a competition",
+      "Battre tes amis en compétition",
+      "Ganar a tus amigos en competición",
+      "Deine Freunde im Wettkampf schlagen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "short-long-v2",
+    "gaming",
+    "freedom",
+    "adventure",
+    [
+      "Play ten excellent short games",
+      "Jouer à dix excellents jeux courts",
+      "Jugar diez juegos cortos excelentes",
+      "Zehn hervorragende kurze Spiele spielen"
+    ],
+    [
+      "Play one excellent hundred-hour game",
+      "Jouer à un excellent jeu de cent heures",
+      "Jugar un excelente juego de cien horas",
+      "Ein hervorragendes Spiel mit hundert Stunden spielen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "create-explore-v2",
+    "gaming",
+    "freedom",
+    "adventure",
+    [
+      "Build your own game world",
+      "Construire ton propre monde de jeu",
+      "Construir tu propio mundo de juego",
+      "Deine eigene Spielwelt bauen"
+    ],
+    [
+      "Explore a world full of secrets",
+      "Explorer un monde rempli de secrets",
+      "Explorar un mundo lleno de secretos",
+      "Eine Welt voller Geheimnisse erkunden"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "skill-luck-v2",
+    "gaming",
+    "security",
+    "adventure",
+    [
+      "Play a game based entirely on skill",
+      "Jouer à un jeu reposant uniquement sur l’adresse",
+      "Jugar a un juego basado solo en la habilidad",
+      "Ein Spiel nur mit Können spielen"
+    ],
+    [
+      "Play a game with unpredictable luck",
+      "Jouer à un jeu avec une part de hasard imprévisible",
+      "Jugar a un juego con azar impredecible",
+      "Ein Spiel mit unvorhersehbarem Glück spielen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "stars-ocean-v2",
+    "random",
+    "adventure",
+    "freedom",
+    [
+      "Spend a night under the stars",
+      "Passer une nuit sous les étoiles",
+      "Pasar una noche bajo las estrellas",
+      "Eine Nacht unter den Sternen verbringen"
+    ],
+    [
+      "Spend a night aboard a boat",
+      "Passer une nuit sur un bateau",
+      "Pasar una noche en un barco",
+      "Eine Nacht auf einem Boot verbringen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "concert-museum-v2",
+    "random",
+    "social",
+    "adventure",
+    [
+      "Attend your favourite artist’s concert",
+      "Assister au concert de ton artiste préféré",
+      "Ir al concierto de tu artista favorito",
+      "Ein Konzert deines Lieblingskünstlers besuchen"
+    ],
+    [
+      "Visit a museum after closing time",
+      "Visiter un musée après sa fermeture",
+      "Visitar un museo después del cierre",
+      "Ein Museum nach Schluss besuchen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "tea-coffee-v2",
+    "random",
+    "security",
+    "freedom",
+    [
+      "Choose tea for your breaks for a year",
+      "Choisir le thé pour tes pauses pendant un an",
+      "Elegir té para tus descansos durante un año",
+      "Ein Jahr lang Tee für deine Pausen wählen"
+    ],
+    [
+      "Choose coffee for your breaks for a year",
+      "Choisir le café pour tes pauses pendant un an",
+      "Elegir café para tus descansos durante un año",
+      "Ein Jahr lang Kaffee für deine Pausen wählen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "sunrise-sunset-v2",
+    "random",
+    "security",
+    "adventure",
+    [
+      "Watch every sunrise for a month",
+      "Regarder chaque lever de soleil pendant un mois",
+      "Ver cada amanecer durante un mes",
+      "Einen Monat jeden Sonnenaufgang ansehen"
+    ],
+    [
+      "Watch every sunset for a month",
+      "Regarder chaque coucher de soleil pendant un mois",
+      "Ver cada atardecer durante un mes",
+      "Einen Monat jeden Sonnenuntergang ansehen"
+    ],
+    "2026-10-05"
+  ],
+  [
+    "photo-journal-v2",
+    "random",
+    "adventure",
+    "security",
+    [
+      "Keep a photo of every day",
+      "Garder une photo de chaque journée",
+      "Guardar una foto de cada día",
+      "Von jedem Tag ein Foto behalten"
+    ],
+    [
+      "Keep a written journal of every day",
+      "Tenir un journal écrit de chaque journée",
+      "Escribir un diario de cada día",
+      "Über jeden Tag ein Tagebuch führen"
+    ],
+    "2026-10-05"
+  ]
+]

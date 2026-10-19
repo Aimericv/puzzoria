@@ -1,0 +1,11 @@
+[Unit]
+Description=Puzzoria encrypted offsite backup
+After=docker.service network-online.target
+Wants=network-online.target
+OnFailure=puzzoria-alert@%n.service
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/puzzoria/operations.env
+ExecStart=/bin/sh /opt/puzzoria/deploy/offsite-backup.sh
+UMask=0077

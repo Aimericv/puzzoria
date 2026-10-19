@@ -1,0 +1,19 @@
+import type { Completion, PublicChallenge, RareWordDiscovery } from "./types";
+import type { Comparison } from "./statistics";
+import type { Community, SocialState } from "./social-types";
+export type LocalPreviewFixture = {
+  completion: Completion;
+  comparison: Comparison;
+  history: Completion[];
+  answer?: string;
+  discovery?: RareWordDiscovery;
+  challenge: PublicChallenge;
+  state?: SocialState;
+  community?: Community;
+  wordGuesses?: string[];
+  grid?: number[];
+  mathResult?: import("./math").MathResult & {reference: string};
+  expression?: string;
+  puzzleState?: import("./new-play").PuzzleState;
+};
+export const isLoopback = (host: string) => ["localhost", "127.0.0.1", "[::1]", "::1"].includes(host);

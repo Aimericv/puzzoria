@@ -1,0 +1,72 @@
+{
+  "rankings": [
+    {"id":"food-v1","category":"food","items":[
+      ["pizza","🍕","Pizza","Pizza","Pizza","Pizza"],
+      ["sushi","🍣","Sushi","Sushi","Sushi","Sushi"],
+      ["burger","🍔","Burger","Burger","Hamburguesa","Burger"],
+      ["tacos","🌮","Tacos","Tacos","Tacos","Tacos"],
+      ["pasta","🍝","Pasta","Pâtes","Pasta","Pasta"]]},
+    {"id":"countries-v1","category":"countries","items":[
+      ["japan","🗾","Japan","Japon","Japón","Japan"],
+      ["italy","🍋","Italy","Italie","Italia","Italien"],
+      ["canada","🍁","Canada","Canada","Canadá","Kanada"],
+      ["brazil","🌴","Brazil","Brésil","Brasil","Brasilien"],
+      ["norway","🏔️","Norway","Norvège","Noruega","Norwegen"]]},
+    {"id":"gaming-v1","category":"gaming","items":[
+      ["minecraft","⛏️","Minecraft","Minecraft","Minecraft","Minecraft"],
+      ["mario","🍄","Super Mario","Super Mario","Super Mario","Super Mario"],
+      ["zelda","🗡️","Zelda","Zelda","Zelda","Zelda"],
+      ["tetris","🧱","Tetris","Tetris","Tetris","Tetris"],
+      ["pokemon","⚡","Pokémon","Pokémon","Pokémon","Pokémon"]]},
+    {"id":"movies-v1","category":"movies","items":[
+      ["starwars","🌌","Star Wars","Star Wars","Star Wars","Star Wars"],
+      ["shrek","💚","Shrek","Shrek","Shrek","Shrek"],
+      ["lotr","💍","The Lord of the Rings","Le Seigneur des anneaux","El Señor de los Anillos","Der Herr der Ringe"],
+      ["toystory","🧸","Toy Story","Toy Story","Toy Story","Toy Story"],
+      ["spirited","🐉","Spirited Away","Le Voyage de Chihiro","El viaje de Chihiro","Chihiros Reise ins Zauberland"]]},
+    {"id":"random-v1","category":"random","items":[
+      ["sleep","😴","Sleeping in","La grasse matinée","Dormir hasta tarde","Ausschlafen"],
+      ["wifi","📶","Fast Wi-Fi","Un Wi-Fi rapide","Wi-Fi rápido","Schnelles WLAN"],
+      ["weekend","🎉","A three-day weekend","Un week-end de trois jours","Un fin de semana de tres días","Ein Drei-Tage-Wochenende"],
+      ["coffee","☕","Good coffee","Un bon café","Un buen café","Guter Kaffee"],
+      ["sunshine","☀️","A sunny day","Une journée ensoleillée","Un día soleado","Ein sonniger Tag"]]},
+    {"id":"animals-v1","category":"animals","items":[
+      ["cat","🐈","Cat","Chat","Gato","Katze"],
+      ["dog","🐕","Dog","Chien","Perro","Hund"],
+      ["otter","🦦","Otter","Loutre","Nutria","Otter"],
+      ["penguin","🐧","Penguin","Manchot","Pingüino","Pinguin"],
+      ["fox","🦊","Fox","Renard","Zorro","Fuchs"]]}
+  ],
+  "dilemmas": [
+    ["island-million-v1","money","freedom","security",["Live on a tropical island for free","Vivre gratuitement sur une île tropicale","Vivir gratis en una isla tropical","Kostenlos auf einer tropischen Insel leben"],["Receive €1 million today","Recevoir 1 million d’euros aujourd’hui","Recibir 1 millón de euros hoy","Heute eine Million Euro erhalten"]],
+    ["salary-time-v1","money","security","freedom",["Double your salary","Doubler ton salaire","Duplicar tu sueldo","Dein Gehalt verdoppeln"],["Work half as many hours","Travailler deux fois moins","Trabajar la mitad de horas","Halb so viele Stunden arbeiten"]],
+    ["travel-home-v1","money","adventure","security",["Free travel for life","Voyager gratuitement toute ta vie","Viajar gratis toda la vida","Lebenslang kostenlos reisen"],["Own your dream home","Posséder la maison de tes rêves","Tener la casa de tus sueños","Dein Traumhaus besitzen"]],
+    ["small-now-v1","money","security","adventure",["Get €10,000 now","Recevoir 10 000 € maintenant","Recibir 10 000 € ahora","Jetzt 10.000 € bekommen"],["Have a 10% chance to get €1 million","Avoir 10 % de chances de gagner 1 million d’euros","Tener un 10 % de posibilidades de ganar 1 millón de euros","Eine Chance von 10 % auf eine Million Euro haben"]],
+    ["rich-famous-v1","money","freedom","social",["Be rich and anonymous","Être riche et anonyme","Ser rico y anónimo","Reich und anonym sein"],["Be famous with an average income","Être célèbre avec un revenu moyen","Ser famoso con ingresos medios","Berühmt sein mit durchschnittlichem Einkommen"]],
+    ["flight-invisible-v1","funny","adventure","freedom",["Be able to fly","Pouvoir voler","Poder volar","Fliegen können"],["Be able to become invisible","Pouvoir devenir invisible","Poder hacerte invisible","Unsichtbar werden können"]],
+    ["duck-horse-v1","funny","adventure","security",["Meet one horse-sized duck","Rencontrer un canard de la taille d’un cheval","Encontrarte con un pato del tamaño de un caballo","Eine Ente so groß wie ein Pferd treffen"],["Meet 100 duck-sized horses","Rencontrer 100 chevaux de la taille d’un canard","Encontrarte con 100 caballos del tamaño de un pato","100 Pferde so klein wie Enten treffen"]],
+    ["sing-dance-v1","funny","social","adventure",["Sing everything you say","Chanter tout ce que tu dis","Cantar todo lo que dices","Alles Gesagte singen"],["Dance whenever you walk","Danser dès que tu marches","Bailar cada vez que caminas","Bei jedem Schritt tanzen"]],
+    ["animal-talk-v1","funny","social","adventure",["Talk to animals","Parler aux animaux","Hablar con los animales","Mit Tieren sprechen"],["Speak every human language","Parler toutes les langues humaines","Hablar todos los idiomas humanos","Alle menschlichen Sprachen sprechen"]],
+    ["pizza-chocolate-v1","funny","security","adventure",["Never eat pizza again","Ne plus jamais manger de pizza","No volver a comer pizza","Nie wieder Pizza essen"],["Never eat chocolate again","Ne plus jamais manger de chocolat","No volver a comer chocolate","Nie wieder Schokolade essen"]],
+    ["city-nature-v1","life","social","freedom",["Live in a lively city","Vivre dans une ville animée","Vivir en una ciudad animada","In einer lebhaften Stadt leben"],["Live close to nature","Vivre au cœur de la nature","Vivir cerca de la naturaleza","Nah an der Natur leben"]],
+    ["early-late-v1","life","security","freedom",["Always wake up early","Toujours te lever tôt","Levantarte siempre temprano","Immer früh aufstehen"],["Always stay up late","Toujours te coucher tard","Acostarte siempre tarde","Immer lange wach bleiben"]],
+    ["cook-clean-v1","life","freedom","security",["Never have to cook again","Ne plus jamais devoir cuisiner","No tener que cocinar nunca más","Nie wieder kochen müssen"],["Never have to clean again","Ne plus jamais devoir faire le ménage","No tener que limpiar nunca más","Nie wieder putzen müssen"]],
+    ["friends-travel-v1","life","social","adventure",["Stay near your friends","Rester près de tes amis","Quedarte cerca de tus amigos","In der Nähe deiner Freunde bleiben"],["Move somewhere new every year","Changer de pays chaque année","Mudarte a un lugar nuevo cada año","Jedes Jahr an einen neuen Ort ziehen"]],
+    ["memory-future-v1","life","security","adventure",["Relive one favourite memory","Revivre ton meilleur souvenir","Revivir tu mejor recuerdo","Deine schönste Erinnerung erneut erleben"],["See one day of your future","Voir une journée de ton avenir","Ver un día de tu futuro","Einen Tag deiner Zukunft sehen"]],
+    ["truth-kind-v1","difficult","security","social",["Always hear the truth","Toujours entendre la vérité","Escuchar siempre la verdad","Immer die Wahrheit hören"],["Always hear something kind","Toujours entendre quelque chose de gentil","Escuchar siempre algo amable","Immer etwas Nettes hören"]],
+    ["past-future-v1","difficult","security","adventure",["Travel 100 years into the past","Voyager 100 ans dans le passé","Viajar 100 años al pasado","100 Jahre in die Vergangenheit reisen"],["Travel 100 years into the future","Voyager 100 ans dans le futur","Viajar 100 años al futuro","100 Jahre in die Zukunft reisen"]],
+    ["phone-music-v1","difficult","freedom","security",["Go a year without a phone","Passer un an sans téléphone","Pasar un año sin teléfono","Ein Jahr ohne Handy leben"],["Go a year without music","Passer un an sans musique","Pasar un año sin música","Ein Jahr ohne Musik leben"]],
+    ["skill-time-v1","difficult","adventure","freedom",["Instantly master one skill","Maîtriser instantanément une compétence","Dominar una habilidad al instante","Eine Fähigkeit sofort beherrschen"],["Have two extra hours every day","Avoir deux heures de plus par jour","Tener dos horas más cada día","Jeden Tag zwei zusätzliche Stunden haben"]],
+    ["online-offline-v1","difficult","social","freedom",["Keep the internet but never travel","Garder Internet mais ne plus voyager","Tener Internet pero no volver a viajar","Internet behalten, aber nie mehr reisen"],["Travel anywhere but lose the internet","Voyager partout mais perdre Internet","Viajar a cualquier lugar pero perder Internet","Überallhin reisen, aber kein Internet mehr haben"]],
+    ["solo-team-v1","gaming","freedom","social",["Play only single-player games","Jouer uniquement en solo","Jugar solo a juegos individuales","Nur Einzelspielerspiele spielen"],["Play only multiplayer games","Jouer uniquement en multijoueur","Jugar solo a juegos multijugador","Nur Mehrspielerspiele spielen"]],
+    ["graphics-story-v1","gaming","adventure","security",["Perfect graphics, ordinary story","Des graphismes parfaits, une histoire banale","Gráficos perfectos, historia corriente","Perfekte Grafik, gewöhnliche Geschichte"],["Simple graphics, unforgettable story","Des graphismes simples, une histoire inoubliable","Gráficos sencillos, historia inolvidable","Einfache Grafik, unvergessliche Geschichte"]],
+    ["explore-compete-v1","gaming","adventure","security",["Explore a huge open world","Explorer un immense monde ouvert","Explorar un enorme mundo abierto","Eine riesige offene Welt erkunden"],["Become the best at one competitive game","Devenir le meilleur dans un jeu compétitif","Ser el mejor en un juego competitivo","In einem Wettkampfspiel der Beste werden"]],
+    ["retro-new-v1","gaming","security","adventure",["Play only retro games","Jouer uniquement à des jeux rétro","Jugar solo a juegos retro","Nur Retrospiele spielen"],["Play only brand-new games","Jouer uniquement aux nouveautés","Jugar solo a juegos recién lanzados","Nur brandneue Spiele spielen"]],
+    ["controller-keyboard-v1","gaming","security","freedom",["Always use a controller","Toujours jouer à la manette","Usar siempre un mando","Immer mit Controller spielen"],["Always use keyboard and mouse","Toujours jouer au clavier et à la souris","Usar siempre teclado y ratón","Immer mit Tastatur und Maus spielen"]],
+    ["sea-mountain-v1","random","freedom","adventure",["Spend a month by the sea","Passer un mois au bord de la mer","Pasar un mes junto al mar","Einen Monat am Meer verbringen"],["Spend a month in the mountains","Passer un mois à la montagne","Pasar un mes en la montaña","Einen Monat in den Bergen verbringen"]],
+    ["teleport-pause-v1","random","adventure","freedom",["Teleport once a day","Te téléporter une fois par jour","Teletransportarte una vez al día","Einmal täglich teleportieren"],["Pause time for ten minutes a day","Arrêter le temps dix minutes par jour","Pausar el tiempo diez minutos al día","Die Zeit täglich zehn Minuten anhalten"]],
+    ["books-films-v1","random","security","social",["Read every book you want for free","Lire gratuitement tous les livres de ton choix","Leer gratis todos los libros que quieras","Alle gewünschten Bücher kostenlos lesen"],["Watch every film you want for free","Voir gratuitement tous les films de ton choix","Ver gratis todas las películas que quieras","Alle gewünschten Filme kostenlos ansehen"]],
+    ["summer-winter-v1","random","adventure","security",["Have summer all year","Avoir l’été toute l’année","Tener verano todo el año","Das ganze Jahr Sommer haben"],["Have winter all year","Avoir l’hiver toute l’année","Tener invierno todo el año","Das ganze Jahr Winter haben"]],
+    ["surprise-plan-v1","random","adventure","security",["Go on a mystery holiday","Partir en vacances sans connaître la destination","Ir de vacaciones sin conocer el destino","Eine Reise mit unbekanntem Ziel machen"],["Plan every detail yourself","Planifier chaque détail toi-même","Planificar cada detalle tú","Jedes Detail selbst planen"]]
+  ]
+}

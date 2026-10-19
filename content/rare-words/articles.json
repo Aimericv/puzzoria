@@ -1,0 +1,787 @@
+{
+  "fr": {
+    "anacoluthe": {
+      "concept": "anacoluth",
+      "pronunciation": "/a.na.kɔ.lyt/",
+      "grammar": "Nom féminin · rhétorique",
+      "definition": [
+        "Une anacoluthe est une rupture dans la construction d’une phrase : on commence avec une organisation grammaticale, puis on poursuit comme si l’on en avait choisi une autre. Les idées restent souvent compréhensibles, mais leur articulation syntaxique ne correspond plus au début.",
+        "À l’oral, cette bifurcation peut venir d’une pensée qui se reformule pendant qu’on parle. En littérature, elle peut être volontaire : elle donne une impression de spontanéité, de trouble ou d’émotion. Ce n’est donc pas simplement une phrase longue ou un mot compliqué."
+      ],
+      "etymology": "Le français reprend un terme passé par le latin, lui-même issu du grec anakólouthos. Ce mot grec exprime l’idée de ne pas suivre, de ne pas être dans la continuité : une image fidèle à la phrase qui quitte sa construction initiale.",
+      "examples": [
+        "« En ouvrant la porte, une odeur de pain m’a accueilli » : la phrase change de sujet, alors que c’est moi qui ouvre la porte.",
+        "Dans son récit, les anacoluthes rendaient perceptible l’hésitation du narrateur."
+      ],
+      "related": [
+        "rupture de construction",
+        "ellipse",
+        "syntaxe"
+      ],
+      "nuance": "L’ellipse omet un élément ; l’anacoluthe change l’organisation grammaticale. Les deux procédés peuvent se rencontrer, sans être interchangeables.",
+      "anecdote": "Une anacoluthe peut être très facile à comprendre. Le décalage porte sur la grammaire, pas nécessairement sur le sens : une conversation ordinaire peut en contenir sans que personne ne s’arrête pour la nommer.",
+      "sources": [
+        "https://www.larousse.fr/encyclopedie/divers/anacoluthe/20809"
+      ]
+    },
+    "soliloque": {
+      "concept": "soliloquy",
+      "pronunciation": "/sɔ.li.lɔk/",
+      "grammar": "Nom masculin",
+      "definition": [
+        "Un soliloque est une prise de parole adressée à soi-même. La personne formule à voix haute ce qu’elle pense, cherche une solution ou examine ses hésitations, sans attendre la réponse d’un interlocuteur.",
+        "Le mot appartient souvent au vocabulaire du théâtre et de la littérature, mais peut aussi décrire une situation ordinaire. Par extension, il peut désigner une conversation devenue si unilatérale qu’un seul participant semble parler pour lui-même."
+      ],
+      "etymology": "Le latin soliloquium réunit solus, qui signifie seul, et loqui, parler. Le mot décrit donc littéralement une parole solitaire.",
+      "examples": [
+        "Seul dans la cuisine, il poursuivait son soliloque en préparant son discours.",
+        "La réunion ressemblait à un soliloque : aucune question ne trouvait de place."
+      ],
+      "related": [
+        "monologue",
+        "parole intérieure",
+        "soliloquer"
+      ],
+      "nuance": "Un monologue peut être prononcé devant un public. Le soliloque insiste sur le fait de se parler à soi-même, même si des spectateurs l’entendent.",
+      "anecdote": "La présence d’un public ne suffit pas à transformer un soliloque en dialogue. Au théâtre, les spectateurs peuvent entendre une pensée que le personnage n’adresse à aucun autre personnage.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/college/soliloque/37526"
+      ]
+    },
+    "ubiquite": {
+      "concept": "ubiquity",
+      "pronunciation": "/y.bi.kɥi.te/",
+      "grammar": "Nom féminin",
+      "definition": [
+        "L’ubiquité désigne la présence en plusieurs lieux au même moment, voire partout à la fois. Dans un récit merveilleux, elle peut être une véritable capacité ; dans la vie courante, elle est généralement une image.",
+        "Dire qu’une personne possède le don d’ubiquité souligne qu’elle semble participer à tout, multiplier les déplacements ou apparaître là où on ne l’attendait pas. Le mot peut aussi qualifier ce qui paraît omniprésent."
+      ],
+      "etymology": "Le mot est formé à partir du latin ubique, partout. Cette origine explique pourquoi il dépasse l’idée d’un simple déplacement rapide : il évoque une présence simultanée.",
+      "examples": [
+        "Entre les deux réunions et la fête de l’école, elle aurait eu besoin du don d’ubiquité.",
+        "L’ubiquité des écrans transforme notre manière d’occuper les espaces publics."
+      ],
+      "related": [
+        "omniprésence",
+        "ubiquitaire",
+        "présence simultanée"
+      ],
+      "nuance": "L’omniprésence insiste sur le fait d’être partout ; l’ubiquité peut aussi se limiter à plusieurs endroits à la fois.",
+      "anecdote": "Le groupe « qui » ne se prononce pas comme dans le mot qui : le u se fait entendre. Ce détail explique la transcription /kɥi/ au milieu du mot.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/francais/ubiquit%C3%A9/80421"
+      ]
+    },
+    "galimatias": {
+      "concept": "galimatias",
+      "pronunciation": "/ɡa.li.ma.tja/",
+      "grammar": "Nom masculin",
+      "definition": [
+        "Un galimatias est un discours ou un texte dont l’enchevêtrement rend le sens difficile à saisir. Il peut accumuler des formulations obscures, des idées mal reliées ou des termes employés sans explication.",
+        "Le mot porte un jugement : on ne dit pas seulement que le sujet est complexe, mais que sa présentation manque de clarté. Un problème exigeant peut être expliqué nettement ; une consigne très simple peut devenir un galimatias."
+      ],
+      "etymology": "L’origine du terme n’est pas établie avec certitude. Plusieurs explications ont été proposées ; mieux vaut conserver cette incertitude que présenter une histoire séduisante comme un fait assuré.",
+      "examples": [
+        "La notice mêlait tellement d’abréviations qu’elle devenait un galimatias.",
+        "Après réécriture, ce galimatias tenait en trois phrases compréhensibles."
+      ],
+      "related": [
+        "charabia",
+        "jargon",
+        "discours confus"
+      ],
+      "nuance": "Un jargon peut être précis pour ses spécialistes. Galimatias dénonce plutôt une confusion qui empêche de suivre le raisonnement.",
+      "anecdote": "On peut dénoncer un galimatias sans savoir quelle était l’intention de son auteur. Le mot décrit l’effet de confusion produit sur le lecteur ou l’auditeur.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/college/galimatias/17639",
+        "https://www.dictionnaire-academie.fr/article/A9G0122"
+      ]
+    },
+    "oxymoron": {
+      "concept": "oxymoron",
+      "pronunciation": "/ɔk.si.mɔ.ʁɔ̃/",
+      "grammar": "Nom masculin · figure de style",
+      "definition": [
+        "Un oxymoron rapproche, dans une expression courte, des mots dont les sens semblent incompatibles. Leur rencontre produit une image inattendue : le lecteur doit dépasser la contradiction apparente pour comprendre l’impression évoquée.",
+        "En français, oxymore est une autre forme courante du même nom. Le procédé se rencontre dans la poésie, le théâtre et les formulations quotidiennes ; il ne suppose pas que la phrase entière soit contradictoire."
+      ],
+      "etymology": "Le grec oxýmōron associe oxýs, aigu ou pénétrant, et mōrós, sot. Le nom de la figure rapproche lui-même deux idées contrastées.",
+      "examples": [
+        "Après l’annonce, un silence assourdissant s’est installé.",
+        "Elle décrivait cette séparation comme une douce violence."
+      ],
+      "related": [
+        "oxymore",
+        "alliance de mots",
+        "antithèse",
+        "paradoxe"
+      ],
+      "nuance": "L’antithèse peut opposer deux propositions éloignées. L’oxymoron rapproche la contradiction à l’intérieur d’un groupe de mots.",
+      "anecdote": "Le nom de cette figure est presque sa propre démonstration : ses racines grecques associent l’acuité et la sottise, deux qualités qu’on n’attend pas ensemble.",
+      "sources": [
+        "https://www.larousse.fr/encyclopedie/divers/oxymore/75937",
+        "https://www.merriam-webster.com/dictionary/oxymoron"
+      ]
+    },
+    "equinoxe": {
+      "concept": "equinox",
+      "pronunciation": "/e.ki.nɔks/",
+      "grammar": "Nom masculin · astronomie",
+      "definition": [
+        "Un équinoxe est l’instant où le Soleil, dans son mouvement apparent annuel, traverse l’équateur céleste. Il y en a deux par an, aux environs de mars et de septembre.",
+        "Ces passages servent de repères pour les saisons. On les associe à des durées de jour et de nuit proches, mais le mot désigne d’abord un événement astronomique précis, et non une journée entière."
+      ],
+      "etymology": "Le latin aequinoctium réunit aequus, égal, et nox, nuit. Le nom retient ainsi l’image d’une nuit comparable au jour.",
+      "examples": [
+        "Nous avons choisi l’équinoxe de printemps comme date symbolique du départ.",
+        "Le professeur distinguait l’équinoxe du solstice sur son schéma."
+      ],
+      "related": [
+        "équateur céleste",
+        "solstice",
+        "équinoxial"
+      ],
+      "nuance": "Le solstice correspond aux extrêmes de la position saisonnière du Soleil ; l’équinoxe correspond au passage par l’équateur céleste.",
+      "anecdote": "Malgré sa terminaison, équinoxe est masculin : on dit un équinoxe. Et son « qui » se prononce /ki/, à la différence de celui d’ubiquité.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/francais/%C3%A9quinoxe/30685"
+      ]
+    },
+    "syzygie": {
+      "concept": "syzygy",
+      "pronunciation": "/si.zi.ʒi/",
+      "grammar": "Nom féminin · astronomie",
+      "definition": [
+        "Une syzygie est une configuration dans laquelle trois corps célestes se trouvent alignés. Pour les phénomènes observés depuis la Terre, les corps concernés sont souvent le Soleil, la Terre et la Lune.",
+        "Le terme permet de parler de la géométrie d’un alignement plutôt que de son seul effet visible. Il appartient au vocabulaire astronomique et s’emploie notamment à propos des configurations de conjonction et d’opposition."
+      ],
+      "etymology": "Le grec syzygía exprime l’idée de réunion ou d’attelage. L’image est celle de plusieurs éléments liés dans une même configuration.",
+      "examples": [
+        "Le schéma représentait la syzygie du Soleil, de la Terre et de la Lune.",
+        "Le conférencier expliquait l’alignement en utilisant le terme syzygie."
+      ],
+      "related": [
+        "alignement",
+        "conjonction",
+        "opposition"
+      ],
+      "nuance": "Conjonction et opposition précisent la disposition des astres ; syzygie met l’accent sur leur alignement.",
+      "anecdote": "Ses deux y et son z lui donnent une allure complexe, mais sa prononciation tient en trois syllabes : /si/, /zi/, /ʒi/.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/college/syzygie/39029"
+      ]
+    },
+    "chimere": {
+      "concept": "chimera",
+      "pronunciation": "/ʃi.mɛʁ/",
+      "grammar": "Nom féminin",
+      "definition": [
+        "Une chimère est d’abord une créature imaginaire issue de la mythologie. Le mot peut évoquer un être composé d’éléments qui n’appartiennent normalement pas au même animal.",
+        "Au sens figuré, une chimère est un projet, un espoir ou une idée auxquels on s’attache malgré leur manque de réalité. Qualifier un rêve de chimère revient donc à mettre en doute la possibilité de le réaliser."
+      ],
+      "etymology": "Le nom remonte au grec khímaira, qui désignait une chèvre avant de devenir le nom de la créature mythologique. Le français l’a reçu par le latin.",
+      "examples": [
+        "Le dessin représentait une chimère assemblée à partir de plusieurs animaux.",
+        "Il avait abandonné la chimère d’un voyage sans dépenses ni imprévus."
+      ],
+      "related": [
+        "illusion",
+        "utopie",
+        "rêve irréalisable",
+        "chimérique"
+      ],
+      "nuance": "Un rêve n’est pas forcément impossible. Chimère ajoute une réserve sur sa réalité ou sa faisabilité.",
+      "anecdote": "Le mot a quitté les récits de monstres pour entrer dans la conversation : aujourd’hui, poursuivre une chimère peut simplement vouloir dire s’obstiner dans une illusion.",
+      "sources": [
+        "https://www.larousse.fr/dictionnaires/college/chim%C3%A8re/7700"
+      ]
+    }
+  },
+  "en": {
+    "petrichor": {
+      "concept": "petrichor",
+      "pronunciation": "PET-ruh-kor",
+      "grammar": "Noun",
+      "definition": [
+        "Petrichor is the earthy scent associated with rain falling on ground that has been dry. It names a recognisable sensory experience rather than rain itself or the smell of any wet surface.",
+        "The scent involves substances from the ground, including plant oils and geosmin. In ordinary writing, the word is useful when you want to evoke the atmosphere just after a shower without describing the whole scene."
+      ],
+      "etymology": "The name combines Greek-derived elements associated with stone and ichor, the fluid of the gods in mythology. The rocky part of the name reflects the material from which the scent arises.",
+      "examples": [
+        "Petrichor rose from the garden as the first drops reached the soil.",
+        "She opened the window to let the cool air and petrichor into the room."
+      ],
+      "related": [
+        "earthy scent",
+        "rain scent",
+        "geosmin"
+      ],
+      "nuance": "Geosmin is one substance associated with the smell; it is not a synonym for the complete scent called petrichor.",
+      "anecdote": "The word was introduced in a 1964 paper by Australian researchers Isabel Joy Bear and Richard Grenfell Thomas. A familiar smell received a surprisingly recent name.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/petrichor"
+      ]
+    },
+    "ineffable": {
+      "concept": "ineffable",
+      "pronunciation": "in-EF-uh-buhl",
+      "grammar": "Adjective",
+      "definition": [
+        "Something ineffable cannot adequately be expressed in words. It may be an intense feeling, a beauty or an experience for which a description seems insufficient.",
+        "The adjective does not necessarily mean pleasant. Joy and sorrow can both be ineffable. In religious usage, it can also describe something whose name must not be spoken, which is a different shade of meaning."
+      ],
+      "etymology": "Latin ineffabilis combines a negative element with a word for what can be spoken or expressed. Its history points to the limits of saying something aloud.",
+      "examples": [
+        "The reunion brought an ineffable sense of relief.",
+        "He tried to describe the loss, but the sadness felt ineffable."
+      ],
+      "related": [
+        "inexpressible",
+        "indescribable",
+        "unspeakable"
+      ],
+      "nuance": "Indescribable is a broad everyday alternative. Ineffable often gives a sentence a more literary or contemplative tone.",
+      "anecdote": "A word associated with wonderful experiences can describe terrible ones too. Its central idea is a failure of expression, not a particular emotion.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/ineffable"
+      ]
+    },
+    "soliloquy": {
+      "concept": "soliloquy",
+      "pronunciation": "suh-LIL-uh-kwee",
+      "grammar": "Noun · plural: soliloquies",
+      "definition": [
+        "A soliloquy is speech directed to oneself. In drama, it lets a character voice thoughts that the other characters do not hear, while the audience gains access to the character’s private reasoning.",
+        "The word can also describe talking to yourself outside the theatre. What matters is the direction of the speech: it is not a conversation in which another person is expected to respond."
+      ],
+      "etymology": "Late Latin soliloquium joins solus, alone, with loqui, to speak. The two roots make the basic meaning easy to remember.",
+      "examples": [
+        "Her soliloquy exposed doubts that she had concealed in the previous scene.",
+        "While looking for his keys, he began a quiet soliloquy."
+      ],
+      "related": [
+        "monologue",
+        "self-talk",
+        "soliloquize"
+      ],
+      "nuance": "A monologue can address other people. A soliloquy is presented as speech to oneself or as thoughts being voiced.",
+      "anecdote": "The audience’s presence does not make a soliloquy a dialogue. In a play, listening to it can give spectators information that no other character possesses.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/soliloquy"
+      ]
+    },
+    "palimpsest": {
+      "concept": "palimpsest",
+      "pronunciation": "PAL-im-sest",
+      "grammar": "Noun",
+      "definition": [
+        "A palimpsest is a writing surface that has been used again after earlier writing was removed. The older text may still leave traces beneath the later one.",
+        "The word also works as a metaphor for places or objects whose earlier forms remain visible. A city can be a palimpsest when successive periods of building and change coexist in its streets rather than completely replacing one another."
+      ],
+      "etymology": "The word passed through Latin from Greek elements expressing scraping again. Its history describes the preparation of a surface for a new layer of writing.",
+      "examples": [
+        "Faint letters from the earlier text remained visible in the palimpsest.",
+        "The district was a palimpsest of industrial buildings and newer homes."
+      ],
+      "related": [
+        "reused manuscript",
+        "layered history",
+        "overwriting"
+      ],
+      "nuance": "A palimpsest suggests surviving traces. It is more specific than simply saying that something has changed over time.",
+      "anecdote": "A term for reused writing material can describe an entire city. The metaphor keeps the same central image: a newer layer has not made the older one disappear completely.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/palimpsest"
+      ]
+    },
+    "numinous": {
+      "concept": "numinous",
+      "pronunciation": "NOO-muh-nuhs",
+      "grammar": "Adjective",
+      "definition": [
+        "Numinous describes a quality that suggests sacred presence, spiritual mystery or a sense of awe. It is a word for the atmosphere of an experience, not necessarily a statement about a person’s religious beliefs.",
+        "A place, an encounter or an artwork can be described as numinous when it feels charged with a significance beyond the ordinary. Simply being mysterious or dimly lit is not enough to convey the whole meaning."
+      ],
+      "etymology": "The adjective is built from Latin numen, associated with divine power or presence. That root explains its connection with the sacred.",
+      "examples": [
+        "The empty sanctuary had a numinous stillness.",
+        "The painting gave the familiar landscape a numinous quality."
+      ],
+      "related": [
+        "sacred",
+        "awe-inspiring",
+        "spiritual",
+        "mysterious"
+      ],
+      "nuance": "Mysterious can describe any unexplained event. Numinous adds a suggestion of sacred or spiritual significance.",
+      "anecdote": "Numinous and luminous may look similar, but they do not mean the same thing. A numinous experience concerns awe or sacred presence; it need not involve light.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/numinous"
+      ]
+    },
+    "oxymoron": {
+      "concept": "oxymoron",
+      "pronunciation": "ok-see-MOR-on",
+      "grammar": "Noun · plural: oxymorons or oxymora",
+      "definition": [
+        "An oxymoron brings apparently contradictory words together in a compact expression. The contrast can make a description more vivid, surprising or precise than an ordinary adjective would.",
+        "The expression is not automatically a mistake. A writer may use it deliberately to suggest a feeling with two competing aspects, such as pleasure mixed with pain or silence that seems overwhelmingly noticeable."
+      ],
+      "etymology": "Its Greek roots combine an idea of sharpness with one of dullness or foolishness. The name itself contains a striking contrast.",
+      "examples": [
+        "The announcement was followed by a deafening silence.",
+        "She described their farewell as a bittersweet victory."
+      ],
+      "related": [
+        "contradiction",
+        "paradox",
+        "antithesis"
+      ],
+      "nuance": "A paradox can develop across a whole argument. An oxymoron usually puts the conflicting terms directly together.",
+      "anecdote": "Oxymoron is sometimes used loosely for any contradiction, but its rhetorical meaning is narrower: the opposing ideas meet within the same expression.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/oxymoron"
+      ]
+    },
+    "ephemeral": {
+      "concept": "ephemeral",
+      "pronunciation": "ih-FEM-uh-ruhl",
+      "grammar": "Adjective",
+      "definition": [
+        "Something ephemeral lasts for only a short time. The adjective can describe a flower, an event, an emotion or anything whose presence is brief rather than enduring.",
+        "It often draws attention to transience without judging it as good or bad. An ephemeral display can be beautiful precisely because it will soon vanish; an ephemeral success can be disappointing because it does not last."
+      ],
+      "etymology": "Greek ephēmeros refers to something lasting a day. Modern English usage is broader: ephemeral does not require an exact duration of twenty-four hours.",
+      "examples": [
+        "The festival created an ephemeral town of lights and tents.",
+        "The rainbow offered an ephemeral burst of colour."
+      ],
+      "related": [
+        "fleeting",
+        "transient",
+        "short-lived",
+        "temporary"
+      ],
+      "nuance": "Temporary can suggest that an arrangement will be replaced. Ephemeral chiefly emphasises its brief duration.",
+      "anecdote": "The root points to a single day, but the modern adjective is not a stopwatch. A moment lasting seconds can be ephemeral too.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/ephemeral"
+      ]
+    },
+    "susurrus": {
+      "concept": "susurrus",
+      "pronunciation": "soo-SUR-uhs",
+      "grammar": "Noun",
+      "definition": [
+        "A susurrus is a quiet sound of murmuring, whispering or rustling. It can evoke leaves moving together, low voices or a soft continuous noise rather than one sharp sound.",
+        "The word is especially useful in descriptive writing because it combines volume and texture. It suggests an audible background that remains gentle, not complete silence and not a loud disturbance."
+      ],
+      "etymology": "Latin susurrus names a hum or whisper. English retains a form close to the Latin word.",
+      "examples": [
+        "A susurrus of leaves accompanied the walk through the garden.",
+        "The susurrus of conversation faded as the lights went down."
+      ],
+      "related": [
+        "murmur",
+        "rustle",
+        "whisper"
+      ],
+      "nuance": "A whisper can be one person’s voice. Susurrus also describes a blended or continuing texture of sound.",
+      "anecdote": "The repeated s sounds make the word particularly apt in a sentence about soft noise. That is a useful sound association, even without treating it as proof of a particular historical origin.",
+      "sources": [
+        "https://www.merriam-webster.com/dictionary/susurrus"
+      ]
+    }
+  },
+  "es": {
+    "serendipia": {
+      "concept": "serendipity",
+      "pronunciation": "se-ren-DI-pia",
+      "grammar": "Sustantivo femenino",
+      "definition": [
+        "Una serendipia es un hallazgo valioso que se produce de forma accidental, cuando no se estaba buscando precisamente eso. No basta con que algo sea casual: el descubrimiento aporta interés o utilidad.",
+        "La palabra sirve para contar cómo una búsqueda, un paseo o una investigación conduce a un resultado inesperado. Distingue entre el objetivo inicial y aquello que se termina encontrando por el camino."
+      ],
+      "etymology": "Es una adaptación del inglés serendipity. Ese nombre alude a Serendip, antiguo nombre de Sri Lanka, y al relato de los tres príncipes de Serendip.",
+      "examples": [
+        "Encontró una carta familiar mientras buscaba un mapa: fue una serendipia.",
+        "La visita acabó en una serendipia, un libro que llevaba años intentando localizar."
+      ],
+      "related": [
+        "hallazgo fortuito",
+        "serendipidad",
+        "casualidad"
+      ],
+      "nuance": "Casualidad es más general. Serendipia destaca que el hallazgo inesperado tiene valor.",
+      "anecdote": "El origen remite a un nombre geográfico y a un relato, no a una raíz que signifique directamente suerte. Esa historia sigue escondida en una palabra usada para descubrimientos cotidianos.",
+      "sources": [
+        "https://dle.rae.es/serendipia"
+      ]
+    },
+    "ataraxia": {
+      "concept": "ataraxia",
+      "pronunciation": "a-ta-RA-xia",
+      "grammar": "Sustantivo femenino · filosofía",
+      "definition": [
+        "La ataraxia es un estado de serenidad o imperturbabilidad. El ánimo conserva su estabilidad frente a las circunstancias que podrían alterarlo.",
+        "En un texto filosófico, la palabra nombra un ideal de tranquilidad interior. En otros contextos puede emplearse para describir una calma profunda, aunque conviene no confundirla automáticamente con indiferencia o ausencia de sentimientos."
+      ],
+      "etymology": "Procede del griego ataraxía. Su sentido se relaciona con la ausencia de perturbación.",
+      "examples": [
+        "Buscaba la ataraxia, no una vida completamente aislada.",
+        "La discusión no parecía alterar su ataraxia."
+      ],
+      "related": [
+        "serenidad",
+        "calma",
+        "imperturbabilidad"
+      ],
+      "nuance": "La calma puede ser momentánea. Ataraxia sugiere una disposición interior más estable, especialmente en su uso filosófico.",
+      "anecdote": "Una persona puede conservar la serenidad y seguir prestando atención a lo que ocurre. Por eso, sustituir siempre ataraxia por indiferencia cambia el matiz de la frase.",
+      "sources": [
+        "https://dle.rae.es/ataraxia"
+      ]
+    },
+    "inefable": {
+      "concept": "ineffable",
+      "pronunciation": "i-ne-FA-ble",
+      "grammar": "Adjetivo",
+      "definition": [
+        "Inefable describe algo que no se consigue expresar de manera suficiente con palabras. Puede aplicarse a una emoción, una experiencia o una cualidad que parece superar cualquier descripción.",
+        "No quiere decir simplemente que algo sea bueno. Lo esencial es la dificultad de decirlo: una alegría intensa y una pena profunda pueden resultar igualmente inefables."
+      ],
+      "etymology": "Viene del latín ineffabilis, relacionado con lo que no puede ser dicho. La forma conserva la negación de la posibilidad de expresarlo.",
+      "examples": [
+        "El regreso a casa le produjo una alegría inefable.",
+        "Intentó explicar aquella sensación inefable sin encontrar las palabras."
+      ],
+      "related": [
+        "indescriptible",
+        "inexpresable",
+        "indecible"
+      ],
+      "nuance": "Indescriptible es una alternativa amplia. Inefable suele aportar un tono más literario y concentra la atención en los límites del lenguaje.",
+      "anecdote": "El adjetivo no cambia con el género: se puede hablar de una alegría inefable o de un placer inefable. En ambos casos, la idea central sigue siendo la misma.",
+      "sources": [
+        "https://dle.rae.es/inefable"
+      ]
+    },
+    "palindromo": {
+      "concept": "palindrome",
+      "pronunciation": "pa-LIN-dro-mo",
+      "grammar": "Sustantivo masculino",
+      "definition": [
+        "Un palíndromo es una palabra o una secuencia que puede leerse en los dos sentidos manteniendo el mismo orden de letras. La lectura de derecha a izquierda reproduce la de izquierda a derecha.",
+        "En las frases palindrómicas se suelen dejar de lado espacios y signos de puntuación para comparar las letras. Esa convención debe aclararse cuando se trabaja con frases, porque la simetría visual completa no siempre es literal."
+      ],
+      "etymology": "Su origen griego reúne la idea de volver atrás con la de recorrer un camino. Es una imagen del trayecto de lectura que puede hacerse en ambos sentidos.",
+      "examples": [
+        "Reconocer es un palíndromo: sus letras conservan el orden al invertirlas.",
+        "Ana y radar son ejemplos breves de palíndromos."
+      ],
+      "related": [
+        "simetría",
+        "lectura reversible",
+        "anagrama"
+      ],
+      "nuance": "Un anagrama reorganiza letras para producir otra palabra. Un palíndromo no las reorganiza libremente: compara el orden normal con el inverso.",
+      "anecdote": "No hace falta una palabra exótica para encontrar un palíndromo. Nombres y palabras corrientes como Ana o radar ya contienen esa simetría.",
+      "sources": [
+        "https://dle.rae.es/pal%C3%ADndromo"
+      ]
+    },
+    "efimero": {
+      "concept": "ephemeral",
+      "pronunciation": "e-FI-me-ro",
+      "grammar": "Adjetivo · femenino: efímera",
+      "definition": [
+        "Algo efímero tiene una duración breve. Puede ser un fenómeno visible, una emoción o una situación que desaparece pronto en vez de mantenerse.",
+        "La palabra pone el foco en el paso del tiempo. No determina por sí sola si la experiencia es agradable: un éxito efímero y una belleza efímera comparten la brevedad, pero no la misma valoración."
+      ],
+      "etymology": "El antecedente griego se refiere a lo que dura un día. En el uso actual, el adjetivo no exige que la duración sea exactamente de veinticuatro horas.",
+      "examples": [
+        "La luz dibujó una figura efímera sobre la pared.",
+        "El equipo celebró un liderazgo efímero antes de perder la ventaja."
+      ],
+      "related": [
+        "fugaz",
+        "pasajero",
+        "breve",
+        "transitorio"
+      ],
+      "nuance": "Transitorio puede señalar una etapa entre otras dos. Efímero insiste sobre todo en lo poco que dura.",
+      "anecdote": "El sentido moderno es más amplio que la imagen de un solo día que guarda su origen. Un arcoíris de pocos minutos también puede ser efímero.",
+      "sources": [
+        "https://dle.rae.es/ef%C3%ADmero"
+      ]
+    },
+    "oximoron": {
+      "concept": "oxymoron",
+      "pronunciation": "ok-SI-mo-ron",
+      "grammar": "Sustantivo masculino · retórica",
+      "definition": [
+        "Un oxímoron une en una expresión conceptos cuyos sentidos parecen contrarios. La combinación obliga a interpretar la frase más allá de su significado literal y puede crear una imagen muy intensa.",
+        "No es necesariamente un error. La contradicción se usa como recurso expresivo, por ejemplo para describir una experiencia que reúne sensaciones opuestas."
+      ],
+      "etymology": "El término griego combina elementos relacionados con la agudeza y la necedad. Su propio nombre contiene una unión de ideas contrastadas.",
+      "examples": [
+        "Tras la noticia, quedó un silencio atronador en la sala.",
+        "Describió la despedida como una amarga dulzura."
+      ],
+      "related": [
+        "contradicción",
+        "paradoja",
+        "antítesis"
+      ],
+      "nuance": "Una paradoja puede ocupar una idea o un razonamiento entero. El oxímoron aproxima los términos opuestos dentro de una expresión.",
+      "anecdote": "El plural también llama la atención: suele conservarse la forma los oxímoron, aunque también se usa oxímoros. Es una buena ocasión para observar cómo se adaptan al español las palabras de origen griego.",
+      "sources": [
+        "https://dle.rae.es/ox%C3%ADmoron",
+        "https://www.rae.es/dpd/ox%C3%ADmoron"
+      ]
+    },
+    "soliloquio": {
+      "concept": "soliloquy",
+      "pronunciation": "so-li-LO-quio",
+      "grammar": "Sustantivo masculino",
+      "definition": [
+        "Un soliloquio es un discurso que alguien dirige a sí mismo. La persona pone sus pensamientos en palabras sin plantear un intercambio con otro interlocutor.",
+        "En el teatro permite mostrar al público dudas, planes o emociones que el personaje mantiene fuera del diálogo con los demás. También puede emplearse para hablar de una reflexión pronunciada en voz alta en la vida cotidiana."
+      ],
+      "etymology": "El latín soliloquium reúne solus, solo, y loqui, hablar. El nombre conserva esa imagen de una persona que habla consigo misma.",
+      "examples": [
+        "El soliloquio reveló el miedo que el personaje ocultaba a su familia.",
+        "Mientras buscaba una solución, comenzó un soliloquio en voz baja."
+      ],
+      "related": [
+        "monólogo",
+        "reflexión en voz alta",
+        "diálogo interior"
+      ],
+      "nuance": "Un monólogo puede estar destinado a otras personas. Soliloquio destaca la dirección de la palabra hacia uno mismo.",
+      "anecdote": "El público puede escuchar un soliloquio sin convertirse en su interlocutor. Así, el teatro permite conocer una intimidad que permanece oculta para los otros personajes.",
+      "sources": [
+        "https://dle.rae.es/soliloquio"
+      ]
+    },
+    "equinoccio": {
+      "concept": "equinox",
+      "pronunciation": "e-qui-NOC-cio",
+      "grammar": "Sustantivo masculino · astronomía",
+      "definition": [
+        "Un equinoccio es el momento del año en que el Sol cruza el ecuador celeste en su recorrido aparente. Hay dos, aproximadamente en marzo y septiembre.",
+        "Se relaciona con duraciones próximas del día y la noche y sirve como referencia para las estaciones. Aunque se hable del día del equinoccio, el fenómeno astronómico corresponde a un instante."
+      ],
+      "etymology": "El latín aequinoctium combina la idea de igualdad con la de noche. La palabra conserva así una descripción del equilibrio asociado a estas fechas.",
+      "examples": [
+        "La clase comparó el equinoccio con el solsticio en un dibujo.",
+        "Eligieron el equinoccio de primavera para inaugurar el jardín."
+      ],
+      "related": [
+        "ecuador celeste",
+        "solsticio",
+        "equinoccial"
+      ],
+      "nuance": "Equinoccio y solsticio son referencias distintas del recorrido estacional del Sol; no son sinónimos.",
+      "anecdote": "La palabra nombra un momento y se usa también para hablar de la fecha que lo contiene. Esa diferencia ayuda a entender por qué el equinoccio no es un fenómeno que dure todo el día.",
+      "sources": [
+        "https://dle.rae.es/equinoccio"
+      ]
+    }
+  },
+  "de": {
+    "oxymoron": {
+      "concept": "oxymoron",
+      "pronunciation": "/ɔˈksyːmorɔn/",
+      "grammar": "Substantiv · das Oxymoron",
+      "definition": [
+        "Ein Oxymoron verbindet Begriffe, die sich ihrem Sinn nach zu widersprechen scheinen. Gerade diese enge Verbindung kann ein Bild prägnanter oder überraschender machen.",
+        "Die Formulierung muss kein sprachlicher Fehler sein. Als Stilmittel kann sie zeigen, dass eine Erfahrung zwei gegensätzliche Seiten zugleich besitzt, statt sie auf eine einfache Eigenschaft zu reduzieren."
+      ],
+      "etymology": "Die griechischen Bestandteile verbinden die Vorstellung von Schärfe oder Scharfsinn mit der von Stumpfheit oder Torheit. Schon der Name enthält einen Gegensatz.",
+      "examples": [
+        "Sie beschrieb den Abschied als bittersüßen Erfolg.",
+        "Sein beredtes Schweigen sagte mehr als eine lange Erklärung."
+      ],
+      "related": [
+        "Widerspruch",
+        "Paradox",
+        "Antithese"
+      ],
+      "nuance": "Eine Antithese kann Gegensätze über einen ganzen Satz verteilen. Beim Oxymoron treffen sie in einer engen Wortverbindung aufeinander.",
+      "anecdote": "Der Begriff ist fast ein Beispiel für sich selbst: Auch seine griechischen Wortteile bringen Eigenschaften zusammen, die man zunächst nicht nebeneinander erwartet.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Oxymoron"
+      ]
+    },
+    "fernweh": {
+      "concept": "fernweh",
+      "pronunciation": "/ˈfɛrnveː/",
+      "grammar": "Substantiv · das Fernweh",
+      "definition": [
+        "Fernweh ist die Sehnsucht nach entfernten Orten und Ländern. Das Gefühl kann durch Reisebilder, Erinnerungen oder die Vorstellung eines noch unbekannten Lebensraums ausgelöst werden.",
+        "Es bezeichnet nicht bloß einen Reiseplan. Im Mittelpunkt steht der Wunsch, anderswo zu sein oder die Ferne zu erleben. Ob die Reise tatsächlich stattfindet, bleibt dabei offen."
+      ],
+      "etymology": "Das zusammengesetzte Wort verbindet fern mit Weh. Die räumliche Entfernung erhält dadurch die Färbung eines schmerzlichen oder drängenden Wunsches.",
+      "examples": [
+        "Beim Blick auf die Karte packte sie das Fernweh.",
+        "Die Erzählung weckte sein Fernweh, obwohl noch keine Reise geplant war."
+      ],
+      "related": [
+        "Reiselust",
+        "Sehnsucht nach der Ferne",
+        "Heimweh"
+      ],
+      "nuance": "Heimweh richtet sich auf die vertraute Heimat. Fernweh zieht die Aufmerksamkeit in die entgegengesetzte Richtung, zu entfernten Orten.",
+      "anecdote": "Fernweh hat im üblichen Gebrauch keinen Plural. Man zählt nicht einzelne Fernwehs, sondern beschreibt eine Empfindung, die stärker oder schwächer sein kann.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Fernweh"
+      ]
+    },
+    "kleinod": {
+      "concept": "kleinod",
+      "pronunciation": "KLEIN-oh(t)",
+      "grammar": "Substantiv · das Kleinod",
+      "definition": [
+        "Ein Kleinod ist ein besonders kostbarer Gegenstand, ursprünglich etwa ein wertvolles Schmuckstück. Das Wort lenkt den Blick auf etwas, das man schätzt und bewahren möchte.",
+        "Übertragen kann auch ein Garten, ein Gebäude oder ein Kunstwerk ein Kleinod sein. Entscheidend ist der empfundene Wert, nicht unbedingt der Marktpreis oder die tatsächliche Größe."
+      ],
+      "etymology": "Das Wort geht auf mittelhochdeutsche Formen zurück, die einen feinen oder kostbaren Gegenstand bezeichneten. Seine Geschichte verbindet es mit Schmuck und besonderer Wertschätzung.",
+      "examples": [
+        "Der restaurierte Pavillon ist ein Kleinod im Stadtpark.",
+        "Sie bewahrte das alte Schmuckstück wie ein Kleinod auf."
+      ],
+      "related": [
+        "Kostbarkeit",
+        "Juwel",
+        "Schmuckstück"
+      ],
+      "nuance": "Juwel kann ebenfalls übertragen gebraucht werden. Kleinod klingt häufig feierlicher und betont, dass etwas besonders erhaltenswert ist.",
+      "anecdote": "Als Mehrzahl begegnen Kleinode und Kleinodien. Die zweite Form fällt besonders im Zusammenhang mit kostbaren Schmuck- oder Kunstgegenständen auf.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Kleinod"
+      ]
+    },
+    "epiphanie": {
+      "concept": "epiphany",
+      "pronunciation": "e-pi-fa-NIE",
+      "grammar": "Substantiv · die Epiphanie",
+      "definition": [
+        "Eine Epiphanie bezeichnet das Erscheinen oder Offenbarwerden einer Gottheit unter den Menschen. Im Deutschen gehört das Wort besonders in religiöse Zusammenhänge.",
+        "Wer es in einem Text liest, sollte auf den Kontext achten: Es geht nicht bloß um etwas, das plötzlich sichtbar wird, sondern um eine Erscheinung mit besonderer religiöser Bedeutung."
+      ],
+      "etymology": "Das griechische epipháneia bedeutet Erscheinung. Es hängt mit einem Verb für sich zeigen oder erscheinen zusammen.",
+      "examples": [
+        "Der Text schildert die Begegnung als eine Epiphanie.",
+        "Die Darstellung verbindet die Epiphanie mit einem Moment des Offenbarwerdens."
+      ],
+      "related": [
+        "Erscheinung",
+        "Offenbarung",
+        "Theophanie"
+      ],
+      "nuance": "Erscheinung ist ein wesentlich allgemeineres Wort. Epiphanie bringt im hier beschriebenen Gebrauch den religiösen Sinn mit.",
+      "anecdote": "Die Herkunft macht das Wort durchschaubar: Eine Epiphanie ist etwas, das sich zeigt. Erst sein Gebrauch legt fest, warum dieses Erscheinen mehr als ein gewöhnliches Auftauchen bedeutet.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Epiphanie"
+      ]
+    },
+    "palimpsest": {
+      "concept": "palimpsest",
+      "pronunciation": "pa-limp-SEST",
+      "grammar": "Substantiv · der oder das Palimpsest",
+      "definition": [
+        "Ein Palimpsest ist ein altes Schriftstück, dessen ursprüngliche Beschriftung entfernt und dessen Oberfläche danach erneut beschrieben wurde. Es handelt sich also um wiederverwendetes Schreibmaterial.",
+        "Der Begriff macht auf die verschiedenen Textschichten aufmerksam. Die spätere Beschriftung ist nicht die ganze Geschichte des Gegenstands, weil auch die frühere Nutzung zu ihm gehört."
+      ],
+      "etymology": "Das Wort gelangte über das Lateinische aus dem Griechischen. Seine ursprüngliche Bedeutung verweist auf erneutes Abschaben, also auf die Vorbereitung einer bereits benutzten Oberfläche.",
+      "examples": [
+        "Unter der jüngeren Schrift waren Spuren des Palimpsests zu erkennen.",
+        "Die Ausstellung erklärte, warum das alte Blatt erneut beschrieben worden war."
+      ],
+      "related": [
+        "wiederbeschriebene Handschrift",
+        "Pergament",
+        "Textschicht"
+      ],
+      "nuance": "Pergament bezeichnet ein Material. Palimpsest bezeichnet dessen besondere Geschichte als erneut beschriebener Schriftträger.",
+      "anecdote": "Duden führt sowohl den männlichen als auch den sächlichen Artikel an. Man kann daher der Palimpsest oder das Palimpsest lesen, ohne dass damit zwei verschiedene Gegenstände gemeint sind.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Palimpsest"
+      ]
+    },
+    "anakoluth": {
+      "concept": "anacoluth",
+      "pronunciation": "a-na-ko-LUHT",
+      "grammar": "Substantiv · das oder der Anakoluth",
+      "definition": [
+        "Ein Anakoluth ist ein Bruch in der grammatischen Konstruktion eines Satzes. Der Sprecher oder Schreiber beginnt nach einem bestimmten Muster und setzt den Satz in einem anderen fort.",
+        "Der Gedanke kann dabei verständlich bleiben. Vor allem bei spontanem Sprechen können Gedanken schneller ihre Richtung wechseln, als sich die begonnene Satzform vollständig ausführen lässt."
+      ],
+      "etymology": "Die griechisch-lateinische Herkunft verweist auf etwas, das nicht passend zusammenhängt oder nicht weiter folgt. Diese Vorstellung beschreibt den abgebrochenen syntaktischen Zusammenhang.",
+      "examples": [
+        "Dieses Buch, ich habe es gestern endlich gelesen.",
+        "Der Anakoluth ließ die Erzählung wie eine spontane Erinnerung wirken."
+      ],
+      "related": [
+        "Satzbruch",
+        "Konstruktionswechsel",
+        "Ellipse"
+      ],
+      "nuance": "Eine Ellipse lässt Satzteile weg. Ein Anakoluth verändert die begonnene Konstruktion; beides ist nicht automatisch dasselbe.",
+      "anecdote": "Ein Satzbruch ist nicht immer ein Bruch des Verstehens. Zuhörer können den gemeinten Gedanken ergänzen, obwohl die Grammatik unterwegs die Richtung wechselt.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Anakoluth"
+      ]
+    },
+    "ataraxie": {
+      "concept": "ataraxia",
+      "pronunciation": "a-ta-ra-KSIE",
+      "grammar": "Substantiv · die Ataraxie · Philosophie",
+      "definition": [
+        "Ataraxie bezeichnet eine innere Ruhe, die durch äußere Störungen nicht leicht erschüttert wird. Gleichmut und seelische Unerschütterlichkeit gehören zum Bedeutungsfeld.",
+        "In philosophischen Texten ist damit mehr gemeint als ein entspannter Augenblick. Das Wort beschreibt eine Haltung oder einen Zustand, bei dem das Gemüt seine Stabilität bewahrt."
+      ],
+      "etymology": "Der Begriff stammt aus dem Griechischen. Seine Bedeutung steht im Zusammenhang mit dem Freisein von innerer Beunruhigung.",
+      "examples": [
+        "Die Philosophin beschrieb Ataraxie als ein Ziel ihrer Lebensführung.",
+        "Seine Ataraxie blieb selbst während der lauten Diskussion erhalten."
+      ],
+      "related": [
+        "Gleichmut",
+        "Seelenruhe",
+        "Gelassenheit",
+        "Unerschütterlichkeit"
+      ],
+      "nuance": "Gelassenheit ist eine alltägliche Annäherung. Ataraxie bringt häufig den besonderen philosophischen Zusammenhang mit.",
+      "anecdote": "Äußere Stille und innere Ruhe sind nicht dasselbe. Gerade weil Ataraxie auf das Gemüt zielt, kann der Begriff auch in einer unruhigen Umgebung sinnvoll sein.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Ataraxie"
+      ]
+    },
+    "silhouette": {
+      "concept": "silhouette",
+      "pronunciation": "/ziluˈɛtə/",
+      "grammar": "Substantiv · die Silhouette",
+      "definition": [
+        "Eine Silhouette ist der Umriss einer Gestalt, besonders wenn sie sich dunkel gegen einen helleren Hintergrund abzeichnet. Die Kontur bleibt sichtbar, während die inneren Einzelheiten zurücktreten.",
+        "Das Wort kann auch einen Schattenriss als Bildform bezeichnen. In der Mode beschreibt es außerdem die äußere Form eines Kleidungsstücks oder der damit entstehenden Gestalt."
+      ],
+      "etymology": "Das französische Wort geht auf den Namen Étienne de Silhouette zurück. Im Deutschen blieb seine französische Schreibweise erhalten.",
+      "examples": [
+        "Vor dem Abendhimmel erschien die Silhouette des Turms.",
+        "Der Mantel gab der Figur eine schmale Silhouette."
+      ],
+      "related": [
+        "Umriss",
+        "Kontur",
+        "Schattenriss"
+      ],
+      "nuance": "Kontur ist allgemein eine Begrenzungslinie. Silhouette ruft oft eine ganze Gestalt hervor, deren Details im Schatten liegen.",
+      "anecdote": "In diesem alltäglichen Bildwort steckt ein Familienname. Seine Schreibweise erinnert noch an den französischen Ursprung, obwohl es fest zum deutschen Wortschatz gehört.",
+      "sources": [
+        "https://www.duden.de/rechtschreibung/Silhouette"
+      ]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[Unit]
+Description=Puzzoria public availability check from a separate host
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/puzzoria/monitor.env
+ExecStart=/usr/bin/node /opt/puzzoria/scripts/public-monitor.mjs
+StateDirectory=puzzoria-monitor
+UMask=0077
+NoNewPrivileges=true

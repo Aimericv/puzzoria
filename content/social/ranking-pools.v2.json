@@ -1,0 +1,458 @@
+[
+  {
+    "id": "food-pool-v2",
+    "category": "food",
+    "from": "2026-10-05",
+    "items": [
+      ["pizza", "🍕", "Pizza", "Pizza", "Pizza", "Pizza"],
+      ["sushi", "🍣", "Sushi", "Sushi", "Sushi", "Sushi"],
+      ["burger", "🍔", "Burger", "Burger", "Hamburguesa", "Burger"],
+      ["tacos", "🌮", "Tacos", "Tacos", "Tacos", "Tacos"],
+      ["pasta", "🍝", "Pasta", "Pâtes", "Pasta", "Pasta"],
+      ["ramen", "🍜", "Ramen", "Ramen", "Ramen", "Ramen"],
+      ["curry", "🍛", "Curry", "Curry", "Curry", "Curry"],
+      [
+        "dumplings",
+        "🥟",
+        "Dumplings",
+        "Raviolis asiatiques",
+        "Dumplings",
+        "Teigtaschen"
+      ],
+      ["paella", "🥘", "Paella", "Paella", "Paella", "Paella"],
+      ["falafel", "🧆", "Falafel", "Falafels", "Falafel", "Falafel"],
+      ["lasagna", "🍝", "Lasagna", "Lasagnes", "Lasaña", "Lasagne"],
+      ["kebab", "🥙", "Kebab", "Kebab", "Kebab", "Kebab"],
+      ["salad", "🥗", "Salad", "Salade", "Ensalada", "Salat"],
+      ["steak", "🥩", "Steak", "Steak", "Bistec", "Steak"],
+      ["fries", "🍟", "Fries", "Frites", "Patatas fritas", "Pommes"],
+      ["pancakes", "🥞", "Pancakes", "Pancakes", "Tortitas", "Pfannkuchen"],
+      ["icecream", "🍦", "Ice cream", "Glace", "Helado", "Eis"],
+      ["chocolate", "🍫", "Chocolate", "Chocolat", "Chocolate", "Schokolade"],
+      ["croissant", "🥐", "Croissant", "Croissant", "Cruasán", "Croissant"],
+      ["waffle", "🧇", "Waffles", "Gaufres", "Gofres", "Waffeln"]
+    ]
+  },
+  {
+    "id": "countries-pool-v2",
+    "category": "countries",
+    "from": "2026-10-05",
+    "items": [
+      ["japan", "🗾", "Japan", "Japon", "Japón", "Japan"],
+      ["italy", "🍋", "Italy", "Italie", "Italia", "Italien"],
+      ["canada", "🍁", "Canada", "Canada", "Canadá", "Kanada"],
+      ["brazil", "🌴", "Brazil", "Brésil", "Brasil", "Brasilien"],
+      ["norway", "🏔️", "Norway", "Norvège", "Noruega", "Norwegen"],
+      ["france", "🥖", "France", "France", "Francia", "Frankreich"],
+      ["spain", "☀️", "Spain", "Espagne", "España", "Spanien"],
+      ["germany", "🏰", "Germany", "Allemagne", "Alemania", "Deutschland"],
+      ["greece", "🏛️", "Greece", "Grèce", "Grecia", "Griechenland"],
+      ["portugal", "🌊", "Portugal", "Portugal", "Portugal", "Portugal"],
+      ["switzerland", "🏔️", "Switzerland", "Suisse", "Suiza", "Schweiz"],
+      ["iceland", "🌋", "Iceland", "Islande", "Islandia", "Island"],
+      ["australia", "🦘", "Australia", "Australie", "Australia", "Australien"],
+      [
+        "newzealand",
+        "🥝",
+        "New Zealand",
+        "Nouvelle-Zélande",
+        "Nueva Zelanda",
+        "Neuseeland"
+      ],
+      [
+        "southkorea",
+        "🎮",
+        "South Korea",
+        "Corée du Sud",
+        "Corea del Sur",
+        "Südkorea"
+      ],
+      ["mexico", "🌵", "Mexico", "Mexique", "México", "Mexiko"],
+      ["thailand", "🛕", "Thailand", "Thaïlande", "Tailandia", "Thailand"],
+      ["morocco", "🫖", "Morocco", "Maroc", "Marruecos", "Marokko"],
+      ["egypt", "🏺", "Egypt", "Égypte", "Egipto", "Ägypten"],
+      [
+        "netherlands",
+        "🌷",
+        "Netherlands",
+        "Pays-Bas",
+        "Países Bajos",
+        "Niederlande"
+      ]
+    ]
+  },
+  {
+    "id": "gaming-pool-v2",
+    "category": "gaming",
+    "from": "2026-10-05",
+    "items": [
+      ["minecraft", "⛏️", "Minecraft", "Minecraft", "Minecraft", "Minecraft"],
+      [
+        "mario",
+        "🍄",
+        "Super Mario",
+        "Super Mario",
+        "Super Mario",
+        "Super Mario"
+      ],
+      ["zelda", "🗡️", "Zelda", "Zelda", "Zelda", "Zelda"],
+      ["tetris", "🧱", "Tetris", "Tetris", "Tetris", "Tetris"],
+      ["pokemon", "⚡", "Pokémon", "Pokémon", "Pokémon", "Pokémon"],
+      [
+        "stardew",
+        "🌾",
+        "Stardew Valley",
+        "Stardew Valley",
+        "Stardew Valley",
+        "Stardew Valley"
+      ],
+      [
+        "hollowknight",
+        "🪲",
+        "Hollow Knight",
+        "Hollow Knight",
+        "Hollow Knight",
+        "Hollow Knight"
+      ],
+      ["portal", "🌀", "Portal", "Portal", "Portal", "Portal"],
+      ["undertale", "❤️", "Undertale", "Undertale", "Undertale", "Undertale"],
+      ["terraria", "🪓", "Terraria", "Terraria", "Terraria", "Terraria"],
+      [
+        "animalcrossing",
+        "🏝️",
+        "Animal Crossing",
+        "Animal Crossing",
+        "Animal Crossing",
+        "Animal Crossing"
+      ],
+      [
+        "mariokart",
+        "🏎️",
+        "Mario Kart",
+        "Mario Kart",
+        "Mario Kart",
+        "Mario Kart"
+      ],
+      ["sims", "🏠", "The Sims", "Les Sims", "Los Sims", "Die Sims"],
+      ["skyrim", "🐉", "Skyrim", "Skyrim", "Skyrim", "Skyrim"],
+      [
+        "eldenring",
+        "💍",
+        "Elden Ring",
+        "Elden Ring",
+        "Elden Ring",
+        "Elden Ring"
+      ],
+      ["hades", "🔥", "Hades", "Hades", "Hades", "Hades"],
+      ["celeste", "🏔️", "Celeste", "Celeste", "Celeste", "Celeste"],
+      [
+        "rocketleague",
+        "⚽",
+        "Rocket League",
+        "Rocket League",
+        "Rocket League",
+        "Rocket League"
+      ],
+      ["fortnite", "🚌", "Fortnite", "Fortnite", "Fortnite", "Fortnite"],
+      ["overwatch", "🎯", "Overwatch", "Overwatch", "Overwatch", "Overwatch"]
+    ]
+  },
+  {
+    "id": "movies-pool-v2",
+    "category": "movies",
+    "from": "2026-10-05",
+    "items": [
+      ["starwars", "🌌", "Star Wars", "Star Wars", "Star Wars", "Star Wars"],
+      ["shrek", "💚", "Shrek", "Shrek", "Shrek", "Shrek"],
+      [
+        "lotr",
+        "💍",
+        "The Lord of the Rings",
+        "Le Seigneur des anneaux",
+        "El Señor de los Anillos",
+        "Der Herr der Ringe"
+      ],
+      ["toystory", "🧸", "Toy Story", "Toy Story", "Toy Story", "Toy Story"],
+      [
+        "spirited",
+        "🐉",
+        "Spirited Away",
+        "Le Voyage de Chihiro",
+        "El viaje de Chihiro",
+        "Chihiros Reise ins Zauberland"
+      ],
+      ["inception", "🌀", "Inception", "Inception", "Origen", "Inception"],
+      [
+        "interstellar",
+        "🪐",
+        "Interstellar",
+        "Interstellar",
+        "Interstellar",
+        "Interstellar"
+      ],
+      ["matrix", "💊", "The Matrix", "Matrix", "Matrix", "Matrix"],
+      ["titanic", "🚢", "Titanic", "Titanic", "Titanic", "Titanic"],
+      [
+        "jurassic",
+        "🦖",
+        "Jurassic Park",
+        "Jurassic Park",
+        "Jurassic Park",
+        "Jurassic Park"
+      ],
+      [
+        "backfuture",
+        "🚗",
+        "Back to the Future",
+        "Retour vers le futur",
+        "Regreso al futuro",
+        "Zurück in die Zukunft"
+      ],
+      [
+        "lionking",
+        "🦁",
+        "The Lion King",
+        "Le Roi lion",
+        "El rey león",
+        "Der König der Löwen"
+      ],
+      [
+        "nemo",
+        "🐠",
+        "Finding Nemo",
+        "Le Monde de Nemo",
+        "Buscando a Nemo",
+        "Findet Nemo"
+      ],
+      [
+        "ratatouille",
+        "🐀",
+        "Ratatouille",
+        "Ratatouille",
+        "Ratatouille",
+        "Ratatouille"
+      ],
+      ["up", "🎈", "Up", "Là-haut", "Up", "Oben"],
+      ["coco", "🎸", "Coco", "Coco", "Coco", "Coco"],
+      ["wall-e", "🤖", "WALL-E", "WALL-E", "WALL-E", "WALL-E"],
+      ["avatar", "🌿", "Avatar", "Avatar", "Avatar", "Avatar"],
+      [
+        "harrypotter",
+        "🪄",
+        "Harry Potter",
+        "Harry Potter",
+        "Harry Potter",
+        "Harry Potter"
+      ],
+      [
+        "paddington",
+        "🐻",
+        "Paddington",
+        "Paddington",
+        "Paddington",
+        "Paddington"
+      ]
+    ]
+  },
+  {
+    "id": "random-pool-v2",
+    "category": "random",
+    "from": "2026-10-05",
+    "items": [
+      [
+        "sleep",
+        "😴",
+        "Sleeping in",
+        "La grasse matinée",
+        "Dormir hasta tarde",
+        "Ausschlafen"
+      ],
+      [
+        "wifi",
+        "📶",
+        "Fast Wi-Fi",
+        "Un Wi-Fi rapide",
+        "Wi-Fi rápido",
+        "Schnelles WLAN"
+      ],
+      [
+        "weekend",
+        "🎉",
+        "A three-day weekend",
+        "Un week-end de trois jours",
+        "Un fin de semana de tres días",
+        "Ein Drei-Tage-Wochenende"
+      ],
+      [
+        "coffee",
+        "☕",
+        "Good coffee",
+        "Un bon café",
+        "Un buen café",
+        "Guter Kaffee"
+      ],
+      [
+        "sunshine",
+        "☀️",
+        "A sunny day",
+        "Une journée ensoleillée",
+        "Un día soleado",
+        "Ein sonniger Tag"
+      ],
+      [
+        "music",
+        "🎧",
+        "Your favourite song",
+        "Ta chanson préférée",
+        "Tu canción favorita",
+        "Dein Lieblingslied"
+      ],
+      [
+        "book",
+        "📖",
+        "A good book",
+        "Un bon livre",
+        "Un buen libro",
+        "Ein gutes Buch"
+      ],
+      [
+        "beach",
+        "🏖️",
+        "A day at the beach",
+        "Une journée à la plage",
+        "Un día en la playa",
+        "Ein Tag am Strand"
+      ],
+      [
+        "walk",
+        "🚶",
+        "A walk in nature",
+        "Une balade dans la nature",
+        "Un paseo por la naturaleza",
+        "Ein Spaziergang in der Natur"
+      ],
+      [
+        "cinema",
+        "🎬",
+        "A trip to the cinema",
+        "Une sortie au cinéma",
+        "Una visita al cine",
+        "Ein Kinobesuch"
+      ],
+      [
+        "nap",
+        "💤",
+        "An afternoon nap",
+        "Une sieste",
+        "Una siesta",
+        "Ein Mittagsschlaf"
+      ],
+      [
+        "dessert",
+        "🍰",
+        "Your favourite dessert",
+        "Ton dessert préféré",
+        "Tu postre favorito",
+        "Dein Lieblingsdessert"
+      ],
+      [
+        "friends",
+        "🫶",
+        "An evening with friends",
+        "Une soirée entre amis",
+        "Una noche con amigos",
+        "Ein Abend mit Freunden"
+      ],
+      [
+        "rain",
+        "🌧️",
+        "Rain from a cosy room",
+        "La pluie depuis une pièce douillette",
+        "La lluvia desde una habitación acogedora",
+        "Regen aus einem gemütlichen Zimmer"
+      ],
+      [
+        "pet",
+        "🐾",
+        "Cuddling a pet",
+        "Un câlin avec un animal",
+        "Abrazar a una mascota",
+        "Mit einem Haustier kuscheln"
+      ],
+      [
+        "train",
+        "🚆",
+        "A scenic train ride",
+        "Un trajet en train avec une belle vue",
+        "Un viaje en tren con buenas vistas",
+        "Eine Zugfahrt mit schöner Aussicht"
+      ],
+      [
+        "gamingnight",
+        "🎮",
+        "An evening gaming",
+        "Une soirée à jouer",
+        "Una noche de videojuegos",
+        "Ein Spieleabend"
+      ],
+      [
+        "freshsheets",
+        "🛏️",
+        "Fresh bed sheets",
+        "Des draps propres",
+        "Sábanas limpias",
+        "Frische Bettwäsche"
+      ],
+      [
+        "sunset",
+        "🌅",
+        "A sunset",
+        "Un coucher de soleil",
+        "Una puesta de sol",
+        "Ein Sonnenuntergang"
+      ],
+      [
+        "surprise",
+        "🎁",
+        "A pleasant surprise",
+        "Une bonne surprise",
+        "Una sorpresa agradable",
+        "Eine schöne Überraschung"
+      ]
+    ]
+  },
+  {
+    "id": "animals-pool-v2",
+    "category": "animals",
+    "from": "2026-10-05",
+    "items": [
+      ["cat", "🐈", "Cat", "Chat", "Gato", "Katze"],
+      ["dog", "🐕", "Dog", "Chien", "Perro", "Hund"],
+      ["otter", "🦦", "Otter", "Loutre", "Nutria", "Otter"],
+      ["penguin", "🐧", "Penguin", "Manchot", "Pingüino", "Pinguin"],
+      ["fox", "🦊", "Fox", "Renard", "Zorro", "Fuchs"],
+      ["panda", "🐼", "Panda", "Panda", "Panda", "Panda"],
+      [
+        "redpanda",
+        "🐾",
+        "Red panda",
+        "Panda roux",
+        "Panda rojo",
+        "Roter Panda"
+      ],
+      ["rabbit", "🐇", "Rabbit", "Lapin", "Conejo", "Kaninchen"],
+      ["dolphin", "🐬", "Dolphin", "Dauphin", "Delfín", "Delfin"],
+      ["elephant", "🐘", "Elephant", "Éléphant", "Elefante", "Elefant"],
+      ["tiger", "🐅", "Tiger", "Tigre", "Tigre", "Tiger"],
+      ["lion", "🦁", "Lion", "Lion", "León", "Löwe"],
+      ["koala", "🐨", "Koala", "Koala", "Koala", "Koala"],
+      ["sloth", "🦥", "Sloth", "Paresseux", "Perezoso", "Faultier"],
+      ["capybara", "🐾", "Capybara", "Capybara", "Capibara", "Wasserschwein"],
+      ["owl", "🦉", "Owl", "Hibou", "Búho", "Eule"],
+      ["horse", "🐎", "Horse", "Cheval", "Caballo", "Pferd"],
+      ["hedgehog", "🦔", "Hedgehog", "Hérisson", "Erizo", "Igel"],
+      ["seal", "🦭", "Seal", "Phoque", "Foca", "Seehund"],
+      ["turtle", "🐢", "Turtle", "Tortue", "Tortuga", "Schildkröte"]
+    ]
+  }
+]

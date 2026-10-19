@@ -1,0 +1,8 @@
+[Unit]
+Description=Puzzoria operational job failure notification
+
+[Service]
+Type=oneshot
+EnvironmentFile=/etc/puzzoria/operations.env
+ExecStart=/usr/bin/node /opt/puzzoria/scripts/notify-operations.mjs
+UMask=0077

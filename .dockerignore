@@ -1,0 +1,19 @@
+# Private configuration and runtime data must never enter the build context.
+.env*
+.npmrc
+.data
+.sites-runtime
+.next*
+node_modules
+.git
+test-results
+playwright-report
+*.tsbuildinfo
+*.sqlite*
+*.db
+backups
+coverage
+tests
+e2e
+docs
+.codex
