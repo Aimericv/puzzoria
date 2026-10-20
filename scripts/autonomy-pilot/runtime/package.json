@@ -1,0 +1,8 @@
+{
+  "name": "puzzoria-autonomy-pilot-runtime",
+  "private": true,
+  "dependencies": {
+    "@openai/codex": "0.163.0",
+    "libsodium-wrappers": "0.8.4"
+  }
+}

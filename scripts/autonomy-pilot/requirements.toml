@@ -1,0 +1,35 @@
+allowed_login_methods = ["chatgpt"]
+cli_auth_credentials_store = "file"
+allowed_approval_policies = ["never"]
+allowed_web_search_modes = ["disabled"]
+mcp_servers = {}
+allow_managed_hooks_only = true
+default_permissions = "pilot"
+
+[allowed_permission_profiles]
+pilot = true
+
+[permissions.pilot]
+extends = ":workspace"
+
+[permissions.pilot.filesystem]
+":minimal" = "read"
+"/opt/puzzoria-pilot/readonly" = "read"
+"/opt/hostedtoolcache/node" = "read"
+"/opt/puzzoria-pilot/work" = "write"
+
+[permissions.pilot.network]
+enabled = false
+
+[permissions.filesystem]
+deny_read = ["/opt/puzzoria-pilot/auth", "/opt/puzzoria-pilot/private", "/home/runner", "/proc/*/environ", "/proc/*/mem", "/var/run/docker.sock"]
+
+[features]
+apps = false
+plugins = false
+browser_use = false
+in_app_browser = false
+computer_use = false
+multi_agent = false
+hooks = false
+use_legacy_landlock = false

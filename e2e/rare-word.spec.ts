@@ -9,6 +9,7 @@ import type { Locale, PublicChallenge } from "../src/lib/types";
 import { comparisonPreviewCopy } from "../src/lib/comparison-preview-i18n";
 import { wordArticlePath } from "../src/lib/word-article-path";
 import { wordArticleCopy } from "../src/lib/word-article-i18n";
+import { articleIsPublished } from "./word-article-publication";
 
 async function guess(page: Page, word: string, locale: Locale) {
   const enter = page.getByRole("button",{name:t(locale).enter,exact:true});
@@ -63,7 +64,9 @@ test("Unusual Word plays in all four languages, reveals knowledge only after com
     await expect(page.locator("#examples blockquote")).toHaveCount(2);
     await expect(page.locator(".word-article-sources a").first()).toHaveAttribute("href",/^https:\/\//);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",new RegExp(wordArticlePath(locale,c.answer) + "$"));
-    await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content",/noindex/);
+    // A repeated Daily answer can already have a public article. Ownership only
+    // keeps an article private before its original publication date.
+    await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(articleIsPublished(locale, c.answer) ? 0 : 1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     if(locale === "fr") await page.screenshot({path:info.outputPath("word-article.png"),fullPage:true});
     if(locale === "fr") {

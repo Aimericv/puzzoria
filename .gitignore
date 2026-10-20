@@ -35,3 +35,5 @@ id_ed25519*
 backups/
 .backups/
 /puzzoria-deploy*.tar.gz
+/.pilot-in/
+/.pilot-out/
