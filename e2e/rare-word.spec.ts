@@ -26,8 +26,13 @@ test("Unusual Word plays in all four languages, reveals knowledge only after com
     await expect(page.locator('.word-variants [aria-current="page"]')).toHaveText(
       ({fr:"Mot du jour",en:"Daily word",es:"Palabra del día",de:"Wort des Tages"})[locale],
     );
+    // The navigation is server-rendered before account/game hydration settles.
+    // Start this gameplay flow from the real interactive board, not its preview.
+    await expect(page.getByRole("button",{name:t(locale).enter,exact:true})).toBeEnabled();
     await page.locator(`.word-variants a[href="${gamePath(locale,"rareword")}"]`).click();
-    await expect(page).toHaveURL(new RegExp(gamePath(locale,"rareword") + "$"));
+    // Client navigation includes a server request; use the navigation timeout
+    // rather than the shorter DOM assertion timeout on a shared CI runner.
+    await page.waitForURL(new RegExp(gamePath(locale,"rareword") + "$"));
     const c = generateChallenge("rareword",locale,utcDay());
     if(c.kind !== "rareword") throw new Error();
     await expect(page.locator(".word-board")).toBeVisible();

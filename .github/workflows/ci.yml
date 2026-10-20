@@ -68,10 +68,10 @@ jobs:
           node-version: 24.15.0
       - run: npm ci --no-audit --no-fund
       - run: npx playwright install --with-deps ${{ matrix.browser }}
-      # Fail early on the two Linux-specific regressions before the hour-long suite.
-      - name: Verify exports and deterministic narrow-screen fixtures
+      # Exercise the observed Linux regressions before the full browser suite.
+      - name: Verify exports, hydrated navigation and deterministic fixtures
         run: >-
-          npm run test:e2e -- e2e/social-games.spec.ts e2e/site-analytics.spec.ts
-          --grep "new SEO pages|internal analytics require" --project=${{ matrix.project }} --reporter=line
+          npm run test:e2e -- e2e/social-games.spec.ts e2e/site-analytics.spec.ts e2e/rare-word.spec.ts
+          --grep "new SEO pages|internal analytics require|Unusual Word plays" --project=${{ matrix.project }} --reporter=line
       - run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line
       # Never upload the disposable SQLite DB, browser state or raw traces.
