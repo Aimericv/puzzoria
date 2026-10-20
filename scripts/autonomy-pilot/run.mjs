@@ -1,5 +1,5 @@
 import {spawn,execFileSync} from "node:child_process";
-import {readFileSync,writeFileSync,mkdirSync,chownSync,chmodSync,renameSync} from "node:fs";
+import {readFileSync,writeFileSync,mkdirSync,chownSync,chmodSync,renameSync,readlinkSync} from "node:fs";
 import {randomBytes} from "node:crypto";
 import {join,dirname} from "node:path";
 import {Rpc} from "./rpc.mjs";
@@ -52,7 +52,7 @@ function stopAgent() {
 }
 let child, rpc, verified=false;
 try {
-  sandbox([readonly+"/isolation.mjs"]);
+  sandbox([readonly+"/isolation.mjs",String(process.pid),readlinkSync("/proc/self/ns/pid")]);
   child=spawn(node,[cli,"app-server"],{uid,gid:uid,env,cwd:readonly,stdio:["pipe","pipe","ignore"],detached:true});
   rpc=new Rpc(child);
   await rpc.request("initialize",{clientInfo:{name:"puzzoria-autonomy-pilot",version:"1"}});rpc.send({method:"initialized"});

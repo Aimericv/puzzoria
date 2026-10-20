@@ -62,6 +62,10 @@ jamais exécutés avec l'identité du superviseur.
 Le CLI natif conserve son auth dans un répertoire distinct du workspace. Les
 outils du modèle ne peuvent lire ni ses fichiers d'auth, ni les secrets du superviseur,
 ni l'environnement du runner. Ils n'ont ni réseau, ni sudo, ni Docker. La
+séparation des namespaces PID est vérifiée : un `/proc` propre au sandbox reste
+normalement lisible, tandis que l'environnement du superviseur et les variables
+de secrets ne doivent pas être accessibles aux outils.
+La
 configuration administrée appartient à root, interdit d'autres profils, apps,
 plugins, MCP, navigateur, hooks et recherche web. Les tests canaris doivent
 réussir avant toute inférence ; aucun repli vers un accès intégral n'est prévu.
