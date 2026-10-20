@@ -24,7 +24,7 @@ enabled = false
 [permissions.filesystem]
 # Codex requires its own auth/tmp/arg0-* executable cache. The minimal profile
 # grants no general home read; explicitly deny credentials, not that cache.
-deny_read = ["/opt/puzzoria-pilot/auth/auth.json", "/opt/puzzoria-pilot/auth/*.json", "/opt/puzzoria-pilot/auth/.tmp*", "/opt/puzzoria-pilot/auth/canary", "/opt/puzzoria-pilot/private", "/home/runner", "/proc", "/var/run/docker.sock"]
+deny_read = ["/opt/puzzoria-pilot/auth/auth.json", "/opt/puzzoria-pilot/auth/*.json", "/opt/puzzoria-pilot/auth/.tmp*", "/opt/puzzoria-pilot/auth/canary", "/opt/puzzoria-pilot/private", "/home/runner", "/proc", "/run"]
 
 [features]
 apps = false
