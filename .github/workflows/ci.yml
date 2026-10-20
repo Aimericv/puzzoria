@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
-      NEXT_PUBLIC_SITE_URL: https://puzzoria.com
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -33,7 +33,11 @@ jobs:
       - run: npm run content:validate
       - run: npm run content:social
       - run: npm run seo:check
+        env:
+          NEXT_PUBLIC_SITE_URL: https://puzzoria.com
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e -- --reporter=line
       - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://puzzoria.com
       # Never upload the disposable SQLite DB, browser state or raw traces.

@@ -22,7 +22,9 @@ extends = ":workspace"
 enabled = false
 
 [permissions.filesystem]
-deny_read = ["/opt/puzzoria-pilot/auth", "/opt/puzzoria-pilot/private", "/home/runner", "/proc/*/environ", "/proc/*/mem", "/var/run/docker.sock"]
+# Codex requires its own auth/tmp/arg0-* executable cache. The minimal profile
+# grants no general home read; explicitly deny credentials, not that cache.
+deny_read = ["/opt/puzzoria-pilot/auth/auth.json", "/opt/puzzoria-pilot/auth/*.json", "/opt/puzzoria-pilot/auth/.tmp*", "/opt/puzzoria-pilot/auth/canary", "/opt/puzzoria-pilot/private", "/home/runner", "/proc/*/environ", "/proc/*/mem", "/var/run/docker.sock"]
 
 [features]
 apps = false

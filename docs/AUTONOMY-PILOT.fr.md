@@ -60,11 +60,13 @@ lui-même les preuves machine. Les tests candidats restent dans le sandbox,
 jamais exécutés avec l'identité du superviseur.
 
 Le CLI natif conserve son auth dans un répertoire distinct du workspace. Les
-outils du modèle ne peuvent lire ni ce répertoire, ni les secrets du superviseur,
+outils du modèle ne peuvent lire ni ses fichiers d'auth, ni les secrets du superviseur,
 ni l'environnement du runner. Ils n'ont ni réseau, ni sudo, ni Docker. La
 configuration administrée appartient à root, interdit d'autres profils, apps,
 plugins, MCP, navigateur, hooks et recherche web. Les tests canaris doivent
 réussir avant toute inférence ; aucun repli vers un accès intégral n'est prévu.
+Le cache d'exécutables auxiliaires `CODEX_HOME/tmp/arg0-*` reste utilisable par
+le sandbox natif ; interdire tout `CODEX_HOME` empêche ce dernier de démarrer.
 
 Le superviseur détient seul le jeton GitHub éphémère et la clé de chiffrement.
 Le jeton personnel du gestionnaire Git sert exclusivement au bootstrap local.
