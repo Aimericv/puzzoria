@@ -4,7 +4,7 @@ import {execFileSync} from "node:child_process";
 
 if(getuid()===0) throw new Error("The sandbox must not run as root");
 if(process.getgid()===0 || process.getgroups().includes(0)) throw new Error("Privileged groups inherited by the agent");
-for(const path of ["/opt/puzzoria-pilot/auth/auth.json","/opt/puzzoria-pilot/auth/canary","/opt/puzzoria-pilot/private/canary","/etc/codex/requirements.toml"]) {
+for(const path of ["/opt/puzzoria-pilot/auth/auth.json","/opt/puzzoria-pilot/auth/canary","/opt/puzzoria-pilot/private/canary","/proc/self/environ","/etc/codex/requirements.toml"]) {
   if(path.endsWith("requirements.toml")) {
     let denied=false; try {writeFileSync(path,"INVALID");} catch {denied=true;}
     if(!denied) throw new Error("Managed policy is writable");

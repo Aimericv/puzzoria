@@ -3,6 +3,10 @@ name: Codex Plus cloud pilot
 on:
   push:
     branches: [codex/autonomy-pilot]
+    paths:
+      - .github/workflows/autonomy-pilot.yml
+      - scripts/autonomy-pilot/**
+      - agent/pilot/BOOT.md
 
 # This gate is evaluated BEFORE allocating a runner. Leave unset until the
 # account owner has verified an effective $0 paid Actions spending stop.
