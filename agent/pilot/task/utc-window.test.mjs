@@ -2,6 +2,49 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { closedUtcDayWindow } from './utc-window.mjs';
 
+for (const [name, input, days, from, to] of [
+  ['7 days across year boundary', '2026-01-03T14:30:00Z', 7, '2025-12-27', '2026-01-03'],
+  ['30 days across leap day', '2024-03-15T23:59:59Z', 30, '2024-02-14', '2024-03-15'],
+  ['7 days across DST', '2026-03-10T03:30:00-04:00', 7, '2026-03-03', '2026-03-10'],
+  ['30 days with UTC date rollover', '2026-01-01T00:30:00+14:00', 30, '2025-12-01', '2025-12-31'],
+]) {
+  test(name, () => {
+    const now = new Date(input);
+    const original = now.getTime();
+    const result = closedUtcDayWindow(now, days);
+    assert.deepEqual(result, { from: `${from}T00:00:00.000Z`, to: `${to}T00:00:00.000Z` });
+    assert.equal(Date.parse(result.to) - Date.parse(result.from), days * 86_400_000);
+    assert.ok(Date.parse(result.to) <= original);
+    assert.equal(now.getTime(), original);
+  });
+}
+
+test('days defaults to one, including explicit undefined', () => {
+  const now = new Date('2026-10-20T12:00:00Z');
+  assert.deepEqual(closedUtcDayWindow(now, 1), closedUtcDayWindow(now));
+  assert.deepEqual(closedUtcDayWindow(now, undefined), closedUtcDayWindow(now));
+});
+
+test('invalid days are rejected without coercion or mutation', () => {
+  const now = new Date('2026-10-20T12:00:00Z');
+  const original = now.getTime();
+  for (const days of [0, -0, -1, 1.5, NaN, Infinity, -Infinity, null, true, '7', {}, [], 7n, Symbol('days')]) {
+    assert.throws(() => closedUtcDayWindow(now, days), TypeError);
+    assert.equal(now.getTime(), original);
+  }
+});
+
+test('unrepresentable windows throw without mutating now', () => {
+  const now = new Date('2026-10-20T12:00:00Z');
+  for (const days of [200_000_001, Number.MAX_SAFE_INTEGER, Number.MAX_VALUE]) {
+    assert.throws(() => closedUtcDayWindow(now, days), RangeError);
+  }
+  const nearMinimum = new Date(-8.64e15 + 7 * 86_400_000);
+  assert.equal(closedUtcDayWindow(nearMinimum, 7).from, new Date(-8.64e15).toISOString());
+  assert.throws(() => closedUtcDayWindow(nearMinimum, 8), RangeError);
+  assert.equal(now.toISOString(), '2026-10-20T12:00:00.000Z');
+});
+
 const cases = [
   ['ordinary day', '2026-10-20T14:12:01.123Z', '2026-10-19', '2026-10-20'],
   ['month boundary', '2026-05-01T12:00:00Z', '2026-04-30', '2026-05-01'],

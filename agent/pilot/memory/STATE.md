@@ -1,16 +1,16 @@
-# Session 1 completed
+# Session 2 completed
 
-Source commit: `5fde74183113f6f92f8dc2ba4318df1fa3c0a014` (provided by the user; this workspace has no Git metadata).
+Resumed user-supplied source commit: `0b24fd1fd31ff059067c43b4b293d62606671603`. Read AGENTS.md, BOOT.md and both memory files from disk before implementation. The prior memory recorded completed phase 1 with source commit `5fde74183113f6f92f8dc2ba4318df1fa3c0a014`. Commit provenance was not independently verified because network and GitHub access are prohibited.
 
-Implemented `agent/pilot/task/utc-window.mjs`. `closedUtcDayWindow(now = new Date())` accepts a valid Date and returns `{ from, to }` ISO strings for the previous fully elapsed UTC day, with inclusive `from` and exclusive `to`. It uses UTC calendar operations, preserves the input, rejects other types and invalid Dates with TypeError, and rejects an unrepresentable previous day with RangeError. Session 1 intentionally has no multi-day argument.
+Implemented `closedUtcDayWindow(now = new Date(), days = 1)` in `agent/pilot/task/utc-window.mjs`. It returns fully elapsed UTC days with inclusive `from` and exclusive `to`, preserving the input Date. Nonpositive, fractional and non-number days throw TypeError without coercion; unrepresentable windows throw RangeError. Existing one-day behavior remains covered.
 
 Verification passed:
 
 - `node --test agent/pilot/task/utc-window.test.mjs`
-- `node agent/pilot/task/utc-window.test.mjs` — 13 tests passed.
+- `node agent/pilot/task/utc-window.test.mjs`
 - `TZ=Pacific/Honolulu node --test agent/pilot/task/utc-window.test.mjs`
 - `TZ=Asia/Tokyo node --test agent/pilot/task/utc-window.test.mjs`
 
-Coverage includes month/year rollover, leap-day and century rules, timezone offsets crossing UTC dates, a DST offset, years below 100, midnight boundaries, 24-hour window duration, input immutability, current-time default, invalid input and Date range underflow. The continuity nonce is preserved in STATE.json.
+Direct execution reports 20 passing tests. Coverage retains the original 13 cases and adds 7/30-day year/leap-day/DST/UTC-offset boundaries, default equivalence, invalid windows, range boundaries and immutability. An initial overflow fixture was corrected because it was still representable; all final commands passed.
 
-Next session: use a NEW thread and runner, read this memory from the separately published GitHub commit, and record the actual first-session commit/context resumed. Add a validated positive-integer `days` argument (default 1) to return fully elapsed UTC days. Add and run 7/30-day and invalid-window tests; update both memory files. Publication is handled separately; this session made no network, credential, production or publication accesses.
+STATE.json records phase 2, status completed, and preserves the continuity nonce from disk. No remaining development work for this bounded pilot. Publication is handled separately; no credentials, network, production or GitHub publication were accessed.
