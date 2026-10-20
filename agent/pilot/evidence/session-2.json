@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "phase": 2,
+  "runId": "39465013048",
+  "attempt": "1",
+  "job": "session_two",
+  "sourceCommit": "0b24fd1fd31ff059067c43b4b293d62606671603",
+  "threadId": "01a15a5a-025b-7b63-8e3b-cd9885b5086b",
+  "model": "gpt-6.1-sol",
+  "authMethod": "chatgpt",
+  "plan": "plus",
+  "nativeAuthRenewed": true,
+  "encryptedAuthRestored": true,
+  "newThread": true,
+  "memoryFromGitHub": true,
+  "isolationCanaries": true,
+  "independentTaskChecks": true,
+  "commands": 10,
+  "quotasBefore": [
+    {
+      "id": "codex",
+      "primary": {
+        "usedPercent": 36,
+        "windowDurationMins": 300,
+        "resetsAt": 1792531449
+      },
+      "secondary": {
+        "usedPercent": 6,
+        "windowDurationMins": 10080,
+        "resetsAt": 1793118249
+      }
+    }
+  ],
+  "quotasAfter": [
+    {
+      "id": "codex",
+      "primary": {
+        "usedPercent": 37,
+        "windowDurationMins": 300,
+        "resetsAt": 1792531449
+      },
+      "secondary": {
+        "usedPercent": 6,
+        "windowDurationMins": 10080,
+        "resetsAt": 1793118249
+      }
+    }
+  ],
+  "recordedAt": "2026-10-20T17:27:48.648Z"
+}
