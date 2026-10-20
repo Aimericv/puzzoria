@@ -67,6 +67,10 @@ plugins, MCP, navigateur, hooks et recherche web. Les tests canaris doivent
 réussir avant toute inférence ; aucun repli vers un accès intégral n'est prévu.
 Le cache d'exécutables auxiliaires `CODEX_HOME/tmp/arg0-*` reste utilisable par
 le sandbox natif ; interdire tout `CODEX_HOME` empêche ce dernier de démarrer.
+Ubuntu 24.04 exige aussi Bubblewrap et le profil AppArmor fourni par Ubuntu,
+chargé avant l'exposition des secrets. Le bootstrap suit la
+[configuration officielle du sandbox](https://learn.chatgpt.com/docs/sandboxing#prerequisites),
+sans désactiver globalement la restriction AppArmor des namespaces.
 
 Le superviseur détient seul le jeton GitHub éphémère et la clé de chiffrement.
 Le jeton personnel du gestionnaire Git sert exclusivement au bootstrap local.
