@@ -35,14 +35,43 @@ jobs:
       - run: npm run seo:check
         env:
           NEXT_PUBLIC_SITE_URL: https://puzzoria.com
-      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://puzzoria.com
+
+  e2e:
+    name: E2E (${{ matrix.project }})
+    needs: checks
+    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - project: desktop
+            browser: chromium
+          - project: mobile
+            browser: chromium
+          - project: android
+            browser: chromium
+          - project: iphone-webkit
+            browser: webkit
+    env:
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24.15.0
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
       # Fail early on the two Linux-specific regressions before the hour-long suite.
       - name: Verify exports and deterministic narrow-screen fixtures
         run: >-
           npm run test:e2e -- e2e/social-games.spec.ts e2e/site-analytics.spec.ts
-          --grep "new SEO pages|internal analytics require" --reporter=line
-      - run: npm run test:e2e -- --reporter=line
-      - run: npm run build
-        env:
-          NEXT_PUBLIC_SITE_URL: https://puzzoria.com
+          --grep "new SEO pages|internal analytics require" --project=${{ matrix.project }} --reporter=line
+      - run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line
       # Never upload the disposable SQLite DB, browser state or raw traces.

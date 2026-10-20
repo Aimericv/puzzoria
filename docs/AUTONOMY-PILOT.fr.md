@@ -1,8 +1,12 @@
 # Validation minimale Codex Plus sur GitHub Actions
 
-Statut initial : implémentation préparée ; la preuve cloud n'est acquise que si
-les **deux jobs réels** réussissent et publient leurs preuves. Aucun déploiement,
-merge automatique, accès SSH ou connexion aux métriques de production.
+Preuve cloud validée le 20 octobre 2026 : les [deux jobs réels](https://github.com/Aimericv/puzzoria/actions/runs/39465013048)
+ont réussi et créé deux commits dans la [PR du bot](https://github.com/Aimericv/puzzoria/pull/2).
+La seconde session a repris la mémoire GitHub et renouvelé nativement l'auth
+restaurée depuis le checkpoint chiffré. Le seed initial est retiré et le pilote
+ponctuel est arrêté. Les contrôles applicatifs sont suivis dans la
+[PR d'infrastructure](https://github.com/Aimericv/puzzoria/pull/1).
+Aucun déploiement, merge automatique, accès SSH ou branchement aux métriques de production.
 
 ## Ce que cette phase démontre
 
@@ -39,7 +43,7 @@ vérifie les cas limites indépendamment des tests écrits par l'agent.
 | Élément | Rôle |
 | --- | --- |
 | `.github/workflows/autonomy-pilot.yml` | Deux runners Ubuntu, sérialisation du pilote, aucun déploiement |
-| `.github/workflows/ci.yml` | Lint, types, tests, contenu, SEO, quatre profils E2E, build |
+| `.github/workflows/ci.yml` | Lint, types, tests, contenu, SEO et build, puis quatre profils E2E isolés en parallèle |
 | `scripts/autonomy-pilot/runtime/` | Versions et intégrités npm verrouillées du CLI et du bootstrap |
 | `scripts/autonomy-pilot/prepare.sh`, `requirements.toml` | UID sans privilèges et restrictions natives administrées |
 | `run.mjs`, `rpc.mjs` | Supervision native, contrôle Plus/quota, arrêt des processus avant publication |
@@ -130,7 +134,8 @@ Le pilote utilise des runners Linux standards inclus dans le forfait GitHub,
 aucun runner plus grand, service, cache payant ou machine supplémentaire. Le
 nombre de minutes et le stockage gratuits sont partagés avec les autres dépôts
 du compte ; leur disponibilité réelle sera aussi vérifiée par les exécutions.
-Les durées maximales des jobs (30 min par session de preuve, 90 min pour la CI)
+Les durées maximales des jobs (30 min par session de preuve, 90 min pour les
+contrôles CI et 35 min par profil E2E)
 limitent les processus bloqués ; elles ne sont pas une répartition stratégique
 du quota de l'agent ni une limite future du nombre d'expériences.
 
