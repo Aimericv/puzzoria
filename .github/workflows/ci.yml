@@ -36,6 +36,11 @@ jobs:
         env:
           NEXT_PUBLIC_SITE_URL: https://puzzoria.com
       - run: npx playwright install --with-deps chromium webkit
+      # Fail early on the two Linux-specific regressions before the hour-long suite.
+      - name: Verify exports and deterministic narrow-screen fixtures
+        run: >-
+          npm run test:e2e -- e2e/social-games.spec.ts e2e/site-analytics.spec.ts
+          --grep "new SEO pages|internal analytics require" --reporter=line
       - run: npm run test:e2e -- --reporter=line
       - run: npm run build
         env:
