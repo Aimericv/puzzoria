@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [main, codex/autonomy-pilot]
   push:
-    branches: [codex/autonomy-pilot, codex/autonomy-agent]
+    branches: [codex/autonomy-pilot]
 
 permissions:
   contents: read
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   inspect:
-    if: github.event_name == 'push' && github.ref_name == 'codex/autonomy-agent' && contains(github.event.head_commit.message, '[validate-ci]')
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 4 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent'
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     permissions:
@@ -39,7 +39,8 @@ jobs:
   checks:
     if: >-
       vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' ||
-      (github.event_name == 'push' && github.ref_name == 'codex/autonomy-agent' && contains(github.event.head_commit.message, '[validate-ci]'))
+      (github.event_name == 'pull_request' && github.event.pull_request.number == 4 &&
+       github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent')
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
@@ -87,7 +88,8 @@ jobs:
     needs: checks
     if: >-
       vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' ||
-      (github.event_name == 'push' && github.ref_name == 'codex/autonomy-agent' && contains(github.event.head_commit.message, '[validate-ci]'))
+      (github.event_name == 'pull_request' && github.event.pull_request.number == 4 &&
+       github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent')
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     strategy:
@@ -138,7 +140,7 @@ jobs:
 
   evidence:
     needs: [checks, e2e]
-    if: always() && github.event_name == 'push' && github.ref_name == 'codex/autonomy-agent' && contains(github.event.head_commit.message, '[validate-ci]')
+    if: always() && github.event_name == 'pull_request' && github.event.pull_request.number == 4 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
