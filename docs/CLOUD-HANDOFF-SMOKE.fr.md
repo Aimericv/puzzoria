@@ -26,9 +26,11 @@ ni interface, ni déploiement. Les fichiers du pilote restent inchangés.
   est encore disponible et reste le dernier checkpoint. Le superviseur refuse
   tout checkpoint plus ancien qu'un artifact d'authentification ultérieur.
   Le secret existant `CODEX_PILOT_VAULT_KEY` reste uniquement dans Actions.
-- Depuis la machine cloud, `api.github.com` doit être autorisé pour inspecter
-  les runs et résultats. L'ajout est enregistré dans les paramètres réseau ;
-  son application doit être vérifiée par une requête réelle.
+- L'API GitHub est bloquée depuis la machine de ce chat. Le runner publie donc
+  une copie expurgée de ses preuves dans une branche dédiée, récupérable par
+  le proxy Git existant. L'ajout d'`api.github.com` est enregistré dans les
+  paramètres réseau mais ne bloque plus cette voie de retour. Ne pas contourner
+  le proxy de la machine : le runner utilise son propre accès GitHub normal.
 
 Lancer une seule fois en poussant la branche `codex/cloud-handoff-smoke` avec
 sa configuration de cible complète. Le workflow n'est pas programmé et n'a
@@ -55,9 +57,15 @@ relancer sans examiner l'authentification préservée et l'état de la tâche.
 6. Conserver uniquement `auth.enc` et `evidence.json` dans un artifact privé
    `cloud-handoff-RUN-ATTEMPT`, avec rétention de 30 jours. Le cache déchiffré
    temporaire est supprimé ; aucun flux de protocole brut n'est publié.
+7. Un éditeur de confiance séparé, réutilisant le client GitHub du pilote,
+   publie uniquement le compte rendu expurgé dans la nouvelle branche
+   `codex/cloud-handoff-evidence/RUN`. Aucun cache d'authentification n'est
+   publié dans Git. Cette étape reste tentée après un échec pour permettre
+   de diagnostiquer le lancement sans accès à l'API depuis ce chat.
 
-Le runner Linux standard est plafonné à dix minutes, sans permission
-d'écriture GitHub. Il partage le verrou de concurrence du pilote pour éviter
+Le runner Linux standard est plafonné à dix minutes. Son éditeur de confiance
+dispose d'une permission d'écriture des preuves ; aucun modèle ne reçoit son
+jeton GitHub. Il partage le verrou de concurrence du pilote pour éviter
 un renouvellement simultané du même login. Le temps Actions réel et les quotas
 observés doivent être rapportés après le run ; un timeout n'est pas une mesure
 de consommation et le budget humain à zéro n'est pas vérifiable par la seule

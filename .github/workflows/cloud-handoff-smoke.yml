@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
-      contents: read
+      contents: write
       actions: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -41,11 +41,13 @@ jobs:
           github-token: ${{ github.token }}
           path: .handoff-in
       - name: Submit a single read-only task through the native cloud CLI
+        id: submit
         env:
           CODEX_PILOT_VAULT_KEY: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/cloud-handoff/run.mjs
       - name: Preserve updated encrypted authentication and redacted evidence
+        id: checkpoint
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -56,3 +58,10 @@ jobs:
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
+      - name: Publish redacted evidence through the existing trusted GitHub publisher
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          HANDOFF_OUTCOME: ${{ steps.submit.outcome }}
+          HANDOFF_ARTIFACT_ID: ${{ steps.checkpoint.outputs.artifact-id }}
+        run: node scripts/cloud-handoff/publish.mjs
