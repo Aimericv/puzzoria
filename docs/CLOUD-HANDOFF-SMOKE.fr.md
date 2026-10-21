@@ -1,0 +1,144 @@
+# Test ponctuel GitHub Actions → nouvel environnement Codex Cloud
+
+> Archive d'un test désormais terminé : aucun lancement de tâche Cloud n'a
+> réussi. Ne pas relancer cette procédure ni restaurer ses anciens checkpoints.
+> Le système courant et les protections financières corrigées sont décrits
+> dans [AUTONOMY-AGENT.fr.md](AUTONOMY-AGENT.fr.md). Le budget Actions à 0 $
+> n'a pas été créé ; le propriétaire a déclaré n'avoir aucun moyen de paiement.
+> Le pointeur d'authentification courant est sur `codex/agent-state`.
+
+Ce test réutilise le runtime Codex 0.163.0, le contrôle Plus/quota inclus,
+le protocole natif de renouvellement et le chiffrement du pilote existant.
+Il ne relance pas la preuve des deux sessions et n'ajoute ni ordonnanceur,
+ni interface, ni déploiement. Les fichiers du pilote restent inchangés.
+
+## Avant le lancement
+
+- Confirmer l'identifiant exact du **nouvel** environnement dans
+  `agent/cloud-handoff/target.json`. L'outil natif
+  `cloud_environment.environment_status` a maintenant fourni le
+  `source_config_id` de l'environnement lié à ce chat, sa version et
+  l'identifiant de la machine. La cible utilise le **source_config_id**,
+  et conserve les métadonnées de provenance. Sa compatibilité avec le CLI
+  reste à tester : ne pas confondre découverte de configuration et acceptation
+  par `codex cloud exec`. Un lien de paramètres contenant l'ID exact constitue
+  une autre méthode de découverte. Ne pas choisir par nom, par dépôt,
+  par ancien environnement ou par identifiant de la machine d'onboarding.
+- Vérifier que le nouvel environnement est publié et utilisable pour de
+  nouvelles tâches. Un brouillon enregistré ne démontre pas cette publication.
+- La condition financière initialement annoncée n'a pas été vérifiée : aucun
+  budget Actions à 0 $ n'a été créé. `PUZZORIA_FREE_ACTIONS_VERIFIED` est
+  obsolète et n'autorise plus ce workflow. Ne pas réactiver cet ancien test.
+- Vérifier que l'artifact `pilot-39465013048-1-session-2` (ID `12285785640`)
+  est encore disponible et reste le dernier checkpoint. Le superviseur refuse
+  tout checkpoint plus ancien qu'un artifact d'authentification ultérieur.
+  Le secret existant `CODEX_PILOT_VAULT_KEY` reste uniquement dans Actions.
+- L'API GitHub est bloquée depuis la machine de ce chat. Le runner publie donc
+  une copie expurgée de ses preuves dans une branche dédiée, récupérable par
+  le proxy Git existant. Cette voie de retour ne demande pas d'accès API
+  depuis la machine Cloud. Ne pas contourner
+  le proxy de la machine : le runner utilise son propre accès GitHub normal.
+
+Lancer une seule fois en poussant la branche `codex/cloud-handoff-smoke` avec
+sa configuration de cible complète. Le workflow n'est pas programmé et n'a
+aucun événement `workflow_dispatch`. Ne pas pousser de nouvelle version pour
+relancer sans examiner l'authentification préservée et l'état de la tâche.
+
+## Ce que fait le runner
+
+1. Installer le runtime avec son lockfile existant et exécuter les tests des
+   limites de cible/confidentialité, avant d'exposer la clé du checkpoint.
+2. Restaurer l'artifact chiffré de la seconde session. Contrôler sa provenance,
+   renouveler avec Codex natif et préserver immédiatement le nouveau cache
+   chiffré. Aucun client OAuth personnalisé, seed retiré ou clé API.
+3. Refuser un compte autre que Plus, une autorisation d'usage inclus inconnue,
+   un quota épuisé ou des crédits payants non nuls/invérifiables.
+4. Appeler `codex cloud exec --env ID_EXACT --branch main --attempts 1`.
+   La mission demande seulement la lecture d'AGENTS/README, le contexte Git,
+   Node et un calcul SQLite en mémoire. Aucun serveur, fichier, commit, PR
+   ou accès de production n'est demandé à la tâche.
+5. Publier le lien retourné dans le résumé du run, comparer l'environnement
+   des métadonnées de tâche à l'identifiant exact, suivre l'état pendant deux
+   minutes au maximum et relire les quotas. Aucun autre modèle n'est lancé
+   sur le runner. Aucun repli vers un environnement hérité ou une API payante.
+6. Conserver uniquement `auth.enc` et `evidence.json` dans un artifact privé
+   `cloud-handoff-RUN-ATTEMPT`, avec rétention de 30 jours. Le cache déchiffré
+   temporaire est supprimé ; aucun flux de protocole brut n'est publié.
+7. Un éditeur de confiance séparé, réutilisant le client GitHub du pilote,
+   publie uniquement le compte rendu expurgé dans la nouvelle branche
+   `codex/cloud-handoff-evidence/RUN`. Aucun cache d'authentification n'est
+   publié dans Git. Cette étape reste tentée après un échec pour permettre
+   de diagnostiquer le lancement sans accès à l'API depuis ce chat.
+
+Le runner Linux standard est plafonné à dix minutes. Son éditeur de confiance
+dispose d'une permission d'écriture des preuves ; aucun modèle ne reçoit son
+jeton GitHub. Il partage le verrou de concurrence du pilote pour éviter
+un renouvellement simultané du même login. Le temps Actions réel et les quotas
+observés doivent être rapportés après le run ; un timeout n'est pas une mesure
+de consommation et le budget humain à zéro n'est pas vérifiable par la seule
+variable d'activation.
+
+## Résultats à distinguer
+
+- **Soumission** : lien de tâche effectivement retourné par le CLI.
+- **Cible confirmée** : métadonnées contenant l'ID exact demandé.
+- **Exécution terminée** : état `ready` et résultat du contrôle consulté.
+- **Discussion vérifiée** : le propriétaire ouvre le lien, répond et constate
+  une nouvelle réponse dans la même tâche. Ce point reste manuel.
+- **Quotas** : relever les fenêtres Plus avant/après et la durée Actions ; si
+  la tâche reste en cours, le relevé après soumission n'est pas son coût final.
+
+Un échec `environment not found` pour l'identifiant exact est une limitation
+de la passerelle du CLI vers ce nouvel environnement ; ne pas sélectionner
+un ancien environnement pour obtenir artificiellement un lien.
+Si la création a pu être acceptée avant une erreur réseau, rechercher la tâche
+par le nonce du test avant toute nouvelle soumission.
+
+**Après tout renouvellement, le nouvel artifact est l'autorité.** L'original
+peut être périmé même si la tâche n'a pas pu être soumise. Le test refuse alors
+une nouvelle utilisation de l'ancien checkpoint ; adapter explicitement la
+provenance et la source d'une reprise, sans réensemencement. Un arrêt brutal
+avant l'upload peut toujours nécessiter une nouvelle connexion dédiée.
+
+## Validation locale
+
+```sh
+node --test scripts/cloud-handoff/run.test.mjs
+node --check scripts/cloud-handoff/run.mjs
+npx --no-install eslint scripts/cloud-handoff/*.mjs --max-warnings 0
+npx --no-install vitest run tests/autonomy-pilot.test.ts --maxWorkers=2
+```
+
+Ces contrôles ne prouvent ni un lancement GitHub, ni l'accès au nouvel
+environnement. Ne pas présenter un test local comme une preuve cloud.
+
+## Résultat réel du 21 octobre 2026
+
+Le [run GitHub 39614422816](https://github.com/Aimericv/puzzoria/actions/runs/39614422816)
+a effectivement restauré le checkpoint et appelé le CLI natif depuis le runner.
+Les [preuves expurgées](https://github.com/Aimericv/puzzoria/blob/codex/cloud-handoff-evidence/39614422816/agent/cloud-handoff/evidence.json)
+ont été récupérées par Git, sans accès à l'API depuis la machine de ce chat.
+
+- Compte ChatGPT Plus confirmé, autorisation incluse acceptée et crédits
+  payants observés à zéro. Avant soumission : 14 % de la fenêtre courte et
+  21 % de la fenêtre hebdomadaire utilisés.
+- CLI 0.163.0. La soumission avec le `source_config_id` exact du nouvel
+  environnement a échoué avec `environment '…~cecfg_…' not found`.
+- Aucun lien de tâche n'a été retourné. L'erreur provient de la résolution de
+  l'environnement avant la création de la tâche ; aucune tâche n'a été créée
+  par cet appel. Aucun ancien environnement n'a été sélectionné.
+- Ce résultat prouve que cet identifiant de configuration n'est pas reconnu
+  par le catalogue utilisé par ce CLI. Il ne suffit pas à déterminer si la
+  cause est une différence de backend/identifiants ou de publication.
+- La capacité de poursuivre la conversation reste non testée, faute de tâche.
+- Le dernier checkpoint est désormais l'artifact privé
+  `cloud-handoff-39614422816-1`, ID `12352132606`, contexte de chiffrement
+  `{repository:"Aimericv/puzzoria",runId:"39614422816",phase:"cloud-handoff",environmentId:ID_CIBLE}`.
+  Ne pas réutiliser l'artifact initial du 20 octobre pour une nouvelle tentative.
+- La durée facturée et le solde Actions global n'ont pas été lus par API ;
+  le blocage des dépenses supplémentaires à zéro reste fondé sur la
+  confirmation antérieure du propriétaire. Ne pas inventer de relevé de facture.
+
+Après ce test, le workflow est limité à l'événement de création de sa branche :
+les mises à jour ultérieures ne doivent allouer aucun runner. Une nouvelle
+tentative nécessite une préparation explicite avec la dernière provenance.

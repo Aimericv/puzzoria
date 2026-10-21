@@ -35,3 +35,11 @@ id_ed25519*
 backups/
 .backups/
 /puzzoria-deploy*.tar.gz
+/.pilot-in/
+/.pilot-out/
+/.agent-out/
+/.agent-in/
+/.handoff-in/
+/.handoff-out/
+/.ci-results/
+/.ci-evidence/

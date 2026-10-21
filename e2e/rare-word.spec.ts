@@ -9,6 +9,7 @@ import type { Locale, PublicChallenge } from "../src/lib/types";
 import { comparisonPreviewCopy } from "../src/lib/comparison-preview-i18n";
 import { wordArticlePath } from "../src/lib/word-article-path";
 import { wordArticleCopy } from "../src/lib/word-article-i18n";
+import { articleIsPublished } from "./word-article-publication";
 
 async function guess(page: Page, word: string, locale: Locale) {
   const enter = page.getByRole("button",{name:t(locale).enter,exact:true});
@@ -25,8 +26,13 @@ test("Unusual Word plays in all four languages, reveals knowledge only after com
     await expect(page.locator('.word-variants [aria-current="page"]')).toHaveText(
       ({fr:"Mot du jour",en:"Daily word",es:"Palabra del día",de:"Wort des Tages"})[locale],
     );
+    // The navigation is server-rendered before account/game hydration settles.
+    // Start this gameplay flow from the real interactive board, not its preview.
+    await expect(page.getByRole("button",{name:t(locale).enter,exact:true})).toBeEnabled();
     await page.locator(`.word-variants a[href="${gamePath(locale,"rareword")}"]`).click();
-    await expect(page).toHaveURL(new RegExp(gamePath(locale,"rareword") + "$"));
+    // Client navigation includes a server request; use the navigation timeout
+    // rather than the shorter DOM assertion timeout on a shared CI runner.
+    await page.waitForURL(new RegExp(gamePath(locale,"rareword") + "$"));
     const c = generateChallenge("rareword",locale,utcDay());
     if(c.kind !== "rareword") throw new Error();
     await expect(page.locator(".word-board")).toBeVisible();
@@ -63,7 +69,9 @@ test("Unusual Word plays in all four languages, reveals knowledge only after com
     await expect(page.locator("#examples blockquote")).toHaveCount(2);
     await expect(page.locator(".word-article-sources a").first()).toHaveAttribute("href",/^https:\/\//);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href",new RegExp(wordArticlePath(locale,c.answer) + "$"));
-    await expect(page.locator('meta[name="robots"]').first()).toHaveAttribute("content",/noindex/);
+    // A repeated Daily answer can already have a public article. Ownership only
+    // keeps an article private before its original publication date.
+    await expect(page.locator('meta[name="robots"][content*="noindex"]')).toHaveCount(articleIsPublished(locale, c.answer) ? 0 : 1);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     if(locale === "fr") await page.screenshot({path:info.outputPath("word-article.png"),fullPage:true});
     if(locale === "fr") {

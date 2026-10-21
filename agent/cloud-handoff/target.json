@@ -1,0 +1,12 @@
+{
+  "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054",
+  "environmentUrl": null,
+  "verifiedNewEnvironment": true,
+  "discovery": {
+    "method": "cloud_environment.environment_status",
+    "sourceConfigId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054",
+    "sourceConfigVersionId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfgver_6ad805c741c881a28f627ccb7737f9af",
+    "runtimeEnvironmentId": "ccarenv_b64_Y2NhcmVudl9kYmYxNWRjMWRkMjQ4MTkxYTNkYzM5ZjQwODU5M2UzNQ",
+    "observationsCurrent": true
+  }
+}
