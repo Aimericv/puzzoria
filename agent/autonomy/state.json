@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 14,
+  "generation": 15,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -410,6 +410,187 @@
           "finishedAt": "2026-10-21T15:14:36.623Z",
           "workflowOutcome": "failure",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39623126545"
+        }
+      }
+    },
+    "39625255374": {
+      "sourceSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "39625255374",
+          "job": "first",
+          "mode": "validation",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-21T15:26:49.869Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 69,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792607914
+                },
+                "secondary": {
+                  "usedPercent": 30,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793118249
+                }
+              }
+            ]
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls -a'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/lib | head -55; ls node_modules/next/dist/docs/01-app/03-api-reference/02-components'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat src/lib/browser-storage.ts tests/browser-storage.test.ts; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat docs/RETENTION.md; cat src/lib/new-play.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'localStorage|reserve' src/lib/run* src/components/*Player* src/lib/*client*; rg --files src/lib | rg 'session|practice|run'; cat src/lib/run-client.ts\"",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc 'cat src/lib/play-client.ts; cat tests/play-client.test.ts; cat vitest.config.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'beginPlay|reservePlay|rememberRun' tests; cat src/lib/types.ts | head -100; cat tests/browser-storage.test.ts | head -8\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat tests/play-reservation.test.ts; sed -n '130,180p' tests/engagement.test.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '103,193p' src/lib/play-client.ts; cat tests/play-start.test.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run lint'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"ps -eo pid,etime,comm,args | rg 'vitest|eslint|tsc|next typegen'\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement a",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale en cours au moment de cette rédaction, résultat à compléter.', 'Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test e",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a15f12-afd8-7db0-8dd5-7aa80b8d4282",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 0,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 72,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792607914
+                },
+                "secondary": {
+                  "usedPercent": 30,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793118249
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 343,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 18,
+          "finishedAt": "2026-10-21T15:31:26.466Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
         }
       }
     }
