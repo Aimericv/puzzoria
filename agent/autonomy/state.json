@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 10,
-  "status": "retrying",
+  "generation": 11,
+  "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -21,10 +21,10 @@
     "expiresAt": "2027-01-19T15:09:20Z",
     "digest": "ea8fd822481db148f89b3a0c86a39d8f27ae71a68dc5e72a206dc7f6a4d6ec0b"
   },
-  "lastMessageId": 6319154344,
+  "lastMessageId": 6319471041,
   "completedSessions": 0,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
-  "nextEligibleAt": "2026-10-21T15:29:28.883Z",
+  "nextEligibleAt": null,
   "lastRun": {
     "id": "39623126545",
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/39623126545"
@@ -35,7 +35,7 @@
     "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n",
     "PLAN.json": "{\n  \"summary\": \"Correction du fallback des brouillons locaux après échec de localStorage ; tests de régression et limites sandbox documentés.\",\n  \"nextMission\": \"Examiner la reprise des brouillons lorsque localStorage est entièrement inaccessible, notamment les réservations de nouvelles parties et leurs erreurs visibles ; corriger un défaut reproductible.\",\n  \"blockedReason\": null,\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"\n}\n"
   },
-  "controlSha": "9baa2b0b860ac863ed8514fc12a5c4998ac9c049",
+  "controlSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
   "pendingMessages": [],
   "retryCount": 2,
   "blockedReason": "Command failed: /opt/hostedtoolcache/node/24.15.0/x64/bin/node /opt/puzzoria-pilot/readonly/node_modules/@openai/codex/bin/codex.js sandbox --include-managed-config -P pilot -C /opt/puzzoria-pilot/work -- npm test -- --maxWorkers=2 --reporter=json --outputFile=.agent-tests.json",
