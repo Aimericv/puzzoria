@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 4,
-  "status": "retrying",
+  "generation": 5,
+  "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -18,10 +18,10 @@
       "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054"
     }
   },
-  "lastMessageId": 0,
+  "lastMessageId": 6319154344,
   "completedSessions": 0,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
-  "nextEligibleAt": "2026-10-21T15:13:47.644Z",
+  "nextEligibleAt": null,
   "lastRun": {
     "id": "39620986831",
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/39620986831"
@@ -32,7 +32,7 @@
     "EXPERIMENTS.md": "# Puzzoria\n\nPremière session autonome à préparer.\n",
     "PLAN.json": "{\"summary\":\"Première session à préparer\",\"nextMission\":null,\"blockedReason\":null}"
   },
-  "controlSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
+  "controlSha": "9baa2b0b860ac863ed8514fc12a5c4998ac9c049",
   "pendingMessages": [],
   "retryCount": 1,
   "blockedReason": "Artifact digest verification failed",
