@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 11,
+  "generation": 12,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": null,
   "checkpoint": {
-    "artifactId": 12356066674,
-    "runId": "39623126545",
-    "name": "puzzoria-agent-auth-39623126545-1",
-    "generation": 1,
+    "artifactId": 12357150877,
+    "runId": "39625255374",
+    "name": "puzzoria-agent-auth-39625255374-2",
+    "generation": 2,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39623126545",
+      "runId": "39625255374",
       "phase": "autonomous-agent",
-      "generation": 1
+      "generation": 2
     },
-    "expiresAt": "2027-01-19T15:09:20Z",
-    "digest": "ea8fd822481db148f89b3a0c86a39d8f27ae71a68dc5e72a206dc7f6a4d6ec0b"
+    "expiresAt": "2027-01-19T15:23:41Z",
+    "digest": "20d17df100d815efe5eb652e97e5394b1c701176573b4238b5652ad3f9842b6b"
   },
   "lastMessageId": 6319471041,
   "completedSessions": 0,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39623126545",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39623126545"
+    "id": "39625255374",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
   },
   "memory": {
     "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : 37aa7654be9393173c4d5c7d3446cc0832bb9818 ; aucun accès Git.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus.\n\nContribution choisie : empêcher un ancien brouillon local de masquer la dernière écriture conservée en mémoire lorsque localStorage refuse une écriture. src/lib/browser-storage.ts suit les clés non persistées, garde valeur et horodatage cohérents, et retire ce statut après sauvegarde réussie ou effacement du compte. Aucun changement des clés, des preuves serveur ou du stockage SQLite.\n\ntests/browser-storage.test.ts ajoute trois cas : échec de la valeur, échec du timestamp, isolation invité/comptes et effacement. Les trois cas ont échoué avant correction et passé après correction. Le double de stockage final vérifie aussi l'effacement disque ; ces tests passent également dans les deux exécutions générales.\n\nContrôles observés : lint et typecheck terminés avec code 0. Validation contenu via node --import tsx scripts/validate-content.ts : 92 défis planifiés et 32 articles multilingues validés. La commande npm content:validate échoue sur le socket IPC de tsx (EPERM). Le lancement npm test par défaut échoue sur le cache Vite non inscriptible ; le chargeur runner et un répertoire de données Vitest sous .tmp permettent les tests ciblés. Deux exécutions générales (parallélisme par défaut, puis --maxWorkers 2) : 340 tests réussis, 1 échec sur 341 dans 26 fichiers. Dans les deux cas, tests/operations.test.ts:55 dépasse 5 s sur le test de sauvegarde quotidienne/purge/indisponibilité. Cause non établie ; ce test et son délai n’ont pas été modifiés. Tous les tests de la contribution passent. Commande générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner [--maxWorkers 2].\n\nBuild bloqué par Turbopack : le lien node_modules pointe hors de la racine du projet. E2E échoue au démarrage du serveur web, code 1 ; aucun parcours navigateur validé. Aucune protection/configuration modifiée pour contourner ces limites.\n\nLimites : un brouillon en mémoire reste perdu si l'onglet ferme avant une sauvegarde réussie ; ce correctif ne promet aucune persistance durable en cas de quota plein. Aucune métrique utilisateur disponible ; aucun effet de rétention mesuré. Aucun réseau externe, publication, merge ni déploiement effectué.\n\nProchaine mission choisie : examiner la reprise des brouillons lorsque localStorage est entièrement inaccessible, notamment les réservations de nouvelles parties et leurs erreurs visibles, puis corriger uniquement un défaut reproductible.\n",
