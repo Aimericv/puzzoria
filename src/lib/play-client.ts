@@ -73,6 +73,7 @@ async function reserveInner(challenge: PublicChallenge): Promise<
 }
 const starts = new Map<string, Promise<RunResponse>>();
 const results = new Map<string, Completion>();
+const completionKey = (id: string) => storageKey(`dailygrid:completion:${id}`);
 export async function postJson(
   url: string,
   body: unknown,
@@ -176,6 +177,8 @@ export async function submitPlay(
   challenge: PublicChallenge,
   body: Record<string, unknown>,
 ) {
+  // Capture before any request: the active account may change while submitting.
+  const ownerKey = completionKey(challenge.id);
   const run = await beginPlay(challenge);
   const result = await postJson(challenge.roomId ? "/api/live-rooms" : "/api/play", {
     ...body,
@@ -184,13 +187,13 @@ export async function submitPlay(
     ...(challenge.roomId ? { code: challenge.roomId } : {}),
   });
   if (result.completion)
-    results.set(challenge.id, result.completion as Completion);
+    results.set(ownerKey, result.completion as Completion);
   return result;
 }
-export const authoritativeCompletion = (id: string) => results.get(id);
+export const authoritativeCompletion = (id: string) => results.get(completionKey(id));
 export function rememberCompletion(completion: Completion) {
   if (completion.provenance === "server")
-    results.set(completion.challengeId, completion);
+    results.set(completionKey(completion.challengeId), completion);
 }
 export async function prepareCompletedPlay(challenge: PublicChallenge) {
   let completion = authoritativeCompletion(challenge.id);
