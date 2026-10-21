@@ -1,0 +1,58 @@
+name: One-off Puzzoria Codex Cloud handoff
+
+on:
+  push:
+    branches: [codex/cloud-handoff-smoke]
+    paths:
+      - .github/workflows/cloud-handoff-smoke.yml
+      - scripts/cloud-handoff/**
+      - agent/cloud-handoff/**
+
+permissions: {}
+# Same lock as the existing pilot: never refresh the shared login concurrently.
+concurrency:
+  group: puzzoria-autonomy-pilot
+  cancel-in-progress: false
+
+jobs:
+  handoff:
+    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24.15.0
+      - name: Install only the existing locked CLI runtime
+        run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
+      - name: Check target and credential boundary helpers without secrets
+        run: node --test scripts/cloud-handoff/run.test.mjs
+      - name: Restore the last successful encrypted checkpoint, never the retired seed
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: pilot-39465013048-1-session-2
+          run-id: 39465013048
+          github-token: ${{ github.token }}
+          path: .handoff-in
+      - name: Submit a single read-only task through the native cloud CLI
+        env:
+          CODEX_PILOT_VAULT_KEY: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/cloud-handoff/run.mjs
+      - name: Preserve updated encrypted authentication and redacted evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cloud-handoff-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .handoff-out/auth.enc
+            .handoff-out/evidence.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
