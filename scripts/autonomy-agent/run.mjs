@@ -9,6 +9,7 @@ import {assertFunding,quotaGate,redact,REPOSITORY,MEMORY_FILES} from "./policy.m
 import {collectCandidate,collectMemory,restoreNextEnv} from "./outputs.mjs";
 import {publishCandidate,stageCandidate} from "./candidate.mjs";
 import {report} from "./inbox.mjs";
+import {verifyCandidate} from "./verify.mjs";
 
 const base="/opt/puzzoria-pilot", work=base+"/work", auth=base+"/auth", readonly=base+"/readonly",uid=3050;
 const cli=readonly+"/node_modules/@openai/codex/bin/codex.js", node=process.execPath;
@@ -24,7 +25,7 @@ state.lastRun={id:runId,url:`https://github.com/${REPOSITORY}/actions/runs/${run
 const checkpoints=new Checkpoints({api,store,key:process.env.CODEX_PILOT_VAULT_KEY,runId,authFile:auth+"/auth.json",directory:resolve(".agent-in"),client:await artifactClient()});
 let child,rpc,watching=false,baseline;
 function stopAgent() {try{execFileSync("pkill",["-KILL","-u",String(uid)],{stdio:"ignore"});}catch(error){if(error.status!==1)throw error;}}
-const env={PATH:dirname(node)+":/usr/local/bin:/usr/bin:/bin",HOME:"/home/puzzoria-pilot",CODEX_HOME:auth,TMPDIR:work+"/.tmp",LANG:"C.UTF-8",NEXT_TELEMETRY_DISABLED:"1"};
+const env={PATH:dirname(node)+":/usr/local/bin:/usr/bin:/bin",HOME:"/home/puzzoria-pilot",CODEX_HOME:auth,TMPDIR:work+"/.tmp",XDG_DATA_HOME:work+"/.tmp/data",LANG:"C.UTF-8",NEXT_TELEMETRY_DISABLED:"1"};
 function sandbox(args,timeout=180000) {
   return execFileSync(node,[cli,"sandbox","--include-managed-config","-P","pilot","-C",work,"--",...args],{uid,gid:uid,env,cwd:work,encoding:"utf8",stdio:["ignore","pipe","pipe"],timeout,maxBuffer:8*1024*1024});
 }
@@ -78,14 +79,17 @@ try {
     await store.save("Pause before inference until the actual blocking quota resets");
     await report(api,state,`Aucune inférence lancée : ${gate.reason}.`);
   } else {
-    state.status="running";state.nextEligibleAt=null;await store.save("Start an admissible autonomous Puzzoria session");
+    state.status="running";state.nextEligibleAt=null;state.blockedReason=null;await store.save("Start an admissible autonomous Puzzoria session");
     await report(api,state,"Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria. Aucun accès de production.");
     checkpoints.start(()=>{try{process.kill(-child.pid,"SIGTERM");}catch{/* Already exited. */}});watching=true;
     let toolCommands=0;evidence.modelCommands=[];
     rpc.listeners.push(message=>{
       if(message.method==="item/completed"&&message.params.item.type==="commandExecution") {
         toolCommands++;
-        if(evidence.modelCommands.length<30) evidence.modelCommands.push({command:redact(message.params.item.command ?? "",secrets).slice(0,500),exitCode:message.params.item.exitCode ?? null});
+        if(evidence.modelCommands.length<30) {
+          const entry={command:redact(message.params.item.command ?? "",secrets).slice(0,500),exitCode:message.params.item.exitCode ?? null};
+          evidence.modelCommands.push(entry);console.log(JSON.stringify({event:"tool_completed",...entry}));
+        }
       }
     });
     const thread=await rpc.request("thread/start",{cwd:work,approvalPolicy:"never",config:{default_permissions:"pilot"},developerInstructions:"Lis AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json et la mémoire depuis le disque. Choisis librement une contribution utile à Puzzoria. Développe et teste dans le sandbox. Tu ne peux modifier ni les scripts/workflows, manifests/verrous, instructions, protections ou secrets. Aucun achat, réseau externe, merge ou déploiement. Le superviseur publie les fichiers autorisés après arrêt des outils. Mets à jour les quatre fichiers de mémoire, sans inventer de résultats."});
@@ -108,9 +112,7 @@ try {
     // Remove model-created caches/configuration outputs before independent checks.
     for(const name of readdirSync(work)) if(/^\.next(?:-|$)/.test(name)||[".tmp",".sites-runtime",".data","test-results","playwright-report",".agent-tests.json",".sandbox-write-test"].includes(name)||name.endsWith(".tsbuildinfo")) rmSync(join(work,name),{recursive:true,force:true});
     mkdirSync(work+"/.tmp");chownSync(work+"/.tmp",uid,uid);
-    for(const [name,args] of [["lint",["npm","run","lint"]],["typecheck",["npm","run","typecheck"]],["unit",["npm","test","--","--maxWorkers=2","--reporter=json","--outputFile=.agent-tests.json"]],["build",["npm","run","build"]]]) {
-      sandbox(args,240000);evidence.commands.push({name,status:"passed"});
-    }
+    verifyCandidate({work,dependencies:"/opt/puzzoria-agent-deps/node_modules",uid,evidence});
     const tests=JSON.parse(readFileSync(work+"/.agent-tests.json","utf8"));
     if(!tests.success || tests.numPassedTests<1 || tests.numFailedTests || tests.numPendingTests) throw new Error("The independent unit suite did not complete with real passing tests");
     evidence.tests={passed:tests.numPassedTests,failed:tests.numFailedTests,skipped:tests.numPendingTests};

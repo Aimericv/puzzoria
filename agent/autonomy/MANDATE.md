@@ -26,6 +26,10 @@ N'essaie pas de modifier les protections, les manifests/verrous, les workflows,
 les scripts de contrôle, les paramètres de l'environnement ou les instructions
 de l'agent. Ne désactive pas un test ni une assertion pour obtenir du vert.
 Le superviseur exécute lui-même les contrôles et publie après l'arrêt des outils.
+Tes tests unitaires ciblés peuvent utiliser `npm test -- --configLoader=runner`.
+Les tests avec serveur local et le build standard seront exécutés séparément
+par le superviseur dans un conteneur sans réseau ni secrets. Les limites du
+sandbox pendant ton travail ne justifient aucun changement des protections.
 Les fichiers publiables sont le code TypeScript/TSX/CSS de `src/`, les tests
 TypeScript de `tests/` et `e2e/`, ainsi que la documentation produit Markdown
 de `docs/` (hors documents de contrôle AUTONOMY/CLOUD-HANDOFF). Les caches et

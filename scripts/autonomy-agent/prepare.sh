@@ -3,6 +3,8 @@ set -euo pipefail
 # Run before exposing Plus/vault credentials. Reuse the verified pilot sandbox.
 bash scripts/autonomy-pilot/prepare.sh
 npm ci --ignore-scripts --no-audit --no-fund
+# Reuse the application's existing pinned runtime, before exposing Plus secrets.
+docker --host=unix:///var/run/docker.sock pull "$(node --input-type=module -e 'import {VERIFIER_IMAGE} from "./scripts/autonomy-agent/verify.mjs";console.log(VERIFIER_IMAGE)')"
 sudo mkdir -p /opt/puzzoria-agent-deps
 sudo cp -a node_modules /opt/puzzoria-agent-deps/
 sudo python3 - <<'PY'

@@ -115,13 +115,47 @@ l'inférence. Les dépendances approuvées sont préparées avant les secrets.
 Le superviseur refuse les changements d'infrastructure, instructions,
 manifests/verrous, liens symboliques ou physiques et fichiers privés. Il
 arrête les outils avant de collecter, tester et publier. Lint, types, tests
-unitaires avec comptage réel et build sont exécutés dans le même confinement.
+unitaires avec comptage réel, contenus et build sont exécutés dans des
+conteneurs éphémères avec l'image Node déjà épinglée par le Dockerfile.
+Ces vérificateurs n'ont aucun secret ni accès Internet (`--network=none`),
+un utilisateur non privilégié, des capacités retirées, une racine en lecture
+seule et des dépendances montées en lecture seule. Leur réseau local permet
+les serveurs de test. Le sandbox natif du modèle reste intégralement inchangé.
 Les commandes et résultats expurgés sont conservés ; aucune base ni trace
 brute de navigateur n'est publiée. Les parcours E2E restent une validation
 distincte : ne pas les déclarer exécutés à partir des seuls tests unitaires.
 
 ## Résultats de livraison
 
-Les résultats locaux et les liens des exécutions réelles seront consignés ici
-après validation. Le raccordement aux métriques réelles et le déploiement sécurisé
-constituent une étape ultérieure, explicitement hors de cette activation.
+Le ticket de communication est [#3](https://github.com/Aimericv/puzzoria/issues/3).
+La [PR d'infrastructure #4](https://github.com/Aimericv/puzzoria/pull/4)
+reste en brouillon, sans activation permanente.
+
+Validation locale du 21 octobre 2026 : 18 tests du superviseur, 345 tests
+applicatifs dans 26 fichiers, lint, types et build réussis. Les validations de
+contenu couvrent 92 challenges programmés, 32 articles multilingues, les jeux
+sociaux et leurs quatre langues. Aucun parcours Playwright n'est présenté
+comme exécuté pour cette livraison.
+
+Le premier [essai réel](https://github.com/Aimericv/puzzoria/actions/runs/39620986831)
+s'est arrêté avant l'inférence : le format du checksum transmis au SDK
+officiel était incorrect. Le correctif conserve le préfixe `sha256:` attendu
+par la version verrouillée et possède un test de régression. Aucun retour
+vers un ancien login ni désactivation de la vérification n'a été effectué.
+Le [nouvel essai](https://github.com/Aimericv/puzzoria/actions/runs/39623126545)
+a franchi le renouvellement natif de connexion Plus, la sauvegarde chiffrée,
+les canaris et l'admission financière avant le démarrage du modèle. Les
+résultats de développement et de reprise seront ajoutés après réception des
+preuves.
+
+Ce nouvel essai a réellement développé une correction des brouillons locaux,
+mais les tests indépendants ont révélé des incompatibilités entre le sandbox
+natif et les outils applicatifs (caches en lecture seule, serveurs locaux et
+racine Turbopack). Le code et la mémoire ont été sauvegardés sur
+`codex/agent-wip`, sans publication présentée comme validée. Le vérificateur
+sans réseau décrit ci-dessus a ensuite passé localement les 341 tests de ce
+travail, lint, types, contenus et build standard. La reprise sur runners
+indépendants reste à confirmer dans la nouvelle exécution.
+
+Le raccordement aux métriques réelles et le déploiement sécurisé constituent
+une étape ultérieure, explicitement hors de cette activation.
