@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "repository": "Aimericv/puzzoria",
+  "runId": "39614422816",
+  "phase": "cloud-handoff",
+  "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054",
+  "status": "failed",
+  "recordedAt": "2026-10-21T14:10:12.479Z",
+  "sourceCheckpoint": {
+    "repository": "Aimericv/puzzoria",
+    "runId": "39465013048",
+    "phase": 2
+  },
+  "error": "Native cloud exec failed: WARNING: proceeding, even though we could not create PATH aliases: Refusing to create helper binaries under temporary dir \"/tmp\" (codex_home: AbsolutePathBuf(\"/tmp/puzzoria-cloud-handoff-m6KYHS\"))\nError: environment '89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054' not found; run `codex cloud` to list available environments\n",
+  "authMethod": "chatgpt",
+  "plan": "plus",
+  "paidCredits": 0,
+  "cliVersion": "codex-cli 0.163.0",
+  "nonce": "deaa80df-3305-462a-81b8-37a191f402a6",
+  "quotasBefore": [
+    {
+      "id": "codex",
+      "primary": {
+        "usedPercent": 14,
+        "windowDurationMins": 300,
+        "resetsAt": 1792607915
+      },
+      "secondary": {
+        "usedPercent": 21,
+        "windowDurationMins": 10080,
+        "resetsAt": 1793118249
+      }
+    }
+  ],
+  "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39614422816",
+  "submissionStepOutcome": "failure",
+  "checkpointArtifactId": "12352132606",
+  "checkpointArtifactName": "cloud-handoff-39614422816-1",
+  "elapsedSeconds": null
+}
