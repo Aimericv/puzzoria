@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "runId": "39632553137",
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632553137",
+  "sha": "b966deb4e7499c037ed109cfee1da75179cb8184",
+  "pr": {
+    "number": 4,
+    "head": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+    "base": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+    "mergeable": true,
+    "draft": true
+  },
+  "jobs": [
+    {
+      "name": "checks",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify funding declaration and require current main as an ancestor",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run lint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+          "conclusion": "cancelled"
+        },
+        {
+          "name": "Run npm run content:validate",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run npm run content:social",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run npm run seo:check",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run npm run build",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Preserve sanitized test counts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "inspect",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/ci-proof.mjs inspect",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "evidence",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "conclusion": null
+        },
+        {
+          "name": "Publish validation and read-only deployment inspection",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": null
+        }
+      ]
+    },
+    {
+      "name": "E2E (${{ matrix.project }})",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "steps": []
+    }
+  ],
+  "inspections": {
+    "webhooks": {
+      "status": "unavailable",
+      "httpStatus": 403
+    },
+    "installations": {
+      "status": "unavailable",
+      "httpStatus": 404
+    },
+    "deployments": {
+      "status": "observed",
+      "result": []
+    },
+    "environments": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "names": []
+      }
+    },
+    "mainChecks": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "checks": []
+      }
+    },
+    "mainStatuses": {
+      "status": "observed",
+      "result": {
+        "state": "pending",
+        "statuses": []
+      }
+    },
+    "communication": {
+      "status": "observed",
+      "result": {
+        "comments": 7,
+        "ownerMessageIds": []
+      }
+    },
+    "variables": {
+      "status": "unavailable",
+      "httpStatus": 403
+    }
+  },
+  "reports": [
+    {
+      "project": "checks",
+      "sha": "b966deb4e7499c037ed109cfee1da75179cb8184",
+      "reports": [
+        {
+          "name": "unit",
+          "success": true,
+          "passed": 345,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  ],
+  "productionAccess": false
+}
