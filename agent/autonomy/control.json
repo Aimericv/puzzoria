@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "repository": "Aimericv/puzzoria",
+  "permanentActivationApproved": false,
+  "funding": {
+    "mode": "no-payment-method",
+    "ownerDeclaration": "Le propriétaire a confirmé dans cette conversation : Aucun moyen de paiement enregistré.",
+    "verifiedAt": "2026-10-21T14:33:40.997Z",
+    "note": "Le budget Actions à 0 $ précédemment annoncé n'a pas été créé. Ne pas réutiliser PUZZORIA_FREE_ACTIONS_VERIFIED comme preuve."
+  },
+  "bootstrapCheckpoint": {
+    "artifactId": 12352132606,
+    "runId": "39614422816",
+    "name": "cloud-handoff-39614422816-1",
+    "context": {
+      "repository": "Aimericv/puzzoria",
+      "runId": "39614422816",
+      "phase": "cloud-handoff",
+      "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054"
+    }
+  }
+}

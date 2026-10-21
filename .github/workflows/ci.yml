@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   checks:
-    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true'
+    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     env:
@@ -42,7 +42,7 @@ jobs:
   e2e:
     name: E2E (${{ matrix.project }})
     needs: checks
-    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true'
+    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     strategy:

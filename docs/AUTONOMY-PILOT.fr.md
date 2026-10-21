@@ -1,5 +1,11 @@
 # Validation minimale Codex Plus sur GitHub Actions
 
+> Correction financière du 21 octobre 2026 : le propriétaire a précisé que le
+> budget Actions à 0 $ décrit ci-dessous n'a pas été créé. Il confirme qu'aucun
+> moyen de paiement n'est enregistré. Les anciennes mentions de budget vérifié
+> sont historiques et ne constituent pas une preuve technique. Le nouveau
+> contrôle n'utilise plus `PUZZORIA_FREE_ACTIONS_VERIFIED` pour autoriser un run.
+
 Preuve cloud validée le 20 octobre 2026 : les [deux jobs réels](https://github.com/Aimericv/puzzoria/actions/runs/39465013048)
 ont réussi et créé deux commits dans la [PR du bot](https://github.com/Aimericv/puzzoria/pull/2).
 La seconde session a repris la mémoire GitHub et renouvelé nativement l'auth

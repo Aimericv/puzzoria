@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   session_one:
-    if: vars.PUZZORIA_PILOT_ENABLED == 'true'
+    if: vars.PUZZORIA_PILOT_ENABLED == 'true' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -60,7 +60,7 @@ jobs:
 
   session_two:
     needs: session_one
-    if: vars.PUZZORIA_PILOT_ENABLED == 'true'
+    if: vars.PUZZORIA_PILOT_ENABLED == 'true' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:

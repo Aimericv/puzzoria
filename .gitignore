@@ -37,3 +37,7 @@ backups/
 /puzzoria-deploy*.tar.gz
 /.pilot-in/
 /.pilot-out/
+/.agent-out/
+/.agent-in/
+/.handoff-in/
+/.handoff-out/
