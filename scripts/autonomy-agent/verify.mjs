@@ -33,6 +33,7 @@ export function verifyCandidate({work,dependencies,uid,evidence,log=console.log}
       const container=`puzzoria-check-${randomUUID()}`;
       const environment={...process.env};
       for(const selector of ["DOCKER_HOST","DOCKER_CONTEXT","DOCKER_TLS","DOCKER_TLS_VERIFY","DOCKER_CERT_PATH"]) delete environment[selector];
+      let failure;
       try {execFileSync("docker",verifierArgs(work,dependencies,uid,command,container),{env:environment,encoding:"utf8",stdio:["ignore","pipe","pipe"],timeout:240000,maxBuffer:8*1024*1024});}
       catch(error) {
         evidence.commands.push({name,status:"failed",exitCode:error.status ?? null});
@@ -42,13 +43,17 @@ export function verifyCandidate({work,dependencies,uid,evidence,log=console.log}
             evidence.failedTests=result.testResults.flatMap(file=>file.assertionResults.filter(test=>test.status==="failed").map(test=>test.fullName)).slice(0,10);
           } catch { /* No completed test report is not a passing suite. */ }
         }
-        throw new Error(`Independent ${name} check failed (exit ${error.status ?? "timeout"})`,{cause:error});
+        failure=new Error(`Independent ${name} check failed (exit ${error.status ?? "timeout"})`,{cause:error});
       }
-      finally {
-        // A timed-out Docker client must not leave a background verifier alive.
-        try {execFileSync("docker",["--host=unix:///var/run/docker.sock","rm","--force",container],{env:environment,stdio:"ignore",timeout:10000});}
-        catch(cleanupError) {if(cleanupError.status!==1) throw new Error("Unable to stop the verifier container");}
+      // A timed-out Docker client must not leave a background verifier alive.
+      try {execFileSync("docker",["--host=unix:///var/run/docker.sock","rm","--force",container],{env:environment,stdio:"ignore",timeout:10000});}
+      catch(cleanupError) {
+        if(cleanupError.status!==1) {
+          const cleanupFailure=new Error("Unable to stop the verifier container",{cause:cleanupError});
+          failure=failure?new AggregateError([failure,cleanupFailure],"Verification and container cleanup failed"):cleanupFailure;
+        }
       }
+      if(failure) throw failure;
       evidence.commands.push({name,status:"passed"});
     }
     evidence.verifier={image:VERIFIER_IMAGE,network:"none",credentials:false,dependencies:"read-only",uid};

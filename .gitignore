@@ -41,3 +41,5 @@ backups/
 /.agent-in/
 /.handoff-in/
 /.handoff-out/
+/.ci-results/
+/.ci-evidence/
