@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 1,
-  "status": "ready",
+  "generation": 2,
+  "status": "retrying",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -21,8 +21,11 @@
   "lastMessageId": 0,
   "completedSessions": 0,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
-  "nextEligibleAt": null,
-  "lastRun": null,
+  "nextEligibleAt": "2026-10-21T15:13:47.644Z",
+  "lastRun": {
+    "id": "39620986831",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39620986831"
+  },
   "memory": {
     "STATE.md": "# Puzzoria\n\nPremière session autonome à préparer.\n",
     "DECISIONS.md": "# Puzzoria\n\nPremière session autonome à préparer.\n",
@@ -30,5 +33,25 @@
     "PLAN.json": "{\"summary\":\"Première session à préparer\",\"nextMission\":null,\"blockedReason\":null}"
   },
   "controlSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
-  "pendingMessages": []
+  "pendingMessages": [],
+  "retryCount": 1,
+  "blockedReason": "Artifact digest verification failed",
+  "lastSession": {
+    "schemaVersion": 1,
+    "runId": "39620986831",
+    "job": "first",
+    "mode": "validation",
+    "funding": {
+      "mode": "no-payment-method",
+      "source": "owner-declaration",
+      "verifiedAt": "2026-10-21T14:33:40.997Z"
+    },
+    "startedAt": "2026-10-21T14:58:45.187Z",
+    "status": "failed",
+    "commands": [],
+    "productionDeployment": false,
+    "sourceCommit": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+    "error": "Artifact digest verification failed",
+    "snapshotError": "ENOENT: no such file or directory, open '/opt/puzzoria-pilot/auth/auth.json'"
+  }
 }
