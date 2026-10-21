@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 17,
+  "generation": 18,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
   "checkpoint": {
-    "artifactId": 12357150877,
+    "artifactId": 12357686383,
     "runId": "39625255374",
-    "name": "puzzoria-agent-auth-39625255374-2",
-    "generation": 2,
+    "name": "puzzoria-agent-auth-39625255374-3",
+    "generation": 3,
     "context": {
       "repository": "Aimericv/puzzoria",
       "runId": "39625255374",
       "phase": "autonomous-agent",
-      "generation": 2
+      "generation": 3
     },
     "expiresAt": "2027-01-19T15:23:41Z",
-    "digest": "20d17df100d815efe5eb652e97e5394b1c701176573b4238b5652ad3f9842b6b"
+    "digest": "b123c59681a0b57f62d4bf2b061e5ff16db489b5be116e69b78bf765b43ff60f"
   },
   "lastMessageId": 6319802370,
   "completedSessions": 1,
