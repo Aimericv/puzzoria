@@ -1,0 +1,80 @@
+{
+  "runs": [
+    {
+      "id": 39622142360,
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39622142360",
+      "sha": "26182a750f0e39c6b58271808a11d6521f12d4d6",
+      "startedAt": "2026-10-21T15:02:15Z",
+      "jobs": []
+    },
+    {
+      "id": 39620986831,
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39620986831",
+      "sha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
+      "startedAt": "2026-10-21T14:54:27Z",
+      "jobs": [
+        {
+          "id": 119293969907,
+          "name": "first",
+          "status": "completed",
+          "conclusion": "failure",
+          "startedAt": "2026-10-21T14:54:30Z",
+          "completedAt": "2026-10-21T14:59:06Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./.github/actions/puzzoria-agent",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Post Run ./.github/actions/puzzoria-agent",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 119296478684,
+          "name": "second",
+          "status": "completed",
+          "conclusion": "skipped",
+          "startedAt": "2026-10-21T14:59:06Z",
+          "completedAt": "2026-10-21T14:59:06Z",
+          "steps": []
+        }
+      ]
+    }
+  ],
+  "annotations": [
+    {
+      "name": "first",
+      "path": ".github",
+      "line": 4,
+      "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+    }
+  ]
+}
