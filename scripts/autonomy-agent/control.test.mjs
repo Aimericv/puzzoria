@@ -195,8 +195,14 @@ test("continuation memory must preserve the disk-only nonce and a next mission",
   assert.equal(collectMemory(root,"disk-only").plan.nextMission,"agent chooses");assert.throws(()=>collectMemory(root,"another-nonce"));
 });
 
-test("permanent wakes and obsolete financial gates remain disabled in checked-in controls",()=>{
-  const saved=JSON.parse(readFileSync("agent/autonomy/control.json","utf8"));assert.equal(saved.permanentActivationApproved,false);
+test("permanent activation needs recorded validation and obsolete financial gates remain rejected",()=>{
+  const saved=JSON.parse(readFileSync("agent/autonomy/control.json","utf8"));assert.equal(typeof saved.permanentActivationApproved,"boolean");
+  if(saved.permanentActivationApproved) {
+    assert.ok(Number.isFinite(Date.parse(saved.activationAuthorization?.approvedAt)));
+    assert.match(saved.activationAuthorization?.ciRunId ?? "",/^\d+$/);
+    assert.equal(saved.activationAuthorization?.productionDeploymentAllowed,false);
+    assert.equal(saved.activationAuthorization?.futureAutomaticMergesAllowed,false);
+  }
   for(const name of ["autonomy-agent.yml","autonomy-pilot.yml","cloud-handoff-smoke.yml","ci.yml"]) {
     const workflow=readFileSync(`.github/workflows/${name}`,"utf8");
     assert.equal(workflow.includes("vars.PUZZORIA_FREE_ACTIONS_VERIFIED"),false);

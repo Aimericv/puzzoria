@@ -29,12 +29,16 @@ if(mode==="summarize") {
   if(process.env.GITHUB_REPOSITORY!==REPOSITORY)throw Error("Unexpected repository");
   const api=github(process.env.GITHUB_TOKEN,REPOSITORY),runId=process.env.GITHUB_RUN_ID;
   const {jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`);
+  const repository=await api("");
   const inspections={};
   for(const [name,path,extract] of [
     ["webhooks","/hooks?per_page=100",rows=>rows.map(row=>({id:row.id,active:row.active,events:row.events,destinationHost:row.config?.url?new URL(row.config.url).hostname:null}))],
     ["installations","/installations",rows=>({totalCount:rows.total_count,apps:rows.installations?.map(row=>({id:row.id,appId:row.app_id}))})],
     ["deployments","/deployments?per_page=100",rows=>rows.map(row=>({id:row.id,ref:row.ref,environment:row.environment,createdAt:row.created_at}))],
     ["environments","/environments?per_page=100",rows=>({totalCount:rows.total_count,names:rows.environments?.map(row=>row.name)})],
+    ["mainChecks","/commits/main/check-runs?per_page=100",rows=>({totalCount:rows.total_count,checks:rows.check_runs.map(row=>({name:row.name,app:row.app?.slug,status:row.status,conclusion:row.conclusion}))})],
+    ["mainStatuses","/commits/main/status",rows=>({state:rows.state,statuses:rows.statuses.map(row=>({context:row.context,state:row.state,targetHost:row.target_url?new URL(row.target_url).hostname:null}))})],
+    ["communication","/issues/3/comments?per_page=100",rows=>({comments:rows.length,ownerMessageIds:rows.filter(row=>row.user?.id===repository.owner.id&&row.user?.type==="User").map(row=>row.id)})],
     ["variables","/actions/variables?per_page=100",rows=>rows.variables.filter(row=>["PUZZORIA_AGENT_ENABLED","PUZZORIA_ACTIONS_NO_PAYMENT_METHOD","PUZZORIA_PILOT_ENABLED"].includes(row.name)).map(row=>({name:row.name,value:["true","false"].includes(row.value)?row.value:"unexpected"}))]
   ]) {
     try {inspections[name]={status:"observed",result:extract(await api(path))};}
