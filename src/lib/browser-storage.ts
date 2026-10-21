@@ -2,6 +2,8 @@
 let userId: string | null = null;
 const memory = new Map<string, string>(),
   times = new Map<string, number>();
+// Failed writes must not be shadowed by an older, still-readable disk value.
+const unsaved = new Set<string>();
 export const storageKey = (key: string) =>
   userId ? `dailygrid:account:${userId}:${key}` : key;
 export const activeUser = () => userId;
@@ -10,7 +12,7 @@ export function setStorageUser(id: string | null) {
 }
 export function clearAccountStorage(id: string) {
   const prefix = `dailygrid:account:${id}:`;
-  for (const key of memory.keys()) if (key.startsWith(prefix)) { memory.delete(key); times.delete(key); }
+  for (const key of memory.keys()) if (key.startsWith(prefix)) { memory.delete(key); times.delete(key); unsaved.delete(key); }
   try {
     for (const key of Object.keys(localStorage))
       if (key.startsWith(prefix) || key === `dailygrid:migration-pending:${id}`) localStorage.removeItem(key);
@@ -18,6 +20,7 @@ export function clearAccountStorage(id: string) {
 }
 export function readLocal(key: string) {
   const actual = storageKey(key);
+  if (unsaved.has(actual)) return memory.get(actual) ?? null;
   try {
     return localStorage.getItem(actual) ?? memory.get(actual) ?? null;
   } catch {
@@ -26,6 +29,7 @@ export function readLocal(key: string) {
 }
 export function localUpdated(key: string) {
   const actual = storageKey(key);
+  if (unsaved.has(actual)) return times.get(actual) ?? 0;
   try {
     return (
       Number(localStorage.getItem(`${actual}:updated`)) ||
@@ -50,8 +54,10 @@ export function writeLocal(
   try {
     localStorage.setItem(actual, encoded);
     localStorage.setItem(`${actual}:updated`, String(updatedAt));
+    unsaved.delete(actual);
   } catch {
     saved = false;
+    unsaved.add(actual);
   }
   window.dispatchEvent(new CustomEvent("dailygrid:storage", { detail: key }));
   if (
