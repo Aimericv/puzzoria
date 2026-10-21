@@ -1,6 +1,6 @@
 "use client";
 import type { Completion, PublicChallenge } from "./types";
-import { readLocal, writeLocal, activeUser } from "./browser-storage";
+import { readLocal, writeLocal, activeUser, storageKey } from "./browser-storage";
 type RunResponse = {
   runId: string;
   challenge: PublicChallenge;
@@ -106,7 +106,9 @@ export function rememberRun(challenge: PublicChallenge, runId: string) {
 export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
   if (challenge.roomId) return reservePlay(challenge);
   const key = challenge.id;
-  const existing = starts.get(key);
+  // The same Daily challenge can be played by different owners in one tab.
+  const ownerKey = storageKey(`dailygrid:run:${key}`);
+  const existing = starts.get(ownerKey);
   if (existing) return existing;
   const promise = (async () => {
     let runId: string | undefined;
@@ -164,8 +166,10 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
       })) as unknown as RunResponse;
     }
   })();
-  starts.set(key, promise);
-  promise.catch(() => starts.delete(key));
+  starts.set(ownerKey, promise);
+  promise.catch(() => {
+    if (starts.get(ownerKey) === promise) starts.delete(ownerKey);
+  });
   return promise;
 }
 export async function submitPlay(
