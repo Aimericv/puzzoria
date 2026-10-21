@@ -104,3 +104,34 @@ npx --no-install vitest run tests/autonomy-pilot.test.ts --maxWorkers=2
 
 Ces contrôles ne prouvent ni un lancement GitHub, ni l'accès au nouvel
 environnement. Ne pas présenter un test local comme une preuve cloud.
+
+## Résultat réel du 21 octobre 2026
+
+Le [run GitHub 39614422816](https://github.com/Aimericv/puzzoria/actions/runs/39614422816)
+a effectivement restauré le checkpoint et appelé le CLI natif depuis le runner.
+Les [preuves expurgées](https://github.com/Aimericv/puzzoria/blob/codex/cloud-handoff-evidence/39614422816/agent/cloud-handoff/evidence.json)
+ont été récupérées par Git, sans accès à l'API depuis la machine de ce chat.
+
+- Compte ChatGPT Plus confirmé, autorisation incluse acceptée et crédits
+  payants observés à zéro. Avant soumission : 14 % de la fenêtre courte et
+  21 % de la fenêtre hebdomadaire utilisés.
+- CLI 0.163.0. La soumission avec le `source_config_id` exact du nouvel
+  environnement a échoué avec `environment '…~cecfg_…' not found`.
+- Aucun lien de tâche n'a été retourné. L'erreur provient de la résolution de
+  l'environnement avant la création de la tâche ; aucune tâche n'a été créée
+  par cet appel. Aucun ancien environnement n'a été sélectionné.
+- Ce résultat prouve que cet identifiant de configuration n'est pas reconnu
+  par le catalogue utilisé par ce CLI. Il ne suffit pas à déterminer si la
+  cause est une différence de backend/identifiants ou de publication.
+- La capacité de poursuivre la conversation reste non testée, faute de tâche.
+- Le dernier checkpoint est désormais l'artifact privé
+  `cloud-handoff-39614422816-1`, ID `12352132606`, contexte de chiffrement
+  `{repository:"Aimericv/puzzoria",runId:"39614422816",phase:"cloud-handoff",environmentId:ID_CIBLE}`.
+  Ne pas réutiliser l'artifact initial du 20 octobre pour une nouvelle tentative.
+- La durée facturée et le solde Actions global n'ont pas été lus par API ;
+  le blocage des dépenses supplémentaires à zéro reste fondé sur la
+  confirmation antérieure du propriétaire. Ne pas inventer de relevé de facture.
+
+Après ce test, le workflow est limité à l'événement de création de sa branche :
+les mises à jour ultérieures ne doivent allouer aucun runner. Une nouvelle
+tentative nécessite une préparation explicite avec la dernière provenance.

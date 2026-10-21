@@ -16,7 +16,8 @@ concurrency:
 
 jobs:
   handoff:
-    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true'
+    # One-off branch creation only: later fixes/docs must never reuse a rotated login.
+    if: vars.PUZZORIA_FREE_ACTIONS_VERIFIED == 'true' && github.event.created == true
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
