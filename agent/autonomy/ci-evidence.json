@@ -1,0 +1,578 @@
+{
+  "schemaVersion": 1,
+  "runId": "39632711143",
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632711143",
+  "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+  "pr": {
+    "number": 4,
+    "head": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+    "base": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+    "mergeable": true,
+    "draft": true
+  },
+  "jobs": [
+    {
+      "name": "inspect",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/ci-proof.mjs inspect",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "checks",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify funding declaration and require current main as an ancestor",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run lint",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run typecheck",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run content:validate",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run content:social",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run seo:check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized test counts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "E2E (mobile)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify exports, hydrated navigation and deterministic fixtures",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:e2e -- --project=mobile --reporter=line,json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized browser results without traces or databases",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "E2E (android)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify exports, hydrated navigation and deterministic fixtures",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:e2e -- --project=android --reporter=line,json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized browser results without traces or databases",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "E2E (iphone-webkit)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npx playwright install --with-deps webkit",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify exports, hydrated navigation and deterministic fixtures",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:e2e -- --project=iphone-webkit --reporter=line,json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized browser results without traces or databases",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "E2E (desktop)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npx playwright install --with-deps chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify exports, hydrated navigation and deterministic fixtures",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm run test:e2e -- --project=desktop --reporter=line,json",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized browser results without traces or databases",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "evidence",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "conclusion": null
+        },
+        {
+          "name": "Publish validation and read-only deployment inspection",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": null
+        }
+      ]
+    }
+  ],
+  "inspections": {
+    "webhooks": {
+      "status": "unavailable",
+      "httpStatus": 403
+    },
+    "installations": {
+      "status": "unavailable",
+      "httpStatus": 404
+    },
+    "deployments": {
+      "status": "observed",
+      "result": []
+    },
+    "environments": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "names": []
+      }
+    },
+    "mainChecks": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "checks": []
+      }
+    },
+    "mainStatuses": {
+      "status": "observed",
+      "result": {
+        "state": "pending",
+        "statuses": []
+      }
+    },
+    "communication": {
+      "status": "observed",
+      "result": {
+        "comments": 7,
+        "ownerMessageIds": []
+      }
+    },
+    "variables": {
+      "status": "unavailable",
+      "httpStatus": 403
+    }
+  },
+  "reports": [
+    {
+      "project": "android",
+      "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+      "reports": [
+        {
+          "name": "preflight",
+          "stats": {
+            "startTime": "2026-10-21T16:16:21.880Z",
+            "duration": 62936.69899999999,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        },
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-21T16:17:25.591Z",
+            "duration": 841377.6579999999,
+            "expected": 82,
+            "skipped": 2,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "checks",
+      "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+      "reports": [
+        {
+          "name": "unit",
+          "success": true,
+          "passed": 345,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "project": "desktop",
+      "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+      "reports": [
+        {
+          "name": "preflight",
+          "stats": {
+            "startTime": "2026-10-21T16:16:20.277Z",
+            "duration": 54715.251000000004,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        },
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-21T16:17:15.743Z",
+            "duration": 813766.814,
+            "expected": 82,
+            "skipped": 2,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "iphone-webkit",
+      "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+      "reports": [
+        {
+          "name": "preflight",
+          "stats": {
+            "startTime": "2026-10-21T16:16:49.697Z",
+            "duration": 85571.119,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        },
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-21T16:18:16.048Z",
+            "duration": 1052594.802,
+            "expected": 82,
+            "skipped": 2,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "mobile",
+      "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+      "reports": [
+        {
+          "name": "preflight",
+          "stats": {
+            "startTime": "2026-10-21T16:16:21.882Z",
+            "duration": 64183.683,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        },
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-21T16:17:26.811Z",
+            "duration": 874803.7620000001,
+            "expected": 82,
+            "skipped": 2,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "productionAccess": false
+}
