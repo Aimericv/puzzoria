@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 19,
-  "status": "running",
+  "generation": 20,
+  "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
-  "codeSha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+  "codeSha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
   "checkpoint": {
     "artifactId": 12357686383,
     "runId": "39625255374",
@@ -22,7 +22,7 @@
     "digest": "b123c59681a0b57f62d4bf2b061e5ff16db489b5be116e69b78bf765b43ff60f"
   },
   "lastMessageId": 6319802370,
-  "completedSessions": 1,
+  "completedSessions": 2,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
@@ -30,10 +30,10 @@
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
   },
   "memory": {
-    "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement au stockage local et aux réservations. Après un changement de compte, il pouvait retourner le run déjà démarré par le propriétaire précédent. La clé utilise maintenant storageKey, capturée avant la requête ; les appels du même propriétaire restent dédupliqués. Le nettoyage d'une promesse rejetée ne retire que cette même promesse.\n\ntests/play-start.test.ts ajoute deux cas : passage invité → compte A → compte B → invité, avec localStorage disponible ou entièrement bloqué. Vérification des runs distincts, déduplication et réutilisation du cache invité. Les deux tests échouent avant correction (guest-run reçu pour le compte A), puis passent après correction. Les 38 tests ciblés de play-start, play-reservation, browser-storage et engagement passent.\n\nContrôles terminés : npm run lint et npm run typecheck, codes 0 ; node --import tsx scripts/validate-content.ts, code 0, 92 défis planifiés et 32 articles multilingues validés. Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test et délai inchangés. Tous les tests de la contribution passent. Commande : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner.\n\nBuild et E2E avec serveur local laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, protection, instruction ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l'agent.\n\nLimites : tests unitaires avec fetch simulé, sans preuve sur navigateur physique ni métrique utilisateur. Ce correctif concerne le cache starts ; le cache des completions et les écritures après une réponse réseau tardive lors d'un changement de compte restent à examiner. Le fallback mémoire n'offre toujours aucune durabilité après fermeture d'onglet.\n\nProchaine mission choisie : examiner l'isolation du cache des résultats terminés entre invité et comptes dans play-client, reproduire un éventuel affichage du résultat d'un autre propriétaire puis corriger dans un périmètre limité.\n",
-    "DECISIONS.md": "# Décisions — 21 octobre 2026\n\n- Privilégier une correction limitée de fiabilité des brouillons plutôt qu'une nouveauté : la lecture du code montre une incohérence directe entre le fallback mémoire et la priorité donnée au disque ; trois tests reproduisent la régression.\n- Mémoriser uniquement les clés dont l'écriture complète a échoué. Donner systématiquement priorité à la mémoire empêcherait la lecture des changements d'un autre onglet après une sauvegarde normale.\n- Traiter valeur et horodatage comme une paire pour la lecture locale après échec partiel. Retirer le marqueur après réussite complète et lors de clearAccountStorage, en conservant les namespaces existants.\n- Ne pas modifier les outils ni dépendances face aux restrictions du sandbox. Utiliser le chargeur Vitest runner, des données temporaires locales et node --import tsx pour la validation contenu ; consigner séparément les commandes standard bloquées.\n- Aucun indicateur de trafic, de rétention, de publication ni de production disponible. La valeur produit reste une hypothèse de fiabilité, pas un résultat utilisateur mesuré.\n\n## Session sur source 8605eabe — démarrages par propriétaire\n\n- Poursuivre l'inspection de la reprise sans stockage durable a révélé un défaut distinct : starts réutilisait un run pour tous les propriétaires du même défi. Deux tests reproduisent directement ce comportement, avec et sans accès à localStorage.\n- Réutiliser storageKey pour aligner le cache mémoire sur les namespaces existants, sans changer les clés persistées ni l'autorité serveur. Conserver la déduplication d'une même partie pour un même propriétaire.\n- Limiter cette contribution aux démarrages ; examiner séparément le cache results et les réponses tardives pour éviter d'étendre une petite correction sans preuve ciblée.\n- L'impact produit attendu est une reprise plus fiable après changement de compte. Aucun trafic ni gain de rétention observé ; aucune publication revendiquée.\n",
-    "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n\n## Cache de démarrage lors d'un changement de propriétaire\n\nHypothèse : beginPlay retourne la promesse du précédent propriétaire pour le même défi, indépendamment du namespace du run local.\n\nProtocole : mémoriser des runs différents pour invité, compte A et compte B ; démarrer le même défi avec chacun, revenir à l'invité et vérifier la déduplication. Exécuter avec stockage disponible puis avec getItem/setItem levant SecurityError. fetch simulé vérifie l'action start et renvoie le run demandé.\n\nRésultats observés : les deux tests échouent avant correction (guest-run au lieu de start-a-run), puis passent après isolation du cache via storageKey. Les quatre fichiers ciblés passent : 38 tests. Lint, typecheck et validation contenu passent. Suite générale : 342 tests réussis sur 343 ; un échec de délai de 5 s dans operations.test.ts:55, déjà signalé dans la mémoire précédente. Cause non établie ; aucune assertion ni limite modifiée. Détails dans STATE.md.\n\nPortée : preuve unitaire de la sélection du run côté client ; aucun résultat de production, aucune mesure de rétention, aucun navigateur réel testé dans cette session.\n",
-    "PLAN.json": "{\n  \"summary\": \"Cache de démarrage isolé par propriétaire ; deux régressions reproduites puis corrigées, y compris sans localStorage.\",\n  \"nextMission\": \"Examiner l'isolation du cache des résultats terminés entre invité et comptes dans play-client ; reproduire un éventuel affichage du résultat d'un autre propriétaire et corriger dans un périmètre limité.\",\n  \"blockedReason\": null,\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"\n}\n"
+    "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : f2509908bdc66ee359d272caab4468ac6bc73b46 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.\n\nContribution : isoler le cache des résultats terminés par propriétaire dans src/lib/play-client.ts. authoritativeCompletion et rememberCompletion utilisent maintenant une clé issue de storageKey ; submitPlay capture cette clé avant ses requêtes. Le provider efface déjà les caches lors des changements de profil, mais une ancienne réponse en vol pouvait auparavant repeupler le cache partagé après cet effacement et écraser le résultat du nouveau propriétaire.\n\ntests/play-completion.test.ts couvre invité/deux comptes, exclusion des imports et réponse submit tardive après effacement des caches/changement de compte. Deux échecs reproduits avant correction, puis 40 tests ciblés réussis. Après ajout explicite du reset du provider dans le scénario tardif, les deux nouveaux tests repassent.\n\nContrôles : npm run lint et npm run typecheck terminés avec code 0 ; node --import tsx scripts/validate-content.ts terminé avec code 0 (92 défis planifiés et 32 articles multilingues). Suite générale : 344 tests réussis sur 345, 27 fichiers réussis sur 28, code 1. Seul tests/operations.test.ts:55 dépasse le délai de 5 s (sauvegarde quotidienne/purge/indisponibilité), échec déjà consigné dans les mémoires précédentes ; cause non établie, assertion et délai inchangés. Commande : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner.\n\nBuild et E2E avec serveur laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l'agent.\n\nLimites : preuve unitaire avec réseau simulé ; aucune mesure utilisateur. Cette correction concerne uniquement le cache mémoire des completions. Les écritures locales après réponse tardive dans prepareCompletedPlay et les créations de runs ne sont pas corrigées par cette contribution.\n\nProchaine mission choisie : reproduire une réponse tardive de prepareCompletedPlay lors d'un changement de propriétaire, puis empêcher l'écriture de son résultat et de son brouillon dans le namespace du nouveau propriétaire.\n",
+    "DECISIONS.md": "# Décisions — 21 octobre 2026\n\n- Privilégier une correction limitée de fiabilité des brouillons plutôt qu'une nouveauté : la lecture du code montre une incohérence directe entre le fallback mémoire et la priorité donnée au disque ; trois tests reproduisent la régression.\n- Mémoriser uniquement les clés dont l'écriture complète a échoué. Donner systématiquement priorité à la mémoire empêcherait la lecture des changements d'un autre onglet après une sauvegarde normale.\n- Traiter valeur et horodatage comme une paire pour la lecture locale après échec partiel. Retirer le marqueur après réussite complète et lors de clearAccountStorage, en conservant les namespaces existants.\n- Ne pas modifier les outils ni dépendances face aux restrictions du sandbox. Utiliser le chargeur Vitest runner, des données temporaires locales et node --import tsx pour la validation contenu ; consigner séparément les commandes standard bloquées.\n- Aucun indicateur de trafic, de rétention, de publication ni de production disponible. La valeur produit reste une hypothèse de fiabilité, pas un résultat utilisateur mesuré.\n\n## Session sur source 8605eabe — démarrages par propriétaire\n\n- Poursuivre l'inspection de la reprise sans stockage durable a révélé un défaut distinct : starts réutilisait un run pour tous les propriétaires du même défi. Deux tests reproduisent directement ce comportement, avec et sans accès à localStorage.\n- Réutiliser storageKey pour aligner le cache mémoire sur les namespaces existants, sans changer les clés persistées ni l'autorité serveur. Conserver la déduplication d'une même partie pour un même propriétaire.\n- Limiter cette contribution aux démarrages ; examiner séparément le cache results et les réponses tardives pour éviter d'étendre une petite correction sans preuve ciblée.\n- L'impact produit attendu est une reprise plus fiable après changement de compte. Aucun trafic ni gain de rétention observé ; aucune publication revendiquée.\n\n## Session sur source f2509908 — résultats en mémoire\n\n- Choisir une correction limitée du cache results dans play-client. Le provider de compte efface déjà les caches au changement de profil, mais une réponse de soumission encore en vol peut les repeupler après cet effacement : le test reproduit ce cas.\n- Utiliser storageKey pour les completions et capturer cette clé au début de submitPlay, avant les awaits. Les réponses tardives restent associées au namespace initial ; les résultats importés restent ignorés par rememberCompletion.\n- Ne pas étendre ce correctif aux écritures asynchrones de brouillons : prepareCompletedPlay et les créations de runs méritent leur propre reproduction.\n- Aucune mesure de trafic ou de rétention disponible ; bénéfice de fiabilité attendu, sans résultat utilisateur mesuré.\n",
+    "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n\n## Cache de démarrage lors d'un changement de propriétaire\n\nHypothèse : beginPlay retourne la promesse du précédent propriétaire pour le même défi, indépendamment du namespace du run local.\n\nProtocole : mémoriser des runs différents pour invité, compte A et compte B ; démarrer le même défi avec chacun, revenir à l'invité et vérifier la déduplication. Exécuter avec stockage disponible puis avec getItem/setItem levant SecurityError. fetch simulé vérifie l'action start et renvoie le run demandé.\n\nRésultats observés : les deux tests échouent avant correction (guest-run au lieu de start-a-run), puis passent après isolation du cache via storageKey. Les quatre fichiers ciblés passent : 38 tests. Lint, typecheck et validation contenu passent. Suite générale : 342 tests réussis sur 343 ; un échec de délai de 5 s dans operations.test.ts:55, déjà signalé dans la mémoire précédente. Cause non établie ; aucune assertion ni limite modifiée. Détails dans STATE.md.\n\nPortée : preuve unitaire de la sélection du run côté client ; aucun résultat de production, aucune mesure de rétention, aucun navigateur réel testé dans cette session.\n\n## Isolation des résultats et réponse de soumission tardive\n\nHypothèse : un résultat stocké par seul challengeId peut être lu pour un autre propriétaire, notamment lorsqu'une réponse arrive après l'effacement des caches au changement de profil.\n\nProtocole : mémoriser des résultats serveur pour invité et deux comptes, vérifier leur restitution et le rejet des imports ; différer la réponse submit, effacer les caches comme le provider, changer de compte, mémoriser son résultat puis libérer l'ancienne réponse.\n\nObservations : les deux tests initiaux échouent avant correction (résultat invité visible au compte, résultat destinataire écrasé par sender-run). Après correction, les 40 tests ciblés passent. Le test de réponse tardive a ensuite été renforcé avec resetPlayClient avant changement de compte ; les deux tests repassent. Il s'agit d'une preuve unitaire avec fetch simulé, sans navigateur réel ni mesure produit.\n\nContrôles de cette session : lint, typecheck et validation contenu réussis ; suite générale à 344/345 tests, seul le délai operations.test.ts:55 échoue comme dans la mémoire précédente. Aucun build/E2E exécuté par l’agent.\n",
+    "PLAN.json": "{\"summary\": \"Cache des résultats terminés isolé par propriétaire ; clé de soumission capturée avant les requêtes pour isoler les réponses tardives.\", \"nextMission\": \"Reproduire une réponse tardive de prepareCompletedPlay lors d'un changement de propriétaire, puis empêcher son écriture dans le namespace du nouveau propriétaire.\", \"blockedReason\": null, \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"}\n"
   },
   "controlSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
   "pendingMessages": [],
@@ -42,14 +42,14 @@
   "lastSession": {
     "schemaVersion": 1,
     "runId": "39625255374",
-    "job": "first",
+    "job": "second",
     "mode": "validation",
     "funding": {
       "mode": "no-payment-method",
       "source": "owner-declaration",
       "verifiedAt": "2026-10-21T14:33:40.997Z"
     },
-    "startedAt": "2026-10-21T15:26:49.869Z",
+    "startedAt": "2026-10-21T15:35:06.640Z",
     "status": "verified",
     "commands": [
       {
@@ -78,7 +78,7 @@
       }
     ],
     "productionDeployment": false,
-    "sourceCommit": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
+    "sourceCommit": "f2509908bdc66ee359d272caab4468ac6bc73b46",
     "isolationCanaries": true,
     "quotaBefore": {
       "status": "ready",
@@ -86,12 +86,12 @@
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 69,
+            "usedPercent": 73,
             "windowDurationMins": 300,
             "resetsAt": 1792607914
           },
           "secondary": {
-            "usedPercent": 30,
+            "usedPercent": 31,
             "windowDurationMins": 10080,
             "resetsAt": 1793118249
           }
@@ -100,43 +100,35 @@
     },
     "modelCommands": [
       {
-        "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
+        "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . 2>/dev/null\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls -a'",
+        "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; cat package.json'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/lib | head -55; ls node_modules/next/dist/docs/01-app/03-api-reference/02-components'",
+        "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; rg --files src/lib tests | head -100; ls node_modules/next/dist/docs'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat src/lib/browser-storage.ts tests/browser-storage.test.ts; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat docs/RETENTION.md; cat src/lib/new-play.ts'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"rg -n 'localStorage|reserve' src/lib/run* src/components/*Player* src/lib/*client*; rg --files src/lib | rg 'session|practice|run'; cat src/lib/run-client.ts\"",
+        "command": "/bin/bash -lc 'cat src/lib/play-client.ts tests/play-start.test.ts docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx'",
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc 'cat src/lib/play-client.ts; cat tests/play-client.test.ts; cat vitest.config.ts'",
+        "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'use-client'; cat src/lib/browser-storage.ts; rg -n 'Completion|rememberCompletion|authoritativeCompletion' tests/play-reservation.test.ts src/lib/types.ts\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"rg -n 'beginPlay|reservePlay|rememberRun' tests; cat src/lib/types.ts | head -100; cat tests/browser-storage.test.ts | head -8\"",
+        "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; sed -n '120,165p' src/lib/types.ts; head -65 tests/play-reservation.test.ts\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"cat tests/play-reservation.test.ts; sed -n '130,180p' tests/engagement.test.ts\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts'",
+        "command": "/bin/bash -lc \"cat > tests/play-completion.test.ts <<'EOF'\nimport { afterEach, expect, it, vi } from \\\"vitest\\\";\nimport { authoritativeCompletion, rememberCompletion, rememberRun, resetPlayClient, submitPlay } from \\\"../src/lib/play-client\\\";\nimport { setStorageUser } from \\\"../src/lib/browser-storage\\\";\nimport type { Completion, PublicChallenge } from \\\"../src/lib/types\\\";\n\nconst challenge: PublicChallenge = {\n  kind: \\\"word\\\", id: \\\"word:completion-owner\\\", date: \\\"2026-10-21\\\",\n  locale: \\\"fr",
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
+        "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/play-completion.test.ts tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
         "exitCode": 0
       },
       {
@@ -144,8 +136,12 @@
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"sed -n '103,193p' src/lib/play-client.ts; cat tests/play-start.test.ts\"",
-        "exitCode": 0
+        "command": "/bin/bash -lc \"sed -n '180,215p' src/lib/play-client.ts; rg -n 'resetPlayClient|setStorageUser' src/lib/account-client.ts src/components/auth*\"",
+        "exitCode": 2
+      },
+      {
+        "command": "/bin/bash -lc \"rg -n 'resetPlayClient|setStorageUser' src/components src/lib/account-client.ts; rg --files -g 'AGENTS.md' src tests agent\"",
+        "exitCode": 1
       },
       {
         "command": "/bin/bash -lc 'npm run typecheck'",
@@ -156,7 +152,7 @@
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"ps -eo pid,etime,comm,args | rg 'vitest|eslint|tsc|next typegen'\"",
+        "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/play-completion.test.ts'",
         "exitCode": 0
       },
       {
@@ -164,29 +160,29 @@
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement a",
+        "command": "/bin/bash -lc \"cat >> agent/autonomy/memory/DECISIONS.md <<'EOF'\n\n## Session sur source f2509908 — résultats en mémoire\n\n- Choisir une correction limitée du cache results dans play-client. Le provider de compte efface déjà les caches au changement de profil, mais une réponse de soumission encore en vol peut les repeupler après cet effacement : le test reproduit ce cas.\n- Utiliser storageKey pour les completions et capturer cette clé au début de submitPlay, avant les awaits. Les réponses tardives",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale en cours au moment de cette rédaction, résultat à compléter.', 'Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test e",
+        "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale : résultat à compléter avant arrêt.', 'Suite générale : 344 tests réussis sur 345, 27 fichiers réussis sur 28, code 1. Seul tests/operations.test.ts:55 dépasse le délai de 5 s (sauvegarde quotidienne/purge/indisponibilité), échec déjà consigné dans les mémoires précédentes ; cause non établie, assertion et délai inchangés. Commande : XDG_DATA_HOME=/opt/puzzori",
         "exitCode": 0
       }
     ],
-    "threadId": "01a15f12-afd8-7db0-8dd5-7aa80b8d4282",
+    "threadId": "01a15f1a-3f77-7950-81dd-0e666ac62dd2",
     "model": "gpt-6.1-sol",
-    "previousCompletedSessions": 0,
+    "previousCompletedSessions": 1,
     "quotaAfter": {
       "status": "ready",
       "quotas": [
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 72,
+            "usedPercent": 77,
             "windowDurationMins": 300,
             "resetsAt": 1792607914
           },
           "secondary": {
-            "usedPercent": 30,
+            "usedPercent": 31,
             "windowDurationMins": 10080,
             "resetsAt": 1793118249
           }
@@ -201,16 +197,16 @@
       "uid": 3050
     },
     "tests": {
-      "passed": 343,
+      "passed": 345,
       "failed": 0,
       "skipped": 0
     },
     "publication": {
-      "sha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+      "sha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
       "url": "https://github.com/Aimericv/puzzoria/pull/5",
       "number": 5
     },
-    "toolCommands": 18
+    "toolCommands": 17
   },
   "validation": {
     "39620986831": {
