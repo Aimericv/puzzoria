@@ -7,9 +7,15 @@ ni interface, ni déploiement. Les fichiers du pilote restent inchangés.
 
 ## Avant le lancement
 
-- Confirmer le lien de paramètres et l'identifiant exact du **nouvel**
-  environnement dans `agent/cloud-handoff/target.json`, puis seulement mettre
-  `verifiedNewEnvironment` à `true`. Ne pas choisir par nom, par dépôt,
+- Confirmer l'identifiant exact du **nouvel** environnement dans
+  `agent/cloud-handoff/target.json`. L'outil natif
+  `cloud_environment.environment_status` a maintenant fourni le
+  `source_config_id` de l'environnement lié à ce chat, sa version et
+  l'identifiant de la machine. La cible utilise le **source_config_id**,
+  et conserve les métadonnées de provenance. Sa compatibilité avec le CLI
+  reste à tester : ne pas confondre découverte de configuration et acceptation
+  par `codex cloud exec`. Un lien de paramètres contenant l'ID exact constitue
+  une autre méthode de découverte. Ne pas choisir par nom, par dépôt,
   par ancien environnement ou par identifiant de la machine d'onboarding.
 - Vérifier que le nouvel environnement est publié et utilisable pour de
   nouvelles tâches. Un brouillon enregistré ne démontre pas cette publication.

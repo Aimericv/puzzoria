@@ -15,6 +15,14 @@ export const sourceCheckpoint = {repository, runId:"39465013048", phase:2};
 export function validateTarget(target) {
   if (target?.verifiedNewEnvironment !== true || !/^[A-Za-z0-9][A-Za-z0-9_.~-]{5,200}$/.test(target.environmentId ?? ""))
     throw new Error("An explicitly verified NEW cloud environment ID is required; no label or automatic selection is allowed");
+  if (target.discovery?.method === "cloud_environment.environment_status") {
+    const discovery = target.discovery;
+    if (discovery.sourceConfigId !== target.environmentId || discovery.observationsCurrent !== true ||
+        !/^ccarenv_/.test(discovery.runtimeEnvironmentId ?? "") ||
+        !discovery.sourceConfigVersionId?.includes("~cecfgver_"))
+      throw new Error("Native environment discovery does not identify this exact new configuration");
+    return target.environmentId;
+  }
   const url = new URL(target.environmentUrl);
   if (url.protocol !== "https:" || url.username || url.password || !["chatgpt.com","codex.openai.com"].includes(url.hostname))
     throw new Error("Unexpected environment settings URL");

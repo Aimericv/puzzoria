@@ -18,6 +18,14 @@ test("a created task must report the exact target environment, never a legacy en
   assert.throws(()=>verifyTask({tasks:[{...task,attempt_total:2}]},"task_one","new-environment"));
 });
 
+test("native runtime metadata can identify the new configuration without making the user find a URL",() => {
+  const environmentId="owner~cecfg_new_configuration";
+  const target={environmentId,verifiedNewEnvironment:true,discovery:{method:"cloud_environment.environment_status",sourceConfigId:environmentId,sourceConfigVersionId:"owner~cecfgver_current",runtimeEnvironmentId:"ccarenv_current",observationsCurrent:true}};
+  assert.equal(validateTarget(target),environmentId);
+  for(const discovery of [{...target.discovery,sourceConfigId:"legacy-id"},{...target.discovery,observationsCurrent:false},{...target.discovery,runtimeEnvironmentId:null},{...target.discovery,sourceConfigVersionId:null}])
+    assert.throws(()=>validateTarget({...target,discovery}));
+});
+
 test("diagnostic output removes checkpoint secrets, bearer values and JWTs",() => {
   const diagnostic=redact("token=fake-refresh-secret Bearer fake-bearer-token eyJhbGciOi.fake-payload.fake-signature",["fake-refresh-secret"]);
   for(const secret of ["fake-refresh-secret","fake-bearer-token","eyJhbGciOi.fake-payload.fake-signature"]) assert.equal(diagnostic.includes(secret),false);
