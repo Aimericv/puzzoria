@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 3,
+  "generation": 4,
   "status": "retrying",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -82,5 +82,6 @@
         }
       }
     }
-  }
+  },
+  "infrastructurePR": "https://github.com/Aimericv/puzzoria/pull/4"
 }
