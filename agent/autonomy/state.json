@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 12,
-  "status": "ready",
+  "generation": 13,
+  "status": "running",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -38,7 +38,7 @@
   "controlSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
   "pendingMessages": [],
   "retryCount": 2,
-  "blockedReason": "Command failed: /opt/hostedtoolcache/node/24.15.0/x64/bin/node /opt/puzzoria-pilot/readonly/node_modules/@openai/codex/bin/codex.js sandbox --include-managed-config -P pilot -C /opt/puzzoria-pilot/work -- npm test -- --maxWorkers=2 --reporter=json --outputFile=.agent-tests.json",
+  "blockedReason": null,
   "lastSession": {
     "schemaVersion": 1,
     "runId": "39623126545",
