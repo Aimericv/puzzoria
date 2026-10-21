@@ -1,0 +1,766 @@
+[
+  {
+    "id": 39632711143,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632711143",
+    "status": "in_progress",
+    "conclusion": null,
+    "sha": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+    "jobs": [
+      {
+        "name": "inspect",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node scripts/autonomy-agent/ci-proof.mjs inspect",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify funding declaration and require current main as an ancestor",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run content:validate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run content:social",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run seo:check",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run build",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Preserve sanitized test counts",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "E2E (mobile)",
+        "status": "in_progress",
+        "conclusion": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify exports, hydrated navigation and deterministic fixtures",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run test:e2e -- --project=mobile --reporter=line,json",
+            "status": "in_progress",
+            "conclusion": null
+          },
+          {
+            "name": "Preserve sanitized browser results without traces or databases",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "pending",
+            "conclusion": null
+          }
+        ]
+      },
+      {
+        "name": "E2E (android)",
+        "status": "in_progress",
+        "conclusion": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify exports, hydrated navigation and deterministic fixtures",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run test:e2e -- --project=android --reporter=line,json",
+            "status": "in_progress",
+            "conclusion": null
+          },
+          {
+            "name": "Preserve sanitized browser results without traces or databases",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "pending",
+            "conclusion": null
+          }
+        ]
+      },
+      {
+        "name": "E2E (iphone-webkit)",
+        "status": "in_progress",
+        "conclusion": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npx playwright install --with-deps webkit",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify exports, hydrated navigation and deterministic fixtures",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run test:e2e -- --project=iphone-webkit --reporter=line,json",
+            "status": "in_progress",
+            "conclusion": null
+          },
+          {
+            "name": "Preserve sanitized browser results without traces or databases",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "pending",
+            "conclusion": null
+          }
+        ]
+      },
+      {
+        "name": "E2E (desktop)",
+        "status": "in_progress",
+        "conclusion": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npx playwright install --with-deps chromium",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify exports, hydrated navigation and deterministic fixtures",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run test:e2e -- --project=desktop --reporter=line,json",
+            "status": "in_progress",
+            "conclusion": null
+          },
+          {
+            "name": "Preserve sanitized browser results without traces or databases",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "pending",
+            "conclusion": null
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "pending",
+            "conclusion": null
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      }
+    ]
+  },
+  {
+    "id": 39632563468,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632563468",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "sha": "b966deb4e7499c037ed109cfee1da75179cb8184",
+    "jobs": [],
+    "annotations": [
+      {
+        "name": "evidence",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "inspect",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 12,
+        "message": "The operation was canceled."
+      }
+    ]
+  },
+  {
+    "id": 39632553137,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632553137",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "sha": "b966deb4e7499c037ed109cfee1da75179cb8184",
+    "jobs": [
+      {
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify funding declaration and require current main as an ancestor",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run lint",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm run typecheck",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+            "status": "completed",
+            "conclusion": "cancelled"
+          },
+          {
+            "name": "Run npm run content:validate",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Run npm run content:social",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Run npm run seo:check",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Run npm run build",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Preserve sanitized test counts",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "inspect",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node scripts/autonomy-agent/ci-proof.mjs inspect",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "evidence",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Publish validation and read-only deployment inspection",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "E2E (${{ matrix.project }})",
+        "status": "completed",
+        "conclusion": "cancelled",
+        "steps": []
+      }
+    ],
+    "annotations": [
+      {
+        "name": "evidence",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "inspect",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 12,
+        "message": "The operation was canceled."
+      }
+    ]
+  },
+  {
+    "id": 39630755411,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39630755411",
+    "status": "completed",
+    "conclusion": "skipped",
+    "sha": "e256311cbfa88d23082211bab4ef40f018a35b58",
+    "jobs": [
+      {
+        "name": "inspect",
+        "status": "completed",
+        "conclusion": "skipped",
+        "steps": []
+      },
+      {
+        "name": "evidence",
+        "status": "completed",
+        "conclusion": "skipped",
+        "steps": []
+      },
+      {
+        "name": "E2E (${{ matrix.project }})",
+        "status": "completed",
+        "conclusion": "skipped",
+        "steps": []
+      },
+      {
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "skipped",
+        "steps": []
+      }
+    ],
+    "annotations": [
+      {
+        "name": "evidence",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "evidence",
+        "path": ".github",
+        "line": 19,
+        "message": "Process completed with exit code 1."
+      },
+      {
+        "name": "inspect",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "inspect",
+        "path": ".github",
+        "line": 19,
+        "message": "Process completed with exit code 1."
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 1,
+        "message": "Canceling since a higher priority waiting request for ci-codex/autonomy-agent exists"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 2,
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+      },
+      {
+        "name": "checks",
+        "path": ".github",
+        "line": 12,
+        "message": "The operation was canceled."
+      }
+    ]
+  }
+]
