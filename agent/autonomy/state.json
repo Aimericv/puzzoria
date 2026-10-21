@@ -1,30 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 5,
+  "generation": 6,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": null,
   "checkpoint": {
-    "artifactId": 12352132606,
-    "runId": "39614422816",
-    "name": "cloud-handoff-39614422816-1",
+    "artifactId": 12356066674,
+    "runId": "39623126545",
+    "name": "puzzoria-agent-auth-39623126545-1",
+    "generation": 1,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39614422816",
-      "phase": "cloud-handoff",
-      "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054"
-    }
+      "runId": "39623126545",
+      "phase": "autonomous-agent",
+      "generation": 1
+    },
+    "expiresAt": "2027-01-19T15:09:20Z",
+    "digest": "ea8fd822481db148f89b3a0c86a39d8f27ae71a68dc5e72a206dc7f6a4d6ec0b"
   },
   "lastMessageId": 6319154344,
   "completedSessions": 0,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39620986831",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39620986831"
+    "id": "39623126545",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39623126545"
   },
   "memory": {
     "STATE.md": "# Puzzoria\n\nPremière session autonome à préparer.\n",
