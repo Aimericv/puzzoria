@@ -26,6 +26,10 @@ N'essaie pas de modifier les protections, les manifests/verrous, les workflows,
 les scripts de contrôle, les paramètres de l'environnement ou les instructions
 de l'agent. Ne désactive pas un test ni une assertion pour obtenir du vert.
 Le superviseur exécute lui-même les contrôles et publie après l'arrêt des outils.
+Les fichiers publiables sont le code TypeScript/TSX/CSS de `src/`, les tests
+TypeScript de `tests/` et `e2e/`, ainsi que la documentation produit Markdown
+de `docs/` (hors documents de contrôle AUTONOMY/CLOUD-HANDOFF). Les caches et
+fichiers locaux de configuration ne font pas partie de ta contribution.
 
 Lis `agent/autonomy/memory/` depuis le disque à chaque session. Conserve le nonce
 de continuité dans `PLAN.json`. Mets à jour :

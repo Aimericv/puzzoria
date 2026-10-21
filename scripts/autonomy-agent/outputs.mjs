@@ -23,6 +23,20 @@ export function restoreNextEnv(root,baseline) {
 export function collectCandidate(root,baseline) {
   const files=[];
   if(readlinkSync(join(root,"node_modules"))!=="/opt/puzzoria-agent-deps/node_modules") throw new Error("Approved dependencies were replaced");
+  function audit(directory="") {
+    for(const name of readdirSync(join(root,directory))) {
+      const path=directory?`${directory}/${name}`:name,stat=lstatSync(join(root,path));
+      if(path==="node_modules") continue;
+      if(stat.isSymbolicLink()) throw new Error("Linked workspace paths are forbidden");
+      if(!directory && (/^\.next(?:-|\/|$)/.test(name) || [".tmp",".sites-runtime",".data","test-results","playwright-report",".agent-tests.json",".sandbox-write-test"].includes(name) || name.endsWith(".tsbuildinfo"))) continue;
+      if(stat.isDirectory()) audit(path);
+      else {
+        const memory=path.startsWith("agent/autonomy/memory/")&&MEMORY_FILES.includes(path.slice("agent/autonomy/memory/".length));
+        if(!baseline.has(path)&&!allowedCandidate(path)&&!memory) throw new Error(`Unapproved workspace file could affect validation: ${path}`);
+      }
+    }
+  }
+  audit();
   for(const [path,original] of baseline) {
     if(allowedCandidate(path)) continue;
     if(!safeFile(root,path,Math.max(1048576,original.length)).equals(original)) throw new Error(`Protected repository file changed: ${path}`);

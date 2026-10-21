@@ -32,7 +32,7 @@ export class Checkpoints {
   async download(pointer,destination) {
     const metadata=await this.api(`/actions/artifacts/${pointer.artifactId}`);
     if(metadata.expired || metadata.name!==pointer.name || metadata.workflow_run?.id!==Number(pointer.runId)) throw new Error("Latest checkpoint is expired or has unexpected provenance; never roll back");
-    const result=await this.client.downloadArtifact(pointer.artifactId,{path:destination,expectedHash:metadata.digest?.replace(/^sha256:/,""),findBy:{token:process.env.GITHUB_TOKEN,workflowRunId:Number(pointer.runId),repositoryOwner:"Aimericv",repositoryName:"puzzoria"}});
+    const result=await this.client.downloadArtifact(pointer.artifactId,{path:destination,expectedHash:metadata.digest,findBy:{token:process.env.GITHUB_TOKEN,workflowRunId:Number(pointer.runId),repositoryOwner:"Aimericv",repositoryName:"puzzoria"}});
     if(result.digestMismatch) throw new Error("Artifact digest verification failed");
     return metadata;
   }

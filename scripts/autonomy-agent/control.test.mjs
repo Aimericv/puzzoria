@@ -137,6 +137,17 @@ test("expired latest generations and checksum failures never roll back to an old
   await assert.rejects(f.create().restore(),/digest verification/);
 });
 
+test("artifact checksum keeps the sha256 prefix required by the pinned official SDK",async t=>{
+  const f=checkpointFixture(t);await f.create().flush();
+  const digest="sha256:"+"a".repeat(64);f.artifacts.get(10).digest=digest;
+  const original=f.client.downloadArtifact;
+  f.client.downloadArtifact=async(id,options)=>{
+    assert.equal(options.expectedHash,digest);
+    return original(id,options);
+  };
+  assert.equal((await f.create().restore()).tokens.refresh_token,"test-refresh");
+});
+
 test("checkpoint recovery rejects another repository, run or generation",()=>{
   const context={repository:REPOSITORY,runId:"2",phase:"autonomous-agent",generation:3};
   const artifact={id:10,name:"puzzoria-agent-auth-2-3",workflow_run:{id:2}};
@@ -159,6 +170,15 @@ test("candidate collection preserves large read-only content and rejects protect
   writeFileSync(join(root,"package.json"),"bad");assert.throws(()=>collectCandidate(root,baseline),/Protected/);
   writeFileSync(join(root,"package.json"),"{}");linkSync(join(root,"package.json"),join(root,"src/leak.ts"));
   assert.throws(()=>collectCandidate(root,baseline),/Unsafe/);
+});
+
+test("untracked npm or environment configuration cannot falsify independent checks",t=>{
+  const {root,baseline}=workspace(t);
+  for(const path of [".npmrc",".env.local","vitest.config.mjs"]) {
+    writeFileSync(join(root,path),"malicious validation override");
+    assert.throws(()=>collectCandidate(root,baseline),/Unapproved workspace file/);
+    rmSync(join(root,path));
+  }
 });
 
 test("only standard generated Next imports can be restored, not arbitrary protected code",t=>{

@@ -105,6 +105,9 @@ try {
     const {memory,plan}=collectMemory(work,state.continuityNonce);
     const files=collectCandidate(work,baseline);
     if(validation&&!state.wipSha&&!files.some(file=>/^(src|tests)\//.test(file.path))) throw new Error("Validation requires a real Puzzoria code/test contribution, not only a report");
+    // Remove model-created caches/configuration outputs before independent checks.
+    for(const name of readdirSync(work)) if(/^\.next(?:-|$)/.test(name)||[".tmp",".sites-runtime",".data","test-results","playwright-report",".agent-tests.json",".sandbox-write-test"].includes(name)||name.endsWith(".tsbuildinfo")) rmSync(join(work,name),{recursive:true,force:true});
+    mkdirSync(work+"/.tmp");chownSync(work+"/.tmp",uid,uid);
     for(const [name,args] of [["lint",["npm","run","lint"]],["typecheck",["npm","run","typecheck"]],["unit",["npm","test","--","--maxWorkers=2","--reporter=json","--outputFile=.agent-tests.json"]],["build",["npm","run","build"]]]) {
       sandbox(args,240000);evidence.commands.push({name,status:"passed"});
     }
@@ -136,14 +139,15 @@ try {
     if(baseline) {
       restoreNextEnv(work,baseline);
       const files=collectCandidate(work,baseline);
-      const outputMemory=collectMemory(work,state.continuityNonce);
-      for(const content of [...files.map(file=>file.content ?? ""),...Object.values(outputMemory.memory)])
+      let partialMemory=state.memory;
+      try {partialMemory=collectMemory(work,state.continuityNonce).memory;} catch {evidence.partialMemoryRejected=true;}
+      for(const content of [...files.map(file=>file.content ?? ""),...Object.values(partialMemory)])
         if(secrets.some(secret=>typeof secret==="string"&&secret.length>0&&content.includes(secret))) throw new Error("Sensitive output rejected",{cause:error});
       if(files.length) {
         const sha=await stageCandidate(api,evidence.sourceCommit,files,"codex/agent-wip",state.wipBranchHead ?? null);
         state.wipSha=sha;state.wipBranchHead=sha;evidence.unverifiedSnapshot=sha;
       }
-      state.memory=outputMemory.memory;
+      state.memory=partialMemory;
     }
   } catch(snapshotError) {evidence.snapshotError=redact(snapshotError.message,secrets);}
   process.exitCode=1;
