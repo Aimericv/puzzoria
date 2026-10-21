@@ -132,7 +132,8 @@ La [PR d'infrastructure #4](https://github.com/Aimericv/puzzoria/pull/4)
 reste en brouillon, sans activation permanente.
 
 Validation locale du 21 octobre 2026 : 18 tests du superviseur, 345 tests
-applicatifs dans 26 fichiers, lint, types et build réussis. Les validations de
+applicatifs dans 26 fichiers sur la branche d'infrastructure (incluant les
+tests historiques du pilote), lint, types et build réussis. Les validations de
 contenu couvrent 92 challenges programmés, 32 articles multilingues, les jeux
 sociaux et leurs quatre langues. Aucun parcours Playwright n'est présenté
 comme exécuté pour cette livraison.
@@ -143,10 +144,8 @@ officiel était incorrect. Le correctif conserve le préfixe `sha256:` attendu
 par la version verrouillée et possède un test de régression. Aucun retour
 vers un ancien login ni désactivation de la vérification n'a été effectué.
 Le [nouvel essai](https://github.com/Aimericv/puzzoria/actions/runs/39623126545)
-a franchi le renouvellement natif de connexion Plus, la sauvegarde chiffrée,
-les canaris et l'admission financière avant le démarrage du modèle. Les
-résultats de développement et de reprise seront ajoutés après réception des
-preuves.
+a franchi la restauration native de connexion Plus, la sauvegarde chiffrée,
+les canaris et l'admission financière avant le démarrage du modèle.
 
 Ce nouvel essai a réellement développé une correction des brouillons locaux,
 mais les tests indépendants ont révélé des incompatibilités entre le sandbox
@@ -154,8 +153,46 @@ natif et les outils applicatifs (caches en lecture seule, serveurs locaux et
 racine Turbopack). Le code et la mémoire ont été sauvegardés sur
 `codex/agent-wip`, sans publication présentée comme validée. Le vérificateur
 sans réseau décrit ci-dessus a ensuite passé localement les 341 tests de ce
-travail, lint, types, contenus et build standard. La reprise sur runners
-indépendants reste à confirmer dans la nouvelle exécution.
+travail, lint, types, contenus et build standard.
+
+La [validation finale réelle](https://github.com/Aimericv/puzzoria/actions/runs/39625255374),
+sur le superviseur `20ae3e330a9b4bacd251e195a93e8d9401278305`, a ensuite
+réussi sur **deux runners indépendants** :
+
+| Session | Tests unitaires | Autres contrôles indépendants | Résultat |
+| --- | --- | --- | --- |
+| Première, reprenant l'instantané interrompu | 343 réussis, 0 échec, 0 ignoré | Isolation, lint, types, contenus, build standard | `verified`, étape `success` |
+| Seconde, reprenant le code et la mémoire de la première | 345 réussis, 0 échec, 0 ignoré | Isolation, lint, types, contenus, build standard | `verified`, étape `success` |
+
+Les 18 tests de contrôle ont également passé avant chaque admission. La
+seconde session utilise un thread différent, annonce une session précédente
+validée et part exactement du commit publié par la première. Le nonce de
+mémoire est conservé et les commits se suivent sans mise à jour forcée.
+Le résultat final est `25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a`, dans la
+[PR de travail #5](https://github.com/Aimericv/puzzoria/pull/5), en brouillon.
+
+L'agent a choisi de corriger les brouillons après refus de stockage local,
+puis les caches de démarrage et de résultat lors d'un changement de
+propriétaire invité/compte. Trois fichiers de tests ajoutent sept régressions
+au produit de départ ; aucune roadmap n'a fixé ces missions. La prochaine
+mission conservée concerne une réponse tardive de préparation de résultat.
+Aucun effet sur le trafic ou la rétention n'est présenté comme mesuré.
+
+Les observations natives Plus sont restées admissibles avant/après chaque
+session : fenêtre courte 69 → 72 %, puis 73 → 77 % utilisés ; fenêtre
+hebdomadaire 30 → 30 %, puis 31 → 31 %. Ces instantanés peuvent inclure des
+usages concurrents et ne constituent pas une mesure exclusive de coût. Le
+dernier checkpoint confirmé est l'artifact `12357686383`, génération 3,
+avec expiration observée au 19 janvier 2027. Son pointeur est dans
+[l'état persistant](https://github.com/Aimericv/puzzoria/blob/codex/agent-state/agent/autonomy/state.json).
+
+Les pauses/reprises de quotas et le filtrage des messages ont été testés
+automatiquement, sans épuiser volontairement les quotas ni usurper l'auteur
+du propriétaire. Le dialogue réel par commentaire du propriétaire reste à
+essayer. Le cron permanent n'a volontairement pas été activé. Le compteur
+mensuel de facturation Actions du compte n'a pas été lu ; l'absence de moyen
+de paiement reste la déclaration du propriétaire. Aucun achat, ajout de
+moyen de paiement, merge ou déploiement n'a été effectué.
 
 Le raccordement aux métriques réelles et le déploiement sécurisé constituent
 une étape ultérieure, explicitement hors de cette activation.

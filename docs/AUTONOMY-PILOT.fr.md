@@ -130,11 +130,12 @@ justifiera un stockage durable à écriture atomique avant d'étendre l'autonomi
 
 ## Enveloppe gratuite
 
-Avant allocation d'un runner, l'opérateur vérifie dans la [facturation GitHub](https://github.com/settings/billing)
-un budget Actions de **0 $ de dépenses payantes**, avec arrêt de consommation
-activé. Une alerte seule ne suffit pas : [documentation du blocage GitHub](https://docs.github.com/en/billing/how-tos/set-up-budgets).
-Ce réglage externe est le plafond réel. Les variables d'activation ci-dessous
-ne sont que des verrous de lancement, jamais un plafond financier.
+Le budget Actions de **0 $ de dépenses payantes** envisagé pour ce pilote
+**n'a pas été créé**. Le propriétaire a confirmé n'avoir aucun moyen de
+paiement enregistré ; cela reste une déclaration, pas une vérification par
+API de facturation. Les variables d'activation ne constituent jamais un
+plafond financier. Le protocole courant est dans
+[AUTONOMY-AGENT.fr.md](AUTONOMY-AGENT.fr.md), sans ajout de moyen de paiement.
 
 Le pilote utilise des runners Linux standards inclus dans le forfait GitHub,
 aucun runner plus grand, service, cache payant ou machine supplémentaire. Le
@@ -175,10 +176,12 @@ connecté au dépôt privé :
    `node scripts/autonomy-pilot/setup.mjs retire-seed`. Conserver la clé et le
    **dernier** checkpoint chiffré tant que cette connexion reste utile.
 
-Les modes de setup sont des commandes d'opérateur de confiance, pas des outils
-du modèle. La variable `PUZZORIA_FREE_ACTIONS_VERIFIED=true` autorise la CI ;
-`PUZZORIA_PILOT_ENABLED=true` autorise le pilote. Leur absence saute les jobs
-avant allocation. `setup.mjs disable` referme ces deux verrous ; annuler à part
+Les modes de setup ci-dessus décrivent la procédure historique, à ne pas
+relancer avec le seed retiré. `PUZZORIA_FREE_ACTIONS_VERIFIED` est obsolète :
+elle n'autorise plus la CI ni le pilote. Les workflows historiques livrés
+demandent `PUZZORIA_ACTIONS_NO_PAYMENT_METHOD`, distinct du verrou
+`PUZZORIA_PILOT_ENABLED`, et restent désactivés. `setup.mjs disable` ferme les
+anciens verrous ; annuler à part
 les jobs déjà lancés. Les supprimer ne remplace pas la révocation de l'auth si
 elle est compromise. Le pilote ne peut ni administrer Secrets/variables/budget,
 ni modifier ses workflows par son canal de publication.

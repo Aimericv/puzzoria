@@ -1,5 +1,12 @@
 # Test ponctuel GitHub Actions → nouvel environnement Codex Cloud
 
+> Archive d'un test désormais terminé : aucun lancement de tâche Cloud n'a
+> réussi. Ne pas relancer cette procédure ni restaurer ses anciens checkpoints.
+> Le système courant et les protections financières corrigées sont décrits
+> dans [AUTONOMY-AGENT.fr.md](AUTONOMY-AGENT.fr.md). Le budget Actions à 0 $
+> n'a pas été créé ; le propriétaire a déclaré n'avoir aucun moyen de paiement.
+> Le pointeur d'authentification courant est sur `codex/agent-state`.
+
 Ce test réutilise le runtime Codex 0.163.0, le contrôle Plus/quota inclus,
 le protocole natif de renouvellement et le chiffrement du pilote existant.
 Il ne relance pas la preuve des deux sessions et n'ajoute ni ordonnanceur,
@@ -19,17 +26,17 @@ ni interface, ni déploiement. Les fichiers du pilote restent inchangés.
   par ancien environnement ou par identifiant de la machine d'onboarding.
 - Vérifier que le nouvel environnement est publié et utilisable pour de
   nouvelles tâches. Un brouillon enregistré ne démontre pas cette publication.
-- Conserver le blocage externe des dépenses Actions à zéro déjà confirmé par
-  le propriétaire, et la variable `PUZZORIA_FREE_ACTIONS_VERIFIED=true`.
-  Lire les minutes incluses disponibles si l'accès à la facturation le permet.
+- La condition financière initialement annoncée n'a pas été vérifiée : aucun
+  budget Actions à 0 $ n'a été créé. `PUZZORIA_FREE_ACTIONS_VERIFIED` est
+  obsolète et n'autorise plus ce workflow. Ne pas réactiver cet ancien test.
 - Vérifier que l'artifact `pilot-39465013048-1-session-2` (ID `12285785640`)
   est encore disponible et reste le dernier checkpoint. Le superviseur refuse
   tout checkpoint plus ancien qu'un artifact d'authentification ultérieur.
   Le secret existant `CODEX_PILOT_VAULT_KEY` reste uniquement dans Actions.
 - L'API GitHub est bloquée depuis la machine de ce chat. Le runner publie donc
   une copie expurgée de ses preuves dans une branche dédiée, récupérable par
-  le proxy Git existant. L'ajout d'`api.github.com` est enregistré dans les
-  paramètres réseau mais ne bloque plus cette voie de retour. Ne pas contourner
+  le proxy Git existant. Cette voie de retour ne demande pas d'accès API
+  depuis la machine Cloud. Ne pas contourner
   le proxy de la machine : le runner utilise son propre accès GitHub normal.
 
 Lancer une seule fois en poussant la branche `codex/cloud-handoff-smoke` avec
