@@ -1,0 +1,23 @@
+name: One-off CI visibility
+on:
+  push:
+    branches: [codex/ci-inspection]
+permissions: {}
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: write
+      actions: read
+      checks: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: node scripts/inspect-ci.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
