@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 16,
+  "generation": 17,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -21,7 +21,7 @@
     "expiresAt": "2027-01-19T15:23:41Z",
     "digest": "20d17df100d815efe5eb652e97e5394b1c701176573b4238b5652ad3f9842b6b"
   },
-  "lastMessageId": 6319471041,
+  "lastMessageId": 6319802370,
   "completedSessions": 1,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
