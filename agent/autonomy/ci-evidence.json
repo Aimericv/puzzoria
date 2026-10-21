@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "runId": "39632711143",
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632711143",
+  "sha": "61f3b63f654d0402824fc1aa0e6aa5361b349337",
+  "pr": {
+    "number": 4,
+    "head": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+    "base": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+    "mergeable": true,
+    "draft": true
+  },
+  "jobs": [
+    {
+      "name": "inspect",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/ci-proof.mjs inspect",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": null
+        }
+      ]
+    },
+    {
+      "name": "checks",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": null
+        },
+        {
+          "name": "Verify funding declaration and require current main as an ancestor",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+          "conclusion": null
+        },
+        {
+          "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run lint",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run typecheck",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run content:validate",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run content:social",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run seo:check",
+          "conclusion": null
+        },
+        {
+          "name": "Run npm run build",
+          "conclusion": null
+        },
+        {
+          "name": "Preserve sanitized test counts",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "conclusion": null
+        }
+      ]
+    }
+  ],
+  "inspections": {
+    "webhooks": {
+      "status": "unavailable",
+      "httpStatus": 403
+    },
+    "installations": {
+      "status": "unavailable",
+      "httpStatus": 404
+    },
+    "deployments": {
+      "status": "observed",
+      "result": []
+    },
+    "environments": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "names": []
+      }
+    },
+    "mainChecks": {
+      "status": "observed",
+      "result": {
+        "totalCount": 0,
+        "checks": []
+      }
+    },
+    "mainStatuses": {
+      "status": "observed",
+      "result": {
+        "state": "pending",
+        "statuses": []
+      }
+    },
+    "communication": {
+      "status": "observed",
+      "result": {
+        "comments": 7,
+        "ownerMessageIds": []
+      }
+    },
+    "variables": {
+      "status": "unavailable",
+      "httpStatus": 403
+    }
+  },
+  "reports": [],
+  "productionAccess": false
+}
