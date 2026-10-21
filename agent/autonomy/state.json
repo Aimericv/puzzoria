@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 13,
-  "status": "running",
+  "generation": 14,
+  "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
-  "codeSha": null,
+  "codeSha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
   "checkpoint": {
     "artifactId": 12357150877,
     "runId": "39625255374",
@@ -22,7 +22,7 @@
     "digest": "20d17df100d815efe5eb652e97e5394b1c701176573b4238b5652ad3f9842b6b"
   },
   "lastMessageId": 6319471041,
-  "completedSessions": 0,
+  "completedSessions": 1,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
@@ -30,18 +30,18 @@
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
   },
   "memory": {
-    "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : 37aa7654be9393173c4d5c7d3446cc0832bb9818 ; aucun accès Git.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus.\n\nContribution choisie : empêcher un ancien brouillon local de masquer la dernière écriture conservée en mémoire lorsque localStorage refuse une écriture. src/lib/browser-storage.ts suit les clés non persistées, garde valeur et horodatage cohérents, et retire ce statut après sauvegarde réussie ou effacement du compte. Aucun changement des clés, des preuves serveur ou du stockage SQLite.\n\ntests/browser-storage.test.ts ajoute trois cas : échec de la valeur, échec du timestamp, isolation invité/comptes et effacement. Les trois cas ont échoué avant correction et passé après correction. Le double de stockage final vérifie aussi l'effacement disque ; ces tests passent également dans les deux exécutions générales.\n\nContrôles observés : lint et typecheck terminés avec code 0. Validation contenu via node --import tsx scripts/validate-content.ts : 92 défis planifiés et 32 articles multilingues validés. La commande npm content:validate échoue sur le socket IPC de tsx (EPERM). Le lancement npm test par défaut échoue sur le cache Vite non inscriptible ; le chargeur runner et un répertoire de données Vitest sous .tmp permettent les tests ciblés. Deux exécutions générales (parallélisme par défaut, puis --maxWorkers 2) : 340 tests réussis, 1 échec sur 341 dans 26 fichiers. Dans les deux cas, tests/operations.test.ts:55 dépasse 5 s sur le test de sauvegarde quotidienne/purge/indisponibilité. Cause non établie ; ce test et son délai n’ont pas été modifiés. Tous les tests de la contribution passent. Commande générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner [--maxWorkers 2].\n\nBuild bloqué par Turbopack : le lien node_modules pointe hors de la racine du projet. E2E échoue au démarrage du serveur web, code 1 ; aucun parcours navigateur validé. Aucune protection/configuration modifiée pour contourner ces limites.\n\nLimites : un brouillon en mémoire reste perdu si l'onglet ferme avant une sauvegarde réussie ; ce correctif ne promet aucune persistance durable en cas de quota plein. Aucune métrique utilisateur disponible ; aucun effet de rétention mesuré. Aucun réseau externe, publication, merge ni déploiement effectué.\n\nProchaine mission choisie : examiner la reprise des brouillons lorsque localStorage est entièrement inaccessible, notamment les réservations de nouvelles parties et leurs erreurs visibles, puis corriger uniquement un défaut reproductible.\n",
-    "DECISIONS.md": "# Décisions — 21 octobre 2026\n\n- Privilégier une correction limitée de fiabilité des brouillons plutôt qu'une nouveauté : la lecture du code montre une incohérence directe entre le fallback mémoire et la priorité donnée au disque ; trois tests reproduisent la régression.\n- Mémoriser uniquement les clés dont l'écriture complète a échoué. Donner systématiquement priorité à la mémoire empêcherait la lecture des changements d'un autre onglet après une sauvegarde normale.\n- Traiter valeur et horodatage comme une paire pour la lecture locale après échec partiel. Retirer le marqueur après réussite complète et lors de clearAccountStorage, en conservant les namespaces existants.\n- Ne pas modifier les outils ni dépendances face aux restrictions du sandbox. Utiliser le chargeur Vitest runner, des données temporaires locales et node --import tsx pour la validation contenu ; consigner séparément les commandes standard bloquées.\n- Aucun indicateur de trafic, de rétention, de publication ni de production disponible. La valeur produit reste une hypothèse de fiabilité, pas un résultat utilisateur mesuré.\n",
-    "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n",
-    "PLAN.json": "{\n  \"summary\": \"Correction du fallback des brouillons locaux après échec de localStorage ; tests de régression et limites sandbox documentés.\",\n  \"nextMission\": \"Examiner la reprise des brouillons lorsque localStorage est entièrement inaccessible, notamment les réservations de nouvelles parties et leurs erreurs visibles ; corriger un défaut reproductible.\",\n  \"blockedReason\": null,\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"\n}\n"
+    "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement au stockage local et aux réservations. Après un changement de compte, il pouvait retourner le run déjà démarré par le propriétaire précédent. La clé utilise maintenant storageKey, capturée avant la requête ; les appels du même propriétaire restent dédupliqués. Le nettoyage d'une promesse rejetée ne retire que cette même promesse.\n\ntests/play-start.test.ts ajoute deux cas : passage invité → compte A → compte B → invité, avec localStorage disponible ou entièrement bloqué. Vérification des runs distincts, déduplication et réutilisation du cache invité. Les deux tests échouent avant correction (guest-run reçu pour le compte A), puis passent après correction. Les 38 tests ciblés de play-start, play-reservation, browser-storage et engagement passent.\n\nContrôles terminés : npm run lint et npm run typecheck, codes 0 ; node --import tsx scripts/validate-content.ts, code 0, 92 défis planifiés et 32 articles multilingues validés. Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test et délai inchangés. Tous les tests de la contribution passent. Commande : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner.\n\nBuild et E2E avec serveur local laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, protection, instruction ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l'agent.\n\nLimites : tests unitaires avec fetch simulé, sans preuve sur navigateur physique ni métrique utilisateur. Ce correctif concerne le cache starts ; le cache des completions et les écritures après une réponse réseau tardive lors d'un changement de compte restent à examiner. Le fallback mémoire n'offre toujours aucune durabilité après fermeture d'onglet.\n\nProchaine mission choisie : examiner l'isolation du cache des résultats terminés entre invité et comptes dans play-client, reproduire un éventuel affichage du résultat d'un autre propriétaire puis corriger dans un périmètre limité.\n",
+    "DECISIONS.md": "# Décisions — 21 octobre 2026\n\n- Privilégier une correction limitée de fiabilité des brouillons plutôt qu'une nouveauté : la lecture du code montre une incohérence directe entre le fallback mémoire et la priorité donnée au disque ; trois tests reproduisent la régression.\n- Mémoriser uniquement les clés dont l'écriture complète a échoué. Donner systématiquement priorité à la mémoire empêcherait la lecture des changements d'un autre onglet après une sauvegarde normale.\n- Traiter valeur et horodatage comme une paire pour la lecture locale après échec partiel. Retirer le marqueur après réussite complète et lors de clearAccountStorage, en conservant les namespaces existants.\n- Ne pas modifier les outils ni dépendances face aux restrictions du sandbox. Utiliser le chargeur Vitest runner, des données temporaires locales et node --import tsx pour la validation contenu ; consigner séparément les commandes standard bloquées.\n- Aucun indicateur de trafic, de rétention, de publication ni de production disponible. La valeur produit reste une hypothèse de fiabilité, pas un résultat utilisateur mesuré.\n\n## Session sur source 8605eabe — démarrages par propriétaire\n\n- Poursuivre l'inspection de la reprise sans stockage durable a révélé un défaut distinct : starts réutilisait un run pour tous les propriétaires du même défi. Deux tests reproduisent directement ce comportement, avec et sans accès à localStorage.\n- Réutiliser storageKey pour aligner le cache mémoire sur les namespaces existants, sans changer les clés persistées ni l'autorité serveur. Conserver la déduplication d'une même partie pour un même propriétaire.\n- Limiter cette contribution aux démarrages ; examiner séparément le cache results et les réponses tardives pour éviter d'étendre une petite correction sans preuve ciblée.\n- L'impact produit attendu est une reprise plus fiable après changement de compte. Aucun trafic ni gain de rétention observé ; aucune publication revendiquée.\n",
+    "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n\n## Cache de démarrage lors d'un changement de propriétaire\n\nHypothèse : beginPlay retourne la promesse du précédent propriétaire pour le même défi, indépendamment du namespace du run local.\n\nProtocole : mémoriser des runs différents pour invité, compte A et compte B ; démarrer le même défi avec chacun, revenir à l'invité et vérifier la déduplication. Exécuter avec stockage disponible puis avec getItem/setItem levant SecurityError. fetch simulé vérifie l'action start et renvoie le run demandé.\n\nRésultats observés : les deux tests échouent avant correction (guest-run au lieu de start-a-run), puis passent après isolation du cache via storageKey. Les quatre fichiers ciblés passent : 38 tests. Lint, typecheck et validation contenu passent. Suite générale : 342 tests réussis sur 343 ; un échec de délai de 5 s dans operations.test.ts:55, déjà signalé dans la mémoire précédente. Cause non établie ; aucune assertion ni limite modifiée. Détails dans STATE.md.\n\nPortée : preuve unitaire de la sélection du run côté client ; aucun résultat de production, aucune mesure de rétention, aucun navigateur réel testé dans cette session.\n",
+    "PLAN.json": "{\n  \"summary\": \"Cache de démarrage isolé par propriétaire ; deux régressions reproduites puis corrigées, y compris sans localStorage.\",\n  \"nextMission\": \"Examiner l'isolation du cache des résultats terminés entre invité et comptes dans play-client ; reproduire un éventuel affichage du résultat d'un autre propriétaire et corriger dans un périmètre limité.\",\n  \"blockedReason\": null,\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"\n}\n"
   },
   "controlSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
   "pendingMessages": [],
-  "retryCount": 2,
+  "retryCount": 0,
   "blockedReason": null,
   "lastSession": {
     "schemaVersion": 1,
-    "runId": "39623126545",
+    "runId": "39625255374",
     "job": "first",
     "mode": "validation",
     "funding": {
@@ -49,9 +49,13 @@
       "source": "owner-declaration",
       "verifiedAt": "2026-10-21T14:33:40.997Z"
     },
-    "startedAt": "2026-10-21T15:10:23.567Z",
-    "status": "failed",
+    "startedAt": "2026-10-21T15:26:49.869Z",
+    "status": "verified",
     "commands": [
+      {
+        "name": "isolation",
+        "status": "passed"
+      },
       {
         "name": "lint",
         "status": "passed"
@@ -59,10 +63,22 @@
       {
         "name": "typecheck",
         "status": "passed"
+      },
+      {
+        "name": "unit",
+        "status": "passed"
+      },
+      {
+        "name": "content",
+        "status": "passed"
+      },
+      {
+        "name": "build",
+        "status": "passed"
       }
     ],
     "productionDeployment": false,
-    "sourceCommit": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+    "sourceCommit": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
     "isolationCanaries": true,
     "quotaBefore": {
       "status": "ready",
@@ -70,12 +86,12 @@
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 57,
+            "usedPercent": 69,
             "windowDurationMins": 300,
-            "resetsAt": 1792607915
+            "resetsAt": 1792607914
           },
           "secondary": {
-            "usedPercent": 28,
+            "usedPercent": 30,
             "windowDurationMins": 10080,
             "resetsAt": 1793118249
           }
@@ -84,71 +100,51 @@
     },
     "modelCommands": [
       {
-        "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
+        "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json && rg --files agent'",
+        "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls -a'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat agent/autonomy/memory/* && cat package.json && rg --files src/lib tests | head -90 && ls node_modules/next/dist/docs'",
+        "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/lib | head -55; ls node_modules/next/dist/docs/01-app/03-api-reference/02-components'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat src/lib/share-client.ts tests/share-client.test.ts src/lib/smooth-scroll.ts src/lib/replay-scroll.ts src/lib/browser-storage.ts && cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"cat docs/RETENTION.md && rg --files node_modules/next/dist/docs | rg 'use-client|client-components' && rg -n 'readLocal|writeLocal|localUpdated' tests\"",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md && cat vitest.config.ts && rg -n 'browser-storage|stubGlobal\\\\(\\\"localStorage' tests\"",
+        "command": "/bin/bash -lc 'cat src/lib/browser-storage.ts tests/browser-storage.test.ts; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat docs/RETENTION.md; cat src/lib/new-play.ts'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"cat > tests/browser-storage.test.ts <<'EOF'\nimport { afterEach, beforeEach, describe, expect, it, vi } from \\\"vitest\\\";\nimport { clearAccountStorage, localUpdated, readLocal, setStorageUser, writeLocal } from \\\"../src/lib/browser-storage\\\";\n\nconst key = \\\"dailygrid:game:storage-regression\\\";\nlet disk: Record<string, string>;\nlet failOn: string | undefined;\nbeforeEach(() => {\n  disk = {};\n  failOn = undefined;\n  setStorageUser(null);\n  vi.stubGlobal(\\\"localStorage\\\", {\n    getItem:",
+        "command": "/bin/bash -lc \"rg -n 'localStorage|reserve' src/lib/run* src/components/*Player* src/lib/*client*; rg --files src/lib | rg 'session|practice|run'; cat src/lib/run-client.ts\"",
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/browser-storage.test.ts'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"sed -n '9670,9705p' node_modules/vitest/dist/chunks/index.DpLw24bj.js && node --version\"",
+        "command": "/bin/bash -lc 'cat src/lib/play-client.ts; cat tests/play-client.test.ts; cat vitest.config.ts'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/browser-storage.test.ts'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/browser-storage.test.ts'",
+        "command": "/bin/bash -lc \"rg -n 'beginPlay|reservePlay|rememberRun' tests; cat src/lib/types.ts | head -100; cat tests/browser-storage.test.ts | head -8\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'npm run content:validate'",
+        "command": "/bin/bash -lc \"cat tests/play-reservation.test.ts; sed -n '130,180p' tests/engagement.test.ts\"",
+        "exitCode": 0
+      },
+      {
+        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts'",
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc 'npm run build'",
-        "exitCode": 1
+        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
+        "exitCode": 0
       },
       {
         "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat tests/browser-storage.test.ts && cat src/lib/browser-storage.ts'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm run test:e2e'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/browser-storage.test.ts'\ns=open(p).read().replace('vi.stubGlobal(\\\"localStorage\\\", {\\\\n    getItem: (name: string) => disk[name] ?? null,\\\\n    setItem: (name: string, value: string) => {','vi.stubGlobal(\\\"localStorage\\\", Object.defineProperties(disk, {\\\\n    getItem: { value: (name: string) => disk[name] ?? null },\\\\n    setItem: { value: (name: string, value: string) => {').replace('disk[name] = value;\\\\n    },\\\\n    removeItem: (name: string) => { dele",
+        "command": "/bin/bash -lc \"sed -n '103,193p' src/lib/play-client.ts; cat tests/play-start.test.ts\"",
         "exitCode": 0
       },
       {
@@ -156,11 +152,11 @@
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"ps -eo pid,etime,pcpu,args | rg '(vitest|eslint|tsc|next|node)' | head -45\"",
+        "command": "/bin/bash -lc 'npm run lint'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"rg -n 'timeout|setTimeout|sleep|100000|60000' tests | head -40 && ls -la .tmp | head -15\"",
+        "command": "/bin/bash -lc \"ps -eo pid,etime,comm,args | rg 'vitest|eslint|tsc|next typegen'\"",
         "exitCode": 0
       },
       {
@@ -168,19 +164,15 @@
         "exitCode": 1
       },
       {
-        "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner --maxWorkers 2'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 37aa7654be9393173c4d5c7d3446cc0832bb9818 ; aucun accès Git.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus.\n\nContribution choisie : empêcher un ancien brouillon local de masquer la dernière écriture conservée en mémoire lorsque localStorage refuse une écriture. src/lib/browser-storage.ts suit les clés non persis",
+        "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement a",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"python3 - <<'PY'\np='agent/autonomy/memory/STATE.md'\ns=open(p).read().replace('Les trois cas ont échoué avant correction et passé après correction (avant amélioration du double de stockage pour vérifier aussi l\\\\'effacement disque).','Les trois cas ont échoué avant correction et passé après correction. Le double de stockage final vérifie aussi l\\\\'effacement disque ; ces tests passent également dans les deux exécutions générales.').replace('Tests généraux en cours au moment de cett",
+        "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale en cours au moment de cette rédaction, résultat à compléter.', 'Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test e",
         "exitCode": 0
       }
     ],
-    "threadId": "01a15f03-bef6-7413-b962-efd541de194a",
+    "threadId": "01a15f12-afd8-7db0-8dd5-7aa80b8d4282",
     "model": "gpt-6.1-sol",
     "previousCompletedSessions": 0,
     "quotaAfter": {
@@ -189,20 +181,36 @@
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 61,
+            "usedPercent": 72,
             "windowDurationMins": 300,
-            "resetsAt": 1792607915
+            "resetsAt": 1792607914
           },
           "secondary": {
-            "usedPercent": 29,
+            "usedPercent": 30,
             "windowDurationMins": 10080,
             "resetsAt": 1793118249
           }
         }
       ]
     },
-    "error": "Command failed: /opt/hostedtoolcache/node/24.15.0/x64/bin/node /opt/puzzoria-pilot/readonly/node_modules/@openai/codex/bin/codex.js sandbox --include-managed-config -P pilot -C /opt/puzzoria-pilot/work -- npm test -- --maxWorkers=2 --reporter=json --outputFile=.agent-tests.json",
-    "unverifiedSnapshot": "8605eabe6d516ca2ea7a34e8184568d4b30f1089"
+    "verifier": {
+      "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+      "network": "none",
+      "credentials": false,
+      "dependencies": "read-only",
+      "uid": 3050
+    },
+    "tests": {
+      "passed": 343,
+      "failed": 0,
+      "skipped": 0
+    },
+    "publication": {
+      "sha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+      "url": "https://github.com/Aimericv/puzzoria/pull/5",
+      "number": 5
+    },
+    "toolCommands": 18
   },
   "validation": {
     "39620986831": {
@@ -407,6 +415,6 @@
     }
   },
   "infrastructurePR": "https://github.com/Aimericv/puzzoria/pull/4",
-  "wipSha": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
+  "wipSha": null,
   "wipBranchHead": "8605eabe6d516ca2ea7a34e8184568d4b30f1089"
 }
