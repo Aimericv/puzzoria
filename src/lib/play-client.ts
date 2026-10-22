@@ -196,6 +196,7 @@ export function rememberCompletion(completion: Completion) {
     results.set(completionKey(completion.challengeId), completion);
 }
 export async function prepareCompletedPlay(challenge: PublicChallenge) {
+  const ownerKey = completionKey(challenge.id);
   let completion = authoritativeCompletion(challenge.id);
   let game: Record<string, unknown> | null = null,
     session: Record<string, unknown> | null = null;
@@ -233,6 +234,9 @@ export async function prepareCompletedPlay(challenge: PublicChallenge) {
   if (!response.ok) return;
   const data = await response.json(),
     result = data.result;
+  // Restoration is optional: discard a late response after a profile switch
+  // rather than writing its draft or emitting sync events for the new owner.
+  if (completionKey(challenge.id) !== ownerKey) return;
   if (!result?.completion) return;
   rememberCompletion(result.completion);
   rememberRun(challenge, data.runId);
