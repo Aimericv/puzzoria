@@ -1,0 +1,77 @@
+{
+  "observedAt": "2026-10-22T19:04:15.098Z",
+  "main": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+  "pr": {
+    "merged": true,
+    "url": "https://github.com/Aimericv/puzzoria/pull/4"
+  },
+  "permanentSwitch": false,
+  "runs": [],
+  "jobs": [],
+  "ownerMessages": [],
+  "state": {
+    "generation": 22,
+    "status": "ready",
+    "completedSessions": 2,
+    "codeSha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
+    "lastRun": {
+      "id": "39625255374",
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
+    },
+    "lastMessageId": 6319802370,
+    "pendingMessageIds": [],
+    "nextEligibleAt": null,
+    "lastSession": {
+      "runId": "39625255374",
+      "mode": "validation",
+      "status": "verified",
+      "sourceCommit": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+      "tests": {
+        "passed": 345,
+        "failed": 0,
+        "skipped": 0
+      },
+      "publication": {
+        "sha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
+        "url": "https://github.com/Aimericv/puzzoria/pull/5",
+        "number": 5
+      },
+      "quotaBefore": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 73,
+              "windowDurationMins": 300,
+              "resetsAt": 1792607914
+            },
+            "secondary": {
+              "usedPercent": 31,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793118249
+            }
+          }
+        ]
+      },
+      "quotaAfter": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 77,
+              "windowDurationMins": 300,
+              "resetsAt": 1792607914
+            },
+            "secondary": {
+              "usedPercent": 31,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793118249
+            }
+          }
+        ]
+      }
+    }
+  }
+}
