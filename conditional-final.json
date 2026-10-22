@@ -1,0 +1,107 @@
+{
+  "source": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+  "mainRun": "https://github.com/Aimericv/puzzoria/actions/runs/39632711143",
+  "priorComplement": "https://github.com/Aimericv/puzzoria/actions/runs/39829393874",
+  "retryRun": "https://github.com/Aimericv/puzzoria/actions/runs/39831867798",
+  "allConditionalTestsPassed": true,
+  "counts": [
+    "desktop : 2 réussis, 0 échecs, 0 ignorés.",
+    "mobile : 2 réussis, 0 échecs, 0 ignorés.",
+    "android : 2 réussis, 0 échecs, 0 ignorés.",
+    "iphone-webkit : 2 réussis, 0 échecs, 0 ignorés."
+  ],
+  "reports": [
+    {
+      "project": "android",
+      "sha": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+      "reports": [
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-22T18:13:47.309Z",
+            "duration": 17992.342,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "desktop",
+      "sha": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+      "reports": [
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-22T18:24:17.688Z",
+            "duration": 19823.117000000002,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "mobile",
+      "sha": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+      "reports": [
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-22T18:13:50.883Z",
+            "duration": 15193.589,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    },
+    {
+      "project": "iphone-webkit",
+      "sha": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+      "reports": [
+        {
+          "name": "full",
+          "stats": {
+            "startTime": "2026-10-22T18:30:58.217Z",
+            "duration": 23574.93,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "failures": [],
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "name": "Starter stats (iphone-webkit)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "evidence",
+      "status": "in_progress",
+      "conclusion": null
+    }
+  ],
+  "communication": {
+    "reportUrl": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6348270601"
+  },
+  "activation": false
+}
