@@ -1,0 +1,17 @@
+{
+  "main": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+  "prMerged": true,
+  "mergeCommit": "6ab3d44cbc2d1f4b1c1b1a173d9c0d9d3916908b",
+  "authorizationRecorded": true,
+  "scheduleUtc": "17 */6 * * *",
+  "permanentSwitch": false,
+  "observedFlag": "",
+  "configuredAt": "2026-10-22T19:00:14.737Z",
+  "productionDeployment": false,
+  "automaticDevelopmentMerges": false,
+  "variableError": {
+    "httpStatus": 403,
+    "message": "GitHub PATCH /actions/variables/PUZZORIA_AGENT_ENABLED returned 403"
+  },
+  "reportUrl": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6348865745"
+}
