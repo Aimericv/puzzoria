@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "permanentActivationApproved": false,
+  "permanentActivationApproved": true,
   "funding": {
     "mode": "no-payment-method",
     "ownerDeclaration": "Le propriétaire a confirmé dans cette conversation : Aucun moyen de paiement enregistré.",
@@ -18,5 +18,20 @@
       "phase": "cloud-handoff",
       "environmentId": "89bae15a-56cf-4cf4-8600-f7e513ebb785~cecfg_6ad805c740c481a2b04e75ffcac27054"
     }
+  },
+  "activationAuthorization": {
+    "approvedAt": "2026-10-22T18:57:16.039515Z",
+    "source": "Explicit owner authorization in this Codex conversation after full CI and manual deployment confirmation",
+    "ciRunId": "39632711143",
+    "validatedHead": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+    "conditionalBrowserRunId": "39831867798",
+    "productionDeploymentAllowed": false,
+    "futureAutomaticMergesAllowed": false,
+    "externalDeploymentEvidence": {
+      "source": "owner-confirmation",
+      "webhooks": "Owner inspected repository settings: list empty, only Add webhook visible",
+      "deployment": "Owner deploys manually to Hetzner VPS; no known external service watches main"
+    },
+    "scheduleUtc": "17 */6 * * *"
   }
 }

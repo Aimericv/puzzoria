@@ -5,21 +5,44 @@ chiffrement et son éditeur de confiance. L'agent choisit librement ses missions
 de développement et conserve ses décisions ; aucune roadmap n'est imposée.
 Il ne fusionne pas de PR et ne déploie rien en production.
 
-## Activation volontairement désactivée
+## Activation autorisée et interrupteurs
 
-Deux conditions distinctes doivent être autorisées **après présentation des
-résultats au propriétaire** :
+Le propriétaire a autorisé le 22 octobre 2026 la fusion de la PR #4 et les
+réveils toutes les six heures, après la CI complète. Il a inspecté la liste
+GitHub des webhooks, qui est vide, et confirme des déploiements manuels sur
+Hetzner, sans service externe connu surveillant main. Cette confirmation est
+enregistrée comme déclaration du propriétaire, sans accès au VPS.
 
-- `agent/autonomy/control.json`: `permanentActivationApproved=true` ;
-- variable de dépôt `PUZZORIA_AGENT_ENABLED=true`.
+Deux verrous indépendants restent nécessaires :
 
-Elles restent désactivées pendant cette livraison. Le workflow n'est pas
-opérationnel par cron tant qu'il n'est pas sur la branche par défaut. La
-validation ponctuelle se lance uniquement par un commit explicite portant
-`[validate-agent]` sur `codex/autonomy-agent`. Elle effectue deux sessions sur
-deux runners indépendants ; un échec ou une admission refusée ne compte pas
-comme réussite. Aucun achat ni saturation réelle de quota n'est nécessaire
-pour tester les arrêts.
+- `agent/autonomy/control.json`: `permanentActivationApproved=true`, avec la
+  référence aux validations et l'interdiction de déployer/fusionner automatiquement ;
+- variable de dépôt `PUZZORIA_AGENT_ENABLED=true`, interrupteur opérationnel.
+
+L'autorisation est désormais enregistrée dans le premier verrou. Le second
+doit être configuré dans GitHub ; sa valeur effective et le résultat du premier
+réveil doivent être vérifiés avant d'annoncer l'activation complète. Mettre la
+variable à `false` empêche les admissions suivantes. `/pause` sur le ticket
+arrête les admissions du modèle tout en permettant de lire les consignes.
+
+Le cron `17 */6 * * *` utilise UTC : 00:17, 06:17, 12:17 et 18:17 UTC. GitHub
+peut retarder ou omettre un horaire ; une session ne dépend pas du PC du
+propriétaire. Une seule session est admise à la fois. Aucun déploiement de
+production ou merge automatique des PR de développement n'est autorisé.
+
+La validation ponctuelle historique utilise un commit explicite portant
+`[validate-agent]` sur `codex/autonomy-agent` et deux runners indépendants.
+Le premier réveil de mise en service doit utiliser le mode `autonomous`,
+sur `main`, sans réutiliser ce mode de validation.
+
+Validation de la mise en service sur `5ece3ee` : 21 tests du superviseur,
+345 tests unitaires, lint, types, contenus, SEO et build réussis dans
+[la CI complète](https://github.com/Aimericv/puzzoria/actions/runs/39632711143).
+Les quatre projets Playwright ont chacun passé 82 parcours standard ; les deux
+parcours conditionnels supplémentaires ont aussi passé sur chaque projet,
+avec [reprise ciblée de l'installation WebKit](https://github.com/Aimericv/puzzoria/actions/runs/39831867798).
+Aucune assertion n'a été désactivée. Les tests d'arrêt et reprise sur quota
+utilisent des réponses contrôlées, sans épuisement volontaire des quotas réels.
 
 ## Finances : correction importante
 

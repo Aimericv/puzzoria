@@ -12,6 +12,7 @@ if(!validation && (control.permanentActivationApproved!==true || process.env.PUZ
   throw new Error("Permanent activation is not approved; no autonomous wakeup is authorized");
 const api=github(process.env.GITHUB_TOKEN,REPOSITORY);
 const store=new StateStore(api,control,process.env.GITHUB_SHA), state=await store.load();
+state.permanentActivationEnabled=control.permanentActivationApproved===true&&process.env.PUZZORIA_AGENT_ENABLED==="true";
 const repo=await api("");
 state.ownerId=repo.owner.id;
 await ensureIssue(api,state);

@@ -18,9 +18,12 @@ export async function readComments(api,number) {
 
 export async function report(api,state,text) {
   const run=state.lastRun?.url ?? "";
+  const activation=state.permanentActivationEnabled
+    ? "Réveils permanents activés toutes les six heures (UTC), sous réserve des quotas et de l'état de pause."
+    : "Réveils permanents non confirmés pour cette exécution : la configuration et la variable GitHub doivent toutes deux autoriser l'activation.";
   const body=`${text}\n\nÉtat : **${state.status}**. Sessions validées : ${state.completedSessions}.`+
     (state.nextEligibleAt?` Prochaine admissibilité : ${state.nextEligibleAt}.`:"")+
     (run?`\n\n[Exécution GitHub](${run})`:"");
   await api(`/issues/${state.issueNumber}/comments`,"POST",{body});
-  await api(`/issues/${state.issueNumber}`,"PATCH",{body:`## État courant\n\n**${state.status}** — ${state.completedSessions} session(s) vérifiée(s).\n\n${state.nextEligibleAt?`Prochaine admissibilité : ${state.nextEligibleAt}.`:"La prochaine session choisira sa mission à partir de la mémoire et de vos consignes."}\n\n${run?`[Dernière exécution](${run})`:""}\n\nÉcrivez vos consignes en commentaires. Seul le propriétaire est accepté. /pause, /resume et /status sont pris en charge. Une conversation Codex Cloud n'est pas automatiquement transmise ici.\n\nAucun achat, merge ou déploiement de production. L'activation permanente nécessite la validation explicite du propriétaire.`});
+  await api(`/issues/${state.issueNumber}`,"PATCH",{body:`## État courant\n\n**${state.status}** — ${state.completedSessions} session(s) vérifiée(s).\n\n${activation}\n\n${state.nextEligibleAt?`Prochaine admissibilité : ${state.nextEligibleAt}.`:"La prochaine session choisira sa mission à partir de la mémoire et de vos consignes."}\n\n${run?`[Dernière exécution](${run})`:""}\n\nÉcrivez vos consignes en commentaires. Seul le propriétaire est accepté. /pause, /resume et /status sont pris en charge. Une conversation Codex Cloud n'est pas automatiquement transmise ici.\n\nAucun achat, merge ou déploiement de production.`});
 }

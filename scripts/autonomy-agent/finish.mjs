@@ -5,6 +5,7 @@ import {REPOSITORY} from "./policy.mjs";
 
 const api=github(process.env.GITHUB_TOKEN,REPOSITORY);
 const control=JSON.parse(readFileSync("agent/autonomy/control.json","utf8"));
+const permanentActivationEnabled=control.permanentActivationApproved===true&&process.env.PUZZORIA_AGENT_ENABLED==="true";
 const store=new StateStore(api,control,process.env.GITHUB_SHA),state=await store.load();
 const runId=process.env.GITHUB_RUN_ID,job=process.env.GITHUB_JOB;
 const evidence=existsSync(".agent-out/run.json")?JSON.parse(readFileSync(".agent-out/run.json","utf8")):{status:"no-model-or-setup-failed",reason:state.status};
@@ -25,4 +26,4 @@ if(head==="codex/autonomy-agent") {
   state.infrastructurePR=pr.html_url;await store.save("Record the reviewable infrastructure PR");
   console.log(JSON.stringify({infrastructurePR:pr.html_url,verifiedSessions:verified,issueNumber:state.issueNumber,permanentActivationApproved:control.permanentActivationApproved}));
 }
-if(process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY,`## Puzzoria\n\nÉtat : ${state.status}. Sessions vérifiées : ${state.completedSessions}.\n\n[Ticket de dialogue](https://github.com/${REPOSITORY}/issues/${state.issueNumber})\n\n[État et preuves](https://github.com/${REPOSITORY}/blob/codex/agent-state/agent/autonomy/state.json)\n\nRéveils permanents : désactivés tant que la validation du propriétaire n'est pas enregistrée.\n`,{flag:"a"});
+if(process.env.GITHUB_STEP_SUMMARY) writeFileSync(process.env.GITHUB_STEP_SUMMARY,`## Puzzoria\n\nÉtat : ${state.status}. Sessions vérifiées : ${state.completedSessions}.\n\n[Ticket de dialogue](https://github.com/${REPOSITORY}/issues/${state.issueNumber})\n\n[État et preuves](https://github.com/${REPOSITORY}/blob/codex/agent-state/agent/autonomy/state.json)\n\nRéveils permanents : ${permanentActivationEnabled?"activés toutes les six heures, sous réserve des quotas et de la pause":"désactivés : configuration et variable d'activation requises"}.\n`,{flag:"a"});
