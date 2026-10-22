@@ -1,0 +1,31 @@
+{
+  "source": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+  "main": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+  "pr": {
+    "url": "https://github.com/Aimericv/puzzoria/pull/4",
+    "merged": false,
+    "draft": true,
+    "autoMergeEnabled": false
+  },
+  "fullCI": {
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39632711143",
+    "conclusion": "success"
+  },
+  "conditional": {
+    "passed": true,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39831867798",
+    "counts": [
+      "desktop : 2 réussis, 0 échecs, 0 ignorés.",
+      "mobile : 2 réussis, 0 échecs, 0 ignorés.",
+      "android : 2 réussis, 0 échecs, 0 ignorés.",
+      "iphone-webkit : 2 réussis, 0 échecs, 0 ignorés."
+    ]
+  },
+  "communication": {
+    "url": "https://github.com/Aimericv/puzzoria/issues/3",
+    "reportUrl": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6348270601",
+    "dashboardUpdated": true
+  },
+  "activation": false,
+  "reason": "External deployment absence unverified; hooks and variables inaccessible (HTTP 403); VPS access prohibited"
+}
