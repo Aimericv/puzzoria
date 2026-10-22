@@ -1,67 +1,17 @@
-name: One-off conditional browser retry
+name: Deliver activation validation without enabling wakes
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
 jobs:
-  conditional-retry:
-    name: Starter stats (${{ matrix.project }})
+  deliver:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: read
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - project: iphone-webkit
-            browser: webkit
-    env:
-      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
-      COMMUNITY_STARTER_STATS: 'true'
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          ref: 5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151
-          persist-credentials: false
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
-        with:
-          node-version: 24.15.0
-      - name: Verify declared no-payment funding
-        run: node --input-type=module -e 'import {readFileSync} from "node:fs";import {assertFunding} from "./scripts/autonomy-agent/policy.mjs";assertFunding(JSON.parse(readFileSync("agent/autonomy/control.json")))'
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Bound package mirror waits and install the required browser
-        run: |
-          sudo tee /etc/apt/apt.conf.d/99-puzzoria-ci-network-bounds >/dev/null <<'APT'
-          Acquire::Retries "0";
-          Acquire::http::Timeout "15";
-          Acquire::https::Timeout "15";
-          APT
-          timeout 240s npx playwright install --with-deps ${{ matrix.browser }}
-      - run: npm run test:e2e -- e2e/starter-statistics.spec.ts --project=${{ matrix.project }} --reporter=line,json
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/full.json
-      - name: Preserve sanitized browser counts
-        if: always()
-        run: node scripts/autonomy-agent/ci-proof.mjs summarize
-        env:
-          CI_PROOF_PROJECT: ${{ matrix.project }}
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: conditional-retry-${{ github.run_id }}-${{ matrix.project }}
-          path: .ci-results/summary.json
-          retention-days: 14
-
-  evidence:
-    needs: [conditional-retry]
-    if: always()
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 3
     permissions:
       contents: write
       actions: read
       issues: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -69,12 +19,7 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          pattern: conditional-retry-${{ github.run_id }}-*
-          path: .ci-evidence
-      - name: Record complementary validation and report on ticket 3
-        if: always()
-        run: node scripts/report-conditional-retry.mjs
+      - run: node scripts/publish-activation-validation.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          CONDITIONAL_PROOF_BRANCH: codex/ci-conditional-final/39831867798
