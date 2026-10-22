@@ -1,4 +1,4 @@
-# Agent autonome Puzzoria — préparation et exploitation
+# Agent autonome Puzzoria — exploitation
 
 Le superviseur réutilise le pilote Codex Plus, son sandbox, ses canaris, son
 chiffrement et son éditeur de confiance. L'agent choisit librement ses missions
@@ -19,11 +19,11 @@ Deux verrous indépendants restent nécessaires :
   référence aux validations et l'interdiction de déployer/fusionner automatiquement ;
 - variable de dépôt `PUZZORIA_AGENT_ENABLED=true`, interrupteur opérationnel.
 
-L'autorisation est désormais enregistrée dans le premier verrou. Le second
-doit être configuré dans GitHub ; sa valeur effective et le résultat du premier
-réveil doivent être vérifiés avant d'annoncer l'activation complète. Mettre la
-variable à `false` empêche les admissions suivantes. `/pause` sur le ticket
-arrête les admissions du modèle tout en permettant de lire les consignes.
+Les deux verrous sont confirmés actifs depuis le 22 octobre 2026 : le
+propriétaire a créé la variable et son commentaire sur le ticket a déclenché
+[le premier réveil autonome réussi](https://github.com/Aimericv/puzzoria/actions/runs/39841409099).
+Mettre la variable à `false` empêche les admissions suivantes. `/pause` sur
+le ticket arrête les admissions du modèle tout en permettant de lire les consignes.
 
 Le cron `17 */6 * * *` utilise UTC : 00:17, 06:17, 12:17 et 18:17 UTC. GitHub
 peut retarder ou omettre un horaire ; une session ne dépend pas du PC du
@@ -43,6 +43,33 @@ parcours conditionnels supplémentaires ont aussi passé sur chaque projet,
 avec [reprise ciblée de l'installation WebKit](https://github.com/Aimericv/puzzoria/actions/runs/39831867798).
 Aucune assertion n'a été désactivée. Les tests d'arrêt et reprise sur quota
 utilisent des réponses contrôlées, sans épuisement volontaire des quotas réels.
+
+## Premier réveil permanent vérifié — 22 octobre 2026
+
+Le [workflow réel](https://github.com/Aimericv/puzzoria/actions/runs/39841409099)
+a terminé avec succès, en mode `autonomous`, sur la configuration `94d4d40` de
+main. Il a été déclenché par [le commentaire du propriétaire](https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126),
+avec [accusé de réception](https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349574544)
+puis [bilan automatique](https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349729447).
+La consigne a été acquittée après validation : la file des messages est vide.
+
+L'agent a repris le code `25bfbab`, la mémoire des deux sessions de validation
+et le dernier checkpoint confirmé, dans un nouveau thread. Il a choisi de
+protéger la restauration d'une partie contre une réponse tardive après un
+changement de compte, avec trois scénarios de régression. Les contrôles
+indépendants ont passé : **348 tests unitaires, aucun échec ni test ignoré**,
+isolation, lint, types, contenus et build standard. Les parcours Playwright
+restent la validation distincte de la CI d'infrastructure décrite plus haut.
+
+Le code `8bb90bd` est proposé dans la [PR #5](https://github.com/Aimericv/puzzoria/pull/5),
+toujours en brouillon, non fusionnée et sans fusion automatique. La mémoire et
+le checkpoint chiffré ont été renouvelés ; l'état final est `ready`, avec trois
+sessions vérifiées au total, dont ce premier réveil permanent. Les contrôles
+d'usage inclus Plus étaient admissibles avant et après cette session. Aucun
+accès au VPS, déploiement de production ou achat n'a été effectué.
+
+Le workflow est actif et le cron est configuré. Le premier déclenchement observé
+provient du ticket ; aucun horaire futur n'est présenté comme déjà exécuté.
 
 ## Finances : correction importante
 
@@ -152,14 +179,15 @@ distincte : ne pas les déclarer exécutés à partir des seuls tests unitaires.
 
 Le ticket de communication est [#3](https://github.com/Aimericv/puzzoria/issues/3).
 La [PR d'infrastructure #4](https://github.com/Aimericv/puzzoria/pull/4)
-reste en brouillon, sans activation permanente.
+a été fusionnée le 22 octobre 2026, après validation et autorisation du propriétaire.
 
 Validation locale du 21 octobre 2026 : 18 tests du superviseur, 345 tests
 applicatifs dans 26 fichiers sur la branche d'infrastructure (incluant les
 tests historiques du pilote), lint, types et build réussis. Les validations de
 contenu couvrent 92 challenges programmés, 32 articles multilingues, les jeux
-sociaux et leurs quatre langues. Aucun parcours Playwright n'est présenté
-comme exécuté pour cette livraison.
+sociaux et leurs quatre langues. Cette validation locale du 21 octobre
+n'incluait pas Playwright ; la CI complète et les parcours exécutés le 22 sont
+référencés dans la section d'activation ci-dessus.
 
 Le premier [essai réel](https://github.com/Aimericv/puzzoria/actions/runs/39620986831)
 s'est arrêté avant l'inférence : le format du checksum transmis au SDK
