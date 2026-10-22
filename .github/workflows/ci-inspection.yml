@@ -1,4 +1,4 @@
-name: Deliver activation validation without enabling wakes
+name: Merge owner-approved Puzzoria infrastructure
 on:
   push:
     branches: [codex/ci-inspection]
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/publish-activation-validation.mjs
+      - run: node scripts/merge-approved-autonomy.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
           CONDITIONAL_PROOF_BRANCH: codex/ci-conditional-final/39831867798
