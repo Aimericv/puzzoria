@@ -1,0 +1,16 @@
+{
+  "authorizedAt": "2026-10-22T18:55:53.567Z",
+  "operation": "merge-approved-infrastructure-pr-4",
+  "ownerDeclaration": {
+    "webhooks": "Owner inspected settings: empty list, Add webhook only.",
+    "production": "Owner deploys manually to Hetzner VPS; no known external service watching main.",
+    "permission": "Owner explicitly authorizes PR 4 merge and six-hour autonomous wakes; no production deployment or automatic development PR merges."
+  },
+  "expectedHead": "5ece3ee5f72a6eefd592a1b5c6a20a87f5a97151",
+  "mainBefore": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+  "merged": true,
+  "mergeCommit": "6ab3d44cbc2d1f4b1c1b1a173d9c0d9d3916908b",
+  "prUrl": "https://github.com/Aimericv/puzzoria/pull/4",
+  "reportUrl": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6348786074",
+  "mainAfter": "6ab3d44cbc2d1f4b1c1b1a173d9c0d9d3916908b"
+}
