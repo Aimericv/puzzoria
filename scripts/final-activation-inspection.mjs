@@ -1,0 +1,17 @@
+import {github} from "./autonomy-pilot/github.mjs";
+const api=github(process.env.GITHUB_TOKEN,"Aimericv/puzzoria");
+const mainRun=await api('/actions/runs/39632711143');
+const complementRun=await api('/actions/runs/39829393874');
+const {jobs}=await api('/actions/runs/39829393874/jobs?per_page=100');
+const pr=await api('/pulls/4');
+const main=(await api('/git/ref/heads/main')).object.sha;
+const repository=await api('');
+const comments=await api('/issues/3/comments?per_page=100');
+const report=comments.find(row=>row.body?.includes('<!-- activation-validation-39632711143 -->'));
+const proof={mainRun:{url:mainRun.html_url,status:mainRun.status,conclusion:mainRun.conclusion,sha:mainRun.head_sha},complementRun:{url:complementRun.html_url,status:complementRun.status,conclusion:complementRun.conclusion,jobs:jobs.map(job=>({name:job.name,status:job.status,conclusion:job.conclusion}))},pr:{url:pr.html_url,head:pr.head.sha,base:pr.base.sha,merged:pr.merged,draft:pr.draft,state:pr.state},main,communication:{reportPublished:Boolean(report),reportUrl:report?.html_url,ownerMessageIds:comments.filter(row=>row.user?.id===repository.owner.id&&row.user?.type==='User').map(row=>row.id)},activation:false};
+const parent=process.env.GITHUB_SHA,commit=await api(`/git/commits/${parent}`);
+const tree=await api('/git/trees','POST',{base_tree:commit.tree.sha,tree:[{path:'activation-validation.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]});
+const next=await api('/git/commits','POST',{message:'Record final CI, unchanged main and communication report receipt',tree:tree.sha,parents:[parent]});
+await api('/git/refs','POST',{ref:`refs/heads/codex/activation-validation/${process.env.GITHUB_RUN_ID}`,sha:next.sha});
+console.log(JSON.stringify(proof));
+if(mainRun.conclusion!=='success'||complementRun.conclusion!=='success'||!report)throw Error('Validation or report receipt is incomplete');
