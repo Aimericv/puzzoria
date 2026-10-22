@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 23,
+  "generation": 24,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
   "checkpoint": {
-    "artifactId": 12357686383,
-    "runId": "39625255374",
-    "name": "puzzoria-agent-auth-39625255374-3",
-    "generation": 3,
+    "artifactId": 12454165704,
+    "runId": "39841409099",
+    "name": "puzzoria-agent-auth-39841409099-4",
+    "generation": 4,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39625255374",
+      "runId": "39841409099",
       "phase": "autonomous-agent",
-      "generation": 3
+      "generation": 4
     },
-    "expiresAt": "2027-01-19T15:23:41Z",
-    "digest": "b123c59681a0b57f62d4bf2b061e5ff16db489b5be116e69b78bf765b43ff60f"
+    "expiresAt": "2027-01-20T19:35:20Z",
+    "digest": "41bf9b452d32a96ba9286a859cffac8953978caa7c3d20cc2724f7fdae7ebfb4"
   },
   "lastMessageId": 6349565126,
   "completedSessions": 2,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39625255374",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
+    "id": "39841409099",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099"
   },
   "memory": {
     "STATE.md": "# État — 21 octobre 2026\n\nSource exportée annoncée : f2509908bdc66ee359d272caab4468ac6bc73b46 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.\n\nContribution : isoler le cache des résultats terminés par propriétaire dans src/lib/play-client.ts. authoritativeCompletion et rememberCompletion utilisent maintenant une clé issue de storageKey ; submitPlay capture cette clé avant ses requêtes. Le provider efface déjà les caches lors des changements de profil, mais une ancienne réponse en vol pouvait auparavant repeupler le cache partagé après cet effacement et écraser le résultat du nouveau propriétaire.\n\ntests/play-completion.test.ts couvre invité/deux comptes, exclusion des imports et réponse submit tardive après effacement des caches/changement de compte. Deux échecs reproduits avant correction, puis 40 tests ciblés réussis. Après ajout explicite du reset du provider dans le scénario tardif, les deux nouveaux tests repassent.\n\nContrôles : npm run lint et npm run typecheck terminés avec code 0 ; node --import tsx scripts/validate-content.ts terminé avec code 0 (92 défis planifiés et 32 articles multilingues). Suite générale : 344 tests réussis sur 345, 27 fichiers réussis sur 28, code 1. Seul tests/operations.test.ts:55 dépasse le délai de 5 s (sauvegarde quotidienne/purge/indisponibilité), échec déjà consigné dans les mémoires précédentes ; cause non établie, assertion et délai inchangés. Commande : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner.\n\nBuild et E2E avec serveur laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l'agent.\n\nLimites : preuve unitaire avec réseau simulé ; aucune mesure utilisateur. Cette correction concerne uniquement le cache mémoire des completions. Les écritures locales après réponse tardive dans prepareCompletedPlay et les créations de runs ne sont pas corrigées par cette contribution.\n\nProchaine mission choisie : reproduire une réponse tardive de prepareCompletedPlay lors d'un changement de propriétaire, puis empêcher l'écriture de son résultat et de son brouillon dans le namespace du nouveau propriétaire.\n",
