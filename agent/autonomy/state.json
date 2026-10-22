@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 22,
+  "generation": 23,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -21,7 +21,7 @@
     "expiresAt": "2027-01-19T15:23:41Z",
     "digest": "b123c59681a0b57f62d4bf2b061e5ff16db489b5be116e69b78bf765b43ff60f"
   },
-  "lastMessageId": 6319802370,
+  "lastMessageId": 6349565126,
   "completedSessions": 2,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
@@ -35,8 +35,14 @@
     "EXPERIMENTS.md": "# Expériences — 21 octobre 2026\n\n## Brouillon local après refus d'écriture\n\nHypothèse technique : après une sauvegarde locale ancienne, un refus de la nouvelle écriture laisse readLocal/localUpdated retourner un état obsolète malgré leur fallback mémoire.\n\nProtocole : double de localStorage avec lecture encore autorisée et échec sélectif de setItem pour la valeur ou son horodatage. Vérifier la nouvelle valeur et son timestamp ; rétablir les écritures, simuler un changement d'un autre onglet ; vérifier aussi les namespaces invité/deux comptes et l'effacement du compte.\n\nRésultats observés : les trois tests initiaux échouent avant correction (ancienne valeur ou ancien timestamp), puis les trois passent après correction. Le double de stockage a ensuite été rendu énumérable pour exercer réellement l'effacement disque, sans suppression manuelle préalable. Les deux exécutions générales confirment les trois tests de cette contribution : 340/341 tests passent ; seul le test de sauvegarde dans operations.test.ts:55 dépasse son délai de 5 s. Lint, typecheck et validation contenu réussis ; build/E2E non validés (voir STATE.md).\n\nPortée : preuve unitaire de comportement, aucune observation de navigateur réel ni d'impact sur la rétention. Une fermeture de l'onglet peut toujours perdre une écriture non persistée. Pas d'expérience avec données de joueurs.\n\n## Cache de démarrage lors d'un changement de propriétaire\n\nHypothèse : beginPlay retourne la promesse du précédent propriétaire pour le même défi, indépendamment du namespace du run local.\n\nProtocole : mémoriser des runs différents pour invité, compte A et compte B ; démarrer le même défi avec chacun, revenir à l'invité et vérifier la déduplication. Exécuter avec stockage disponible puis avec getItem/setItem levant SecurityError. fetch simulé vérifie l'action start et renvoie le run demandé.\n\nRésultats observés : les deux tests échouent avant correction (guest-run au lieu de start-a-run), puis passent après isolation du cache via storageKey. Les quatre fichiers ciblés passent : 38 tests. Lint, typecheck et validation contenu passent. Suite générale : 342 tests réussis sur 343 ; un échec de délai de 5 s dans operations.test.ts:55, déjà signalé dans la mémoire précédente. Cause non établie ; aucune assertion ni limite modifiée. Détails dans STATE.md.\n\nPortée : preuve unitaire de la sélection du run côté client ; aucun résultat de production, aucune mesure de rétention, aucun navigateur réel testé dans cette session.\n\n## Isolation des résultats et réponse de soumission tardive\n\nHypothèse : un résultat stocké par seul challengeId peut être lu pour un autre propriétaire, notamment lorsqu'une réponse arrive après l'effacement des caches au changement de profil.\n\nProtocole : mémoriser des résultats serveur pour invité et deux comptes, vérifier leur restitution et le rejet des imports ; différer la réponse submit, effacer les caches comme le provider, changer de compte, mémoriser son résultat puis libérer l'ancienne réponse.\n\nObservations : les deux tests initiaux échouent avant correction (résultat invité visible au compte, résultat destinataire écrasé par sender-run). Après correction, les 40 tests ciblés passent. Le test de réponse tardive a ensuite été renforcé avec resetPlayClient avant changement de compte ; les deux tests repassent. Il s'agit d'une preuve unitaire avec fetch simulé, sans navigateur réel ni mesure produit.\n\nContrôles de cette session : lint, typecheck et validation contenu réussis ; suite générale à 344/345 tests, seul le délai operations.test.ts:55 échoue comme dans la mémoire précédente. Aucun build/E2E exécuté par l’agent.\n",
     "PLAN.json": "{\"summary\": \"Cache des résultats terminés isolé par propriétaire ; clé de soumission capturée avant les requêtes pour isoler les réponses tardives.\", \"nextMission\": \"Reproduire une réponse tardive de prepareCompletedPlay lors d'un changement de propriétaire, puis empêcher son écriture dans le namespace du nouveau propriétaire.\", \"blockedReason\": null, \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\"}\n"
   },
-  "controlSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
-  "pendingMessages": [],
+  "controlSha": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+  "pendingMessages": [
+    {
+      "id": 6349565126,
+      "text": "Test de communication : poursuis librement ton mandat Puzzoria, sans déploiement ni fusion automatique.",
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126"
+    }
+  ],
   "retryCount": 0,
   "blockedReason": null,
   "lastSession": {
@@ -765,5 +771,6 @@
   },
   "infrastructurePR": "https://github.com/Aimericv/puzzoria/pull/4",
   "wipSha": null,
-  "wipBranchHead": "8605eabe6d516ca2ea7a34e8184568d4b30f1089"
+  "wipBranchHead": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
+  "permanentActivationEnabled": true
 }
