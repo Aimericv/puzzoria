@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { articleIsPublished } from "./word-article-publication";
 import { generateChallenge } from "../src/lib/challenges";
 import { utcDay } from "../src/lib/date";
 import { normalizeWord } from "../src/lib/word-normalization";
@@ -99,7 +100,7 @@ test("manual scrolling cancels the replay animation and releases temporary page 
   }));
   expect(resumed).toBe(false);
 });
-test("word card secondary links share the gray style and future articles stay private", async ({page, browser}) => {
+test("word card secondary links share the gray style and article access follows its publication date", async ({page, browser}) => {
   await page.goto("/fr");
   const card = page.locator(".game-card.word");
   expect(await card.locator(".card-word-variant").evaluate(e => getComputedStyle(e).color)).toBe(await card.locator(".card-practice").first().evaluate(e => getComputedStyle(e).color));
@@ -108,6 +109,8 @@ test("word card secondary links share the gray style and future articles stay pr
   const context = await browser.newContext({javaScriptEnabled: false});
   const stranger = await context.newPage();
   const response = await stranger.goto("http://127.0.0.1:3100" + wordArticlePath("fr", c.answer));
-  expect(response?.status()).toBe(404); await expect(stranger.locator("[data-word-article]")).toHaveCount(0);
+  const published = articleIsPublished("fr", c.answer);
+  expect(response?.status()).toBe(published ? 200 : 404);
+  await expect(stranger.locator("[data-word-article]")).toHaveCount(published ? 1 : 0);
   await context.close();
 });

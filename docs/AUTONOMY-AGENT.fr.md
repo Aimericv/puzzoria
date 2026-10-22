@@ -1,0 +1,198 @@
+# Agent autonome Puzzoria — préparation et exploitation
+
+Le superviseur réutilise le pilote Codex Plus, son sandbox, ses canaris, son
+chiffrement et son éditeur de confiance. L'agent choisit librement ses missions
+de développement et conserve ses décisions ; aucune roadmap n'est imposée.
+Il ne fusionne pas de PR et ne déploie rien en production.
+
+## Activation volontairement désactivée
+
+Deux conditions distinctes doivent être autorisées **après présentation des
+résultats au propriétaire** :
+
+- `agent/autonomy/control.json`: `permanentActivationApproved=true` ;
+- variable de dépôt `PUZZORIA_AGENT_ENABLED=true`.
+
+Elles restent désactivées pendant cette livraison. Le workflow n'est pas
+opérationnel par cron tant qu'il n'est pas sur la branche par défaut. La
+validation ponctuelle se lance uniquement par un commit explicite portant
+`[validate-agent]` sur `codex/autonomy-agent`. Elle effectue deux sessions sur
+deux runners indépendants ; un échec ou une admission refusée ne compte pas
+comme réussite. Aucun achat ni saturation réelle de quota n'est nécessaire
+pour tester les arrêts.
+
+## Finances : correction importante
+
+Le budget Actions à 0 $ évoqué précédemment **n'a pas été créé**. L'ancien
+`PUZZORIA_FREE_ACTIONS_VERIFIED` ne sert plus d'autorisation dans les workflows
+livrés. Le propriétaire a confirmé qu'**aucun moyen de paiement n'est enregistré**
+sur son compte GitHub. Cette déclaration est enregistrée comme telle dans
+`control.json`, pas comme une vérification technique de facturation.
+
+Sans moyen de paiement, GitHub bloque normalement l'usage dépassant l'enveloppe
+incluse. Aucun moyen de paiement ou service payant n'est ajouté. Si cette
+situation change, désactiver l'agent et réexaminer la protection avant reprise.
+Le superviseur ne peut pas inspecter ni garantir à lui seul les moyens de
+paiement du compte. Les autres workflows livrés demandent désormais le verrou
+distinct `PUZZORIA_ACTIONS_NO_PAYMENT_METHOD`; son absence les garde désactivés.
+
+Codex doit déclarer un compte Plus, l'usage inclus autorisé et des crédits
+payants observables à zéro. Une donnée inconnue, un mode API ou une limite
+financière ne déclenche aucune inférence. Aucun repli payant n'est prévu.
+
+## Réveils et dialogue
+
+Après activation autorisée : horaire toutes les six heures, lancement manuel
+ou commentaire du propriétaire sur le ticket dédié. Un contrôle sans modèle
+lit l'état avant de préparer le sandbox. Il consomme quand même des minutes
+Actions ; aucune promesse de fonctionnement illimité ou 24 h/24 n'est faite.
+
+Le ticket créé contient les rapports, liens des PR, résultats de tests et
+raisons de pause. Écrire normalement une consigne suffit. Seul l'ID immuable
+du propriétaire, sur ce ticket et ce dépôt exacts, est accepté. Les bots,
+autres auteurs et commentaires sur des PR sont ignorés. Les messages sont
+paginés, stockés en attente et acquittés après une session validée.
+
+- `/pause` : bloque les prochaines admissions ;
+- `/resume` ou `/reprendre` : lève la pause volontaire, sans contourner un quota ;
+- `/status` : publie l'état sans lancer de modèle.
+
+Un commentaire n'interrompt pas instantanément une session déjà en cours.
+Les points de contrôle et la limite de session en bornent la durée. Annuler
+brutalement un job peut conserver un travail non publié ou nécessiter une
+reconnexion si l'interruption précède un checkpoint.
+
+Codex Cloud reste un espace de travail interactif indépendant. Ce chat peut
+consulter la mémoire par Git. Ses messages ne sont pas automatiquement transmis
+au runner ; la boîte de directives opérationnelle de cette étape est le ticket.
+
+## État, code et reprise
+
+- `codex/agent-state` : état machine, mémoire, prochaine mission, compte rendu,
+  identifiants des messages et pointeur du checkpoint chiffré ;
+- `codex/agent-work` : contributions validées, dans une PR brouillon vers main ;
+- `codex/agent-wip` : instantané non validé lors d'une interruption ; il ne
+  déclenche ni fusion ni déploiement et n'est pas présenté comme testé.
+
+Le superviseur contrôle le parent Git et ne force aucune mise à jour. Le modèle
+ne reçoit pas de dépôt Git avec les objets privés, ni de jeton de publication.
+Il travaille sur un export du SHA candidat, avec les dépendances approuvées.
+
+Les fenêtres Plus réellement saturées déterminent `nextEligibleAt`, à partir
+de leurs `resetsAt`. Le runner s'arrête pendant l'attente ; un réveil ultérieur
+revérifie les quotas. Les erreurs transitoires conservent le travail et sont
+recontrôlées, avec un arrêt après des échecs répétés. Les pauses et connexions
+manquantes ne sont jamais levées par une autorisation implicite.
+
+Si l'enveloppe Actions empêche d'allouer une VM, l'agent ne peut pas lui-même
+envoyer d'alerte. Le prochain horaire après renouvellement dépend de GitHub.
+Les durées des jobs et de la CI s'additionnent ; elles sont partagées avec
+les autres dépôts du compte.
+
+## Checkpoints et sécurité
+
+La source initiale est le dernier checkpoint du test de transmission, artifact
+`12352132606`, avec son contexte AES-GCM exact. Ne pas restaurer le seed retiré
+ou un ancien checkpoint pour réessayer.
+
+Le SDK officiel d'artifacts est verrouillé dans le runtime existant. Le
+superviseur chiffre et publie le cache natif dès son changement, puis met à
+jour le pointeur seulement après un upload confirmé. Une génération uploadée
+avant une panne du pointeur peut être retrouvée, déchiffrée et authentifiée.
+Une génération expirée, ambiguë ou invalide ne provoque jamais de retour
+silencieux à l'ancien login. Les checksums disponibles sont vérifiés.
+
+La rétention demandée est de 90 jours, plafonnée par le réglage effectif du
+dépôt. L'expiration observée est conservée. Cela ne garantit pas une validité
+indéfinie : révocation, longue absence ou coupure au moment du renouvellement
+peuvent nécessiter une nouvelle connexion sécurisée.
+
+Les outils du modèle gardent l'UID, les namespaces et les restrictions natives
+du pilote. Ils ne reçoivent ni secrets Plus, ni clé du coffre, ni jeton GitHub
+ou artifact, ni accès de production. Les canaris sont obligatoires avant
+l'inférence. Les dépendances approuvées sont préparées avant les secrets.
+
+Le superviseur refuse les changements d'infrastructure, instructions,
+manifests/verrous, liens symboliques ou physiques et fichiers privés. Il
+arrête les outils avant de collecter, tester et publier. Lint, types, tests
+unitaires avec comptage réel, contenus et build sont exécutés dans des
+conteneurs éphémères avec l'image Node déjà épinglée par le Dockerfile.
+Ces vérificateurs n'ont aucun secret ni accès Internet (`--network=none`),
+un utilisateur non privilégié, des capacités retirées, une racine en lecture
+seule et des dépendances montées en lecture seule. Leur réseau local permet
+les serveurs de test. Le sandbox natif du modèle reste intégralement inchangé.
+Les commandes et résultats expurgés sont conservés ; aucune base ni trace
+brute de navigateur n'est publiée. Les parcours E2E restent une validation
+distincte : ne pas les déclarer exécutés à partir des seuls tests unitaires.
+
+## Résultats de livraison
+
+Le ticket de communication est [#3](https://github.com/Aimericv/puzzoria/issues/3).
+La [PR d'infrastructure #4](https://github.com/Aimericv/puzzoria/pull/4)
+reste en brouillon, sans activation permanente.
+
+Validation locale du 21 octobre 2026 : 18 tests du superviseur, 345 tests
+applicatifs dans 26 fichiers sur la branche d'infrastructure (incluant les
+tests historiques du pilote), lint, types et build réussis. Les validations de
+contenu couvrent 92 challenges programmés, 32 articles multilingues, les jeux
+sociaux et leurs quatre langues. Aucun parcours Playwright n'est présenté
+comme exécuté pour cette livraison.
+
+Le premier [essai réel](https://github.com/Aimericv/puzzoria/actions/runs/39620986831)
+s'est arrêté avant l'inférence : le format du checksum transmis au SDK
+officiel était incorrect. Le correctif conserve le préfixe `sha256:` attendu
+par la version verrouillée et possède un test de régression. Aucun retour
+vers un ancien login ni désactivation de la vérification n'a été effectué.
+Le [nouvel essai](https://github.com/Aimericv/puzzoria/actions/runs/39623126545)
+a franchi la restauration native de connexion Plus, la sauvegarde chiffrée,
+les canaris et l'admission financière avant le démarrage du modèle.
+
+Ce nouvel essai a réellement développé une correction des brouillons locaux,
+mais les tests indépendants ont révélé des incompatibilités entre le sandbox
+natif et les outils applicatifs (caches en lecture seule, serveurs locaux et
+racine Turbopack). Le code et la mémoire ont été sauvegardés sur
+`codex/agent-wip`, sans publication présentée comme validée. Le vérificateur
+sans réseau décrit ci-dessus a ensuite passé localement les 341 tests de ce
+travail, lint, types, contenus et build standard.
+
+La [validation finale réelle](https://github.com/Aimericv/puzzoria/actions/runs/39625255374),
+sur le superviseur `20ae3e330a9b4bacd251e195a93e8d9401278305`, a ensuite
+réussi sur **deux runners indépendants** :
+
+| Session | Tests unitaires | Autres contrôles indépendants | Résultat |
+| --- | --- | --- | --- |
+| Première, reprenant l'instantané interrompu | 343 réussis, 0 échec, 0 ignoré | Isolation, lint, types, contenus, build standard | `verified`, étape `success` |
+| Seconde, reprenant le code et la mémoire de la première | 345 réussis, 0 échec, 0 ignoré | Isolation, lint, types, contenus, build standard | `verified`, étape `success` |
+
+Les 18 tests de contrôle ont également passé avant chaque admission. La
+seconde session utilise un thread différent, annonce une session précédente
+validée et part exactement du commit publié par la première. Le nonce de
+mémoire est conservé et les commits se suivent sans mise à jour forcée.
+Le résultat final est `25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a`, dans la
+[PR de travail #5](https://github.com/Aimericv/puzzoria/pull/5), en brouillon.
+
+L'agent a choisi de corriger les brouillons après refus de stockage local,
+puis les caches de démarrage et de résultat lors d'un changement de
+propriétaire invité/compte. Trois fichiers de tests ajoutent sept régressions
+au produit de départ ; aucune roadmap n'a fixé ces missions. La prochaine
+mission conservée concerne une réponse tardive de préparation de résultat.
+Aucun effet sur le trafic ou la rétention n'est présenté comme mesuré.
+
+Les observations natives Plus sont restées admissibles avant/après chaque
+session : fenêtre courte 69 → 72 %, puis 73 → 77 % utilisés ; fenêtre
+hebdomadaire 30 → 30 %, puis 31 → 31 %. Ces instantanés peuvent inclure des
+usages concurrents et ne constituent pas une mesure exclusive de coût. Le
+dernier checkpoint confirmé est l'artifact `12357686383`, génération 3,
+avec expiration observée au 19 janvier 2027. Son pointeur est dans
+[l'état persistant](https://github.com/Aimericv/puzzoria/blob/codex/agent-state/agent/autonomy/state.json).
+
+Les pauses/reprises de quotas et le filtrage des messages ont été testés
+automatiquement, sans épuiser volontairement les quotas ni usurper l'auteur
+du propriétaire. Le dialogue réel par commentaire du propriétaire reste à
+essayer. Le cron permanent n'a volontairement pas été activé. Le compteur
+mensuel de facturation Actions du compte n'a pas été lu ; l'absence de moyen
+de paiement reste la déclaration du propriétaire. Aucun achat, ajout de
+moyen de paiement, merge ou déploiement n'a été effectué.
+
+Le raccordement aux métriques réelles et le déploiement sécurisé constituent
+une étape ultérieure, explicitement hors de cette activation.

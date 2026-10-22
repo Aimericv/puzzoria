@@ -1,0 +1,105 @@
+name: Codex Plus cloud pilot
+
+on:
+  push:
+    branches: [codex/autonomy-pilot]
+    paths:
+      - .github/workflows/autonomy-pilot.yml
+      - scripts/autonomy-pilot/**
+      - agent/pilot/BOOT.md
+
+# This gate is evaluated BEFORE allocating a runner. Leave unset until the
+# account owner has verified an effective $0 paid Actions spending stop.
+permissions: {}
+concurrency:
+  group: puzzoria-autonomy-pilot
+  cancel-in-progress: false
+
+jobs:
+  session_one:
+    if: vars.PUZZORIA_PILOT_ENABLED == 'true' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      statuses: write
+    outputs:
+      proof_sha: ${{ steps.codex.outputs.proof_sha }}
+      pr_url: ${{ steps.codex.outputs.pr_url }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
+      - run: bash scripts/autonomy-pilot/prepare.sh
+      - id: codex
+        name: Develop, verify isolation and publish a draft PR
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CODEX_PILOT_SEED: ${{ secrets.CODEX_PILOT_SEED }}
+          CODEX_PILOT_VAULT_KEY: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
+        shell: bash
+        run: >-
+          sudo --preserve-env=GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_RUN_ATTEMPT,GITHUB_JOB,GITHUB_WORKSPACE,GITHUB_OUTPUT,GITHUB_TOKEN,CODEX_PILOT_SEED,CODEX_PILOT_VAULT_KEY,PATH
+          "$(command -v node)" scripts/autonomy-pilot/run.mjs 1
+      - name: Preserve only encrypted auth and sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pilot-${{ github.run_id }}-${{ github.run_attempt }}-session-1
+          path: |
+            .pilot-out/auth.enc
+            .pilot-out/evidence.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
+
+  session_two:
+    needs: session_one
+    if: vars.PUZZORIA_PILOT_ENABLED == 'true' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      statuses: write
+      actions: read
+    steps:
+      # A fresh checkout of the agent's published commit, never the first VM's
+      # workspace. The publisher cannot change the supervisor or this workflow.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ needs.session_one.outputs.proof_sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
+      - run: bash scripts/autonomy-pilot/prepare.sh
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: pilot-${{ github.run_id }}-${{ github.run_attempt }}-session-1
+          path: .pilot-in
+      - name: Resume from GitHub in a new Codex thread
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CODEX_PILOT_VAULT_KEY: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
+        shell: bash
+        run: >-
+          sudo --preserve-env=GITHUB_REPOSITORY,GITHUB_RUN_ID,GITHUB_RUN_ATTEMPT,GITHUB_JOB,GITHUB_WORKSPACE,GITHUB_OUTPUT,GITHUB_TOKEN,CODEX_PILOT_VAULT_KEY,PATH
+          "$(command -v node)" scripts/autonomy-pilot/run.mjs 2
+      - name: Preserve renewed encrypted auth and sanitized evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pilot-${{ github.run_id }}-${{ github.run_attempt }}-session-2
+          path: |
+            .pilot-out/auth.enc
+            .pilot-out/evidence.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

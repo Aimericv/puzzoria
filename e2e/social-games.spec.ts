@@ -690,7 +690,9 @@ test("new SEO pages work without JavaScript in all locales, rooms remain noindex
     expect(b.background).not.toBe(b.color);
     expect(b.height).toBeGreaterThanOrEqual(44);
   }
-  await page.goto("/fr/devine-le-nombre");
+  // The hard bot opens at 50, so protecting 99 keeps this layout fixture active.
+  // An easy bot can legitimately guess 99 immediately and reveal the result.
+  await page.goto(gamePath("fr", "guess", undefined, "hard"));
   const m = st("fr");
   await page
     .getByRole("spinbutton", { name: m.secret, exact: true })
@@ -703,14 +705,14 @@ test("new SEO pages work without JavaScript in all locales, rooms remain noindex
   await arena(page, "99");
   const publicPuzzle = await page.evaluate(
     () =>
-      JSON.parse(localStorage.getItem("dailygrid:practice:guess:fr:easy")!)
+      JSON.parse(localStorage.getItem("dailygrid:practice:guess:fr:hard")!)
         .challenge,
   );
   const puzzle = generateChallenge(
     "guess",
     "fr",
     publicPuzzle.date,
-    "easy",
+    "hard",
     publicPuzzle.id.split(":")[2],
   );
   if (puzzle.kind !== "guess") throw new Error();

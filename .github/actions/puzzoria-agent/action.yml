@@ -1,0 +1,66 @@
+name: Bounded Puzzoria autonomous session
+description: Reuse the Plus pilot sandbox, retain checkpoints and publish verified work without production access.
+inputs:
+  mode:
+    description: validation or autonomous
+    required: true
+  github-token:
+    description: Trusted publisher token; never passed to the model.
+    required: true
+  vault-key:
+    description: Existing checkpoint encryption binding; never passed to the model.
+    required: true
+outputs:
+  run_model:
+    description: Whether the preflight admitted inference.
+    value: ${{ steps.preflight.outputs.run_model }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      with:
+        node-version: 24.15.0
+    - name: Install the locked trusted CLI and artifact client
+      shell: bash
+      run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
+    - name: Test control boundaries without Plus credentials
+      shell: bash
+      run: node --test scripts/autonomy-agent/*.test.mjs
+    - id: preflight
+      name: Read the inbox and admission state
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        AGENT_MODE: ${{ inputs.mode }}
+        PUZZORIA_AGENT_ENABLED: ${{ env.PUZZORIA_AGENT_ENABLED }}
+      run: node scripts/autonomy-agent/preflight.mjs
+    - name: Prepare the existing sandbox before exposing Plus credentials
+      if: steps.preflight.outputs.run_model == 'true'
+      shell: bash
+      run: bash scripts/autonomy-agent/prepare.sh
+    - id: agent
+      name: Run one admitted autonomous session
+      if: steps.preflight.outputs.run_model == 'true'
+      uses: ./.github/actions/puzzoria-artifact-runtime
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        CODEX_PILOT_VAULT_KEY: ${{ inputs.vault-key }}
+        AGENT_MODE: ${{ inputs.mode }}
+        PUZZORIA_AGENT_ENABLED: ${{ env.PUZZORIA_AGENT_ENABLED }}
+    - name: Preserve only sanitized machine evidence
+      if: always()
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      with:
+        name: puzzoria-agent-evidence-${{ github.run_id }}-${{ github.job }}-${{ github.run_attempt }}
+        path: .agent-out/run.json
+        include-hidden-files: true
+        if-no-files-found: ignore
+        retention-days: 30
+    - name: Record the outcome and prepare the review PR
+      if: always()
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        AGENT_STEP_OUTCOME: ${{ steps.agent.outcome }}
+        AGENT_CONTROL_BRANCH: ${{ inputs.mode == 'validation' && 'codex/autonomy-agent' || '' }}
+      run: node scripts/autonomy-agent/finish.mjs

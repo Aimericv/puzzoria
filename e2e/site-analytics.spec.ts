@@ -1,8 +1,16 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Download } from "@playwright/test";
 import { rareWordCopy } from "../src/lib/rare-word-i18n";
 import { gamePath } from "../src/lib/i18n";
 import { siteAnalyticsCopy } from "../src/lib/site-analytics-i18n";
 import { isWebKitFetchDiagnostic, recordUnhandledRejections, unhandledRejections } from "./browser-errors";
+
+async function downloadText(download: Download) {
+  const stream=await download.createReadStream();
+  if(!stream)throw new Error("Missing completed export download");
+  let text="";
+  for await(const chunk of stream)text+=chunk.toString();
+  return text;
+}
 test("internal analytics require the configured account, filter real starts and export only aggregates",async({page,browser,browserName},info)=>{
   await recordUnhandledRejections(page);
   const errors:string[]=[];page.on("pageerror",e=>{if(!isWebKitFetchDiagnostic(e,browserName))errors.push(e.message);});
@@ -29,11 +37,20 @@ test("internal analytics require the configured account, filter real starts and 
     await page.goto("/fr/admin/analytics");
     await page.getByRole("combobox",{name:"Jeu",exact:true}).selectOption("wordsearch");await page.getByRole("combobox",{name:"Langue de la partie",exact:true}).selectOption("es");await page.getByRole("combobox",{name:"Mode",exact:true}).selectOption("practice");
     await page.getByRole("button",{name:"Appliquer",exact:true}).click();await expect(page).toHaveURL(/game=wordsearch.*locale=es.*mode=practice/);
-    const downloadPromise=page.waitForEvent("download");await page.getByRole("link",{name:"Télécharger le CSV",exact:true}).click();const download=await downloadPromise;expect(download.suggestedFilename()).toMatch(/^analytics-.*\.csv$/);
-    const reportDownloadPromise=page.waitForEvent("download");await page.getByRole("link",{name:siteAnalyticsCopy("fr").exportAnalysis,exact:true}).click();
+    const csvLink=page.getByRole("link",{name:"Télécharger le CSV",exact:true});
+    await expect(csvLink).toHaveAttribute("download","");
+    const csvResponse=await page.request.get(await csvLink.getAttribute("href")??"");
+    expect(csvResponse.status()).toBe(200);
+    expect(csvResponse.headers()["content-disposition"]).toMatch(/^attachment; filename="analytics-.*\.csv"$/);
+    const downloadPromise=page.waitForEvent("download",{timeout:15000});await csvLink.click();const download=await downloadPromise;expect(download.suggestedFilename()).toMatch(/^analytics-.*\.csv$/);
+    const csv=await downloadText(download);
+    expect(csv.split(/\r?\n/)[0]).toBe("day,players,starts,finishes,pending,dormant");
+    expect(csv).not.toContain(username);
+    const reportLink=page.getByRole("link",{name:siteAnalyticsCopy("fr").exportAnalysis,exact:true});
+    await expect(reportLink).toHaveAttribute("download","");
+    const reportDownloadPromise=page.waitForEvent("download",{timeout:15000});await reportLink.click();
     const reportDownload=await reportDownloadPromise;expect(reportDownload.suggestedFilename()).toMatch(/^puzzoria-analytics-.*\.json$/);
-    const reportResponse=await page.request.get(await page.getByRole("link",{name:siteAnalyticsCopy("fr").exportAnalysis,exact:true}).getAttribute("href")??"");
-    const report=await reportResponse.json();expect(report.filters).toMatchObject({game:"wordsearch",puzzleLocale:"es",mode:"practice"});
+    const report=JSON.parse(await downloadText(reportDownload));expect(report.filters).toMatchObject({game:"wordsearch",puzzleLocale:"es",mode:"practice"});
     expect(report.schemaVersion).toBe(1);expect(report.report.official.totals.starts).toBeGreaterThanOrEqual(1);
     expect(JSON.stringify(report)).not.toContain(username);
     await page.screenshot({path:`test-results/analytics-${info.project.name}.png`,fullPage:true});

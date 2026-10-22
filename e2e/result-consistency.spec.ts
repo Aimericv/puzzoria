@@ -13,7 +13,8 @@ test("all result screens share the same actions, preserve boards and replay a fr
   test.setTimeout(150000); await page.emulateMedia({reducedMotion:"reduce"});
   for (const game of gameIds) {
     await page.goto(hasDaily(game) ? gamePath("fr",game) : practicePath("fr",game),{waitUntil:"networkidle"});
-    const current = await page.locator("[data-game-root]").count(); expect(current).toBe(1);
+    // networkidle does not wait for account hydration and prepareCompletedPlay.
+    await expect(page.locator("[data-game-root]")).toHaveCount(1);
     const before = await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"));
     const old = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId);
     await page.getByRole("button",{name:devPreviewCopy("fr").finish,exact:true}).click();

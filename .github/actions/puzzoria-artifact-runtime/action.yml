@@ -1,0 +1,5 @@
+name: Run the trusted Puzzoria supervisor
+description: Keep GitHub's injected artifact transport inside the trusted supervisor.
+runs:
+  using: node24
+  main: run.mjs
