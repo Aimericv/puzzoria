@@ -1,0 +1,134 @@
+{
+  "observedAt": "2026-10-22T19:36:03.388Z",
+  "main": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+  "pr": {
+    "merged": true,
+    "url": "https://github.com/Aimericv/puzzoria/pull/4"
+  },
+  "permanentSwitch": true,
+  "runs": [
+    {
+      "id": 39841409099,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099",
+      "event": "issue_comment",
+      "status": "in_progress",
+      "conclusion": null,
+      "sha": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+      "createdAt": "2026-10-22T19:35:19Z"
+    }
+  ],
+  "jobs": [
+    {
+      "runId": 39841409099,
+      "jobs": [
+        {
+          "name": "first",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./.github/actions/puzzoria-agent",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run ./.github/actions/puzzoria-agent",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ownerMessages": [
+    {
+      "id": 6349565126,
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126",
+      "createdAt": "2026-10-22T19:35:16Z"
+    }
+  ],
+  "state": {
+    "generation": 23,
+    "status": "ready",
+    "completedSessions": 2,
+    "codeSha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
+    "permanentActivationEnabled": true,
+    "lastRun": {
+      "id": "39625255374",
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
+    },
+    "lastMessageId": 6349565126,
+    "pendingMessageIds": [
+      6349565126
+    ],
+    "nextEligibleAt": null,
+    "lastSession": {
+      "runId": "39625255374",
+      "mode": "validation",
+      "status": "verified",
+      "sourceCommit": "f2509908bdc66ee359d272caab4468ac6bc73b46",
+      "tests": {
+        "passed": 345,
+        "failed": 0,
+        "skipped": 0
+      },
+      "publication": {
+        "sha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
+        "url": "https://github.com/Aimericv/puzzoria/pull/5",
+        "number": 5
+      },
+      "quotaBefore": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 73,
+              "windowDurationMins": 300,
+              "resetsAt": 1792607914
+            },
+            "secondary": {
+              "usedPercent": 31,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793118249
+            }
+          }
+        ]
+      },
+      "quotaAfter": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 77,
+              "windowDurationMins": 300,
+              "resetsAt": 1792607914
+            },
+            "secondary": {
+              "usedPercent": 31,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793118249
+            }
+          }
+        ]
+      }
+    }
+  }
+}
