@@ -1,0 +1,188 @@
+{
+  "observedAt": "2026-10-22T19:44:42.245Z",
+  "main": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+  "pr": {
+    "merged": true,
+    "url": "https://github.com/Aimericv/puzzoria/pull/4"
+  },
+  "permanentSwitch": true,
+  "runs": [
+    {
+      "id": 39841409099,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099",
+      "event": "issue_comment",
+      "status": "completed",
+      "conclusion": "success",
+      "sha": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
+      "createdAt": "2026-10-22T19:35:19Z"
+    }
+  ],
+  "jobs": [
+    {
+      "runId": 39841409099,
+      "jobs": [
+        {
+          "name": "first",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run ./.github/actions/puzzoria-agent",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run ./.github/actions/puzzoria-agent",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "second",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        }
+      ]
+    }
+  ],
+  "ownerMessages": [
+    {
+      "id": 6349565126,
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126",
+      "createdAt": "2026-10-22T19:35:16Z"
+    }
+  ],
+  "state": {
+    "generation": 27,
+    "status": "ready",
+    "completedSessions": 3,
+    "codeSha": "8bb90bd2b16b1dbb64f3184ef50265c45fd6eade",
+    "permanentActivationEnabled": true,
+    "lastRun": {
+      "id": "39841409099",
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099"
+    },
+    "lastMessageId": 6349565126,
+    "pendingMessageIds": [],
+    "nextEligibleAt": null,
+    "lastSession": {
+      "runId": "39841409099",
+      "mode": "autonomous",
+      "status": "verified",
+      "sourceCommit": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
+      "tests": {
+        "passed": 348,
+        "failed": 0,
+        "skipped": 0
+      },
+      "publication": {
+        "sha": "8bb90bd2b16b1dbb64f3184ef50265c45fd6eade",
+        "url": "https://github.com/Aimericv/puzzoria/pull/5",
+        "number": 5
+      },
+      "quotaBefore": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 28,
+              "windowDurationMins": 300,
+              "resetsAt": 1792710689
+            },
+            "secondary": {
+              "usedPercent": 4,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793297489
+            }
+          }
+        ]
+      },
+      "quotaAfter": {
+        "status": "ready",
+        "quotas": [
+          {
+            "id": "codex",
+            "primary": {
+              "usedPercent": 31,
+              "windowDurationMins": 300,
+              "resetsAt": 1792710689
+            },
+            "secondary": {
+              "usedPercent": 5,
+              "windowDurationMins": 10080,
+              "resetsAt": 1793297489
+            }
+          }
+        ]
+      }
+    }
+  },
+  "workflow": {
+    "id": 391833045,
+    "state": "active",
+    "path": ".github/workflows/autonomy-agent.yml"
+  },
+  "communication": {
+    "acknowledgements": [
+      {
+        "id": 6349574544,
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349574544",
+        "createdAt": "2026-10-22T19:35:45Z"
+      }
+    ],
+    "sessionReports": [
+      {
+        "id": 6349656580,
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349656580",
+        "createdAt": "2026-10-22T19:40:05Z"
+      },
+      {
+        "id": 6349729447,
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349729447",
+        "createdAt": "2026-10-22T19:43:56Z"
+      }
+    ]
+  },
+  "workPR": {
+    "number": 5,
+    "url": "https://github.com/Aimericv/puzzoria/pull/5",
+    "draft": true,
+    "merged": false,
+    "autoMergeEnabled": false,
+    "head": "8bb90bd2b16b1dbb64f3184ef50265c45fd6eade"
+  },
+  "plan": {
+    "summary": "Restauration des parties terminées : réponse tardive ignorée après changement de propriétaire, avant toute écriture ou sync ; trois scénarios de régression couverts.",
+    "nextMission": "Reproduire les créations tardives de runs dans reservePlay et beginPlay après changement de propriétaire, puis protéger leur mémorisation et leur démarrage sans casser la déduplication ni les reprises.",
+    "blockedReason": null
+  },
+  "session": {
+    "threadId": "01a16520-bdec-74a0-b4ba-04cf58ae7495",
+    "previousCompletedSessions": 2,
+    "isolationCanaries": true,
+    "toolCommands": 16
+  }
+}
