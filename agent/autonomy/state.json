@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 38,
+  "generation": 39,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "79b8f6435fb61515425c413549131eb179547342",
   "checkpoint": {
-    "artifactId": 12498859296,
-    "runId": "39948290202",
-    "name": "puzzoria-agent-auth-39948290202-6",
-    "generation": 6,
+    "artifactId": 12519595688,
+    "runId": "39993265531",
+    "name": "puzzoria-agent-auth-39993265531-7",
+    "generation": 7,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39948290202",
+      "runId": "39993265531",
       "phase": "autonomous-agent",
-      "generation": 6
+      "generation": 7
     },
-    "expiresAt": "2027-01-21T11:45:10Z",
-    "digest": "40ff75971df637fea1a8048302ae335ceafac57d176443a5f0b95859a26b38d6"
+    "expiresAt": "2027-01-21T17:13:13Z",
+    "digest": "0069a0018744d27442d2d237cff56541672d1dd83f4e6e35e220efde21c8acb3"
   },
   "lastMessageId": 6364235180,
   "completedSessions": 5,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39948290202",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39948290202"
+    "id": "39993265531",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39993265531"
   },
   "memory": {
     "STATE.md": "# État — 23 octobre 2026\n\nSource exportée annoncée : b49072b62fc46da90657b33ae5b99080ceca1747 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : submitPlay vérifie le namespace après await beginPlay, avant envoi, et avant de retourner le résultat au consommateur. Une réponse devenue obsolète est rejetée avec unavailable. Une completion déjà reçue reste mémorisée dans le cache du propriétaire initial, conformément au comportement précédent ; le résultat serveur accepté n’est pas annulé. Les états intermédiaires et terminés ne sont plus transmis à la branche de succès du consommateur après changement de profil. Aucun format persisté ni règle serveur changé.\n\nPreuves : tests/play-completion.test.ts renforce le test existant de completion tardive et ajoute deux scénarios de progression différée (réponse HTTP / lecture JSON), un changement de compte dans l’await d’un démarrage déjà en cache, et un contrôle positif sans changement. Avant correction : quatre échecs sur six tests. Après correction : six réussites et 21 tests ciblés réussis sur cinq fichiers. Les tests de progression ont ensuite été renforcés avec un consommateur qui écrit via writeLocal ; les six tests repassent et préservent les brouillons des deux propriétaires. Ce sont des consommateurs simulés, pas des composants React montés.\n\nContrôles terminés : npm run lint et npm run typecheck, codes 0 ; node --import tsx scripts/validate-content.ts, code 0 (92 défis, 32 articles multilingues). Suite générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner, code 1, 359 tests réussis sur 360, 29 fichiers réussis sur 30. Seul tests/operations.test.ts:55 dépasse 5 s, comme précédemment ; cause non établie et contrôles inchangés. Build et E2E laissés au superviseur selon le mandat.\n\nLimites : pas de navigateur réel ni métrique utilisateur disponible. Le contrôle de namespace ne détecte pas A → B → A ; les branches catch de restauration des composants restent à examiner : ClassicGame et SocialGame peuvent appeler reservePlay après un rejet, même après démontage. Cette contribution ne garantit pas l’absence de toute requête ou effet tardif de ces branches.\n\nAucun script, manifest/verrou, instruction, protection ni secret modifié. Aucun réseau externe, achat, merge, déploiement ou publication effectué par l’agent.\n\nProchaine mission choisie : reproduire une restauration engagée par un composant démonté après changement de compte (branches catch de ClassicGame/SocialGame) et empêcher le premier effet tardif démontré, avec un test ciblé, sans modifier les formats de sauvegarde.\n",
