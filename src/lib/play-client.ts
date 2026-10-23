@@ -89,6 +89,7 @@ async function reserveInner(challenge: PublicChallenge): Promise<
 }
 const starts = new Map<string, Promise<RunResponse>>();
 const results = new Map<string, Completion>();
+let clientGeneration = 0;
 const completionKey = (id: string) => storageKey(`dailygrid:completion:${id}`);
 export async function postJson(
   url: string,
@@ -232,6 +233,7 @@ export function rememberCompletion(completion: Completion) {
     results.set(completionKey(completion.challengeId), completion);
 }
 export async function prepareCompletedPlay(challenge: PublicChallenge) {
+  const generation = clientGeneration;
   const ownerKey = completionKey(challenge.id);
   let completion = authoritativeCompletion(challenge.id);
   let game: Record<string, unknown> | null = null,
@@ -272,7 +274,8 @@ export async function prepareCompletedPlay(challenge: PublicChallenge) {
     result = data.result;
   // Restoration is optional: discard a late response after a profile switch
   // rather than writing its draft or emitting sync events for the new owner.
-  if (completionKey(challenge.id) !== ownerKey) return;
+  // A reset also invalidates it if the user has since returned to this account.
+  if (generation !== clientGeneration || completionKey(challenge.id) !== ownerKey) return;
   if (!result?.completion) return;
   rememberCompletion(result.completion);
   rememberRun(challenge, data.runId);
@@ -312,6 +315,7 @@ export async function prepareCompletedPlay(challenge: PublicChallenge) {
   });
 }
 export function resetPlayClient() {
+  clientGeneration++;
   reservations.clear();
   starts.clear();
   results.clear();

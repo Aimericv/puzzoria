@@ -9,7 +9,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it.each(["same", "account", "guest"])("restores completed drafts only for the requesting owner: %s", async (destination) => {
+it.each(["same", "account", "guest", "roundtrip", "reset"])("restores completed drafts only for the requesting owner: %s", async (destination) => {
   const challenge: PublicChallenge = {
     kind: "word", id: `word:restore-${destination}`, date: "2026-10-22",
     locale: "fr", length: 5, attempts: 6,
@@ -38,7 +38,13 @@ it.each(["same", "account", "guest"])("restores completed drafts only for the re
   await vi.waitFor(() => expect(json).toHaveBeenCalledOnce());
   if (destination !== "same") {
     resetPlayClient();
-    setStorageUser(destination === "guest" ? null : "restore-destination");
+    if (destination !== "reset") {
+      setStorageUser(destination === "guest" ? null : "restore-destination");
+      if (destination === "roundtrip") {
+        resetPlayClient();
+        setStorageUser(`restore-source-${destination}`);
+      }
+    }
     rememberCompletion({ ...completion, runId: "destination-run" });
     for (const key of ["run", "game", "session"])
       writeLocal(`dailygrid:${key}:${challenge.id}`, { preserved: key });
@@ -57,5 +63,19 @@ it.each(["same", "account", "guest"])("restores completed drafts only for the re
     for (const key of ["run", "game", "session"])
       expect(JSON.parse(readLocal(`dailygrid:${key}:${challenge.id}`)!)).toEqual({ preserved: key });
     expect(changed).not.toHaveBeenCalled();
+
+    // Discarding an old request must still allow the active profile to restore.
+    const freshCompletion = { ...completion, runId: "destination-run" };
+    vi.stubGlobal("fetch", vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ runId: freshCompletion.runId, result: {
+        completion: freshCompletion, guesses: ["MERCI"], rows: [["correct"]],
+        success: true, answer: "MERCI",
+      } }),
+    })));
+    await prepareCompletedPlay(challenge);
+    expect(JSON.parse(readLocal(`dailygrid:run:${challenge.id}`)!)).toBe("destination-run");
+    expect(JSON.parse(readLocal(`dailygrid:game:${challenge.id}`)!)).toMatchObject({ complete: true, guesses: ["MERCI"] });
+    expect(JSON.parse(readLocal(`dailygrid:session:${challenge.id}`)!)).toMatchObject({ completion: freshCompletion });
   }
 });
