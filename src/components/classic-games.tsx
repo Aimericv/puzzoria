@@ -59,7 +59,8 @@ export function ClassicGame({
     [anchor, setAnchor] = useState<number | null>(null),
     [hover, setHover] = useState<number | null>(null),
     [focus, setFocus] = useState(c.kind === "mines" ? c.start : 0);
-  const locked = useRef(false),
+  const alive = useRef(true),
+    locked = useRef(false),
     pointer = useRef<{ x: number; y: number; index: number | null } | null>(
       null,
     ),
@@ -72,6 +73,7 @@ export function ClassicGame({
   });
   useEffect(() => {
     let live = true;
+    alive.current = true;
     void reservePlay(c)
       .then((data) => {
         if (!live) return;
@@ -104,6 +106,7 @@ export function ClassicGame({
       });
     return () => {
       live = false;
+      alive.current = false;
     };
   }, [c, setDraft]);
   const act = useCallback(
@@ -134,17 +137,20 @@ export function ClassicGame({
           sequence: current.current.moves,
           bank,
         });
+        if (!alive.current) return;
         const result = data.state as PuzzleState;
         setDraft({ result });
         current.current = result;
         if (data.completion)
           sessionRef.current.finish(result.success, result.score);
       } catch (e) {
+        if (!alive.current) return;
         setError(e instanceof Error ? e.message : "networkError");
         // A lost response can have saved the move. Restore it before allowing another move.
         try {
-          const data = await reservePlay(c),
-            result = data.result?.state ?? data.progress;
+          const data = await reservePlay(c);
+          if (!alive.current) return;
+          const result = data.result?.state ?? data.progress;
           if (result) {
             setDraft({ result: result as PuzzleState });
             current.current = result as PuzzleState;
@@ -161,7 +167,7 @@ export function ClassicGame({
         }
       } finally {
         locked.current = false;
-        setBusy(false);
+        if (alive.current) setBusy(false);
       }
     },
     [c, draftReady, setDraft, loaded, preview],
