@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 33,
+  "generation": 34,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "b49072b62fc46da90657b33ae5b99080ceca1747",
   "checkpoint": {
-    "artifactId": 12479194996,
-    "runId": "39903146638",
-    "name": "puzzoria-agent-auth-39903146638-5",
-    "generation": 5,
+    "artifactId": 12498859296,
+    "runId": "39948290202",
+    "name": "puzzoria-agent-auth-39948290202-6",
+    "generation": 6,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39903146638",
+      "runId": "39948290202",
       "phase": "autonomous-agent",
-      "generation": 5
+      "generation": 6
     },
-    "expiresAt": "2027-01-21T04:58:02Z",
-    "digest": "a4cb83b05227f7c136e16f6bc4f730e4b1be8e45fb48e9f2b6e4098268e22565"
+    "expiresAt": "2027-01-21T11:45:10Z",
+    "digest": "40ff75971df637fea1a8048302ae335ceafac57d176443a5f0b95859a26b38d6"
   },
   "lastMessageId": 6357844521,
   "completedSessions": 4,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39903146638",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39903146638"
+    "id": "39948290202",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39948290202"
   },
   "memory": {
     "STATE.md": "# État — 23 octobre 2026\n\nSource exportée annoncée : 8bb90bd2b16b1dbb64f3184ef50265c45fd6eade ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : reserveInner et beginPlay capturent le namespace du propriétaire et rejettent une opération devenue obsolète avec l’erreur existante unavailable. Contrôles après lecture des réponses/JSON, avant mémorisation, avant démarrage après création et avant le fallback de recréation après run indisponible. Les réponses de reprise réussies et de salon live sont également contrôlées. Aucun format de clé, règle serveur ou résultat publié changé. Les requêtes déjà envoyées ne sont pas annulées ; leurs réponses tardives sont rejetées.\n\nTests ajoutés : tests/play-owner-change.test.ts, six scénarios de changement de compte (création reserve/begin, reprise manquante reserve/begin, reprise réussie reserve/begin), préservation du run du destinataire et absence de seconde requête ; deux contrôles positifs de création et déduplication sans changement de propriétaire. Avant correction, les quatre scénarios initiaux échouent : reserve-new résout au lieu de rejeter ; les trois autres dépassent 5 s après avoir engagé une requête supplémentaire laissée en attente par le double fetch. Après correction, les 17 tests des cinq fichiers play-owner-change, play-reservation, play-start, play-completion et play-restore passent.\n\nContrôles terminés : npm run lint, npm run typecheck et node --import tsx scripts/validate-content.ts, codes 0 (92 défis planifiés, 32 articles multilingues). Suite générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner, code 1, 355 tests réussis sur 356, 29 fichiers réussis sur 30. Seul tests/operations.test.ts:55 dépasse le délai de 5 s, comme dans les sessions précédentes ; cause non établie, test inchangé. Les derniers ajouts ciblés ont aussi été vérifiés séparément après modification.\n\nBuild et E2E avec serveur laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l’agent.\n\nLimites : preuves unitaires avec fetch simulé, sans navigateur réel ni mesure de trafic/rétention. Le contrôle compare le namespace actif ; il ne détecte pas un aller-retour A → B → A pendant une requête. La mise à jour des composants consommateurs et les cycles de session restent des sujets distincts.\n\nProchaine mission choisie : examiner les consommateurs de reservePlay/beginPlay/submitPlay et reproduire une mise à jour tardive de brouillon ou d’interface après changement de profil ; corriger le premier cas démontré avec un test ciblé, sans élargir les formats persistés.\n",
