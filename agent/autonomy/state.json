@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 46,
+  "generation": 47,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -209,359 +209,6 @@
     "toolCommands": 17
   },
   "validation": {
-    "39625255374": {
-      "sourceSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "39625255374",
-          "job": "first",
-          "mode": "validation",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-21T15:26:49.869Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 69,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607914
-                },
-                "secondary": {
-                  "usedPercent": 30,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls -a'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/lib | head -55; ls node_modules/next/dist/docs/01-app/03-api-reference/02-components'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat src/lib/browser-storage.ts tests/browser-storage.test.ts; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat docs/RETENTION.md; cat src/lib/new-play.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'localStorage|reserve' src/lib/run* src/components/*Player* src/lib/*client*; rg --files src/lib | rg 'session|practice|run'; cat src/lib/run-client.ts\"",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'cat src/lib/play-client.ts; cat tests/play-client.test.ts; cat vitest.config.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'beginPlay|reservePlay|rememberRun' tests; cat src/lib/types.ts | head -100; cat tests/browser-storage.test.ts | head -8\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat tests/play-reservation.test.ts; sed -n '130,180p' tests/engagement.test.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '103,193p' src/lib/play-client.ts; cat tests/play-start.test.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"ps -eo pid,etime,comm,args | rg 'vitest|eslint|tsc|next typegen'\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 8605eabe6d516ca2ea7a34e8184568d4b30f1089 ; aucun accès Git utilisé.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus sur disque.\n\nContribution choisie : isoler le cache de démarrage de partie par propriétaire. Dans src/lib/play-client.ts, beginPlay utilisait le seul identifiant du défi pour starts, contrairement a",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale en cours au moment de cette rédaction, résultat à compléter.', 'Suite générale terminée avec code 1 : 342 tests réussis, 1 échec sur 343, dans 27 fichiers. Seul tests/operations.test.ts:55 dépasse le délai de 5 s sur la sauvegarde quotidienne/purge/indisponibilité ; ce même échec figurait dans la mémoire précédente. Cause non établie dans cette session, test e",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a15f12-afd8-7db0-8dd5-7aa80b8d4282",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 0,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 72,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607914
-                },
-                "secondary": {
-                  "usedPercent": 30,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 343,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "f2509908bdc66ee359d272caab4468ac6bc73b46",
-            "url": "https://github.com/Aimericv/puzzoria/pull/5",
-            "number": 5
-          },
-          "toolCommands": 18,
-          "finishedAt": "2026-10-21T15:31:26.466Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
-        },
-        "second": {
-          "schemaVersion": 1,
-          "runId": "39625255374",
-          "job": "second",
-          "mode": "validation",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-21T15:35:06.640Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "f2509908bdc66ee359d272caab4468ac6bc73b46",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 73,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607914
-                },
-                "secondary": {
-                  "usedPercent": 31,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . 2>/dev/null\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; cat package.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; rg --files src/lib tests | head -100; ls node_modules/next/dist/docs'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat src/lib/play-client.ts tests/play-start.test.ts docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'use-client'; cat src/lib/browser-storage.ts; rg -n 'Completion|rememberCompletion|authoritativeCompletion' tests/play-reservation.test.ts src/lib/types.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; sed -n '120,165p' src/lib/types.ts; head -65 tests/play-reservation.test.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > tests/play-completion.test.ts <<'EOF'\nimport { afterEach, expect, it, vi } from \\\"vitest\\\";\nimport { authoritativeCompletion, rememberCompletion, rememberRun, resetPlayClient, submitPlay } from \\\"../src/lib/play-client\\\";\nimport { setStorageUser } from \\\"../src/lib/browser-storage\\\";\nimport type { Completion, PublicChallenge } from \\\"../src/lib/types\\\";\n\nconst challenge: PublicChallenge = {\n  kind: \\\"word\\\", id: \\\"word:completion-owner\\\", date: \\\"2026-10-21\\\",\n  locale: \\\"fr",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/play-completion.test.ts tests/play-start.test.ts tests/play-reservation.test.ts tests/browser-storage.test.ts tests/engagement.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '180,215p' src/lib/play-client.ts; rg -n 'resetPlayClient|setStorageUser' src/lib/account-client.ts src/components/auth*\"",
-              "exitCode": 2
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'resetPlayClient|setStorageUser' src/components src/lib/account-client.ts; rg --files -g 'AGENTS.md' src tests agent\"",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/play-completion.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat >> agent/autonomy/memory/DECISIONS.md <<'EOF'\n\n## Session sur source f2509908 — résultats en mémoire\n\n- Choisir une correction limitée du cache results dans play-client. Le provider de compte efface déjà les caches au changement de profil, mais une réponse de soumission encore en vol peut les repeupler après cet effacement : le test reproduit ce cas.\n- Utiliser storageKey pour les completions et capturer cette clé au début de submitPlay, avant les awaits. Les réponses tardives",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale : résultat à compléter avant arrêt.', 'Suite générale : 344 tests réussis sur 345, 27 fichiers réussis sur 28, code 1. Seul tests/operations.test.ts:55 dépasse le délai de 5 s (sauvegarde quotidienne/purge/indisponibilité), échec déjà consigné dans les mémoires précédentes ; cause non établie, assertion et délai inchangés. Commande : XDG_DATA_HOME=/opt/puzzori",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a15f1a-3f77-7950-81dd-0e666ac62dd2",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 1,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 77,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607914
-                },
-                "secondary": {
-                  "usedPercent": 31,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 345,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
-            "url": "https://github.com/Aimericv/puzzoria/pull/5",
-            "number": 5
-          },
-          "toolCommands": 17,
-          "finishedAt": "2026-10-21T15:39:45.719Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39625255374"
-        }
-      }
-    },
     "39841409099": {
       "sourceSha": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
       "jobs": {
@@ -1267,6 +914,183 @@
           "finishedAt": "2026-10-23T17:21:15.457Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39993265531"
+        }
+      }
+    },
+    "40026950371": {
+      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "40026950371",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-23T21:31:09.282Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "876c9bd6647c55820942f41a825977b34897d60c",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792809075
+                },
+                "secondary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395875
+                }
+              }
+            ]
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; ls -la agent/autonomy'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/components | head -60; ls node_modules/next/dist/docs'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx; rg -n 'alive|reservePlay|submitPlay|useEffect' src/components/{classic-games,social-game}.tsx; rg --files | rg '(report|supervisor|play-restore|unmounted-recovery)'\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat src/lib/play-client.ts; cat tests/play-restore.test.ts; rg --files node_modules/next/dist/docs | rg 'use-client'; ls /opt/puzzoria-pilot/readonly\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat src/lib/browser-storage.ts; rg -n 'resetPlayClient|setStorageUser' src/components/account-provider.tsx; sed -n '65,175p' src/components/classic-games.tsx\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/play-restore.test.ts'\ns=open(p).read().replace('[\\\"same\\\", \\\"account\\\", \\\"guest\\\"]','[\\\"same\\\", \\\"account\\\", \\\"guest\\\", \\\"roundtrip\\\", \\\"reset\\\"]')\ns=s.replace('setStorageUser(destination === \\\"guest\\\" ? null : \\\"restore-destination\\\");','''if (destination \"'!== \"reset\") {\n      setStorageUser(destination === \"guest\" ? null : \"restore-destination\");\n      if (destination === \"roundtrip\") {\n        resetPlayClient();\n        setStorageUser(`restore-source-",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/play-client.ts'\ns=open(p).read().replace('const results = new Map<string, Completion>();','const results = new Map<string, Completion>();\\\\nlet clientGeneration = 0;')\ns=s.replace('export async function prepareCompletedPlay(challenge: PublicChallenge) {\\\\n  const ownerKey = completionKey(challenge.id);','export async function prepareCompletedPlay(challenge: PublicChallenge) {\\\\n  const generation = clientGeneration;\\\\n  const ownerKey = completionKey(ch",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/play-restore.test.ts'\ns=open(p).read().replace('    expect(changed).not.toHaveBeenCalled();\\\\n','''    expect(changed).not.toHaveBeenCalled();\n\n    // Discarding an old request must still allow the active profile to restore.\n    const freshCompletion = { ...completion, runId: \\\"destination-run\\\" };\n    vi.stubGlobal(\\\"fetch\\\", vi.fn(async () => ({\n      ok: true,\n      json: async () => ({ runId: freshCompletion.runId, result: {\n        completion: freshC",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run lint'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '82,100p' src/lib/play-client.ts; sed -n '255,275p' src/lib/play-client.ts; sed -n '305,320p' src/lib/play-client.ts; cat tests/play-restore.test.ts; ls agent/autonomy/memory\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nroot=Path('agent/autonomy/memory')\np=root/'DECISIONS.md'\np.write_text(p.read_text()+'''\\\\n## Session sur source 876c9bd6 — restauration après retour au même compte\\\\n\\\\n- Deux tests reproduisent une limite du contrôle par namespace : après A → B → A ou reset sans changement de propriétaire, prepareCompletedPlay accepte encore une réponse ancienne et remplace la completion récente.\\\\n- Capturer une génération mémoire au début de",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader=runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '235,240p' src/lib/play-client.ts; sed -n '274,282p' src/lib/play-client.ts; cat agent/autonomy/memory/PLAN.json\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\np.write_text('''# État — 23 octobre 2026\\\\n\\\\nSource exportée annoncée : 876c9bd6647c55820942f41a825977b34897d60c. Aucun accès Git utilisé.\\\\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md. Aucun rapport navigateur du superviseur trouvé dans les fichiers de travail consultés.\\\\n\\\\nContribution",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a16aac-e91b-74a2-b354-aeb3f0130919",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 6,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 2,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792809084
+                },
+                "secondary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395884
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 362,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "178dd81a15ef2073b28c7e4132e686acd6c26f9b",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 17,
+          "finishedAt": "2026-10-23T21:35:25.599Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40026950371"
         }
       }
     }
