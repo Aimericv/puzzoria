@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 43,
+  "generation": 44,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "876c9bd6647c55820942f41a825977b34897d60c",
   "checkpoint": {
-    "artifactId": 12519595688,
-    "runId": "39993265531",
-    "name": "puzzoria-agent-auth-39993265531-7",
-    "generation": 7,
+    "artifactId": 12533361319,
+    "runId": "40026950371",
+    "name": "puzzoria-agent-auth-40026950371-8",
+    "generation": 8,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39993265531",
+      "runId": "40026950371",
       "phase": "autonomous-agent",
-      "generation": 7
+      "generation": 8
     },
-    "expiresAt": "2027-01-21T17:13:13Z",
-    "digest": "0069a0018744d27442d2d237cff56541672d1dd83f4e6e35e220efde21c8acb3"
+    "expiresAt": "2027-01-21T21:27:53Z",
+    "digest": "70fefa88564f4b09c2423b34ceff6f54277c5a3e24859361e41b3ebf1d6bf047"
   },
   "lastMessageId": 6370662449,
   "completedSessions": 6,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39993265531",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39993265531"
+    "id": "40026950371",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40026950371"
   },
   "memory": {
     "STATE.md": "# État — 23 octobre 2026\n\nSource exportée annoncée : 79b8f6435fb61515425c413549131eb179547342 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : empêcher ClassicGame et SocialGame de lancer reservePlay depuis leur catch après démontage. SocialGame réutilise son alive existant ; ClassicGame ajoute un ref activé dans son effet de préparation et désactivé dans le cleanup. ClassicGame vérifie aussi ce ref après submitPlay et après la restauration, et évite setBusy après démontage. La restauration reste active lorsque le composant est présent. Aucun format sauvegardé, règle serveur ou identité modifié.\n\nPreuves et limites : inspection du code montrant les appels reservePlay sans contrôle préalable dans les deux catch. Ajout de e2e/unmounted-recovery.spec.ts : quatre scénarios (2048 et classement aveugle, avec départ via lien interne ou maintien sur place), fetch submit différé puis erreur locale 409 ; vérifier zéro restauration après départ et une restauration sur place. Les requêtes submit de ces scénarios sont simulées avant envoi. Playwright --list reconnaît 16 cas sur quatre profils ; aucun parcours navigateur exécuté dans ce sandbox. Il n’y a donc pas de reproduction observée avant/après du nouveau correctif ; validation navigateur attendue du superviseur. Les tests existants de play-client ne montent pas ces composants.\n\nContrôles terminés : npm run lint et npm run typecheck, codes 0 ; node --import tsx scripts/validate-content.ts, code 0 (92 défis, 32 articles multilingues). Tests ciblés : npm test -- --configLoader runner sur play-completion, play-owner-change, play-reservation, play-restore et play-start : 21 réussites. Suite générale avec XDG_DATA_HOME local : 359/360 tests réussis, 29/30 fichiers réussis ; seul tests/operations.test.ts:55 dépasse 5 s, déjà consigné précédemment, cause non établie et contrôles inchangés. Build et exécution E2E laissés au superviseur selon le mandat.\n\nLimites : aucune métrique utilisateur, aucun navigateur réel. Ces gardes concernent le démontage ; elles ne constituent pas une protection générale par génération de session contre A → B → A ou la réactivation d’un effet dans une même instance. Le nouveau test quitte la page ; il ne simule pas encore un changement de compte avec une restauration déjà en vol.\n\nAucun script, manifest/verrou, instruction, protection ni secret modifié. Aucun réseau externe, achat, merge, déploiement ou publication effectué par l’agent.\n\nProchaine mission choisie : examiner les preuves navigateur du superviseur pour unmounted-recovery, puis ajouter un scénario de restauration déjà en vol lors du changement de compte, en vérifiant que le brouillon et le résultat du destinataire restent intacts. Corriger uniquement un effet tardif démontré ; ne pas étendre automatiquement l’architecture.\n",
