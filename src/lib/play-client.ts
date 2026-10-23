@@ -35,7 +35,17 @@ async function reserveInner(challenge: PublicChallenge): Promise<
     };
   }
 > {
-  if (challenge.roomId) return await postJson("/api/live-rooms", { action: "run", code: challenge.roomId }) as unknown as RunResponse;
+  // An in-flight response must not cross into a different storage owner.
+  const ownerKey = storageKey(`dailygrid:run:${challenge.id}`);
+  const checkOwner = () => {
+    if (storageKey(`dailygrid:run:${challenge.id}`) !== ownerKey)
+      throw new Error("unavailable");
+  };
+  if (challenge.roomId) {
+    const data = await postJson("/api/live-rooms", { action: "run", code: challenge.roomId });
+    checkOwner();
+    return data as unknown as RunResponse;
+  }
   let id: string | null = null;
   try {
     id = JSON.parse(readLocal(`dailygrid:run:${challenge.id}`) ?? "null");
@@ -46,7 +56,12 @@ async function reserveInner(challenge: PublicChallenge): Promise<
     const response = await fetch(`/api/play?runId=${encodeURIComponent(id)}`, {
       cache: "no-store",
     });
-    if (response.ok) return response.json();
+    checkOwner();
+    if (response.ok) {
+      const data = await response.json();
+      checkOwner();
+      return data;
+    }
     if (response.status !== 404) throw new Error("networkError");
   }
   if (challenge.mode === "practice" && !challenge.friendId)
@@ -66,6 +81,7 @@ async function reserveInner(challenge: PublicChallenge): Promise<
             : {}),
         },
   );
+  checkOwner();
   if ((data.challenge as PublicChallenge)?.id !== challenge.id)
     throw new Error("unavailable");
   rememberRun(challenge, data.runId as string);
@@ -109,6 +125,10 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
   const key = challenge.id;
   // The same Daily challenge can be played by different owners in one tab.
   const ownerKey = storageKey(`dailygrid:run:${key}`);
+  const checkOwner = () => {
+    if (storageKey(`dailygrid:run:${key}`) !== ownerKey)
+      throw new Error("unavailable");
+  };
   const existing = starts.get(ownerKey);
   if (existing) return existing;
   const promise = (async () => {
@@ -137,6 +157,7 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
               ? { difficulty: challenge.difficulty }
               : {}),
           });
+      checkOwner();
       if (
         challenge.friendId &&
         (created.challenge as PublicChallenge)?.id !== key
@@ -146,12 +167,16 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
       rememberRun(challenge, runId);
     };
     if (typeof runId !== "string" || !runId) await create();
+    checkOwner();
     try {
-      return (await postJson("/api/play", {
+      const started = await postJson("/api/play", {
         action: "start",
         runId,
-      })) as unknown as RunResponse;
+      });
+      checkOwner();
+      return started as unknown as RunResponse;
     } catch (error) {
+      checkOwner();
       // Signup can claim a guest run while its original draft remains locally.
       // Daily/archive challenges keep the same content when a new owner resumes.
       if (
@@ -161,10 +186,13 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
       )
         throw error;
       await create();
-      return (await postJson("/api/play", {
+      checkOwner();
+      const started = await postJson("/api/play", {
         action: "start",
         runId,
-      })) as unknown as RunResponse;
+      });
+      checkOwner();
+      return started as unknown as RunResponse;
     }
   })();
   starts.set(ownerKey, promise);
