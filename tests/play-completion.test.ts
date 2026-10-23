@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { authoritativeCompletion, rememberCompletion, rememberRun, resetPlayClient, submitPlay } from "../src/lib/play-client";
-import { setStorageUser } from "../src/lib/browser-storage";
+import { authoritativeCompletion, beginPlay, rememberCompletion, rememberRun, resetPlayClient, submitPlay } from "../src/lib/play-client";
+import { readLocal, setStorageUser, writeLocal } from "../src/lib/browser-storage";
 import type { Completion, PublicChallenge } from "../src/lib/types";
 
 const challenge: PublicChallenge = {
@@ -58,10 +58,75 @@ it("keeps a late submitted completion in the initiating owner's cache", async ()
   const recipient = completion("recipient-run");
   rememberCompletion(recipient);
   resolve(Response.json({ completion: completion("sender-run") }));
-  await pending;
+  await expect(pending).rejects.toThrow("unavailable");
   expect(authoritativeCompletion(challenge.id)).toEqual(recipient);
   setStorageUser("completion-sender");
   expect(authoritativeCompletion(challenge.id)?.runId).toBe("sender-run");
   setStorageUser(null);
   expect(authoritativeCompletion(challenge.id)).toBeUndefined();
+});
+
+// Consumers apply both intermediate state and completed results after submitPlay.
+it.each(["response", "json"])("does not deliver late progress to a draft consumer (%s)", async (delay) => {
+  vi.stubGlobal("window", new EventTarget());
+  setStorageUser(`progress-origin-${delay}`);
+  rememberRun(challenge, "progress-run");
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  let reading = false;
+  const fetch = vi.fn(async (_url: string, options: RequestInit) => {
+    const body = JSON.parse(String(options.body));
+    if (body.action === "start") return Response.json({ runId: body.runId, challenge });
+    reading = true;
+    if (delay === "response") await gate;
+    return { ok: true, json: async () => {
+      if (delay === "json") await gate;
+      return { state: { moves: 1 } };
+    } } as Response;
+  });
+  vi.stubGlobal("fetch", fetch);
+  writeLocal(`dailygrid:game:${challenge.id}`, { moves: 0 });
+  const applyDraft = vi.fn((data: Record<string, unknown>) => {
+    writeLocal(`dailygrid:game:${challenge.id}`, data.state);
+  });
+  const pending = submitPlay(challenge, { step: { kind: "move" } }).then(applyDraft);
+  const rejected = expect(pending).rejects.toThrow("unavailable");
+  await vi.waitFor(() => expect(reading).toBe(true));
+  resetPlayClient();
+  setStorageUser(`progress-destination-${delay}`);
+  writeLocal(`dailygrid:game:${challenge.id}`, { moves: 7 });
+  release();
+  await rejected;
+  expect(applyDraft).not.toHaveBeenCalled();
+  expect(JSON.parse(readLocal(`dailygrid:game:${challenge.id}`)!)).toEqual({ moves: 7 });
+  setStorageUser(`progress-origin-${delay}`);
+  expect(JSON.parse(readLocal(`dailygrid:game:${challenge.id}`)!)).toEqual({ moves: 0 });
+  expect(fetch).toHaveBeenCalledTimes(2);
+});
+
+it("does not submit a cached started run after switching owners in the await gap", async () => {
+  vi.stubGlobal("window", new EventTarget());
+  setStorageUser("submit-gap-origin");
+  rememberRun(challenge, "gap-run");
+  const fetch = vi.fn(async () => Response.json({ runId: "gap-run", challenge }));
+  vi.stubGlobal("fetch", fetch);
+  await beginPlay(challenge);
+  const pending = submitPlay(challenge, { guesses: [] });
+  const rejected = expect(pending).rejects.toThrow("unavailable");
+  resetPlayClient();
+  setStorageUser("submit-gap-destination");
+  await rejected;
+  expect(fetch).toHaveBeenCalledTimes(1);
+});
+
+it("delivers progress and completion normally for an unchanged owner", async () => {
+  vi.stubGlobal("window", new EventTarget());
+  setStorageUser("submit-stable");
+  rememberRun(challenge, "stable-run");
+  const result = { state: { moves: 1 }, completion: completion("stable-run") };
+  vi.stubGlobal("fetch", vi.fn(async (_url: string, options: RequestInit) =>
+    Response.json(JSON.parse(String(options.body)).action === "start"
+      ? { runId: "stable-run", challenge } : result)));
+  expect(await submitPlay(challenge, { guesses: [] })).toEqual(result);
+  expect(authoritativeCompletion(challenge.id)).toEqual(result.completion);
 });

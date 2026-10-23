@@ -207,7 +207,12 @@ export async function submitPlay(
 ) {
   // Capture before any request: the active account may change while submitting.
   const ownerKey = completionKey(challenge.id);
+  const checkOwner = () => {
+    if (completionKey(challenge.id) !== ownerKey)
+      throw new Error("unavailable");
+  };
   const run = await beginPlay(challenge);
+  checkOwner();
   const result = await postJson(challenge.roomId ? "/api/live-rooms" : "/api/play", {
     ...body,
     action: "submit",
@@ -216,6 +221,9 @@ export async function submitPlay(
   });
   if (result.completion)
     results.set(ownerKey, result.completion as Completion);
+  // Keep completed results with their owner, but never deliver stale state
+  // to a consumer that may now save its draft under another profile.
+  checkOwner();
   return result;
 }
 export const authoritativeCompletion = (id: string) => results.get(completionKey(id));
