@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 41,
+  "generation": 42,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -221,179 +221,6 @@
     "toolCommands": 20
   },
   "validation": {
-    "39623126545": {
-      "sourceSha": "9baa2b0b860ac863ed8514fc12a5c4998ac9c049",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "39623126545",
-          "job": "first",
-          "mode": "validation",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-21T15:10:23.567Z",
-          "status": "failed",
-          "commands": [
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 57,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607915
-                },
-                "secondary": {
-                  "usedPercent": 28,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json && rg --files agent'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/* && cat package.json && rg --files src/lib tests | head -90 && ls node_modules/next/dist/docs'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat src/lib/share-client.ts tests/share-client.test.ts src/lib/smooth-scroll.ts src/lib/replay-scroll.ts src/lib/browser-storage.ts && cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat docs/RETENTION.md && rg --files node_modules/next/dist/docs | rg 'use-client|client-components' && rg -n 'readLocal|writeLocal|localUpdated' tests\"",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md && cat vitest.config.ts && rg -n 'browser-storage|stubGlobal\\\\(\\\"localStorage' tests\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > tests/browser-storage.test.ts <<'EOF'\nimport { afterEach, beforeEach, describe, expect, it, vi } from \\\"vitest\\\";\nimport { clearAccountStorage, localUpdated, readLocal, setStorageUser, writeLocal } from \\\"../src/lib/browser-storage\\\";\n\nconst key = \\\"dailygrid:game:storage-regression\\\";\nlet disk: Record<string, string>;\nlet failOn: string | undefined;\nbeforeEach(() => {\n  disk = {};\n  failOn = undefined;\n  setStorageUser(null);\n  vi.stubGlobal(\\\"localStorage\\\", {\n    getItem:",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/browser-storage.test.ts'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '9670,9705p' node_modules/vitest/dist/chunks/index.DpLw24bj.js && node --version\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/browser-storage.test.ts'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/browser-storage.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run content:validate'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'npm run build'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat tests/browser-storage.test.ts && cat src/lib/browser-storage.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run test:e2e'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/browser-storage.test.ts'\ns=open(p).read().replace('vi.stubGlobal(\\\"localStorage\\\", {\\\\n    getItem: (name: string) => disk[name] ?? null,\\\\n    setItem: (name: string, value: string) => {','vi.stubGlobal(\\\"localStorage\\\", Object.defineProperties(disk, {\\\\n    getItem: { value: (name: string) => disk[name] ?? null },\\\\n    setItem: { value: (name: string, value: string) => {').replace('disk[name] = value;\\\\n    },\\\\n    removeItem: (name: string) => { dele",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"ps -eo pid,etime,pcpu,args | rg '(vitest|eslint|tsc|next|node)' | head -45\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'timeout|setTimeout|sleep|100000|60000' tests | head -40 && ls -la .tmp | head -15\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner --maxWorkers 2'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 21 octobre 2026\n\nSource exportée annoncée : 37aa7654be9393173c4d5c7d3446cc0832bb9818 ; aucun accès Git.\nAGENTS.md, MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client ont été lus.\n\nContribution choisie : empêcher un ancien brouillon local de masquer la dernière écriture conservée en mémoire lorsque localStorage refuse une écriture. src/lib/browser-storage.ts suit les clés non persis",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='agent/autonomy/memory/STATE.md'\ns=open(p).read().replace('Les trois cas ont échoué avant correction et passé après correction (avant amélioration du double de stockage pour vérifier aussi l\\\\'effacement disque).','Les trois cas ont échoué avant correction et passé après correction. Le double de stockage final vérifie aussi l\\\\'effacement disque ; ces tests passent également dans les deux exécutions générales.').replace('Tests généraux en cours au moment de cett",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a15f03-bef6-7413-b962-efd541de194a",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 0,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 61,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792607915
-                },
-                "secondary": {
-                  "usedPercent": 29,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793118249
-                }
-              }
-            ]
-          },
-          "error": "Command failed: /opt/hostedtoolcache/node/24.15.0/x64/bin/node /opt/puzzoria-pilot/readonly/node_modules/@openai/codex/bin/codex.js sandbox --include-managed-config -P pilot -C /opt/puzzoria-pilot/work -- npm test -- --maxWorkers=2 --reporter=json --outputFile=.agent-tests.json",
-          "unverifiedSnapshot": "8605eabe6d516ca2ea7a34e8184568d4b30f1089",
-          "finishedAt": "2026-10-21T15:14:36.623Z",
-          "workflowOutcome": "failure",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39623126545"
-        }
-      }
-    },
     "39625255374": {
       "sourceSha": "20ae3e330a9b4bacd251e195a93e8d9401278305",
       "jobs": {
@@ -1263,6 +1090,195 @@
           "finishedAt": "2026-10-23T11:52:17.036Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39948290202"
+        }
+      }
+    },
+    "39993265531": {
+      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "39993265531",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-23T17:16:48.766Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "79b8f6435fb61515425c413549131eb179547342",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792793816
+                },
+                "secondary": {
+                  "usedPercent": 7,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793297489
+                }
+              }
+            ]
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*STATE*' -g '*LOG*' agent . | head -70\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent/autonomy/memory'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/{STATE.md,DECISIONS.md,EXPERIMENTS.md,PLAN.json}; cat package.json'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'catch|reservePlay|submitPlay|useEffect|cancelled' src/components/games/{ClassicGame,SocialGame}.tsx; rg --files src | rg 'classic|social|play-client'; cat docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'catch|reservePlay|submitPlay|cancelled|alive' src/components/{classic-games,social-game}.tsx; cat tests/play-completion.test.ts | head -100; cat src/lib/play-client.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '35,180p' src/components/classic-games.tsx; sed -n '90,270p' src/components/social-game.tsx; ls tests; ls e2e\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"head -100 e2e/classic-games.spec.ts; head -100 e2e/social-games.spec.ts; cat src/components/use-stored-state.ts 2>/dev/null; rg -n 'key=|ClassicGame|SocialGame' src/components/game-player.tsx; cat e2e/browser-errors.ts | head -40\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"head -50 src/components/classic-games.tsx; head -85 src/components/social-game.tsx; cat tests/cookie-settings.test.ts | head -60; rg -n '<Link|href=' src/components/header.tsx\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/components/classic-games.tsx'\ns=open(p).read().replace('const locked = useRef(false),','const alive = useRef(true),\\\\n    locked = useRef(false),',1).replace('    let live = true;\\\\n    void reservePlay(c)','    let live = true;\\\\n    alive.current = true;\\\\n    void reservePlay(c)',1).replace('      live = false;','      live = false;\\\\n      alive.current = false;',1).replace('        const result = data.state as PuzzleState;','        if (\"'!alive.curren",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-completion.test.ts tests/play-owner-change.test.ts tests/play-reservation.test.ts tests/play-restore.test.ts tests/play-start.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat > e2e/unmounted-recovery.spec.ts <<'EOF'\nimport { test, expect } from \\\"@playwright/test\\\";\nimport { directions, slide } from \\\"../src/lib/tile2048\\\";\n\nfor (const game of [\\\"2048\\\", \\\"ranking\\\"] as const) {\n  for (const leave of [false, true]) {\n    test(\"'`${game}: late failed submission ${leave ? \"does not restore after leaving\" : \"restores while active\"}`, async ({ page }) => {\n      await page.addInitScript(() => {\n        localStorage.setItem(\"puzzoria:measurement-choice\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node node_modules/@playwright/test/cli.js test e2e/unmounted-recovery.spec.ts --list'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run lint'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '60,82p' src/components/classic-games.tsx; sed -n '130,179p' src/components/classic-games.tsx; sed -n '218,230p' src/components/social-game.tsx\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'useStoredState|setValue =|useCallback' src/components/storage.tsx | head -20; cat vitest.config.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'function useStoredState|setValue.*useCallback|function useGameSession' src/components/storage*; date -u\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '34,90p' src/components/storage.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nroot=Path('agent/autonomy/memory')\n(root/'STATE.md').write_text('''# État — 23 octobre 2026\n\nSource exportée annoncée : 79b8f6435fb61515425c413549131eb179547342 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : empêcher ClassicGame et SocialGame de lancer reservePlay depuis leur ca",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a169c4-119e-7611-bb08-ba4b7d39ed9f",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 5,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 3,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792793824
+                },
+                "secondary": {
+                  "usedPercent": 8,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793297489
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 360,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "876c9bd6647c55820942f41a825977b34897d60c",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 20,
+          "finishedAt": "2026-10-23T17:21:15.457Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39993265531"
         }
       }
     }
