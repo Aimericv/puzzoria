@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 28,
+  "generation": 29,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "8bb90bd2b16b1dbb64f3184ef50265c45fd6eade",
   "checkpoint": {
-    "artifactId": 12454165704,
-    "runId": "39841409099",
-    "name": "puzzoria-agent-auth-39841409099-4",
-    "generation": 4,
+    "artifactId": 12479194996,
+    "runId": "39903146638",
+    "name": "puzzoria-agent-auth-39903146638-5",
+    "generation": 5,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "39841409099",
+      "runId": "39903146638",
       "phase": "autonomous-agent",
-      "generation": 4
+      "generation": 5
     },
-    "expiresAt": "2027-01-20T19:35:20Z",
-    "digest": "41bf9b452d32a96ba9286a859cffac8953978caa7c3d20cc2724f7fdae7ebfb4"
+    "expiresAt": "2027-01-21T04:58:02Z",
+    "digest": "a4cb83b05227f7c136e16f6bc4f730e4b1be8e45fb48e9f2b6e4098268e22565"
   },
   "lastMessageId": 6349729447,
   "completedSessions": 3,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "39841409099",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099"
+    "id": "39903146638",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/39903146638"
   },
   "memory": {
     "STATE.md": "# État — 22 octobre 2026\n\nSource exportée annoncée : 25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (message du propriétaire autorisant la poursuite libre sans fusion ni déploiement), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : prepareCompletedPlay capture le namespace du propriétaire avant sa requête et vérifie qu'il est toujours actif après la lecture JSON. Une réponse devenue obsolète est ignorée avant rememberCompletion, rememberRun et les écritures de grille/session. Cela évite aussi l'émission de synchronisations pour le nouveau compte. La restauration pourra être redemandée lors du retour au profil initial ; aucune clé persistante ni autorité serveur changée.\n\nTests ajoutés dans tests/play-restore.test.ts : réponse JSON différée, changement de compte ou passage à invité après reset des caches, préservation du résultat/run/grille/session du destinataire et absence de sync ; contrôle positif sans changement de propriétaire. Avant correction, deux échecs sur trois (résultat original écrasant destination-run). Après correction, sept tests ciblés passent dans les fichiers play-restore, play-completion et play-start.\n\nContrôles terminés : npm run lint et npm run typecheck, codes 0 ; node --import tsx scripts/validate-content.ts, code 0 (92 défis planifiés, 32 articles multilingues). Suite générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner, code 1 ; 347 tests réussis sur 348, 28 fichiers réussis sur 29. Seul tests/operations.test.ts:55 dépasse le délai de 5 s, comme dans les sessions précédentes. Cause non établie ; aucune assertion ni limite modifiée.\n\nBuild et E2E avec serveur laissés au superviseur conformément au mandat. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, merge, déploiement ou publication effectué par l'agent.\n\nLimites : preuve unitaire avec fetch simulé ; aucun navigateur réel ni mesure de trafic/rétention. Les créations tardives de runs dans reserveInner et beginPlay restent à examiner séparément.\n\nProchaine mission choisie : reproduire une création de run tardive lors d'un changement de propriétaire (reservePlay et beginPlay), puis empêcher sa mémorisation ou son démarrage dans le nouveau contexte, en conservant la déduplication et les reprises légitimes.\n",
