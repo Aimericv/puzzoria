@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 48,
+  "generation": 49,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "178dd81a15ef2073b28c7e4132e686acd6c26f9b",
   "checkpoint": {
-    "artifactId": 12533361319,
-    "runId": "40026950371",
-    "name": "puzzoria-agent-auth-40026950371-8",
-    "generation": 8,
+    "artifactId": 12548253498,
+    "runId": "40063437750",
+    "name": "puzzoria-agent-auth-40063437750-9",
+    "generation": 9,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40026950371",
+      "runId": "40063437750",
       "phase": "autonomous-agent",
-      "generation": 8
+      "generation": 9
     },
-    "expiresAt": "2027-01-21T21:27:53Z",
-    "digest": "70fefa88564f4b09c2423b34ceff6f54277c5a3e24859361e41b3ebf1d6bf047"
+    "expiresAt": "2027-01-22T04:43:00Z",
+    "digest": "b7c317e2bf894597110f9c0944ef8edd0175041f8920a6869460b413e4beb3ff"
   },
   "lastMessageId": 6375202378,
   "completedSessions": 7,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40026950371",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40026950371"
+    "id": "40063437750",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40063437750"
   },
   "memory": {
     "STATE.md": "# État — 23 octobre 2026\n\nSource exportée annoncée : 876c9bd6647c55820942f41a825977b34897d60c. Aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md. Aucun rapport navigateur du superviseur trouvé dans les fichiers de travail consultés.\n\nContribution : empêcher prepareCompletedPlay de restaurer une réponse antérieure à resetPlayClient, même après un retour au même compte (A → B → A). Une génération en mémoire est capturée au début de la restauration et incrémentée lors du reset déjà utilisé par le provider de compte. Le contrôle de namespace existant reste en place. Aucun format persisté, règle serveur ou identité modifié.\n\nPreuves : deux nouveaux scénarios dans tests/play-restore.test.ts échouent avant correction, car original-run écrase destination-run ; les trois scénarios précédents passent. Après correction, les cinq scénarios passent et les 23 tests ciblés de play-client passent. Le test vérifie conservation du résultat, run, grille, session et absence de sync ; les quatre scénarios invalidés vérifient aussi qu’une nouvelle restauration du profil actif réussit. Ces assertions supplémentaires ont été ajoutées après le lancement de la suite générale et les cinq scénarios ont ensuite repassé séparément.\n\nContrôles : npm run lint et npm run typecheck terminés avec code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). Suite générale avec XDG_DATA_HOME local : 361/362 tests réussis, 29/30 fichiers réussis ; seul tests/operations.test.ts:55 dépasse 5 s, déjà consigné dans les sessions précédentes. Cause non établie ; aucune assertion ni limite modifiée. Build et E2E laissés au superviseur conformément au mandat. Aucun navigateur réel ni résultat utilisateur mesuré.\n\nLimites : cette génération ne protège que prepareCompletedPlay. Les autres requêtes gardent leurs contrôles de namespace et peuvent nécessiter une reproduction A → B → A distincte. Les gardes de composants et les E2E unmounted-recovery précédents ne sont pas validés par cette preuve unitaire.\n\nAucun script, manifest/verrou, instruction, protection ni secret modifié. Aucun réseau externe, achat, merge, déploiement ou publication effectué par l’agent. Les quatre mémoires sont mises à jour ; nonce de continuité conservé.\n\nProchaine mission choisie : examiner les preuves navigateur du superviseur si disponibles, puis reproduire A → B → A pendant une soumission en vol ; vérifier caches et consommateurs avant d’étendre la garde de génération.\n",
