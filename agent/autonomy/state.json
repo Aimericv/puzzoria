@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 51,
+  "generation": 52,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -205,179 +205,6 @@
     "toolCommands": 16
   },
   "validation": {
-    "39841409099": {
-      "sourceSha": "94d4d40b2476b4755f0df233edf7ae4c4d4e53d3",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "39841409099",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-22T19:39:49.131Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 28,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792710689
-                },
-                "secondary": {
-                  "usedPercent": 4,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793297489
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/components | head -45'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat src/lib/play-client.ts; cat tests/play-completion.test.ts; cat src/components/storage.ts; cat docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.mdx'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'use-client'; cat src/lib/browser-storage.ts; rg -n 'prepareCompletedPlay' tests src\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat tests/play-start.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > tests/play-restore.test.ts <<'EOF'\nimport { afterEach, expect, it, vi } from \\\"vitest\\\";\nimport { authoritativeCompletion, prepareCompletedPlay, rememberCompletion, resetPlayClient } from \\\"../src/lib/play-client\\\";\nimport { readLocal, setStorageUser, writeLocal } from \\\"../src/lib/browser-storage\\\";\nimport type { Completion, PublicChallenge } from \\\"../src/lib/types\\\";\n\nafterEach(() => {\n  resetPlayClient();\n  setStorageUser(null);\n  vi.unstubAllGlobals();\n});\n\nit.each([\\\"s",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader runner tests/play-restore.test.ts tests/play-completion.test.ts tests/play-start.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files tests | rg 'storage|play|progress'\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat tests/play-reservation.test.ts; sed -n '40,80p' src/components/game-player.tsx\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 22 octobre 2026\n\nSource exportée annoncée : 25bfbab98f4bacf40bd73b0bcb1fe094be5dc00a ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (message du propriétaire autorisant la poursuite libre sans fusion ni déploiement), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : prepareCompletedPlay capture le namespace du propriétaire avant sa requ",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md')\ns=p.read_text().replace('Suite générale lancée avec XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner ; résultat à compléter ci-dessous.', 'Suite générale : XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner, code 1 ; 347 tests réussis sur 348, 28 fichiers réussis sur 29. Seul tests/operations.test.ts:55 dépasse le délai de 5",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a16520-bdec-74a0-b4ba-04cf58ae7495",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 2,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 31,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792710689
-                },
-                "secondary": {
-                  "usedPercent": 5,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793297489
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 348,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "8bb90bd2b16b1dbb64f3184ef50265c45fd6eade",
-            "url": "https://github.com/Aimericv/puzzoria/pull/5",
-            "number": 5
-          },
-          "toolCommands": 16,
-          "finishedAt": "2026-10-22T19:43:58.072Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39841409099"
-        }
-      }
-    },
     "39903146638": {
       "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
       "jobs": {
@@ -1087,6 +914,179 @@
           "finishedAt": "2026-10-23T21:35:25.599Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40026950371"
+        }
+      }
+    },
+    "40063437750": {
+      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "40063437750",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-24T04:46:22.732Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "178dd81a15ef2073b28c7e4132e686acd6c26f9b",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792835190
+                },
+                "secondary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395884
+                }
+              }
+            ]
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . 2>/dev/null\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files src/components | head -60'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat src/components/play-client.ts tests/play-submit.test.ts docs/RETENTION.md node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; rg --files | rg 'report|supervisor'\"",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"rg --files | rg 'play-(client|submission|completion|restore|start)|play.*test'; cat src/lib/play-client.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat tests/play-owner-change.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat tests/play-completion.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/play-completion.test.ts'\ns=open(p).read(); s += '''\n\nit.each([\\\"roundtrip\\\", \\\"reset\\\"])(\\\"discards a submission from a previous client generation (%s)\\\", async (cycle) => {\n  vi.stubGlobal(\\\"window\\\", new EventTarget());\n  const owner = \"'`submit-generation-${cycle}`;\n  setStorageUser(owner);\n  rememberRun(challenge, \"old-run\");\n  let release!: () => void;\n  const gate = new Promise<void>((resolve) => { release = resolve; });\n  let submitting = false;\n  ",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/play-client.ts';s=open(p).read();s=s.replace('// Capture before any request: the active account may change while submitting.\\\\n  const ownerKey', '// Capture before any request: resets invalidate even a return to the same account.\\\\n  const generation = clientGeneration;\\\\n  const ownerKey');s=s.replace('if (completionKey(challenge.id) \"'!== ownerKey)'\"\\\\n      throw', 'if (generation \"'!== clientGeneration || completionKey(challenge.id) !== ownerKey)'\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run lint'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '218,257p' src/lib/play-client.ts; rg -n 'resetPlayClient|setStorageUser' src/components/account-provider.tsx; rg --files .tmp agent | head -30\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/play-completion.test.ts';s=open(p).read().replace('it(\\\"does not submit a cached started run after switching owners in the await gap\\\", async () => {','it.each([\\\"switch\\\", \\\"roundtrip\\\", \\\"reset\\\"])(\\\"does not submit a cached started run after invalidation in the await gap (%s)\\\", async (cycle) => {').replace('  setStorageUser(\\\"submit-gap-destination\\\");\\\\n  await rejected;', '  if (cycle \"'!== \"reset\") setStorageUser(\"submit-gap-destination\");'\"\\\\n  if",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader=runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nroot='agent/autonomy/memory/'\np=root+'PLAN.json';d=json.load(open(p));d.update(summary='Soumissions invalidées après resetPlayClient, y compris A → B → A : rejet avant envoi et avant cache/consommateur ; deux régressions reproduites puis corrigées.',nextMission='Examiner les preuves navigateur du superviseur si disponibles, puis reproduire A → B → A pendant une création ou un démarrage en vol ; vérifier absence de mémorisation et de requête de reprise ",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a16c3b-64c9-7691-a86a-54e46acc716c",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 7,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 2,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792835199
+                },
+                "secondary": {
+                  "usedPercent": 1,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395884
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 366,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "c8921a361188453f1417d47d18f529ae1e387e99",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 16,
+          "finishedAt": "2026-10-24T04:49:35.268Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40063437750"
         }
       }
     }
