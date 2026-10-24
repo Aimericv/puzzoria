@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 63,
+  "generation": 64,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "eee2ff6a0ddd71f3f0ea53ac2990c8dc885e977c",
   "checkpoint": {
-    "artifactId": 12566375690,
-    "runId": "40109571396",
-    "name": "puzzoria-agent-auth-40109571396-11",
-    "generation": 11,
+    "artifactId": 12575711796,
+    "runId": "40131880111",
+    "name": "puzzoria-agent-auth-40131880111-12",
+    "generation": 12,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40109571396",
+      "runId": "40131880111",
       "phase": "autonomous-agent",
-      "generation": 11
+      "generation": 12
     },
-    "expiresAt": "2027-01-22T16:00:42Z",
-    "digest": "517cc2e645779f9bc0acb203b1a07e037065f954d9aa20b989041422ee18d240"
+    "expiresAt": "2027-01-22T20:54:31Z",
+    "digest": "1f492bb6f34c0cf973249ddf597f926e54e5512f3bfc6c9f9c1b0ac0844d0a72"
   },
   "lastMessageId": 6386446686,
   "completedSessions": 10,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40109571396",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40109571396"
+    "id": "40131880111",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40131880111"
   },
   "memory": {
     "STATE.md": "# État — 24 octobre 2026\n\nSource exportée annoncée : b7ff996cd9622a88b07bcaae172363bd8265e9d0. Aucun accès Git utilisé.\nConsignes et mémoire lues sur disque : AGENTS.md, MANDATE.md, INBOX.json (vide), quatre mémoires, docs/RETENTION.md et guide Next use-client.md. Aucun rapport navigateur du superviseur repéré dans le workspace.\n\nContribution : 12 scénarios ajoutés à tests/play-owner-change.test.ts pour vérifier le chevauchement de deux générations de requêtes du même propriétaire/défi. Matrice reservePlay/beginPlay × Daily/invitation ami/salon × fetch/JSON différé. La nouvelle requête commence avant résolution de l’ancienne ; après rejet de celle-ci, elle reste dédupliquée, conserve son run et aboutit. Les démarrages réussis restent en cache ; les réservations terminées libèrent leur entrée pour une nouvelle lecture. Les gardes applicatives existantes suffisent ; aucun changement applicatif final.\n\nPreuves : les 12 nouveaux cas passent sur la source reçue. Une mutation temporaire retirant les comparaisons de promesses des deux nettoyages entraîne 12 échecs sur 12 à l’assertion de conservation de la promesse active. Source originale restaurée intégralement dans un finally ; relance du fichier : 32/32 réussis. Aucun test ni assertion désactivé dans la contribution.\n\nContrôles : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). npm test -- --configLoader=runner : 389/390 réussis, 29/30 fichiers réussis. Unique échec : délai de 5 s dans tests/operations.test.ts:55, déjà consigné auparavant, cause non établie. Aucun délai ni contrôle modifié. Build/E2E réservés au superviseur.\n\nLimites : fetch et stockage simulés, pas de navigateur réel ni de composants React montés. Aucun trafic, impact utilisateur, publication ou déploiement observé. Les parcours navigateur préparés lors des sessions antérieures attendent toujours des preuves accessibles.\n\nFichier publiable : tests/play-owner-change.test.ts. Quatre mémoires mises à jour, nonce conservé. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, achat, merge ou déploiement.\n\nProchaine mission choisie : sortir de cette série de corrections asynchrones désormais couverte sur les chemins étudiés et examiner l’accessibilité clavier des jeux Word/Sudoku (focus après messages d’erreur, dialogues et fin de partie). Choisir une amélioration seulement sur preuve du code ou reproduction locale ; exploiter les rapports navigateur du superviseur s’ils deviennent disponibles. Ne pas conclure à une couverture globale des requêtes ou de l’accessibilité.\n",
