@@ -74,3 +74,80 @@ it.each([reservePlay, beginPlay])("preserves creation and deduplication for an u
   expect(JSON.parse(readLocal(`dailygrid:run:${challenge.id}`)!)).toBe("stable-run");
   expect(fetch).toHaveBeenCalledTimes(play === beginPlay ? 2 : 1);
 });
+
+it.each(
+  ["reserve", "begin"].flatMap((operation) =>
+    ["daily", "friend", "room"].flatMap((route) =>
+      ["fetch", "json"].map((delay) => ({ operation, route, delay })),
+    ),
+  ),
+)("keeps the new $operation promise while obsolete $route $delay work settles", async ({ operation, route, delay }) => {
+  const disk = new Map<string, string>();
+  vi.stubGlobal("localStorage", {
+    getItem: (key: string) => disk.get(key) ?? null,
+    setItem: (key: string, value: string) => disk.set(key, value),
+  });
+  vi.stubGlobal("window", new EventTarget());
+  setStorageUser("concurrent-owner");
+  const challenge: PublicChallenge = {
+    kind: "word", id: `word:concurrent-${operation}-${route}-${delay}`,
+    date: "2026-10-24", locale: "fr", length: 5, attempts: 6,
+    ...(route === "friend" ? { friendId: "private-invitation", mode: "practice" as const } : {}),
+    ...(route === "room" ? { roomId: "private-room", mode: "practice" as const } : {}),
+  };
+  const play = operation === "reserve" ? reservePlay : beginPlay;
+  const payload = (runId: string) => ({ runId, challenge, startedAt: null });
+  let releaseOld!: () => void;
+  let jsonStarted!: () => void;
+  const readingJson = new Promise<void>((resolve) => { jsonStarted = resolve; });
+  let releaseCurrent!: (response: Response) => void;
+  const fetch = vi.fn<typeof globalThis.fetch>(async () => Response.json(payload("current-run")));
+  fetch.mockImplementationOnce(() => {
+    if (delay === "fetch") return new Promise<Response>((resolve) => {
+      releaseOld = () => resolve(Response.json(payload("obsolete-run")));
+    });
+    return Promise.resolve({
+      ok: true,
+      json: () => {
+        jsonStarted();
+        return new Promise((resolve) => { releaseOld = () => resolve(payload("obsolete-run")); });
+      },
+    } as Response);
+  });
+  fetch.mockImplementationOnce(() => new Promise<Response>((resolve) => { releaseCurrent = resolve; }));
+  vi.stubGlobal("fetch", fetch);
+  const obsolete = play(challenge);
+  const rejected = expect(obsolete).rejects.toThrow("unavailable");
+  if (delay === "json") await readingJson;
+  resetPlayClient();
+  // Same owner and challenge: both generations address the same cache entry.
+  const current = play(challenge);
+  expect(play(challenge)).toBe(current);
+  expect(fetch).toHaveBeenCalledTimes(2);
+  releaseOld();
+  await rejected;
+  // Let finally/catch cleanup finish before asking for the in-flight work again.
+  await Promise.resolve();
+  expect(play(challenge)).toBe(current);
+  expect(fetch).toHaveBeenCalledTimes(2);
+  expect(readLocal(`dailygrid:run:${challenge.id}`)).toBeNull();
+  releaseCurrent(Response.json(payload("current-run")));
+  expect((await current).runId).toBe("current-run");
+  const startsRun = operation === "begin" && route !== "room";
+  expect(fetch).toHaveBeenCalledTimes(startsRun ? 3 : 2);
+  expect(fetch.mock.calls[0]?.[0]).toBe(route === "room" ? "/api/live-rooms" : route === "friend" ? "/api/friends" : "/api/play");
+  if (route !== "room") {
+    expect(JSON.parse(readLocal(`dailygrid:run:${challenge.id}`)!)).toBe("current-run");
+  }
+  if (startsRun) {
+    expect(play(challenge)).toBe(current);
+    expect(fetch).toHaveBeenCalledTimes(3);
+  } else {
+    // Reservations expire after settlement, so a subsequent read must be fresh.
+    await Promise.resolve();
+    const next = play(challenge);
+    expect(next).not.toBe(current);
+    expect((await next).runId).toBe("current-run");
+    expect(fetch).toHaveBeenCalledTimes(3);
+  }
+});
