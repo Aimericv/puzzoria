@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 66,
+  "generation": 67,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -221,195 +221,6 @@
     "toolCommands": 20
   },
   "validation": {
-    "39993265531": {
-      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "39993265531",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-23T17:16:48.766Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "79b8f6435fb61515425c413549131eb179547342",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 0,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792793816
-                },
-                "secondary": {
-                  "usedPercent": 7,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793297489
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*STATE*' -g '*LOG*' agent . | head -70\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent/autonomy/memory'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/{STATE.md,DECISIONS.md,EXPERIMENTS.md,PLAN.json}; cat package.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'catch|reservePlay|submitPlay|useEffect|cancelled' src/components/games/{ClassicGame,SocialGame}.tsx; rg --files src | rg 'classic|social|play-client'; cat docs/RETENTION.md; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'catch|reservePlay|submitPlay|cancelled|alive' src/components/{classic-games,social-game}.tsx; cat tests/play-completion.test.ts | head -100; cat src/lib/play-client.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '35,180p' src/components/classic-games.tsx; sed -n '90,270p' src/components/social-game.tsx; ls tests; ls e2e\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"head -100 e2e/classic-games.spec.ts; head -100 e2e/social-games.spec.ts; cat src/components/use-stored-state.ts 2>/dev/null; rg -n 'key=|ClassicGame|SocialGame' src/components/game-player.tsx; cat e2e/browser-errors.ts | head -40\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"head -50 src/components/classic-games.tsx; head -85 src/components/social-game.tsx; cat tests/cookie-settings.test.ts | head -60; rg -n '<Link|href=' src/components/header.tsx\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/components/classic-games.tsx'\ns=open(p).read().replace('const locked = useRef(false),','const alive = useRef(true),\\\\n    locked = useRef(false),',1).replace('    let live = true;\\\\n    void reservePlay(c)','    let live = true;\\\\n    alive.current = true;\\\\n    void reservePlay(c)',1).replace('      live = false;','      live = false;\\\\n      alive.current = false;',1).replace('        const result = data.state as PuzzleState;','        if (\"'!alive.curren",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner tests/play-completion.test.ts tests/play-owner-change.test.ts tests/play-reservation.test.ts tests/play-restore.test.ts tests/play-start.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > e2e/unmounted-recovery.spec.ts <<'EOF'\nimport { test, expect } from \\\"@playwright/test\\\";\nimport { directions, slide } from \\\"../src/lib/tile2048\\\";\n\nfor (const game of [\\\"2048\\\", \\\"ranking\\\"] as const) {\n  for (const leave of [false, true]) {\n    test(\"'`${game}: late failed submission ${leave ? \"does not restore after leaving\" : \"restores while active\"}`, async ({ page }) => {\n      await page.addInitScript(() => {\n        localStorage.setItem(\"puzzoria:measurement-choice\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node node_modules/@playwright/test/cli.js test e2e/unmounted-recovery.spec.ts --list'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '60,82p' src/components/classic-games.tsx; sed -n '130,179p' src/components/classic-games.tsx; sed -n '218,230p' src/components/social-game.tsx\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'useStoredState|setValue =|useCallback' src/components/storage.tsx | head -20; cat vitest.config.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'function useStoredState|setValue.*useCallback|function useGameSession' src/components/storage*; date -u\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'XDG_DATA_HOME=/opt/puzzoria-pilot/work/.tmp/test-data npm test -- --configLoader runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '34,90p' src/components/storage.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nroot=Path('agent/autonomy/memory')\n(root/'STATE.md').write_text('''# État — 23 octobre 2026\n\nSource exportée annoncée : 79b8f6435fb61515425c413549131eb179547342 ; aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md.\n\nContribution : empêcher ClassicGame et SocialGame de lancer reservePlay depuis leur ca",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a169c4-119e-7611-bb08-ba4b7d39ed9f",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 5,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 3,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792793824
-                },
-                "secondary": {
-                  "usedPercent": 8,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793297489
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 360,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "876c9bd6647c55820942f41a825977b34897d60c",
-            "url": "https://github.com/Aimericv/puzzoria/pull/5",
-            "number": 5
-          },
-          "toolCommands": 20,
-          "finishedAt": "2026-10-23T17:21:15.457Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/39993265531"
-        }
-      }
-    },
     "40026950371": {
       "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
       "jobs": {
@@ -1107,6 +918,195 @@
           "finishedAt": "2026-10-24T16:08:50.109Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40109571396"
+        }
+      }
+    },
+    "40131880111": {
+      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "40131880111",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-24T20:57:42.216Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "eee2ff6a0ddd71f3f0ea53ac2990c8dc885e977c",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792893469
+                },
+                "secondary": {
+                  "usedPercent": 1,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395884
+                }
+              }
+            ]
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/{STATE.md,DECISIONS.md,EXPERIMENTS.md,PLAN.json}'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg --files src/components | rg -i 'word|sudoku|dialog'; rg --files node_modules/next/dist/docs | head; rg --files e2e | head; cat package.json\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; cat src/components/sudoku-game.tsx'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'keydown|handler|role=|input|focus' src/components/word-game.tsx; cat e2e/game-modes.spec.ts | head -100; rg -n 'sudoku|keyboard' e2e/*.ts | head -65; rg -n 'dialog|role=\\\"dialog\\\"' src/components/*.tsx | head -25\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '200,238p' src/components/word-game.tsx; sed -n '210,270p' e2e/platform.spec.ts; cat src/components/measurement-provider.tsx | tail -25; rg --files src/lib | rg keyboard; head -25 e2e/platform.spec.ts; rg -n 'cookie|preferences' src/lib/*i18n* | head\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'cookie|measurement' src/components/site-footer.tsx src/components/measurement-provider.tsx; cat e2e/engagement.spec.ts | head -25; cat playwright.config.ts | head -65\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'cookie-settings|cookieSettings|openCookie' src/components/*.tsx; sed -n '260,285p' src/components/word-game.tsx; cat src/lib/cookie-i18n.ts | head -10\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat src/components/cookie-settings-button.tsx; rg -n 'CookieSettingsButton|<footer' src/components src/app | head -15; npm exec playwright test e2e/game-dialog-keyboard.spec.ts -- --list\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '245,318p' src/components/word-game.tsx; sed -n '85,98p' src/components/measurement-provider.tsx; cat docs/RETENTION.md | head -60; rg --files . | rg -i '(report|supervis|handoff)' | head -20\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '145,205p' src/components/word-game.tsx; sed -n '88,98p' src/components/measurement-provider.tsx\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run lint'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg --files tests | head -12; rg -n 'aria|dialog|keyboard' tests | head -20\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'scrollIntoView|focus\\\\(|tabIndex|role=\\\"status\\\"' src/components/game-common.tsx | head -30; rg -n 'test\\\\(|it\\\\(' tests/operations.test.ts | head -10\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm test -- --configLoader=runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('agent/autonomy/memory')\n(root/'STATE.md').write_text('''# État — 24 octobre 2026\n\nSource exportée annoncée : eee2ff6a0ddd71f3f0ea53ac2990c8dc885e977c. Aucun accès Git utilisé.\nConsignes et mémoire lues sur disque : AGENTS.md, MANDATE.md, INBOX.json (vide), quatre mémoires ; guide Next use-client.md lu avant modification. docs/RETENTION.md consulté ; aucune modification de mesure, authentification ou résultats serveur",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\np=json.loads(Path('agent/autonomy/memory/PLAN.json').read_text())\nassert p['continuityNonce']=='1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1'\nfor name in ['STATE.md','DECISIONS.md','EXPERIMENTS.md','PLAN.json']:\n assert Path('agent/autonomy/memory',name).stat().st_size>0\nprint('Quatre mémoires présentes ; nonce conservé.')\nPY\"",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a16fb4-a8db-7cc3-b8bc-d55c0f843a40",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 10,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 3,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1792893476
+                },
+                "secondary": {
+                  "usedPercent": 2,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793395884
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 390,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "7672c692bf5b24e2e2b70ecd793e5c3c2a9198e7",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 20,
+          "finishedAt": "2026-10-24T21:01:59.927Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40131880111"
         }
       }
     }
