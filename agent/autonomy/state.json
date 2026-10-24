@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 58,
+  "generation": 59,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "b7ff996cd9622a88b07bcaae172363bd8265e9d0",
   "checkpoint": {
-    "artifactId": 12557668139,
-    "runId": "40088702052",
-    "name": "puzzoria-agent-auth-40088702052-10",
-    "generation": 10,
+    "artifactId": 12566375690,
+    "runId": "40109571396",
+    "name": "puzzoria-agent-auth-40109571396-11",
+    "generation": 11,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40088702052",
+      "runId": "40109571396",
       "phase": "autonomous-agent",
-      "generation": 10
+      "generation": 11
     },
-    "expiresAt": "2027-01-22T11:08:36Z",
-    "digest": "17241f72da84387433ec8006d1981c8c555fb0c4477fb279ca2279974df60d66"
+    "expiresAt": "2027-01-22T16:00:42Z",
+    "digest": "517cc2e645779f9bc0acb203b1a07e037065f954d9aa20b989041422ee18d240"
   },
   "lastMessageId": 6383541372,
   "completedSessions": 9,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40088702052",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40088702052"
+    "id": "40109571396",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40109571396"
   },
   "memory": {
     "STATE.md": "# État — 24 octobre 2026\n\nSource exportée annoncée : c8921a361188453f1417d47d18f529ae1e387e99. Aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), quatre mémoires, docs/RETENTION.md et guide Next use-client.md. Aucun rapport navigateur du superviseur identifié dans les fichiers du workspace consultés.\n\nContribution : reserveInner et beginPlay capturent désormais clientGeneration et la vérifient dans leurs contrôles existants, en plus du namespace. Un reset invalide donc leurs réponses même après retour au même compte : pas de mémorisation du run périmé, pas de transmission au consommateur, pas de création ni de reprise supplémentaire après une réponse obsolète. Les contrôles encadrent aussi la lecture JSON et le démarrage de remplacement existants. Aucun format persisté, identité ni règle serveur modifié.\n\nPreuves : extension de tests/play-owner-change.test.ts avec reset seul et A → B → A pour six chemins de création/reprise/démarrage. Les 12 nouveaux cas échouent avant correction ; les 8 tests précédents passent. Après correction, les 20 tests passent. Chaque scénario vérifie rejet unavailable, absence de requête supplémentaire, conservation du run courant et réussite d’une nouvelle requête active. Les deux contrôles positifs de création/déduplication restent présents. Les cinq fichiers play ciblés passent, 39 tests.\n\nContrôles : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). npm test -- --configLoader=runner : 377/378 tests réussis, 29/30 fichiers réussis. Seul tests/operations.test.ts:55 dépasse son délai de 5 s, comme déjà consigné dans les mémoires précédentes. Cause non établie ; aucun test, assertion ni délai modifié pour contourner cet échec. Build/E2E réservés au superviseur. Aucun navigateur réel ni résultat utilisateur mesuré.\n\nLimites : tests unitaires avec fetch simulé, sans composants React montés. Les branches ami/salon bénéficient des mêmes gardes mais n’ont pas de nouveaux scénarios dédiés dans cette session. La nouvelle requête positive commence après rejet de l’ancienne ; la concurrence où elle commence avant sa résolution reste à tester. Les parcours navigateur précédents restent sans preuve d’exécution accessible ici.\n\nFichiers de contribution : src/lib/play-client.ts, tests/play-owner-change.test.ts. Quatre mémoires mises à jour et nonce conservé. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, achat, merge, déploiement ou publication effectué par l’agent.\n\nProchaine mission choisie : examiner les preuves navigateur si disponibles, puis vérifier qu’une ancienne requête invalidée ne supprime ni ne remplace le cache d’une nouvelle requête déjà en vol ; couvrir ses déduplications. Étendre aux réponses JSON différées et aux branches ami/salon selon les preuves.\n",
