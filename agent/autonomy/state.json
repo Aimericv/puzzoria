@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 53,
+  "generation": 54,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "c8921a361188453f1417d47d18f529ae1e387e99",
   "checkpoint": {
-    "artifactId": 12548253498,
-    "runId": "40063437750",
-    "name": "puzzoria-agent-auth-40063437750-9",
-    "generation": 9,
+    "artifactId": 12557668139,
+    "runId": "40088702052",
+    "name": "puzzoria-agent-auth-40088702052-10",
+    "generation": 10,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40063437750",
+      "runId": "40088702052",
       "phase": "autonomous-agent",
-      "generation": 9
+      "generation": 10
     },
-    "expiresAt": "2027-01-22T04:43:00Z",
-    "digest": "b7c317e2bf894597110f9c0944ef8edd0175041f8920a6869460b413e4beb3ff"
+    "expiresAt": "2027-01-22T11:08:36Z",
+    "digest": "17241f72da84387433ec8006d1981c8c555fb0c4477fb279ca2279974df60d66"
   },
   "lastMessageId": 6380043325,
   "completedSessions": 8,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40063437750",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40063437750"
+    "id": "40088702052",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40088702052"
   },
   "memory": {
     "STATE.md": "# État — 24 octobre 2026\n\nSource exportée annoncée : 178dd81a15ef2073b28c7e4132e686acd6c26f9b. Aucun accès Git utilisé.\nConsignes lues sur disque : AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide), les quatre mémoires, docs/RETENTION.md et le guide Next use-client.md. Aucun rapport navigateur du superviseur identifié dans les fichiers consultés.\n\nContribution : submitPlay capture la génération mémoire existante, la vérifie après beginPlay et après la réponse de soumission, avant toute mémorisation de completion ou transmission au consommateur. Un reset invalide ainsi une ancienne soumission même si le compte revient à son namespace initial. Contrairement au comportement précédent, une réponse invalidée ne repeuple plus le cache initial après reset ; le résultat serveur reste récupérable par une nouvelle requête. Aucun format persisté ni règle serveur modifié.\n\nPreuves : deux nouveaux scénarios (A → B → A et reset seul) échouent avant correction, car le consommateur reçoit la réponse au lieu du rejet unavailable. Après correction, ils vérifient rejet, absence de consommateur, conservation des completion/run/brouillon récents et réussite d’une nouvelle soumission. Les 25 tests ciblés passent. Deux cas supplémentaires vérifient ensuite l’absence d’envoi dans l’await de beginPlay après reset ou aller-retour ; les 10 tests du fichier play-completion passent après cet ajout.\n\nContrôles : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). Suite générale : 363/364 tests réussis, 29/30 fichiers réussis ; seul tests/operations.test.ts:55 dépasse 5 s, déjà consigné auparavant. Cette suite précède les deux derniers cas d’await, validés séparément ensuite. Cause du délai non établie ; aucun test ni délai assoupli. Build/E2E réservés au superviseur. Aucun navigateur réel ni résultat utilisateur mesuré.\n\nLimites : reservePlay et beginPlay gardent leurs contrôles par namespace, sans génération propre. La garde de submitPlay protège son appelant après beginPlay, mais ne suffit pas à garantir l’absence d’effets internes pendant ce démarrage. Les scénarios de composants/browser précédents restent sans preuve d’exécution accessible ici.\n\nAucun script, manifest/verrou, instruction, protection ni secret modifié. Aucun réseau externe, achat, merge, déploiement ou publication effectué par l’agent. Quatre mémoires mises à jour, nonce conservé.\n\nProchaine mission choisie : examiner les preuves navigateur si disponibles, puis reproduire A → B → A pendant création/démarrage avant d’étendre la génération.\n",
