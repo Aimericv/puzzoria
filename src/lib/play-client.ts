@@ -35,10 +35,11 @@ async function reserveInner(challenge: PublicChallenge): Promise<
     };
   }
 > {
-  // An in-flight response must not cross into a different storage owner.
+  // Resets invalidate in-flight work even after returning to the same owner.
+  const generation = clientGeneration;
   const ownerKey = storageKey(`dailygrid:run:${challenge.id}`);
   const checkOwner = () => {
-    if (storageKey(`dailygrid:run:${challenge.id}`) !== ownerKey)
+    if (generation !== clientGeneration || storageKey(`dailygrid:run:${challenge.id}`) !== ownerKey)
       throw new Error("unavailable");
   };
   if (challenge.roomId) {
@@ -125,9 +126,10 @@ export function beginPlay(challenge: PublicChallenge): Promise<RunResponse> {
   if (challenge.roomId) return reservePlay(challenge);
   const key = challenge.id;
   // The same Daily challenge can be played by different owners in one tab.
+  const generation = clientGeneration;
   const ownerKey = storageKey(`dailygrid:run:${key}`);
   const checkOwner = () => {
-    if (storageKey(`dailygrid:run:${key}`) !== ownerKey)
+    if (generation !== clientGeneration || storageKey(`dailygrid:run:${key}`) !== ownerKey)
       throw new Error("unavailable");
   };
   const existing = starts.get(ownerKey);

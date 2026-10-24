@@ -9,9 +9,13 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it.each(["reserve-new", "begin-new", "reserve-missing", "begin-missing", "reserve-read", "begin-start"])(
-  "discards late %s responses after a profile switch without writing or retrying",
-  async (scenario) => {
+it.each(
+  ["switch", "reset", "return"].flatMap((transition) =>
+    ["reserve-new", "begin-new", "reserve-missing", "begin-missing", "reserve-read", "begin-start"].map((scenario) => ({ transition, scenario })),
+  ),
+)(
+  "discards late $scenario responses after $transition without writing or retrying",
+  async ({ scenario, transition }) => {
     const disk = new Map<string, string>();
     vi.stubGlobal("localStorage", {
       getItem: (key: string) => disk.get(key) ?? null,
@@ -25,12 +29,17 @@ it.each(["reserve-new", "begin-new", "reserve-missing", "begin-missing", "reserv
     setStorageUser("origin");
     if (!scenario.endsWith("new")) rememberRun(challenge, "old-run");
     let release!: (response: Response) => void;
-    const fetch = vi.fn(() => new Promise<Response>((resolve) => { release = resolve; }));
+    const fetch = vi.fn(() => Promise.resolve(Response.json({ runId: "unexpected-run", challenge, startedAt: null })));
+    fetch.mockImplementationOnce(() => new Promise<Response>((resolve) => { release = resolve; }));
     vi.stubGlobal("fetch", fetch);
     const pending = scenario.startsWith("reserve") ? reservePlay(challenge) : beginPlay(challenge);
     const rejected = expect(pending).rejects.toThrow("unavailable");
     resetPlayClient();
-    setStorageUser("destination");
+    if (transition !== "reset") setStorageUser("destination");
+    if (transition === "return") {
+      resetPlayClient();
+      setStorageUser("origin");
+    }
     rememberRun(challenge, "destination-run");
     if (scenario === "reserve-missing") release(Response.json({}, { status: 404 }));
     else if (scenario === "begin-missing") release(Response.json({ error: "unavailable" }, { status: 404 }));
@@ -38,6 +47,10 @@ it.each(["reserve-new", "begin-new", "reserve-missing", "begin-missing", "reserv
     await rejected;
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(JSON.parse(readLocal(`dailygrid:run:${challenge.id}`)!)).toBe("destination-run");
+    fetch.mockImplementation(async () => Response.json({ runId: "destination-run", challenge, startedAt: null }));
+    const fresh = scenario.startsWith("reserve") ? reservePlay(challenge) : beginPlay(challenge);
+    expect((await fresh).runId).toBe("destination-run");
+    expect(fetch).toHaveBeenCalledTimes(2);
   },
 );
 
