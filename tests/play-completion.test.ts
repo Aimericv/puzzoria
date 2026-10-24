@@ -32,7 +32,7 @@ it("isolates remembered completions between guest and accounts", () => {
   }
 });
 
-it("keeps a late submitted completion in the initiating owner's cache", async () => {
+it("discards a late submitted completion after the client cache is reset", async () => {
   const disk = new Map<string, string>();
   vi.stubGlobal("localStorage", {
     getItem: (key: string) => disk.get(key) ?? null,
@@ -61,7 +61,7 @@ it("keeps a late submitted completion in the initiating owner's cache", async ()
   await expect(pending).rejects.toThrow("unavailable");
   expect(authoritativeCompletion(challenge.id)).toEqual(recipient);
   setStorageUser("completion-sender");
-  expect(authoritativeCompletion(challenge.id)?.runId).toBe("sender-run");
+  expect(authoritativeCompletion(challenge.id)).toBeUndefined();
   setStorageUser(null);
   expect(authoritativeCompletion(challenge.id)).toBeUndefined();
 });
@@ -104,7 +104,7 @@ it.each(["response", "json"])("does not deliver late progress to a draft consume
   expect(fetch).toHaveBeenCalledTimes(2);
 });
 
-it("does not submit a cached started run after switching owners in the await gap", async () => {
+it.each(["switch", "roundtrip", "reset"])("does not submit a cached started run after invalidation in the await gap (%s)", async (cycle) => {
   vi.stubGlobal("window", new EventTarget());
   setStorageUser("submit-gap-origin");
   rememberRun(challenge, "gap-run");
@@ -114,7 +114,11 @@ it("does not submit a cached started run after switching owners in the await gap
   const pending = submitPlay(challenge, { guesses: [] });
   const rejected = expect(pending).rejects.toThrow("unavailable");
   resetPlayClient();
-  setStorageUser("submit-gap-destination");
+  if (cycle !== "reset") setStorageUser("submit-gap-destination");
+  if (cycle === "roundtrip") {
+    resetPlayClient();
+    setStorageUser("submit-gap-origin");
+  }
   await rejected;
   expect(fetch).toHaveBeenCalledTimes(1);
 });
@@ -129,4 +133,46 @@ it("delivers progress and completion normally for an unchanged owner", async () 
       ? { runId: "stable-run", challenge } : result)));
   expect(await submitPlay(challenge, { guesses: [] })).toEqual(result);
   expect(authoritativeCompletion(challenge.id)).toEqual(result.completion);
+});
+
+
+it.each(["roundtrip", "reset"])("discards a submission from a previous client generation (%s)", async (cycle) => {
+  vi.stubGlobal("window", new EventTarget());
+  const owner = `submit-generation-${cycle}`;
+  setStorageUser(owner);
+  rememberRun(challenge, "old-run");
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  let submitting = false;
+  const fetch = vi.fn(async (_url: string, options: RequestInit) => {
+    const body = JSON.parse(String(options.body));
+    if (body.action === "start") return Response.json({ runId: body.runId, challenge });
+    submitting = true;
+    await gate;
+    return Response.json({ state: { moves: 1 }, completion: completion("old-run") });
+  });
+  vi.stubGlobal("fetch", fetch);
+  const consumer = vi.fn((data: Record<string, unknown>) => writeLocal(`dailygrid:game:${challenge.id}`, data.state));
+  const pending = submitPlay(challenge, { guesses: [] }).then(consumer);
+  // Attach a handler before releasing the deferred request.
+  const settled = pending.then(() => null, (error: Error) => error.message);
+  await vi.waitFor(() => expect(submitting).toBe(true));
+  resetPlayClient();
+  if (cycle === "roundtrip") {
+    setStorageUser(`${owner}-other`);
+    resetPlayClient();
+    setStorageUser(owner);
+  }
+  const recent = completion("recent-run");
+  rememberCompletion(recent);
+  rememberRun(challenge, "recent-run");
+  writeLocal(`dailygrid:game:${challenge.id}`, { moves: 7 });
+  release();
+  expect(await settled).toBe("unavailable");
+  expect(consumer).not.toHaveBeenCalled();
+  expect(authoritativeCompletion(challenge.id)).toEqual(recent);
+  expect(JSON.parse(readLocal(`dailygrid:run:${challenge.id}`)!)).toBe("recent-run");
+  expect(JSON.parse(readLocal(`dailygrid:game:${challenge.id}`)!)).toEqual({ moves: 7 });
+  // A fresh operation in the active generation still succeeds.
+  expect((await submitPlay(challenge, { guesses: [] })).state).toEqual({ moves: 1 });
 });

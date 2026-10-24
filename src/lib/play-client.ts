@@ -206,10 +206,11 @@ export async function submitPlay(
   challenge: PublicChallenge,
   body: Record<string, unknown>,
 ) {
-  // Capture before any request: the active account may change while submitting.
+  // Capture before any request: resets invalidate even a return to the same account.
+  const generation = clientGeneration;
   const ownerKey = completionKey(challenge.id);
   const checkOwner = () => {
-    if (completionKey(challenge.id) !== ownerKey)
+    if (generation !== clientGeneration || completionKey(challenge.id) !== ownerKey)
       throw new Error("unavailable");
   };
   const run = await beginPlay(challenge);
@@ -220,11 +221,11 @@ export async function submitPlay(
     runId: run.runId,
     ...(challenge.roomId ? { code: challenge.roomId } : {}),
   });
+  // Do not repopulate caches cleared by reset, or deliver obsolete progress.
+  // The authoritative server result remains recoverable by a fresh request.
+  checkOwner();
   if (result.completion)
     results.set(ownerKey, result.completion as Completion);
-  // Keep completed results with their owner, but never deliver stale state
-  // to a consumer that may now save its draft under another profile.
-  checkOwner();
   return result;
 }
 export const authoritativeCompletion = (id: string) => results.get(completionKey(id));
