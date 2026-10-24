@@ -204,6 +204,7 @@ export function WordGame({
     const handler = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (
+        target.closest('dialog, [role="dialog"], [role="alertdialog"]') ||
         e.ctrlKey ||
         e.metaKey ||
         e.altKey ||

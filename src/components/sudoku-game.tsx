@@ -163,6 +163,7 @@ export function SudokuGame({
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (
+        (e.target as HTMLElement).closest('dialog, [role="dialog"], [role="alertdialog"]') ||
         ["SELECT", "INPUT", "TEXTAREA"].includes(
           (e.target as HTMLElement).tagName,
         ) ||
