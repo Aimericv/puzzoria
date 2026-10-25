@@ -87,3 +87,33 @@ test("Sudoku shortcuts respect links and editable focus, then resume on game too
   await page.keyboard.press("3");
   await expect(entry).toHaveText("3");
 });
+
+
+test("Sudoku arrows preserve rows and columns at edges and move accessible focus", async ({ page }) => {
+  await page.goto("/en/sudoku");
+  const board = page.locator(".sudoku-board");
+  const cells = board.locator(".sudoku-cell");
+  await expect(cells.first()).toBeEnabled();
+  const draft = await cells.allTextContents();
+  const cases = [
+    { from: 9, key: "ArrowLeft", to: 9 },
+    { from: 17, key: "ArrowRight", to: 17 },
+    { from: 4, key: "ArrowUp", to: 4 },
+    { from: 76, key: "ArrowDown", to: 76 },
+    { from: 40, key: "ArrowLeft", to: 39 },
+    { from: 40, key: "ArrowRight", to: 41 },
+    { from: 40, key: "ArrowUp", to: 31 },
+    { from: 40, key: "ArrowDown", to: 49 },
+  ];
+  for (const { from, key, to } of cases) {
+    await cells.nth(from).click();
+    await expect(cells.nth(from)).toBeFocused();
+    await page.keyboard.press(key);
+    await expect(cells.nth(to)).toBeFocused();
+    await expect(cells.nth(to)).toHaveAttribute("aria-pressed", "true");
+    await expect(cells.nth(to)).toHaveAttribute("tabindex", "0");
+    await expect(board.locator('.sudoku-cell[tabindex="0"]')).toHaveCount(1);
+    await expect(board.locator('.sudoku-cell[aria-pressed="true"]')).toHaveCount(1);
+    expect(await cells.allTextContents()).toEqual(draft);
+  }
+});
