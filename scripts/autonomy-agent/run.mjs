@@ -83,6 +83,9 @@ try {
     const metrics=await collectAnalytics({token:process.env.PUZZORIA_ANALYTICS_READ_TOKEN});
     writeFileSync(ANALYTICS_FILE,JSON.stringify(metrics,null,2)+"\n",{mode:0o444});
     evidence.analytics={status:metrics.status,source:metrics.source,fetchedAt:metrics.fetchedAt,sha256:metrics.sha256,reason:metrics.reason};
+    // Verify the actual native tool boundary before asking the model to read it.
+    sandbox([node,"--input-type=module","-e",`import {readFileSync,writeFileSync} from 'node:fs';const path=${JSON.stringify(ANALYTICS_FILE)};JSON.parse(readFileSync(path,'utf8'));let denied=false;try{writeFileSync(path,'tampered');}catch{denied=true;}if(!denied)throw new Error('Analytics snapshot is writable by model tools');if(process.env.PUZZORIA_ANALYTICS_READ_TOKEN)throw new Error('Analytics credential inherited by model tools');`]);
+    evidence.analytics.readOnlySnapshot=true;
     state.status="running";state.nextEligibleAt=null;state.blockedReason=null;await store.save("Start an admissible autonomous Puzzoria session");
     await report(api,state,`Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria.\n\nStatistiques Puzzoria : ${metrics.status}${metrics.status==="available"?` (7/30/90 jours, collectées à ${metrics.fetchedAt})`:metrics.reason?` (${metrics.reason})`:""}. Lecture des agrégats seulement ; aucune modification de production.`);
     checkpoints.start(()=>{try{process.kill(-child.pid,"SIGTERM");}catch{/* Already exited. */}});watching=true;
