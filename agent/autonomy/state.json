@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 68,
+  "generation": 69,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "7672c692bf5b24e2e2b70ecd793e5c3c2a9198e7",
   "checkpoint": {
-    "artifactId": 12575711796,
-    "runId": "40131880111",
-    "name": "puzzoria-agent-auth-40131880111-12",
-    "generation": 12,
+    "artifactId": 12586314849,
+    "runId": "40163257229",
+    "name": "puzzoria-agent-auth-40163257229-13",
+    "generation": 13,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40131880111",
+      "runId": "40163257229",
       "phase": "autonomous-agent",
-      "generation": 12
+      "generation": 13
     },
-    "expiresAt": "2027-01-22T20:54:31Z",
-    "digest": "1f492bb6f34c0cf973249ddf597f926e54e5512f3bfc6c9f9c1b0ac0844d0a72"
+    "expiresAt": "2027-01-23T04:49:03Z",
+    "digest": "48e00ecd5814a3e01355744982949e4389a646046890929a71176186dd4d6057"
   },
   "lastMessageId": 6389489350,
   "completedSessions": 11,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40131880111",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40131880111"
+    "id": "40163257229",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40163257229"
   },
   "memory": {
     "STATE.md": "# État — 24 octobre 2026\n\nSource exportée annoncée : eee2ff6a0ddd71f3f0ea53ac2990c8dc885e977c. Aucun accès Git utilisé.\nConsignes et mémoire lues sur disque : AGENTS.md, MANDATE.md, INBOX.json (vide), quatre mémoires ; guide Next use-client.md lu avant modification. docs/RETENTION.md consulté ; aucune modification de mesure, authentification ou résultats serveur. Aucun rapport navigateur du superviseur repéré dans les fichiers du workspace.\n\nDécision : suivre la mission d’accessibilité Word/Sudoku. Le code montre que leurs écouteurs keydown globaux continuent de traiter les touches provenant des boutons du dialogue de préférences des cookies. Word peut saisir/effacer des lettres ; Sudoku peut changer la grille, la sélection, les notes ou annuler derrière le dialogue. Il s’agit d’un constat du chemin de code, pas d’une reproduction navigateur exécutée.\n\nContribution : les deux écouteurs ignorent les événements dont la cible appartient à un dialogue natif, role=dialog ou role=alertdialog. Aucun texte ni traduction ajouté. Les raccourcis hors dialogue restent inchangés. Deux scénarios E2E préparent une saisie, ouvrent le vrai dialogue via le pied de page, vérifient après plusieurs touches la conservation de la grille et du mode notes, puis ferment par Entrée et vérifient la reprise du clavier dans le jeu.\n\nContrôles observés : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). npm test -- --configLoader=runner : 389/390 réussis, 29/30 fichiers réussis. Unique échec : délai de 5 s dans tests/operations.test.ts:55, déjà consigné auparavant ; cause non établie, contrôle inchangé. Playwright --list découvre les deux scénarios sur quatre configurations, soit huit cas, sans les exécuter. Build et tests avec serveur réservés au superviseur selon le mandat.\n\nLimites : pas de validation navigateur ni de mesure utilisateur. La garde ARIA est présente mais les scénarios utilisent le dialogue natif existant. Les autres jeux et les raccourcis hors dialogue n’ont pas été corrigés dans cette contribution. Aucun trafic, publication ni déploiement observé.\n\nFichiers publiables : src/components/word-game.tsx, src/components/sudoku-game.tsx, e2e/game-dialog-keyboard.spec.ts. Quatre mémoires mises à jour, nonce conservé. Aucun script, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, achat, merge ou déploiement.\n\nProchaine mission choisie : consulter les preuves navigateur lorsqu’elles sont accessibles, puis examiner les raccourcis Sudoku quand le focus est sur les liens, les zones éditables ou les commandes hors grille. Son écouteur exclut seulement SELECT/INPUT/TEXTAREA en dehors des dialogues ; choisir une correction uniquement sur preuve et préserver le jeu au clavier ainsi que les raccourcis des outils.\n",
