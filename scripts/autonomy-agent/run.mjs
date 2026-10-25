@@ -10,6 +10,7 @@ import {collectCandidate,collectMemory,restoreNextEnv} from "./outputs.mjs";
 import {publishCandidate,stageCandidate} from "./candidate.mjs";
 import {report} from "./inbox.mjs";
 import {verifyCandidate} from "./verify.mjs";
+import {collectAnalytics,ANALYTICS_FILE} from "./analytics.mjs";
 
 const base="/opt/puzzoria-pilot", work=base+"/work", auth=base+"/auth", readonly=base+"/readonly",uid=3050;
 const cli=readonly+"/node_modules/@openai/codex/bin/codex.js", node=process.execPath;
@@ -19,7 +20,7 @@ if(process.getuid()!==0 || process.env.GITHUB_REPOSITORY!==REPOSITORY || !proces
 if(!validation && (control.permanentActivationApproved!==true || process.env.PUZZORIA_AGENT_ENABLED!=="true")) throw new Error("Permanent activation remains disabled");
 const api=github(process.env.GITHUB_TOKEN,REPOSITORY), store=new StateStore(api,control,process.env.GITHUB_SHA),state=await store.load();
 const runId=process.env.GITHUB_RUN_ID, output=resolve(".agent-out");mkdirSync(output,{recursive:true,mode:0o755});
-const secrets=[process.env.GITHUB_TOKEN,process.env.CODEX_PILOT_VAULT_KEY];
+const secrets=[process.env.GITHUB_TOKEN,process.env.CODEX_PILOT_VAULT_KEY,process.env.PUZZORIA_ANALYTICS_READ_TOKEN];
 const evidence={schemaVersion:1,runId,job:process.env.GITHUB_JOB,mode:validation?"validation":"autonomous",funding,startedAt:new Date().toISOString(),status:"starting",commands:[],productionDeployment:false};
 state.lastRun={id:runId,url:`https://github.com/${REPOSITORY}/actions/runs/${runId}`};
 const checkpoints=new Checkpoints({api,store,key:process.env.CODEX_PILOT_VAULT_KEY,runId,authFile:auth+"/auth.json",directory:resolve(".agent-in"),client:await artifactClient()});
@@ -79,8 +80,11 @@ try {
     await store.save("Pause before inference until the actual blocking quota resets");
     await report(api,state,`Aucune inférence lancée : ${gate.reason}.`);
   } else {
+    const metrics=await collectAnalytics({token:process.env.PUZZORIA_ANALYTICS_READ_TOKEN});
+    writeFileSync(ANALYTICS_FILE,JSON.stringify(metrics,null,2)+"\n",{mode:0o444});
+    evidence.analytics={status:metrics.status,source:metrics.source,fetchedAt:metrics.fetchedAt,sha256:metrics.sha256,reason:metrics.reason};
     state.status="running";state.nextEligibleAt=null;state.blockedReason=null;await store.save("Start an admissible autonomous Puzzoria session");
-    await report(api,state,"Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria. Aucun accès de production.");
+    await report(api,state,`Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria.\n\nStatistiques Puzzoria : ${metrics.status}${metrics.status==="available"?` (7/30/90 jours, collectées à ${metrics.fetchedAt})`:metrics.reason?` (${metrics.reason})`:""}. Lecture des agrégats seulement ; aucune modification de production.`);
     checkpoints.start(()=>{try{process.kill(-child.pid,"SIGTERM");}catch{/* Already exited. */}});watching=true;
     let toolCommands=0;evidence.modelCommands=[];
     rpc.listeners.push(message=>{

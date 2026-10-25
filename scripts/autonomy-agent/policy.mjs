@@ -43,6 +43,7 @@ export function quotaGate(account,limits,now=Date.now()) {
 
 export function allowedCandidate(path) {
   if(typeof path!=="string" || path.includes("\\") || path.split("/").some(part=>!part||part==="."||part===".."||part.startsWith("."))) return false;
+  if(["src/lib/server/analytics-reader.ts","src/app/api/agent/analytics/route.ts"].includes(path)) return false;
   if(/^(src|tests|e2e)\/.+\.(?:ts|tsx|css)$/.test(path)) return true;
   return /^docs\/.+\.md$/.test(path) && !/^docs\/(?:AUTONOMY|CLOUD-HANDOFF)/i.test(path);
 }

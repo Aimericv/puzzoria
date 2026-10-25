@@ -58,7 +58,7 @@ test("all inbox pages are fetched even when a concurrency event was replaced",as
 });
 
 test("publication cannot change policy, secrets, workflow, dependencies or inbox",()=>{
-  for(const path of [".github/workflows/ci.yml","scripts/autonomy-agent/run.mjs","AGENTS.md","package.json","package-lock.json","agent/inbox/priority.md","docs/AUTONOMY-NEXT.fr.md","src/../scripts/escape.ts","src/.env","src/x\\y.ts"])
+  for(const path of [".github/workflows/ci.yml","scripts/autonomy-agent/run.mjs","AGENTS.md","package.json","package-lock.json","agent/inbox/priority.md","docs/AUTONOMY-NEXT.fr.md","src/../scripts/escape.ts","src/.env","src/x\\y.ts","src/lib/server/analytics-reader.ts","src/app/api/agent/analytics/route.ts"])
     assert.equal(allowedCandidate(path),false,path);
   for(const path of ["src/app/[locale]/page.tsx","tests/new-feature.test.ts","docs/PRODUCT.fr.md"]) assert.equal(allowedCandidate(path),true,path);
 });
