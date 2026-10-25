@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 73,
+  "generation": 74,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "76701b2ed2c1b399b1baa4bca5f261921695542f",
   "checkpoint": {
-    "artifactId": 12586314849,
-    "runId": "40163257229",
-    "name": "puzzoria-agent-auth-40163257229-13",
-    "generation": 13,
+    "artifactId": 12597289762,
+    "runId": "40189716697",
+    "name": "puzzoria-agent-auth-40189716697-14",
+    "generation": 14,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40163257229",
+      "runId": "40189716697",
       "phase": "autonomous-agent",
-      "generation": 13
+      "generation": 14
     },
-    "expiresAt": "2027-01-23T04:49:03Z",
-    "digest": "48e00ecd5814a3e01355744982949e4389a646046890929a71176186dd4d6057"
+    "expiresAt": "2027-01-23T11:38:34Z",
+    "digest": "9510f82e3718dcffcfe19780eddb25bbe7f3b79a4a60bf9531fa15ad91fa0fd3"
   },
   "lastMessageId": 6393654803,
   "completedSessions": 12,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40163257229",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40163257229"
+    "id": "40189716697",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40189716697"
   },
   "memory": {
     "STATE.md": "# État — 25 octobre 2026\n\nSource exportée annoncée : 7672c692bf5b24e2e2b70ecd793e5c3c2a9198e7. Aucun accès Git utilisé. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun rapport navigateur du superviseur repéré parmi les fichiers du workspace consultés.\n\nDécision : suivre la mission d'accessibilité Sudoku. L'écouteur global continue de traiter les touches depuis les liens, les zones contenteditable et les champs ARIA, alors qu'il protège déjà les dialogues et les champs natifs. Ce constat repose sur le chemin de code, pas sur une reproduction navigateur exécutée.\n\nContribution : l'écouteur ignore aussi les liens (descendants compris), les zones éditables héritées et role=textbox. La cible est vérifiée comme HTMLElement avant accès aux propriétés DOM. Les raccourcis des boutons de grille et des outils sont conservés. Aucun texte ni traduction ajouté, aucun changement de stockage ni d'autorité serveur.\n\nUn scénario E2E prépare une saisie, focalise le lien de marque et vérifie la conservation de la grille et des notes après plusieurs touches. Un éditeur temporaire injecté dans le test exerce un descendant contenteditable. Après suppression de cette fixture, le scénario vérifie la reprise des raccourcis sur Notes puis la grille.\n\nContrôles observés : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). npm test -- --configLoader=runner : 389/390 tests réussis, 29/30 fichiers réussis. Unique échec : délai de 5 s dans tests/operations.test.ts:55, déjà consigné auparavant ; cause non établie, contrôle inchangé. Playwright --list découvre douze cas dans game-dialog-keyboard.spec.ts, dont quatre pour le nouveau scénario, sans les exécuter. Build et tests avec serveur réservés au superviseur conformément au mandat.\n\nLimites : aucune exécution navigateur ni résultat avant/après du scénario nouveau. Le contenu éditable est une fixture de test ; aucun éditeur produit ajouté. La garde ARIA n'est pas exercée par ce scénario. Aucun trafic, résultat utilisateur, publication ni déploiement observé.\n\nFichiers publiables : src/components/sudoku-game.tsx, e2e/game-dialog-keyboard.spec.ts. Les quatre mémoires sont mises à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, achat, merge ou déploiement.\n\nProchaine mission choisie : examiner la navigation fléchée Sudoku aux bords des lignes et la cohérence sélection/focus accessible. Consulter les preuves navigateur du superviseur lorsqu'elles sont disponibles ; décider d'une correction sur preuve, sans étendre automatiquement l'audit à tous les jeux.\n",
