@@ -40,3 +40,50 @@ for (const game of ["word", "sudoku"] as const) {
     else await expect(entry).not.toHaveText("1");
   });
 }
+
+test("Sudoku shortcuts respect links and editable focus, then resume on game tools", async ({ page }) => {
+  await page.goto("/en/sudoku");
+  const board = page.locator(".sudoku-board");
+  const entry = board.locator(".sudoku-cell.entered").first();
+  await expect(entry).toBeEnabled();
+  await entry.focus();
+  await page.keyboard.press("1");
+  await expect(entry).toHaveText("1");
+  const before = await board.innerHTML();
+  const notes = page.locator(".sudoku-options button").first();
+  const brand = page.locator('header a[href="/en"]').first();
+  await brand.focus();
+  for (const key of ["2", "n", "ArrowRight", "Backspace", "Control+z"]) {
+    await page.keyboard.press(key);
+    expect(await board.innerHTML()).toBe(before);
+    await expect(notes).toHaveAttribute("aria-pressed", "false");
+    await expect(brand).toBeFocused();
+  }
+
+  // A temporary editor exercises nested editable targets without adding product UI.
+  await page.evaluate(() => {
+    const editor = document.createElement("div");
+    editor.contentEditable = "true";
+    editor.id = "keyboard-test-editor";
+    editor.innerHTML = '<span tabindex="0">draft</span>';
+    document.body.append(editor);
+  });
+  const editable = page.locator("#keyboard-test-editor span");
+  await editable.focus();
+  await page.keyboard.press("2");
+  await page.keyboard.press("n");
+  expect(await board.innerHTML()).toBe(before);
+  await expect(notes).toHaveAttribute("aria-pressed", "false");
+  await page.locator("#keyboard-test-editor").evaluate((editor) => editor.remove());
+
+  await notes.focus();
+  await page.keyboard.press("n");
+  await expect(notes).toHaveAttribute("aria-pressed", "true");
+  await page.keyboard.press("n");
+  await expect(notes).toHaveAttribute("aria-pressed", "false");
+  await page.keyboard.press("Backspace");
+  await expect(entry).not.toHaveText("1");
+  await entry.focus();
+  await page.keyboard.press("3");
+  await expect(entry).toHaveText("3");
+});

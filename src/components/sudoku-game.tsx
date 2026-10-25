@@ -162,11 +162,11 @@ export function SudokuGame({
   }, [done, session.session.paused, setValue]);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target;
       if (
-        (e.target as HTMLElement).closest('dialog, [role="dialog"], [role="alertdialog"]') ||
-        ["SELECT", "INPUT", "TEXTAREA"].includes(
-          (e.target as HTMLElement).tagName,
-        ) ||
+        !(target instanceof HTMLElement) ||
+        target.isContentEditable ||
+        target.closest('dialog, [role="dialog"], [role="alertdialog"], a[href], input, textarea, select, [role="textbox"]') ||
         done ||
         !ready ||
         session.session.paused
