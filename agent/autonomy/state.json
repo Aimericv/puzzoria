@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 78,
+  "generation": 79,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "19ab1ab87a63f95cce6674a328503e3b59990df2",
   "checkpoint": {
-    "artifactId": 12597289762,
-    "runId": "40189716697",
-    "name": "puzzoria-agent-auth-40189716697-14",
-    "generation": 14,
+    "artifactId": 12605469178,
+    "runId": "40211868390",
+    "name": "puzzoria-agent-auth-40211868390-15",
+    "generation": 15,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40189716697",
+      "runId": "40211868390",
       "phase": "autonomous-agent",
-      "generation": 14
+      "generation": 15
     },
-    "expiresAt": "2027-01-23T11:38:34Z",
-    "digest": "9510f82e3718dcffcfe19780eddb25bbe7f3b79a4a60bf9531fa15ad91fa0fd3"
+    "expiresAt": "2027-01-23T16:28:51Z",
+    "digest": "4403bbbad45ad4b47b953e2b946429686d6aaf8bf807bd5cfeedeaa3508fe434"
   },
   "lastMessageId": 6397220278,
   "completedSessions": 13,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40189716697",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40189716697"
+    "id": "40211868390",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40211868390"
   },
   "memory": {
     "STATE.md": "# État — 25 octobre 2026\n\nSource exportée annoncée : 76701b2ed2c1b399b1baa4bca5f261921695542f. Aucun accès Git utilisé. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun rapport du superviseur repéré dans les documents consultés.\n\nDécision : suivre la mission mémorisée sur la navigation Sudoku. Le déplacement linéaire traverse les lignes horizontalement et change de colonne au bord vertical. Constat établi par lecture du calcul, sans reproduction navigateur exécutée.\n\nContribution : borner séparément ligne et colonne dans l'écouteur des flèches. Au bord, la sélection reste sur place ; à l'intérieur, elle avance d'une cellule sur son axe. L'effet de focus, aria-pressed et tabindex existants sont conservés. Aucun changement de puzzle, stockage, autorité serveur ou traduction.\n\nUn scénario E2E prépare quatre vérifications de bords et quatre déplacements intérieurs. Il contrôle focus, sélection unique, point de tabulation unique et texte de grille inchangé. Playwright --list découvre 16 cas dans game-dialog-keyboard.spec.ts, dont quatre pour le nouveau scénario. Cette découverte ne constitue pas une exécution navigateur.\n\nContrôles observés : npm run lint et npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis et 32 articles multilingues). npm test -- --configLoader=runner : 389/390 tests réussis, 29/30 fichiers réussis. Unique échec : délai de 5 s dans tests/operations.test.ts:55, déjà consigné dans la mémoire précédente ; cause non établie, contrôle inchangé. Build et tests avec serveur réservés au superviseur selon le mandat.\n\nLimites : aucun résultat avant/après navigateur ; les tests unitaires existants ne valident pas le cycle de focus React de ce changement. Aucun trafic, résultat utilisateur, publication ni déploiement observé.\n\nFichiers publiables : src/components/sudoku-game.tsx, e2e/game-dialog-keyboard.spec.ts. Les quatre mémoires sont mises à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Aucun réseau externe, achat, merge ou déploiement.\n\nProchaine mission choisie : examiner les raccourcis Word avec Alt (notamment navigation navigateur), en préservant la saisie normale ; consulter les preuves navigateur du superviseur si disponibles et ne corriger que sur preuve.\n",
