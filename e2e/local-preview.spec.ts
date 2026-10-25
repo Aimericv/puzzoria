@@ -5,10 +5,11 @@ import { practicePath } from "../src/lib/play-path";
 import { hasWinRate } from "../src/lib/result-metrics";
 import { devPreviewCopy } from "../src/lib/dev-preview-i18n";
 
-test("local finish previews all games without changing progress", async ({page}, info) => {
-  test.setTimeout(120000);
-  await page.emulateMedia({reducedMotion: "reduce"});
-  for (const game of gameIds) {
+// Independent contexts and per-game timeouts keep one slow cold route from
+// consuming the entire catalogue's timeout and identify the actual failing game.
+for (const game of gameIds) {
+  test(`local finish preview for ${game} preserves progress`, async ({page}, info) => {
+    await page.emulateMedia({reducedMotion: "reduce"});
     await page.goto(practicePath("fr", game), {waitUntil: "networkidle"});
     const finish = page.getByRole("button", {name: devPreviewCopy("fr").finish, exact: true});
     await expect(finish).toBeVisible();
@@ -32,8 +33,8 @@ test("local finish previews all games without changing progress", async ({page},
     await expect(finish).toBeVisible();
     expect(await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"))).toBe(before);
     page.off("request", collect);
-  }
-});
+  });
+}
 
 test("one Daily Sudoku preserves old archives and three Unlimited levels in every language", async ({page}) => {
   for (const locale of locales) {
