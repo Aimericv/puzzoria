@@ -165,6 +165,9 @@ export function SudokuGame({
       const target = e.target;
       if (
         !(target instanceof HTMLElement) ||
+        e.isComposing ||
+        // Some IMEs report the confirming key only as the legacy processing code.
+        e.keyCode === 229 ||
         e.altKey ||
         target.isContentEditable ||
         target.closest('dialog, [role="dialog"], [role="alertdialog"], a[href], input, textarea, select, [role="textbox"]') ||

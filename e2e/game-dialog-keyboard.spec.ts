@@ -155,3 +155,46 @@ for (const game of ["word", "sudoku"] as const) {
     }
   });
 }
+
+
+for (const game of ["word", "sudoku"] as const) {
+  for (const signal of ["isComposing", "keyCode"] as const) {
+    test(`${game} leaves ${signal} IME keys untouched and resumes normal editing`, async ({ page }) => {
+      await page.goto(`/en/${game}`);
+      const board = page.locator(game === "word" ? ".word-board" : ".sudoku-board");
+      const entry = game === "word" ? board : board.locator(".sudoku-cell.entered").first();
+      if (game === "word") await expect(board).toHaveAttribute("aria-busy", "false");
+      else await expect(entry).toBeEnabled();
+      await entry.focus();
+      await page.keyboard.press(game === "word" ? "a" : "1");
+      if (game === "word") await expect(board.locator(".word-row").first()).toHaveText("A");
+      else await expect(entry).toHaveText("1");
+      const before = await board.innerHTML();
+      const keys = game === "word"
+        ? ["b", "Enter", "Backspace", "Delete", "ArrowLeft", "ArrowRight", "Home", "End"]
+        : ["2", "n", "Backspace", "Delete", "0", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "z"];
+      for (const key of keys) {
+        // Test the modern flag separately from the legacy IME processing code.
+        // Synthetic events test the listener, not a real OS input method.
+        const uncancelled = await entry.evaluate((element, { key, signal }) => element.dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key, isComposing: signal === "isComposing", keyCode: signal === "keyCode" ? 229 : 0,
+            ctrlKey: key === "z", bubbles: true, cancelable: true,
+          }),
+        ), { key, signal });
+        expect(uncancelled).toBe(true);
+        expect(await board.innerHTML()).toBe(before);
+        await expect(entry).toBeFocused();
+        if (game === "sudoku")
+          await expect(page.locator(".sudoku-options button").first()).toHaveAttribute("aria-pressed", "false");
+      }
+      await page.keyboard.press(game === "word" ? "b" : "2");
+      if (game === "word") await expect(board.locator(".word-row").first()).toHaveText("AB");
+      else {
+        await expect(entry).toHaveText("2");
+        await page.keyboard.press("Control+z");
+        await expect(entry).toHaveText("1");
+      }
+    });
+  }
+}
