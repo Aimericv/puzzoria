@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 83,
+  "generation": 84,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "fe273e5340e75b9a79daf5f2652a50572f2734aa",
   "checkpoint": {
-    "artifactId": 12605469178,
-    "runId": "40211868390",
-    "name": "puzzoria-agent-auth-40211868390-15",
-    "generation": 15,
+    "artifactId": 12614140510,
+    "runId": "40233018062",
+    "name": "puzzoria-agent-auth-40233018062-16",
+    "generation": 16,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40211868390",
+      "runId": "40233018062",
       "phase": "autonomous-agent",
-      "generation": 15
+      "generation": 16
     },
-    "expiresAt": "2027-01-23T16:28:51Z",
-    "digest": "4403bbbad45ad4b47b953e2b946429686d6aaf8bf807bd5cfeedeaa3508fe434"
+    "expiresAt": "2027-01-23T20:55:15Z",
+    "digest": "37a8e73a207199830a7fac4932f9f93c76e020e5529eca602cdb2c945b0e7a4a"
   },
   "lastMessageId": 6400263129,
   "completedSessions": 14,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40211868390",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40211868390"
+    "id": "40233018062",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40233018062"
   },
   "memory": {
     "STATE.md": "# État — 25 octobre 2026\n\nSource exportée annoncée : 19ab1ab87a63f95cce6674a328503e3b59990df2. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun accès Git ni rapport superviseur disponible dans les documents consultés.\n\nDécision : suivre la mission Alt mémorisée. Word ignore déjà e.altKey dans la source reçue ; Sudoku ne le fait pas. Le chemin de code permet aux touches Alt+chiffre, Alt+flèche, Alt+effacement et Alt+N de modifier le jeu ou d’annuler le comportement navigateur. Constat de code, sans reproduction navigateur exécutée.\n\nContribution : garde e.altKey dans Sudoku avant tout traitement, y compris Ctrl/Meta+Z. Deux scénarios E2E préparés (Word et Sudoku) vérifient grille et focus inchangés, absence de preventDefault, notes inchangées, puis saisie normale et annulation Sudoku. Les événements Alt sont synthétiques pour ne pas déclencher de navigation navigateur ; cela ne valide pas les raccourcis natifs du système.\n\nContrôles observés : lint et typecheck code 0 ; validation contenu via node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles multilingues). Playwright --list code 0 découvre 24 cas dans le fichier, dont huit nouveaux. Ce n’est pas une exécution navigateur. Suite npm test -- --configLoader=runner : 389/390 tests passent, 29/30 fichiers ; unique échec de délai 5 s dans tests/operations.test.ts:55, déjà connu dans la mémoire. Aucun contrôle modifié. Build et tests avec serveur réservés au superviseur.\n\nFichiers publiables : src/components/sudoku-game.tsx et e2e/game-dialog-keyboard.spec.ts. Quatre mémoires mises à jour, nonce conservé. Aucun changement de script/workflow, manifest/verrou, instruction, protection ou secret. Aucun réseau externe, achat, merge ou déploiement. Aucune publication, métrique utilisateur ou amélioration de rétention revendiquée.\n\nProchaine mission : examiner les événements de composition IME dans les écouteurs Word/Sudoku, et consulter les preuves navigateur si disponibles.\n",
