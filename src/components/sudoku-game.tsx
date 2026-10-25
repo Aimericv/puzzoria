@@ -165,6 +165,7 @@ export function SudokuGame({
       const target = e.target;
       if (
         !(target instanceof HTMLElement) ||
+        e.altKey ||
         target.isContentEditable ||
         target.closest('dialog, [role="dialog"], [role="alertdialog"], a[href], input, textarea, select, [role="textbox"]') ||
         done ||

@@ -117,3 +117,41 @@ test("Sudoku arrows preserve rows and columns at edges and move accessible focus
     expect(await cells.allTextContents()).toEqual(draft);
   }
 });
+
+
+for (const game of ["word", "sudoku"] as const) {
+  test(`${game} leaves Alt shortcuts to the browser and preserves normal editing`, async ({ page }) => {
+    await page.goto(`/en/${game}`);
+    const board = page.locator(game === "word" ? ".word-board" : ".sudoku-board");
+    const entry = game === "word" ? board : board.locator(".sudoku-cell.entered").first();
+    if (game === "word") await expect(board).toHaveAttribute("aria-busy", "false");
+    else await expect(entry).toBeEnabled();
+    await entry.focus();
+    await page.keyboard.press(game === "word" ? "a" : "1");
+    if (game === "word") await expect(board.locator(".word-row").first()).toHaveText("A");
+    else await expect(entry).toHaveText("1");
+    const before = await board.innerHTML();
+    const keys = game === "word"
+      ? ["b", "ArrowLeft", "ArrowRight", "Home", "End", "Backspace", "Delete", "Enter"]
+      : ["2", "n", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Backspace", "Delete", "0", "z"];
+    for (const key of keys) {
+      // Synthetic events exercise the game listener without triggering browser navigation.
+      // dispatchEvent returns false if a listener cancels the shortcut.
+      const uncancelled = await entry.evaluate((element, key) => element.dispatchEvent(
+        new KeyboardEvent("keydown", { key, altKey: true, ctrlKey: key === "z", bubbles: true, cancelable: true }),
+      ), key);
+      expect(uncancelled).toBe(true);
+      expect(await board.innerHTML()).toBe(before);
+      await expect(entry).toBeFocused();
+      if (game === "sudoku")
+        await expect(page.locator(".sudoku-options button").first()).toHaveAttribute("aria-pressed", "false");
+    }
+    await page.keyboard.press(game === "word" ? "b" : "2");
+    if (game === "word") await expect(board.locator(".word-row").first()).toHaveText("AB");
+    else {
+      await expect(entry).toHaveText("2");
+      await page.keyboard.press("Control+z");
+      await expect(entry).toHaveText("1");
+    }
+  });
+}
