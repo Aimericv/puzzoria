@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "origin": "https://puzzoria.com",
+  "appDirectory": "/opt/puzzoria",
+  "composeFile": "/opt/puzzoria/compose.yaml",
+  "environmentFile": "/opt/puzzoria/.env.docker",
+  "composeProject": "dailygrid",
+  "appService": "app",
+  "repository": "/var/lib/puzzoria-release/repository.git",
+  "stateDirectory": "/var/lib/puzzoria-release",
+  "initialCommit": "0000000000000000000000000000000000000000",
+  "bootstrapApprovedCommit": "REPLACE_WITH_EXACT_OWNER_APPROVED_FIRST_COMMIT",
+  "policyHash": "REPLACE_WITH_VALIDATED_CONTROLLER_POLICY_HASH"
+}

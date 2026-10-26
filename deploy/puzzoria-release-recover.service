@@ -1,0 +1,10 @@
+[Unit]
+Description=Recover an interrupted Puzzoria image rollout without restoring player data
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flock --nonblock --conflict-exit-code 75 /run/lock/puzzoria-release.lock /usr/local/lib/puzzoria-release/node /usr/local/lib/puzzoria-release/release-host.mjs recover
+SuccessExitStatus=75
+UMask=0077

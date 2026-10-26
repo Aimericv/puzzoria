@@ -1,0 +1,14 @@
+import {mkdirSync,copyFileSync,cpSync,writeFileSync,readFileSync} from 'node:fs';
+import {join,resolve} from 'node:path';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {releasePolicyHash} from './release-client.mjs';
+const destination=resolve('.release/controller');mkdirSync(join(destination,'node_modules'),{recursive:true});
+for(const file of ['release-host.mjs','deployment-transaction.mjs','release-policy.mjs','public-probe.mjs'])copyFileSync(join('scripts/autonomy-agent',file),join(destination,file));
+for(const file of ['install-release-controller.sh','puzzoria-release-entry.sh','puzzoria-release-recover.service','puzzoria-release-recover.timer','release-config.example.json'])copyFileSync(join('deploy',file),join(destination,file));
+cpSync('node_modules/typescript',join(destination,'node_modules/typescript'),{recursive:true});
+const manifest={source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),policyHash:releasePolicyHash(),typescript:JSON.parse(readFileSync('node_modules/typescript/package.json','utf8')).version,productionEnabled:false};
+writeFileSync(join(destination,'VALIDATION.json'),JSON.stringify(manifest,null,2)+'\n');
+execFileSync('tar',['-czf','.release/puzzoria-controller.tar.gz','-C',destination,'.']);
+const sha256=createHash('sha256').update(readFileSync('.release/puzzoria-controller.tar.gz')).digest('hex');
+writeFileSync('.release/puzzoria-controller.sha256',sha256+'  puzzoria-controller.tar.gz\n');console.log(JSON.stringify({...manifest,archiveSha256:sha256}));

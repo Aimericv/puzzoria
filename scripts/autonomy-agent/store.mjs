@@ -1,4 +1,4 @@
-import {randomBytes} from "node:crypto";
+import {randomBytes,createHash} from "node:crypto";
 import {REPOSITORY,STATE_BRANCH,STATE_PATH,MEMORY_FILES} from "./policy.mjs";
 
 export async function optional(api,path) {
@@ -34,9 +34,12 @@ export class StateStore {
     if((actual?.object.sha ?? null)!==previous) throw new Error("Agent state changed concurrently; refusing stale publication");
     const parentCommit=await this.api(`/git/commits/${parent}`);
     const next={...this.state,generation:this.state.generation+1};
+    const archives=next.growth?.archiveQueue??[];
+    if(next.growth){next.growth={...next.growth};delete next.growth.archiveQueue;}
     const content=JSON.stringify(next,null,2)+"\n";
     if(Buffer.byteLength(content)>262144) throw new Error("Persistent state exceeds its limit");
-    const tree=await this.api("/git/trees","POST",{base_tree:parentCommit.tree.sha,tree:[{path:STATE_PATH,mode:"100644",type:"blob",content}]});
+    const records=archives.map(record=>{if(!/^[a-z0-9][a-z0-9-]{2,63}$/.test(record.id))throw Error('Invalid archive identity');const key=createHash('sha256').update(JSON.stringify(record)).digest('hex');return {path:`agent/autonomy/experiments/${key}.json`,mode:'100644',type:'blob',content:JSON.stringify(record,null,2)+'\n'};});
+    const tree=await this.api("/git/trees","POST",{base_tree:parentCommit.tree.sha,tree:[{path:STATE_PATH,mode:"100644",type:"blob",content},...records]});
     const commit=await this.api("/git/commits","POST",{message,tree:tree.sha,parents:[parent]});
     if(previous) await this.api(`/git/refs/heads/${STATE_BRANCH}`,"PATCH",{sha:commit.sha,force:false});
     else await this.api("/git/refs","POST",{ref:`refs/heads/${STATE_BRANCH}`,sha:commit.sha});

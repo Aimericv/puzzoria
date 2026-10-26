@@ -14,6 +14,10 @@ evidence.runUrl=`https://github.com/${REPOSITORY}/actions/runs/${runId}`;
 state.validation ??={};
 state.validation[runId] ??={sourceSha:process.env.GITHUB_SHA,jobs:{}};
 state.validation[runId].jobs[job]=evidence;
+const candidate=state.growth?.releaseCandidate;
+if(process.env.GITHUB_OUTPUT&&process.env.AGENT_MODE==='autonomous'&&process.env.MODEL_ADMITTED==='true'&&candidate&&['proposed','waiting_validation_budget','validation_failed','validating',undefined].includes(candidate.status)) {
+  writeFileSync(process.env.GITHUB_OUTPUT,`candidate_sha=${candidate.sha}\n`,{flag:'a'});
+}
 for(const id of Object.keys(state.validation).sort((a,b)=>Number(b)-Number(a)).slice(5)) delete state.validation[id];
 await store.save("Record actual validation outcomes without activating permanent wakes");
 const head=process.env.GITHUB_HEAD_REF || process.env.AGENT_CONTROL_BRANCH;
