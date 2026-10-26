@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 101,
+  "generation": 102,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -238,167 +238,6 @@
     "toolCommands": 21
   },
   "validation": {
-    "40189716697": {
-      "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "40189716697",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-25T11:42:00.957Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "sourceCommit": "76701b2ed2c1b399b1baa4bca5f261921695542f",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 0,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792946530
-                },
-                "secondary": {
-                  "usedPercent": 0,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793533330
-                }
-              }
-            ]
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat package.json; rg --files node_modules/next/dist/docs | head'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'Arrow|selected|focus|tabIndex|aria-selected' src/components/sudoku-game.tsx; cat e2e/game-dialog-keyboard.spec.ts; rg --files src/lib | rg sudoku; rg --files node_modules/next/dist/docs | rg use-client\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-client.md; sed -n '1,225p' src/components/sudoku-game.tsx; cat src/lib/sudoku.ts; rg --files tests | head\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/components/sudoku-game.tsx'\ns=open(p).read(); old='''        const delta = (\n          { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -9, ArrowDown: 9 } as Record<\n            string,\n            number\n          >\n        )[e.key];\n        if (delta)\n          setValue((s) => ({\n            ...s,\n            selected: Math.max(0, Math.min(80, s.selected + delta)),\n          }));'''; new='''        setValue((s) => {\n          const row = Math.floor(s.selected / 9",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts; npx playwright test e2e/game-dialog-keyboard.spec.ts --list'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '245,285p' src/components/sudoku-game.tsx; npm run lint\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files docs agent | rg -i 'report|supervis|result|handoff'; sed -n '185,208p' src/components/sudoku-game.tsx\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader=runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\np='agent/autonomy/memory/PLAN.json'\nx=json.load(open(p)); x.update(summary='Navigation fléchée Sudoku bornée par ligne et colonne ; scénario E2E préparé pour les quatre bords, mouvements intérieurs, sélection, tabulation et focus. Lint, types et contenu passent ; exécution navigateur au superviseur.', nextMission='Examiner les raccourcis Word lorsque Alt est maintenu (notamment navigation navigateur) et vérifier qu’ils ne modifient pas le brouillon. Co",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 25 octobre 2026\n\nSource exportée annoncée : 76701b2ed2c1b399b1baa4bca5f261921695542f. Aucun accès Git utilisé. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun rapport du superviseur repéré dans les documents consultés.\n\nDécision : suivre la mission mémorisée sur la navigation Sudoku. Le déplacement linéaire traverse ",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a172de-4ffe-79e2-bd7a-6c9b892a86f2",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 12,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 2,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1792946539
-                },
-                "secondary": {
-                  "usedPercent": 0,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793533339
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 390,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "19ab1ab87a63f95cce6674a328503e3b59990df2",
-            "url": "https://github.com/Aimericv/puzzoria/pull/5",
-            "number": 5
-          },
-          "toolCommands": 13,
-          "finishedAt": "2026-10-25T11:45:32.454Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40189716697"
-        }
-      }
-    },
     "40211868390": {
       "sourceSha": "b2e1eb0a779a82f84a04ff36b59536ffdfa01612",
       "jobs": {
@@ -1170,6 +1009,212 @@
           "finishedAt": "2026-10-26T05:01:22.847Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40271417887"
+        }
+      }
+    },
+    "40328393400": {
+      "sourceSha": "a42423098e49eeb60e5393d48cca5dbd9c1475a4",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "40328393400",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-10-26T13:14:16.957Z",
+          "status": "verified",
+          "commands": [
+            {
+              "name": "isolation",
+              "status": "passed"
+            },
+            {
+              "name": "lint",
+              "status": "passed"
+            },
+            {
+              "name": "typecheck",
+              "status": "passed"
+            },
+            {
+              "name": "unit",
+              "status": "passed"
+            },
+            {
+              "name": "content",
+              "status": "passed"
+            },
+            {
+              "name": "build",
+              "status": "passed"
+            }
+          ],
+          "productionDeployment": false,
+          "sourceCommit": "1fa9297b11aeff203eb4914e7ae3a143c94968ea",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 34,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1793033580
+                },
+                "secondary": {
+                  "usedPercent": 5,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793620380
+                }
+              }
+            ]
+          },
+          "analytics": {
+            "status": "available",
+            "source": "https://puzzoria.com/api/agent/analytics",
+            "fetchedAt": "2026-10-26T13:14:24.537Z",
+            "sha256": "283b18be3a4dea721dd8ea170f96f0329fcfdd27dfad9d5638254c714b73e754",
+            "readOnlySnapshot": true
+          },
+          "searchConsole": {
+            "status": "unavailable",
+            "fetchedAt": "2026-10-26T13:14:25.975Z",
+            "reason": "invalid_oidc_endpoint",
+            "readOnlySnapshot": true
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . 2>/dev/null\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent/autonomy'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/* /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat agent/autonomy/memory/STATE.md agent/autonomy/memory/PLAN.json; tail -65 agent/autonomy/memory/EXPERIMENTS.md; rg -n 'homeBody|homeDescription|homeTitle' src; cat package.json; rg --files node_modules/next/dist/docs | head\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat src/lib/seo-content.ts; cat src/lib/game-modes.ts; rg --files tests | rg seo; rg --files /opt/puzzoria-pilot/readonly; cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.md | head -80'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '315,410p' src/lib/seo-content.ts; cat src/lib/game-modes.ts; rg --files tests | rg seo; python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nprint(p.keys());print({k:v for k,v in p.items() if k not in ['reports','sha256']})\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'daily|quotid|diari|täglich|stored|enregistr|réell|real|echte' src/lib/social-seo.ts src/lib/new-games-seo.ts src/lib/rare-word-seo.ts; cat tests/seo.test.ts | head -95; rg -n 'starter|COMMUNITY_STARTER' src/lib/server/community*; python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nfor k,v in p['reports'].items():\n print(k, str(v)[:1800])\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat src/lib/social-seo.ts; cat src/lib/new-games-seo.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat docs/DUELS.fr.md | head -100; rg -n 'guess|secret|deadline|simultan' src/lib/server/live* | head -35; sed -n '1,80p' tests/seo.test.ts; cat docs/RETENTION.md | head -65\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '1,75p' tests/seo.test.ts; sed -n '320,370p' src/lib/server/live-rooms.ts; rg -n 'attempts|success|completedAt' src/lib/server/live-rooms.ts | tail -15\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/social-seo.ts'\ns=open(p).read()\nr={\n'Create a private duel and share its code or link. Each player chooses a secret number. Take turns guessing; higher/lower answers are verified automatically. Reopen the link to resume.':'Create a private room and share its link. Each player chooses a secret number and confirms they are ready. After a shared countdown, guess simultaneously with automatically verified higher/lower answers. A correct answer wins over an ",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/seo.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nr=p['reports']['30'];print(r.keys())\nfor k,v in r.items():\n if k not in ['definitions','daily','games','measurement']: print(k,str(v)[:1400])\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/social-seo.ts';s=open(p).read()\nfor a,b in [('The first correct guess wins.','Against the bot, the first correct guess wins.'),('Le premier qui trouve gagne.','Contre le bot, le premier qui trouve gagne.'),('Gana quien acierte primero.','Contra el bot, gana quien acierte primero.'),('Wer zuerst trifft, gewinnt.','Gegen den Bot gewinnt, wer zuerst trifft.')]:\n assert a in s;s=s.replace(a,b)\nopen(p,'w').write(s)\nPY\nnpm run typecheck\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"sed -n '163,210p' src/lib/server/live-rooms.ts; python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nfor k,v in p['reports'].items():\n r=v['report'];print(k,r.keys());print(r['official']['totals'])\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nr=p['reports']['30']['report'];print(r['product'].keys());print(str(r['official'].get('retention'))[:1500])\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\np='agent/autonomy/memory/PLAN.json';d=json.load(open(p));d.update(summary='Règles publiques Devine le nombre corrigées EN/FR/ES/DE : salon simultané, décompte commun, réussite puis essais et instant de fin, cinq minutes/30 essais. Contrôles locaux consignés dans STATE.md ; publication au superviseur.',nextMission='Auditer les textes de règles et d’aide des neuf jeux concernant les invitations : distinguer les nouveaux salons simultanés des anciens défi",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm test -- --configLoader=runner'",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"cat >> agent/autonomy/memory/DECISIONS.md <<'EOF'\n\n## Session sur source 1fa9297b — règles publiques du duel de nombres\n\n- Suivre l’audit éditorial mémorisé. Les homeBody actifs sont déjà alignés sur les modes ; ne pas corriger leurs anciennes valeurs masquées comme si elles étaient affichées. L’inspection révèle une contradiction concrète dans social-seo : le nouveau duel y est présenté comme alterné, contrairement à docs/DUELS.fr.md et live-rooms.ts.\n- Corriger les quatre langue",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 26 octobre 2026\n\nSource exportée annoncée : 1fa9297b11aeff203eb4914e7ae3a143c94968ea. AGENTS.md, MANDATE.md, INBOX.json vide et mémoire lus depuis le disque. Guide Next generate-metadata consulté. Aucun accès Git, réseau externe, achat, merge ou déploiement. Aucun nouveau rapport navigateur du superviseur consulté.\n\nDécision : poursuivre l’audit public choisi en mémoire. Les textes homeBody actifs distinguent déjà les cinq Dail",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a17859-2161-7fd1-ac18-5829bdab6715",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 17,
+          "quotaAfter": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 41,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1793033579
+                },
+                "secondary": {
+                  "usedPercent": 6,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1793620379
+                }
+              }
+            ]
+          },
+          "verifier": {
+            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
+            "network": "none",
+            "credentials": false,
+            "dependencies": "read-only",
+            "uid": 3050
+          },
+          "tests": {
+            "passed": 390,
+            "failed": 0,
+            "skipped": 0
+          },
+          "publication": {
+            "sha": "4dbbc66e9c61839f2569606c396520fbbfb6d140",
+            "url": "https://github.com/Aimericv/puzzoria/pull/5",
+            "number": 5
+          },
+          "toolCommands": 21,
+          "finishedAt": "2026-10-26T13:20:51.894Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40328393400"
         }
       }
     }
