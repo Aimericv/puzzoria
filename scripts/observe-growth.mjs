@@ -11,7 +11,7 @@ for(const run of selected.slice(0,2)){
  for(const job of jobs){
   const notes=await api(`/check-runs/${job.check_run_url.split('/').at(-1)}/annotations`).catch(()=>[]);
   let log=null;
-  if(job.conclusion==='failure'||job.conclusion==='timed_out'){
+  if(job.conclusion==='failure'||job.conclusion==='timed_out'||(run.path==='.github/workflows/growth-check.yml'&&job.status==='in_progress')){
    const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${job.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
    if(response.ok)log=(await response.text()).split('\n').slice(-180).join('\n');else log=`HTTP ${response.status}`;
   }
