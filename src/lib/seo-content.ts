@@ -41,6 +41,14 @@ const content: Record<Locale, SeoCopy> = {
             text: "Le vert indique une lettre bien placée ; le jaune, une lettre présente ailleurs ; le gris, une lettre absente des positions encore disponibles. Un mot peut contenir deux fois la même lettre. Si votre proposition comporte deux E et qu'un seul reçoit du vert ou du jaune, le second E ne prouve pas qu'il existe une autre occurrence dans la réponse.",
           },
           {
+            title: "Quel premier mot choisir ?",
+            text: "Commencez par un mot accepté de cinq lettres avec plusieurs lettres différentes, pour tester des voyelles et des consonnes en un essai. Aucun premier mot ne garantit de gagner. Au tour suivant, croisez les indices de toutes les lignes : gardez les lettres vertes à leur place, déplacez les jaunes et écartez les lettres entièrement grises. Une lettre répétée reste possible si les couleurs ne l’excluent pas.",
+          },
+          {
+            title: "Un exemple de déduction, sans dévoiler le mot du jour",
+            text: "Exemple fictif : si la réponse était SALON et votre proposition ESSAI, les couleurs seraient gris, jaune, gris, jaune, gris. Le premier S jaune et le second S gris indiqueraient un seul S, ailleurs qu’en deuxième et troisième positions. Le A serait présent ailleurs qu’en quatrième position ; E et I seraient absents. Cherchez alors un mot compatible avec toutes ces contraintes, plutôt que de déplacer une seule lettre au hasard. Cet exemple explique les règles ; il ne donne aucun indice sur la partie du jour.",
+          },
+          {
             title: "Accents et mots acceptés",
             text: "É, È et Ê comptent comme E ; Ç comme C. Les propositions sont vérifiées dans un dictionnaire comprenant des mots courants et des formes conjuguées, comme ADULE. OUTIL est également accepté. Les mots à deviner sont sélectionnés séparément, en privilégiant les formes fréquentes. Cliquez sur une case de la ligne active pour corriger une lettre.",
           },
@@ -115,6 +123,14 @@ const content: Record<Locale, SeoCopy> = {
           {
             title: "Colours and repeated letters",
             text: "Green means the letter is in the right position, yellow means it belongs elsewhere, and grey means it does not fill any remaining position. The answer can repeat a letter. If you guess two Es but only one receives green or yellow, the second E does not establish that the answer contains another E.",
+          },
+          {
+            title: "How to choose a first guess",
+            text: "Start with an accepted five-letter word containing several different letters, so one guess tests both vowels and consonants. No opening word guarantees a win. On your next turn, combine the clues from every row: keep green letters in place, move yellow letters and rule out letters that are entirely grey. A repeated letter is still possible unless the colours rule it out.",
+          },
+          {
+            title: "A worked example without revealing today’s answer",
+            text: "In a fictional puzzle with APPLE as the answer, guessing PAPER would give yellow, yellow, green, yellow, grey. The yellow first P and green third P would confirm two Ps; A would belong somewhere other than the second position, E somewhere other than the fourth, and R would be absent. Look for a word satisfying all those clues together. This is a rules example, independent of today’s puzzle.",
           },
           {
             title: "Words and editing your guess",
@@ -193,6 +209,14 @@ const content: Record<Locale, SeoCopy> = {
             text: "El verde señala una letra bien colocada; el amarillo, una letra que está en otra posición; el gris, una letra que no ocupa ninguna posición restante. La solución puede repetir letras. Si propones dos E y solo una aparece verde o amarilla, la segunda no confirma que exista otra E en la respuesta.",
           },
           {
+            title: "Cómo elegir la primera palabra de cinco letras",
+            text: "Empieza con una palabra aceptada que tenga varias letras distintas para probar vocales y consonantes en un intento. Ninguna palabra inicial garantiza ganar. Después, combina las pistas de todas las filas: conserva las verdes en su lugar, cambia de posición las amarillas y descarta las letras que solo aparecen grises. Una letra repetida sigue siendo posible si los colores no la excluyen.",
+          },
+          {
+            title: "Un ejemplo resuelto sin revelar la palabra del día",
+            text: "En un ejemplo ficticio con SALTO como respuesta, la propuesta CASAS daría gris, verde, amarillo, gris, gris. La A verde y la segunda A gris indicarían una sola A, en segunda posición. La primera S amarilla y la segunda S gris indicarían una sola S, fuera de la tercera y quinta posiciones; la C estaría ausente. Busca una palabra que respete todas esas pistas a la vez. Este ejemplo explica las reglas: no ofrece pistas sobre la partida de hoy.",
+          },
+          {
             title: "Tildes, palabras y correcciones",
             text: "Las letras acentuadas se normalizan a su forma simple. El diccionario de propuestas incluye palabras frecuentes y formas flexionadas; las respuestas pertenecen a otra selección que prioriza palabras comunes. Haz clic en una casilla de la fila actual para reemplazar una letra o utiliza las flechas y las teclas de borrado antes de validar.",
           },
@@ -267,6 +291,14 @@ const content: Record<Locale, SeoCopy> = {
           {
             title: "Farben und wiederholte Buchstaben",
             text: "Grün bedeutet die richtige Position, Gelb eine andere Position und Grau, dass der Buchstabe keine verbleibende Stelle belegt. Ein Wort kann einen Buchstaben mehrfach enthalten. Wenn du zwei E eingibst, aber nur eines grün oder gelb wird, weist das zweite E nicht auf ein weiteres Vorkommen in der Lösung hin.",
+          },
+          {
+            title: "Welches Wort eignet sich für den ersten Versuch?",
+            text: "Beginne mit einem gültigen Wort aus fünf Buchstaben, das mehrere verschiedene Buchstaben enthält. So prüfst du Vokale und Konsonanten in einem Versuch. Kein Startwort garantiert einen Sieg. Verbinde danach die Hinweise aller Zeilen: Grüne Buchstaben bleiben an ihrem Platz, gelbe müssen an eine andere Stelle, und vollständig graue Buchstaben scheiden aus. Wiederholungen bleiben möglich, solange die Farben sie nicht ausschließen.",
+          },
+          {
+            title: "Ein Beispiel ohne das heutige Wort zu verraten",
+            text: "In einem erfundenen Rätsel mit der Lösung KABEL ergäbe der Versuch BALLE die Farben Gelb, Grün, Gelb, Grau, Gelb. Das erste gelbe L und das zweite graue L würden genau ein L bestätigen, außerhalb der dritten und vierten Position. A stünde an zweiter Stelle, B nicht an erster und E nicht an fünfter Stelle. Suche ein Wort, das alle Hinweise zugleich erfüllt. Dies ist ein Regelbeispiel, unabhängig vom heutigen Rätsel.",
           },
           {
             title: "Schreibweise und Eingaben ändern",
