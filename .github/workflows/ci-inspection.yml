@@ -1,24 +1,40 @@
-name: Observe release validation without raw logs
+name: Targeted isolated game modes readiness verification
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
 jobs:
-  observe:
+  targeted:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 25
     permissions:
       contents: write
-      actions: read
-      pull-requests: read
-      issues: read
+      pull-requests: write
+      statuses: write
+      issues: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: 4820729e4815111c16e404212f7c0f7fac182e1d
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/read-completed-validation-failure.mjs && node scripts/observe-puzzoria-release.mjs
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: candidate
+      - run: npm run lint && npm run typecheck
+        working-directory: candidate
+      - name: Run only preflight and affected case under the existing isolated verifier
+        run: sudo --preserve-env=PATH "$(command -v node)" ../control/scripts/test-game-modes-readiness.mjs
+        working-directory: candidate
+      - name: Publish only targeted counts and prepare fix PR; no merge or production
+        run: node ../control/scripts/publish-game-modes-readiness.mjs
+        working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}

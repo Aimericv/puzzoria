@@ -12,6 +12,7 @@ if(failed){
  for(const match of log.matchAll(/\s\d+\) \[(desktop|mobile|android|iphone-webkit)\] › (e2e\/[a-z0-9-]+\.spec\.ts):(\d+):/g))result.cases.push({project:match[1],file:match[2],line:Number(match[3])});
  const categories={count_assertion:/Error: expect\(locator\)\.toHaveCount/,text_assertion:/Error: expect\(locator\)\.toHaveText/,visible_assertion:/Error: expect\(locator\)\.toBeVisible/,page_closed:/Target page, context or browser has been closed/,browser_crash:/Page crashed|browser.*crashed/i,server_timeout:/Timed out waiting.*webServer/i,test_timeout:/Test timeout of|Test ended while|TimeoutError/,missing_runtime:/Cannot find module|executable doesn't exist/i,disk_full:/ENOSPC/};
  result.errorCategories=Object.entries(categories).filter(([,re])=>re.test(log)).map(([name])=>name);
+ result.assertionLocations=[...log.matchAll(/(e2e\/[a-z0-9-]+\.spec\.ts):(\d+):(\d+)/g)].map(m=>({file:m[1],line:Number(m[2]),column:Number(m[3])}));
  const expected=log.match(/Expected:\s+(\d+)/),received=log.match(/Received:\s+(\d+|undefined)/);
  if(expected)result.expectedCount=Number(expected[1]);if(received)result.receivedCount=received[1]==='undefined'?'undefined':Number(received[1]);
 }
