@@ -1,7 +1,7 @@
 import {github} from './autonomy-pilot/github.mjs';
 const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria');
 const {workflow_runs:runs}=await api('/actions/runs?branch=codex%2Fgrowth-autonomy&per_page=10');
-const selected=runs.filter(r=>r.head_sha==='1b2572247706a9a307cfb64d37a663090bcebaed');
+const selected=runs.filter(r=>r.head_sha==='78f028830caae969499bb03c716958660aee7fad');
 const reports=[];
 
 
