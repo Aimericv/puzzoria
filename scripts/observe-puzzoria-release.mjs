@@ -3,6 +3,7 @@ import{tmpdir}from'node:os';
 import{join}from'node:path';
 import{execFileSync}from'node:child_process';
 import{github}from'./autonomy-pilot/github.mjs';
+import{readComments}from'./autonomy-agent/inbox.mjs';
 const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40418453890';
 const run=await api(`/actions/runs/${runId}`),{jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`),pr=await api('/pulls/11');
 const data=await api('/contents/agent/autonomy/state.json?ref=codex%2Fagent-state'),state=JSON.parse(Buffer.from(data.content,'base64'));
@@ -23,9 +24,9 @@ if(artifact){
 }
 const receipt=state.growth?.releaseCandidate;
 const issue=await api('/issues/3');
-const comments=await api('/issues/3/comments?per_page=100');
-const lastOwner=comments.filter(c=>c.user.login==='Aimericv'&&c.user.type==='User').at(-1);
-const communication={issue:issue.html_url,lastOwnerMessageId:lastOwner?.id??null,recordedLastMessageId:state.lastMessageId,consumed:!!lastOwner&&state.lastMessageId>=lastOwner.id};
+const comments=await readComments(api,3);
+const lastOwner=comments.filter(c=>c.user.id===state.ownerId&&c.user.type==='User').at(-1);
+const communication={issue:issue.html_url,lastOwnerMessageId:lastOwner?.id??null,recordedLastMessageId:state.lastMessageId,received:!!lastOwner&&state.lastMessageId>=lastOwner.id,pending:!!lastOwner&&(state.pendingMessages??[]).some(m=>m.id===lastOwner.id),acknowledgementFound:!!lastOwner&&comments.some(c=>c.user.type==='Bot'&&c.body.includes('Consignes reçues')&&c.body.includes(`#${lastOwner.id}`))};
 const native=await api('/actions/runs/40414606922');
 const nativeResult={id:native.id,event:native.event,status:native.status,conclusion:native.conclusion,url:native.html_url,completedSessions:state.completedSessions,lastSessionRunId:state.lastSession?.runId,lastSessionStatus:state.lastSession?.status,tests:state.lastSession?.tests};
 const bridge=(await api('/actions/runs?branch=codex%2Fci-inspection&per_page=10')).workflow_runs.filter(r=>r.name==='Validate complete SEO rendering on current and proposed content');
