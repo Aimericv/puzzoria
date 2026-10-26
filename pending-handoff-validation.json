@@ -1,0 +1,20 @@
+{
+  "source": "4691c2b55832a302af9317c11d6db291ba2b46be",
+  "main": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+  "pr": {
+    "number": 14,
+    "url": "https://github.com/Aimericv/puzzoria/pull/14"
+  },
+  "candidate": {
+    "number": 11,
+    "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+    "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+    "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+    "applicationContentUnchanged": true
+  },
+  "tests": 61,
+  "lint": true,
+  "policyHash": "fc23ea9a4605d4def3620d46cce4fa96c2210bad24d7e48259e19a0d3d7fa341",
+  "productionEnabled": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40413850936"
+}
