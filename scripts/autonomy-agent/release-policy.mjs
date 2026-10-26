@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 
 export const COPY_FILES=new Set(['src/lib/seo-content.ts','src/lib/rare-word-seo.ts','src/lib/new-games-seo.ts','src/lib/social-seo.ts']);
 export const E2E_PROJECTS=['desktop','mobile','android','iphone-webkit'];
+const safeEditorialValue=value=>value.trim().length>0&&value.length<=4000&&![...value].some(c=>c.charCodeAt(0)<32||c.charCodeAt(0)===127)&&!/[<>]|https?:|javascript:|data:/i.test(value)&&!/[€$]|paypal|stripe|paiement|payment|purchase|payout/i.test(value);
 function copyShape(source) {
   const file=ts.createSourceFile('copy.ts',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TS);
   if(file.parseDiagnostics.length)throw Error('invalid_typescript');
@@ -36,7 +37,52 @@ export function safeCopyEdit(before,after) {
   try {
     const a=copyShape(before),b=copyShape(after);
     return a.shape===b.shape&&a.values.length===b.values.length&&b.values.some((v,i)=>v!==a.values[i])&&
-      b.values.every((value,i)=>value===a.values[i]||(value.trim().length>0&&value.length<=4000&&![...value].some(c=>c.charCodeAt(0)<32||c.charCodeAt(0)===127)&&!/[<>]|https?:|javascript:|data:/i.test(value)&&!/[€$]|paypal|stripe|paiement|payment|purchase|payout/i.test(value)));
+      b.values.every((value,i)=>value===a.values[i]||safeEditorialValue(value));
+  }catch{return false;}
+}
+function sectionArrays(source) {
+  const file=ts.createSourceFile('seo.ts',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TS);
+  if(file.parseDiagnostics.length)throw Error('Invalid editorial source');
+  const arrays=new Map(),name=node=>ts.isIdentifier(node)||ts.isStringLiteral(node)?node.text:null;
+  function walk(node,path) {
+    if(ts.isObjectLiteralExpression(node))for(const property of node.properties)if(ts.isPropertyAssignment(property)&&name(property.name))walk(property.initializer,[...path,name(property.name)]);
+    if(!ts.isArrayLiteralExpression(node)||!/^(fr|en|es|de)\.games\.(word|sudoku|math)\.sections$/.test(path.join('.')))return;
+    const scanner=ts.createScanner(ts.ScriptTarget.Latest,false,ts.LanguageVariant.Standard,node.getText(file));
+    for(let kind=scanner.scan();kind!==ts.SyntaxKind.EndOfFileToken;kind=scanner.scan())if([ts.SyntaxKind.SingleLineCommentTrivia,ts.SyntaxKind.MultiLineCommentTrivia].includes(kind))throw Error('Comments are not editorial records');
+    const records=node.elements.map(element=>{
+      if(!ts.isObjectLiteralExpression(element)||element.properties.length!==2)throw Error('Only title/text records are permitted');
+      const record={};
+      for(const property of element.properties){
+        if(!ts.isPropertyAssignment(property)||!['title','text'].includes(name(property.name))||Object.hasOwn(record,name(property.name))||!ts.isStringLiteral(property.initializer))throw Error('Executable or unexpected section field');
+        record[name(property.name)]=property.initializer.text;
+      }
+      if(!Object.hasOwn(record,'title')||!Object.hasOwn(record,'text'))throw Error('Incomplete section');
+      return {title:record.title,text:record.text};
+    });
+    const key=path.join('.');if(arrays.has(key))throw Error('Duplicate editorial path');
+    arrays.set(key,{start:node.getStart(file),end:node.end,records});
+  }
+  for(const statement of file.statements)if(ts.isVariableStatement(statement)&&(statement.declarationList.flags&ts.NodeFlags.Const))for(const declaration of statement.declarationList.declarations)if(ts.isIdentifier(declaration.name)&&declaration.name.text==='content'&&declaration.initializer)walk(declaration.initializer,[]);
+  let normalized=source;
+  for(const array of [...arrays.values()].sort((a,b)=>b.start-a.start))normalized=normalized.slice(0,array.start)+'[]'+normalized.slice(array.end);
+  return {arrays,normalized};
+}
+export function safeSectionInsertions(before,after) {
+  try {
+    const a=sectionArrays(before),b=sectionArrays(after);
+    if(!a.arrays.size||a.normalized!==b.normalized||JSON.stringify([...a.arrays.keys()])!==JSON.stringify([...b.arrays.keys()]))return false;
+    let added=0,characters=0;
+    for(const [path,original] of a.arrays) {
+      let position=0;
+      for(const record of b.arrays.get(path).records) {
+        const next=original.records[position];
+        if(next&&record.title===next.title&&record.text===next.text){position++;continue;}
+        if(!safeEditorialValue(record.title)||!safeEditorialValue(record.text))return false;
+        added++;characters+=record.title.length+record.text.length;
+      }
+      if(position!==original.records.length)return false;
+    }
+    return added>0&&added<=16&&characters<=32000;
   }catch{return false;}
 }
 export function classifyRelease(files) {
@@ -45,10 +91,10 @@ export function classifyRelease(files) {
   for(const file of files) {
     if(file.mode&&file.mode!=='100644'||file.deleted||typeof file.after!=='string'||Buffer.byteLength(file.after)>262144)return {risk:'manual',reason:'deletion_link_or_large_file'};
     if(/^docs\/[a-zA-Z0-9/_-]+\.md$/.test(file.path)&&!/(?:AUTONOMY|CLOUD-HANDOFF|SECURITY|RETENTION|PREPRODUCTION|SEARCH-CONSOLE|ANALYTICS)/i.test(file.path))continue;
-    if(!COPY_FILES.has(file.path)||typeof file.before!=='string'||!safeCopyEdit(file.before,file.after))return {risk:'manual',reason:`review_required:${file.path}`};
+    if(!COPY_FILES.has(file.path)||typeof file.before!=='string'||!(safeCopyEdit(file.before,file.after)||(file.path==='src/lib/seo-content.ts'&&safeSectionInsertions(file.before,file.after))))return {risk:'manual',reason:`review_required:${file.path}`};
     runtime=true;
   }
-  return {risk:'low',kind:runtime?'editorial-copy':'documentation',requiresDeployment:runtime,reason:'unchanged executable structure; bounded editorial literals only'};
+  return {risk:'low',kind:runtime?'editorial-copy':'documentation',requiresDeployment:runtime,reason:'unchanged executable code; bounded text edits or pure section insertions'};
 }
 export function policyDigest(policy) {return createHash('sha256').update(JSON.stringify(policy)).digest('hex');}
 export function assertValidation(proof,{head,base,minimumUnitTests=345}) {

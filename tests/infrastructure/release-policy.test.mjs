@@ -1,10 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {classifyRelease,safeCopyEdit,assertValidation,deploymentAllowed,E2E_PROJECTS} from '../../scripts/autonomy-agent/release-policy.mjs';
+import {classifyRelease,safeCopyEdit,safeSectionInsertions,assertValidation,deploymentAllowed,E2E_PROJECTS} from '../../scripts/autonomy-agent/release-policy.mjs';
 import {mergeSafeCandidate} from '../../scripts/autonomy-agent/release-controller.mjs';
 import {pendingDeploymentAllowed} from '../../scripts/autonomy-agent/release-client.mjs';
 const before='const content = {fr: {title: "Old", text: "Original"}}; export function get(){return content;}';
 const after=before.replace('Old','Better Wordle title');
+const sections='const content={fr:{games:{word:{sections:[{title:"First",text:"Original"},{title:"Last",text:"Preserved"}]}}}};export function get(){return content;}';
+const inserted=sections.replace('{title:"Last"','{title:"Example",text:"A fictional deduction."},{title:"Last"');
+test('pure guide insertions preserve old records and every byte of executable code',()=>{
+ assert.equal(safeSectionInsertions(sections,inserted),true);
+ assert.equal(classifyRelease([{path:'src/lib/seo-content.ts',before:sections,after:inserted}]).risk,'low');
+ for(const value of [inserted.replace('return content','return\n content'),inserted+'\n// @ts-ignore',inserted.replace('text:"A fictional deduction."','text:fetch("https://evil.example")'),inserted.replace('title:"Example"','get title(){return "Example"}'),inserted.replace('text:"A fictional deduction."','text:"A fictional deduction.",url:"bad"'),inserted.replace('text:"A fictional deduction."','...extra,text:"A fictional deduction."'),inserted.replace('{title:"First",text:"Original"},',''),inserted.replace('text:"Original"','text:"Changed"'),inserted.replace('title:"Example"','/* @ts-ignore */title:"Example"'),inserted.replace('A fictional deduction.','<script>bad</script>'),inserted.replace('A fictional deduction.','Buy $500'),inserted.replace('A fictional deduction.','https://evil.example')])assert.equal(safeSectionInsertions(sections,value),false,value);
+});
+test('guide insertions cannot introduce executable paths or exceed bounded content',()=>{
+ assert.equal(safeSectionInsertions(sections,sections),false);
+ assert.equal(safeSectionInsertions(sections,inserted.replace('games:','other:')),false);
+ assert.equal(safeSectionInsertions(sections,sections.replace('{title:"Last"',Array(17).fill('{title:"New",text:"Text"},').join('')+'{title:"Last"')),false);
+ assert.equal(safeSectionInsertions(sections,inserted.replace('A fictional deduction.','x'.repeat(4001))),false);
+ const reversed=sections.replace('{title:"First",text:"Original"},{title:"Last",text:"Preserved"}','{title:"Last",text:"Preserved"},{title:"First",text:"Original"},{title:"New",text:"Extra"}');
+ assert.equal(safeSectionInsertions(sections,reversed),false);
+ const large=Array(9).fill(`{title:"${'t'.repeat(2000)}",text:"${'x'.repeat(2000)}"},`).join('');
+ assert.equal(safeSectionInsertions(sections,sections.replace('{title:"Last"',large+'{title:"Last"')),false);
+ assert.equal(classifyRelease([{path:'src/lib/new-games-seo.ts',before:sections,after:inserted}]).risk,'manual');
+});
 test('only bounded editorial literals with identical executable syntax are automatic',()=>{
  assert.equal(safeCopyEdit(before,after),true);
  for(const value of [after.replace('return content','return\n content'),after+'\nprocess.exit(0)',after.replace('"Original"','fetch("https://evil.example")'),after.replace('title:','other:'),after+'\n// @ts-ignore',after.replace('Better Wordle title','<script>bad</script>'),after.replace('Better Wordle title','Buy $500')])assert.equal(safeCopyEdit(before,value),false,value);

@@ -69,6 +69,14 @@ confidentialité, migrations, nouveaux jeux, configuration et infrastructure
 restent en revue humaine. Ce périmètre est volontairement explicite : passer
 les tests ne rend pas arbitrairement tout code « sûr ».
 
+Les tableaux `content.<locale>.games.<word|sudoku|math>.sections` du seul module
+`seo-content.ts` acceptent aussi l'insertion de paragraphes littéraux
+`{title, text}`. Tous les blocs existants restent identiques et dans l'ordre ;
+le reste du fichier reste identique octet par octet. Aucun appel, expression,
+getter, spread, champ supplémentaire, commentaire ajouté ou suppression n'est
+accepté. Au plus seize blocs et 32 000 caractères nouveaux sont permis, avec
+les mêmes restrictions de texte. Cette règle est aussi vérifiée sur le VPS.
+
 Le validateur utilise les mêmes dépendances verrouillées et un environnement
 Playwright/Node épinglé par digests, sans réseau, secrets, socket Docker ou
 capacité privilégiée dans les conteneurs exécutant le candidat. Lint, types,
