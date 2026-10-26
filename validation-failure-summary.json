@@ -1,0 +1,17 @@
+{
+  "runId": "40418453890",
+  "runStatus": "completed",
+  "conclusion": "failure",
+  "cases": [
+    {
+      "project": "desktop",
+      "file": "e2e/game-modes.spec.ts",
+      "line": 7
+    }
+  ],
+  "errorCategories": [
+    "count_assertion"
+  ],
+  "expectedCount": 0,
+  "receivedCount": "undefined"
+}
