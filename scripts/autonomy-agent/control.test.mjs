@@ -10,6 +10,20 @@ import {Checkpoints,recoveryPointer} from "./checkpoint.mjs";
 import {collectCandidate,restoreNextEnv,collectMemory} from "./outputs.mjs";
 import {readComments} from "./inbox.mjs";
 import {unseal} from "../autonomy-pilot/vault.mjs";
+import {github} from "../autonomy-pilot/github.mjs";
+
+test('GitHub transport accepts the exact commit comparison used by the release pipeline',async t=>{
+ const calls=[];t.mock.method(globalThis,'fetch',async(url,options)=>{calls.push({url,method:options.method});return {ok:true,status:200,json:async()=>({status:'ahead',behind_by:0})};});
+ const path='/compare/'+'a'.repeat(40)+'...'+'b'.repeat(40);
+ assert.equal((await github('test-token',REPOSITORY)(path)).status,'ahead');
+ assert.equal(calls[0].url,'https://api.github.com/repos/'+REPOSITORY+path);
+});
+test('comparison support never permits traversal, arbitrary refs or another repository',async t=>{
+ let called=false;t.mock.method(globalThis,'fetch',async()=>{called=true;throw Error('Unexpected network');});
+ const request=github('test-token',REPOSITORY),sha='a'.repeat(40);
+ for(const path of ['../contents/x','/contents/../x','/compare/main...other','/compare/'+sha+'...'+sha+'/../contents/x','/compare/'+sha+'...'+sha+'?next=../x'])await assert.rejects(request(path),/Invalid GitHub path/);
+ assert.throws(()=>github('test-token','other/repository'),/Unexpected repository/);assert.equal(called,false);
+});
 
 const account={type:"chatgpt",planType:"plus"};
 const limits=()=>({ordinaryUsageAllowed:true,rateLimits:{limitId:"codex",credits:{hasCredits:false,unlimited:false,balance:"0"},primary:{usedPercent:20,resetsAt:2000},secondary:{usedPercent:10,resetsAt:10000}}});
