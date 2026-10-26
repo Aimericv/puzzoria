@@ -13,6 +13,7 @@ test('conditional browser runs must actually cover every skipped default case',(
 test('candidate validation has neither secrets, host namespaces, a Docker socket nor Internet',()=>{
  const args=releaseDockerArgs({work:'/work/source',dependencies:'/approved/deps',image:'locked',command:['npm','test']});
  assert.ok(args.includes('--network=none'));assert.ok(args.includes('--read-only'));assert.ok(args.includes('--cap-drop=ALL'));assert.ok(args.includes('-i'));assert.ok(args.includes('3050:3050'));
+ assert.ok(args.includes('--shm-size=512m'));assert.ok(!args.includes('--ipc=host'));
  assert.ok(!args.some(value=>/GITHUB_TOKEN|VAULT|DEPLOY_KEY|docker.sock.*dst/.test(value)));
 });
 test('first production activation requires every explicit approval and target field',()=>{

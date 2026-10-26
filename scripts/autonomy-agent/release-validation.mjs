@@ -1,5 +1,5 @@
 import {execFileSync} from 'node:child_process';
-import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,rmSync,existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {randomUUID,createHash} from 'node:crypto';
 import {restoreNextEnv} from './outputs.mjs';
@@ -23,7 +23,7 @@ export function browserCoverage(reports) {
   }));
 }
 export function releaseDockerArgs({work,dependencies,command,image,env={}}) {
-  return ['--host=unix:///var/run/docker.sock','run','--rm','--pull=never','--name',`puzzoria-release-check-${randomUUID()}`,'--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--user','3050:3050','--pids-limit','512','--memory','5g','--cpus','2','--tmpfs','/tmp:rw,nosuid,nodev,size=1g,mode=1777','--mount',`type=bind,src=${work},dst=/work`,'--mount',`type=bind,src=${dependencies},dst=/work/node_modules,readonly`,'--workdir','/work',image,'/usr/bin/env','-i','PATH=/usr/local/bin:/usr/bin:/bin','HOME=/work/.tmp/home','NEXT_TELEMETRY_DISABLED=1','PLAYWRIGHT_BROWSERS_PATH=/ms-playwright',...Object.entries(env).map(([key,value])=>`${key}=${value}`),...command];
+  return ['--host=unix:///var/run/docker.sock','run','--rm','--pull=never','--name',`puzzoria-release-check-${randomUUID()}`,'--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--user','3050:3050','--pids-limit','512','--memory','5g','--cpus','2','--shm-size=512m','--tmpfs','/tmp:rw,nosuid,nodev,size=1g,mode=1777','--mount',`type=bind,src=${work},dst=/work`,'--mount',`type=bind,src=${dependencies},dst=/work/node_modules,readonly`,'--workdir','/work',image,'/usr/bin/env','-i','PATH=/usr/local/bin:/usr/bin:/bin','HOME=/work/.tmp/home','NEXT_TELEMETRY_DISABLED=1','PLAYWRIGHT_BROWSERS_PATH=/ms-playwright',...Object.entries(env).map(([key,value])=>`${key}=${value}`),...command];
 }
 export function validateRelease({head,base,tree,output='.release/proof.json'}) {
   if(![head,base].every(value=>/^[a-f0-9]{40}$/.test(value)))throw Error('Pinned Git commits required');
@@ -51,10 +51,16 @@ export function validateRelease({head,base,tree,output='.release/proof.json'}) {
     run('unit',['npm','test','--','--configLoader=runner','--maxWorkers=2','--reporter=json','--outputFile=.release-results/unit.json']);
     const unit=JSON.parse(readFileSync(join(work,'.release-results/unit.json'),'utf8'));proof.unit={passed:unit.numPassedTests,failed:unit.numFailedTests,skipped:unit.numPendingTests};
     const reports=[];
-    for(const project of E2E_PROJECTS)for(const conditional of [false,true]) {
-      const file=`.release-results/${project}-${conditional?'conditional':'full'}.json`;
-      run(`browser ${project} ${conditional?'conditional':'full'}`,['npm','run','test:e2e','--',...(conditional?['e2e/starter-statistics.spec.ts']:[]),`--project=${project}`,'--reporter=json'],{NEXT_PUBLIC_SITE_URL:'http://127.0.0.1:3100',PLAYWRIGHT_JSON_OUTPUT_FILE:file,...(conditional?{COMMUNITY_STARTER_STATS:'true'}:{})},25*60000);
-      reports.push(JSON.parse(readFileSync(join(work,file),'utf8')));
+    for(const project of E2E_PROJECTS)for(const mode of ['preflight','full','conditional']) {
+      const file=`.release-results/${project}-${mode}.json`;
+      // Reuse the repository CI's checked preflight for Linux hydration and
+      // cold route compilation. Its assertions must pass too; no retries.
+      const selected=mode==='preflight'?['e2e/social-games.spec.ts','e2e/site-analytics.spec.ts','e2e/rare-word.spec.ts','--grep','new SEO pages|internal analytics require|Unusual Word plays']:mode==='conditional'?['e2e/starter-statistics.spec.ts']:[];
+      try {
+        run(`browser ${project} ${mode}`,['npm','run','test:e2e','--',...selected,`--project=${project}`,'--reporter=line,json'],{NEXT_PUBLIC_SITE_URL:'http://127.0.0.1:3100',PLAYWRIGHT_JSON_OUTPUT_FILE:file,...(mode==='conditional'?{COMMUNITY_STARTER_STATS:'true'}:{})},25*60000);
+      } finally {
+        if(existsSync(join(work,file))){reports.push(JSON.parse(readFileSync(join(work,file),'utf8')));proof.e2e=browserCoverage(reports);}
+      }
     }
     proof.e2e=browserCoverage(reports);restoreNextEnv(work,baseline);
     for(const [path,data] of baseline)if(!data.equals(readFileSync(join(work,path))))throw Error('Validation modified the candidate source');
