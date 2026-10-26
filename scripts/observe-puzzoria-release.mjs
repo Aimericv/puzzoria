@@ -3,7 +3,7 @@ import{tmpdir}from'node:os';
 import{join}from'node:path';
 import{execFileSync}from'node:child_process';
 import{github}from'./autonomy-pilot/github.mjs';
-const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId=String((await api('/actions/workflows/autonomy-agent.yml/runs?per_page=1')).workflow_runs[0].id);
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40418453890';
 const run=await api(`/actions/runs/${runId}`),{jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`),pr=await api('/pulls/11');
 const data=await api('/contents/agent/autonomy/state.json?ref=codex%2Fagent-state'),state=JSON.parse(Buffer.from(data.content,'base64'));
 const artifactList=await api(`/actions/runs/${runId}/artifacts?per_page=100`);
@@ -22,8 +22,14 @@ if(artifact){
  }catch{validation={status:'proof-not-readable-yet'};}finally{rmSync(dir,{recursive:true,force:true});}
 }
 const receipt=state.growth?.releaseCandidate;
+const issue=await api('/issues/3');
+const comments=await api('/issues/3/comments?per_page=100');
+const lastOwner=comments.filter(c=>c.user.login==='Aimericv'&&c.user.type==='User').at(-1);
+const communication={issue:issue.html_url,lastOwnerMessageId:lastOwner?.id??null,recordedLastMessageId:state.lastMessageId,consumed:!!lastOwner&&state.lastMessageId>=lastOwner.id};
+const native=await api('/actions/runs/40414606922');
+const nativeResult={id:native.id,event:native.event,status:native.status,conclusion:native.conclusion,url:native.html_url,completedSessions:state.completedSessions,lastSessionRunId:state.lastSession?.runId,lastSessionStatus:state.lastSession?.status,tests:state.lastSession?.tests};
 const bridge=(await api('/actions/runs?branch=codex%2Fci-inspection&per_page=10')).workflow_runs.filter(r=>r.name==='Validate complete SEO rendering on current and proposed content');
-const proof={targeted:bridge.map(r=>({id:r.id,status:r.status,conclusion:r.conclusion,url:r.html_url})),observedAt:new Date().toISOString(),run:{id:run.id,status:run.status,conclusion:run.conclusion,source:run.head_sha,url:run.html_url},jobs:jobs.map(j=>({name:j.name,status:j.status,conclusion:j.conclusion,steps:j.steps.map(s=>({name:s.name,status:s.status,conclusion:s.conclusion}))})),pr:{number:11,state:pr.state,merged:pr.merged,draft:pr.draft,head:pr.head.sha,base:pr.base.sha,mergeSha:pr.merge_commit_sha,url:pr.html_url},state:{generation:state.generation,status:state.status,completedSessions:state.completedSessions,releaseCandidate:receipt,validationBudget:state.releaseValidationHistory,experiments:state.growth?.experiments.map(e=>({id:e.id,status:e.status,mergeSha:e.mergeSha,deployment:e.deployment}))},validation};
+const proof={communication,nativeResult,targeted:bridge.map(r=>({id:r.id,status:r.status,conclusion:r.conclusion,url:r.html_url})),observedAt:new Date().toISOString(),run:{id:run.id,status:run.status,conclusion:run.conclusion,source:run.head_sha,url:run.html_url},jobs:jobs.map(j=>({name:j.name,status:j.status,conclusion:j.conclusion,steps:j.steps.map(s=>({name:s.name,status:s.status,conclusion:s.conclusion}))})),pr:{number:11,state:pr.state,merged:pr.merged,draft:pr.draft,head:pr.head.sha,base:pr.base.sha,mergeSha:pr.merge_commit_sha,url:pr.html_url},state:{generation:state.generation,status:state.status,completedSessions:state.completedSessions,releaseCandidate:receipt,deferredReleaseCandidate:state.growth?.deferredReleaseCandidate,validationBudget:state.releaseValidationHistory,experiments:state.growth?.experiments.map(e=>({id:e.id,status:e.status,mergeSha:e.mergeSha,deployment:e.deployment}))},validation};
 const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'release-observation.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Observe exact PR validation and sanitized proof; no raw logs or production access',tree:tree.sha,parents:[parent]});
 await api('/git/refs','POST',{ref:`refs/heads/codex/release-observation/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});
 console.log(JSON.stringify(proof));
