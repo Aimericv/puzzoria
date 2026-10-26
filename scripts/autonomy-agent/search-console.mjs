@@ -14,7 +14,7 @@ const maximum=2*1024*1024;
 function oidcURL(value) {
   const url=new URL(value);
   if(url.protocol!=="https:" || !/^(?:[a-z0-9-]+\.)*actions\.githubusercontent\.com$/.test(url.hostname) ||
-     url.username || url.password || url.port || url.hash || !url.pathname.endsWith("/idtoken")) throw new Error("invalid_oidc_endpoint");
+     url.username || url.password || url.port || url.hash) throw new Error("invalid_oidc_endpoint");
   url.searchParams.set("audience",audience);return url.href;
 }
 
