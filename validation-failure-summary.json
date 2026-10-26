@@ -1,0 +1,17 @@
+{
+  "runId": "40413975908",
+  "runStatus": "completed",
+  "conclusion": "failure",
+  "cases": [
+    {
+      "project": "desktop",
+      "file": "e2e/seo.spec.ts",
+      "line": 7
+    }
+  ],
+  "errorCategories": [
+    "count_assertion"
+  ],
+  "expectedCount": 3,
+  "receivedCount": 5
+}
