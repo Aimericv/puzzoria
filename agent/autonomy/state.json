@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 130,
+  "generation": 131,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1633,7 +1633,7 @@
       "experimentId": "word-guide-worked-deductions",
       "verified": true,
       "runId": "40387959783",
-      "status": "validating",
+      "status": "validation_failed",
       "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
       "rebase": {
         "testOnly": true,
