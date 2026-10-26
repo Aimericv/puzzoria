@@ -1,13 +1,13 @@
 import type { Locale } from "./types";
 const en = {
   challengeFriend: "Challenge a friend",
-  invitation: "Your challenge link",
+  invitation: "Link to play this puzzle at your own pace",
   linkReady: "Link ready — send it to a friend.",
   copyLink: "Copy link",
   copyFailed: "Select and copy the link below.",
   friendTitle: "A friendly challenge",
   friendIntro:
-    "Play the same puzzle as your friend, then compare your results. No account needed.",
+    "Play the same puzzle, each at your own pace, then compare results. You don’t need to be online together or create an account.",
   playChallenge: "Play this challenge",
   you: "You",
   friend: "Your friend",
@@ -28,7 +28,7 @@ const en = {
   downloadImage: "Download image",
   imageReady: "Your image is ready.",
   imageUnavailable: "Image unavailable. You can still share the text result.",
-  beatMe: "Can you do better?",
+  beatMe: "Your turn, at your own pace!",
   favorite: "Favorite",
   chooseFavorite: "Choose your favorite game",
   resume: "Resume your game",
@@ -90,13 +90,13 @@ const en = {
 type Copy = typeof en;
 const fr: Copy = {
   challengeFriend: "Défier un ami",
-  invitation: "Votre lien de défi",
+  invitation: "Lien pour jouer ce puzzle à votre rythme",
   linkReady: "Lien prêt — envoyez-le à un ami.",
   copyLink: "Copier le lien",
   copyFailed: "Sélectionnez et copiez le lien ci-dessous.",
   friendTitle: "Un défi entre amis",
   friendIntro:
-    "Jouez au même puzzle que votre ami, puis comparez vos résultats. Aucun compte nécessaire.",
+    "Jouez au même puzzle, chacun à votre rythme, puis comparez vos résultats. Inutile d’être connectés en même temps ou de créer un compte.",
   playChallenge: "Jouer ce défi",
   you: "Vous",
   friend: "Votre ami",
@@ -119,7 +119,7 @@ const fr: Copy = {
   imageReady: "Votre image est prête.",
   imageUnavailable:
     "Image indisponible. Vous pouvez partager le résultat texte.",
-  beatMe: "Tu fais mieux ?",
+  beatMe: "À ton tour, à ton rythme !",
   favorite: "Favori",
   chooseFavorite: "Choisir votre jeu préféré",
   resume: "Reprendre votre partie",
@@ -180,13 +180,13 @@ const fr: Copy = {
 };
 const es: Copy = {
   challengeFriend: "Retar a un amigo",
-  invitation: "Tu enlace de reto",
+  invitation: "Enlace para jugar este puzzle a tu ritmo",
   linkReady: "Enlace listo: envíalo a un amigo.",
   copyLink: "Copiar enlace",
   copyFailed: "Selecciona y copia el enlace de abajo.",
   friendTitle: "Un reto entre amigos",
   friendIntro:
-    "Juega el mismo puzzle que tu amigo y compara los resultados. No necesitas cuenta.",
+    "Jugad el mismo puzzle, cada uno a su ritmo, y comparad los resultados. No necesitáis estar conectados a la vez ni crear una cuenta.",
   playChallenge: "Jugar este reto",
   you: "Tú",
   friend: "Tu amigo",
@@ -208,7 +208,7 @@ const es: Copy = {
   imageReady: "Tu imagen está lista.",
   imageUnavailable:
     "Imagen no disponible. Puedes compartir el resultado como texto.",
-  beatMe: "¿Puedes hacerlo mejor?",
+  beatMe: "¡Tu turno, a tu ritmo!",
   favorite: "Favorito",
   chooseFavorite: "Elige tu juego favorito",
   resume: "Continuar tu partida",
@@ -268,13 +268,13 @@ const es: Copy = {
 };
 const de: Copy = {
   challengeFriend: "Freund herausfordern",
-  invitation: "Dein Rätsel-Link",
+  invitation: "Link zu diesem Rätsel in deinem Tempo",
   linkReady: "Link bereit – schicke ihn einem Freund.",
   copyLink: "Link kopieren",
   copyFailed: "Wähle den Link unten aus und kopiere ihn.",
   friendTitle: "Eine freundschaftliche Herausforderung",
   friendIntro:
-    "Spiele dasselbe Rätsel wie dein Freund und vergleicht eure Ergebnisse. Kein Konto nötig.",
+    "Spielt dasselbe Rätsel, jeder in seinem Tempo, und vergleicht eure Ergebnisse. Ihr müsst nicht gleichzeitig online sein und braucht kein Konto.",
   playChallenge: "Dieses Rätsel spielen",
   you: "Du",
   friend: "Dein Freund",
@@ -296,7 +296,7 @@ const de: Copy = {
   downloadImage: "Bild herunterladen",
   imageReady: "Dein Bild ist bereit.",
   imageUnavailable: "Bild nicht verfügbar. Du kannst das Textergebnis teilen.",
-  beatMe: "Schaffst du es besser?",
+  beatMe: "Jetzt du, in deinem Tempo!",
   favorite: "Favorit",
   chooseFavorite: "Wähle dein Lieblingsspiel",
   resume: "Spiel fortsetzen",

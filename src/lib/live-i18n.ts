@@ -1,7 +1,7 @@
 import type { Locale } from "./types";
 import type { LiveGame } from "./live-types";
 const en = {
-  invite: "Challenge a friend",
+  invite: "Play live with a friend",
   title: "Play with a friend",
   create: "Create a room",
   name: "Your nickname",
@@ -73,7 +73,7 @@ const en = {
 };
 type Copy = typeof en;
 const fr: Copy = {
-  invite: "Défier un ami",
+  invite: "Jouer en direct avec un ami",
   title: "Jouer avec un ami",
   create: "Créer un salon",
   name: "Ton pseudo",
@@ -146,7 +146,7 @@ const fr: Copy = {
   },
 };
 const es: Copy = {
-  invite: "Retar a un amigo",
+  invite: "Jugar en directo con un amigo",
   title: "Jugar con un amigo",
   create: "Crear una sala",
   name: "Tu apodo",
@@ -219,7 +219,7 @@ const es: Copy = {
   },
 };
 const de: Copy = {
-  invite: "Freund herausfordern",
+  invite: "Live mit einem Freund spielen",
   title: "Mit einem Freund spielen",
   create: "Raum erstellen",
   name: "Dein Spitzname",
