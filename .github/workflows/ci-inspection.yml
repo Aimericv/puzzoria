@@ -1,58 +1,23 @@
-name: Validate complete SEO rendering on current and proposed content
+name: Observe release validation without raw logs
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  validate:
+  observe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 22
+    timeout-minutes: 3
     permissions:
       contents: write
-      actions: write
-      pull-requests: write
-      issues: write
-      statuses: write
+      actions: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          path: candidate
-          ref: 2184c2b2ec0d7e035216927ccc9ce48fbf52b048
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: candidate
-      - run: npm run lint && npm run typecheck
-        working-directory: candidate
-      - run: npx playwright install --with-deps chromium
-        working-directory: candidate
-      - name: Verify current guide content
-        run: |
-          mkdir -p .ci-results
-          npm run test:e2e -- e2e/seo.spec.ts --grep 'four languages expose usable HTML' --project=desktop --reporter=line,json
-        working-directory: candidate
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/seo-baseline.json
-      - name: Verify exact native proposal content with same test
-        run: |
-          git show 3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402:src/lib/seo-content.ts > src/lib/seo-content.ts
-          npm run test:e2e -- e2e/seo.spec.ts --grep 'four languages expose usable HTML' --project=desktop --reporter=line,json
-          git restore -- src/lib/seo-content.ts
-        working-directory: candidate
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/seo-proposal.json
-      - name: Merge tested test-only fix, preserve proposal, resume independent validation
-        run: node ../control/scripts/seo-render-operator.mjs
-        working-directory: candidate
+      - run: node scripts/observe-puzzoria-release.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
