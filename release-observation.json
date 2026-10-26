@@ -1,0 +1,520 @@
+{
+  "readiness": [
+    {
+      "id": 40421393068,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40421393068",
+      "jobs": [
+        {
+          "name": "targeted",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm run lint && npm run typecheck",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run only preflight and affected case under the existing isolated verifier",
+              "status": "in_progress",
+              "conclusion": null
+            },
+            {
+              "name": "Publish only targeted counts and prepare fix PR; no merge or production",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "pending",
+              "conclusion": null
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "pending",
+              "conclusion": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "budgetAdmission": {
+    "runId": 40421531343,
+    "status": "completed",
+    "conclusion": "success",
+    "reservedMinutes": 180,
+    "candidateStatus": "waiting_validation_budget",
+    "validationJob": "skipped",
+    "jobs": [
+      {
+        "name": "first",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "search-console-check",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "release-prepare",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "second",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "release-finalize",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "release-validation",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "production-gate",
+        "status": "completed",
+        "conclusion": "skipped"
+      },
+      {
+        "name": "production",
+        "status": "completed",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "communication": {
+    "issue": "https://github.com/Aimericv/puzzoria/issues/3",
+    "lastOwnerMessageId": 6349565126,
+    "recordedLastMessageId": 6429571664,
+    "received": true,
+    "pending": false,
+    "acknowledgementFound": true
+  },
+  "nativeResult": {
+    "id": 40414606922,
+    "event": "schedule",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40414606922",
+    "completedSessions": 21,
+    "lastSessionRunId": "40414606922",
+    "lastSessionStatus": "verified",
+    "tests": {
+      "passed": 359,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "targeted": [],
+  "observedAt": "2026-10-26T23:47:37.968Z",
+  "run": {
+    "id": 40418453890,
+    "status": "completed",
+    "conclusion": "failure",
+    "source": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40418453890"
+  },
+  "jobs": [
+    {
+      "name": "first",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Read owner pause and instructions before metadata-only validation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run ./.github/actions/puzzoria-agent",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Read the trusted pending receipt without exposing a commit as a job output",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "search-console-check",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "release-prepare",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/release-check.mjs prepare",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "second",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "release-validation",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate the pinned candidate with no credentials or external network in its containers",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "release-finalize",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/release-check.mjs finalize",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "production-gate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "production",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    }
+  ],
+  "pr": {
+    "number": 11,
+    "state": "open",
+    "merged": false,
+    "draft": true,
+    "head": "3524bab3d352b09375da0075133d1a13cf8f365b",
+    "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+    "mergeSha": "b9a2fa59bb462352bf6d994ddaf463907279c4f8",
+    "url": "https://github.com/Aimericv/puzzoria/pull/11"
+  },
+  "state": {
+    "generation": 133,
+    "status": "ready",
+    "completedSessions": 21,
+    "releaseCandidate": {
+      "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
+      "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+      "prNumber": 11,
+      "experimentId": "word-guide-worked-deductions",
+      "verified": true,
+      "runId": "40387959783",
+      "status": "waiting_validation_budget",
+      "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+      "rebase": {
+        "testOnly": true,
+        "previousHead": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f"
+      },
+      "risk": {
+        "risk": "low",
+        "kind": "editorial-copy",
+        "requiresDeployment": true,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
+      }
+    },
+    "deferredReleaseCandidate": {
+      "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
+      "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+      "prNumber": 15,
+      "experimentId": "published-vocabulary-discovery",
+      "verified": true,
+      "runId": "40414606922",
+      "risk": {
+        "risk": "manual",
+        "reason": "review_required:src/components/game-guide.tsx"
+      },
+      "status": "manual_review"
+    },
+    "validationBudget": [
+      {
+        "at": "2026-10-26T22:39:19.107Z",
+        "runId": "40413975908",
+        "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+        "minutes": 90
+      },
+      {
+        "at": "2026-10-26T23:16:04.791Z",
+        "runId": "40418453890",
+        "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
+        "minutes": 90
+      }
+    ],
+    "experiments": [
+      {
+        "id": "word-guide-worked-deductions",
+        "status": "proposed"
+      },
+      {
+        "id": "published-vocabulary-discovery",
+        "status": "manual_review"
+      }
+    ]
+  },
+  "validation": {
+    "head": "3524bab3d352b09375da0075133d1a13cf8f365b",
+    "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+    "tree": "a9bb0aec5a462670fd55ec70e76ffcbde9519ed1",
+    "status": "failed",
+    "network": "none",
+    "credentials": false,
+    "checks": {
+      "isolation": true,
+      "lint": true,
+      "typecheck": true,
+      "content": true,
+      "social": true,
+      "seo": true,
+      "build": true
+    },
+    "unit": {
+      "passed": 351,
+      "failed": 0,
+      "skipped": 0
+    },
+    "e2e": {
+      "desktop": {
+        "passed": 91,
+        "failed": 1,
+        "skipped": 2,
+        "flaky": 0
+      },
+      "mobile": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "android": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "iphone-webkit": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    }
+  }
+}
