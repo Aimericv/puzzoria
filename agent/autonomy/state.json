@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 108,
+  "generation": 109,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "4aec4c01b61957fc405af3c8640c26018b07d61e",
   "checkpoint": {
-    "artifactId": 12655787217,
-    "runId": "40333834747",
-    "name": "puzzoria-agent-auth-40333834747-20",
-    "generation": 20,
+    "artifactId": 12681360485,
+    "runId": "40384422749",
+    "name": "puzzoria-agent-auth-40384422749-21",
+    "generation": 21,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40333834747",
+      "runId": "40384422749",
       "phase": "autonomous-agent",
-      "generation": 20
+      "generation": 21
     },
-    "expiresAt": "2027-01-24T13:48:26Z",
-    "digest": "530523e3d39b1070e590669c6046d1e03a8139bf9d782edf0af86e1ee7d49237"
+    "expiresAt": "2027-01-24T19:10:58Z",
+    "digest": "4ad9794f62dc8baa15c9c42899816a287e4f809a6d5c762c613d13a57ed0d795"
   },
   "lastMessageId": 6424998860,
   "completedSessions": 19,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40333834747",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40333834747"
+    "id": "40384422749",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40384422749"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026\n\nSource exportée annoncée : 4dbbc66e9c61839f2569606c396520fbbfb6d140. Consignes AGENTS.md, mandat, INBOX vide et mémoire lus sur disque ; guide Next generate-metadata consulté. Aucun réseau externe, Git, achat, merge ou déploiement.\n\nContribution : src/lib/live-i18n.ts, huit textes Wordle/Devine le nombre EN/FR/ES/DE. Les règles affichées annonçaient seulement moins d’essais puis temps ; elles précisent désormais réussite avant recherche inachevée, puis moins d’essais entre réussites, puis instant de fin. Wordle précise aussi six essais. Le classement est confirmé dans live-rooms.ts, fonction settle : échec [-1], réussite [1, -attempts, -elapsed]. Les composants affichent directement m.rules dans la création et le salon. Aucun moteur, contrat serveur, résultat ou URL modifié.\n\nAudit ciblé des règles des neuf salons et textes SEO/aide : pas de nouvelle contradiction simultané/asynchrone établie dans les autres jeux. Les textes engagement-i18n et social-i18n de tours historiques restent nécessaires : InvitationActions utilise encore /api/friends pour les images et NumberRoom conserve ses anciens liens. Ne pas réécrire globalement toutes les invitations comme du live. Audit de lecture, pas preuve exhaustive des parcours navigateur.\n\nVérifications observées : npm run lint et npm run typecheck code 0. Tests ciblés live-rooms + seo : 52/52. Validation contenu via node --import tsx scripts/validate-content.ts : code 0, 92 défis et 32 articles. Suite générale npm test -- --configLoader=runner : 389/390 tests, 29/30 fichiers ; seul operations.test.ts:55 dépasse 5000 ms, déjà consigné en mémoire. Aucune assertion/limite modifiée, cause non établie. Pas de test de copie littérale ajouté pour cette correction de prose. Build et E2E avec serveur réservés au superviseur ; aucun résultat navigateur ni publication revendiqué.\n\nDonnées réelles : analytics available collecté le 2026-10-26T13:52:14.830Z. 7 jours UTC (20–26 octobre) : 1 identité compte/appareil, 1 départ, 1 fin, 0 session consentie mesurée. 30 jours (27 septembre–26 octobre) et 90 jours (29 juillet–26 octobre) : 6 identités, 20 départs, 18 fins, 3 sessions consenties. Jour courant partiel. Sur 30 jours D+1 mature 6 et D+7 mature 5 sans retour ; D+30 mature 0, pourcentage null. Ces identités ne sont pas des personnes uniques et les visites consenties ne représentent pas tout le trafic.\n\nSearch Console available collectée le 2026-10-26T13:52:16.340Z, données finales America/Los_Angeles. 7 jours demandés 19–25 octobre : 1 clic, 62 impressions ; 30 jours 26 septembre–25 octobre : 6 clics, 177 impressions ; 90 jours 28 juillet–25 octobre : 6 clics, 177 impressions. lastReportedDate 24 octobre pour les trois fenêtres, jours récents potentiellement manquants. Totaux collectés séparément, lignes partielles non additionnées. Les clics ne sont pas des personnes/comptes/visites Puzzoria. Échantillon trop petit pour attribuer un effet produit à ces corrections.\n\nQuatre fichiers de mémoire mis à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Publication au superviseur.\n\nProchaine mission : Auditer le partage image des résultats et son lien /friend : vérifier si le parcours distingue clairement le défi asynchrone du bouton de salon live, et corriger seulement une ambiguïté constatée dans les quatre langues. Préserver les anciennes invitations et les règles serveur.\n",
