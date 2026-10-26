@@ -3,7 +3,8 @@ import {allowedOutput, CONTROL_BRANCH, PROOF_BRANCH} from "./policy.mjs";
 export function github(token, repository) {
   if(repository!=="Aimericv/puzzoria") throw new Error("Unexpected repository");
   return async function request(path,method="GET",body) {
-    if((path!=="" && !path.startsWith("/")) || path.includes("..")) throw new Error("Invalid GitHub path");
+    const comparison=/^\/compare\/[a-f0-9]{40}\.\.\.[a-f0-9]{40}$/.test(path);
+    if((path!=="" && !path.startsWith("/")) || (path.includes("..")&&!comparison)) throw new Error("Invalid GitHub path");
     const response=await fetch(`https://api.github.com/repos/${repository}${path}`,{method,headers:{Authorization:`Bearer ${token}`,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(30000)});
     if(!response.ok) {
       const error=new Error(`GitHub ${method} ${path.split("?")[0]} returned ${response.status}`);
