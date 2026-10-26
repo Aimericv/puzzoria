@@ -1,4 +1,4 @@
-name: Validate and install bounded growth evidence fix
+name: Resume the corrected growth wake after its existing delay
 on:
   push:
     branches: [codex/ci-inspection]
@@ -6,45 +6,17 @@ permissions: {}
 jobs:
   deliver:
     runs-on: ubuntu-24.04
-    timeout-minutes: 8
+    timeout-minutes: 3
     permissions:
       contents: write
-      pull-requests: write
-      issues: write
-      actions: read
-      statuses: write
-    defaults:
-      run:
-        working-directory: candidate
+      actions: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
-          path: control
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          persist-credentials: false
-          ref: 345c58611f9d4b918acbbf1cfe61a42411a9dc9b
-          fetch-depth: 0
-          path: candidate
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - name: Require the exact bounded contract-only diff
-        run: |
-          node --input-type=module <<'JS'
-          import{execFileSync}from'node:child_process';
-          const git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim();
-          const base='e6656c842cc0c648dd0fbaa5f219908d5540a1fd',head='345c58611f9d4b918acbbf1cfe61a42411a9dc9b';
-          if(git('rev-parse','HEAD')!==head||JSON.stringify(git('diff','--name-only',base,head).split('\n'))!==JSON.stringify(['agent/autonomy/MANDATE.md','scripts/autonomy-agent/growth.mjs','scripts/autonomy-agent/growth.test.mjs'])||git('diff','--summary',base,head))throw Error('Unexpected change outside contract fix');
-          JS
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify all controller boundaries without inference or production credentials
-        run: |
-          mkdir -p .ci-results
-          node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap
-      - run: npm run lint
-      - name: Verify the real rejected plan and merge the exact tested fix with production off
-        run: node ../control/scripts/growth-contract-operator.mjs
+      - run: node scripts/retry-growth-wake.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}

@@ -1,0 +1,17 @@
+import {github} from './autonomy-pilot/github.mjs';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria');
+const main=(await api('/git/ref/heads/main')).object.sha;
+if(main!=='65bb234080929e3f6d27406f56bb84321c6b8287')throw Error('Unexpected main revision');
+const get=async path=>JSON.parse(Buffer.from((await api(path)).content,'base64'));
+const control=await get('/contents/agent/autonomy/control.json?ref=main');
+if(control.release.productionEnabled!==false||control.release.productionAuthorization!==null||!control.growth.enabled)throw Error('Growth must be enabled and production disabled');
+const state=await get('/contents/agent/autonomy/state.json?ref=codex%2Fagent-state');
+if(state.status!=='retrying'||state.lastSession.runId!=='40384422749'||state.lastSession.error!=='A bounded, measurable growth experiment is required in PLAN.json')throw Error('Only retry the observed fixed technical failure');
+if(Date.parse(state.nextEligibleAt)>Date.now())throw Error('Respect the existing retry delay; no quota or cooldown override');
+await api('/actions/workflows/autonomy-agent.yml/dispatches','POST',{ref:'main',inputs:{'deploy-pending':false,'check-search-console':false}});
+const proof={source:main,requestedAt:new Date().toISOString(),previousRun:state.lastSession.runId,nextEligibleAt:state.nextEligibleAt,retryDelayRespected:true,stateUnmodified:true,productionEnabled:false};
+const parent=process.env.GITHUB_SHA,base=await api('/git/commits/'+parent);
+const tree=await api('/git/trees','POST',{base_tree:base.tree.sha,tree:[{path:'growth-retry.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]});
+const commit=await api('/git/commits','POST',{message:'Request ordinary growth wake after the existing retry delay; no quota override',tree:tree.sha,parents:[parent]});
+await api('/git/refs','POST',{ref:`refs/heads/codex/growth-retry/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});
+console.log(JSON.stringify(proof));
