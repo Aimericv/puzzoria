@@ -1,25 +1,146 @@
-name: Observe corrected growth wake through sanitized state only
+name: Validate editorial data policy and the autonomous SEO proposal without production
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
+concurrency:
+  group: puzzoria-autonomy-pilot
+  cancel-in-progress: false
+env:
+  PUZZORIA_AGENT_ENABLED: ${{ vars.PUZZORIA_AGENT_ENABLED }}
 jobs:
-  deliver:
+  policy:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 10
     permissions:
       contents: write
+      pull-requests: write
+      issues: write
       actions: read
-      issues: read
+      statuses: write
+    defaults:
+      run:
+        working-directory: candidate
+    outputs:
+      main_sha: ${{ steps.policy.outputs.main_sha }}
+      eligible: ${{ steps.prepare.outputs.eligible }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          path: control
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          ref: 854469c4f654d12e6d5ad6936b40f508f549e8e4
+          fetch-depth: 0
+          path: candidate
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - name: Require the exact controller-only change with no application edits
+        run: |
+          node --input-type=module <<'JS'
+          import{execFileSync}from'node:child_process';
+          const git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim();
+          const base='65bb234080929e3f6d27406f56bb84321c6b8287',head='854469c4f654d12e6d5ad6936b40f508f549e8e4';
+          const allowed=['.github/workflows/autonomy-agent.yml','.github/workflows/growth-check.yml','agent/autonomy/MANDATE.md','docs/AUTONOMY-GROWTH.fr.md','scripts/autonomy-agent/release-policy.mjs','tests/infrastructure/release-policy.test.mjs'];
+          if(git('rev-parse','HEAD')!==head||JSON.stringify(git('diff','--name-only',base,head).split('\n'))!==JSON.stringify(allowed)||git('diff','--summary',base,head))throw Error('Unexpected source change');
+          for(const f of allowed.slice(0,2)){const before=git('show',base+':'+f),after=git('show',head+':'+f);if(after.replace(/^          include-hidden-files: true\n/gm,'')!==before)throw Error('Workflow may only explicitly include selected hidden artifacts');}
+          JS
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify classifier, finance, memory and recovery boundaries without model or production credentials
+        run: |
+          mkdir -p .ci-results .release
+          node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap
+      - run: npm run lint
+      - run: node scripts/autonomy-agent/package-controller.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewed-puzzoria-controller
+          include-hidden-files: true
+          path: |
+            candidate/.release/puzzoria-controller.tar.gz
+            candidate/.release/puzzoria-controller.sha256
+          retention-days: 7
+      - id: policy
+        name: Install tested data policy and preserve the exact native proposal across its controller-only rebase
+        run: node ../control/scripts/editorial-policy-operator.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - id: prepare
+        name: Use the existing supervisor to classify the proposal and reserve its free validation allowance
+        run: node scripts/autonomy-agent/release-check.mjs prepare
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - if: steps.prepare.outputs.eligible == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-request-${{ github.run_id }}
+          include-hidden-files: true
+          path: candidate/.release/request.json
+          retention-days: 7
+  validation:
+    needs: policy
+    if: needs.policy.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          ref: ${{ needs.policy.outputs.main_sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: release-request-${{ github.run_id }}
+          path: .release
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Run the existing exact-source validator without credentials or network in candidate containers
+        run: sudo --preserve-env=GITHUB_REPOSITORY,GITHUB_SHA,GITHUB_TOKEN,PATH "$(command -v node)" scripts/autonomy-agent/release-check.mjs validate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-proof-${{ github.run_id }}
+          include-hidden-files: true
+          path: .release/proof.json
+          if-no-files-found: ignore
+          retention-days: 7
+  finalize:
+    needs: [policy, validation]
+    if: always() && needs.policy.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: write
       pull-requests: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
+          ref: ${{ needs.policy.outputs.main_sha }}
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/observe-growth.mjs
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: release-request-${{ github.run_id }}
+          path: .release
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        continue-on-error: true
+        with:
+          name: release-proof-${{ github.run_id }}
+          path: .release
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Let the existing supervisor merge only the fully validated proposal and retain the production gate
+        run: node scripts/autonomy-agent/release-check.mjs finalize
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
