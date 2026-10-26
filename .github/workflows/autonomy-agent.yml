@@ -7,6 +7,10 @@ on:
     types: [created]
   workflow_dispatch:
     inputs:
+      deploy-pending:
+        description: Process an already tested pending release without running Codex; production approval is still mandatory
+        type: boolean
+        default: false
       check-search-console:
         description: Verify Google read-only collection without running Codex
         type: boolean
@@ -43,7 +47,7 @@ jobs:
     # Only the operator's explicit validation commit bypasses the permanent-off switch.
     if: >-
       (github.event_name == 'push' && contains(github.event.head_commit.message, '[validate-agent]')) ||
-      (vars.PUZZORIA_AGENT_ENABLED == 'true' && !inputs.check-search-console &&
+      (vars.PUZZORIA_AGENT_ENABLED == 'true' && !inputs.check-search-console && !inputs.deploy-pending &&
        (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
         (github.event_name == 'issue_comment' && !github.event.issue.pull_request &&
          github.event.comment.user.id == github.event.repository.owner.id && github.event.comment.user.type == 'User')))
@@ -57,6 +61,7 @@ jobs:
       id-token: write
     outputs:
       admitted: ${{ steps.session.outputs.run_model }}
+      candidate: ${{ steps.session.outputs.candidate_sha }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -68,6 +73,152 @@ jobs:
           github-token: ${{ github.token }}
           vault-key: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
           analytics-token: ${{ secrets.PUZZORIA_ANALYTICS_READ_TOKEN }}
+
+  release-prepare:
+    needs: first
+    if: github.ref == 'refs/heads/main' && needs.first.outputs.candidate != '' && needs.first.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: read
+      issues: write
+    outputs:
+      eligible: ${{ steps.prepare.outputs.eligible }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - id: prepare
+        run: node scripts/autonomy-agent/release-check.mjs prepare
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - if: steps.prepare.outputs.eligible == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-request-${{ github.run_id }}
+          path: .release/request.json
+          retention-days: 14
+
+  release-validation:
+    needs: release-prepare
+    if: needs.release-prepare.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: release-request-${{ github.run_id }}
+          path: .release
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate the pinned candidate with no credentials or external network in its containers
+        run: sudo --preserve-env=GITHUB_REPOSITORY,GITHUB_SHA,GITHUB_TOKEN,PATH "$(command -v node)" scripts/autonomy-agent/release-check.mjs validate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: release-proof-${{ github.run_id }}
+          path: .release/proof.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+  release-finalize:
+    needs: [release-prepare, release-validation]
+    if: always() && needs.release-prepare.outputs.eligible == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: release-request-${{ github.run_id }}
+          path: .release
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        continue-on-error: true
+        with:
+          name: release-proof-${{ github.run_id }}
+          path: .release
+      - run: node scripts/autonomy-agent/release-check.mjs finalize
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  production-gate:
+    needs: [first, release-finalize]
+    if: >-
+      always() && github.ref == 'refs/heads/main' && vars.PUZZORIA_AGENT_ENABLED == 'true' &&
+      vars.PUZZORIA_AUTODEPLOY_ENABLED == 'true' &&
+      (needs.first.result == 'success' || (github.event_name == 'workflow_dispatch' && inputs.deploy-pending))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: read
+    outputs:
+      allowed: ${{ steps.gate.outputs.allowed }}
+      sha: ${{ steps.gate.outputs.sha }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - id: gate
+        run: node scripts/autonomy-agent/release-client.mjs gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_AUTODEPLOY_ENABLED: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
+
+  production:
+    needs: production-gate
+    if: needs.production-gate.outputs.allowed == 'true'
+    environment: puzzoria-production
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Deploy through the restricted host command after policy and initial owner approval
+        run: node scripts/autonomy-agent/release-client.mjs deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_AUTODEPLOY_ENABLED: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
+          RELEASE_SHA: ${{ needs.production-gate.outputs.sha }}
+          PUZZORIA_DEPLOY_KEY: ${{ secrets.PUZZORIA_DEPLOY_KEY }}
+          PUZZORIA_DEPLOY_KNOWN_HOSTS: ${{ secrets.PUZZORIA_DEPLOY_KNOWN_HOSTS }}
 
   second:
     needs: first

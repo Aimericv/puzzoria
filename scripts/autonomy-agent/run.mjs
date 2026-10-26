@@ -12,6 +12,8 @@ import {report} from "./inbox.mjs";
 import {verifyCandidate} from "./verify.mjs";
 import {collectAnalytics,ANALYTICS_FILE} from "./analytics.mjs";
 import {collectSearchConsole,SEARCH_CONSOLE_FILE} from "./search-console.mjs";
+import {collectTrends,TRENDS_FILE} from './trends.mjs';
+import {observation,growthContext,validateExperiment,recordExperiment,GROWTH_FILE} from './growth.mjs';
 
 const base="/opt/puzzoria-pilot", work=base+"/work", auth=base+"/auth", readonly=base+"/readonly",uid=3050;
 const cli=readonly+"/node_modules/@openai/codex/bin/codex.js", node=process.execPath;
@@ -25,7 +27,7 @@ const secrets=[process.env.GITHUB_TOKEN,process.env.CODEX_PILOT_VAULT_KEY,proces
 const evidence={schemaVersion:1,runId,job:process.env.GITHUB_JOB,mode:validation?"validation":"autonomous",funding,startedAt:new Date().toISOString(),status:"starting",commands:[],productionDeployment:false};
 state.lastRun={id:runId,url:`https://github.com/${REPOSITORY}/actions/runs/${runId}`};
 const checkpoints=new Checkpoints({api,store,key:process.env.CODEX_PILOT_VAULT_KEY,runId,authFile:auth+"/auth.json",directory:resolve(".agent-in"),client:await artifactClient()});
-let child,rpc,watching=false,baseline;
+let child,rpc,watching=false,baseline,growthSnapshot;
 function stopAgent() {try{execFileSync("pkill",["-KILL","-u",String(uid)],{stdio:"ignore"});}catch(error){if(error.status!==1)throw error;}}
 const env={PATH:dirname(node)+":/usr/local/bin:/usr/bin:/bin",HOME:"/home/puzzoria-pilot",CODEX_HOME:auth,TMPDIR:work+"/.tmp",XDG_DATA_HOME:work+"/.tmp/data",LANG:"C.UTF-8",NEXT_TELEMETRY_DISABLED:"1"};
 function sandbox(args,timeout=180000) {
@@ -41,7 +43,8 @@ function snapshot(directory,prefix="",result=new Map()) {
 }
 async function prepareSource() {
   const main=(await api("/git/ref/heads/main")).object.sha;
-  const source=state.wipSha ?? state.codeSha ?? main;
+  evidence.baseMain=main;
+  const source=control.growth?.enabled?(state.growth?.wip?.base===main?state.growth.wip.sha:main):(state.wipSha ?? state.codeSha ?? main);
   evidence.sourceCommit=source;
   const response=await fetch(`https://api.github.com/repos/${REPOSITORY}/tarball/${source}`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:"application/vnd.github+json"},signal:AbortSignal.timeout(60000)});
   if(!response.ok) throw new Error(`Source archive unavailable (${response.status})`);
@@ -92,6 +95,15 @@ try {
     evidence.searchConsole={status:google.status,property:google.property,fetchedAt:google.fetchedAt,sha256:google.sha256,reason:google.reason};
     sandbox([node,"--input-type=module","-e",`import {readFileSync,writeFileSync} from 'node:fs';const path=${JSON.stringify(SEARCH_CONSOLE_FILE)};JSON.parse(readFileSync(path,'utf8'));let denied=false;try{writeFileSync(path,'tampered');}catch{denied=true;}if(!denied)throw new Error('Google snapshot is writable by model tools');for(const name of ['ACTIONS_ID_TOKEN_REQUEST_URL','ACTIONS_ID_TOKEN_REQUEST_TOKEN','GOOGLE_APPLICATION_CREDENTIALS','GOOGLE_ACCESS_TOKEN'])if(process.env[name])throw new Error('Google identity inherited by model tools');`]);
     evidence.searchConsole.readOnlySnapshot=true;
+    if(control.growth?.enabled) {
+      const trends=await collectTrends();
+      writeFileSync(TRENDS_FILE,JSON.stringify(trends,null,2)+'\n',{mode:0o444});
+      growthSnapshot=observation(metrics,google);
+      const context=growthContext(state,growthSnapshot,trends,control);
+      writeFileSync(GROWTH_FILE,JSON.stringify(context,null,2)+'\n',{mode:0o444});
+      for(const path of [TRENDS_FILE,GROWTH_FILE])sandbox([node,'--input-type=module','-e',`import {readFileSync,writeFileSync} from 'node:fs';const path=${JSON.stringify(path)};JSON.parse(readFileSync(path,'utf8'));let denied=false;try{writeFileSync(path,'tampered')}catch{denied=true}if(!denied)throw Error('Growth snapshot is writable');`]);
+      evidence.growth={observationId:growthSnapshot.id,trendStatus:trends.status,trendSources:trends.sources.map(({id,status,reason})=>({id,status,reason})),readOnlySnapshots:true};
+    }
     state.status="running";state.nextEligibleAt=null;state.blockedReason=null;await store.save("Start an admissible autonomous Puzzoria session");
     await report(api,state,`Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria.\n\nStatistiques Puzzoria : ${metrics.status}${metrics.status==="available"?` (7/30/90 jours, collectées à ${metrics.fetchedAt})`:metrics.reason?` (${metrics.reason})`:""}.\n\nSearch Console : ${google.status}${google.status==="available"?` (${google.property}, collectée à ${google.fetchedAt})`:google.reason?` (${google.reason})`:""}. Lecture des agrégats seulement ; aucune modification de production.`);
     checkpoints.start(()=>{try{process.kill(-child.pid,"SIGTERM");}catch{/* Already exited. */}});watching=true;
@@ -120,26 +132,39 @@ try {
     if(!toolCommands) throw new Error("No tool execution was observed");
     restoreNextEnv(work,baseline);
     const {memory,plan}=collectMemory(work,state.continuityNonce);
+    const experiment=control.growth?.enabled?validateExperiment(plan,{observationId:growthSnapshot.id}):null;
     const files=collectCandidate(work,baseline);
+    if(experiment) {
+      if(files.length&&state.growth.experiments.some(row=>row.id===experiment.id&&row.candidateSha))throw Error('New code proposals require a fresh isolated experiment ID');
+      recordExperiment(structuredClone(state),experiment,growthSnapshot,null);
+    }
     if(validation&&!state.wipSha&&!files.some(file=>/^(src|tests)\//.test(file.path))) throw new Error("Validation requires a real Puzzoria code/test contribution, not only a report");
     // Remove model-created caches/configuration outputs before independent checks.
     for(const name of readdirSync(work)) if(/^\.next(?:-|$)/.test(name)||[".tmp",".sites-runtime",".data","test-results","playwright-report",".agent-tests.json",".sandbox-write-test"].includes(name)||name.endsWith(".tsbuildinfo")) rmSync(join(work,name),{recursive:true,force:true});
     mkdirSync(work+"/.tmp");chownSync(work+"/.tmp",uid,uid);
-    verifyCandidate({work,dependencies:"/opt/puzzoria-agent-deps/node_modules",uid,evidence});
-    const tests=JSON.parse(readFileSync(work+"/.agent-tests.json","utf8"));
-    if(!tests.success || tests.numPassedTests<1 || tests.numFailedTests || tests.numPendingTests) throw new Error("The independent unit suite did not complete with real passing tests");
-    evidence.tests={passed:tests.numPassedTests,failed:tests.numFailedTests,skipped:tests.numPendingTests};
+    if(files.length) {
+      verifyCandidate({work,dependencies:"/opt/puzzoria-agent-deps/node_modules",uid,evidence});
+      const tests=JSON.parse(readFileSync(work+"/.agent-tests.json","utf8"));
+      if(!tests.success || tests.numPassedTests<1 || tests.numFailedTests || tests.numPendingTests) throw new Error("The independent unit suite did not complete with real passing tests");
+      evidence.tests={passed:tests.numPassedTests,failed:tests.numFailedTests,skipped:tests.numPendingTests};
+    } else evidence.analysisOnly=true;
     stopAgent();restoreNextEnv(work,baseline);
     if(JSON.stringify(collectCandidate(work,baseline))!==JSON.stringify(files)) throw new Error("Candidate tests changed their publication");
     const currentAuth=JSON.parse(readFileSync(auth+"/auth.json","utf8"));secrets.push(...Object.values(currentAuth.tokens));
     for(const content of [...files.map(file=>file.content ?? ""),...Object.values(memory)])
       if(secrets.some(secret=>typeof secret==="string"&&secret.length>0&&content.includes(secret))) throw new Error("Sensitive value detected in candidate output");
-    const published=await publishCandidate(api,evidence.sourceCommit,files,plan.summary,state.codeSha);evidence.publication=published;evidence.toolCommands=toolCommands;
+    const published=files.length?await publishCandidate(api,evidence.sourceCommit,files,plan.summary,experiment?null:state.codeSha,experiment?{branch:`codex/experiments/${experiment.id}`,experiment}:{}):null;evidence.publication=published;evidence.toolCommands=toolCommands;
+    if(experiment) {
+      recordExperiment(state,experiment,growthSnapshot,published);
+      evidence.experiment={id:experiment.id,objective:experiment.objective,metric:experiment.metric,decision:experiment.decision};
+      if(published)state.growth.releaseCandidate={sha:published.sha,base:evidence.baseMain,prNumber:published.number,experimentId:experiment.id,verified:true,runId};
+      delete state.growth.wip;
+    }
     state.memory=memory;state.codeSha=published?.sha ?? evidence.sourceCommit;state.completedSessions++;state.pendingMessages=[];
     state.wipSha=null;state.retryCount=0;state.status=endGate.status;state.nextEligibleAt=endGate.nextEligibleAt ?? null;
-    state.blockedReason=plan.blockedReason;state.lastSession=evidence;evidence.status="verified";
+    state.blockedReason=plan.blockedReason;state.lastSession=evidence;evidence.status=files.length?"verified":"observed";
     await store.save("Publish verified autonomous work and its continuation memory");
-    await report(api,state,`${redact(plan.summary,secrets)}\n\nTests indépendants : ${evidence.tests.passed} réussis ; lint, types et build réussis.\n\nProchaine mission choisie par l'agent : ${redact(plan.nextMission,secrets)}${published?`\n\n[PR de travail](${published.url})`:""}`);
+    await report(api,state,`${redact(plan.summary,secrets)}\n\n${evidence.tests?`Tests indépendants : ${evidence.tests.passed} réussis ; lint, types et build réussis.`:'Session d’analyse : mémoire et protocole validés ; aucun test applicatif relancé sans modification.'}${experiment?`\n\nExpérience ${experiment.id} : ${experiment.objective}, métrique ${experiment.metric}. Aucun effet de production attribué avant un déploiement confirmé.`:''}\n\nProchaine mission choisie par l'agent : ${redact(plan.nextMission,secrets)}${published?`\n\n[PR de travail](${published.url})`:""}`);
   }
 } catch(error) {
   if(child){try{process.kill(-child.pid,"SIGTERM");}catch{/* Already stopped. */}}stopAgent();child=null;
@@ -159,8 +184,11 @@ try {
       for(const content of [...files.map(file=>file.content ?? ""),...Object.values(partialMemory)])
         if(secrets.some(secret=>typeof secret==="string"&&secret.length>0&&content.includes(secret))) throw new Error("Sensitive output rejected",{cause:error});
       if(files.length) {
-        const sha=await stageCandidate(api,evidence.sourceCommit,files,"codex/agent-wip",state.wipBranchHead ?? null);
-        state.wipSha=sha;state.wipBranchHead=sha;evidence.unverifiedSnapshot=sha;
+        const wipBranch=control.growth?.enabled?`codex/experiments-wip/${runId}`:'codex/agent-wip';
+        const sha=await stageCandidate(api,evidence.sourceCommit,files,wipBranch,control.growth?.enabled?null:(state.wipBranchHead??null));
+        if(control.growth?.enabled&&state.growth)state.growth.wip={sha,base:evidence.baseMain,branch:wipBranch};
+        else {state.wipSha=sha;state.wipBranchHead=sha;}
+        evidence.unverifiedSnapshot=sha;
       }
       state.memory=partialMemory;
     }

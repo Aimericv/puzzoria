@@ -7,6 +7,9 @@ import globals from "globals";
 // Compose maintained plugins directly, avoiding incompatible legacy dependencies.
 export default defineConfig([
   globalIgnores([
+    ".release/**",
+    ".ci-results/**",
+    ".ci-evidence/**",
     ".next/**",
     ".next-e2e/**",
     ".next-validation/**",

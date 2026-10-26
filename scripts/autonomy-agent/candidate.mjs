@@ -12,11 +12,13 @@ export async function stageCandidate(api,parent,files,branch,expectedHead=null) 
   return next.sha;
 }
 
-export async function publishCandidate(api,parent,files,summary,expectedHead=null) {
+export async function publishCandidate(api,parent,files,summary,expectedHead=null,metadata={}) {
   if(!files.length && parent===expectedHead) return null;
-  const sha=await stageCandidate(api,parent,files,WORK_BRANCH,expectedHead);
-  const prs=await api(`/pulls?state=open&head=Aimericv:${WORK_BRANCH}`);
-  const description=`${summary}\n\nDéveloppement autonome avec ChatGPT Plus, sans déploiement ni fusion automatique. Lint, types, tests unitaires et build exécutés par le superviseur dans le sandbox. Voir le ticket de suivi et les preuves de session pour les résultats exacts.\n\nLes métriques réelles ne sont pas raccordées.`;
-  const pr=prs.length?await api(`/pulls/${prs[0].number}`,"PATCH",{body:description}):await api("/pulls","POST",{head:WORK_BRANCH,base:"main",title:"Puzzoria : contribution de l'agent autonome",body:description,draft:true});
+  const branch=metadata.branch??WORK_BRANCH;
+  if(branch!==WORK_BRANCH&&!/^codex\/experiments\/[a-z0-9][a-z0-9-]{2,63}$/.test(branch))throw Error('Invalid experiment branch');
+  const sha=await stageCandidate(api,parent,files,branch,expectedHead);
+  const prs=await api(`/pulls?state=open&head=Aimericv:${branch}`);
+  const description=`${summary}\n\nDéveloppement autonome avec ChatGPT Plus. Lint, types, tests unitaires, contenus et build exécutés par le vérificateur isolé. Voir le ticket de suivi et les preuves de session pour les résultats exacts.\n\n${metadata.experiment?`Expérience : ${metadata.experiment.id}. Objectif : ${metadata.experiment.objective}. Hypothèse : ${metadata.experiment.hypothesis}. Métrique : ${metadata.experiment.metric}. Aucune amélioration de production n'est attribuée avant un déploiement réellement confirmé.`:'Les sources de métriques disponibles sont décrites dans le rapport de session.'}\n\nLa fusion à faible risque demande une validation complète indépendante. La production reste soumise à son verrou d'activation et aux contrôles de déploiement.`;
+  const pr=prs.length?await api(`/pulls/${prs[0].number}`,"PATCH",{body:description}):await api("/pulls","POST",{head:branch,base:"main",title:metadata.experiment?`Puzzoria : expérience ${metadata.experiment.id}`:"Puzzoria : contribution de l'agent autonome",body:description,draft:true});
   return {sha,url:pr.html_url,number:pr.number};
 }

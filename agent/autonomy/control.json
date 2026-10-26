@@ -33,5 +33,31 @@
       "deployment": "Owner deploys manually to Hetzner VPS; no known external service watches main"
     },
     "scheduleUtc": "17 */6 * * *"
+  },
+  "growth": {
+    "enabled": true,
+    "goal": {
+      "dailyActiveUsers": 1000000,
+      "startsAt": "2026-10-22",
+      "targetDate": "2027-04-22",
+      "measurement": "Accounts/devices and consented traffic are observable proxies, not unique people or a guaranteed outcome."
+    }
+  },
+  "release": {
+    "safeMergeEnabled": true,
+    "authorizedBy": "Owner request of 2026-10-26: autonomous handling of low-risk PRs after independent checks; sensitive changes require owner approval.",
+    "minimumUnitTests": 345,
+    "maximumValidationMinutes": 90,
+    "validationBudgetMinutes7d": 180,
+    "productionEnabled": false,
+    "productionAuthorization": null,
+    "target": {
+      "origin": "https://puzzoria.com",
+      "sshHost": "37.27.24.173",
+      "sshUser": "puzzoria-release",
+      "sshPort": 22,
+      "hostKeyFingerprint": "SHA256:7wiefI6XYd5fbKwZfx9Dyvk2UNY2sqnHgMc7CD+oXeg",
+      "initialCommit": null
+    }
   }
 }

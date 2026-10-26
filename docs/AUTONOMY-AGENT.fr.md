@@ -3,7 +3,10 @@
 Le superviseur réutilise le pilote Codex Plus, son sandbox, ses canaris, son
 chiffrement et son éditeur de confiance. L'agent choisit librement ses missions
 de développement et conserve ses décisions ; aucune roadmap n'est imposée.
-Il ne fusionne pas de PR et ne déploie rien en production.
+L’évolution du 26 octobre ajoute des expériences de croissance et une fusion
+conditionnelle des changements éditoriaux à faible risque. Les déploiements
+automatiques restent désactivés avant leur première autorisation : voir
+[AUTONOMY-GROWTH.fr.md](AUTONOMY-GROWTH.fr.md) pour le périmètre et les contrôles.
 
 ## Activation autorisée et interrupteurs
 

@@ -14,6 +14,9 @@ inputs:
     description: Optional read-only Puzzoria credential; trusted supervisor only.
     required: false
 outputs:
+  candidate_sha:
+    description: A trusted pending isolated growth candidate; never a model claim.
+    value: ${{ steps.finish.outputs.candidate_sha }}
   run_model:
     description: Whether the preflight admitted inference.
     value: ${{ steps.preflight.outputs.run_model }}
@@ -60,11 +63,14 @@ runs:
         include-hidden-files: true
         if-no-files-found: ignore
         retention-days: 30
-    - name: Record the outcome and prepare the review PR
+    - id: finish
+      name: Record the outcome and prepare the review PR
       if: always()
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         AGENT_STEP_OUTCOME: ${{ steps.agent.outcome }}
+        AGENT_MODE: ${{ inputs.mode }}
+        MODEL_ADMITTED: ${{ steps.preflight.outputs.run_model }}
         AGENT_CONTROL_BRANCH: ${{ inputs.mode == 'validation' && 'codex/autonomy-agent' || '' }}
       run: node scripts/autonomy-agent/finish.mjs

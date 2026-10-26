@@ -43,3 +43,4 @@ backups/
 /.handoff-out/
 /.ci-results/
 /.ci-evidence/
+/.release/

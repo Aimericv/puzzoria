@@ -1,0 +1,54 @@
+name: Growth autonomy validation
+on:
+  push:
+    branches: [codex/growth-autonomy]
+permissions: {}
+concurrency:
+  group: puzzoria-growth-validation
+  cancel-in-progress: false
+jobs:
+  validate:
+    if: contains(github.event.head_commit.message, '[growth-ci]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - name: Verify the owner's existing funding declaration and disabled production
+        run: |
+          node --input-type=module -e 'import {readFileSync} from "node:fs";import {assertFunding} from "./scripts/autonomy-agent/policy.mjs";const c=JSON.parse(readFileSync("agent/autonomy/control.json"));assertFunding(c);if(c.release.productionEnabled||c.release.productionAuthorization)throw Error("Production must remain disabled")'
+          mkdir -p .ci-results .release
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Exercise controller, risk, measurement and financial boundaries
+        run: node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap
+      - name: Verify real Docker backup, private preview and image rollback without production
+        run: node scripts/autonomy-agent/test-deployment-docker.mjs
+      - name: Verify recovery even if the new application process has exited
+        run: node scripts/autonomy-agent/test-deployment-docker.mjs --crash
+      - name: Test public trend sources without authentication or paid APIs
+        run: node --input-type=module -e 'import {collectTrends} from "./scripts/autonomy-agent/trends.mjs";import {writeFileSync} from "node:fs";writeFileSync(".ci-results/trends.json",JSON.stringify(await collectTrends()))'
+      - name: Validate exact source in isolated containers, including four browser configurations
+        run: sudo --preserve-env=PATH "$(command -v node)" scripts/autonomy-agent/check-growth-ci.mjs
+      - name: Package the disabled, reviewed host controller
+        run: node scripts/autonomy-agent/package-controller.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: puzzoria-controller-${{ github.sha }}
+          path: |
+            .release/puzzoria-controller.tar.gz
+            .release/puzzoria-controller.sha256
+          retention-days: 7
+      - name: Publish sanitized validation evidence only
+        if: always()
+        run: node scripts/autonomy-agent/growth-ci-proof.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
