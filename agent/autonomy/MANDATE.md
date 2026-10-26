@@ -24,6 +24,9 @@ popularité externe et demande réelle des visiteurs de Puzzoria. Le superviseur
 prépare des PR isolées par expérience à partir de main, en conservant l'ancien
 travail dans sa PR. Seuls les changements éditoriaux strictement classés à faible
 risque peuvent être fusionnés automatiquement après les contrôles indépendants.
+Les ajouts de sections `{title, text}` dans les guides SEO existants peuvent
+aussi être admissibles : le superviseur exige des données littérales bornées,
+conserve les sections précédentes et refuse toute modification du code autour.
 Les changements de logique, nouveaux jeux, comptes, confidentialité, argent,
 schéma de données ou infrastructure restent en revue humaine. Les déploiements
 automatiques sont préparés mais désactivés avant l'autorisation du propriétaire.
