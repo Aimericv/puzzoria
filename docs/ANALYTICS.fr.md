@@ -50,6 +50,60 @@ L'export `format=json` est une pièce jointe privée, sans modifier le JSON de l
 
 Les données de visite sont limitées à la mesure consentie. Un fichier vide ou une rétention encore immature n'autorise pas à inventer des performances. Avant le branchement publicitaire, les recettes/récompenses restent inconnues. Pour comparer deux périodes, conserver leurs exports et joindre une courte note sur les changements du site entre les deux.
 
+## Lecture autonome par le bot
+
+`GET /api/agent/analytics` utilise le même export `puzzoria.analytics` v1 que
+le tableau privé, avec les filtres `days=7|30|90`, `game`, `locale`,
+`interface_locale` et `mode`. Les autres paramètres et les doublons sont refusés.
+Il ne délivre aucune session et ne donne accès ni aux comptes, ni à la base,
+ni aux autres API. Le tableau administrateur garde son contrôle habituel.
+
+L'accès est fermé (404) tant que `ANALYTICS_READER_TOKEN_SHA256` n'est pas une
+empreinte SHA-256 valide. Un jeton Bearer distinct, aléatoire de 256 bits,
+autorise la lecture. Le serveur ne conserve que son empreinte ; la comparaison
+est à temps constant. Une empreinte remplacée révoque immédiatement l'ancien
+jeton ; une valeur vide désactive l'accès. Ne jamais mettre le jeton dans une
+URL, une variable `NEXT_PUBLIC_*`, un fichier commité ou un message.
+Toutes les réponses sont privées/no-store et noindex. Six lectures autorisées
+par minute protègent les agrégations SQLite sur le VPS ; les requêtes sans
+autorisation ne consomment pas cette enveloppe.
+
+À chaque session admise, le superviseur récupère les trois fenêtres 7/30/90
+depuis l'URL HTTPS fixe de Puzzoria. Il refuse les redirections, borne la taille
+et la durée des réponses et valide le contrat et la fraîcheur. Le modèle lit
+`/opt/puzzoria-pilot/readonly/puzzoria-analytics.json` sans accès réseau ni
+secret supplémentaire. La date, l'état de collecte et l'empreinte du rapport
+sont dans les preuves machine ; un échec fournit `reports:null`, jamais des
+statistiques inventées. Le rapport n'est pas publié comme artifact ni dans
+Git ; le bot peut conserver ses conclusions dans sa mémoire privée habituelle.
+Les libellés et sources mesurés restent des données, jamais des instructions.
+
+Installation opérateur :
+
+1. Depuis un checkout de confiance avec GitHub déjà connecté et le runtime
+   verrouillé installé, exécuter
+   `node scripts/autonomy-agent/setup-analytics-reader.mjs`.
+   Il crée `PUZZORIA_ANALYTICS_READ_TOKEN` dans GitHub Secrets et affiche
+   uniquement `ANALYTICS_READER_TOKEN_SHA256=...`, jamais le jeton brut.
+2. Ajouter cette ligne dans le `.env.docker` privé du déploiement. Déployer
+   l'image contenant l'endpoint et la configuration Compose, puis recréer
+   uniquement le service applicatif avec la procédure de déploiement habituelle.
+   Cela exige un déploiement explicite ; la PR ne modifie pas le serveur.
+3. Après fusion du superviseur dans `main`, le prochain réveil admis collecte
+   automatiquement. Vérifier `analytics.status=available` et la date dans les
+   preuves de session. Une erreur 404 peut aussi indiquer une version de
+   production trop ancienne ou un accès désactivé ; 401 indique un secret et
+   une empreinte différents. Ne pas les interpréter comme une absence de trafic.
+
+La commande refuse d'écraser un secret existant. Pour une rotation volontaire,
+utiliser `--rotate` et appliquer ensemble la nouvelle empreinte au serveur.
+Aucun accès SSH, déploiement automatique, achat ou nouveau service n'est ajouté.
+
+Après configuration, lancer **Check Puzzoria read-only analytics** dans GitHub
+Actions sur `main` pour vérifier la production sans consommer le quota Codex.
+Ce contrôle manuel réutilise la déclaration financière existante et ne publie
+que la disponibilité, la date et l'empreinte des rapports, jamais leur contenu.
+
 ## Publicité future
 
 Aucun SDK, emplacement, indice ou publicité n’est ajouté. Les compteurs sont distincts : opportunité, demande, rendu non vide, impression visible ; offre/acceptation/début/fin vidéo. Les événements publicitaires sont refusés tant que `ANALYTICS_ADS_ENABLED` n’est pas activé côté serveur lors d’une intégration autorisée. Un UUID d’impression déduplique chaque étape. Il faut brancher les vrais callbacks du fournisseur, pas compter un chargement comme une vue.

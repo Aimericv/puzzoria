@@ -40,8 +40,13 @@ async function arena(page: Page, secret: string) {
   await expect(page.locator(".number-arena > article")).toHaveCount(2);
   await expect(you.locator(".duel-secret")).toHaveText(secret);
   await expect(opponent.locator(".duel-secret")).toHaveText("?");
-  const left = await you.boundingBox(),
-    right = await opponent.boundingBox();
+  // A replay can still be scrolling. Measure both cards in the same browser
+  // task so scroll movement between two protocol calls cannot fake misalignment.
+  const {left,right} = await page.locator(".number-arena").evaluate(element => {
+    const a=element.querySelector('[data-duel-player="you"]')?.getBoundingClientRect();
+    const b=element.querySelector('[data-duel-player="opponent"]')?.getBoundingClientRect();
+    return {left:a?{x:a.x,y:a.y,width:a.width}:null,right:b?{x:b.x,y:b.y,width:b.width}:null};
+  });
   expect(left).not.toBeNull();
   expect(right).not.toBeNull();
   expect(left!.x + left!.width).toBeLessThanOrEqual(right!.x);

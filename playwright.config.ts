@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { createHash } from "node:crypto";
 const fixture = `.sites-runtime/e2e-${Date.now()}`;
 export default defineConfig({
   testDir: "./e2e",
@@ -51,6 +52,8 @@ export default defineConfig({
       TRUST_PROXY: "true",
       // Dedicated accounts in Playwright's isolated, disposable database only.
       ANALYTICS_ADMIN_USERNAMES: "measure_desktop,measure_mobile,measure_android,measure_webkit",
+      // Public fixture capability for this disposable test server only.
+      ANALYTICS_READER_TOKEN_SHA256: createHash("sha256").update("e".repeat(43)).digest("hex"),
     },
     timeout: 120000,
   },

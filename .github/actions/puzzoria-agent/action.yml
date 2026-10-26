@@ -10,6 +10,9 @@ inputs:
   vault-key:
     description: Existing checkpoint encryption binding; never passed to the model.
     required: true
+  analytics-token:
+    description: Optional read-only Puzzoria credential; trusted supervisor only.
+    required: false
 outputs:
   run_model:
     description: Whether the preflight admitted inference.
@@ -45,6 +48,7 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         CODEX_PILOT_VAULT_KEY: ${{ inputs.vault-key }}
+        PUZZORIA_ANALYTICS_READ_TOKEN: ${{ inputs.analytics-token }}
         AGENT_MODE: ${{ inputs.mode }}
         PUZZORIA_AGENT_ENABLED: ${{ env.PUZZORIA_AGENT_ENABLED }}
     - name: Preserve only sanitized machine evidence
