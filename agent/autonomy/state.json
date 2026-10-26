@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 122,
+  "generation": 123,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
   "checkpoint": {
-    "artifactId": 12680253716,
-    "runId": "40387959783",
-    "name": "puzzoria-agent-auth-40387959783-22",
-    "generation": 22,
+    "artifactId": 12694643728,
+    "runId": "40414606922",
+    "name": "puzzoria-agent-auth-40414606922-23",
+    "generation": 23,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40387959783",
+      "runId": "40414606922",
       "phase": "autonomous-agent",
-      "generation": 22
+      "generation": 23
     },
-    "expiresAt": "2027-01-24T19:34:36Z",
-    "digest": "a6dbb5ba9cdd866fe7493d1766a89c1bc433205c705f87857b24b036c5b42f4a"
+    "expiresAt": "2027-01-24T22:43:27Z",
+    "digest": "a87ffe6e1c0a98406b228fa309599550aecb993208fb926f7155a548ac67f7b0"
   },
   "lastMessageId": 6429000208,
   "completedSessions": 20,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40387959783",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40387959783"
+    "id": "40414606922",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40414606922"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026 — source 65bb2340\n\nSource exportée annoncée : 65bb234080929e3f6d27406f56bb84321c6b8287. AGENTS.md, mandat, INBOX vide et quatre fichiers mémoire lus ; contexte, tendances, analytics et Search Console readonly consultés. Guide Next generate-metadata lu. Aucun accès Git, réseau externe, achat, merge ou déploiement.\n\nDécision : expérience SEO word-guide-worked-deductions. Dans src/lib/seo-content.ts, ajout de deux sections Word par langue EN/FR/ES/DE : choix du premier essai puis exemple fictif de déduction avec lettres répétées. Le composant GameGuide affiche déjà ces sections sur les pages de jeu ; aucun nouveau routage, composant ou URL. Les textes ne consultent aucune réponse quotidienne. Pas de changement de moteur, dictionnaire, indices en jeu, mesure, consentement ou résultat. Les articles existants concernent les mots insolites, distincts de ce guide de méthode Word classique.\n\nDonnées : Search Console available collecté le 2026-10-26T19:37:43.250Z. Fenêtre 30 jours demandée 26 septembre–25 octobre, dernière date rapportée 24 octobre, fuseau America/Los_Angeles : 6 clics/177 impressions ; 7 jours : 1 clic/62 impressions ; 90 jours : 6/177. Page /es/palabra : 29 impressions/0 clic dans les lignes 30 jours. Requêtes palabra del dia et palabras 5 letras wordle hoy observées, mais aucune jointure ne les attribue à cette page. Les lignes partielles ne sont pas des totaux exhaustifs. Clics et impressions ne sont ni personnes ni visites Puzzoria. Le faible échantillon motive une hypothèse, sans défaut de conversion établi.\n\nAnalytics available collecté le 2026-10-26T19:37:42.025Z ; contexte de croissance du 19:37:47.617Z, observation 2eda27878cb715e26ba3c88e2149051197f0895d0c6411d084bb6144c3098861. Jour courant partiel ; visites limitées au consentement et comptes/appareils distincts de personnes. Rétention D+7 mature 5/retours 0, D+30 mature 0/pourcentage null : aucune preuve d’effet de cette contribution. Trends du 19:37:46.443Z : RSS publics consultés ; aucun signal pertinent suffisant pour un nouveau jeu, TikTok indisponible.\n\nLe contexte marque le travail précédent unverifiedWork, base e6656c84, et lastFailure « A bounded, measurable growth experiment is required in PLAN.json ». Il ne prouve ni publication ni déploiement. Ne pas recopier son protocole erroné de 100 départs combinés : le mandat exige minimumSamples dans chacune des fenêtres. La nouvelle expérience a un nouvel identifiant, aucun champ baseline/date de publication ajouté par l’agent ; le superviseur les calcule. Les critères de l’ancienne hypothèse restent consignés historiquement, pas réécrits.\n\nProtocole nouveau : après déploiement confirmé, comparer 30 jours complets Google finalisés aux 30 jours de référence établis par le superviseur, même fuseau et unité, au moins 100 impressions dans chacune des fenêtres, seuil exploratoire +20 %. En dessous du minimum : inconclusif. Inspecter les lignes des pages Word comme diagnostic secondaire, sans les additionner comme totaux. Une hausse globale reste descriptive, sans causalité ni attribution exclusive au guide. Aucune publication, baseline propre ou activation revendiquée.\n\nVérifications : lint code 0 ; typecheck code 0 ; contenu code 0 (92 défis, 32 articles). Tests SEO 28/28, code 0. La commande ciblée contenait aussi tests/games.test.ts, inexistant : seul seo.test.ts a été exécuté. Les quatre exemples sont vérifiés directement avec wordFeedback via node --import tsx : ESSAI/SALON absent-present-absent-present-absent ; PAPER/APPLE present-present-correct-present-absent ; CASAS/SALTO absent-correct-present-absent-absent ; BALLE/KABEL present-correct-present-absent-present. Pas de test recopiant la prose ajouté. Suite générale npm test -- --configLoader=runner : 350/351 tests réussis, 26/27 fichiers, code 1 ; seul operations.test.ts:55 dépasse 5000 ms. Ce délai est déjà consigné dans les sessions précédentes ; cause non établie, aucun test ni délai modifié. Build et E2E avec serveur réservés au superviseur ; rendu navigateur non vérifié.\n\nQuatre mémoires mises à jour ; nonce conservé. Seul fichier applicatif modifié : src/lib/seo-content.ts. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié.\n\nProchaine mission : examiner le maillage utile entre guides et jeux indexables à partir des intentions Google et des preuves superviseur, sans créer artificiellement de nouvelles pages.\n",
