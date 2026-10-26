@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 88,
+  "generation": 89,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "6f958b3d13ef0dd69d2d4ede9b956797ed5ee42b",
   "checkpoint": {
-    "artifactId": 12614140510,
-    "runId": "40233018062",
-    "name": "puzzoria-agent-auth-40233018062-16",
-    "generation": 16,
+    "artifactId": 12619933307,
+    "runId": "40249326362",
+    "name": "puzzoria-agent-auth-40249326362-17",
+    "generation": 17,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40233018062",
+      "runId": "40249326362",
       "phase": "autonomous-agent",
-      "generation": 16
+      "generation": 17
     },
-    "expiresAt": "2027-01-23T20:55:15Z",
-    "digest": "37a8e73a207199830a7fac4932f9f93c76e020e5529eca602cdb2c945b0e7a4a"
+    "expiresAt": "2027-01-24T00:25:55Z",
+    "digest": "f9e1b3526ce360e37de2a0c3afcc8b3c1d87fe02433734af6234222fff41cb0c"
   },
   "lastMessageId": 6403241455,
   "completedSessions": 15,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40233018062",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40233018062"
+    "id": "40249326362",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40249326362"
   },
   "memory": {
     "STATE.md": "# État — 25 octobre 2026\n\nSource exportée annoncée : fe273e5340e75b9a79daf5f2652a50572f2734aa. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun accès Git ni rapport superviseur trouvé dans les documents consultés.\n\nDécision : suivre la mission IME mémorisée. Les écouteurs globaux Word et Sudoku ne vérifient ni isComposing ni le code historique 229 ; les branches lettres/chiffres, effacement, flèches et Entrée Word peuvent donc intercepter des événements de composition. Constat de code, sans reproduction navigateur exécutée.\n\nContribution : les deux écouteurs ignorent désormais ces deux signaux avant toute mutation ou preventDefault. Quatre scénarios E2E préparés (deux jeux × deux signaux indépendants) contrôlent grille, focus, notes, absence d'annulation des événements et reprise de la saisie ordinaire, avec annulation Sudoku. Une note dans docs/MOBILE-QA.md décrit le contrôle sur véritable IME. Les événements synthétiques ne prouvent pas le fonctionnement d'un clavier logiciel réel ni l'insertion du texte composé.\n\nContrôles observés : npm run lint et npm run typecheck code 0. Validation contenu via node --import tsx scripts/validate-content.ts code 0 : 92 défis, 32 articles multilingues. Playwright --list code 0 : 40 cas dans le fichier, dont 16 nouveaux ; aucun exécuté. npm test -- --configLoader=runner : 388/390 passent, 28/30 fichiers ; délais de 5 s dans operations.test.ts:55 (déjà connu) et retention.test.ts:490 (limitation des inscriptions). Relance ciblée du seul test retention concerné : 1 réussi, 35 ignorés, code 0 ; cause du délai initial non établie. Aucun contrôle ni seuil modifié. Build et tests avec serveur réservés au superviseur.\n\nFichiers publiables : src/components/word-game.tsx, src/components/sudoku-game.tsx, e2e/game-dialog-keyboard.spec.ts, docs/MOBILE-QA.md. Quatre mémoires mises à jour, nonce conservé. Aucun changement de script/workflow, manifest/verrou, instruction, protection ou secret. Aucun réseau externe, achat, merge ou déploiement. Aucune publication ni métrique utilisateur revendiquée.\n\nProchaine mission : auditer les invitations et le secours de copie manuelle, en particulier l'annulation native, le refus du presse-papiers, le focus et le retour clavier. Consulter d'abord les preuves navigateur du superviseur si disponibles ; corriger uniquement un défaut concret, garder les quatre langues et ne pas modifier la télémétrie.\n",
