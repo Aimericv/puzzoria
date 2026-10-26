@@ -1,0 +1,95 @@
+{
+  "source": "4518673ea50c0315fce286064187a58e819d4bd9",
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40368589727",
+  "controls": {
+    "tests": 53,
+    "passed": 53,
+    "failed": 0
+  },
+  "release": null,
+  "steps": [
+    {
+      "name": "Set up job",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Verify the owner's existing funding declaration and disabled production",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Exercise controller, risk, measurement and financial boundaries",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Verify real Docker backup, private preview and image rollback without production",
+      "conclusion": "success",
+      "status": "completed"
+    },
+    {
+      "name": "Verify recovery even if the new application process has exited",
+      "conclusion": "cancelled",
+      "status": "completed"
+    },
+    {
+      "name": "Test public trend sources without authentication or paid APIs",
+      "conclusion": "skipped",
+      "status": "completed"
+    },
+    {
+      "name": "Validate exact source in isolated containers, including four browser configurations",
+      "conclusion": "skipped",
+      "status": "completed"
+    },
+    {
+      "name": "Package the disabled, reviewed host controller",
+      "conclusion": "skipped",
+      "status": "completed"
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "status": "completed"
+    },
+    {
+      "name": "Publish sanitized validation evidence only",
+      "conclusion": null,
+      "status": "in_progress"
+    },
+    {
+      "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+      "conclusion": null,
+      "status": "pending"
+    },
+    {
+      "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "conclusion": null,
+      "status": "pending"
+    }
+  ],
+  "trends": null,
+  "productionEnabled": false,
+  "controller": null,
+  "pr": {
+    "number": 9,
+    "url": "https://github.com/Aimericv/puzzoria/pull/9",
+    "draft": true
+  }
+}
