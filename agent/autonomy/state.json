@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 103,
+  "generation": 104,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "4dbbc66e9c61839f2569606c396520fbbfb6d140",
   "checkpoint": {
-    "artifactId": 12652207532,
-    "runId": "40328393400",
-    "name": "puzzoria-agent-auth-40328393400-19",
-    "generation": 19,
+    "artifactId": 12655787217,
+    "runId": "40333834747",
+    "name": "puzzoria-agent-auth-40333834747-20",
+    "generation": 20,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40328393400",
+      "runId": "40333834747",
       "phase": "autonomous-agent",
-      "generation": 19
+      "generation": 20
     },
-    "expiresAt": "2027-01-24T13:11:06Z",
-    "digest": "4f1ba8f10d5dc3e231d4306b4decf565287a8db74c8ffc070ed4716f7e071e79"
+    "expiresAt": "2027-01-24T13:48:26Z",
+    "digest": "530523e3d39b1070e590669c6046d1e03a8139bf9d782edf0af86e1ee7d49237"
   },
   "lastMessageId": 6417031579,
   "completedSessions": 18,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40328393400",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40328393400"
+    "id": "40333834747",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40333834747"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026\n\nSource exportée annoncée : 1fa9297b11aeff203eb4914e7ae3a143c94968ea. AGENTS.md, MANDATE.md, INBOX.json vide et mémoire lus depuis le disque. Guide Next generate-metadata consulté. Aucun accès Git, réseau externe, achat, merge ou déploiement. Aucun nouveau rapport navigateur du superviseur consulté.\n\nDécision : poursuivre l’audit public choisi en mémoire. Les textes homeBody actifs distinguent déjà les cinq Daily, rareword sans Practice et les autres jeux illimités. Une contradiction est confirmée dans social-seo.ts : le paragraphe entre amis de Devine le nombre décrit des tours alternés, alors que les nouveaux salons sont simultanés. Correction EN/FR/ES/DE : lien privé, secret manuel et confirmation, décompte commun, propositions simultanées et vérifiées, réussite puis moins d’essais puis instant de fin, cinq minutes et 30 essais maximum. La phrase « premier qui trouve » vise désormais explicitement le bot. Vérification par docs/DUELS.fr.md et code live-rooms.ts (start, settle, propositions).\n\nContribution publiable : src/lib/social-seo.ts uniquement. Aucun moteur, URL, ancien salon, résultat, texte communautaire, clé persistée ni traduction hors de cette règle modifié. Pas de test recopiant littéralement des textes pour ce changement de prose à faible impact.\n\nContrôles observés : npm run lint code 0 ; npm run typecheck code 0 ; npm test -- --configLoader=runner tests/seo.test.ts : 28/28 ; node --import tsx scripts/validate-content.ts code 0 : 92 défis et 32 articles. Suite générale npm test -- --configLoader=runner : 389/390 tests, 29/30 fichiers ; seul operations.test.ts:55 dépasse 5000 ms, déjà consigné auparavant. Aucune assertion ni limite modifiée, cause non établie. Build et E2E avec serveur laissés au superviseur selon le mandat ; aucun résultat navigateur revendiqué.\n\nRapport réel available collecté le 2026-10-26T13:14:24.537Z. 7 jours (20–26 octobre) : une identité compte/appareil, un départ et une fin. 30 jours (27 septembre–26 octobre) et 90 jours (29 juillet–26 octobre) : six identités, 20 départs, 18 fins. Jour courant partiel ; ces identités ne sont pas des personnes uniques, les visites consenties ne décrivent pas tout le trafic. Rétention 30 jours : D+1 mature 6 et D+7 mature 5, aucun retour ; D+30 mature 0 et pourcentage null. Aucun effet produit attribuable. Search Console collectée le 2026-10-26T13:14:25.975Z : unavailable, invalid_oidc_endpoint, reports null ; aucune observation Google ni lastReportedDate disponible.\n\nQuatre fichiers de mémoire mis à jour, continuityNonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Publication et contrôles restants au superviseur.\n\nProchaine mission : auditer les textes de règles et d’aide des neuf jeux concernant les invitations, distinguer nouveaux salons simultanés et anciens défis asynchrones par confrontation au code, puis corriger seulement les contradictions établies. Ne pas étendre aux moteurs ni supprimer les anciens liens.\n",
