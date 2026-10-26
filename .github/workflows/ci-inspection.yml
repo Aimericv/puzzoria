@@ -1,18 +1,17 @@
-name: Test existing validation admission refusal at reserved budget limit
+name: Observe final release, targeted fix and budget stop without raw logs
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  request:
+  observe:
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     permissions:
-      contents: read
-      actions: write
+      contents: write
+      actions: read
+      pull-requests: read
+      issues: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -20,6 +19,6 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/check-validation-budget-stop.mjs
+      - run: node scripts/observe-puzzoria-release.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
