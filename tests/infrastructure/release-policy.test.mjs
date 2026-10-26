@@ -26,10 +26,13 @@ test('safe merge rejects changed PRs and main races without forced ref updates',
 });
 test('the exact initial approval gates bootstrap, then verified receipts permit later releases',()=>{
  const initial='a'.repeat(40),later='b'.repeat(40);
- const control={release:{target:{initialCommit:'0'.repeat(40)},productionAuthorization:{initialApprovedCommit:initial}}};
- const state={growth:{releaseCandidate:{mergeSha:later,status:'awaiting_activation'}}};
+ const control={release:{target:{initialCommit:'0'.repeat(40)},productionAuthorization:{policyHash:'policy'}}};
+ const state={growth:{productionBootstrapApproval:{sha:initial,policyHash:'policy',approvedAt:'2026-10-26T00:00:00Z'},releaseCandidate:{mergeSha:later,status:'awaiting_activation',ownerApprovedBootstrap:true}}};
  assert.equal(pendingDeploymentAllowed(control,state),false);
  state.growth.releaseCandidate.mergeSha=initial;assert.equal(pendingDeploymentAllowed(control,state),true);
+ state.growth.productionBootstrapApproval.policyHash='changed';assert.equal(pendingDeploymentAllowed(control,state),false);
+ state.growth.productionBootstrapApproval.policyHash='policy';delete state.growth.releaseCandidate.ownerApprovedBootstrap;assert.equal(pendingDeploymentAllowed(control,state),false);
+ state.growth.releaseCandidate.ownerApprovedBootstrap=true;
  state.growth.lastDeployedCommit=initial;state.growth.releaseCandidate.mergeSha=later;assert.equal(pendingDeploymentAllowed(control,state),true);
  state.growth.releaseCandidate.status='validation_failed';assert.equal(pendingDeploymentAllowed(control,state),false);
  delete state.growth.lastDeployedCommit;delete control.release.productionAuthorization;

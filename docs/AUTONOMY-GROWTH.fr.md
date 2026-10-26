@@ -134,8 +134,13 @@ contrôleur, non utilisées et hors des deux versions de récupération peuvent
 4. Configurer la clé dédiée dans l'environnement GitHub `puzzoria-production`,
    limité à main. Renseigner la politique approuvée et la cible ; activer
    seulement alors `productionEnabled` et `PUZZORIA_AUTODEPLOY_ENABLED`.
-5. Le superviseur crée un reçu initial approuvé, distinct d'une expérience
-   produit, puis traite `deploy-pending`. Le reçu réel du VPS détermine le
+5. Après le commit de configuration, l'opérateur enregistre dans l'état protégé
+   `growth.productionBootstrapApproval` (SHA main exact, hash de politique,
+   date d'autorisation) et un reçu initial `ownerApprovedBootstrap`, distinct
+   d'une expérience produit, puis traite `deploy-pending`. L'approbation du SHA
+   est externe au commit lui-même : aucun hash Git autoréférent n'est requis.
+   Ce SHA doit aussi correspondre au `bootstrapApprovedCommit` installé sur le
+   VPS. Le reçu réel du VPS détermine le
    succès ; une absence de confirmation n'est pas un déploiement réussi.
 
 L'absence de moyen de paiement reste une déclaration du propriétaire. Le

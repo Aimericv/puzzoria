@@ -14,9 +14,11 @@ export function releasePolicyHash() {
 export function pendingDeploymentAllowed(control,state) {
   const pending=state?.growth?.releaseCandidate;
   const previous=state?.growth?.lastDeployedCommit??control.release.target.initialCommit;
+  const approval=state?.growth?.productionBootstrapApproval;
   return /^[a-f0-9]{40}$/.test(previous??'')&&pending?.status==='awaiting_activation'&&
     /^[a-f0-9]{40}$/.test(pending?.mergeSha??'')&&
-    (previous!=='0'.repeat(40)||pending.mergeSha===control.release.productionAuthorization?.initialApprovedCommit);
+    (previous!=='0'.repeat(40)||(pending.ownerApprovedBootstrap===true&&approval?.sha===pending.mergeSha&&
+      approval.policyHash===control.release.productionAuthorization?.policyHash&&Number.isFinite(Date.parse(approval.approvedAt))));
 }
 export async function run(mode=process.argv[2]) {
   if(mode==='policy-hash'){console.log(releasePolicyHash());return;}
@@ -36,7 +38,7 @@ export async function run(mode=process.argv[2]) {
   if(!candidate||candidate.mergeSha!==sha||candidate.status!=='awaiting_activation'||!/^[a-f0-9]{40}$/.test(sha??''))throw Error('No exact tested merge is waiting for deployment');
   const expected=state.growth.lastDeployedCommit??control.release.target.initialCommit;
   if(!/^[a-f0-9]{40}$/.test(expected))throw Error('An attested previous production commit is required');
-  if(expected==='0'.repeat(40)&&sha!==control.release.productionAuthorization.initialApprovedCommit)throw Error('The first rollout needs exact source approval');
+  if(!pendingDeploymentAllowed(control,state))throw Error('The first rollout needs an exact trusted source approval');
   const experiment=state.growth.experiments.find(row=>row.id===candidate.experimentId);
   if(!experiment&&candidate.ownerApprovedBootstrap!==true)throw Error('Unknown experiment without an operator-approved bootstrap receipt');
   const directory=mkdtempSync(join(tmpdir(),'puzzoria-ssh-'));let receipt;
