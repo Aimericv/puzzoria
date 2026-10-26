@@ -1,0 +1,28 @@
+{
+  "source": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+  "pr": {
+    "number": 16,
+    "url": "https://github.com/Aimericv/puzzoria/pull/16"
+  },
+  "candidate": {
+    "number": 11,
+    "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
+    "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+    "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+    "applicationContentUnchanged": true
+  },
+  "targetedSeo": {
+    "baseline": true,
+    "proposal": true,
+    "locales": 4,
+    "games": 7,
+    "allTitlesAndParagraphs": true
+  },
+  "deferred": {
+    "prNumber": 15,
+    "status": "manual_review",
+    "preserved": true
+  },
+  "completedSessions": 21,
+  "productionEnabled": false
+}
