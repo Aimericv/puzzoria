@@ -1,0 +1,20 @@
+{
+  "source": "345c58611f9d4b918acbbf1cfe61a42411a9dc9b",
+  "base": "e6656c842cc0c648dd0fbaa5f219908d5540a1fd",
+  "merged": true,
+  "sha": "65bb234080929e3f6d27406f56bb84321c6b8287",
+  "pr": {
+    "number": 10,
+    "url": "https://github.com/Aimericv/puzzoria/pull/10"
+  },
+  "tests": 55,
+  "passed": 55,
+  "lint": true,
+  "realFailedPlanAccepted": true,
+  "appAndReleaseSourcesUnchanged": true,
+  "reusedFullValidation": "https://github.com/Aimericv/puzzoria/actions/runs/40374752799",
+  "policyHash": "85cf9bcbac14a1a1ff10e4d9784e0cce3b7c6ea17716ba4be9dd50bf364c2860",
+  "productionEnabled": false,
+  "nextEligibleAt": "2026-10-26T19:33:25.786Z",
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40387110387"
+}
