@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 113,
+  "generation": 114,
   "status": "retrying",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "4aec4c01b61957fc405af3c8640c26018b07d61e",
   "checkpoint": {
-    "artifactId": 12681360485,
-    "runId": "40384422749",
-    "name": "puzzoria-agent-auth-40384422749-21",
-    "generation": 21,
+    "artifactId": 12680253716,
+    "runId": "40387959783",
+    "name": "puzzoria-agent-auth-40387959783-22",
+    "generation": 22,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40384422749",
+      "runId": "40387959783",
       "phase": "autonomous-agent",
-      "generation": 21
+      "generation": 22
     },
-    "expiresAt": "2027-01-24T19:10:58Z",
-    "digest": "4ad9794f62dc8baa15c9c42899816a287e4f809a6d5c762c613d13a57ed0d795"
+    "expiresAt": "2027-01-24T19:34:36Z",
+    "digest": "a6dbb5ba9cdd866fe7493d1766a89c1bc433205c705f87857b24b036c5b42f4a"
   },
   "lastMessageId": 6425384690,
   "completedSessions": 19,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": "2026-10-26T19:33:25.786Z",
   "lastRun": {
-    "id": "40384422749",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40384422749"
+    "id": "40387959783",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40387959783"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026 — source e6656c84\n\nSource exportée annoncée : e6656c842cc0c648dd0fbaa5f219908d5540a1fd. AGENTS.md, agent/autonomy/MANDATE.md, INBOX vide et mémoire lus sur disque. Guide Next generate-metadata consulté pour le texte friendIntro utilisé aussi en métadonnées. Sources readonly growth-context, trends, puzzoria-analytics et search-console consultées. Aucun réseau externe, Git, achat, merge ou déploiement.\n\nDécision : proposer l’expérience d’acquisition shared-puzzle-own-pace, qui rend explicites deux parcours de partage actuels. InvitationActions crée /api/friends et partage /friend après un résultat terminé ; LiveInvite crée /api/live-rooms et ouvre /live pour une nouvelle partie simultanée. Leurs libellés ne précisaient pas cette différence. Hypothèse de compréhension et de démarrage, sans confusion utilisateur ni frein de croissance mesuré.\n\nContribution : src/lib/engagement-i18n.ts (12 textes) et src/lib/live-i18n.ts (4 textes), EN/FR/ES/DE. Le bouton live annonce le direct, le lien et le CTA de l’image invitent à jouer à son rythme ; l’introduction /friend explique qu’aucune présence simultanée ni compte n’est nécessaire. Cette introduction reste commune à la page et sa description de métadonnées. Aucun changement de composant, API, règle, stockage, mesure, consentement, résultat, URL ou indexation. Les anciens liens restent compatibles. Aucun test de copie littérale ajouté ; recherche dans tests/e2e sans ancien libellé ciblé trouvé.\n\nVérifications observées dans ce sandbox :\n- npm run lint : code 0.\n- npm run typecheck : code 0, types de routes générés.\n- node --import tsx scripts/validate-content.ts : code 0, 92 défis et 32 articles multilingues. Le script n’a pas été modifié.\n- npm test -- --configLoader=runner tests/engagement.test.ts tests/share-client.test.ts tests/seo.test.ts tests/live-rooms.test.ts : 91/91, quatre fichiers, code 0.\n- npm test -- --configLoader=runner : 350/351, 26/27 fichiers, code 1. Seul operations.test.ts:55 dépasse 5000 ms, comme dans les mémoires précédentes. Cause non établie ; aucune assertion ni limite modifiée. Le nombre de tests de cet export diffère du précédent bilan 389/390 : ne pas reprendre cet ancien total comme preuve de la présente source.\n- Build et E2E avec serveur réservés au superviseur par le mandat. Le rendu de l’image et les libellés plus longs sur mobile ne sont pas vérifiés dans un navigateur par l’agent. Pas de preuve Safari physique ni publication revendiquée.\n\nDonnées disponibles : analytics status=available, fetchedAt 2026-10-26T19:14:21.976Z. 7 jours UTC (20–26 octobre) : 1 identité compte/appareil, 1 départ, 1 fin, 0 session consentie mesurée. 30 jours (27 septembre–26 octobre) et 90 jours (29 juillet–26 octobre) : 6 identités, 20 départs, 18 fins, 3 sessions consenties. Jour courant partiel. Sur 30 jours D+1 mature 6 et D+7 mature 5 sans retour ; D+30 mature 0, pourcentage null. Ces identités ne sont pas des personnes uniques ; les visites consenties ne représentent pas tout le trafic.\n\nSearch Console status=available, fetchedAt 2026-10-26T19:14:23.376Z, données finales America/Los_Angeles : 7 jours demandés 19–25 octobre, 1 clic/62 impressions ; 30 jours 26 septembre–25 octobre, 6 clics/177 impressions ; 90 jours 28 juillet–25 octobre, 6 clics/177 impressions. lastReportedDate 24 octobre pour chaque fenêtre ; les jours récents peuvent manquer. Totaux collectés séparément ; lignes partielles non additionnées comme totaux. Page espagnole /es/palabra : 29 impressions, aucun clic dans les lignes 30 jours, piste SEO à examiner. Les clics ne sont pas des personnes/comptes/visites Puzzoria.\n\nTrends fetchedAt 2026-10-26T19:14:28.125Z : RSS Google FR/US/DE/ES disponibles ; aucun signal pertinent suffisant identifié pour choisir un nouveau jeu. TikTok Creative Center indisponible (request_failed), jamais zéro popularité.\n\nProtocole et baseline fixes dans PLAN.json : observation.id 8937a2fa332f581d4a1333e1fc9e59410043802c2fb2d87410c867866e9d2bf8, 10 départs du 12 au 25 octobre UTC (14 jours complets, calcul sur les 14 points). Comparaison aux 14 premières journées UTC complètes après un déploiement confirmé, seuil +20 % et 100 départs combinés dans les deux fenêtres ; sinon inconclusif. Même si ces seuils sont atteints, l’avant/après global ne prouve ni causalité ni attribution au partage. Aucun déploiement confirmé ; deployedAt et résultat null.\n\nLes quatre fichiers de mémoire sont mis à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Publication et contrôles indépendants au superviseur.\n\nProchaine mission choisie : examiner les intentions Search Console de la page Word espagnole et les guides existants. Choisir une contribution SEO pédagogique différenciée si un manque utile est établi ; éviter une nouvelle série de microcorrections et préserver les réponses quotidiennes.\n",
