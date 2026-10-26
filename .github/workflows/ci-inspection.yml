@@ -1,61 +1,23 @@
-name: Test exact GitHub comparisons and resume existing validation without inference
+name: Observe exact autonomous PR validation without raw logs
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  recover:
+  observe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: write
-      pull-requests: write
-      issues: write
-      actions: write
-      statuses: write
-    defaults:
-      run:
-        working-directory: candidate
+      actions: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
-          path: control
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          persist-credentials: false
-          path: candidate
-          ref: 4691c2b55832a302af9317c11d6db291ba2b46be
-          fetch-depth: 0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - name: Require the exact transport-only fix and unchanged application
-        run: |
-          node --input-type=module <<'JS'
-          import{execFileSync}from'node:child_process';
-          const git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim();
-          if(git('rev-parse','HEAD')!=='4691c2b55832a302af9317c11d6db291ba2b46be'||JSON.stringify(git('diff','--name-only','5fafbfc871223fb0781d888ecd4757ac540617ba','HEAD').split('\n'))!==JSON.stringify(['scripts/autonomy-agent/control.test.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-pilot/github.mjs']))throw Error('Unexpected change outside transport fix');
-          JS
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify 61 controls including real comparison routing and traversal rejection
-        run: |
-          mkdir -p .ci-results
-          node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap
-      - run: npm run lint
-      - run: node scripts/autonomy-agent/package-controller.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-controller
-          include-hidden-files: true
-          path: |
-            candidate/.release/puzzoria-controller.tar.gz
-            candidate/.release/puzzoria-controller.sha256
-          retention-days: 7
-      - name: Install tested transport and resume the exact proposal without additional inference
-        run: node ../control/scripts/recover-pending-handoff.mjs
+      - run: node scripts/observe-puzzoria-release.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
