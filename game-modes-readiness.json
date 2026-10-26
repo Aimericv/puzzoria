@@ -1,0 +1,79 @@
+{
+  "head": "4820729e4815111c16e404212f7c0f7fac182e1d",
+  "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+  "fixtureSeoCommit": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+  "status": "passed",
+  "sourceUnchanged": true,
+  "lint": true,
+  "typecheck": true,
+  "scope": "targeted modes case and preflight only; not full PR validation",
+  "evidence": {
+    "method": "successful GitHub steps at a pinned workflow revision whose script asserts exact counts and unchanged source",
+    "runId": 40421393068,
+    "workflowCommit": "317232aabc14c06dbaf08cc298137d8d61579ab3",
+    "originalProofFileRecovered": false,
+    "publisherFailure": "proof branch name conflicted with existing source branch namespace"
+  },
+  "projects": {
+    "desktop": {
+      "readiness": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "preflight": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "mobile": {
+      "readiness": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "preflight": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "android": {
+      "readiness": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "preflight": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "iphone-webkit": {
+      "readiness": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "preflight": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "pr": {
+    "number": 17,
+    "url": "https://github.com/Aimericv/puzzoria/pull/17"
+  }
+}
