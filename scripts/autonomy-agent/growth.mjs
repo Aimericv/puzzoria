@@ -15,18 +15,29 @@ export const METRICS={
 const number=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0?value:null;
 const day=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T00:00:00Z'))&&new Date(value+'T00:00:00Z').toISOString().slice(0,10)===value;
 const text=(value,max=2000)=>typeof value==='string'&&value.trim().length>0&&value.length<=max;
+function evidenceText(value) {
+  if(text(value,8000))return value;
+  if(!Array.isArray(value)||value.length<1||value.length>8)return null;
+  const keys=new Set(['source','finding','observationId','collectedAt']);
+  for(const entry of value)if(!entry||typeof entry!=='object'||Array.isArray(entry)||
+    Object.keys(entry).some(key=>!keys.has(key))||!text(entry.source,500)||!text(entry.finding,2000)||
+    (entry.observationId!==undefined&&!/^[a-f0-9]{64}$/.test(entry.observationId))||
+    (entry.collectedAt!==undefined&&(typeof entry.collectedAt!=='string'||!Number.isFinite(Date.parse(entry.collectedAt)))))return null;
+  const serialized=JSON.stringify(value);return text(serialized,8000)?serialized:null;
+}
 export function validateExperiment(plan,{observationId}={}) {
   const e=plan?.experiment;
+  const evidence=evidenceText(e?.evidence);
   if(!e||!/^([a-z0-9][a-z0-9-]{2,63})$/.test(e.id??'')||!['acquisition','seo','retention'].includes(e.objective)||
-    !['product','research','measurement','reliability'].includes(e.kind)||!text(e.hypothesis)||!text(e.expectedImpact)||!text(e.evidence)||
+    !['product','research','measurement','reliability'].includes(e.kind)||!text(e.hypothesis)||!text(e.expectedImpact)||!evidence||
     !METRICS[e.metric]||!Number.isInteger(e.observationDays)||e.observationDays<1||e.observationDays>90||
     !Number.isInteger(e.minimumSamples)||e.minimumSamples<1||e.minimumSamples>10000000||
     typeof e.minimumRelativeImprovement!=='number'||!Number.isFinite(e.minimumRelativeImprovement)||e.minimumRelativeImprovement<=0||e.minimumRelativeImprovement>100||
     !['propose','observe','continue','stop','pivot'].includes(e.decision))throw Error('A bounded, measurable growth experiment is required in PLAN.json');
   // Model descriptions are proposals; baselines, releases and results below are
   // computed by the trusted supervisor, never copied from a model claim.
-  if(observationId&&!e.evidence.includes(observationId))throw Error('Cite the actual current observation ID from the read-only growth context');
-  return Object.fromEntries(['id','objective','kind','hypothesis','expectedImpact','evidence','metric','observationDays','minimumSamples','minimumRelativeImprovement','decision'].map(k=>[k,e[k]]));
+  if(observationId&&!evidence.includes(observationId))throw Error('Cite the actual current observation ID from the read-only growth context');
+  return {...Object.fromEntries(['id','objective','kind','hypothesis','expectedImpact','metric','observationDays','minimumSamples','minimumRelativeImprovement','decision'].map(k=>[k,e[k]])),evidence};
 }
 export function observation(analytics,google,now=Date.now()) {
   const today=new Date(now).toISOString().slice(0,10),series={};
@@ -97,7 +108,7 @@ export function growthContext(state,snapshot,trends,control) {
   const ledger=state.growth;
   for(const e of ledger.experiments)e.assessment=assessExperiment(e,snapshot);
   ledger.lastObservation={id:snapshot.id,collectedAt:snapshot.collectedAt,sources:snapshot.sources};
-  return {schemaVersion:1,goal:control.growth.goal,observation:{...snapshot,series:Object.fromEntries(Object.entries(snapshot.series).map(([key,rows])=>[key,rows.slice(-30)])),coverage:'Context includes the latest 30 observed daily points; the separate source snapshots retain their full 90-day reports.'},trends:{status:trends.status,sha256:trends.sha256},experiments:ledger.experiments.map(({baseline,...rest})=>({...rest,baselineId:baseline?.id})),archives:ledger.archived??[],legacyWork:ledger.legacyWork,
+  return {schemaVersion:1,goal:control.growth.goal,observation:{...snapshot,series:Object.fromEntries(Object.entries(snapshot.series).map(([key,rows])=>[key,rows.slice(-30)])),coverage:'Context includes the latest 30 observed daily points; the separate source snapshots retain their full 90-day reports.'},trends:{status:trends.status,sha256:trends.sha256},experiments:ledger.experiments.map(({baseline,...rest})=>({...rest,baselineId:baseline?.id})),archives:ledger.archived??[],legacyWork:ledger.legacyWork,unverifiedWork:ledger.wip??null,lastFailure:state.lastSession?.status==='failed'?{runId:state.lastSession.runId,reason:state.lastSession.error}:null,
     instructions:'Prioritize evidence-backed acquisition, SEO and retention. You may research, wait for mature data, pivot, or propose new games. Do not manufacture minor fixes or claim an unpublished change affected production. Retention aggregates describe mature cohorts but are not release-specific cohorts.'};
 }
 export function recordExperiment(state,experiment,snapshot,publication,now=Date.now()) {

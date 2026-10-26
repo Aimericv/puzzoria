@@ -7,6 +7,13 @@ test('growth requires an objective, hypothesis and predeclared measurable criter
  assert.equal(validateExperiment({experiment:experiment()}).metric,'google.clicks');
  for(const patch of [{id:'../escape'},{objective:'random-fixes'},{minimumSamples:0},{observationDays:NaN},{metric:'invented.dau'},{hypothesis:''}])assert.throws(()=>validateExperiment({experiment:{...experiment(),...patch}}));
 });
+test('structured evidence from a real wake is bounded, normalized and must cite the current observation',()=>{
+ const id='a'.repeat(64),evidence=[{source:'/readonly/growth-context.json',observationId:id,collectedAt:'2026-10-26T19:14:28Z',finding:'Ten actual starts in fourteen complete UTC days.'},{source:'src/components/invitation-actions.tsx',finding:'Invitation paths inspected; no measured user confusion.'}];
+ const result=validateExperiment({experiment:{...experiment(),evidence,baseline:{invented:999},deployedAt:'2026-01-01'}},{observationId:id});
+ assert.deepEqual(JSON.parse(result.evidence),evidence);assert.equal(result.baseline,undefined);assert.equal(result.deployedAt,undefined);
+ assert.throws(()=>validateExperiment({experiment:{...experiment(),evidence}},{observationId:'b'.repeat(64)}));
+ for(const bad of [[],Array(9).fill(evidence[0]),[{...evidence[0],finding:{nested:'data'}}],[{...evidence[0],command:'untrusted'}],'a'.repeat(8001)])assert.throws(()=>validateExperiment({experiment:{...experiment(),evidence:bad}}));
+});
 test('snapshots retain unknown data, exclude partial UTC day and do not fill Google gaps',()=>{
  const a={status:'available',fetchedAt:new Date(now).toISOString(),reports:{90:{report:{official:{daily:[{day:'2026-10-25',players:4,starts:6},{day:'2026-10-26',players:999,starts:999},{day:'2026-99-01',players:3}]},product:{daily:[]}}}}};
  const s=observation(a,{status:'unavailable'},now);
