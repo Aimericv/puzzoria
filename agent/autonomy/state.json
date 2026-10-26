@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 93,
+  "generation": 94,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "423c52914e8a403bb295f18de2b2c4c23689c9f8",
   "checkpoint": {
-    "artifactId": 12619933307,
-    "runId": "40249326362",
-    "name": "puzzoria-agent-auth-40249326362-17",
-    "generation": 17,
+    "artifactId": 12629005925,
+    "runId": "40271417887",
+    "name": "puzzoria-agent-auth-40271417887-18",
+    "generation": 18,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40249326362",
+      "runId": "40271417887",
       "phase": "autonomous-agent",
-      "generation": 17
+      "generation": 18
     },
-    "expiresAt": "2027-01-24T00:25:55Z",
-    "digest": "f9e1b3526ce360e37de2a0c3afcc8b3c1d87fe02433734af6234222fff41cb0c"
+    "expiresAt": "2027-01-24T04:54:08Z",
+    "digest": "b990b4223761ee988deb7d490c7dae1989f445de433bf83540833ba5ee79743c"
   },
   "lastMessageId": 6405582302,
   "completedSessions": 16,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40249326362",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40249326362"
+    "id": "40271417887",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40271417887"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026\n\nSource exportée annoncée : 6f958b3d13ef0dd69d2d4ede9b956797ed5ee42b. AGENTS.md, agent/autonomy/MANDATE.md, INBOX.json (vide) et les quatre mémoires lus depuis le disque. Guide Next use-client.md consulté avant modification. Aucun accès Git ; aucun rapport de validation navigateur du superviseur identifié dans les documents consultés.\n\nDécision : suivre la mission mémorisée sur partage/invitations. shareText gère déjà annulation et refus avec secours ; LiveRoom sélectionne déjà son lien en cas d’échec. InvitationActions affiche seulement copyFailed : le lien reste disponible mais n’est pas focalisé ni sélectionné. Correction limitée : ref du champ, focus sans scroll puis select après refus de copie. Aucun texte, clé persistée, règle serveur ou événement analytique changé.\n\nContribution publiable : src/components/invitation-actions.tsx et e2e/invitation-copy.spec.ts. Quatre scénarios EN/FR/ES/DE préparent une vraie fin Numbers Daily et une invitation/image serveur, refusent la copie, vérifient le message, le focus et la sélection complète du lien readonly, puis réautorisent la copie et vérifient Tab/Entrée et lien exact. Le presse-papiers est simulé ; aucune reproduction ni exécution navigateur réalisée par l’agent. Le défaut initial est un constat de code, pas un échec navigateur mesuré.\n\nContrôles observés : npm run lint et npm run typecheck code 0. node --import tsx scripts/validate-content.ts code 0 : 92 défis et 32 articles multilingues. npm test -- --configLoader=runner tests/share-client.test.ts code 0 : 8/8 tests existants. Playwright --list code 0 : 16 nouveaux cas découverts (quatre langues × quatre configurations), aucun exécuté. Suite générale npm test -- --configLoader=runner : 389/390 tests réussis, 29/30 fichiers ; seul operations.test.ts:55 dépasse 5 s, déjà consigné dans la mémoire. Aucune assertion ni limite modifiée, cause non établie. Build et E2E avec serveur réservés au superviseur.\n\nDonnées réelles désormais disponibles : rapport status=available collecté le 2026-10-26 à 00:29:07.817Z, fenêtres 7/30/90 jours jusqu’au 26 octobre partiel. Sur 7 jours (20–26 octobre) : une identité compte/appareil, un démarrage, une fin ; aucune session de visite consentie mesurée. Sur 30 jours (27 septembre–26 octobre) : six identités, 20 démarrages et 18 fins ; trois sessions mesurées, deux visiteurs mesurés. D+1 mature : 6, retours : 0 ; D+7 mature : 5, retours : 0 ; D+30 mature : 0, pourcentage null. Le rapport 90 jours (29 juillet–26 octobre) contient les mêmes totaux. Ces identités ne sont pas des personnes uniques ; les visites consenties ne représentent pas tout le trafic. Aucun effet du correctif sur la rétention démontré et aucune publication ni mise en production revendiquée.\n\nQuatre mémoires mises à jour, nonce conservé. Aucun changement de scripts/workflows, manifests/verrous, instructions, protections ou secrets. Aucun réseau externe, achat, merge ou déploiement.\n\nProchaine mission choisie : vérifier d’abord les preuves navigateur de cette contribution si disponibles, puis auditer le secours de copie du salon historique NumberRoom. Son catch affiche un lien dans une notice sans champ de copie ; confirmer le parcours existant, préserver les anciennes invitations et proposer un secours sélectionnable cohérent si le défaut est établi. Ne pas généraliser à tous les partages ni toucher à la télémétrie sans nécessité.\n",
