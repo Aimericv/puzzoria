@@ -1,0 +1,72 @@
+{
+  "merged": true,
+  "sha": "e6656c842cc0c648dd0fbaa5f219908d5540a1fd",
+  "source": "78f028830caae969499bb03c716958660aee7fad",
+  "pr": "https://github.com/Aimericv/puzzoria/pull/9",
+  "productionEnabled": false,
+  "wakeRequested": true,
+  "validation": {
+    "standard": 40374772558,
+    "isolated": 40374752799,
+    "controls": {
+      "tests": 54,
+      "passed": 54,
+      "failed": 0
+    },
+    "release": {
+      "head": "78f028830caae969499bb03c716958660aee7fad",
+      "base": "ff1ce7d52f4862c9b9072299139a8e2e35a12207",
+      "tree": "c7c365a0a8dd3252aca90229f821cc409327316c",
+      "status": "passed",
+      "network": "none",
+      "credentials": false,
+      "checks": {
+        "isolation": true,
+        "lint": true,
+        "typecheck": true,
+        "content": true,
+        "social": true,
+        "seo": true,
+        "build": true
+      },
+      "unit": {
+        "passed": 351,
+        "failed": 0,
+        "skipped": 0
+      },
+      "e2e": {
+        "desktop": {
+          "passed": 94,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "mobile": {
+          "passed": 94,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "android": {
+          "passed": 94,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0
+        },
+        "iphone-webkit": {
+          "passed": 94,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0
+        }
+      },
+      "sourceDigest": "f18503f28493ff6d0ff7ea33dd7521d9a0d1d89b0749d4bcd19468e0e4525a6f"
+    },
+    "controller": {
+      "source": "78f028830caae969499bb03c716958660aee7fad",
+      "policyHash": "85cf9bcbac14a1a1ff10e4d9784e0cce3b7c6ea17716ba4be9dd50bf364c2860",
+      "typescript": "5.9.3",
+      "productionEnabled": false
+    }
+  }
+}
