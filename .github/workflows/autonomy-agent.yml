@@ -101,6 +101,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: release-request-${{ github.run_id }}
+          include-hidden-files: true
           path: .release/request.json
           retention-days: 14
 
@@ -132,6 +133,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: release-proof-${{ github.run_id }}
+          include-hidden-files: true
           path: .release/proof.json
           if-no-files-found: ignore
           retention-days: 14
