@@ -1,5 +1,5 @@
 import{github}from'./autonomy-pilot/github.mjs';
-const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40413975908';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40418453890';
 const run=await api(`/actions/runs/${runId}`);
 if(run.status!=='completed')throw Error('Completed validation only; never read live job logs');
 const{jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`);
