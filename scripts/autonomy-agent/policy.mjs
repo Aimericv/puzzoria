@@ -61,6 +61,14 @@ export function canWake(state,now=Date.now(),hasMessages=false) {
   return hasMessages || state.status!=="blocked";
 }
 
+export function pendingReleaseReady(state,main) {
+  const receipt=state.growth?.releaseCandidate;
+  return !state.paused&&['ready','waiting_quota'].includes(state.status)&&!(state.pendingMessages?.length)&&
+    /^[a-f0-9]{40}$/.test(main??'')&&receipt?.base===main&&/^[a-f0-9]{40}$/.test(receipt?.sha??'')&&
+    receipt.verified===true&&Number.isSafeInteger(receipt.prNumber)&&receipt.prNumber>0&&
+    [undefined,'proposed','waiting_validation_budget','validation_failed','validating'].includes(receipt.status);
+}
+
 export function redact(text,secrets=[]) {
   let clean=String(text);
   for(const value of secrets.filter(value=>typeof value==="string"&&value.length>0)) clean=clean.split(value).join("[redacted]");

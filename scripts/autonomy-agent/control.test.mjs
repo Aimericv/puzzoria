@@ -4,7 +4,7 @@ import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,copyFileSync,sym
 import {tmpdir} from "node:os";
 import {join} from "node:path";
 import {randomBytes} from "node:crypto";
-import {assertFunding,quotaGate,allowedCandidate,trustedMessages,canWake,REPOSITORY} from "./policy.mjs";
+import {assertFunding,quotaGate,allowedCandidate,trustedMessages,canWake,pendingReleaseReady,REPOSITORY} from "./policy.mjs";
 import {StateStore,initialState} from "./store.mjs";
 import {Checkpoints,recoveryPointer} from "./checkpoint.mjs";
 import {collectCandidate,restoreNextEnv,collectMemory} from "./outputs.mjs";
@@ -14,6 +14,18 @@ import {unseal} from "../autonomy-pilot/vault.mjs";
 const account={type:"chatgpt",planType:"plus"};
 const limits=()=>({ordinaryUsageAllowed:true,rateLimits:{limitId:"codex",credits:{hasCredits:false,unlimited:false,balance:"0"},primary:{usedPercent:20,resetsAt:2000},secondary:{usedPercent:10,resetsAt:10000}}});
 const control={repository:REPOSITORY,bootstrapCheckpoint:{artifactId:1,runId:"1",name:"bootstrap",context:{repository:REPOSITORY,runId:"1",phase:2}}};
+const pending=()=>({status:'ready',pendingMessages:[],growth:{releaseCandidate:{sha:'a'.repeat(40),base:'b'.repeat(40),prNumber:11,verified:true,status:'proposed'}}});
+test('pending validation requires a verified exact-base receipt and respects owner control',()=>{
+ assert.equal(pendingReleaseReady(pending(),'b'.repeat(40)),true);
+ for(const change of [s=>s.paused=true,s=>s.status='blocked',s=>s.status='needs_login',s=>s.status='retrying',s=>s.pendingMessages.push({text:'reconsider this proposal'}),s=>s.growth.releaseCandidate.verified=false,s=>s.growth.releaseCandidate.sha='untrusted',s=>s.growth.releaseCandidate.status='manual_review',s=>s.growth.releaseCandidate.prNumber=-1]){const state=pending();change(state);assert.equal(pendingReleaseReady(state,'b'.repeat(40)),false);}
+ assert.equal(pendingReleaseReady(pending(),'c'.repeat(40)),false);
+});
+test('free pending checks remain separate from an exhausted model quota',()=>{
+ const state=pending();state.status='waiting_quota';state.nextEligibleAt='2027-01-01T00:00:00Z';
+ assert.equal(canWake(state,Date.parse('2026-10-26T00:00:00Z')),false);
+ assert.equal(pendingReleaseReady(state,'b'.repeat(40)),true);
+ assert.equal(state.nextEligibleAt,'2027-01-01T00:00:00Z');
+});
 function directory(t) {const path=mkdtempSync(join(tmpdir(),"puzzoria-agent-test-"));t.after(()=>rmSync(path,{recursive:true,force:true}));return path;}
 
 test("old financial flags and an uncreated budget never authorize Actions",()=>{

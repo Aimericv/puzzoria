@@ -92,6 +92,14 @@ au plus 180 minutes de validation sur sept jours, 90 par tentative, avant
 d'allouer le vérificateur complet. C'est une borne de ressources, pas une
 roadmap ni une garantie sur les minutes partagées avec d'autres dépôts.
 
+Le transfert vers la CI relit le reçu protégé après la session et transmet
+uniquement un booléen entre les jobs. L'entrée `validate-pending` du workflow
+permet de reprendre les contrôles d'une proposition déjà vérifiée sans nouvelle
+inférence ni secret Plus. La boîte de réception est relue auparavant ; pause,
+consignes non traitées, état bloqué ou base main périmée empêchent la reprise.
+Une attente du quota du modèle n'autorise aucune nouvelle inférence, mais peut
+laisser terminer cette validation gratuite dans son budget GitHub distinct.
+
 ## Déploiement préparé, activation séparée
 
 Cible confirmée par le propriétaire : Hetzner `37.27.24.173`, projet existant
