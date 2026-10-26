@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 129,
+  "generation": 130,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1633,11 +1633,17 @@
       "experimentId": "word-guide-worked-deductions",
       "verified": true,
       "runId": "40387959783",
-      "status": "proposed",
+      "status": "validating",
       "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
       "rebase": {
         "testOnly": true,
         "previousHead": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f"
+      },
+      "risk": {
+        "risk": "low",
+        "kind": "editorial-copy",
+        "requiresDeployment": true,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
       }
     },
     "deferredReleaseCandidate": {
@@ -1659,6 +1665,12 @@
       "at": "2026-10-26T22:39:19.107Z",
       "runId": "40413975908",
       "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+      "minutes": 90
+    },
+    {
+      "at": "2026-10-26T23:16:04.791Z",
+      "runId": "40418453890",
+      "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
       "minutes": 90
     }
   ]
