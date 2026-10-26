@@ -54,7 +54,7 @@ const en = {
   secretHelp:
     "Choose your secret number before marking yourself ready. Both players search at the same time.",
   rules: {
-    word: "Same new word · fewest attempts wins · time breaks ties · 10-minute limit.",
+    word: "Same new word · solving beats an unfinished search · among solvers, fewest attempts wins, then earliest finish · 6 attempts each · 10-minute limit.",
     sudoku: "Same new grid · first correct completion wins · 30-minute limit.",
     math: "Same numbers and target · one submitted expression each · closest answer wins, then time · 10-minute limit.",
     "2048":
@@ -64,7 +64,7 @@ const en = {
     wordsearch:
       "Same word grid · first to find every word wins · 10-minute limit.",
     guess:
-      "Secret numbers chosen by you · simultaneous proposals · fewest guesses wins, then time · 30 guesses each · 5-minute limit.",
+      "Secret numbers chosen by you · simultaneous proposals · finding the number beats an unfinished search · among solvers, fewest guesses wins, then earliest finish · 30 guesses each · 5-minute limit.",
     ranking:
       "Same category and items · five locked positions each · compare your rankings together · 10-minute limit.",
     rather:
@@ -127,7 +127,7 @@ const fr: Copy = {
   secretHelp:
     "Choisis ton nombre secret avant de te déclarer prêt. Vous cherchez tous les deux en même temps.",
   rules: {
-    word: "Même nouveau mot · le moins d’essais gagne · le temps départage les égalités · limite de 10 minutes.",
+    word: "Même nouveau mot · trouver le mot prime sur une recherche inachevée · entre réussites, moins d’essais puis fin la plus précoce · 6 essais chacun · limite de 10 minutes.",
     sudoku:
       "Même nouvelle grille · le premier à la terminer correctement gagne · limite de 30 minutes.",
     math: "Mêmes nombres et objectif · une expression validée chacun · le plus proche gagne, puis le temps départage · limite de 10 minutes.",
@@ -138,7 +138,7 @@ const fr: Copy = {
     wordsearch:
       "Même grille · le premier à trouver tous les mots gagne · limite de 10 minutes.",
     guess:
-      "Nombres secrets choisis par vous · propositions simultanées · le moins d’essais gagne, puis le temps départage · 30 essais chacun · limite de 5 minutes.",
+      "Nombres secrets choisis par vous · propositions simultanées · trouver le nombre prime sur une recherche inachevée · entre réussites, moins d’essais puis fin la plus précoce · 30 essais chacun · limite de 5 minutes.",
     ranking:
       "Même catégorie et mêmes objets · cinq positions verrouillées chacun · comparez vos classements à la fin · limite de 10 minutes.",
     rather:
@@ -200,7 +200,7 @@ const es: Copy = {
   secretHelp:
     "Elige tu número secreto antes de marcarte listo. Ambos buscan al mismo tiempo.",
   rules: {
-    word: "Misma palabra nueva · gana quien use menos intentos · desempata el tiempo · límite de 10 minutos.",
+    word: "Misma palabra nueva · resolver supera una búsqueda sin terminar · entre quienes resuelven, menos intentos y después final más temprano · 6 intentos por jugador · límite de 10 minutos.",
     sudoku:
       "Misma cuadrícula nueva · gana quien la complete correctamente primero · límite de 30 minutos.",
     math: "Mismos números y objetivo · una expresión por jugador · gana la más cercana, después el tiempo · límite de 10 minutos.",
@@ -211,7 +211,7 @@ const es: Copy = {
     wordsearch:
       "Misma sopa de letras · gana quien encuentre todas las palabras primero · límite de 10 minutos.",
     guess:
-      "Números secretos elegidos por vosotros · propuestas simultáneas · gana quien use menos intentos, después el tiempo · 30 intentos por jugador · límite de 5 minutos.",
+      "Números secretos elegidos por vosotros · propuestas simultáneas · encontrar el número supera una búsqueda sin terminar · entre quienes resuelven, menos intentos y después final más temprano · 30 intentos por jugador · límite de 5 minutos.",
     ranking:
       "Misma categoría y elementos · cinco puestos bloqueados por jugador · comparad los rankings al final · límite de 10 minutos.",
     rather:
@@ -274,7 +274,7 @@ const de: Copy = {
   secretHelp:
     "Wähle deine Geheimzahl, bevor du dich bereit meldest. Beide suchen gleichzeitig.",
   rules: {
-    word: "Dasselbe neue Wort · weniger Versuche gewinnen · bei Gleichstand entscheidet die Zeit · 10 Minuten Zeitlimit.",
+    word: "Dasselbe neue Wort · gelöst schlägt ungelöst · bei zwei Lösungen entscheiden weniger Versuche, dann der frühere Abschluss · je 6 Versuche · 10 Minuten Zeitlimit.",
     sudoku:
       "Dasselbe neue Raster · wer es zuerst richtig löst, gewinnt · 30 Minuten Zeitlimit.",
     math: "Gleiche Zahlen und Ziel · ein Ausdruck pro Spieler · die nächste Lösung gewinnt, dann entscheidet die Zeit · 10 Minuten Zeitlimit.",
@@ -285,7 +285,7 @@ const de: Copy = {
     wordsearch:
       "Gleiches Buchstabenfeld · wer zuerst alle Wörter findet, gewinnt · 10 Minuten Zeitlimit.",
     guess:
-      "Selbst gewählte Geheimzahlen · gleichzeitige Vorschläge · weniger Versuche gewinnen, dann die Zeit · je 30 Versuche · 5 Minuten Zeitlimit.",
+      "Selbst gewählte Geheimzahlen · gleichzeitige Vorschläge · gefunden schlägt nicht gefunden · bei zwei Lösungen entscheiden weniger Versuche, dann der frühere Abschluss · je 30 Versuche · 5 Minuten Zeitlimit.",
     ranking:
       "Gleiche Kategorie und Objekte · fünf feste Plätze pro Spieler · vergleicht eure Ranglisten am Ende · 10 Minuten Zeitlimit.",
     rather:

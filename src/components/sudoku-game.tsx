@@ -162,10 +162,15 @@ export function SudokuGame({
   }, [done, session.session.paused, setValue]);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
+      const target = e.target;
       if (
-        ["SELECT", "INPUT", "TEXTAREA"].includes(
-          (e.target as HTMLElement).tagName,
-        ) ||
+        !(target instanceof HTMLElement) ||
+        e.isComposing ||
+        // Some IMEs report the confirming key only as the legacy processing code.
+        e.keyCode === 229 ||
+        e.altKey ||
+        target.isContentEditable ||
+        target.closest('dialog, [role="dialog"], [role="alertdialog"], a[href], input, textarea, select, [role="textbox"]') ||
         done ||
         !ready ||
         session.session.paused
@@ -188,17 +193,14 @@ export function SudokuGame({
         setValue((s) => ({ ...s, noteMode: !s.noteMode }));
       } else if (e.key.startsWith("Arrow")) {
         e.preventDefault();
-        const delta = (
-          { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -9, ArrowDown: 9 } as Record<
-            string,
-            number
-          >
-        )[e.key];
-        if (delta)
-          setValue((s) => ({
-            ...s,
-            selected: Math.max(0, Math.min(80, s.selected + delta)),
-          }));
+        setValue((s) => {
+          const row = Math.floor(s.selected / 9), col = s.selected % 9;
+          const nextRow = Math.max(0, Math.min(8,
+            row + (e.key === "ArrowDown" ? 1 : e.key === "ArrowUp" ? -1 : 0)));
+          const nextCol = Math.max(0, Math.min(8,
+            col + (e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0)));
+          return { ...s, selected: nextRow * 9 + nextCol };
+        });
       }
     };
     window.addEventListener("keydown", handler);

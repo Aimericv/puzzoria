@@ -23,6 +23,7 @@ export function InvitationActions({
     [message, setMessage] = useState(""),
     [busy, setBusy] = useState(false),
     [image, setImage] = useState(false),
+    linkInput = useRef<HTMLInputElement>(null),
     pending = useRef<Promise<string> | null>(null),
     m = et(locale),
     sharedImage = ["sudoku", "math", "2048", "mines", "wordsearch"].includes(completion.game);
@@ -52,6 +53,8 @@ export function InvitationActions({
       setMessage(t(locale).copied);
     } catch {
       setMessage(m.copyFailed);
+      linkInput.current?.focus({ preventScroll: true });
+      linkInput.current?.select();
     }
   }
   async function shareImage() {
@@ -112,6 +115,7 @@ export function InvitationActions({
               <label className="invitation-link">
                 {m.invitation}
                 <input
+                  ref={linkInput}
                   readOnly
                   value={`${typeof window !== "undefined" ? window.location.origin : ""}/${locale}/friend/${id}`}
                   onFocus={(event) => event.target.select()}

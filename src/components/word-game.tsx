@@ -204,6 +204,10 @@ export function WordGame({
     const handler = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement;
       if (
+        e.isComposing ||
+        // Some IMEs report the confirming key only as the legacy processing code.
+        e.keyCode === 229 ||
+        target.closest('dialog, [role="dialog"], [role="alertdialog"]') ||
         e.ctrlKey ||
         e.metaKey ||
         e.altKey ||

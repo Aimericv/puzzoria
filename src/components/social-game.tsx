@@ -221,6 +221,7 @@ export function SocialGame({
       }
       await refresh(runId);
     } catch (e) {
+      if (!alive.current) return;
       // Restore accepted actions before retrying, including a lost response after commit.
       try {
         const data = await reservePlay(c);

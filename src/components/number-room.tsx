@@ -6,6 +6,7 @@ import type { RoomView } from "@/lib/number-room-types";
 import type { SocialAction } from "@/lib/social-types";
 import { st } from "@/lib/social-i18n";
 import { t } from "@/lib/i18n";
+import { et } from "@/lib/engagement-i18n";
 import { postJson } from "@/lib/play-client";
 import {
   NumberControls,
@@ -42,6 +43,7 @@ function RoomClient({
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
     [notice, setNotice] = useState("");
+  const linkInput = useRef<HTMLInputElement>(null);
   const current = useRef<RoomView | null>(null),
     locked = useRef(false),
     alive = useRef(true);
@@ -149,15 +151,15 @@ function RoomClient({
   }
   async function copy() {
     if (!room) return;
-    const link = new URL(
-      `/${locale}/number-room/${room.code}`,
-      window.location.origin,
-    ).href;
+    const link = linkInput.current?.value;
+    if (!link) return;
     try {
       await navigator.clipboard.writeText(link);
       setNotice(base.copied);
     } catch {
-      setNotice(link);
+      setNotice(et(locale).copyFailed);
+      linkInput.current?.focus({ preventScroll: true });
+      linkInput.current?.select();
     }
   }
   const disabled = busy || !account.ready,
@@ -203,6 +205,15 @@ function RoomClient({
           <div className="room-code">
             <span>{m.code}</span>
             <strong>{room.code}</strong>
+            <label className="invitation-link">
+              {et(locale).invitation}
+              <input
+                ref={linkInput}
+                readOnly
+                value={`${typeof window !== "undefined" ? window.location.origin : ""}/${locale}/number-room/${room.code}`}
+                onFocus={(event) => event.currentTarget.select()}
+              />
+            </label>
             <button className="secondary-button" onClick={() => void copy()}>
               {m.link}
             </button>
