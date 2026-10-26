@@ -1,0 +1,207 @@
+{
+  "targeted": [
+    {
+      "id": 40417822550,
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40417822550"
+    }
+  ],
+  "observedAt": "2026-10-26T23:10:34.381Z",
+  "run": {
+    "id": 40414606922,
+    "status": "completed",
+    "conclusion": "success",
+    "source": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40414606922"
+  },
+  "jobs": [
+    {
+      "name": "first",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Read owner pause and instructions before metadata-only validation",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run ./.github/actions/puzzoria-agent",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Read the trusted pending receipt without exposing a commit as a job output",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run ./.github/actions/puzzoria-agent",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "search-console-check",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "release-prepare",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run node scripts/autonomy-agent/release-check.mjs prepare",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "second",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "release-validation",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "release-finalize",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "production-gate",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    },
+    {
+      "name": "production",
+      "status": "completed",
+      "conclusion": "skipped",
+      "steps": []
+    }
+  ],
+  "pr": {
+    "number": 11,
+    "state": "open",
+    "merged": false,
+    "draft": true,
+    "head": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+    "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+    "mergeSha": "1ea126771c1d29d0b82a69ad17bb665cf3c70274",
+    "url": "https://github.com/Aimericv/puzzoria/pull/11"
+  },
+  "state": {
+    "generation": 127,
+    "status": "ready",
+    "completedSessions": 21,
+    "releaseCandidate": {
+      "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
+      "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+      "prNumber": 15,
+      "experimentId": "published-vocabulary-discovery",
+      "verified": true,
+      "runId": "40414606922",
+      "risk": {
+        "risk": "manual",
+        "reason": "review_required:src/components/game-guide.tsx"
+      },
+      "status": "manual_review"
+    },
+    "validationBudget": [
+      {
+        "at": "2026-10-26T22:39:19.107Z",
+        "runId": "40413975908",
+        "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+        "minutes": 90
+      }
+    ],
+    "experiments": [
+      {
+        "id": "word-guide-worked-deductions",
+        "status": "proposed"
+      },
+      {
+        "id": "published-vocabulary-discovery",
+        "status": "manual_review"
+      }
+    ]
+  },
+  "validation": null
+}
