@@ -1,61 +1,23 @@
-name: Validate and recover pending handoff without inference or production
+name: Read structured pending PR metadata without logs
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  recover:
+  inspect:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 3
     permissions:
       contents: write
-      pull-requests: write
-      issues: write
-      actions: write
-      statuses: write
-    defaults:
-      run:
-        working-directory: candidate
+      actions: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
-          path: control
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          persist-credentials: false
-          path: candidate
-          ref: 06f2ec582a6dfadc5f15b616f43816f1b784d686
-          fetch-depth: 0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - name: Require the exact handoff-only change, preserving all application data
-        run: |
-          node --input-type=module <<'JS'
-          import{execFileSync}from'node:child_process';
-          const git=(...a)=>execFileSync('git',a,{encoding:'utf8'}).trim();
-          if(git('rev-parse','HEAD')!=='06f2ec582a6dfadc5f15b616f43816f1b784d686'||JSON.stringify(git('diff','--name-only','87dea5bf013d5d584649efb465660a1d609ccd76','HEAD').split('\n'))!==JSON.stringify(['.github/workflows/autonomy-agent.yml','docs/AUTONOMY-GROWTH.fr.md','scripts/autonomy-agent/control.test.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs']))throw Error('Unexpected application or release change');
-          JS
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify all 59 controller, finance, pause and inference-separation boundaries
-        run: |
-          mkdir -p .ci-results
-          node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap
-      - run: npm run lint
-      - run: node scripts/autonomy-agent/package-controller.mjs
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-controller
-          include-hidden-files: true
-          path: |
-            candidate/.release/puzzoria-controller.tar.gz
-            candidate/.release/puzzoria-controller.sha256
-          retention-days: 7
-      - name: Install the tested handoff and dispatch existing full validation without a model session
-        run: node ../control/scripts/recover-pending-handoff.mjs
+      - run: node scripts/inspect-handoff-metadata.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
