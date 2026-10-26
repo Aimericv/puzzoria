@@ -55,6 +55,19 @@ Le registre conserve douze expériences actives et archive les expériences
 arrêtées dans Git, pour borner la taille de mémoire. Le budget de validation
 CI est un plafond opérationnel gratuit, pas une roadmap stratégique.
 
+`evidence` accepte un texte (8 000 caractères maximum) ou 1–8 objets avec
+`source`, `finding`, et facultativement `observationId`, `collectedAt`.
+Le superviseur normalise ces sources et calcule lui-même la baseline et les
+dates de publication : n'ajoute pas tes propres champs pour les remplacer.
+`minimumSamples` s'applique à **chacune** des deux fenêtres, ou à chacun des
+dénominateurs de rétention ; ce n'est pas leur somme. Avec une baseline sous
+ce seuil, le résultat restera insuffisant même si le trafic suivant augmente.
+Le contexte indique aussi `lastFailure` et `unverifiedWork` : un instantané
+non validé n'est ni publié ni déployé et n'est repris que sur une base compatible.
+Vérifie le code effectivement fourni. Réévalue une mission héritée à partir
+des observations actuelles plutôt que de poursuivre automatiquement une ancienne
+série de retouches ; tu restes libre de ta prochaine expérience.
+
 Lis `/opt/puzzoria-pilot/readonly/puzzoria-analytics.json` : le superviseur y
 dépose les rapports agrégés Puzzoria sur 7/30/90 jours à chaque session admise,
 si l'accès de production est configuré. Seul `status=available` atteste une
