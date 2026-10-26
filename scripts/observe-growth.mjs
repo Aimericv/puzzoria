@@ -3,9 +3,9 @@ const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria');
 const {workflow_runs:runs}=await api('/actions/runs?branch=codex%2Fgrowth-autonomy&per_page=10');
 const selected=runs.filter(r=>r.path==='.github/workflows/growth-check.yml');
 const reports=[];
-for(const run of selected)if(run.head_sha.startsWith('4518673')&&['queued','in_progress'].includes(run.status))await api(`/actions/runs/${run.id}/cancel`,'POST').catch(e=>{if(e.status!==409)throw e;});
 
-for(const run of selected.slice(0,3)){
+
+for(const run of selected.slice(0,1)){
  const {jobs}=await api(`/actions/runs/${run.id}/jobs?per_page=100`);
  const details=[];
  for(const job of jobs){
