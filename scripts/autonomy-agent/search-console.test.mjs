@@ -6,7 +6,7 @@ import {collectSearchConsole,GOOGLE_PROVIDER,GOOGLE_READER,searchPeriod} from ".
 const now=Date.parse("2026-10-26T00:30:00Z"),audience=`https://iam.googleapis.com/${GOOGLE_PROVIDER}`;
 const workflow="Aimericv/puzzoria/.github/workflows/autonomy-agent.yml@refs/heads/main";
 const env={GITHUB_REPOSITORY:"Aimericv/puzzoria",GITHUB_REF:"refs/heads/main",GITHUB_WORKFLOW_REF:workflow,
-  ACTIONS_ID_TOKEN_REQUEST_URL:"https://vstoken.actions.githubusercontent.com/123/idtoken?api-version=2.0",ACTIONS_ID_TOKEN_REQUEST_TOKEN:"github-request-secret-1234567890"};
+  ACTIONS_ID_TOKEN_REQUEST_URL:"https://vstoken.actions.githubusercontent.com/_apis/distributedtask/hubs/build/plans/123/jobs/456/oidctoken?api-version=2.0",ACTIONS_ID_TOKEN_REQUEST_TOKEN:"github-request-secret-1234567890"};
 const claims={iss:"https://token.actions.githubusercontent.com",aud:audience,repository_id:"1426188364",repository_owner_id:"103512403",ref:"refs/heads/main",workflow_ref:workflow,exp:now/1000+300};
 const jwt=object=>`eyJhbGciOiJSUzI1NiJ9.${Buffer.from(JSON.stringify(object)).toString("base64url")}.fake-signature`;
 const federation="federated-secret-1234567890",access="google-readonly-secret-1234567890";
@@ -33,7 +33,7 @@ test("no OIDC configuration or untrusted context never calls an external endpoin
   assert.equal((await collectSearchConsole({env:{},now,fetchImpl})).status,"not_configured");
   for(const change of [{GITHUB_REF:"refs/heads/evil"},{GITHUB_REPOSITORY:"fork/puzzoria"},{GITHUB_WORKFLOW_REF:"other"},
     {ACTIONS_ID_TOKEN_REQUEST_URL:"https://evil.example/idtoken"},{ACTIONS_ID_TOKEN_REQUEST_URL:"https://vstoken.actions.githubusercontent.com.evil.example/idtoken"},
-    {ACTIONS_ID_TOKEN_REQUEST_URL:"http://vstoken.actions.githubusercontent.com/idtoken"},{ACTIONS_ID_TOKEN_REQUEST_URL:"https://vstoken.actions.githubusercontent.com/other"}]) {
+    {ACTIONS_ID_TOKEN_REQUEST_URL:"http://vstoken.actions.githubusercontent.com/idtoken"},{ACTIONS_ID_TOKEN_REQUEST_URL:"https://user:password@vstoken.actions.githubusercontent.com/idtoken"}]) {
     const f=fixture();const result=await collectSearchConsole({env:{...env,...change},now,fetchImpl:f.fetchImpl});
     assert.equal(result.status,"unavailable");assert.equal(result.reports,null);assert.equal(f.calls.length,0);
   }

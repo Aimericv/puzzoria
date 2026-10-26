@@ -423,7 +423,15 @@ test("two separate devices share a real room, protect numbers and alternate turn
 }, info) => {
   const m = st("fr");
   // Historical turn-based number rooms remain readable. New entry points use simultaneous live rooms.
+  const hostProfile = page.waitForResponse(
+    (response) => new URL(response.url()).pathname === "/api/account" && response.request().method() === "GET",
+  );
   await page.goto("/fr");
+  // This API fixture bypasses the UI's account.ready guard. Let the browser
+  // install its guest cookie before reserving the host seat under that owner.
+  const initializedHost = await hostProfile;
+  expect(initializedHost.ok()).toBe(true);
+  await initializedHost.finished();
   const legacy = await page.request.post("/api/number-rooms", {data:{action:"create",locale:"fr"}});
   const legacyCode = (await legacy.json()).code;
   await page.goto(`/fr/number-room/${legacyCode}`);
