@@ -11,7 +11,6 @@ test("Word variants share one catalogue entry and daily modes agree across langu
   test.setTimeout(120000);
   for (const locale of locales) {
     await page.goto(`/${locale}`);
-    await expect(page.locator(".ad-slot")).toHaveCount(0);
     for (const game of catalogGameIds) {
       const card = page.locator(".game-card").filter({has: page.locator(`a.card-play[href="${gamePath(locale, game)}"]`)});
       await expect(card.locator(".daily-tag")).toHaveText(
@@ -29,19 +28,19 @@ test("Word variants share one catalogue entry and daily modes agree across langu
     }
     await expect(page.locator(`.card-play[href="${gamePath(locale, "rareword")}"]`)).toHaveCount(0);
     await expect(page.locator(`.game-card.word a[href="${gamePath(locale, "rareword")}"]`)).toHaveText(`${t(locale).rarewordName} →`);
+    await expect(page.locator(".ad-slot")).toHaveCount(0);
     for (const game of gameIds) {
       await page.goto(gamePath(locale, game));
-      await expect(page.locator(".ad-slot")).toHaveCount(0);
       if (hasDaily(game)) {
         await expect(page.locator(".mode-nav")).toBeVisible();
         await expect(page.locator(".mode-intro")).toHaveText(
           dailyGoal(game, locale)!,
         );
       } else {
-        await expect(page.locator(".mode-nav")).toHaveCount(0);
         await expect(page.locator(".game-date")).toHaveText(
           rt(locale).practice,
         );
+        await expect(page.locator(".mode-nav")).toHaveCount(0);
         await expect(page.locator(".sidebar-archive")).toHaveCount(0);
         await expect
           .poll(() =>
@@ -69,6 +68,8 @@ test("Word variants share one catalogue entry and daily modes agree across langu
           page.locator(".play-surface [data-game-preview]"),
         ).toHaveCount(0);
       }
+      // Positive mode/content checks above confirm the new page is ready before absence checks.
+      await expect(page.locator(".ad-slot")).toHaveCount(0);
     }
   }
   for (const game of gameIds.filter((game) => !hasDaily(game))) {
