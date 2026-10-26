@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 127,
+  "generation": 128,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1478,7 +1478,7 @@
             "google.impressions": null
           }
         },
-        "candidateSha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
+        "candidateSha": "3524bab3d352b09375da0075133d1a13cf8f365b",
         "prNumber": 11,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/11",
         "status": "proposed",
@@ -1627,6 +1627,20 @@
       }
     },
     "releaseCandidate": {
+      "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
+      "base": "d5dc9dab3b541d1b8dabf9d71327e7282727c89b",
+      "prNumber": 11,
+      "experimentId": "word-guide-worked-deductions",
+      "verified": true,
+      "runId": "40387959783",
+      "status": "proposed",
+      "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+      "rebase": {
+        "testOnly": true,
+        "previousHead": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f"
+      }
+    },
+    "deferredReleaseCandidate": {
       "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
       "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
       "prNumber": 15,
