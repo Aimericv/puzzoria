@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 126,
+  "generation": 127,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1602,7 +1602,7 @@
         "candidateSha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
         "prNumber": 15,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/15",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -1632,7 +1632,12 @@
       "prNumber": 15,
       "experimentId": "published-vocabulary-discovery",
       "verified": true,
-      "runId": "40414606922"
+      "runId": "40414606922",
+      "risk": {
+        "risk": "manual",
+        "reason": "review_required:src/components/game-guide.tsx"
+      },
+      "status": "manual_review"
     }
   },
   "releaseValidationHistory": [
