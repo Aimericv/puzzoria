@@ -15,6 +15,10 @@ const docker=args=>execFileSync('docker',['--host=unix:///var/run/docker.sock',.
 const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8'}).trim();
 const compose=args=>docker(['compose','--project-name',project,'--env-file',join(root,'fixture.env'),'--file',join(root,'compose.yaml'),...args]);
 try {
+  // A Dockerfile FROM can fill BuildKit's cache without registering this
+  // digest as a runnable local image. Recovery deliberately uses --pull=never,
+  // so provision the independent schema runtime before testing it.
+  docker(['pull',VERIFIER_IMAGE]);
   mkdirSync(join(root,'src/lib'),{recursive:true});mkdirSync(join(root,'scripts'));
   for(const name of ['backup-sqlite.mjs','verify-restore.mjs','account-erasure.mjs','container-health.mjs'])copyFileSync(join('scripts',name),join(root,'scripts',name));
   writeFileSync(join(root,'package.json'),'{"type":"module"}\n');
