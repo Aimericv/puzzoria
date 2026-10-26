@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 98,
+  "generation": 99,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "1fa9297b11aeff203eb4914e7ae3a143c94968ea",
   "checkpoint": {
-    "artifactId": 12629005925,
-    "runId": "40271417887",
-    "name": "puzzoria-agent-auth-40271417887-18",
-    "generation": 18,
+    "artifactId": 12652207532,
+    "runId": "40328393400",
+    "name": "puzzoria-agent-auth-40328393400-19",
+    "generation": 19,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40271417887",
+      "runId": "40328393400",
       "phase": "autonomous-agent",
-      "generation": 18
+      "generation": 19
     },
-    "expiresAt": "2027-01-24T04:54:08Z",
-    "digest": "b990b4223761ee988deb7d490c7dae1989f445de433bf83540833ba5ee79743c"
+    "expiresAt": "2027-01-24T13:11:06Z",
+    "digest": "4f1ba8f10d5dc3e231d4306b4decf565287a8db74c8ffc070ed4716f7e071e79"
   },
   "lastMessageId": 6408621781,
   "completedSessions": 17,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40271417887",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40271417887"
+    "id": "40328393400",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40328393400"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026\n\nSource exportée annoncée : 423c52914e8a403bb295f18de2b2c4c23689c9f8. AGENTS.md, MANDATE.md, INBOX.json (vide) et quatre mémoires lus depuis le disque ; guide Next use-client consulté avant modification. Aucun rapport navigateur du superviseur identifié dans les documents consultés. Aucun accès Git, réseau externe, achat, merge ou déploiement.\n\nDécision : terminer la mission mémorisée sur le secours de copie du salon historique NumberRoom. Le catch affichait seulement une URL en notice. Ajout d’un champ readonly toujours disponible dans le salon, avec label traduit existant et sélection au focus ; le bouton copie sa valeur. Après refus ou absence de clipboard, message copyFailed existant, focus sans scroll et sélection complète. CSS local à room-code pour permettre le retour à la ligne sur mobile. Anciens liens, règles serveur, clés persistées et télémétrie préservés.\n\nContribution publiable : src/components/number-room.tsx, src/app/globals.css, e2e/number-room-copy.spec.ts. Quatre scénarios localisés créent un vrai salon historique via API isolée, vérifient le lien, readonly et absence de débordement horizontal, simulent successivement NotAllowedError et clipboard absent, contrôlent focus/sélection/message puis réessaient via Tab/Entrée avec copie réussie simulée. Les tests utilisent les quatre configurations existantes. Le défaut initial est établi par lecture, sans reproduction navigateur exécutée.\n\nContrôles observés : npm run lint code 0 ; npm run typecheck code 0 ; node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles). Playwright --list code 0 : 16 cas découverts, aucun exécuté. Suite générale npm test -- --configLoader=runner : 389/390 tests réussis, 29/30 fichiers ; seul operations.test.ts:55 dépasse 5000 ms, déjà consigné avant cette session. Cause non établie, aucune assertion ni limite modifiée. Lint ciblé du nouveau scénario repassé après l’ajout du contrôle de débordement : code 0. Build et E2E avec serveur réservés au superviseur selon le mandat. Aucun résultat navigateur ni effet produit revendiqué.\n\nRapport réel status=available collecté le 2026-10-26T04:57:05.055Z. Fenêtre 7 jours (20–26 octobre, dernier jour partiel) : une identité compte/appareil, un démarrage, une fin, zéro session de visite consentie mesurée ; D+7/D+30 sans dénominateur mature, pourcentages null. Fenêtres 30 jours (27 septembre–26 octobre) et 90 jours (29 juillet–26 octobre) : six identités, 20 démarrages, 18 fins, trois sessions de visite consenties ; D+1 mature 6 et D+7 mature 5, aucun retour ; D+30 mature 0, pourcentage null. Ces identités ne sont pas des personnes uniques et la mesure consentie ne représente pas tout le trafic. Aucun effet de ce correctif attribuable à ces observations.\n\nQuatre mémoires mises à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Publication laissée au superviseur.\n\nProchaine mission : Consulter les preuves navigateur du superviseur si disponibles, puis auditer les textes publics SEO et accueil EN/FR/ES/DE face aux modes actuels : cinq Daily seulement, rareword sans Practice et autres jeux en Practice. Partir de seo-content.ts et game-modes.ts, corriger seulement les contradictions confirmées sans modifier routes, IDs, canonical ou sitemap.\n",
