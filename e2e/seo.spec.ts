@@ -42,7 +42,16 @@ test("four languages expose usable HTML and canonical alternatives without JavaS
         expect(
           (await page.goto(`/${locale}/${slugs[locale][game]}`))?.status(),
         ).toBe(200);
-        await expect(page.locator("[data-seo-guide] h2")).toHaveCount(3);
+        const sections = seoCopy(locale).games[game].sections;
+        expect(sections.length).toBeGreaterThanOrEqual(3);
+        const guide = page.locator("[data-seo-guide]");
+        await expect(guide.locator("h2")).toHaveCount(sections.length);
+        await expect(guide.locator("h2")).toHaveText(
+          sections.map((section) => section.title),
+        );
+        await expect(guide.locator("p")).toHaveText(
+          sections.map((section) => section.text),
+        );
         await expect(page.locator("[data-game-preview]")).toBeVisible();
         expect(await page.locator("noscript").textContent()).toContain(
           seoCopy(locale).noScript,
