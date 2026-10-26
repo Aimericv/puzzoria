@@ -1,0 +1,348 @@
+{
+  "observedAt": "2026-10-26T17:40:47.195Z",
+  "reports": [
+    {
+      "id": 40370577720,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40370577720",
+      "status": "in_progress",
+      "conclusion": null,
+      "head": "1b2572247706a9a307cfb64d37a663090bcebaed",
+      "createdAt": "2026-10-26T17:38:53Z",
+      "jobs": [
+        {
+          "id": 121740469003,
+          "name": "checks",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-26T17:40:05Z",
+              "completed_at": "2026-10-26T17:40:06Z"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-26T17:40:06Z",
+              "completed_at": "2026-10-26T17:40:08Z"
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-26T17:40:08Z",
+              "completed_at": "2026-10-26T17:40:20Z"
+            },
+            {
+              "name": "Verify funding declaration and require current main as an ancestor",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-26T17:40:20Z",
+              "completed_at": "2026-10-26T17:40:20Z"
+            },
+            {
+              "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-26T17:40:20Z",
+              "completed_at": "2026-10-26T17:40:29Z"
+            },
+            {
+              "name": "Run npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-26T17:40:29Z",
+              "completed_at": "2026-10-26T17:40:38Z"
+            },
+            {
+              "name": "Run node --test scripts/autonomy-agent/*.test.mjs",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-26T17:40:38Z",
+              "completed_at": "2026-10-26T17:40:39Z"
+            },
+            {
+              "name": "Run npm run lint",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 8,
+              "started_at": "2026-10-26T17:40:39Z",
+              "completed_at": null
+            },
+            {
+              "name": "Run npm run typecheck",
+              "status": "pending",
+              "conclusion": null,
+              "number": 9,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json",
+              "status": "pending",
+              "conclusion": null,
+              "number": 10,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run npm run content:validate",
+              "status": "pending",
+              "conclusion": null,
+              "number": 11,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run npm run content:social",
+              "status": "pending",
+              "conclusion": null,
+              "number": 12,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run npm run seo:check",
+              "status": "pending",
+              "conclusion": null,
+              "number": 13,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run npm run build",
+              "status": "pending",
+              "conclusion": null,
+              "number": 14,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Preserve sanitized test counts",
+              "status": "pending",
+              "conclusion": null,
+              "number": 15,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "status": "pending",
+              "conclusion": null,
+              "number": 16,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "pending",
+              "conclusion": null,
+              "number": 31,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "pending",
+              "conclusion": null,
+              "number": 32,
+              "started_at": null,
+              "completed_at": null
+            }
+          ],
+          "annotations": [],
+          "log": null
+        },
+        {
+          "id": 121740471679,
+          "name": "inspect",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": [],
+          "annotations": [],
+          "log": null
+        }
+      ]
+    },
+    {
+      "id": 40370567876,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40370567876",
+      "status": "in_progress",
+      "conclusion": null,
+      "head": "1b2572247706a9a307cfb64d37a663090bcebaed",
+      "createdAt": "2026-10-26T17:38:49Z",
+      "jobs": [
+        {
+          "id": 121740229461,
+          "name": "validate",
+          "status": "in_progress",
+          "conclusion": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-26T17:39:34Z",
+              "completed_at": "2026-10-26T17:39:35Z"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-26T17:39:35Z",
+              "completed_at": "2026-10-26T17:39:37Z"
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-26T17:39:37Z",
+              "completed_at": "2026-10-26T17:39:43Z"
+            },
+            {
+              "name": "Verify the owner's existing funding declaration and disabled production",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-26T17:39:43Z",
+              "completed_at": "2026-10-26T17:39:44Z"
+            },
+            {
+              "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-26T17:39:44Z",
+              "completed_at": "2026-10-26T17:39:59Z"
+            },
+            {
+              "name": "Exercise controller, risk, measurement and financial boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-26T17:39:59Z",
+              "completed_at": "2026-10-26T17:40:00Z"
+            },
+            {
+              "name": "Verify real Docker backup, private preview and image rollback without production",
+              "status": "in_progress",
+              "conclusion": null,
+              "number": 7,
+              "started_at": "2026-10-26T17:40:00Z",
+              "completed_at": null
+            },
+            {
+              "name": "Verify recovery even if the new application process has exited",
+              "status": "pending",
+              "conclusion": null,
+              "number": 8,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Test public trend sources without authentication or paid APIs",
+              "status": "pending",
+              "conclusion": null,
+              "number": 9,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Validate exact source in isolated containers, including four browser configurations",
+              "status": "pending",
+              "conclusion": null,
+              "number": 10,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Package the disabled, reviewed host controller",
+              "status": "pending",
+              "conclusion": null,
+              "number": 11,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "status": "pending",
+              "conclusion": null,
+              "number": 12,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Publish sanitized validation evidence only",
+              "status": "pending",
+              "conclusion": null,
+              "number": 13,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "pending",
+              "conclusion": null,
+              "number": 25,
+              "started_at": null,
+              "completed_at": null
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "pending",
+              "conclusion": null,
+              "number": 26,
+              "started_at": null,
+              "completed_at": null
+            }
+          ],
+          "annotations": [],
+          "log": null
+        }
+      ]
+    }
+  ],
+  "otherRuns": [
+    {
+      "id": 40370577720,
+      "name": "Repository checks",
+      "status": "in_progress",
+      "conclusion": null,
+      "head": "1b2572247706a9a307cfb64d37a663090bcebaed"
+    },
+    {
+      "id": 40368866154,
+      "name": "Repository checks",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head": "cfa4cca260915ed3a8a4ef08d402b0cd4f9427a0"
+    },
+    {
+      "id": 40368600434,
+      "name": "Repository checks",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head": "4518673ea50c0315fce286064187a58e819d4bd9"
+    },
+    {
+      "id": 40366454038,
+      "name": "Repository checks",
+      "status": "completed",
+      "conclusion": "action_required",
+      "head": "2afccf5163c4d107a1bf3e565b776f31f0685a2b"
+    }
+  ]
+}
