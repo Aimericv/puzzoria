@@ -1,0 +1,44 @@
+{
+  "observedAt": "2026-10-26T17:38:58.543Z",
+  "reports": [
+    {
+      "id": 40370567876,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40370567876",
+      "status": "pending",
+      "conclusion": null,
+      "head": "1b2572247706a9a307cfb64d37a663090bcebaed",
+      "createdAt": "2026-10-26T17:38:49Z",
+      "jobs": []
+    }
+  ],
+  "otherRuns": [
+    {
+      "id": 40370577720,
+      "name": "Repository checks",
+      "status": "queued",
+      "conclusion": null,
+      "head": "1b2572247706a9a307cfb64d37a663090bcebaed"
+    },
+    {
+      "id": 40368866154,
+      "name": "Repository checks",
+      "status": "in_progress",
+      "conclusion": null,
+      "head": "cfa4cca260915ed3a8a4ef08d402b0cd4f9427a0"
+    },
+    {
+      "id": 40368600434,
+      "name": "Repository checks",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head": "4518673ea50c0315fce286064187a58e819d4bd9"
+    },
+    {
+      "id": 40366454038,
+      "name": "Repository checks",
+      "status": "completed",
+      "conclusion": "action_required",
+      "head": "2afccf5163c4d107a1bf3e565b776f31f0685a2b"
+    }
+  ]
+}
