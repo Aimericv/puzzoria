@@ -7,6 +7,10 @@ on:
     types: [created]
   workflow_dispatch:
     inputs:
+      validate-pending:
+        description: Validate an already verified proposal without running Codex; all merge and production gates still apply
+        type: boolean
+        default: false
       deploy-pending:
         description: Process an already tested pending release without running Codex; production approval is still mandatory
         type: boolean
@@ -61,22 +65,39 @@ jobs:
       id-token: write
     outputs:
       admitted: ${{ steps.session.outputs.run_model }}
-      candidate: ${{ steps.session.outputs.candidate_sha }}
+      candidate: ${{ steps.pending.outputs.eligible }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           persist-credentials: false
+      - if: inputs.validate-pending
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - if: inputs.validate-pending
+        name: Read owner pause and instructions before metadata-only validation
+        run: node scripts/autonomy-agent/preflight.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          AGENT_MODE: autonomous
       - id: session
+        if: '!inputs.validate-pending'
         uses: ./.github/actions/puzzoria-agent
         with:
           mode: ${{ github.event_name == 'push' && 'validation' || 'autonomous' }}
           github-token: ${{ github.token }}
           vault-key: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
           analytics-token: ${{ secrets.PUZZORIA_ANALYTICS_READ_TOKEN }}
+      - id: pending
+        if: github.ref == 'refs/heads/main'
+        name: Read the trusted pending receipt without exposing a commit as a job output
+        run: node scripts/autonomy-agent/pending-release.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
   release-prepare:
     needs: first
-    if: github.ref == 'refs/heads/main' && needs.first.outputs.candidate != '' && needs.first.result == 'success'
+    if: github.ref == 'refs/heads/main' && needs.first.outputs.candidate == 'true' && needs.first.result == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
