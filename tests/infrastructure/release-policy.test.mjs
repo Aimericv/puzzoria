@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {classifyRelease,safeCopyEdit,assertValidation,deploymentAllowed,E2E_PROJECTS} from '../../scripts/autonomy-agent/release-policy.mjs';
 import {mergeSafeCandidate} from '../../scripts/autonomy-agent/release-controller.mjs';
+import {pendingDeploymentAllowed} from '../../scripts/autonomy-agent/release-client.mjs';
 const before='const content = {fr: {title: "Old", text: "Original"}}; export function get(){return content;}';
 const after=before.replace('Old','Better Wordle title');
 test('only bounded editorial literals with identical executable syntax are automatic',()=>{
@@ -22,4 +23,15 @@ test('safe merge rejects changed PRs and main races without forced ref updates',
  const calls=[],api=async(path,method='GET',body)=>{calls.push({path,method,body});if(path==='/pulls/7')return {head:{sha:head,ref:'codex/experiments/test',repo:{full_name:'Aimericv/puzzoria'}},base:{sha:base,ref:'main'},merged:false};if(path==='/git/ref/heads/main')return {object:{sha:base}};if(path.startsWith('/git/commits/'))return {tree:{sha:'tree'}};if(path==='/git/commits')return {sha:'merge'};if(path==='/git/refs/heads/main'){const e=Error('race');e.status=422;throw e;}throw Error(path);};
  const result=await mergeSafeCandidate({api,receipt:{sha:head,base,prNumber:7,verified:true,experimentId:'test'},validation:validation(),files:[{path:'src/lib/seo-content.ts',before,after}],policy:{safeMergeEnabled:true},agentEnabled:'true'});
  assert.equal(result.status,'stale_main');assert.equal(calls.find(c=>c.path==='/git/refs/heads/main').body.force,false);
+});
+test('the exact initial approval gates bootstrap, then verified receipts permit later releases',()=>{
+ const initial='a'.repeat(40),later='b'.repeat(40);
+ const control={release:{target:{initialCommit:'0'.repeat(40)},productionAuthorization:{initialApprovedCommit:initial}}};
+ const state={growth:{releaseCandidate:{mergeSha:later,status:'awaiting_activation'}}};
+ assert.equal(pendingDeploymentAllowed(control,state),false);
+ state.growth.releaseCandidate.mergeSha=initial;assert.equal(pendingDeploymentAllowed(control,state),true);
+ state.growth.lastDeployedCommit=initial;state.growth.releaseCandidate.mergeSha=later;assert.equal(pendingDeploymentAllowed(control,state),true);
+ state.growth.releaseCandidate.status='validation_failed';assert.equal(pendingDeploymentAllowed(control,state),false);
+ delete state.growth.lastDeployedCommit;delete control.release.productionAuthorization;
+ assert.equal(pendingDeploymentAllowed(control,state),false);
 });

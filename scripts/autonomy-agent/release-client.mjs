@@ -11,15 +11,22 @@ export function releasePolicyHash() {
   const files=['scripts/autonomy-agent/release-policy.mjs','scripts/autonomy-agent/release-controller.mjs','scripts/autonomy-agent/release-host.mjs','scripts/autonomy-agent/deployment-transaction.mjs','scripts/autonomy-agent/public-probe.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/release-check.mjs','scripts/autonomy-agent/release-validation.mjs','.github/containers/release-verifier.Dockerfile','.github/workflows/autonomy-agent.yml','.github/actions/puzzoria-agent/action.yml','deploy/puzzoria-release-entry.sh','deploy/install-release-controller.sh','deploy/puzzoria-release-recover.service','deploy/puzzoria-release-recover.timer','package-lock.json'];
   return createHash('sha256').update(files.map(file=>file+'\n'+readFileSync(file,'utf8')).join('\n')).digest('hex');
 }
+export function pendingDeploymentAllowed(control,state) {
+  const pending=state?.growth?.releaseCandidate;
+  const previous=state?.growth?.lastDeployedCommit??control.release.target.initialCommit;
+  return /^[a-f0-9]{40}$/.test(previous??'')&&pending?.status==='awaiting_activation'&&
+    /^[a-f0-9]{40}$/.test(pending?.mergeSha??'')&&
+    (previous!=='0'.repeat(40)||pending.mergeSha===control.release.productionAuthorization?.initialApprovedCommit);
+}
 export async function run(mode=process.argv[2]) {
   if(mode==='policy-hash'){console.log(releasePolicyHash());return;}
   const control=JSON.parse(readFileSync('agent/autonomy/control.json','utf8'));assertFunding(control);
   const allowed=deploymentAllowed(control,process.env.PUZZORIA_AUTODEPLOY_ENABLED,releasePolicyHash());
   if(mode==='gate'){
-    let pending;
-    if(allowed){const api=github(process.env.GITHUB_TOKEN,REPOSITORY),state=await new StateStore(api,control,process.env.GITHUB_SHA).load();pending=state.growth?.releaseCandidate;}
-    const firstAllowed=control.release.target.initialCommit!=='0'.repeat(40)||pending?.mergeSha===control.release.productionAuthorization?.initialApprovedCommit;
-    const admitted=allowed&&firstAllowed&&pending?.status==='awaiting_activation'&&/^[a-f0-9]{40}$/.test(pending?.mergeSha??'');
+    let state;
+    if(allowed){const api=github(process.env.GITHUB_TOKEN,REPOSITORY);state=await new StateStore(api,control,process.env.GITHUB_SHA).load();}
+    const pending=state?.growth?.releaseCandidate;
+    const admitted=allowed&&pendingDeploymentAllowed(control,state);
     if(process.env.GITHUB_OUTPUT)writeFileSync(process.env.GITHUB_OUTPUT,`allowed=${Boolean(admitted)}\nsha=${admitted?pending.mergeSha:''}\n`,{flag:'a'});console.log(JSON.stringify({productionAllowed:Boolean(admitted),policyHash:releasePolicyHash()}));return;
   }
   if(mode!=='deploy'||!allowed)throw Error('Production activation is not approved for this policy and target');
