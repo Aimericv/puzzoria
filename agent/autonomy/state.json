@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 149,
+  "generation": 150,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2641,10 +2641,10 @@
       }
     ],
     "pendingDeployment": {
-      "sha": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
-      "base": "3e743001df87694f42a40d48e55c98d858829053",
-      "mergeSha": "d6bbe94a33f73f127e3a58de5a24d06f5b90baa1",
-      "prNumber": 24,
+      "sha": "15451511cccdeb573cf224d6082818d39336764b",
+      "base": "d6bbe94a33f73f127e3a58de5a24d06f5b90baa1",
+      "mergeSha": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
+      "prNumber": 25,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
       "status": "awaiting_activation",
@@ -2655,9 +2655,9 @@
       "validation": {
         "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
         "fullRunId": "40539308357",
-        "controllerRunId": "40554329376",
-        "configurationSource": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
-        "configurationRunId": "40561621248"
+        "controllerRunId": "40576205097",
+        "configurationSource": "15451511cccdeb573cf224d6082818d39336764b",
+        "configurationRunId": "40576971865"
       },
       "ownerAuthorizationRequired": false,
       "ownerApprovedBootstrap": true
@@ -2692,15 +2692,21 @@
       "controllerRunId": "40549513756"
     },
     "productionBootstrapApproval": {
-      "sha": "d6bbe94a33f73f127e3a58de5a24d06f5b90baa1",
-      "policyHash": "f827e08a074c002c915feea464309af2f2819939c2ddbea66ec23b64abda9ea1",
+      "sha": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
+      "policyHash": "4301afd6d0c5bbe862d31e3915fe94a68b8b369ead9d45fbeb85c161d3326123",
       "approvedAt": "2026-10-27T18:28:53Z",
-      "validationRunId": "40554329376",
-      "validatedSource": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
-      "controllerArchiveSha256": "08ee5c853ecd5c994af1d397450230cdb14c6e567db26f34eba5cb3b1a7831d4",
+      "validationRunId": "40576205097",
+      "validatedSource": "15451511cccdeb573cf224d6082818d39336764b",
+      "controllerArchiveSha256": "30feed5e4eba82280cd1757ab554d7fdbcabeb913c638ba9ba32fb5b1214cc05",
       "appValidationSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
       "appValidationRunId": "40539308357",
-      "authorizationSource": "Explicit owner authorization in this Codex conversation on 2026-10-27: install restricted controller, verify real VPS configuration and restorable backup, controlled first publication with site checks and rollback, then future low-risk publications only after observed bootstrap success. Sensitive changes remain subject to owner approval. No additional cost."
+      "authorizationSource": "Explicit owner authorization in this Codex conversation on 2026-10-27: install restricted controller, verify real VPS configuration and restorable backup, controlled first publication with site checks and rollback, then future low-risk publications only after observed bootstrap success. Sensitive changes remain subject to owner approval. No additional cost.",
+      "transport": {
+        "deploymentPort": 2222,
+        "administrativePort": 22,
+        "rootRejected": true,
+        "realSshValidationRun": "40576205097"
+      }
     }
   },
   "releaseValidationHistory": [
@@ -2807,13 +2813,55 @@
       }
     },
     {
-      "at": "2026-10-27T18:37:34.135Z",
+      "at": "2026-10-27T18:37:01Z",
       "runId": "40561621248",
       "sha": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
+      "minutes": 3,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122391861853,
+        "startedAt": "2026-10-27T18:37:01Z",
+        "completedAt": "2026-10-27T18:37:43Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T20:02:04Z",
+      "runId": "40574398950",
+      "sha": "65ccdbc11a49d3e7a4aa47a202a679455505bd1b",
+      "minutes": 4,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122436816262,
+        "startedAt": "2026-10-27T20:02:04Z",
+        "completedAt": "2026-10-27T20:03:05Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T20:14:12Z",
+      "runId": "40576205097",
+      "sha": "15451511cccdeb573cf224d6082818d39336764b",
+      "minutes": 3,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122443199831,
+        "startedAt": "2026-10-27T20:14:12Z",
+        "completedAt": "2026-10-27T20:15:10Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T20:19:51.945Z",
+      "runId": "40576971865",
+      "sha": "15451511cccdeb573cf224d6082818d39336764b",
       "minutes": 7,
       "settled": false,
       "accounting": {
-        "source": "bounded-initial-configuration-preparation-reservation",
+        "source": "bounded-restricted-transport-staging-reservation",
         "maximumJobMinutes": 5,
         "marginMinutes": 2
       }
