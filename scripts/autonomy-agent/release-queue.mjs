@@ -2,7 +2,7 @@ const sha=value=>/^[a-f0-9]{40}$/.test(value??'');
 export function verifiedReceipt(receipt) {
   return receipt?.verified===true&&sha(receipt.sha)&&sha(receipt.base)&&Number.isSafeInteger(receipt.prNumber)&&receipt.prNumber>0&&/^[a-z0-9][a-z0-9-]{0,79}$/.test(receipt.experimentId??'');
 }
-const terminal=new Set(['merged','merged_documentation','merged_externally','closed','deployed','rolled_back']);
+const terminal=new Set(['merged','merged_documentation','merged_externally','closed','deployed','rolled_back','cancelled_by_strategy']);
 export function ensureReleaseQueue(state) {
   state.growth??={};const growth=state.growth;
   if(!growth.pendingDeployment&&growth.releaseCandidate?.status==='awaiting_activation')growth.pendingDeployment=structuredClone(growth.releaseCandidate);
