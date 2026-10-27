@@ -17,6 +17,7 @@ export async function selectReleaseCandidate(api,state,main,{wait=ms=>new Promis
   for(const receipt of validationCandidates(state)) {
     const experiment=state.growth.experiments?.find(e=>e.id===receipt.experimentId&&e.prNumber===receipt.prNumber&&e.candidateSha===receipt.sha);
     if(!experiment){receipt.status='manual_review';receipt.reason='unknown_or_changed_experiment';continue;}
+    if(['stop','pivot'].includes(experiment.decision)){receipt.status='cancelled_by_strategy';experiment.status='cancelled';continue;}
     const pr=await api(`/pulls/${receipt.prNumber}`);
     if(pr.merged){receipt.status='merged_externally';experiment.status='merged_externally';experiment.mergeSha=pr.merge_commit_sha;continue;}
     if(pr.state==='closed'){receipt.status='closed';experiment.status='closed';continue;}

@@ -100,3 +100,11 @@ test('production credentials appear only in the gated production job, without a 
  const before=source.slice(0,source.indexOf('\n  production:\n')),production=source.slice(source.indexOf('\n  production:\n'),source.indexOf('\n  second:\n'));
  assert.ok(!before.includes('secrets.PUZZORIA_DEPLOY_KEY'));assert.ok(production.includes("github.ref == 'refs/heads/main'"));assert.ok(production.includes("needs.production-gate.outputs.allowed == 'true'"));assert.ok(!production.includes('environment:'));assert.ok(production.includes('secrets.PUZZORIA_DEPLOY_KEY'));
 });
+
+test('a stopped or pivoted experiment cannot be forced through an older queued proposal',async()=>{
+ for(const decision of ['stop','pivot']){
+  const f=selectionFixture();f.state.growth.experiments[0].decision=decision;
+  assert.equal(await selectReleaseCandidate(f.api,f.state,f.main),null);assert.equal(f.calls.length,0);
+  assert.equal(f.state.growth.releaseQueue[0].status,'cancelled_by_strategy');assert.equal(f.state.growth.experiments[0].status,'cancelled');
+ }
+});
