@@ -1,23 +1,55 @@
-name: Observe complete reviewed growth CI without raw logs
+name: Verify deployment owner controls without activation
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
 jobs:
-  observe:
+  validate:
+    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 10
     permissions:
       contents: write
-      actions: read
-      pull-requests: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: bbcd110d7ee6390a3fb55ab7de16d9edb504e60b
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/observe-reviewed-growth-ci.mjs
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: candidate
+      - run: mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap && npm run lint
+        working-directory: candidate
+      - name: Check installer syntax and its no-change default
+        shell: pwsh
+        working-directory: candidate
+        run: |
+          $tokens = $null
+          $parseErrors = $null
+          [void][System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path 'deploy/setup-release-from-windows.ps1'), [ref]$tokens, [ref]$parseErrors)
+          if ($parseErrors.Count) { $parseErrors | ForEach-Object { Write-Error $_.Message }; exit 1 }
+          & ./deploy/setup-release-from-windows.ps1
+      - run: node scripts/autonomy-agent/package-controller.mjs
+        working-directory: candidate
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewed-puzzoria-controller
+          include-hidden-files: true
+          path: |
+            candidate/.release/puzzoria-controller.tar.gz
+            candidate/.release/puzzoria-controller.sha256
+          retention-days: 7
+      - name: Publish targeted proof and draft PR only
+        run: node ../control/scripts/publish-owner-controls.mjs
+        working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
