@@ -1,0 +1,125 @@
+{
+  "main": "3e743001df87694f42a40d48e55c98d858829053",
+  "source": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+  "productionEnabled": false,
+  "productionAuthorized": false,
+  "productionVariableEnabled": false,
+  "agentEnabled": true,
+  "validationMinutes": 121,
+  "validationLimit": 180,
+  "controller": {
+    "source": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+    "policyHash": "f827e08a074c002c915feea464309af2f2819939c2ddbea66ec23b64abda9ea1",
+    "typescript": "5.9.3",
+    "productionEnabled": false
+  },
+  "controllerArchiveSha256": "08ee5c853ecd5c994af1d397450230cdb14c6e567db26f34eba5cb3b1a7831d4",
+  "controllerArtifact": {
+    "runId": "40554329376",
+    "id": 12757000550,
+    "name": "reviewed-puzzoria-controller",
+    "expiresAt": "2026-11-03T17:51:04Z"
+  },
+  "controllerTests": 77,
+  "app": {
+    "source": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+    "runId": "40539308357",
+    "unit": 359,
+    "e2e": 424,
+    "unchanged": true
+  },
+  "rollback": {
+    "fixtureRunId": "40534259927",
+    "fixtures": 2,
+    "productionTested": false
+  },
+  "state": {
+    "generation": 148,
+    "status": "ready",
+    "completedSessions": 23,
+    "memoryAndAuthPreserved": true,
+    "pendingDeploymentStatus": "awaiting_activation",
+    "pendingOwnerApproval": true
+  },
+  "communication": {
+    "issue": "https://github.com/Aimericv/puzzoria/issues/3",
+    "ownerMessageId": 6349565126,
+    "acknowledgementUrl": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349574544",
+    "unreadMessages": 0,
+    "cloudChatAutomaticallyConnected": false
+  },
+  "prs": [
+    {
+      "number": 2,
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/2"
+    },
+    {
+      "number": 5,
+      "state": "open",
+      "merged": false,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/5"
+    },
+    {
+      "number": 11,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/11"
+    },
+    {
+      "number": 15,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/15"
+    },
+    {
+      "number": 18,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/18"
+    },
+    {
+      "number": 19,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/19"
+    },
+    {
+      "number": 20,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/20"
+    },
+    {
+      "number": 21,
+      "state": "closed",
+      "merged": true,
+      "draft": false,
+      "url": "https://github.com/Aimericv/puzzoria/pull/21"
+    },
+    {
+      "number": 22,
+      "state": "closed",
+      "merged": true,
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/22"
+    },
+    {
+      "number": 23,
+      "state": "closed",
+      "merged": true,
+      "draft": false,
+      "url": "https://github.com/Aimericv/puzzoria/pull/23"
+    }
+  ],
+  "noVpsAccess": true,
+  "noDeployRequested": true
+}
