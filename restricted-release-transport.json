@@ -1,0 +1,80 @@
+{
+  "source": "15451511cccdeb573cf224d6082818d39336764b",
+  "base": "d6bbe94a33f73f127e3a58de5a24d06f5b90baa1",
+  "paths": [
+    "agent/autonomy/control.json",
+    "deploy/install-release-controller.sh",
+    "deploy/puzzoria-release-entry.sh",
+    "deploy/puzzoria-release-sshd.conf",
+    "deploy/puzzoria-release-sshd.service",
+    "deploy/setup-release-from-windows.ps1",
+    "docs/AUTONOMY-GROWTH.fr.md",
+    "scripts/autonomy-agent/package-controller.mjs",
+    "scripts/autonomy-agent/release-client.mjs",
+    "scripts/autonomy-agent/test-release-ssh.py"
+  ],
+  "controls": {
+    "tests": 77,
+    "passed": 77,
+    "failed": 0
+  },
+  "ssh": {
+    "status": "passed",
+    "realSshAuthentication": true,
+    "rootWithSameKeyRejected": true,
+    "passwordAndInteractiveAuthDisabled": true,
+    "readOnlyCheckAllowed": true,
+    "boundedReleaseAllowed": true,
+    "arbitraryCommandsRejected": 7,
+    "forbiddenMarkerAbsent": true,
+    "forwardingRejected": true,
+    "productionContacted": false,
+    "listener": "loopback-only",
+    "temporaryBootstrapPolicyValid": true,
+    "testUserProvisioningNeeded": false
+  },
+  "lint": true,
+  "powerShellParseAndDryRun": true,
+  "controller": {
+    "source": "15451511cccdeb573cf224d6082818d39336764b",
+    "policyHash": "4301afd6d0c5bbe862d31e3915fe94a68b8b369ead9d45fbeb85c161d3326123",
+    "typescript": "5.9.3",
+    "productionEnabled": false
+  },
+  "archiveSha256": "30feed5e4eba82280cd1757ab554d7fdbcabeb913c638ba9ba32fb5b1214cc05",
+  "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+  "applicationUnchanged": true,
+  "unit": 359,
+  "e2e": 424,
+  "rollback": {
+    "modulesUnchanged": true,
+    "sourceRun": 40534259927,
+    "fixtures": [
+      {
+        "test": "real-docker-image-rollback",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      },
+      {
+        "test": "real-docker-crashed-app-recovery",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      }
+    ],
+    "hostModulesUnchanged": true
+  },
+  "priorValidationMinutes": 131,
+  "reservedMaximumValidationMinutes": 12,
+  "externalProductionEnabled": false,
+  "vpsContacted": false,
+  "protectedStateChanged": false,
+  "pr": {
+    "number": 25,
+    "url": "https://github.com/Aimericv/puzzoria/pull/25"
+  },
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40576205097"
+}
