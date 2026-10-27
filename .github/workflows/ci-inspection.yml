@@ -1,34 +1,24 @@
-name: Recover successful targeted checks and install reviewed test-only fix
+name: Observe final release, targeted fix and budget stop without raw logs
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  finalize:
+  observe:
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 3
     permissions:
       contents: write
       actions: read
-      pull-requests: write
-      issues: write
+      pull-requests: read
+      issues: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          path: candidate
-          ref: d5dc9dab3b541d1b8dabf9d71327e7282727c89b
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node ../control/scripts/finish-readiness.mjs
-        working-directory: candidate
+      - run: node scripts/observe-puzzoria-release.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
