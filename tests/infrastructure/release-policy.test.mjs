@@ -56,3 +56,10 @@ test('the exact initial approval gates bootstrap, then verified receipts permit 
  delete state.growth.lastDeployedCommit;delete control.release.productionAuthorization;
  assert.equal(pendingDeploymentAllowed(control,state),false);
 });
+
+test('a newer proposal does not change the separately attested pending production release',()=>{
+ const sha='a'.repeat(40),control={release:{target:{initialCommit:'b'.repeat(40)}}};
+ const state={growth:{pendingDeployment:{mergeSha:sha,status:'awaiting_activation'},releaseCandidate:{mergeSha:'c'.repeat(40),status:'manual_review'}}};
+ assert.equal(pendingDeploymentAllowed(control,state),true);
+ state.growth.pendingDeployment.status='rolled_back';assert.equal(pendingDeploymentAllowed(control,state),false);
+});

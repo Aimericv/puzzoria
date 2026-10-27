@@ -1,3 +1,4 @@
+import {validationCandidates} from "./release-queue.mjs";
 import {assertFreeChatGPT} from "../autonomy-pilot/policy.mjs";
 
 export const REPOSITORY="Aimericv/puzzoria";
@@ -62,11 +63,8 @@ export function canWake(state,now=Date.now(),hasMessages=false) {
 }
 
 export function pendingReleaseReady(state,main) {
-  const receipt=state.growth?.releaseCandidate;
   return !state.paused&&['ready','waiting_quota'].includes(state.status)&&!(state.pendingMessages?.length)&&
-    /^[a-f0-9]{40}$/.test(main??'')&&receipt?.base===main&&/^[a-f0-9]{40}$/.test(receipt?.sha??'')&&
-    receipt.verified===true&&Number.isSafeInteger(receipt.prNumber)&&receipt.prNumber>0&&
-    [undefined,'proposed','waiting_validation_budget','validation_failed','validating'].includes(receipt.status);
+    /^[a-f0-9]{40}$/.test(main??'')&&validationCandidates(state).length>0;
 }
 
 export function redact(text,secrets=[]) {

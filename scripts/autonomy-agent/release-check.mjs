@@ -1,57 +1,65 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import {github} from '../autonomy-pilot/github.mjs';
 import {StateStore} from './store.mjs';
-import {assertFunding,REPOSITORY} from './policy.mjs';
-import {classifyRelease} from './release-policy.mjs';
+import {assertFunding,pendingReleaseReady,REPOSITORY} from './policy.mjs';
 import {mergeSafeCandidate} from './release-controller.mjs';
 import {validateRelease} from './release-validation.mjs';
+import {loadReleaseFiles,selectReleaseCandidate} from './release-selection.mjs';
+import {reconcileValidationReservations,validationReservation,validationBudgetAvailable} from './release-budget.mjs';
+import {ensureReleaseQueue,deploymentBlocksNewRuntime} from './release-queue.mjs';
 
 const mode=process.argv[2],control=JSON.parse(readFileSync('agent/autonomy/control.json','utf8'));assertFunding(control);
 if(process.env.GITHUB_REPOSITORY!==REPOSITORY)throw Error('Unexpected repository');
 const api=github(process.env.GITHUB_TOKEN,REPOSITORY),store=new StateStore(api,control,process.env.GITHUB_SHA),state=await store.load();
 const output=(key,value)=>{if(process.env.GITHUB_OUTPUT)writeFileSync(process.env.GITHUB_OUTPUT,`${key}=${value}\n`,{flag:'a'});};
-const get=async(path,ref)=>{const file=await api(`/contents/${path}?ref=${ref}`);if(file.encoding!=='base64'||file.size>262144)throw Error('Unexpected candidate file');return Buffer.from(file.content,'base64').toString('utf8');};
-async function load(receipt) {
- const comparison=await api(`/compare/${receipt.base}...${receipt.sha}`);
- if(comparison.status!=='ahead'||comparison.behind_by!==0||!comparison.files?.length||comparison.files.length>=300)throw Error('Candidate is not isolated from the expected main');
- const tree=await api(`/git/trees/${receipt.sha}?recursive=1`);if(tree.truncated)throw Error('Candidate tree is truncated');
- const files=[];
- for(const row of comparison.files) {
-  const entry=tree.tree.find(entry=>entry.path===row.filename);
-  const eligible=/^(src\/lib\/(?:seo-content|rare-word-seo|new-games-seo|social-seo)\.ts|docs\/[a-zA-Z0-9/_-]+\.md)$/.test(row.filename);
-  files.push({path:row.filename,mode:entry?.mode??'deleted',deleted:row.status==='removed',after:eligible&&entry?.mode==='100644'?await get(row.filename,receipt.sha):'',before:eligible&&row.status!=='added'?await get(row.filename,receipt.base):undefined});
- }
- return files;
-}
+const report=body=>api('/issues/3/comments','POST',{body});
 if(mode==='prepare') {
- output('eligible','false');const receipt=state.growth?.releaseCandidate;
- if(!receipt||control.release?.safeMergeEnabled!==true||process.env.PUZZORIA_AGENT_ENABLED!=='true')process.exit(0);
- if(!/^[a-f0-9]{40}$/.test(receipt.sha)||!/^\d+$/.test(String(receipt.prNumber)))throw Error('Invalid trusted receipt');
- const main=(await api('/git/ref/heads/main')).object.sha;
- const experiment=state.growth.experiments.find(row=>row.id===receipt.experimentId);
- if(main!==receipt.base){receipt.status='stale_main';await store.save('Preserve a proposal whose main changed; no automatic rebase');process.exit(0);}
- const files=await load(receipt),risk=classifyRelease(files);receipt.risk=risk;
- if(risk.risk!=='low'){receipt.status='manual_review';experiment.status='manual_review';await store.save('Require owner review for non-editorial or sensitive changes');await api('/issues/3/comments','POST',{body:`[Expérience ${experiment.id}](${experiment.prUrl}) : revue humaine requise (${risk.reason}). Aucun déploiement automatique.`});process.exit(0);}
- const now=Date.now();state.releaseValidationHistory=(state.releaseValidationHistory??[]).filter(row=>now-Date.parse(row.at)<7*86400000);
- if(state.releaseValidationHistory.reduce((sum,row)=>sum+row.minutes,0)+control.release.maximumValidationMinutes>control.release.validationBudgetMinutes7d){receipt.status='waiting_validation_budget';await store.save('Wait within the free validation-minute allowance');process.exit(0);}
- state.releaseValidationHistory.push({at:new Date(now).toISOString(),runId:process.env.GITHUB_RUN_ID,sha:receipt.sha,minutes:control.release.maximumValidationMinutes});
- receipt.status='validating';await store.save('Reserve bounded validation time before allocating the full release verifier');
- mkdirSync('.release',{recursive:true});writeFileSync('.release/request.json',JSON.stringify({...receipt,risk},null,2)+'\n');output('eligible','true');output('head',receipt.sha);output('base',receipt.base);output('kind',risk.kind);
+  output('eligible','false');
+  if(control.release?.safeMergeEnabled!==true||process.env.PUZZORIA_AGENT_ENABLED!=='true'||state.paused||!['ready','waiting_quota'].includes(state.status)||state.pendingMessages?.length)process.exit(0);
+  const main=(await api('/git/ref/heads/main')).object.sha;
+  state.releaseValidationHistory=await reconcileValidationReservations(api,state.releaseValidationHistory);
+  const receipt=await selectReleaseCandidate(api,state,main);
+  if(!receipt){await store.save('Preserve queued proposals and require review of sensitive or changed publications');process.exit(0);}
+  if(receipt.risk.requiresDeployment&&deploymentBlocksNewRuntime(state)){receipt.status='waiting_deployment_confirmation';await store.save('Preserve the initially approved or unconfirmed host rollout before merging newer runtime work');process.exit(0);}
+  const reservation=validationReservation(receipt.risk.kind,control.release.maximumValidationMinutes);
+  if(!validationBudgetAvailable(state.releaseValidationHistory,reservation,control.release.validationBudgetMinutes7d)){
+    const changed=receipt.status!=='waiting_validation_budget';receipt.status='waiting_validation_budget';
+    await store.save('Retain remaining completed-job accounting and wait within the unchanged allowance');
+    if(changed)await report(`[PR #${receipt.prNumber}](https://github.com/${REPOSITORY}/pull/${receipt.prNumber}) : validation en attente du plafond interne. Les réveils restent actifs ; aucun repli payant ni déploiement.`);
+    process.exit(0);
+  }
+  state.releaseValidationHistory.push({at:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),sha:receipt.sha,minutes:reservation});
+  receipt.status='validating';await store.save('Reserve bounded validation time; finished jobs retain their observed duration and safety margin');
+  mkdirSync('.release',{recursive:true});writeFileSync('.release/request.json',JSON.stringify(receipt,null,2)+'\n');
+  output('eligible','true');output('head',receipt.sha);output('base',receipt.base);output('kind',receipt.risk.kind);
 } else if(mode==='validate') {
- const receipt=JSON.parse(readFileSync('.release/request.json','utf8'));
- const commit=await api(`/git/commits/${receipt.sha}`);
- if(receipt.risk.kind==='documentation'){mkdirSync('.release',{recursive:true});writeFileSync('.release/proof.json',JSON.stringify({head:receipt.sha,base:receipt.base,tree:commit.tree.sha,status:'passed',documentationOnly:true})+'\n');}
- else validateRelease({head:receipt.sha,base:receipt.base,tree:commit.tree.sha});
+  const receipt=JSON.parse(readFileSync('.release/request.json','utf8')),commit=await api(`/git/commits/${receipt.sha}`);
+  if(receipt.risk.kind==='documentation'){mkdirSync('.release',{recursive:true});writeFileSync('.release/proof.json',JSON.stringify({head:receipt.sha,base:receipt.base,tree:commit.tree.sha,status:'passed',documentationOnly:true})+'\n');}
+  else validateRelease({head:receipt.sha,base:receipt.base,tree:commit.tree.sha});
 } else if(mode==='finalize') {
- const receipt=JSON.parse(readFileSync('.release/request.json','utf8')),record=state.growth?.releaseCandidate;
- output('deploy','false');if(!record||record.sha!==receipt.sha)throw Error('The release receipt changed');
- if(!existsSync('.release/proof.json')){record.status='validation_failed';await store.save('No automatic merge without complete validation');process.exit(0);}
- const validation=JSON.parse(readFileSync('.release/proof.json','utf8'));
- if(validation.status!=='passed'){record.status='validation_failed';await store.save('Validation failed; preserve the proposal without merging');process.exit(0);}
- const result=await mergeSafeCandidate({api,receipt,validation,files:await load(receipt),policy:control.release,agentEnabled:process.env.PUZZORIA_AGENT_ENABLED});
- record.status=result.status;record.result=result;
- const experiment=state.growth.experiments.find(row=>row.id===receipt.experimentId);experiment.status=result.status;
- if(result.status==='merged'){experiment.mergeSha=result.sha;record.mergeSha=result.sha;record.status=result.risk.requiresDeployment?'awaiting_activation':'merged_documentation';output('deploy',String(result.risk.requiresDeployment));output('sha',result.sha);output('candidate',receipt.sha);}
- await store.save('Record exact tested merge result without assuming a production rollout');
- await api('/issues/3/comments','POST',{body:`[Expérience ${experiment.id}](${experiment.prUrl}) : ${record.status}. ${result.status==='merged'?'Fusion limitée au contenu classé à faible risque après validation indépendante.':'Aucune fusion automatique effectuée.'} Aucun effet en production n'est attribué sans confirmation du déploiement.`});
+  const receipt=JSON.parse(readFileSync('.release/request.json','utf8'));ensureReleaseQueue(state);
+  const record=state.growth.releaseQueue.find(row=>row.prNumber===receipt.prNumber);
+  output('deploy','false');if(!record||record.sha!==receipt.sha)throw Error('The queued release receipt changed');
+  state.releaseValidationHistory=await reconcileValidationReservations(api,state.releaseValidationHistory);
+  const validation=existsSync('.release/proof.json')?JSON.parse(readFileSync('.release/proof.json','utf8')):null;
+  if(validation?.status!=='passed'){
+    record.status='validation_failed';state.growth.releaseCandidate=record;
+    await store.save('Preserve failed validation and its completed-job accounting without merging');
+    await report(`[PR #${record.prNumber}](https://github.com/${REPOSITORY}/pull/${record.prNumber}) : validation complète en échec. Aucune fusion ni production. [Exécution](https://github.com/${REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}).`);
+    process.exit(0);
+  }
+  const experiment=state.growth.experiments.find(row=>row.id===receipt.experimentId&&row.prNumber===receipt.prNumber&&row.candidateSha===receipt.sha);
+  if(!experiment)throw Error('The experiment changed before finalization');
+  const result=await mergeSafeCandidate({api,receipt,validation,files:await loadReleaseFiles(api,receipt),policy:control.release,agentEnabled:process.env.PUZZORIA_AGENT_ENABLED});
+  record.status=result.status;record.result=result;state.growth.releaseCandidate=record;
+  experiment.status=result.status;
+  if(result.status==='merged'){
+    experiment.mergeSha=result.sha;record.mergeSha=result.sha;record.status=result.risk.requiresDeployment?'awaiting_activation':'merged_documentation';
+    if(result.risk.requiresDeployment)state.growth.pendingDeployment=structuredClone(record);
+    output('deploy',String(result.risk.requiresDeployment));output('sha',result.sha);output('candidate',receipt.sha);
+  }
+  await store.save('Record tested merge without replacing pending deployment with a newer development proposal');
+  await report(`[Expérience ${experiment.id}](${experiment.prUrl}) : ${record.status}. ${result.status==='merged'?'Fusion après vérification indépendante de la révision exacte.':'Aucune fusion automatique effectuée.'} Aucun effet de production attribué sans reçu de déploiement.`);
+  // At most one continuation after a successful merge; failures and budget waits stop the chain.
+  if(result.status==='merged'&&pendingReleaseReady(state,result.sha))await api('/actions/workflows/autonomy-agent.yml/dispatches','POST',{ref:'main',inputs:{'validate-pending':true,'deploy-pending':false,'check-search-console':false}});
 } else throw Error('Use prepare, validate or finalize');

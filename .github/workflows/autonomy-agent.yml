@@ -102,8 +102,9 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: write
-      pull-requests: read
+      pull-requests: write
       issues: write
+      actions: read
     outputs:
       eligible: ${{ steps.prepare.outputs.eligible }}
     steps:
@@ -130,7 +131,7 @@ jobs:
     needs: release-prepare
     if: needs.release-prepare.outputs.eligible == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: ${{ needs.release-prepare.outputs.kind == 'documentation' && 5 || 90 }}
     permissions:
       contents: read
     steps:
@@ -168,6 +169,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: read
+      actions: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -199,6 +201,7 @@ jobs:
     timeout-minutes: 3
     permissions:
       contents: read
+      issues: read
     outputs:
       allowed: ${{ steps.gate.outputs.allowed }}
       sha: ${{ steps.gate.outputs.sha }}
@@ -218,8 +221,7 @@ jobs:
 
   production:
     needs: production-gate
-    if: needs.production-gate.outputs.allowed == 'true'
-    environment: puzzoria-production
+    if: needs.production-gate.outputs.allowed == 'true' && github.ref == 'refs/heads/main' && github.repository == 'Aimericv/puzzoria'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:

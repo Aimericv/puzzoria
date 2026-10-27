@@ -1,3 +1,4 @@
+import {rememberReleaseCandidate} from "./release-queue.mjs";
 import {spawn,execFileSync} from "node:child_process";
 import {readFileSync,writeFileSync,mkdirSync,rmSync,chownSync,chmodSync,readlinkSync,readdirSync,lstatSync,symlinkSync} from "node:fs";
 import {join,dirname,resolve} from "node:path";
@@ -157,7 +158,7 @@ try {
     if(experiment) {
       recordExperiment(state,experiment,growthSnapshot,published);
       evidence.experiment={id:experiment.id,objective:experiment.objective,metric:experiment.metric,decision:experiment.decision};
-      if(published)state.growth.releaseCandidate={sha:published.sha,base:evidence.baseMain,prNumber:published.number,experimentId:experiment.id,verified:true,runId};
+      if(published)rememberReleaseCandidate(state,{sha:published.sha,base:evidence.baseMain,prNumber:published.number,experimentId:experiment.id,verified:true,runId,status:"proposed"});
       delete state.growth.wip;
     }
     state.memory=memory;state.codeSha=published?.sha ?? evidence.sourceCommit;state.completedSessions++;state.pendingMessages=[];

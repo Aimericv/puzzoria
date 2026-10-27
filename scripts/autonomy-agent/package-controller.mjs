@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {releasePolicyHash} from './release-client.mjs';
 const destination=resolve('.release/controller');mkdirSync(join(destination,'node_modules'),{recursive:true});
 for(const file of ['release-host.mjs','deployment-transaction.mjs','release-policy.mjs','public-probe.mjs'])copyFileSync(join('scripts/autonomy-agent',file),join(destination,file));
-for(const file of ['install-release-controller.sh','puzzoria-release-entry.sh','puzzoria-release-recover.service','puzzoria-release-recover.timer','release-config.example.json'])copyFileSync(join('deploy',file),join(destination,file));
+for(const file of ['install-release-controller.sh','setup-release-from-windows.ps1','puzzoria-release-entry.sh','puzzoria-release-recover.service','puzzoria-release-recover.timer','release-config.example.json'])copyFileSync(join('deploy',file),join(destination,file));
 cpSync('node_modules/typescript',join(destination,'node_modules/typescript'),{recursive:true});
 const manifest={source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),policyHash:releasePolicyHash(),typescript:JSON.parse(readFileSync('node_modules/typescript/package.json','utf8')).version,productionEnabled:false};
 writeFileSync(join(destination,'VALIDATION.json'),JSON.stringify(manifest,null,2)+'\n');
