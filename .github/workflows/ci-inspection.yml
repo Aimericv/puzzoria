@@ -1,4 +1,4 @@
-name: Merge only the fully reviewed code with production still disabled
+name: Reconcile already merged release facts without production authorization
 on:
   push:
     branches: [codex/ci-inspection]
@@ -7,19 +7,28 @@ concurrency:
   group: puzzoria-autonomy-pilot
   cancel-in-progress: false
 jobs:
-  merge:
+  reconcile:
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 5
     permissions:
       contents: write
-      pull-requests: write
+      actions: read
+      pull-requests: read
+      issues: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: 45bef6497b0d6e2afc3e46e307d21e0ce0f255c0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/merge-reviewed-release-only.mjs
+      - run: node ../control/scripts/reconcile-reviewed-release-state.mjs
+        working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
