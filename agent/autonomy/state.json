@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 153,
+  "generation": 154,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2647,7 +2647,7 @@
       "prNumber": 26,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
-      "status": "awaiting_activation",
+      "status": "awaiting_policy_refresh",
       "includedExperiments": [
         "word-guide-worked-deductions",
         "published-vocabulary-discovery"
@@ -2898,6 +2898,19 @@
         "source": "bounded-windows-installer-staging-reservation",
         "maximumJobMinutes": 5,
         "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T21:27:15.513Z",
+      "runId": "40586884415",
+      "sha": "ab8de8936b20065134f6405ca11fb405ca3d1de4",
+      "minutes": 20,
+      "settled": false,
+      "accounting": {
+        "source": "bounded-windows-installer-review-reservation",
+        "maximumActiveJobMinutes": 12,
+        "activeJobs": 4,
+        "marginMinutesPerJob": 2
       }
     }
   ]
