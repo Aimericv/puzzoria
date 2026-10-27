@@ -1,0 +1,14 @@
+import{github}from'./autonomy-pilot/github.mjs';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),source='bbcd110d7ee6390a3fb55ab7de16d9edb504e60b',base='24de100089f917e7067c49866c0f073dd98c0686';
+const data=await api('/contents/reviewed-release-ready.json?ref=codex%2Freviewed-release-ready%2F40551501926'),proof=JSON.parse(Buffer.from(data.content,'base64'));
+if(proof.source!==source||proof.base!==base||proof.controllerTests.passed!==76||!proof.unchangedApplicationSources||proof.applicationValidation.status!=='passed'||proof.applicationValidation.unit.passed!==359||proof.applicationValidation.unit.failed||proof.applicationValidation.unit.skipped||Object.keys(proof.applicationValidation.e2e).length!==4||Object.values(proof.applicationValidation.e2e).some(p=>p.passed!==106||p.failed||p.skipped||p.flaky)||proof.resourceTotal>180||proof.productionEnabled!==false)throw Error('Complete reviewed evidence missing');
+const file=await api(`/contents/agent/autonomy/control.json?ref=${source}`),control=JSON.parse(Buffer.from(file.content,'base64'));
+if(control.release.productionEnabled!==false||control.release.productionAuthorization!==null||control.release.target.initialCommit!==null||control.release.validationBudgetMinutes7d!==180)throw Error('Production gates must remain closed');
+const pr=await api('/pulls/21');
+if(pr.merged||pr.draft||pr.head.sha!==source||pr.base.sha!==base||(await api('/git/ref/heads/main')).object.sha!==base)throw Error('PR or main changed since review');
+const result=await api('/pulls/21/merge','PUT',{sha:source,merge_method:'merge',commit_title:'Integrate fully reviewed growth work and release safeguards; production remains disabled'});
+if(!result.merged)throw Error('Reviewed merge refused');
+const expected=await api(`/git/commits/${source}`),merged=await api(`/git/commits/${result.sha}`);
+if(expected.tree.sha!==merged.tree.sha)throw Error('Merged tree differs from reviewed source; operator review required');
+const report={source,main:result.sha,tree:merged.tree.sha,pr:21,unit:359,browserCases:424,controllerTests:76,productionEnabled:false,protectedStateChanged:false,deployRequested:false};
+const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'reviewed-release-merged.json',mode:'100644',type:'blob',content:JSON.stringify(report,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record only reviewed code merge; no state mutation, activation or dispatch',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/reviewed-release-merged/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(report));
