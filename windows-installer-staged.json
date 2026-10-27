@@ -1,0 +1,36 @@
+{
+  "main": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
+  "source": "684d86c654e9b606181b5dca7cd87d153587d4b9",
+  "pr": {
+    "number": 26,
+    "url": "https://github.com/Aimericv/puzzoria/pull/26"
+  },
+  "controllerRunId": "40583971296",
+  "controllerArtifactId": 12770519057,
+  "controllerArtifactExpires": "2026-11-03T21:07:33Z",
+  "policyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
+  "archiveSha256": "0472d86a94cb835fe48a7451ca34645724369c3c165455057c2e0a67c9958b8d",
+  "windows": {
+    "publicKeyOnly": true,
+    "independentFingerprint": true,
+    "productionContacted": false,
+    "strictKnownHosts": true,
+    "failed": 0,
+    "sshKeyscanRequired": false,
+    "passed": 7
+  },
+  "controls": 77,
+  "unit": 359,
+  "e2e": 424,
+  "applicationUnchanged": true,
+  "hostRollbackModulesUnchanged": true,
+  "realSshProofRun": "40576205097",
+  "validationReservedMinutes": 147,
+  "validationLimit": 180,
+  "stateGeneration": 153,
+  "memoryAndAuthPreserved": true,
+  "ownerFirstActivationAlreadyAuthorized": true,
+  "externalProductionEnabled": false,
+  "vpsContacted": false,
+  "deployRequested": false
+}
