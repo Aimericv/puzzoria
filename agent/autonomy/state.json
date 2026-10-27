@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 159,
+  "generation": 160,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2647,7 +2647,7 @@
       "prNumber": 27,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
-      "status": "awaiting_activation",
+      "status": "deployed",
       "includedExperiments": [
         "word-guide-worked-deductions",
         "published-vocabulary-discovery"
@@ -2660,7 +2660,10 @@
         "configurationRunId": "40588678094"
       },
       "ownerAuthorizationRequired": false,
-      "ownerApprovedBootstrap": true
+      "ownerApprovedBootstrap": true,
+      "deploymentFailures": 1,
+      "lastDeploymentFailureAt": "2026-10-27T21:52:23.394Z",
+      "nextDeploymentAttemptAt": "2026-10-28T03:52:23.394Z"
     },
     "reviewedBatch": {
       "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
