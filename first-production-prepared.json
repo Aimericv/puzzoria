@@ -1,0 +1,23 @@
+{
+  "main": "d6bbe94a33f73f127e3a58de5a24d06f5b90baa1",
+  "configurationSource": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
+  "pr": {
+    "number": 24,
+    "url": "https://github.com/Aimericv/puzzoria/pull/24"
+  },
+  "generation": 149,
+  "controllerSource": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+  "controllerRunId": "40554329376",
+  "controllerPolicyHash": "f827e08a074c002c915feea464309af2f2819939c2ddbea66ec23b64abda9ea1",
+  "controllerArchiveSha256": "08ee5c853ecd5c994af1d397450230cdb14c6e567db26f34eba5cb3b1a7831d4",
+  "controllerArtifactId": 12757000550,
+  "controls": 77,
+  "applicationUnchanged": true,
+  "externalProductionEnabled": false,
+  "ownerApproved": true,
+  "awaiting": "one-time installation from owner Windows PC; no Cloud administrative SSH credential or TCP route",
+  "vpsContacted": false,
+  "deployRequested": false,
+  "memoryAndAuthPreserved": true,
+  "validationReservedMinutes": 131
+}
