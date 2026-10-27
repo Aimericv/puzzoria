@@ -2,10 +2,10 @@ import { test, expect } from "@playwright/test";
 import { locales } from "../src/lib/types";
 import { slugs } from "../src/lib/i18n";
 import { seoCopy } from "../src/lib/seo-content";
-import { publishedWordArticles } from "../src/lib/server/word-articles";
+import articleCatalog from "../content/rare-words/catalog.json" with { type: "json" };
 import { wordArticleCopy } from "../src/lib/word-article-i18n";
 import { wordArticlePath } from "../src/lib/word-article-path";
-import { previousDay, utcDay } from "../src/lib/date";
+import { previousDay, utcDay, DAY_MS } from "../src/lib/date";
 
 test("four languages expose usable HTML and canonical alternatives without JavaScript", async ({
   browser,
@@ -56,7 +56,9 @@ test("four languages expose usable HTML and canonical alternatives without JavaS
         await expect(ruleSections.locator("p")).toHaveText(
           sections.map((section) => section.text),
         );
-        const published = game === "rareword" ? publishedWordArticles(locale) : [];
+        const published = game === "rareword"
+          ? articleCatalog[locale].filter((_, index) => utcDay(new Date(Date.parse(articleCatalog.startsAt) + (index + 1) * DAY_MS)) <= utcDay())
+          : [];
         const discovery = guide.locator("[data-published-word-articles]");
         await expect(discovery).toHaveCount(published.length ? 1 : 0);
         if (published.length) {
