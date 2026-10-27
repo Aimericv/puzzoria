@@ -1,0 +1,173 @@
+{
+  "plan": {
+    "source": "67309ca867c415c50889a30558d79cd848f9cfcb",
+    "pr": {
+      "number": 21,
+      "url": "https://github.com/Aimericv/puzzoria/pull/21"
+    },
+    "sourceStateGeneration": 146,
+    "protectedStateChanged": false,
+    "previousObservedMinutes": 38,
+    "reviewJobMaximumMinutes": 100,
+    "safetyMarginMinutes": 2,
+    "withinValidationAllowance": true,
+    "limit": 180,
+    "productionEnabled": false,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40537512719"
+  },
+  "source": "67309ca867c415c50889a30558d79cd848f9cfcb",
+  "controls": {
+    "tests": 73,
+    "passed": 73,
+    "failed": 0
+  },
+  "validation": {
+    "head": "67309ca867c415c50889a30558d79cd848f9cfcb",
+    "base": "24de100089f917e7067c49866c0f073dd98c0686",
+    "tree": "dab273d8ba4f3c7dace97570b2eb3c0c6f9255c7",
+    "status": "failed",
+    "network": "none",
+    "credentials": false,
+    "checks": {
+      "isolation": true,
+      "lint": true,
+      "typecheck": true,
+      "content": true,
+      "social": true,
+      "seo": true,
+      "build": true
+    },
+    "unit": {
+      "passed": 359,
+      "failed": 0,
+      "skipped": 0
+    },
+    "e2e": {
+      "desktop": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "mobile": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "android": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "iphone-webkit": {
+        "passed": 0,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Read-only funding and bounded validation admission; create draft PR",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Verify supervisor financial, queue and deployment gates",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Parse Windows bootstrap and exercise its no-change default",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "Validate exact source with complete isolated app and four browser suites",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "name": "Package the validated disabled production controller",
+      "status": "pending",
+      "conclusion": null
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "status": "pending",
+      "conclusion": null
+    },
+    {
+      "name": "Publish filtered proof and PR status only",
+      "status": "pending",
+      "conclusion": null
+    },
+    {
+      "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+      "status": "pending",
+      "conclusion": null
+    },
+    {
+      "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "status": "pending",
+      "conclusion": null
+    },
+    {
+      "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+      "status": "pending",
+      "conclusion": null
+    }
+  ],
+  "rollback": {
+    "modulesUnchanged": true,
+    "sourceRun": 40534259927,
+    "fixtures": [
+      {
+        "test": "real-docker-image-rollback",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      },
+      {
+        "test": "real-docker-crashed-app-recovery",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      }
+    ]
+  },
+  "controller": null,
+  "protectedStateChanged": false,
+  "productionEnabled": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40537512719"
+}
