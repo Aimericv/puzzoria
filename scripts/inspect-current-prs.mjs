@@ -1,0 +1,5 @@
+import{github}from'./autonomy-pilot/github.mjs';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),repo=await api(''),prs=await api('/pulls?state=open&per_page=100');
+const rows=[];for(const pr of prs){const files=await api(`/pulls/${pr.number}/files?per_page=100`);rows.push({number:pr.number,title:pr.title,head:pr.head.sha,base:pr.base.sha,branch:pr.head.ref,draft:pr.draft,url:pr.html_url,files:files.map(f=>({path:f.filename,status:f.status,additions:f.additions,deletions:f.deletions}))});}
+const proof={observedAt:new Date().toISOString(),visibility:repo.visibility,private:repo.private,ownerId:repo.owner.id,prs:rows};
+const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'pending-prs.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Inspect open autonomous PRs without logs or secrets',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/pending-pr-inspection/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(proof));
