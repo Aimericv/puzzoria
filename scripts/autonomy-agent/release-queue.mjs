@@ -34,7 +34,7 @@ export function pendingDeployment(state) {
 
 export function deploymentBlocksNewRuntime(state) {
   const pending=pendingDeployment(state);
-  return pending?.status==='manual_intervention'||pending?.status==='awaiting_activation'&&((pending.ownerApprovedBootstrap===true&&!state.growth.lastDeployedCommit)||(pending.deploymentFailures??0)>0);
+  return ['manual_intervention','awaiting_policy_refresh'].includes(pending?.status)||pending?.status==='awaiting_activation'&&((pending.ownerApprovedBootstrap===true&&!state.growth.lastDeployedCommit)||(pending.deploymentFailures??0)>0);
 }
 export function recordDeploymentFailure(candidate,now=Date.now()) {
   candidate.deploymentFailures=(candidate.deploymentFailures??0)+1;

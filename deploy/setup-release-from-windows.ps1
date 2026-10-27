@@ -2,6 +2,7 @@
 param(
   [switch]$Apply,
   [switch]$Activate,
+  [switch]$RefreshBootstrapPolicy,
   [string]$ApprovedCommit,
   [string]$PolicyHash,
   [string]$ValidationRunId,
@@ -44,12 +45,30 @@ function Read-VerifiedAdminHostKey([string]$Identity, [int]$Port, [string]$Finge
   }
   throw 'Empreinte SSH du VPS differente de celle confirmee par le proprietaire. Aucune modification du VPS.'
 }
+function Set-BootstrapReady([string]$Repository, [string]$Commit, [string]$Hash, [string]$Run, [string]$Directory) {
+  $file = Read-GitHubJson "repos/$Repository/contents/agent/autonomy/state.json?ref=codex%2Fagent-state"
+  $fresh = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($file.content)) | ConvertFrom-Json
+  $approved = $fresh.growth.productionBootstrapApproval
+  $queued = $fresh.growth.pendingDeployment
+  $deployed = $fresh.growth.PSObject.Properties['lastDeployedCommit']
+  if (($deployed -and $deployed.Value) -or $approved.sha -ne $Commit -or $approved.policyHash -ne $Hash -or $approved.validationRunId -ne $Run -or $queued.mergeSha -ne $Commit -or $queued.ownerApprovedBootstrap -ne $true -or $queued.status -notin @('awaiting_policy_refresh','awaiting_activation')) { throw 'Etat initial modifie pendant la verification ; aucune activation.' }
+  if ($queued.status -eq 'awaiting_activation') { return }
+  $queued.status = 'awaiting_activation'
+  $fresh.generation = $fresh.generation + 1
+  $body = @{message='Confirm verified initial host policy refresh without changing memory or owner instructions';branch='codex/agent-state';sha=$file.sha;content=[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(($fresh | ConvertTo-Json -Depth 100)))}
+  $inputPath = Join-Path $Directory 'bootstrap-ready.json'
+  [IO.File]::WriteAllText($inputPath, ($body | ConvertTo-Json -Depth 100), [Text.UTF8Encoding]::new($false))
+  & gh api --method PUT "repos/$Repository/contents/agent/autonomy/state.json" --input $inputPath | Out-Null
+  Assert-Native 'confirmation atomique de la politique initiale, sans ecraser un etat concurrent'
+}
 $repo = 'Aimericv/puzzoria'
 $stateFile = Read-GitHubJson "repos/$repo/contents/agent/autonomy/state.json?ref=codex%2Fagent-state"
 $state = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($stateFile.content)) | ConvertFrom-Json
 $approval = $state.growth.productionBootstrapApproval
 $pending = $state.growth.pendingDeployment
-if ($approval.sha -ne $ApprovedCommit -or $approval.policyHash -ne $PolicyHash -or $approval.validationRunId -ne $ValidationRunId -or -not $approval.approvedAt -or $pending.mergeSha -ne $ApprovedCommit -or $pending.ownerApprovedBootstrap -ne $true -or $pending.status -ne 'awaiting_activation') { throw 'Autorisation initiale exacte absente de l''état protégé ; aucune installation.' }
+$expectedStatuses = if ($RefreshBootstrapPolicy) { @('awaiting_policy_refresh','awaiting_activation') } else { @('awaiting_activation') }
+if ($approval.sha -ne $ApprovedCommit -or $approval.policyHash -ne $PolicyHash -or $approval.validationRunId -ne $ValidationRunId -or -not $approval.approvedAt -or $pending.mergeSha -ne $ApprovedCommit -or $pending.ownerApprovedBootstrap -ne $true -or $pending.status -notin $expectedStatuses) { throw 'Autorisation initiale exacte absente de l''état protégé ; aucune installation.' }
+if ($RefreshBootstrapPolicy -and $approval.previousPolicyHash -notmatch '^[a-f0-9]{64}$') { throw 'Politique precedente exacte requise.' }
 $controlFile = Read-GitHubJson "repos/$repo/contents/agent/autonomy/control.json?ref=$ApprovedCommit"
 $control = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($controlFile.content)) | ConvertFrom-Json
 if ($control.release.productionAuthorization.policyHash -ne $PolicyHash -or $control.release.target.sshHost -ne '37.27.24.173' -or $control.release.target.sshUser -ne 'puzzoria-release' -or $control.release.target.sshPort -ne 2222 -or $control.release.target.initialCommit -ne ('0' * 40)) { throw 'La cible ne correspond pas à l''autorisation initiale.' }
@@ -68,6 +87,10 @@ try {
   if ($manifest.policyHash -ne $PolicyHash -or $manifest.source -ne $approval.validatedSource) { throw 'La politique ou la source du paquet ne correspond pas à la validation approuvée.' }
   $known = Join-Path $directory 'known_hosts'
   $pinned = Read-VerifiedAdminHostKey $AdminKey $AdminSshPort 'SHA256:7wiefI6XYd5fbKwZfx9Dyvk2UNY2sqnHgMc7CD+oXeg'
+  if ($RefreshBootstrapPolicy) {
+    & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body false
+    Assert-Native 'suspension des publications pendant la verification de politique'
+  }
   $adminKnownHost = if ($AdminSshPort -eq 22) { '37.27.24.173' } else { "[37.27.24.173]:$AdminSshPort" }
   [IO.File]::WriteAllText($known, "$adminKnownHost ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
   $transportOptions = @('-i',$AdminKey,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$known",'-o','ConnectTimeout=15')
@@ -79,6 +102,7 @@ try {
   if ($environmentFile -notin @('/opt/puzzoria/.env.docker','/opt/puzzoria/.env')) { throw 'Configuration Compose existante inconnue.' }
   $deployKey = Join-Path $env:USERPROFILE '.ssh\puzzoria_release_auto_ed25519'
   if (-not (Test-Path -LiteralPath $deployKey)) {
+    if ($RefreshBootstrapPolicy) { throw 'La cle restreinte existante est requise ; aucune regeneration.' }
     $argumentMode = Get-Variable PSNativeCommandArgumentPassing -ErrorAction SilentlyContinue
     if ($argumentMode -and $argumentMode.Value -ne 'Legacy') { & ssh-keygen -q -t ed25519 -N '' -f $deployKey -C 'puzzoria-restricted-release' }
     else { & ssh-keygen -q -t ed25519 -N '""' -f $deployKey -C 'puzzoria-restricted-release' }
@@ -96,8 +120,13 @@ try {
   Assert-Native 'création du dossier temporaire privé sur le VPS'
   & scp @scpOptions $archive (Join-Path $directory 'host-config.json') (Join-Path $directory 'deploy.pub') "root@37.27.24.173:$remote/"
   Assert-Native 'copie du paquet contrôleur et de la seule clé publique'
-  & ssh @sshOptions 'root@37.27.24.173' "tar -xzf '$remote/puzzoria-controller.tar.gz' -C '$remote' && bash '$remote/install-release-controller.sh' --apply '$remote/host-config.json' '$remote/deploy.pub'"
-  Assert-Native 'installation du contrôleur restreint, sans remplacement de l''application'
+  if ($RefreshBootstrapPolicy) {
+    & ssh @sshOptions 'root@37.27.24.173' "tar -xzf '$remote/puzzoria-controller.tar.gz' -C '$remote' && bash '$remote/install-release-controller.sh' --refresh-bootstrap-policy '$remote/host-config.json' '$remote/deploy.pub' '$($approval.previousPolicyHash)'"
+    Assert-Native 'actualisation verifiee de la politique initiale, sans reinstallation ni changement applicatif'
+  } else {
+    & ssh @sshOptions 'root@37.27.24.173' "tar -xzf '$remote/puzzoria-controller.tar.gz' -C '$remote' && bash '$remote/install-release-controller.sh' --apply '$remote/host-config.json' '$remote/deploy.pub'"
+    Assert-Native 'installation du contrôleur restreint, sans remplacement de l''application'
+  }
   $deployKnown = Join-Path $directory 'deploy_known_hosts'
   [IO.File]::WriteAllText($deployKnown, "[37.27.24.173]:2222 ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
   $checkOptions = @('-i',$deployKey,'-p','2222','-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$deployKnown",'-o','PasswordAuthentication=no','-o','BatchMode=yes','-o','ConnectTimeout=15')
@@ -106,11 +135,14 @@ try {
   $checked = $hostCheck | ConvertFrom-Json
   if ($checked.productionChanged -ne $false -or $checked.state.phase -ne 'healthy' -or $checked.state.currentCommit -ne ('0' * 40)) { throw 'Etat initial du controleur non confirme ; aucune activation.' }
   # Private key travels only over gh stdin into a repository secret, never as argv or to the VPS.
-  Get-Content -Raw -LiteralPath $deployKey | & gh secret set PUZZORIA_DEPLOY_KEY --repo $repo
-  Assert-Native 'enregistrement sécurisé de la clé distincte dans GitHub'
-  Get-Content -Raw -LiteralPath $deployKnown | & gh secret set PUZZORIA_DEPLOY_KNOWN_HOSTS --repo $repo
-  Assert-Native 'enregistrement de l''empreinte SSH vérifiée'
+  if (-not $RefreshBootstrapPolicy) {
+    Get-Content -Raw -LiteralPath $deployKey | & gh secret set PUZZORIA_DEPLOY_KEY --repo $repo
+    Assert-Native 'enregistrement sécurisé de la clé distincte dans GitHub'
+    Get-Content -Raw -LiteralPath $deployKnown | & gh secret set PUZZORIA_DEPLOY_KNOWN_HOSTS --repo $repo
+    Assert-Native 'enregistrement de l''empreinte SSH vérifiée'
+  }
   if ($Activate) {
+    if ($RefreshBootstrapPolicy) { Set-BootstrapReady $repo $ApprovedCommit $PolicyHash $ValidationRunId $directory }
     & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body true
     Assert-Native 'activation explicitement autorisée des publications'
     & gh workflow run autonomy-agent.yml --repo $repo --ref main -f deploy-pending=true
