@@ -1,0 +1,56 @@
+{
+  "source": "ab8de8936b20065134f6405ca11fb405ca3d1de4",
+  "base": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
+  "paths": [
+    ".github/workflows/autonomy-agent.yml",
+    "agent/autonomy/control.json",
+    "deploy/install-release-controller.sh",
+    "deploy/refresh-bootstrap-policy.mjs",
+    "deploy/setup-release-from-windows.ps1",
+    "docs/AUTONOMY-GROWTH.fr.md",
+    "scripts/autonomy-agent/bootstrap-policy.test.mjs",
+    "scripts/autonomy-agent/package-controller.mjs",
+    "scripts/autonomy-agent/release-client.mjs",
+    "scripts/autonomy-agent/test-windows-host-key.ps1"
+  ],
+  "controls": 86,
+  "windows": {
+    "independentFingerprint": true,
+    "failed": 0,
+    "passed": 7,
+    "publicKeyOnly": true,
+    "productionContacted": false,
+    "strictKnownHosts": true,
+    "sshKeyscanRequired": false
+  },
+  "ready": {
+    "productionContacted": false,
+    "passed": 6,
+    "memoryAndOwnerMessagesPreserved": true,
+    "failed": 0,
+    "exactBlobCompareAndSwap": true
+  },
+  "reproducer": {
+    "original": "skipped",
+    "fixed": "success",
+    "denied": "skipped"
+  },
+  "powerShellParseAndDryRun": true,
+  "lint": true,
+  "policyHash": "8300c3b391709c29fa2ffe48931941c27a4851ef73dfaf552b40ac3520dc23fb",
+  "archiveSha256": "ba33d1500cf1a3e9a00700173e0d51bbaefcba57337b23b56eba46a60621135b",
+  "controllerSource": "ab8de8936b20065134f6405ca11fb405ca3d1de4",
+  "unit": 359,
+  "e2e": 424,
+  "applicationUnchanged": true,
+  "hostRollbackModulesUnchanged": true,
+  "realSshProofRun": "40576205097",
+  "externalProductionEnabled": true,
+  "publicationHeldForPolicyRefresh": true,
+  "vpsContacted": false,
+  "pr": {
+    "number": 27,
+    "url": "https://github.com/Aimericv/puzzoria/pull/27"
+  },
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40586884415"
+}
