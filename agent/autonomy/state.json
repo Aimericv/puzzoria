@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 147,
+  "generation": 148,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2761,6 +2761,20 @@
         "jobId": 122349131474,
         "startedAt": "2026-10-27T17:19:42Z",
         "completedAt": "2026-10-27T17:20:27Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T17:50:22Z",
+      "runId": "40554329376",
+      "sha": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+      "minutes": 3,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122366197417,
+        "startedAt": "2026-10-27T17:50:22Z",
+        "completedAt": "2026-10-27T17:51:14Z",
         "marginMinutes": 2
       }
     }
