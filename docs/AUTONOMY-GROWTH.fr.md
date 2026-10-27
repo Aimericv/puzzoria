@@ -203,6 +203,14 @@ volumes existants sont conservés. Le script vérifie la présence de `.env.dock
 ou `.env` sans afficher leur contenu. L'installateur refuse un contrôleur déjà
 installé ; une mise à niveau demande une revue distincte.
 
+La lecture de la clé publique hôte réutilise `ssh`, la clé administrative locale
+et le fichier `known_hosts` déjà approuvé, avec `StrictHostKeyChecking=yes` et
+sans mot de passe ni authentification interactive. L'empreinte ED25519 est
+ensuite comparée à celle confirmée indépendamment par le propriétaire. Cette
+lecture ne modifie pas le serveur et ne dépend plus de `ssh-keyscan`, dont la
+négociation peut échouer sous Windows alors que `ssh` fonctionne. Une connexion
+administrative vérifiée doit donc avoir déjà été établie depuis ce PC.
+
 Cette installation unique requiert les commandes gratuites GitHub CLI (`gh`,
 connecté au compte propriétaire), OpenSSH et tar sur Windows. `-Activate` est
 une option séparée ; elle demande le premier `deploy-pending` seulement après
