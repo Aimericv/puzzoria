@@ -1,0 +1,16 @@
+{
+  "source": "67309ca867c415c50889a30558d79cd848f9cfcb",
+  "pr": {
+    "number": 21,
+    "url": "https://github.com/Aimericv/puzzoria/pull/21"
+  },
+  "sourceStateGeneration": 146,
+  "protectedStateChanged": false,
+  "previousObservedMinutes": 38,
+  "reviewJobMaximumMinutes": 100,
+  "safetyMarginMinutes": 2,
+  "withinValidationAllowance": true,
+  "limit": 180,
+  "productionEnabled": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40537512719"
+}
