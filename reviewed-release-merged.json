@@ -1,0 +1,12 @@
+{
+  "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+  "main": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+  "tree": "52c4e6f52a6bbed4d1cd73b63e4f13625927c816",
+  "pr": 21,
+  "unit": 359,
+  "browserCases": 424,
+  "controllerTests": 76,
+  "productionEnabled": false,
+  "protectedStateChanged": false,
+  "deployRequested": false
+}
