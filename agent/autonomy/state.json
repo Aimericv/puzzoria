@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 139,
+  "generation": 140,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1999,7 +1999,7 @@
         "candidateSha": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593",
         "prNumber": 18,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/18",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -2029,7 +2029,12 @@
       "prNumber": 18,
       "experimentId": "first-play-entry-audit",
       "verified": true,
-      "runId": "40453920004"
+      "runId": "40453920004",
+      "risk": {
+        "risk": "manual",
+        "reason": "review_required:docs/FIRST-PLAY-AUDIT.fr.md"
+      },
+      "status": "manual_review"
     },
     "deferredReleaseCandidate": {
       "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
