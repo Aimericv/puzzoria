@@ -1,0 +1,12 @@
+{
+  "runId": "40589012232",
+  "source": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "oldBytes": 409545,
+  "normalizedBytes": 191952,
+  "stateGeneration": 159,
+  "memoryAuthOwnerDirectivesAndApprovalUnchanged": true,
+  "quotaLimitsUnchanged": true,
+  "ordinaryStateReaderPassed": true,
+  "productionAccessedByOperator": false,
+  "rerunRequested": true
+}
