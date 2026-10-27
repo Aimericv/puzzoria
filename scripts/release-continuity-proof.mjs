@@ -1,0 +1,23 @@
+import{execFileSync}from'node:child_process';
+import{readFileSync}from'node:fs';
+import{resolve}from'node:path';
+import{pathToFileURL}from'node:url';
+import{github}from'./autonomy-pilot/github.mjs';
+const source='a3e138ff59679473171d5baa47725ff6c8c8c878',base='24de100089f917e7067c49866c0f073dd98c0686';
+if(execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==source)throw Error('Unexpected source');
+const tap=readFileSync('.ci-results/control.tap','utf8'),count=n=>Number(tap.match(new RegExp(`^# ${n} (\\d+)`,'m'))?.[1]??0);
+if(count('tests')!==70||count('pass')!==70||count('fail')!==0)throw Error('70 passing controls required');
+const fixtures=[];
+for(const name of ['rollback','crashed-rollback']){const lines=readFileSync(`.ci-results/${name}.log`,'utf8').trim().split('\n');const p=lines.map(l=>{try{return JSON.parse(l);}catch{return null;}}).find(p=>p?.status==='passed'&&p.test?.startsWith('real-docker'));if(!p||!p.verifiedBackup||p.postRolloutWritesRetained!==1||p.productionContacted!==false)throw Error('Both real isolated rollback fixtures must pass');fixtures.push({test:p.test,status:p.status,verifiedBackup:p.verifiedBackup,writesRetained:p.postRolloutWritesRetained,productionContacted:false});}
+const control=JSON.parse(readFileSync('agent/autonomy/control.json'));
+if(control.release.productionEnabled!==false||control.release.productionAuthorization!==null||control.release.validationBudgetMinutes7d!==180)throw Error('Production and spending gates must remain unchanged');
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria');
+const {reconcileValidationReservations}=await import(pathToFileURL(resolve('scripts/autonomy-agent/release-budget.mjs')));
+const data=await api('/contents/agent/autonomy/state.json?ref=codex%2Fagent-state'),state=JSON.parse(Buffer.from(data.content,'base64'));
+const history=await reconcileValidationReservations(api,structuredClone(state.releaseValidationHistory));
+const budget={limit:180,before:state.releaseValidationHistory.map(({runId,minutes})=>({runId,minutes})),after:history.map(({runId,minutes,settled,accounting})=>({runId,minutes,settled,accounting})),sourceStateUnchanged:true};
+const url=`https://github.com/Aimericv/puzzoria/actions/runs/${process.env.GITHUB_RUN_ID}`;
+const existing=await api('/pulls?state=all&head=Aimericv:codex/release-continuity');
+const pr=existing[0]??await api('/pulls','POST',{head:'codex/release-continuity',base:'main',draft:true,title:'Conserver les PR et déploiements en attente et rapprocher le temps de validation observé',body:`Les réservations terminées restaient bloquées à 90 minutes, les nouvelles propositions masquaient les précédentes et les documents traduits étaient classés sensibles. Cette PR ajoute une file protégée, un reçu de déploiement séparé, le rapprochement des jobs GitHub terminés avec marge de deux minutes et la revalidation complète des mises à jour sans conflit des PR ordinaires.\n\nLe plafond de 180 minutes reste inchangé ; les données ambiguës gardent la réservation entière. Les préparations de PR obtiennent uniquement les droits nécessaires à leur mise à jour et à la lecture des jobs ; la finalisation peut poursuivre le même workflow après une fusion réussie. Aucun droit de production n’est activé.\n\nValidation : 70 contrôles, lint, deux vrais scénarios Docker de sauvegarde/rollback conservant les écritures, paquet contrôleur désactivé et rapprochement en lecture seule des deux vrais jobs GitHub. Aucun code applicatif modifié. Les propositions produit devront passer leur validation complète distincte. Cette exécution ne fusionne rien et ne modifie ni l’état protégé ni les PR existantes. [Résultats](${url}).`});
+const proof={source,base,pr:{number:pr.number,url:pr.html_url},tests:70,lint:true,fixtures,budget,controller:JSON.parse(readFileSync('.release/controller/VALIDATION.json')),productionEnabled:false,url};
+const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'release-continuity.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]}),record=await api('/git/commits','POST',{message:'Record reviewable continuity checks; no merge or protected-state changes',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/release-continuity-validation/${process.env.GITHUB_RUN_ID}`,sha:record.sha});console.log(JSON.stringify(proof));
