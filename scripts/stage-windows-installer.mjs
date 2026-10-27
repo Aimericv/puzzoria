@@ -1,0 +1,47 @@
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {github} from './autonomy-pilot/github.mjs';
+const source='684d86c654e9b606181b5dca7cd87d153587d4b9',base='32c2e4b043c819a5326ec6e2d9ab856e9297512e';
+const reviewRun=process.env.REVIEW_RUN_ID;
+if(!/^\d+$/.test(reviewRun??''))throw Error('Exact completed review run required');
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),load=p=>import(pathToFileURL(resolve(p)));
+const get=async(path,ref)=>JSON.parse(Buffer.from((await api(`/contents/${path}?ref=${encodeURIComponent(ref)}`)).content,'base64'));
+const control=JSON.parse(readFileSync('agent/autonomy/control.json')),before=await get('agent/autonomy/control.json',base),proof=await get('windows-installer-review.json','codex/windows-installer-review/'+reviewRun);
+const {StateStore}=await load('scripts/autonomy-agent/store.mjs'),{releasePolicyHash,pendingDeploymentAllowed}=await load('scripts/autonomy-agent/release-client.mjs'),{deploymentOwnerControl}=await load('scripts/autonomy-agent/deployment-owner-control.mjs');
+if(process.env.PRODUCTION_FLAG==='true'||process.env.FREE_FLAG!=='true'||process.env.AGENT_FLAG!=='true'||control.release.productionAuthorization.approvedAt!==before.release.productionAuthorization.approvedAt||control.release.productionAuthorization.source!==before.release.productionAuthorization.source||releasePolicyHash()!==proof.policyHash||control.release.productionAuthorization.policyHash!==proof.policyHash)throw Error('Preserve explicit owner consent and disabled production');
+if(proof.source!==source||proof.base!==base||proof.controls!==77||proof.windows.passed!==7||!proof.windows.strictKnownHosts||!proof.windows.independentFingerprint||!proof.windows.publicKeyOnly||proof.windows.sshKeyscanRequired||proof.windows.productionContacted||!proof.powerShellParseAndDryRun||!proof.lint||!proof.applicationUnchanged||!proof.hostRollbackModulesUnchanged||proof.unit!==359||proof.e2e!==424||proof.realSshProofRun!=='40576205097'||proof.ssh.status!=='passed')throw Error('Complete exact Windows validation required');
+const run=await api('/actions/runs/'+reviewRun),{artifacts}=await api('/actions/runs/'+reviewRun+'/artifacts'),artifact=artifacts.find(a=>a.name==='reviewed-puzzoria-controller'&&!a.expired);
+if(run.status!=='completed'||run.conclusion!=='success'||run.run_attempt!==1||run.head_branch!=='codex/ci-inspection'||run.path!=='.github/workflows/ci-inspection.yml'||!artifact)throw Error('Successful completed review and unexpired controller required');
+const store=new StateStore(api,control,base),state=await store.load();
+if(state.growth.lastDeployedCommit||state.growth.productionBootstrapApproval?.sha!==base||state.growth.pendingDeployment?.mergeSha!==base||state.growth.pendingDeployment.status!=='awaiting_activation'||!state.growth.pendingDeployment.ownerApprovedBootstrap||!await deploymentOwnerControl(api,state))throw Error('Preserve newer production or owner instructions');
+const digest=s=>{const c=structuredClone(s);delete c.generation;delete c.releaseValidationHistory;delete c.growth.pendingDeployment;delete c.growth.productionBootstrapApproval;return createHash('sha256').update(JSON.stringify(c)).digest('hex');},invariant=digest(state);
+const accounting=[];
+for(const [id,name] of [['40576971865','stage'],[reviewRun,'validate']]){
+ const r=await api('/actions/runs/'+id),{jobs}=await api('/actions/runs/'+id+'/jobs'),j=jobs[0];
+ if(r.status!=='completed'||r.run_attempt!==1||r.head_branch!=='codex/ci-inspection'||jobs.length!==1||j.name!==name||j.status!=='completed'||!state.releaseValidationHistory.some(row=>row.runId===id))throw Error('Exact completed reserved preparation job required');
+ const start=Date.parse(j.started_at),end=Date.parse(j.completed_at);
+ if(!Number.isFinite(start)||!Number.isFinite(end)||end<start||end-start>12*60000)throw Error('Invalid preparation accounting');
+ accounting.push({at:j.started_at,runId:id,sha:id===reviewRun?source:base,minutes:Math.ceil((end-start)/60000)+2,settled:true,accounting:{source:'github-completed-review-job-timestamps',jobId:j.id,startedAt:j.started_at,completedAt:j.completed_at,marginMinutes:2}});
+}
+state.releaseValidationHistory=state.releaseValidationHistory.filter(row=>!accounting.some(a=>a.runId===row.runId)).concat(accounting,[{at:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID,sha:source,minutes:7,settled:false,accounting:{source:'bounded-windows-installer-staging-reservation',maximumJobMinutes:5,marginMinutes:2}}]);
+const used=state.releaseValidationHistory.reduce((n,r)=>n+r.minutes,0);if(used>180||digest(state)!==invariant)throw Error('Preserve memory, auth and unchanged validation allowance');
+await store.save('Account completed Windows validation and reserve exact staging; keep production disabled');
+const pr=await api('/pulls/'+proof.pr.number);
+if(pr.merged||pr.head.sha!==source||pr.base.sha!==base||(await api('/git/ref/heads/main')).object.sha!==base||pr.mergeable!==true)throw Error('Exact tested Windows PR and main must remain mergeable');
+if(pr.draft){const r=await fetch('https://api.github.com/graphql',{method:'POST',headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,'Content-Type':'application/json'},body:JSON.stringify({query:'mutation($id:ID!){markPullRequestReadyForReview(input:{pullRequestId:$id}){pullRequest{id}}}',variables:{id:pr.node_id}})});const v=await r.json();if(!r.ok||v.errors)throw Error('Could not mark validated installer ready');}
+await api('/statuses/'+source,'POST',{state:'success',context:'autonomy/windows-host-key-validated',description:'77 controls + 7 PowerShell host-key cases; unchanged app and rollback; no VPS access',target_url:proof.url});
+if(!await deploymentOwnerControl(api,state))throw Error('Owner directive arrived before merge');
+const result=await api('/pulls/'+pr.number+'/merge','PUT',{sha:source,merge_method:'merge',commit_title:'Fix Windows host key reading with strict verified SSH and independent fingerprint'});
+if(!result.merged)throw Error('Exact authorized installer merge refused');
+const c=await api('/git/commits/'+source),merged=await api('/git/commits/'+result.sha);if(c.tree.sha!==merged.tree.sha)throw Error('Unexpected merged tree');
+state.growth.productionBootstrapApproval={...state.growth.productionBootstrapApproval,sha:result.sha,policyHash:releasePolicyHash(),validatedSource:source,validationRunId:reviewRun,controllerArchiveSha256:proof.archiveSha256,windowsHostKey:{verifiedSsh:true,strictKnownHosts:true,independentFingerprint:true,validationRunId:reviewRun}};
+state.growth.pendingDeployment={...state.growth.pendingDeployment,sha:source,base,mergeSha:result.sha,prNumber:pr.number,status:'awaiting_activation',validation:{...state.growth.pendingDeployment.validation,configurationSource:source,configurationRunId:process.env.GITHUB_RUN_ID,controllerRunId:reviewRun}};
+if(digest(state)!==invariant||!pendingDeploymentAllowed(control,state))throw Error('Preserve memory, authentication and exact bootstrap guards');
+await store.save('Bind existing initial owner consent to verified Windows installer; preserve memory, quotas and disabled external switch');
+const report={main:result.sha,source,pr:{number:pr.number,url:pr.html_url},controllerRunId:reviewRun,controllerArtifactId:artifact.id,controllerArtifactExpires:artifact.expires_at,policyHash:releasePolicyHash(),archiveSha256:proof.archiveSha256,windows:proof.windows,controls:77,unit:359,e2e:424,applicationUnchanged:true,hostRollbackModulesUnchanged:true,realSshProofRun:'40576205097',validationReservedMinutes:used,validationLimit:180,stateGeneration:state.generation,memoryAndAuthPreserved:true,ownerFirstActivationAlreadyAuthorized:true,externalProductionEnabled:false,vpsContacted:false,deployRequested:false};
+const parent=process.env.GITHUB_SHA,p=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:p.tree.sha,tree:[{path:'windows-installer-staged.json',mode:'100644',type:'blob',content:JSON.stringify(report,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record exact Windows installer, package and preserved owner consent; await owner local setup',tree:tree.sha,parents:[parent]});
+await api('/git/refs','POST',{ref:`refs/heads/codex/windows-installer-staged/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});
+await api('/issues/3/comments','POST',{body:`Correctif de l’installation Windows validé et fusionné : ${pr.html_url}. La lecture de clé publique passe par SSH avec known_hosts strict puis vérification de l’empreinte approuvée ; ssh-keyscan n’est plus requis. 77 contrôles et 7 cas PowerShell passent. Code applicatif, contrôleur SSH, sauvegardes et rollback inchangés. L’autorisation initiale existante est conservée pour ${result.sha}, ainsi que la mémoire et l’authentification. Interrupteur externe toujours désactivé ; aucun accès VPS ni publication par cette préparation. Installation unique depuis le PC propriétaire encore nécessaire.`});
+console.log(JSON.stringify(report));
