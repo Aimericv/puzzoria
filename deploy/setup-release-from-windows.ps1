@@ -54,7 +54,7 @@ try {
   $known = Join-Path $directory 'known_hosts'
   $pinned = $null
   $scanFile = Join-Path $directory 'host-key-scan.txt'
-  $scan = Start-Process -FilePath (Get-Command ssh-keyscan).Source -ArgumentList @('-T','10','-p',[string]$AdminSshPort,'-t','ed25519','37.27.24.173') -Wait -PassThru -NoNewWindow -RedirectStandardOutput $scanFile -RedirectStandardError (Join-Path $directory 'host-key-scan.stderr')
+  $scan = Start-Process -FilePath (Get-Command ssh-keyscan).Source -ArgumentList @('-T','10','-p',"$AdminSshPort",'-t','ed25519','37.27.24.173') -Wait -PassThru -NoNewWindow -RedirectStandardOutput $scanFile -RedirectStandardError (Join-Path $directory 'host-key-scan.stderr')
   if ($scan.ExitCode -ne 0) { throw "Acces SSH administratif au port $AdminSshPort indisponible. Aucune modification du VPS." }
   $keys = Get-Content -LiteralPath $scanFile
   foreach ($line in $keys) {
@@ -69,8 +69,8 @@ try {
   $adminKnownHost = if ($AdminSshPort -eq 22) { '37.27.24.173' } else { "[37.27.24.173]:$AdminSshPort" }
   [IO.File]::WriteAllText($known, "$adminKnownHost ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
   $transportOptions = @('-i',$AdminKey,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$known",'-o','ConnectTimeout=15')
-  $sshOptions = $transportOptions + @('-p',[string]$AdminSshPort)
-  $scpOptions = $transportOptions + @('-P',[string]$AdminSshPort)
+  $sshOptions = $transportOptions + @('-p',"$AdminSshPort")
+  $scpOptions = $transportOptions + @('-P',"$AdminSshPort")
   # Metadata only: do not print or copy either existing environment file.
   $environmentFile = (& ssh @sshOptions 'root@37.27.24.173' 'if test -f /opt/puzzoria/.env.docker; then echo /opt/puzzoria/.env.docker; elif test -f /opt/puzzoria/.env; then echo /opt/puzzoria/.env; else exit 1; fi') -join ''
   Assert-Native 'précontrôle du fichier de configuration existant'
