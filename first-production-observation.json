@@ -1,0 +1,258 @@
+{
+  "observedAt": "2026-10-27T21:46:24.643Z",
+  "run": {
+    "id": 40589012232,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40589012232",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "failure",
+    "source": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "createdAt": "2026-10-27T21:42:28Z",
+    "updatedAt": "2026-10-27T21:43:00Z",
+    "jobs": [
+      {
+        "id": 122488035596,
+        "name": "search-console-check",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:30Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122488035763,
+        "name": "second",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:30Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122488036082,
+        "name": "production-gate",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-27T21:42:32Z",
+        "completedAt": "2026-10-27T21:42:59Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node scripts/autonomy-agent/release-client.mjs gate",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 122488036244,
+        "name": "release-prepare",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:30Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122488037187,
+        "name": "release-finalize",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:30Z",
+        "completedAt": "2026-10-27T21:42:30Z",
+        "steps": []
+      },
+      {
+        "id": 122488092684,
+        "name": "first",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:37Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122488106032,
+        "name": "release-validation",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:39Z",
+        "completedAt": "2026-10-27T21:42:30Z",
+        "steps": []
+      },
+      {
+        "id": 122488266497,
+        "name": "production",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-27T21:42:59Z",
+        "completedAt": "2026-10-27T21:42:59Z",
+        "steps": []
+      }
+    ]
+  },
+  "activation": {
+    "agent": true,
+    "production": true,
+    "noPaymentMethodDeclaration": true
+  },
+  "state": {
+    "generation": 158,
+    "status": "ready",
+    "nextEligibleAt": null,
+    "lastMessageId": 6434434856,
+    "issueNumber": 3,
+    "completedSessions": 23,
+    "lastDeployedCommit": null,
+    "pendingDeployment": {
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "mergeSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "prNumber": 27,
+      "status": "awaiting_activation",
+      "deploymentFailures": null,
+      "nextDeploymentAttemptAt": null,
+      "lastDeploymentFailureAt": null
+    },
+    "experimentCount": 4,
+    "validationReservedMinutes": 164
+  },
+  "communication": {
+    "url": "https://github.com/Aimericv/puzzoria/issues/3",
+    "recentOwnerMessages": [
+      {
+        "id": 6349565126,
+        "createdAt": "2026-10-22T19:35:16Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126",
+        "processed": true
+      }
+    ],
+    "recentReports": [
+      {
+        "id": 6448991291,
+        "createdAt": "2026-10-27T17:32:30Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6448991291",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6449277769,
+        "createdAt": "2026-10-27T17:42:02Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6449277769",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6449581353,
+        "createdAt": "2026-10-27T17:54:22Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6449581353",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6450514179,
+        "createdAt": "2026-10-27T18:37:38Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6450514179",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6451063661,
+        "createdAt": "2026-10-27T19:04:41Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6451063661",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6452608343,
+        "createdAt": "2026-10-27T20:19:55Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6452608343",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6453650742,
+        "createdAt": "2026-10-27T21:10:31Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6453650742",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454284362,
+        "createdAt": "2026-10-27T21:40:44Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454284362",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      }
+    ]
+  },
+  "productionAccessedByObserver": false,
+  "protectedStateChanged": false,
+  "stateEncoding": {
+    "githubReportedBytes": 409545,
+    "decodedBytes": 409545,
+    "schemaVersion": 1,
+    "repositoryMatches": true,
+    "generationIsInteger": true,
+    "approvalDateIsValid": true,
+    "pendingMessagesArray": true
+  },
+  "workflow": {
+    "state": "active",
+    "path": ".github/workflows/autonomy-agent.yml"
+  },
+  "publicHealth": {
+    "url": "https://puzzoria.com/api/health",
+    "status": 200,
+    "healthy": true
+  },
+  "completedJobErrorCategories": [
+    {
+      "job": "production-gate",
+      "categories": [
+        "unexpected_state_file"
+      ]
+    }
+  ]
+}
