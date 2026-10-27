@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 141,
+  "generation": 142,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593",
   "checkpoint": {
-    "artifactId": 12711912225,
-    "runId": "40453920004",
-    "name": "puzzoria-agent-auth-40453920004-24",
-    "generation": 24,
+    "artifactId": 12733991144,
+    "runId": "40502857332",
+    "name": "puzzoria-agent-auth-40502857332-25",
+    "generation": 25,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40453920004",
+      "runId": "40502857332",
       "phase": "autonomous-agent",
-      "generation": 24
+      "generation": 25
     },
-    "expiresAt": "2027-01-25T05:11:43Z",
-    "digest": "c69caaa3914c1c44dd944652fb3bc78afc0db07b6ced15515cc4d605a5a3d290"
+    "expiresAt": "2027-01-25T12:19:30Z",
+    "digest": "185d21d5a64061df4adeedff9e8a8c93f877a58fc5dd884a4cd0175dfd2b06cc"
   },
   "lastMessageId": 6434434856,
   "completedSessions": 22,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40453920004",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40453920004"
+    "id": "40502857332",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40502857332"
   },
   "memory": {
     "STATE.md": "# État — 27 octobre 2026 — source 24de1000\n\nSource annoncée : 24de100089f917e7067c49866c0f073dd98c0686. AGENTS.md, mandat, inbox vide, quatre mémoires et quatre rapports readonly consultés. Guide Next use-client lu. Aucun Git, réseau externe, achat, merge ou déploiement.\n\nDécision autonome : audit acquisition first-play-entry-audit, recherche terminée sans intervention produit. Les métriques ne localisent aucun abandon ; les CTA et parcours sans compte existent. Rapport publiable docs/FIRST-PLAY-AUDIT.fr.md : données datées, parcours source, limites et protocole navigateur. Ne pas réimplémenter les deux PR précédentes absentes de cette source : le contexte les garde awaiting_verified_deployment (guide Word proposé, fiches en revue humaine). lastFailure/unverifiedWork null.\n\nObservation 228dc69c307fcf4c5d61a7cbea34dfef20b3c7327f96c63f336f8ec43908522c à 05:15:15.259Z. Google available à 05:15:11.648Z : 30 jours demandés 26 septembre–25 octobre, dernière date rapportée 24 octobre, fuseau America/Los_Angeles, 177 impressions/6 clics ; lignes partielles non additives, pas de jointure page/requête. Analytics available à 05:15:10.133Z : 30 jours 28 septembre–27 octobre UTC, six identités compte/appareil, 20 départs/18 fins, trois sessions consenties ; 7 jours une identité/un départ/une fin, zéro session mesurée. Jour courant partiel. Identités distinctes de personnes, sessions consenties distinctes du trafic total. D+7 mature 5, retours 0 ; D+30 dénominateur 0, pourcentage null. Trends à 05:15:14.320Z : actualités/sport ; TikTok indisponible, aucune demande de nouveau jeu établie.\n\nTests ciblés exécutés : npm test -- --configLoader=runner tests/seo.test.ts tests/content.test.ts, 33/33 réussis, deux fichiers, code 0. Aucun code applicatif modifié ; pas de suite générale, lint, types, build ou navigateur exécutés pour cette contribution documentaire. Les résultats des sessions antérieures ne sont pas réattribués à cette source. Serveurs/build réservés au superviseur.\n\nIncertitudes : temps de préparation, rendu mobile et arbre accessible avant départ inconnus. GamePreview affiche des lettres de Mots mêlés ; la page de base utilise un preview distinct du vrai run, tandis que ClassicGame masque son plateau en attente via CSS. Examiner ces phases sans annoncer une fuite serveur ou une régression avant reproduction. Les E2E existants consultés jouent surtout l'archive, pas cette entrée Practice.\n\nRecherche arrêtée (decision stop), pas d'effet attendu du document sur les départs. Protocole de suivi exploratoire : playing.starts, 14 jours UTC complets, minimum 20 dans chacune des fenêtres, +20 %, baseline/fenêtres au superviseur ; insuffisant si le seuil manque, aucune causalité revendiquée. Une intervention future aura un nouvel identifiant. Anciens critères préservés dans EXPERIMENTS et le contexte.\n\nProchaine mission choisie : préparer des scénarios E2E des pages de base Word/Mots mêlés, quatre langues, preview/préparation/première interaction, départ explicite et échec/reprise, texte visible et arbre accessible. Exécution serveur au superviseur ; correction produit seulement après reproduction. Quatre mémoires mises à jour, nonce conservé. Aucun fichier interdit modifié.\n",
