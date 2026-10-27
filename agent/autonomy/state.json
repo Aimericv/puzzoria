@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 154,
+  "generation": 155,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2892,25 +2892,68 @@
       "at": "2026-10-27T21:10:19.014Z",
       "runId": "40584407324",
       "sha": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-      "minutes": 7,
-      "settled": false,
+      "minutes": 3,
+      "settled": true,
       "accounting": {
-        "source": "bounded-windows-installer-staging-reservation",
-        "maximumJobMinutes": 5,
-        "marginMinutes": 2
+        "source": "github-completed-review-job-timestamps",
+        "jobs": [
+          {
+            "id": 122471953469,
+            "name": "stage",
+            "startedAt": "2026-10-27T21:09:48Z",
+            "completedAt": "2026-10-27T21:10:34Z"
+          }
+        ],
+        "marginMinutesPerJob": 2
       }
     },
     {
       "at": "2026-10-27T21:27:15.513Z",
       "runId": "40586884415",
       "sha": "ab8de8936b20065134f6405ca11fb405ca3d1de4",
-      "minutes": 20,
+      "minutes": 12,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobs": [
+          {
+            "id": 122480599078,
+            "name": "reserve",
+            "startedAt": "2026-10-27T21:27:05Z",
+            "completedAt": "2026-10-27T21:27:22Z"
+          },
+          {
+            "id": 122480750136,
+            "name": "gate",
+            "startedAt": "2026-10-27T21:27:24Z",
+            "completedAt": "2026-10-27T21:27:26Z"
+          },
+          {
+            "id": 122480789387,
+            "name": "fixed",
+            "startedAt": "2026-10-27T21:27:29Z",
+            "completedAt": "2026-10-27T21:27:32Z"
+          },
+          {
+            "id": 122480839377,
+            "name": "validate",
+            "startedAt": "2026-10-27T21:27:35Z",
+            "completedAt": "2026-10-27T21:28:20Z"
+          }
+        ],
+        "marginMinutesPerJob": 2
+      }
+    },
+    {
+      "at": "2026-10-27T21:31:28.004Z",
+      "runId": "40587465644",
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "minutes": 6,
       "settled": false,
       "accounting": {
-        "source": "bounded-windows-installer-review-reservation",
-        "maximumActiveJobMinutes": 12,
-        "activeJobs": 4,
-        "marginMinutesPerJob": 2
+        "source": "bounded-final-initial-production-review",
+        "maximumJobMinutes": 4,
+        "marginMinutes": 2
       }
     }
   ]
