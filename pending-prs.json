@@ -1,0 +1,278 @@
+{
+  "observedAt": "2026-10-27T15:31:52.477Z",
+  "visibility": "private",
+  "private": true,
+  "ownerId": 103512403,
+  "prs": [
+    {
+      "number": 19,
+      "title": "Puzzoria : expérience first-play-browser-protocol",
+      "head": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
+      "base": "24de100089f917e7067c49866c0f073dd98c0686",
+      "branch": "codex/experiments/first-play-browser-protocol",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/19",
+      "files": [
+        {
+          "path": "docs/FIRST-PLAY-BROWSER.fr.md",
+          "status": "added",
+          "additions": 31,
+          "deletions": 0
+        },
+        {
+          "path": "e2e/first-play-entry.spec.ts",
+          "status": "added",
+          "additions": 110,
+          "deletions": 0
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "title": "Puzzoria : expérience first-play-entry-audit",
+      "head": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593",
+      "base": "24de100089f917e7067c49866c0f073dd98c0686",
+      "branch": "codex/experiments/first-play-entry-audit",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/18",
+      "files": [
+        {
+          "path": "docs/FIRST-PLAY-AUDIT.fr.md",
+          "status": "added",
+          "additions": 87,
+          "deletions": 0
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "title": "Puzzoria : expérience published-vocabulary-discovery",
+      "head": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
+      "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+      "branch": "codex/experiments/published-vocabulary-discovery",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/15",
+      "files": [
+        {
+          "path": "src/components/game-guide.tsx",
+          "status": "modified",
+          "additions": 21,
+          "deletions": 0
+        },
+        {
+          "path": "src/lib/word-article-i18n.ts",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 4
+        },
+        {
+          "path": "tests/game-guide.test.ts",
+          "status": "added",
+          "additions": 40,
+          "deletions": 0
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "title": "Puzzoria : expérience word-guide-worked-deductions",
+      "head": "2b5e68c1de8145f8d641eeb81e2f7f233a9e3797",
+      "base": "24de100089f917e7067c49866c0f073dd98c0686",
+      "branch": "codex/experiments/word-guide-worked-deductions",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/11",
+      "files": [
+        {
+          "path": "src/lib/seo-content.ts",
+          "status": "modified",
+          "additions": 32,
+          "deletions": 0
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Puzzoria : contribution de l'agent autonome",
+      "head": "4aec4c01b61957fc405af3c8640c26018b07d61e",
+      "base": "37aa7654be9393173c4d5c7d3446cc0832bb9818",
+      "branch": "codex/agent-work",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/5",
+      "files": [
+        {
+          "path": "docs/MOBILE-QA.md",
+          "status": "modified",
+          "additions": 2,
+          "deletions": 0
+        },
+        {
+          "path": "e2e/game-dialog-keyboard.spec.ts",
+          "status": "added",
+          "additions": 200,
+          "deletions": 0
+        },
+        {
+          "path": "e2e/invitation-copy.spec.ts",
+          "status": "added",
+          "additions": 48,
+          "deletions": 0
+        },
+        {
+          "path": "e2e/number-room-copy.spec.ts",
+          "status": "added",
+          "additions": 54,
+          "deletions": 0
+        },
+        {
+          "path": "e2e/unmounted-recovery.spec.ts",
+          "status": "added",
+          "additions": 69,
+          "deletions": 0
+        },
+        {
+          "path": "src/app/globals.css",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0
+        },
+        {
+          "path": "src/components/classic-games.tsx",
+          "status": "modified",
+          "additions": 10,
+          "deletions": 4
+        },
+        {
+          "path": "src/components/invitation-actions.tsx",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0
+        },
+        {
+          "path": "src/components/number-room.tsx",
+          "status": "modified",
+          "additions": 16,
+          "deletions": 5
+        },
+        {
+          "path": "src/components/social-game.tsx",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 0
+        },
+        {
+          "path": "src/components/sudoku-game.tsx",
+          "status": "modified",
+          "additions": 16,
+          "deletions": 14
+        },
+        {
+          "path": "src/components/word-game.tsx",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0
+        },
+        {
+          "path": "src/lib/browser-storage.ts",
+          "status": "modified",
+          "additions": 7,
+          "deletions": 1
+        },
+        {
+          "path": "src/lib/live-i18n.ts",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 8
+        },
+        {
+          "path": "src/lib/play-client.ts",
+          "status": "modified",
+          "additions": 67,
+          "deletions": 13
+        },
+        {
+          "path": "src/lib/social-seo.ts",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 8
+        },
+        {
+          "path": "tests/browser-storage.test.ts",
+          "status": "added",
+          "additions": 56,
+          "deletions": 0
+        },
+        {
+          "path": "tests/play-completion.test.ts",
+          "status": "added",
+          "additions": 178,
+          "deletions": 0
+        },
+        {
+          "path": "tests/play-owner-change.test.ts",
+          "status": "added",
+          "additions": 153,
+          "deletions": 0
+        },
+        {
+          "path": "tests/play-restore.test.ts",
+          "status": "added",
+          "additions": 81,
+          "deletions": 0
+        },
+        {
+          "path": "tests/play-start.test.ts",
+          "status": "added",
+          "additions": 53,
+          "deletions": 0
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Prove two independent Codex Plus cloud sessions",
+      "head": "56fbf745ff2f81a43e930cd2b79e58c53685b917",
+      "base": "5fde74183113f6f92f8dc2ba4318df1fa3c0a014",
+      "branch": "codex/autonomy-proof",
+      "draft": true,
+      "url": "https://github.com/Aimericv/puzzoria/pull/2",
+      "files": [
+        {
+          "path": "agent/pilot/evidence/session-1.json",
+          "status": "added",
+          "additions": 50,
+          "deletions": 0
+        },
+        {
+          "path": "agent/pilot/evidence/session-2.json",
+          "status": "added",
+          "additions": 50,
+          "deletions": 0
+        },
+        {
+          "path": "agent/pilot/memory/STATE.json",
+          "status": "added",
+          "additions": 28,
+          "deletions": 0
+        },
+        {
+          "path": "agent/pilot/memory/STATE.md",
+          "status": "added",
+          "additions": 16,
+          "deletions": 0
+        },
+        {
+          "path": "agent/pilot/task/utc-window.mjs",
+          "status": "added",
+          "additions": 23,
+          "deletions": 0
+        },
+        {
+          "path": "agent/pilot/task/utc-window.test.mjs",
+          "status": "added",
+          "additions": 93,
+          "deletions": 0
+        }
+      ]
+    }
+  ]
+}
