@@ -1,0 +1,32 @@
+{
+  "source": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+  "baseline": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+  "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+  "applicationAndBrowserSourcesUnchanged": true,
+  "allowedControllerChanges": [
+    "scripts/autonomy-agent/release-continuity.test.mjs",
+    "scripts/autonomy-agent/release-queue.mjs",
+    "scripts/autonomy-agent/release-selection.mjs"
+  ],
+  "controls": {
+    "tests": 77,
+    "passed": 77,
+    "failed": 0
+  },
+  "lint": true,
+  "bootstrapParseAndDryRun": true,
+  "controller": {
+    "source": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
+    "policyHash": "f827e08a074c002c915feea464309af2f2819939c2ddbea66ec23b64abda9ea1",
+    "typescript": "5.9.3",
+    "productionEnabled": false
+  },
+  "archiveSha256": "08ee5c853ecd5c994af1d397450230cdb14c6e567db26f34eba5cb3b1a7831d4",
+  "pr": {
+    "number": 23,
+    "url": "https://github.com/Aimericv/puzzoria/pull/23"
+  },
+  "productionEnabled": false,
+  "protectedStateChanged": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40554329376"
+}
