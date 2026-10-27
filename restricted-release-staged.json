@@ -1,0 +1,41 @@
+{
+  "main": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
+  "source": "15451511cccdeb573cf224d6082818d39336764b",
+  "pr": {
+    "number": 25,
+    "url": "https://github.com/Aimericv/puzzoria/pull/25"
+  },
+  "controllerRunId": "40576205097",
+  "controllerArtifactId": 12767601981,
+  "controllerArtifactExpires": "2026-11-03T20:15:00Z",
+  "policyHash": "4301afd6d0c5bbe862d31e3915fe94a68b8b369ead9d45fbeb85c161d3326123",
+  "archiveSha256": "30feed5e4eba82280cd1757ab554d7fdbcabeb913c638ba9ba32fb5b1214cc05",
+  "ssh": {
+    "status": "passed",
+    "realSshAuthentication": true,
+    "rootWithSameKeyRejected": true,
+    "passwordAndInteractiveAuthDisabled": true,
+    "readOnlyCheckAllowed": true,
+    "boundedReleaseAllowed": true,
+    "arbitraryCommandsRejected": 7,
+    "forbiddenMarkerAbsent": true,
+    "forwardingRejected": true,
+    "productionContacted": false,
+    "listener": "loopback-only",
+    "temporaryBootstrapPolicyValid": true,
+    "testUserProvisioningNeeded": false
+  },
+  "controls": 77,
+  "unit": 359,
+  "e2e": 424,
+  "applicationUnchanged": true,
+  "hostRollbackModulesUnchanged": true,
+  "validationReservedMinutes": 141,
+  "validationLimit": 180,
+  "stateGeneration": 150,
+  "memoryAndAuthPreserved": true,
+  "ownerFirstActivationAlreadyAuthorized": true,
+  "externalProductionEnabled": false,
+  "vpsContacted": false,
+  "deployRequested": false
+}
