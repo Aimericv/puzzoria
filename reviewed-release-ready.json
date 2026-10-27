@@ -1,0 +1,138 @@
+{
+  "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+  "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+  "base": "24de100089f917e7067c49866c0f073dd98c0686",
+  "applicationValidation": {
+    "head": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+    "base": "24de100089f917e7067c49866c0f073dd98c0686",
+    "tree": "3e266deb80fa217209f6546579819bfc16ac4168",
+    "status": "passed",
+    "network": "none",
+    "credentials": false,
+    "checks": {
+      "isolation": true,
+      "lint": true,
+      "typecheck": true,
+      "content": true,
+      "social": true,
+      "seo": true,
+      "build": true
+    },
+    "unit": {
+      "passed": 359,
+      "failed": 0,
+      "skipped": 0
+    },
+    "e2e": {
+      "desktop": {
+        "passed": 106,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "mobile": {
+        "passed": 106,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "android": {
+        "passed": 106,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "iphone-webkit": {
+        "passed": 106,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    "sourceDigest": "72120ad2435b1089b60d5393a15614dfbe601ebb6c5de54482308060dac76c9d"
+  },
+  "controllerTests": {
+    "tests": 76,
+    "passed": 76,
+    "failed": 0
+  },
+  "unchangedApplicationSources": true,
+  "controllerChanges": [
+    ".github/workflows/autonomy-agent.yml",
+    "scripts/autonomy-agent/deployment-owner-control.mjs",
+    "scripts/autonomy-agent/deployment-owner-control.test.mjs",
+    "scripts/autonomy-agent/release-client.mjs"
+  ],
+  "controller": {
+    "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+    "policyHash": "a325506226b1e29244abef228c2326002dc71b1d0540dc57d3710a78839902cf",
+    "typescript": "5.9.3",
+    "productionEnabled": false
+  },
+  "controllerArtifact": {
+    "runId": "40549513756",
+    "id": 12754542108,
+    "name": "reviewed-puzzoria-controller",
+    "archiveSha256": "6b1dc5f5e34f3e85f923294567c1a3ca4e0c4335e4911b555673090192b60793"
+  },
+  "rollback": {
+    "modulesUnchanged": true,
+    "sourceRun": 40534259927,
+    "fixtures": [
+      {
+        "test": "real-docker-image-rollback",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      },
+      {
+        "test": "real-docker-crashed-app-recovery",
+        "status": "passed",
+        "verifiedBackup": true,
+        "writesRetained": 1,
+        "productionContacted": false
+      }
+    ]
+  },
+  "reviewJobAccounting": [
+    {
+      "runId": "40537512719",
+      "minutes": 7,
+      "source": "completed-review-job-timestamps",
+      "startedAt": "2026-10-27T16:05:49Z",
+      "completedAt": "2026-10-27T16:09:53Z",
+      "settled": true
+    },
+    {
+      "runId": "40539308357",
+      "minutes": 70,
+      "source": "completed-review-job-timestamps",
+      "startedAt": "2026-10-27T16:16:39Z",
+      "completedAt": "2026-10-27T17:24:04Z",
+      "settled": true
+    },
+    {
+      "runId": "40549513756",
+      "minutes": 3,
+      "source": "completed-review-job-timestamps",
+      "startedAt": "2026-10-27T17:19:42Z",
+      "completedAt": "2026-10-27T17:20:27Z",
+      "settled": true
+    }
+  ],
+  "priorMainValidatorMinutes": 38,
+  "validationAllowanceMinutes": 180,
+  "resourceTotal": 118,
+  "duplicateChecksCancelled": [
+    40550976037
+  ],
+  "fullRunPackagingFailureOnly": true,
+  "pr": {
+    "number": 21,
+    "url": "https://github.com/Aimericv/puzzoria/pull/21"
+  },
+  "productionEnabled": false,
+  "protectedStateChanged": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40551501926"
+}
