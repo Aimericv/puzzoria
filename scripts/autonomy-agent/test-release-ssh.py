@@ -129,7 +129,7 @@ try:
     if forwarding.returncode == 0 or 'forward' not in forwarding.stderr.lower():
         raise RuntimeError('Remote forwarding was not rejected')
     phase = 'temporary_bootstrap_policy'
-    bootstrap = call(['/usr/sbin/sshd', '-T', '-p', '2223', '-o', 'PidFile=/run/puzzoria-bootstrap-ssh.pid', '-o', 'PasswordAuthentication=no', '-o', 'KbdInteractiveAuthentication=no', '-o', 'AuthenticationMethods=publickey', '-o', 'PermitRootLogin=prohibit-password', '-o', 'AllowUsers=root', '-o', 'DisableForwarding=yes', '-C', 'user=root,host=localhost,addr=127.0.0.1']).stdout.splitlines()
+    bootstrap = call(['/usr/sbin/sshd', '-T', '-f', '/dev/null', '-p', '2223', '-o', 'HostKey=' + str(folder / 'host'), '-o', 'UsePAM=yes', '-o', 'Subsystem=sftp internal-sftp', '-o', 'PidFile=/run/puzzoria-bootstrap-ssh.pid', '-o', 'PasswordAuthentication=no', '-o', 'KbdInteractiveAuthentication=no', '-o', 'AuthenticationMethods=publickey', '-o', 'PermitRootLogin=prohibit-password', '-o', 'AllowUsers=root', '-o', 'DisableForwarding=yes', '-C', 'user=root,host=localhost,addr=127.0.0.1']).stdout.splitlines()
     for setting in ('port 2223', 'passwordauthentication no', 'kbdinteractiveauthentication no', 'authenticationmethods publickey', 'allowusers root', 'disableforwarding yes'):
         if setting not in bootstrap:
             raise RuntimeError('Unsafe temporary bootstrap SSH setting')
