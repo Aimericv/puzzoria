@@ -248,3 +248,9 @@ même clé autorisée, refus des commandes arbitraires et des tunnels, acceptati
 des seuls `check` et `release` bornés. Elle ne contacte pas le VPS. Les fichiers
 du contrôleur de sauvegarde/rollback restent identiques aux deux fixtures
 Docker déjà validées ; aucun nouvel effet de production n'est revendiqué.
+
+Le banc SSH réutilise le compte non privilégié du runner jetable avec un fichier
+de clés temporaire distinct, au lieu de créer un compte système. La fixture
+substitue uniquement ce nom de compte, le port loopback et les chemins privés
+de test dans la configuration de production ; la règle `AllowUsers` originale
+reste vérifiée avant substitution. Aucun fichier de clés existant n'est écrasé.
