@@ -1,7 +1,7 @@
 import{readFileSync}from'node:fs';
 import{execFileSync}from'node:child_process';
 import{github}from'./autonomy-pilot/github.mjs';
-const source='65ccdbc11a49d3e7a4aa47a202a679455505bd1b',base='d6bbe94a33f73f127e3a58de5a24d06f5b90baa1';
+const source='15451511cccdeb573cf224d6082818d39336764b',base='d6bbe94a33f73f127e3a58de5a24d06f5b90baa1';
 const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),get=async(path,ref)=>JSON.parse(Buffer.from((await api(`/contents/${path}?ref=${encodeURIComponent(ref)}`)).content,'base64'));
 if(process.env.PRODUCTION_FLAG==='true')throw Error('External production switch must stay disabled');
 const paths=execFileSync('git',['diff','--name-only',base,source],{encoding:'utf8'}).trim().split('\n'),allowed=['agent/autonomy/control.json','deploy/install-release-controller.sh','deploy/puzzoria-release-entry.sh','deploy/puzzoria-release-sshd.conf','deploy/puzzoria-release-sshd.service','deploy/setup-release-from-windows.ps1','docs/AUTONOMY-GROWTH.fr.md','scripts/autonomy-agent/package-controller.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/test-release-ssh.py'];
