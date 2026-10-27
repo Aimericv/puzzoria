@@ -89,6 +89,7 @@ test('an initial approved or unconfirmed rollout blocks newer runtime merges unt
  state.growth.pendingDeployment.deploymentFailures=1;assert.equal(deploymentBlocksNewRuntime(state),true);
  state.growth.pendingDeployment.status='deployed';assert.equal(deploymentBlocksNewRuntime(state),false);
  state.growth.pendingDeployment.status='manual_intervention';assert.equal(deploymentBlocksNewRuntime(state),true);
+ state.growth.pendingDeployment.status='awaiting_policy_refresh';assert.equal(deploymentBlocksNewRuntime(state),true);
 });
 test('unconfirmed deployments get bounded delayed retries rather than invented success',()=>{
  const candidate={status:'awaiting_activation'},now=Date.parse('2026-10-27T12:00:00Z');
