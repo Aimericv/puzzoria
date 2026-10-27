@@ -1,5 +1,7 @@
 import{github}from'./autonomy-pilot/github.mjs';
-const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40537512719';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria');
+const candidates=(await api('/actions/runs?branch=codex%2Fci-inspection&per_page=30')).workflow_runs.filter(r=>r.name==='Full review of autonomous releases without activation');
+const runId=String(candidates[0].id);
 const run=await api(`/actions/runs/${runId}`),{jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`),pr=await api('/pulls/21'),main=(await api('/git/ref/heads/main')).object.sha;
 const proof={observedAt:new Date().toISOString(),run:{id:run.id,status:run.status,conclusion:run.conclusion,source:run.head_sha,url:run.html_url},jobs:jobs.map(j=>({name:j.name,status:j.status,conclusion:j.conclusion,steps:j.steps.map(s=>({name:s.name,status:s.status,conclusion:s.conclusion}))})),pr:{number:pr.number,head:pr.head.sha,base:pr.base.sha,merged:pr.merged,draft:pr.draft,url:pr.html_url},main};
 const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'reviewed-growth-observation.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Observe review CI steps without raw logs or mutations of protected state',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/reviewed-growth-observation/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(proof));
