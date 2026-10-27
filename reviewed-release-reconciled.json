@@ -1,0 +1,39 @@
+{
+  "main": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+  "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+  "generationBefore": 146,
+  "generationAfter": 147,
+  "preservedStateHash": "b04f25f2da4504e7897ef15d186f5e028a4117f0e872b7e57b4594c1239cc963",
+  "preservedExperimentCriteriaHash": "e19ae5527dbdbc94e75f341389b1f5cb5bf203bf0bacdfdc837a4dff4b22a606",
+  "prs": [
+    {
+      "prNumber": 11,
+      "status": "awaiting_activation",
+      "originalHead": "2b5e68c1de8145f8d641eeb81e2f7f233a9e3797"
+    },
+    {
+      "prNumber": 15,
+      "status": "awaiting_activation",
+      "originalHead": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364"
+    },
+    {
+      "prNumber": 18,
+      "status": "merged_documentation",
+      "originalHead": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593"
+    },
+    {
+      "prNumber": 19,
+      "status": "merged_documentation",
+      "originalHead": "ef37c973f567bd2241f4542684905c4fa32b5fc6"
+    }
+  ],
+  "validationMinutes": 118,
+  "validationLimit": 180,
+  "pendingDeployment": {
+    "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+    "status": "awaiting_activation",
+    "ownerAuthorizationRequired": true
+  },
+  "productionEnabled": false,
+  "productionAuthorized": false
+}
