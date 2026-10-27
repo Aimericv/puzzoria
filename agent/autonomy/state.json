@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 155,
+  "generation": 156,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2945,14 +2945,28 @@
       }
     },
     {
-      "at": "2026-10-27T21:31:28.004Z",
+      "at": "2026-10-27T21:31:15Z",
       "runId": "40587465644",
       "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
-      "minutes": 6,
+      "minutes": 4,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122482628958,
+        "startedAt": "2026-10-27T21:31:15Z",
+        "completedAt": "2026-10-27T21:32:22Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T21:40:31.951Z",
+      "runId": "40588678094",
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "minutes": 5,
       "settled": false,
       "accounting": {
-        "source": "bounded-final-initial-production-review",
-        "maximumJobMinutes": 4,
+        "source": "bounded-windows-installer-staging-reservation",
+        "maximumJobMinutes": 3,
         "marginMinutes": 2
       }
     }
