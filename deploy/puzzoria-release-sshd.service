@@ -1,0 +1,14 @@
+[Unit]
+Description=Puzzoria restricted deployment SSH listener
+After=network.target ssh.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/sbin/sshd -t -f /etc/puzzoria-release/sshd_config
+ExecStart=/usr/sbin/sshd -D -e -f /etc/puzzoria-release/sshd_config
+KillMode=process
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

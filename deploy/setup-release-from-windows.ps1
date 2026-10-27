@@ -6,6 +6,8 @@ param(
   [string]$PolicyHash,
   [string]$ValidationRunId,
   [string]$ArtifactName = 'reviewed-puzzoria-controller',
+  [ValidateSet(22,2223)]
+  [int]$AdminSshPort = 22,
   [string]$AdminKey = ''
 )
 $ErrorActionPreference = 'Stop'
@@ -35,7 +37,7 @@ $pending = $state.growth.pendingDeployment
 if ($approval.sha -ne $ApprovedCommit -or $approval.policyHash -ne $PolicyHash -or $approval.validationRunId -ne $ValidationRunId -or -not $approval.approvedAt -or $pending.mergeSha -ne $ApprovedCommit -or $pending.ownerApprovedBootstrap -ne $true -or $pending.status -ne 'awaiting_activation') { throw 'Autorisation initiale exacte absente de l''état protégé ; aucune installation.' }
 $controlFile = Read-GitHubJson "repos/$repo/contents/agent/autonomy/control.json?ref=$ApprovedCommit"
 $control = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($controlFile.content)) | ConvertFrom-Json
-if ($control.release.productionAuthorization.policyHash -ne $PolicyHash -or $control.release.target.sshHost -ne '37.27.24.173' -or $control.release.target.sshUser -ne 'puzzoria-release' -or $control.release.target.initialCommit -ne ('0' * 40)) { throw 'La cible ne correspond pas à l''autorisation initiale.' }
+if ($control.release.productionAuthorization.policyHash -ne $PolicyHash -or $control.release.target.sshHost -ne '37.27.24.173' -or $control.release.target.sshUser -ne 'puzzoria-release' -or $control.release.target.sshPort -ne 2222 -or $control.release.target.initialCommit -ne ('0' * 40)) { throw 'La cible ne correspond pas à l''autorisation initiale.' }
 $directory = Join-Path ([IO.Path]::GetTempPath()) ('puzzoria-setup-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $directory | Out-Null
 try {
@@ -52,8 +54,8 @@ try {
   $known = Join-Path $directory 'known_hosts'
   $pinned = $null
   $scanFile = Join-Path $directory 'host-key-scan.txt'
-  $scan = Start-Process -FilePath (Get-Command ssh-keyscan).Source -ArgumentList @('-T','10','-t','ed25519','37.27.24.173') -Wait -PassThru -NoNewWindow -RedirectStandardOutput $scanFile -RedirectStandardError (Join-Path $directory 'host-key-scan.stderr')
-  if ($scan.ExitCode -ne 0) { throw 'Lecture de la clé publique du VPS impossible.' }
+  $scan = Start-Process -FilePath (Get-Command ssh-keyscan).Source -ArgumentList @('-T','10','-p',"$AdminSshPort",'-t','ed25519','37.27.24.173') -Wait -PassThru -NoNewWindow -RedirectStandardOutput $scanFile -RedirectStandardError (Join-Path $directory 'host-key-scan.stderr')
+  if ($scan.ExitCode -ne 0) { throw "Acces SSH administratif au port $AdminSshPort indisponible. Aucune modification du VPS." }
   $keys = Get-Content -LiteralPath $scanFile
   foreach ($line in $keys) {
     if ($line -match '^\S+\s+ssh-ed25519\s+([A-Za-z0-9+/=]+)(?:\s|$)') {
@@ -64,8 +66,11 @@ try {
     }
   }
   if (-not $pinned) { throw 'Empreinte SSH du VPS différente de celle confirmée par le propriétaire.' }
-  [IO.File]::WriteAllText($known, "37.27.24.173 ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
-  $sshOptions = @('-i',$AdminKey,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$known",'-o','ConnectTimeout=15')
+  $adminKnownHost = if ($AdminSshPort -eq 22) { '37.27.24.173' } else { "[37.27.24.173]:$AdminSshPort" }
+  [IO.File]::WriteAllText($known, "$adminKnownHost ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
+  $transportOptions = @('-i',$AdminKey,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$known",'-o','ConnectTimeout=15')
+  $sshOptions = $transportOptions + @('-p',"$AdminSshPort")
+  $scpOptions = $transportOptions + @('-P',"$AdminSshPort")
   # Metadata only: do not print or copy either existing environment file.
   $environmentFile = (& ssh @sshOptions 'root@37.27.24.173' 'if test -f /opt/puzzoria/.env.docker; then echo /opt/puzzoria/.env.docker; elif test -f /opt/puzzoria/.env; then echo /opt/puzzoria/.env; else exit 1; fi') -join ''
   Assert-Native 'précontrôle du fichier de configuration existant'
@@ -87,14 +92,21 @@ try {
   $remote = '/tmp/puzzoria-release-install-' + [Guid]::NewGuid().ToString('N')
   & ssh @sshOptions 'root@37.27.24.173' "install -d -m 0700 '$remote'"
   Assert-Native 'création du dossier temporaire privé sur le VPS'
-  & scp @sshOptions $archive (Join-Path $directory 'host-config.json') (Join-Path $directory 'deploy.pub') "root@37.27.24.173:$remote/"
+  & scp @scpOptions $archive (Join-Path $directory 'host-config.json') (Join-Path $directory 'deploy.pub') "root@37.27.24.173:$remote/"
   Assert-Native 'copie du paquet contrôleur et de la seule clé publique'
   & ssh @sshOptions 'root@37.27.24.173' "tar -xzf '$remote/puzzoria-controller.tar.gz' -C '$remote' && bash '$remote/install-release-controller.sh' --apply '$remote/host-config.json' '$remote/deploy.pub'"
   Assert-Native 'installation du contrôleur restreint, sans remplacement de l''application'
+  $deployKnown = Join-Path $directory 'deploy_known_hosts'
+  [IO.File]::WriteAllText($deployKnown, "[37.27.24.173]:2222 ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
+  $checkOptions = @('-i',$deployKey,'-p','2222','-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$deployKnown",'-o','PasswordAuthentication=no','-o','BatchMode=yes','-o','ConnectTimeout=15')
+  $hostCheck = (& ssh @checkOptions 'puzzoria-release@37.27.24.173' 'check') -join "`n"
+  Assert-Native 'verification du port restreint 2222 et du controleur installe'
+  $checked = $hostCheck | ConvertFrom-Json
+  if ($checked.productionChanged -ne $false -or $checked.state.phase -ne 'healthy' -or $checked.state.currentCommit -ne ('0' * 40)) { throw 'Etat initial du controleur non confirme ; aucune activation.' }
   # Private key travels only over gh stdin into a repository secret, never as argv or to the VPS.
   Get-Content -Raw -LiteralPath $deployKey | & gh secret set PUZZORIA_DEPLOY_KEY --repo $repo
   Assert-Native 'enregistrement sécurisé de la clé distincte dans GitHub'
-  Get-Content -Raw -LiteralPath $known | & gh secret set PUZZORIA_DEPLOY_KNOWN_HOSTS --repo $repo
+  Get-Content -Raw -LiteralPath $deployKnown | & gh secret set PUZZORIA_DEPLOY_KNOWN_HOSTS --repo $repo
   Assert-Native 'enregistrement de l''empreinte SSH vérifiée'
   if ($Activate) {
     & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body true
