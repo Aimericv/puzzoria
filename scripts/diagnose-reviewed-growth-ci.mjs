@@ -1,0 +1,14 @@
+import{github}from'./autonomy-pilot/github.mjs';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),runId='40537512719',run=await api(`/actions/runs/${runId}`);
+if(run.status!=='completed')throw Error('Completed review run required; never inspect live logs');
+const{jobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`),job=jobs.find(j=>j.name==='validate'&&j.status==='completed'&&j.conclusion==='failure');
+const proof={runId,status:run.status,conclusion:run.conclusion,categories:[],locations:[],phases:[]};
+if(job){
+ const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${job.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});if(!response.ok)throw Error('Completed diagnostic unavailable');const log=await response.text();if(log.length>8388608)throw Error('Unexpected diagnostic size');
+ const categories={module_not_found:/Cannot find module|Cannot find package|ERR_MODULE_NOT_FOUND/,unsupported_directory_import:/ERR_UNSUPPORTED_DIR_IMPORT/,syntax_error:/SyntaxError:/,esm_export_error:/does not provide an export named|Named export .*not found/,server_only_import:/cannot be imported from a Client Component|server-only/,browser_global_error:/Browser runner reported global errors/,count_assertion:/Error: expect\(locator\)\.toHaveCount/,text_assertion:/Error: expect\(locator\)\.toHaveText/,test_timeout:/Test timeout of|Test ended while|TimeoutError/,missing_runtime:/Executable doesn't exist|executable doesn't exist/,disk_full:/ENOSPC/,permission_denied:/EACCES|Permission denied/,npm_failure:/npm ERR!|npm error/};
+ proof.categories=Object.entries(categories).filter(([,r])=>r.test(log)).map(([n])=>n);
+ proof.locations=[...log.matchAll(/((?:e2e|src)\/[a-zA-Z0-9_/[\]-]+\.(?:ts|tsx)):(\d+):(\d+)/g)].map(m=>({file:m[1],line:Number(m[2]),column:Number(m[3])}));
+ proof.phases=[...log.matchAll(/Isolated release validation: (isolation|lint|typecheck|content|social|seo|build|unit|browser (?:desktop|mobile|android|iphone-webkit) (?:preflight|full|conditional))/g)].map(m=>m[1]);
+ proof.knownImports=['next/headers','next/navigation','server-only'].filter(s=>log.includes(s));
+}
+const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'reviewed-growth-diagnostic.json',mode:'100644',type:'blob',content:JSON.stringify(proof,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record only static completed-CI fault categories and source locations, no raw logs',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/reviewed-growth-diagnostic/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(proof));
