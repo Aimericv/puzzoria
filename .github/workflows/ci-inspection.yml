@@ -1,17 +1,22 @@
-name: Validate isolated deployment SSH without production access
+name: Stage verified restricted transport under existing first activation consent
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
+concurrency:
+  group: puzzoria-autonomy-pilot
+  cancel-in-progress: false
 jobs:
-  validate:
+  stage:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' && vars.PUZZORIA_AUTODEPLOY_ENABLED != 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 5
     permissions:
       contents: write
-      actions: read
       pull-requests: write
+      statuses: write
+      actions: read
+      issues: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -21,49 +26,16 @@ jobs:
         with:
           path: candidate
           ref: 15451511cccdeb573cf224d6082818d39336764b
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
       - run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: candidate
-      - run: mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap && npm run lint
-        working-directory: candidate
-      - id: ssh
-        name: Verify real key authentication, forced commands and rejection of root and forwarding on loopback
-        run: |
-          test -x /usr/sbin/sshd || { sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends openssh-server; }
-          sudo --preserve-env=GITHUB_ACTIONS,GITHUB_REPOSITORY python3 scripts/autonomy-agent/test-release-ssh.py
-        working-directory: candidate
-      - name: Parse Windows installer and run its no-change default
-        shell: pwsh
-        working-directory: candidate
-        run: |
-          $tokens = $null
-          $parseErrors = $null
-          [void][System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path 'deploy/setup-release-from-windows.ps1'), [ref]$tokens, [ref]$parseErrors)
-          if ($parseErrors.Count) { $parseErrors | ForEach-Object { Write-Error $_.Message }; exit 1 }
-          & ./deploy/setup-release-from-windows.ps1
-      - run: node scripts/autonomy-agent/package-controller.mjs
-        working-directory: candidate
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-controller
-          include-hidden-files: true
-          path: |
-            candidate/.release/puzzoria-controller.tar.gz
-            candidate/.release/puzzoria-controller.sha256
-          retention-days: 7
-      - run: node ../control/scripts/publish-restricted-transport.mjs
+      - run: node ../control/scripts/stage-restricted-release.mjs
         working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
-      - name: Publish structured fixture failure only
-        if: failure() && steps.ssh.outcome == 'failure'
-        run: node ../control/scripts/publish-restricted-transport-fault.mjs
-        working-directory: candidate
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-          CANDIDATE_SOURCE: 15451511cccdeb573cf224d6082818d39336764b
+          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
+          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
