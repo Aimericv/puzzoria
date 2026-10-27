@@ -221,7 +221,7 @@ jobs:
 
   production:
     needs: production-gate
-    if: always() && needs.production-gate.result == 'success' && needs.production-gate.outputs.allowed == 'true' && github.ref == 'refs/heads/main' && github.repository == 'Aimericv/puzzoria'
+    if: always() && !cancelled() && needs.production-gate.result == 'success' && needs.production-gate.outputs.allowed == 'true' && github.ref == 'refs/heads/main' && github.repository == 'Aimericv/puzzoria'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
