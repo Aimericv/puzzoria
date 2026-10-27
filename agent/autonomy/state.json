@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 135,
+  "generation": 136,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
   "checkpoint": {
-    "artifactId": 12694643728,
-    "runId": "40414606922",
-    "name": "puzzoria-agent-auth-40414606922-23",
-    "generation": 23,
+    "artifactId": 12711912225,
+    "runId": "40453920004",
+    "name": "puzzoria-agent-auth-40453920004-24",
+    "generation": 24,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40414606922",
+      "runId": "40453920004",
       "phase": "autonomous-agent",
-      "generation": 23
+      "generation": 24
     },
-    "expiresAt": "2027-01-24T22:43:27Z",
-    "digest": "a87ffe6e1c0a98406b228fa309599550aecb993208fb926f7155a548ac67f7b0"
+    "expiresAt": "2027-01-25T05:11:43Z",
+    "digest": "c69caaa3914c1c44dd944652fb3bc78afc0db07b6ced15515cc4d605a5a3d290"
   },
   "lastMessageId": 6430231613,
   "completedSessions": 21,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40414606922",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40414606922"
+    "id": "40453920004",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40453920004"
   },
   "memory": {
     "STATE.md": "# État — 26 octobre 2026 — source 692ddc9c\n\nSource annoncée : 692ddc9c815940e6df3df0287dcd3aceb7530b05. AGENTS.md, mandat, INBOX vide et mémoire lus depuis le disque ; contexte, tendances, analytics et Search Console readonly consultés. Guide Next Linking and Navigating lu. Aucun accès Git ni réseau externe, achat, merge ou déploiement.\n\nDécision : expérience SEO published-vocabulary-discovery. Le guide Mot insolite ne permettait pas de découvrir les fiches existantes, accessibles après résultat et entre articles et présentes au sitemap. Les jeux sont déjà maillés dans la navigation : pas de duplication de cette liste. Ajout dans GameGuide d’une section listant toutes les fiches déjà publiques de la langue (huit actuellement), avec libellés descriptifs et introduction EN/FR/ES/DE. Réutilisation de publishedWordArticles et wordArticlePath : aucun nouveau routage, aucune URL paramétrée ni changement de date de publication, autorisation ou preuve serveur. Pas de nouvelles réponses ou définitions générées. Le guide classique reste inchangé ; la source fournie ne contient pas les ajouts de la PR précédente.\n\nContexte collecté à 22:59:08.849Z, observation 267259312775e58d5555e5f8979fbcdcc801efe841e7491c7c075cac7122dade : PR 11 word-guide-worked-deductions proposée, awaiting_verified_deployment. unverifiedWork et lastFailure null. Aucun effet de cette PR revendiqué, aucun critère ancien réécrit.\n\nSearch Console available, collecte 2026-10-26T22:59:05.368Z. 30 jours demandés 26 septembre–25 octobre, dernière date rapportée 24 octobre, fuseau America/Los_Angeles, données finales : 6 clics/177 impressions ; 7 jours 19–25 octobre : 1/62 ; 90 jours : 6/177. Totaux séparés, lignes partielles non additives ; /es/palabra 29 impressions et /fr/mots-meles 13 sans clic, sans jointure page/requête. Clics Google distincts des personnes et visites. Aucun défaut de conversion mesuré ni demande de fiches démontrée ; contribution fondée sur un manque de chemin public établi dans le code.\n\nAnalytics available collecté à 22:59:04.106Z : 7 jours 20–26 octobre, une identité compte/appareil, un départ/une fin, aucune session de visite consentie mesurée. 30 jours 27 septembre–26 octobre et 90 jours 29 juillet–26 octobre : six identités, 20 départs, 18 fins, trois sessions mesurées. Jour courant partiel, mesure de visites facultative, identités distinctes de personnes uniques. D+7 mature 5/retours 0 sur 30 jours ; D+30 mature 0/pourcentage null. Pas de preuve de gain ou de frein de rétention. Trends collecté à 22:59:07.749Z : actualités/sport, pas de demande pertinente établie ; TikTok indisponible, jamais assimilé à zéro popularité.\n\nProtocole : google.impressions, 30 jours complets finalisés après déploiement confirmé, référence de même unité/fuseau calculée par le superviseur, minimum 100 impressions dans chacune des fenêtres, seuil exploratoire +20 %. Sinon inconclusif. Analyse globale descriptive avant/après, sans causalité ou attribution exclusive. Examiner secondairement les lignes des fiches sans les additionner comme totaux. Aucun champ baseline/date de publication propre ajouté.\n\nVérifications : tests ciblés game-guide/word-articles/seo 43/43, code 0. Huit nouveaux cas de rendu HTML serveur vérifient les quatre langues, la frontière UTC de publication, les huit liens stables sans query et leur absence dans Word/Sudoku. Lint et typecheck code 0 ; validation contenu via node --import tsx scripts/validate-content.ts code 0 (92 défis, 32 articles). Suite générale npm test -- --configLoader=runner : 358/359 tests réussis, 27/28 fichiers, code 1 ; seul operations.test.ts:55 dépasse 5000 ms (5010 ms observées). Ce délai est déjà consigné dans les sessions antérieures ; cause non établie, aucun test ni délai modifié. Build et serveurs E2E réservés au superviseur ; aucun rendu navigateur ou appareil physique vérifié.\n\nFichiers applicatifs : src/components/game-guide.tsx, src/lib/word-article-i18n.ts ; tests/game-guide.test.ts. Quatre mémoires mises à jour, nonce conservé. Aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié.\n\nProchaine mission : examiner le parcours entrée Google → premier démarrage sur les pages Word/Mots mêlés à partir du rendu serveur et des preuves superviseur ; ne pas empiler de retouches éditoriales sans frein établi.\n",
