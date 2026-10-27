@@ -85,12 +85,16 @@ export function safeSectionInsertions(before,after) {
     return added>0&&added<=16&&characters<=32000;
   }catch{return false;}
 }
+export function editorialDocumentation(path) {
+  return /^docs\/(?:[a-zA-Z0-9_-]+\/)*[a-zA-Z0-9_-]+(?:\.[a-zA-Z0-9_-]+)*\.md$/.test(path)&&!/(?:AUTONOMY|CLOUD-HANDOFF|SECURITY|RETENTION|PREPRODUCTION|SEARCH-CONSOLE|ANALYTICS)/i.test(path);
+}
+export const releaseSourceEligible=path=>COPY_FILES.has(path)||editorialDocumentation(path);
 export function classifyRelease(files) {
   if(!Array.isArray(files)||files.length===0||files.length>30)return {risk:'manual',reason:'empty_or_large_change'};
   let runtime=false;
   for(const file of files) {
     if(file.mode&&file.mode!=='100644'||file.deleted||typeof file.after!=='string'||Buffer.byteLength(file.after)>262144)return {risk:'manual',reason:'deletion_link_or_large_file'};
-    if(/^docs\/[a-zA-Z0-9/_-]+\.md$/.test(file.path)&&!/(?:AUTONOMY|CLOUD-HANDOFF|SECURITY|RETENTION|PREPRODUCTION|SEARCH-CONSOLE|ANALYTICS)/i.test(file.path))continue;
+    if(editorialDocumentation(file.path))continue;
     if(!COPY_FILES.has(file.path)||typeof file.before!=='string'||!(safeCopyEdit(file.before,file.after)||(file.path==='src/lib/seo-content.ts'&&safeSectionInsertions(file.before,file.after))))return {risk:'manual',reason:`review_required:${file.path}`};
     runtime=true;
   }

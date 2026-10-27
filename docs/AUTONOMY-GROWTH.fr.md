@@ -87,10 +87,15 @@ Les traces, captures et bases de test ne sont pas publiées.
 
 Le SHA de PR, la base main et l'arbre Git doivent être exactement ceux testés.
 La mise à jour de main n'est jamais forcée : une modification concurrente
-arrête la tentative. Aucun auto-merge différé n'est armé. La politique réserve
-au plus 180 minutes de validation sur sept jours, 90 par tentative, avant
-d'allouer le vérificateur complet. C'est une borne de ressources, pas une
-roadmap ni une garantie sur les minutes partagées avec d'autres dépôts.
+arrête la tentative. Aucun auto-merge différé n'est armé. Le plafond interne reste de 180 minutes de validation sur sept jours. Avant
+allocation, le superviseur réserve le délai maximal du job (90 minutes pour
+l'application, 5 pour la documentation), plus deux minutes de marge. Après
+terminaison, seules les métadonnées GitHub du job exact, terminé sur le workflow
+main attendu et la bonne tentative, permettent de remplacer la réservation par
+sa durée arrondie à la minute supérieure, plus la même marge. Une exécution en
+cours, une reprise ambiguë, des dates invalides ou une API indisponible gardent
+la réservation entière. Ce calcul ne mesure pas le quota partagé du compte
+GitHub et ne crée ni budget à 0 € ni droit à des minutes payantes.
 
 Le transfert vers la CI relit le reçu protégé après la session et transmet
 uniquement un booléen entre les jobs. L'entrée `validate-pending` du workflow
@@ -98,7 +103,24 @@ permet de reprendre les contrôles d'une proposition déjà vérifiée sans nouv
 inférence ni secret Plus. La boîte de réception est relue auparavant ; pause,
 consignes non traitées, état bloqué ou base main périmée empêchent la reprise.
 Une attente du quota du modèle n'autorise aucune nouvelle inférence, mais peut
-laisser terminer cette validation gratuite dans son budget GitHub distinct.
+laisser terminer cette validation dans son plafond de ressources distinct.
+
+Les publications vérifiées entrent dans une file protégée ; un nouveau réveil
+ne remplace plus les propositions précédentes. La documentation produit traduite
+(`.fr.md`, etc.) est admissible, tandis que les documents de sécurité,
+confidentialité et politique restent soumis à revue. Une proposition ordinaire
+sur une ancienne base peut recevoir automatiquement main uniquement si sa
+branche n'a pas changé, sans conflit : les parents de la fusion, son nouveau
+delta complet puis les tests sur son SHA exact sont contrôlés à nouveau.
+Un conflit, une tête de branche inattendue ou un delta devenu sensible impose
+une revue. Après une fusion réussie, une continuation de validation sans modèle
+peut traiter la proposition suivante. Les échecs et attentes de ressources
+arrêtent cette chaîne et sont signalés dans le ticket #3.
+
+La publication en attente de déploiement est conservée séparément dans
+`growth.pendingDeployment`. Les sessions de développement suivantes ne peuvent
+pas remplacer ce reçu par une nouvelle proposition. Le verrou initial de
+production, la clé SSH distincte et les contrôles du VPS restent exigés.
 
 ## Déploiement préparé, activation séparée
 

@@ -1,3 +1,4 @@
+import {pendingDeployment} from "./release-queue.mjs";
 import {readFileSync,writeFileSync,mkdtempSync,rmSync,openSync,closeSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -9,11 +10,11 @@ import {StateStore} from './store.mjs';
 import {assertFunding,REPOSITORY} from './policy.mjs';
 export function releasePolicyHash() {
   const files=['scripts/autonomy-agent/release-policy.mjs','scripts/autonomy-agent/release-controller.mjs','scripts/autonomy-agent/release-host.mjs','scripts/autonomy-agent/deployment-transaction.mjs','scripts/autonomy-agent/public-probe.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/release-check.mjs','scripts/autonomy-agent/release-validation.mjs','.github/containers/release-verifier.Dockerfile','.github/workflows/autonomy-agent.yml','.github/actions/puzzoria-agent/action.yml','deploy/puzzoria-release-entry.sh','deploy/install-release-controller.sh','deploy/puzzoria-release-recover.service','deploy/puzzoria-release-recover.timer','package-lock.json'];
-  files.push('scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs');
+  files.push('scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs');
   return createHash('sha256').update(files.map(file=>file+'\n'+readFileSync(file,'utf8')).join('\n')).digest('hex');
 }
 export function pendingDeploymentAllowed(control,state) {
-  const pending=state?.growth?.releaseCandidate;
+  const pending=pendingDeployment(state);
   const previous=state?.growth?.lastDeployedCommit??control.release.target.initialCommit;
   const approval=state?.growth?.productionBootstrapApproval;
   return /^[a-f0-9]{40}$/.test(previous??'')&&pending?.status==='awaiting_activation'&&
@@ -28,14 +29,14 @@ export async function run(mode=process.argv[2]) {
   if(mode==='gate'){
     let state;
     if(allowed){const api=github(process.env.GITHUB_TOKEN,REPOSITORY);state=await new StateStore(api,control,process.env.GITHUB_SHA).load();}
-    const pending=state?.growth?.releaseCandidate;
+    const pending=pendingDeployment(state);
     const admitted=allowed&&pendingDeploymentAllowed(control,state);
     if(process.env.GITHUB_OUTPUT)writeFileSync(process.env.GITHUB_OUTPUT,`allowed=${Boolean(admitted)}\nsha=${admitted?pending.mergeSha:''}\n`,{flag:'a'});console.log(JSON.stringify({productionAllowed:Boolean(admitted),policyHash:releasePolicyHash()}));return;
   }
   if(mode!=='deploy'||!allowed)throw Error('Production activation is not approved for this policy and target');
   if(process.env.GITHUB_REPOSITORY!==REPOSITORY||process.env.GITHUB_REF!=='refs/heads/main')throw Error('Production requires trusted main context');
   const api=github(process.env.GITHUB_TOKEN,REPOSITORY),store=new StateStore(api,control,process.env.GITHUB_SHA),state=await store.load();
-  const candidate=state.growth?.releaseCandidate,sha=process.env.RELEASE_SHA;
+  const candidate=pendingDeployment(state),sha=process.env.RELEASE_SHA;
   if(!candidate||candidate.mergeSha!==sha||candidate.status!=='awaiting_activation'||!/^[a-f0-9]{40}$/.test(sha??''))throw Error('No exact tested merge is waiting for deployment');
   const expected=state.growth.lastDeployedCommit??control.release.target.initialCommit;
   if(!/^[a-f0-9]{40}$/.test(expected))throw Error('An attested previous production commit is required');
@@ -70,6 +71,7 @@ export async function run(mode=process.argv[2]) {
       (receipt.phase==='healthy'&&(receipt.currentCommit!==sha||!Number.isFinite(Date.parse(receipt.releasedAt)))))throw Error('Deployment receipt does not identify a verified rollout');
     if(receipt.phase==='healthy'&&result.status!==0)throw Error('SSH did not confirm successful rollout completion');
     candidate.status=receipt.phase==='healthy'?'deployed':'rolled_back';
+    const queued=state.growth.releaseQueue?.find(row=>row.prNumber===candidate.prNumber&&row.sha===candidate.sha);if(queued)queued.status=candidate.status;
     const deployment={status:candidate.status,sha,releasedAt:receipt.releasedAt??null,finishedAt:receipt.finishedAt,previousCommit:expected};
     if(experiment)experiment.deployment=deployment;
     if(candidate.status==='deployed')for(const row of state.growth.experiments)if(row!==experiment&&row.mergeSha&&!row.deployment?.releasedAt){const comparison=await api(`/compare/${row.mergeSha}...${sha}`);if(['ahead','identical'].includes(comparison.status))row.deployment={...deployment,sharedRollout:true};}
