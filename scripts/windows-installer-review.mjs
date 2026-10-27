@@ -1,0 +1,36 @@
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {github} from './autonomy-pilot/github.mjs';
+const source='684d86c654e9b606181b5dca7cd87d153587d4b9',base='32c2e4b043c819a5326ec6e2d9ab856e9297512e';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),load=p=>import(pathToFileURL(resolve(p)));
+const {StateStore}=await load('scripts/autonomy-agent/store.mjs');
+const control=JSON.parse(readFileSync('agent/autonomy/control.json'));
+if(process.env.PRODUCTION_FLAG==='true'||process.env.FREE_FLAG!=='true'||process.env.AGENT_FLAG!=='true'||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==source)throw Error('Exact source, free funding and disabled production required');
+const store=new StateStore(api,control,base),state=await store.load();
+if(state.growth.lastDeployedCommit||state.growth.productionBootstrapApproval?.sha!==base||state.growth.pendingDeployment?.mergeSha!==base||state.growth.pendingDeployment?.status!=='awaiting_activation')throw Error('Preserve any newer production state');
+if(process.argv[2]==='reserve'){
+ const used=state.releaseValidationHistory.reduce((n,r)=>n+r.minutes,0);
+ if(used+12+7>180)throw Error('Unchanged validation allowance insufficient');
+ state.releaseValidationHistory.push({at:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID,sha:source,minutes:12,settled:false,accounting:{source:'bounded-windows-installer-review-reservation',maximumJobMinutes:10,marginMinutes:2}});
+ await store.save('Reserve bounded Windows installer validation without changing activation, memory or authentication');
+ console.log(JSON.stringify({reservedMinutes:12,totalReservedMinutes:used+12,limit:180,productionEnabled:false}));
+}else if(process.argv[2]==='publish'){
+ const allowed=['agent/autonomy/control.json','deploy/setup-release-from-windows.ps1','docs/AUTONOMY-GROWTH.fr.md','scripts/autonomy-agent/test-windows-host-key.ps1'];
+ const paths=execFileSync('git',['diff','--name-only',base,source],{encoding:'utf8'}).trim().split('\n');
+ if(JSON.stringify(paths)!==JSON.stringify(allowed))throw Error('Only Windows helper, policy receipt and documentation may change');
+ const tap=readFileSync('.ci-results/control.tap','utf8');
+ if(!/^# tests 77$/m.test(tap)||!/^# pass 77$/m.test(tap)||!/^# fail 0$/m.test(tap))throw Error('77 controls required');
+ const windows=JSON.parse(readFileSync('.ci-results/windows-host-key.json')),manifest=JSON.parse(readFileSync('.release/controller/VALIDATION.json'));
+ const {releasePolicyHash}=await load('scripts/autonomy-agent/release-client.mjs');
+ if(windows.passed!==7||windows.failed||!windows.strictKnownHosts||!windows.independentFingerprint||!windows.publicKeyOnly||windows.sshKeyscanRequired||windows.productionContacted||manifest.source!==source||manifest.policyHash!==releasePolicyHash()||manifest.policyHash!==control.release.productionAuthorization.policyHash)throw Error('Strict verified SSH and exact package required');
+ const oldFile=await api('/contents/restricted-release-staged.json?ref=codex/restricted-release-staged/40576971865'),old=JSON.parse(Buffer.from(oldFile.content,'base64'));
+ if(old.main!==base||old.unit!==359||old.e2e!==424||old.ssh.status!=='passed'||!old.hostRollbackModulesUnchanged)throw Error('Existing transport and application proof required');
+ const url=`https://github.com/Aimericv/puzzoria/actions/runs/${process.env.GITHUB_RUN_ID}`;
+ const existing=(await api('/pulls?state=all&head=Aimericv:codex/windows-host-key'))[0];
+ const pr=existing??await api('/pulls','POST',{head:'codex/windows-host-key',base:'main',draft:true,title:'Lire la clé publique du VPS via la connexion SSH Windows vérifiée',body:`Sous Windows, ssh-keyscan s’arrête après KEXINIT alors que la connexion administrative normale retourne SSH_OK. L’installateur réutilise désormais cette connexion avec StrictHostKeyChecking=yes, sans mot de passe ni authentification interactive, puis vérifie toujours l’empreinte ED25519 approuvée indépendamment. Aucun accès VPS depuis les tests, aucune modification des contrôleurs ou du code applicatif.\n\nValidation : 77 contrôles, lint, analyse et exécution PowerShell ; 7 cas acceptent uniquement la clé publique attendue et refusent clé incorrecte, lecture échouée, contenu vide, autre algorithme ou base64 invalide. Les preuves existantes de 359 tests unitaires, 424 cas Playwright, SSH restreint et rollback restent applicables car leurs sources sont inchangées. [Validation](${url}).`});
+ const report={source,base,paths,controls:77,windows,powerShellParseAndDryRun:true,lint:true,policyHash:releasePolicyHash(),archiveSha256:readFileSync('.release/puzzoria-controller.sha256','utf8').trim().split(/\s+/)[0],controllerSource:manifest.source,unit:359,e2e:424,applicationUnchanged:true,hostRollbackModulesUnchanged:true,realSshProofRun:'40576205097',ssh:old.ssh,externalProductionEnabled:false,vpsContacted:false,pr:{number:pr.number,url:pr.html_url},url};
+ const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'windows-installer-review.json',mode:'100644',type:'blob',content:JSON.stringify(report,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record verified Windows host key reader, negative security cases and unchanged production controller',tree:tree.sha,parents:[parent]});
+ await api('/git/refs','POST',{ref:`refs/heads/codex/windows-installer-review/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(report));
+}else throw Error('Explicit review phase required');
