@@ -1,0 +1,88 @@
+{
+  "targetHead": "7a6c7416fc14472fcecca8170dc5dd64e9864c9a",
+  "runs": [
+    {
+      "id": 40560728749,
+      "url": "https://github.com/Aimericv/puzzoria/actions/runs/40560728749",
+      "status": "completed",
+      "conclusion": "failure",
+      "createdAt": "2026-10-27T18:31:11Z",
+      "updatedAt": "2026-10-27T18:31:50Z",
+      "jobs": [
+        {
+          "id": 122388699077,
+          "name": "record",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/config-control.tap",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run node ../control/scripts/prepare-first-production.mjs",
+              "status": "completed",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "main": "3e743001df87694f42a40d48e55c98d858829053",
+  "prs": [
+    {
+      "number": 24,
+      "state": "open",
+      "mergedAt": null,
+      "head": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
+      "url": "https://github.com/Aimericv/puzzoria/pull/24"
+    }
+  ]
+}
