@@ -1,27 +1,127 @@
-name: Observe the owner-dispatched first production rollout
+name: Verify native skipped-job rollout and initial policy refresh
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
+concurrency:
+  group: puzzoria-autonomy-pilot
+  cancel-in-progress: false
 jobs:
-  observe:
+  reserve:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
     permissions:
       contents: write
-      actions: read
-      issues: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: ab8de8936b20065134f6405ca11fb405ca3d1de4
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/observe-first-production.mjs
+      - run: node ../control/scripts/initial-production-review.mjs reserve
+        working-directory: candidate
+        env: &review-env
+          GITHUB_TOKEN: ${{ github.token }}
+          PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
+          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
+          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
+  skipped-session:
+    if: false
+    runs-on: ubuntu-24.04
+    steps:
+      - run: 'true'
+  gate:
+    needs: [reserve, skipped-session]
+    if: always() && needs.reserve.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    outputs:
+      allowed: ${{ steps.gate.outputs.allowed }}
+      denied: ${{ steps.gate.outputs.denied }}
+    steps:
+      - id: gate
+        run: |
+          echo 'allowed=true' >> "$GITHUB_OUTPUT"
+          echo 'denied=false' >> "$GITHUB_OUTPUT"
+  original:
+    needs: gate
+    if: needs.gate.outputs.allowed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: 'true'
+  fixed:
+    needs: gate
+    if: always() && needs.gate.result == 'success' && needs.gate.outputs.allowed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: 'true'
+  denied:
+    needs: gate
+    if: always() && needs.gate.result == 'success' && needs.gate.outputs.denied == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - run: 'true'
+  validate:
+    needs: [reserve, gate, original, fixed, denied]
+    if: always() && needs.reserve.result == 'success' && needs.gate.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: ab8de8936b20065134f6405ca11fb405ca3d1de4
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: candidate
+      - run: mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap && npm run lint && bash -n deploy/install-release-controller.sh
+        working-directory: candidate
+      - name: Verify PowerShell parser, no-change default, strict host key and concurrent state guards
+        shell: pwsh
+        working-directory: candidate
+        run: |
+          & ./scripts/autonomy-agent/test-windows-host-key.ps1
+          & ./deploy/setup-release-from-windows.ps1
+      - run: node scripts/autonomy-agent/package-controller.mjs
+        working-directory: candidate
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reviewed-puzzoria-controller
+          include-hidden-files: true
+          path: |
+            candidate/.release/puzzoria-controller.tar.gz
+            candidate/.release/puzzoria-controller.sha256
+          retention-days: 7
+      - run: node ../control/scripts/initial-production-review.mjs publish
+        working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
-          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
           FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
+          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
+          OLD_JOB: ${{ needs.original.result }}
+          FIXED_JOB: ${{ needs.fixed.result }}
+          DENIED_JOB: ${{ needs.denied.result }}
