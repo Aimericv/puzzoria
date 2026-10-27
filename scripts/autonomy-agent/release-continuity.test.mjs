@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {reconcileValidationReservations,validationReservation,validationBudgetAvailable} from './release-budget.mjs';
-import {rememberReleaseCandidate,validationCandidates,pendingDeployment,ensureReleaseQueue} from './release-queue.mjs';
+import {rememberReleaseCandidate,validationCandidates,pendingDeployment,ensureReleaseQueue,deploymentBlocksNewRuntime,recordDeploymentFailure} from './release-queue.mjs';
 import {selectReleaseCandidate} from './release-selection.mjs';
 import {classifyRelease} from './release-policy.mjs';
 const now=Date.parse('2026-10-27T12:00:00Z');
@@ -79,4 +80,23 @@ test('archived or changed experiments cannot reach a mutation or validation allo
  const f=selectionFixture();f.state.growth.experiments=[];
  assert.equal(await selectReleaseCandidate(f.api,f.state,f.main),null);assert.equal(f.calls.length,0);
  assert.equal(f.state.growth.releaseQueue[0].reason,'unknown_or_changed_experiment');
+});
+
+test('an initial approved or unconfirmed rollout blocks newer runtime merges until confirmation',()=>{
+ const state={growth:{pendingDeployment:{status:'awaiting_activation',ownerApprovedBootstrap:true,mergeSha:'a'.repeat(40)}}};
+ assert.equal(deploymentBlocksNewRuntime(state),true);
+ state.growth.lastDeployedCommit='b'.repeat(40);assert.equal(deploymentBlocksNewRuntime(state),false);
+ state.growth.pendingDeployment.deploymentFailures=1;assert.equal(deploymentBlocksNewRuntime(state),true);
+ state.growth.pendingDeployment.status='deployed';assert.equal(deploymentBlocksNewRuntime(state),false);
+ state.growth.pendingDeployment.status='manual_intervention';assert.equal(deploymentBlocksNewRuntime(state),true);
+});
+test('unconfirmed deployments get bounded delayed retries rather than invented success',()=>{
+ const candidate={status:'awaiting_activation'},now=Date.parse('2026-10-27T12:00:00Z');
+ recordDeploymentFailure(candidate,now);assert.equal(candidate.status,'awaiting_activation');assert.equal(candidate.nextDeploymentAttemptAt,'2026-10-27T18:00:00.000Z');
+ recordDeploymentFailure(candidate,now);recordDeploymentFailure(candidate,now);assert.equal(candidate.status,'manual_intervention');assert.equal(candidate.deploymentFailures,3);
+});
+test('production credentials appear only in the gated production job, without a paid private-environment prerequisite',()=>{
+ const source=readFileSync(new URL('../../.github/workflows/autonomy-agent.yml',import.meta.url),'utf8');
+ const before=source.slice(0,source.indexOf('\n  production:\n')),production=source.slice(source.indexOf('\n  production:\n'),source.indexOf('\n  second:\n'));
+ assert.ok(!before.includes('secrets.PUZZORIA_DEPLOY_KEY'));assert.ok(production.includes("github.ref == 'refs/heads/main'"));assert.ok(production.includes("needs.production-gate.outputs.allowed == 'true'"));assert.ok(!production.includes('environment:'));assert.ok(production.includes('secrets.PUZZORIA_DEPLOY_KEY'));
 });

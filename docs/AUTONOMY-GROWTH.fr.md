@@ -169,8 +169,12 @@ contrôleur, non utilisées et hors des deux versions de récupération peuvent
    image n'est pas attestée. Seul `bootstrapApprovedCommit` pourra alors la
    remplacer, avec sauvegarde, test privé, refus de migration et rollback vers
    l'image réellement observée. Le contrôleur n'invente pas une révision Git.
-4. Configurer la clé dédiée dans l'environnement GitHub `puzzoria-production`,
-   limité à main. Renseigner la politique approuvée et la cible ; activer
+4. Configurer la clé dédiée dans les secrets du dépôt. Elle est injectée
+   uniquement dans le job de production, après les contrôles de main, de politique
+   et de reçu approuvé ; elle n'est jamais transmise aux sessions du modèle.
+   Les environnements privés GitHub peuvent exiger une offre payante et ne sont
+   donc pas une condition de cette installation. Renseigner la politique
+   approuvée et la cible ; activer
    seulement alors `productionEnabled` et `PUZZORIA_AUTODEPLOY_ENABLED`.
 5. Après le commit de configuration, l'opérateur enregistre dans l'état protégé
    `growth.productionBootstrapApproval` (SHA main exact, hash de politique,
@@ -185,3 +189,25 @@ L'absence de moyen de paiement reste une déclaration du propriétaire. Le
 budget GitHub à 0 € n'a pas été créé ni techniquement vérifié. Aucune API
 payante, publicité, achat, autoscaling ou repli payant n'est ajouté. Si GitHub
 ne peut plus allouer de VM dans le quota gratuit, la reprise dépend de GitHub.
+
+## Installation initiale depuis Windows
+
+`deploy/setup-release-from-windows.ps1` ne fait rien sans `-Apply`. Après la
+seule autorisation initiale, il vérifie le reçu d'approbation protégé, le SHA256
+du paquet validé et l'empreinte SSH confirmée, réutilise uniquement la connexion
+administrative locale pour installer le contrôleur, et crée une autre clé
+ED25519 pour les publications ordinaires. La clé administrative ne quitte pas
+le PC. La clé privée distincte est transmise à `gh secret set` par son entrée
+standard ; le VPS reçoit uniquement sa clé publique. Le fichier Compose et les
+volumes existants sont conservés. Le script vérifie la présence de `.env.docker`
+ou `.env` sans afficher leur contenu. L'installateur refuse un contrôleur déjà
+installé ; une mise à niveau demande une revue distincte.
+
+Cette installation unique requiert les commandes gratuites GitHub CLI (`gh`,
+connecté au compte propriétaire), OpenSSH et tar sur Windows. `-Activate` est
+une option séparée ; elle demande le premier `deploy-pending` seulement après
+installation et enregistrement des secrets. Le SHA approuvé reste protégé des
+nouvelles fusions applicatives jusqu'à son reçu réel. Une absence de reçu
+conserve le même SHA pour une reprise idempotente, au plus tôt six heures plus
+tard et au maximum trois échecs avant intervention. Un rollback confirmé n'est
+pas un succès ; ses données courantes restent conservées.

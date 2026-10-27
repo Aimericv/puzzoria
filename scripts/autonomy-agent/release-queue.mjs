@@ -25,9 +25,20 @@ export function validationCandidates(state) {
   const source=[...(state.growth?.releaseQueue??[]),state.growth?.releaseCandidate,state.growth?.deferredReleaseCandidate];
   const seen=new Set();return source.filter(row=>{
     if(!verifiedReceipt(row)||seen.has(row.prNumber))return false;seen.add(row.prNumber);
-    return [undefined,'proposed','waiting_validation_budget','validation_failed','validating','stale_main'].includes(row.status);
+    return [undefined,'proposed','waiting_validation_budget','validation_failed','validating','stale_main','waiting_deployment_confirmation'].includes(row.status);
   });
 }
 export function pendingDeployment(state) {
   return state.growth?.pendingDeployment??(state?.growth?.releaseCandidate?.status==='awaiting_activation'?state.growth.releaseCandidate:null);
+}
+
+export function deploymentBlocksNewRuntime(state) {
+  const pending=pendingDeployment(state);
+  return pending?.status==='manual_intervention'||pending?.status==='awaiting_activation'&&((pending.ownerApprovedBootstrap===true&&!state.growth.lastDeployedCommit)||(pending.deploymentFailures??0)>0);
+}
+export function recordDeploymentFailure(candidate,now=Date.now()) {
+  candidate.deploymentFailures=(candidate.deploymentFailures??0)+1;
+  candidate.lastDeploymentFailureAt=new Date(now).toISOString();
+  candidate.nextDeploymentAttemptAt=new Date(now+6*3600000).toISOString();
+  if(candidate.deploymentFailures>=3)candidate.status='manual_intervention';
 }

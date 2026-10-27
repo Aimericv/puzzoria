@@ -2,6 +2,9 @@ import { test, expect } from "@playwright/test";
 import { locales } from "../src/lib/types";
 import { slugs } from "../src/lib/i18n";
 import { seoCopy } from "../src/lib/seo-content";
+import { publishedWordArticles } from "../src/lib/server/word-articles";
+import { wordArticleCopy } from "../src/lib/word-article-i18n";
+import { wordArticlePath } from "../src/lib/word-article-path";
 import { previousDay, utcDay } from "../src/lib/date";
 
 test("four languages expose usable HTML and canonical alternatives without JavaScript", async ({
@@ -45,13 +48,23 @@ test("four languages expose usable HTML and canonical alternatives without JavaS
         const sections = seoCopy(locale).games[game].sections;
         expect(sections.length).toBeGreaterThanOrEqual(3);
         const guide = page.locator("[data-seo-guide]");
-        await expect(guide.locator("h2")).toHaveCount(sections.length);
-        await expect(guide.locator("h2")).toHaveText(
+        const ruleSections = guide.locator(":scope > section:not([data-published-word-articles])");
+        await expect(ruleSections).toHaveCount(sections.length);
+        await expect(ruleSections.locator("h2")).toHaveText(
           sections.map((section) => section.title),
         );
-        await expect(guide.locator("p")).toHaveText(
+        await expect(ruleSections.locator("p")).toHaveText(
           sections.map((section) => section.text),
         );
+        const published = game === "rareword" ? publishedWordArticles(locale) : [];
+        const discovery = guide.locator("[data-published-word-articles]");
+        await expect(discovery).toHaveCount(published.length ? 1 : 0);
+        if (published.length) {
+          await expect(discovery.locator("h2")).toHaveText(wordArticleCopy(locale).collection);
+          await expect(discovery.locator("p")).toHaveText(wordArticleCopy(locale).publishedIntro);
+          await expect(discovery.locator("a")).toHaveText(published.map(article => wordArticleCopy(locale).title.replace("{word}", article.word)));
+          expect(await discovery.locator("a").evaluateAll(links => links.map(link => link.getAttribute("href")))).toEqual(published.map(article => wordArticlePath(locale, article.word)));
+        }
         await expect(page.locator("[data-game-preview]")).toBeVisible();
         expect(await page.locator("noscript").textContent()).toContain(
           seoCopy(locale).noScript,

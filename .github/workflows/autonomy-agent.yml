@@ -220,8 +220,7 @@ jobs:
 
   production:
     needs: production-gate
-    if: needs.production-gate.outputs.allowed == 'true'
-    environment: puzzoria-production
+    if: needs.production-gate.outputs.allowed == 'true' && github.ref == 'refs/heads/main' && github.repository == 'Aimericv/puzzoria'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:

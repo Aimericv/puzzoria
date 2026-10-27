@@ -6,7 +6,7 @@ import {mergeSafeCandidate} from './release-controller.mjs';
 import {validateRelease} from './release-validation.mjs';
 import {loadReleaseFiles,selectReleaseCandidate} from './release-selection.mjs';
 import {reconcileValidationReservations,validationReservation,validationBudgetAvailable} from './release-budget.mjs';
-import {ensureReleaseQueue} from './release-queue.mjs';
+import {ensureReleaseQueue,deploymentBlocksNewRuntime} from './release-queue.mjs';
 
 const mode=process.argv[2],control=JSON.parse(readFileSync('agent/autonomy/control.json','utf8'));assertFunding(control);
 if(process.env.GITHUB_REPOSITORY!==REPOSITORY)throw Error('Unexpected repository');
@@ -20,6 +20,7 @@ if(mode==='prepare') {
   state.releaseValidationHistory=await reconcileValidationReservations(api,state.releaseValidationHistory);
   const receipt=await selectReleaseCandidate(api,state,main);
   if(!receipt){await store.save('Preserve queued proposals and require review of sensitive or changed publications');process.exit(0);}
+  if(receipt.risk.requiresDeployment&&deploymentBlocksNewRuntime(state)){receipt.status='waiting_deployment_confirmation';await store.save('Preserve the initially approved or unconfirmed host rollout before merging newer runtime work');process.exit(0);}
   const reservation=validationReservation(receipt.risk.kind,control.release.maximumValidationMinutes);
   if(!validationBudgetAvailable(state.releaseValidationHistory,reservation,control.release.validationBudgetMinutes7d)){
     const changed=receipt.status!=='waiting_validation_budget';receipt.status='waiting_validation_budget';
