@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 160,
+  "generation": 161,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -282,193 +282,6 @@
     }
   },
   "validation": {
-    "40384422749": {
-      "sourceSha": "e6656c842cc0c648dd0fbaa5f219908d5540a1fd",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "40384422749",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-26T19:14:13.828Z",
-          "status": "failed",
-          "commands": [],
-          "productionDeployment": false,
-          "baseMain": "e6656c842cc0c648dd0fbaa5f219908d5540a1fd",
-          "sourceCommit": "e6656c842cc0c648dd0fbaa5f219908d5540a1fd",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 66,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793051633
-                },
-                "secondary": {
-                  "usedPercent": 26,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793620380
-                }
-              }
-            ]
-          },
-          "analytics": {
-            "status": "available",
-            "source": "https://puzzoria.com/api/agent/analytics",
-            "fetchedAt": "2026-10-26T19:14:21.976Z",
-            "sha256": "e4c2bfc4551cb374ba4582d10dfbb9cd5b723ad815b5f29790152320b1d94aa2",
-            "readOnlySnapshot": true
-          },
-          "searchConsole": {
-            "status": "available",
-            "property": "sc-domain:puzzoria.com",
-            "fetchedAt": "2026-10-26T19:14:23.376Z",
-            "sha256": "4374ba4eb6e204408005a15b9b0c49448fe2a226a82a43ed49fc52b51f42bf32",
-            "readOnlySnapshot": true
-          },
-          "growth": {
-            "observationId": "8937a2fa332f581d4a1333e1fc9e59410043802c2fb2d87410c867866e9d2bf8",
-            "trendStatus": "available",
-            "trendSources": [
-              {
-                "id": "google-fr",
-                "status": "available"
-              },
-              {
-                "id": "google-us",
-                "status": "available"
-              },
-              {
-                "id": "google-de",
-                "status": "available"
-              },
-              {
-                "id": "google-es",
-                "status": "available"
-              },
-              {
-                "id": "tiktok-creative-center",
-                "status": "unavailable",
-                "reason": "request_failed"
-              }
-            ],
-            "readOnlySnapshots": true
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd && rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -80\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent/autonomy; cat docs/AUTONOMY-NEXT.fr.md'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/growth-context.json /opt/puzzoria-pilot/readonly/trends.json /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/PLAN.json; tail -65 agent/autonomy/memory/STATE.md; tail -65 agent/autonomy/memory/EXPERIMENTS.md; tail -35 agent/autonomy/memory/DECISIONS.md; cat /opt/puzzoria-pilot/readonly/growth-context.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfor name in ['trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+name+'.json'))\n print(name, json.dumps(d,ensure_ascii=False)[:15000] if name=='trends' else json.dumps({k:v for k,v in d.items() if k not in ['reports','daily','top','windows']},ensure_ascii=False)[:2500]); print('keys',list(d))\nPY\nrg --files src | rg 'seo|engagement|Invitation|friend|share'; cat src/components/InvitationActions.tsx; cat src/",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat src/components/social-share.tsx; cat src/components/friend-player.tsx; sed -n '1,160p' src/lib/new-games-seo.ts; head -100 src/lib/seo-content.ts; cat package.json; cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/ generate-metadata.mdx 2>/dev/null\"",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'InvitationActions|linkReady|friendIntro|challengeFriend|beatMe' src; rg --files node_modules/next/dist/docs | rg '(generate-metadata|link.mdx)\"'$'\"'; cat src/components/invitation-actions.tsx; cat 'src/app/[locale]/friend/[id]/page.tsx'; cat src/components/live-invite.tsx; cat src/lib/server/friends.ts | head -160; cat src/app/api/share-image/route.tsx | head -170\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"ls node_modules/next/dist/docs; find node_modules/next/dist/docs -name '*metadata*' -o -name '*link*'; rg -n 'invite:' src/lib/live-i18n.ts; rg --files tests | rg '(friend|engagement|seo|share)'; python3 - <<'PY'\nimport json\nfor name in ['puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+name+'.json'))\n print(name); print(json.dumps(d['reports'],ensure_ascii=False)[:11000])\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '1,175p' node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.md; cat tests/engagement.test.ts | head -110; cat tests/seo.test.ts | head -70; cat docs/DUELS.fr.md | head -55; cat tests/share-client.test.ts | head -30\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/engagement-i18n.ts'\ns=open(p).read()\nchanges={\n'Your challenge link':'Link to play this puzzle at your own pace',\n'Play the same puzzle as your friend, then compare your results. No account needed.':'Your friend has already played. Play the same puzzle when you’re ready, then compare results. You don’t need to be online together or create an account.',\n'Can you do better?':'Your turn, at your own pace\"'!'\"',\n'Votre lien de défi':'Lien pour jouer ce puzz",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/engagement.test.ts tests/share-client.test.ts tests/seo.test.ts tests/live-rooms.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\np=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nfor n,r in p['reports'].items():\n print(n,r['period'],r['report']['official']['totals'],r['report']['official']['retention'],r['report']['product']['totals']['sessions'])\ng=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\na=[r for r in g['observation']['series']['playing.starts'] if '2026-10-12'<=r['date']<='2026-10-25'];print('baseline14',sum(r['value'] for r ",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/engagement-i18n.ts';s=open(p).read()\nreplacements={\n'Your friend has already played. Play the same puzzle when you’re ready, then compare results. You don’t need to be online together or create an account.':'Play the same puzzle, each at your own pace, then compare results. You don’t need to be online together or create an account.',\n'Votre ami a déjà joué. Jouez au même puzzle quand vous le souhaitez, puis comparez vos résultats. Inutile d’être connect",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nm=Path('agent/autonomy/memory')\np=json.loads((m/'PLAN.json').read_text())\np.update(summary='Parcours de partage clarifié EN/FR/ES/DE : invitation live explicitement en direct ; lien, image et page /friend explicitement chacun à son rythme. Expérience acquisition proposée, sans déploiement ni effet mesuré.',nextMission='Examiner les intentions Search Console de la page Word espagnole (29 impressions, aucun clic sur 30 jours) et ",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'Challenge a friend|Défier un ami|Retar a un amigo|Freund herausfordern|Can you do better|Tu fais mieux|Your challenge link|Votre lien de défi|A friendly challenge' e2e tests src | head -75; rg -n 'invite:|invitation:|friendIntro:|beatMe:' src/lib/engagement-i18n.ts src/lib/live-i18n.ts; ls e2e\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > agent/autonomy/memory/STATE.md <<'EOF'\n# État — 26 octobre 2026 — source e6656c84\n\nSource exportée annoncée : e6656c842cc0c648dd0fbaa5f219908d5540a1fd. AGENTS.md, agent/autonomy/MANDATE.md, INBOX vide et mémoire lus sur disque. Guide Next generate-metadata consulté pour le texte friendIntro utilisé aussi en métadonnées. Sources readonly growth-context, trends, puzzoria-analytics et search-console consultées. Aucun réseau externe, Git, achat, merge ou déploiement.\n\nDécision :",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a179a2-c49c-7df1-80dd-403a92bddea6",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 19,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 71,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793051632
-                },
-                "secondary": {
-                  "usedPercent": 27,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793620379
-                }
-              }
-            ]
-          },
-          "error": "A bounded, measurable growth experiment is required in PLAN.json",
-          "unverifiedSnapshot": "3a2e80f8d1df43defe13fbfad60c1d26db6841ff",
-          "finishedAt": "2026-10-26T19:18:31.810Z",
-          "workflowOutcome": "failure",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40384422749"
-        }
-      }
-    },
     "40387959783": {
       "sourceSha": "65bb234080929e3f6d27406f56bb84321c6b8287",
       "jobs": {
@@ -1426,6 +1239,17 @@
           "finishedAt": "2026-10-27T12:29:00.666Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40502857332"
+        }
+      }
+    },
+    "40593881826": {
+      "sourceSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "jobs": {
+        "first": {
+          "status": "no-model-or-setup-failed",
+          "reason": "ready",
+          "workflowOutcome": "skipped",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40593881826"
         }
       }
     }
