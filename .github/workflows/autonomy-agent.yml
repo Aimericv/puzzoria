@@ -201,6 +201,7 @@ jobs:
     timeout-minutes: 3
     permissions:
       contents: read
+      issues: read
     outputs:
       allowed: ${{ steps.gate.outputs.allowed }}
       sha: ${{ steps.gate.outputs.sha }}

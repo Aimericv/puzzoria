@@ -1,3 +1,4 @@
+import {deploymentStateAdmissible,deploymentOwnerControl} from "./deployment-owner-control.mjs";
 import {pendingDeployment,recordDeploymentFailure} from "./release-queue.mjs";
 import {readFileSync,writeFileSync,mkdtempSync,rmSync,openSync,closeSync} from 'node:fs';
 import {tmpdir} from 'node:os';
@@ -10,14 +11,14 @@ import {StateStore} from './store.mjs';
 import {assertFunding,REPOSITORY} from './policy.mjs';
 export function releasePolicyHash() {
   const files=['scripts/autonomy-agent/release-policy.mjs','scripts/autonomy-agent/release-controller.mjs','scripts/autonomy-agent/release-host.mjs','scripts/autonomy-agent/deployment-transaction.mjs','scripts/autonomy-agent/public-probe.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/release-check.mjs','scripts/autonomy-agent/release-validation.mjs','.github/containers/release-verifier.Dockerfile','.github/workflows/autonomy-agent.yml','.github/actions/puzzoria-agent/action.yml','deploy/puzzoria-release-entry.sh','deploy/install-release-controller.sh','deploy/setup-release-from-windows.ps1','deploy/puzzoria-release-recover.service','deploy/puzzoria-release-recover.timer','package-lock.json'];
-  files.push('scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs');
+  files.push('scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs','scripts/autonomy-agent/deployment-owner-control.mjs');
   return createHash('sha256').update(files.map(file=>file+'\n'+readFileSync(file,'utf8')).join('\n')).digest('hex');
 }
 export function pendingDeploymentAllowed(control,state,now=Date.now()) {
   const pending=pendingDeployment(state);
   const previous=state?.growth?.lastDeployedCommit??control.release.target.initialCommit;
   const approval=state?.growth?.productionBootstrapApproval;
-  return /^[a-f0-9]{40}$/.test(previous??'')&&pending?.status==='awaiting_activation'&&
+  return deploymentStateAdmissible(state)&&/^[a-f0-9]{40}$/.test(previous??'')&&pending?.status==='awaiting_activation'&&
     !(pending.nextDeploymentAttemptAt&&(!Number.isFinite(Date.parse(pending.nextDeploymentAttemptAt))||Date.parse(pending.nextDeploymentAttemptAt)>now))&&
     /^[a-f0-9]{40}$/.test(pending?.mergeSha??'')&&
     (previous!=='0'.repeat(40)||(pending.ownerApprovedBootstrap===true&&approval?.sha===pending.mergeSha&&
@@ -31,7 +32,7 @@ export async function run(mode=process.argv[2]) {
     let state;
     if(allowed){const api=github(process.env.GITHUB_TOKEN,REPOSITORY);state=await new StateStore(api,control,process.env.GITHUB_SHA).load();}
     const pending=pendingDeployment(state);
-    const admitted=allowed&&pendingDeploymentAllowed(control,state);
+    const admitted=allowed&&pendingDeploymentAllowed(control,state)&&await deploymentOwnerControl(github(process.env.GITHUB_TOKEN,REPOSITORY),state);
     if(process.env.GITHUB_OUTPUT)writeFileSync(process.env.GITHUB_OUTPUT,`allowed=${Boolean(admitted)}\nsha=${admitted?pending.mergeSha:''}\n`,{flag:'a'});console.log(JSON.stringify({productionAllowed:Boolean(admitted),policyHash:releasePolicyHash()}));return;
   }
   if(mode!=='deploy'||!allowed)throw Error('Production activation is not approved for this policy and target');
@@ -42,6 +43,7 @@ export async function run(mode=process.argv[2]) {
   const expected=state.growth.lastDeployedCommit??control.release.target.initialCommit;
   if(!/^[a-f0-9]{40}$/.test(expected))throw Error('An attested previous production commit is required');
   if(!pendingDeploymentAllowed(control,state))throw Error('The first rollout needs an exact trusted source approval');
+  if(!await deploymentOwnerControl(api,state)){console.log(JSON.stringify({productionDeferred:'owner-control',productionChanged:false}));return;}
   const experiment=state.growth.experiments.find(row=>row.id===candidate.experimentId);
   if(!experiment&&candidate.ownerApprovedBootstrap!==true)throw Error('Unknown experiment without an operator-approved bootstrap receipt');
   const directory=mkdtempSync(join(tmpdir(),'puzzoria-ssh-'));let receipt,confirmed=false;
@@ -64,6 +66,8 @@ export async function run(mode=process.argv[2]) {
     writeFileSync(known,`${host} ssh-ed25519 ${pinned}\n`,{mode:0o600});
     execFileSync('git',['update-ref','refs/puzzoria-release/verified',sha]);
     execFileSync('git',['bundle','create',bundle,'refs/puzzoria-release/verified',...(expected==='0'.repeat(40)?[]:[`^${expected}`])],{stdio:'ignore'});
+    // Re-read immediately before SSH: an owner directive can arrive after the gate job.
+    if(!await deploymentOwnerControl(api,state)){console.log(JSON.stringify({productionDeferred:'new-owner-directive',productionChanged:false}));return;}
     const input=openSync(bundle,'r');
     let result;
     try{result=spawnSync('ssh',['-T','-i',key,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',`UserKnownHostsFile=${known}`,'-o','PasswordAuthentication=no','-o','BatchMode=yes','-o','ConnectTimeout=15','-p',String(control.release.target.sshPort),`${control.release.target.sshUser}@${control.release.target.sshHost}`,`release ${sha} ${expected} ${releasePolicyHash()}`],{stdio:[input,'pipe','pipe'],encoding:'utf8',timeout:25*60000,maxBuffer:1048576});}finally{closeSync(input);}
