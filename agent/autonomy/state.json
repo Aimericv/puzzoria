@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 145,
+  "generation": 146,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2475,7 +2475,7 @@
         "candidateSha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
         "prNumber": 19,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/19",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -2505,7 +2505,12 @@
       "prNumber": 19,
       "experimentId": "first-play-browser-protocol",
       "verified": true,
-      "runId": "40502857332"
+      "runId": "40502857332",
+      "risk": {
+        "risk": "manual",
+        "reason": "review_required:docs/FIRST-PLAY-BROWSER.fr.md"
+      },
+      "status": "manual_review"
     },
     "deferredReleaseCandidate": {
       "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
