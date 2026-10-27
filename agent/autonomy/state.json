@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 146,
+  "generation": 147,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1552,11 +1552,19 @@
         "candidateSha": "2b5e68c1de8145f8d641eeb81e2f7f233a9e3797",
         "prNumber": 11,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/11",
-        "status": "proposed",
+        "status": "merged",
         "assessment": {
           "status": "awaiting_verified_deployment",
           "causalClaim": false
-        }
+        },
+        "requiresDeployment": true,
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        },
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
       },
       {
         "id": "published-vocabulary-discovery",
@@ -1673,11 +1681,19 @@
         "candidateSha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
         "prNumber": 15,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/15",
-        "status": "manual_review",
+        "status": "merged",
         "assessment": {
           "status": "awaiting_verified_deployment",
           "causalClaim": false
-        }
+        },
+        "requiresDeployment": true,
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        },
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
       },
       {
         "id": "first-play-entry-audit",
@@ -2074,11 +2090,19 @@
         "candidateSha": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593",
         "prNumber": 18,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/18",
-        "status": "manual_review",
+        "status": "merged_documentation",
         "assessment": {
           "status": "awaiting_verified_deployment",
           "causalClaim": false
-        }
+        },
+        "requiresDeployment": false,
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        },
+        "publicationMergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
       },
       {
         "id": "first-play-browser-protocol",
@@ -2475,7 +2499,15 @@
         "candidateSha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
         "prNumber": 19,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/19",
-        "status": "manual_review"
+        "status": "merged_documentation",
+        "requiresDeployment": false,
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        },
+        "publicationMergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
       }
     ],
     "legacyWork": {
@@ -2510,20 +2542,151 @@
         "risk": "manual",
         "reason": "review_required:docs/FIRST-PLAY-BROWSER.fr.md"
       },
-      "status": "manual_review"
+      "status": "merged_documentation",
+      "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+      "validatedInBatch": {
+        "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+        "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+        "fullRunId": "40539308357",
+        "controllerRunId": "40549513756"
+      }
     },
-    "deferredReleaseCandidate": {
-      "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
-      "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
-      "prNumber": 15,
-      "experimentId": "published-vocabulary-discovery",
-      "verified": true,
-      "runId": "40414606922",
-      "risk": {
-        "risk": "manual",
-        "reason": "review_required:src/components/game-guide.tsx"
+    "releaseQueue": [
+      {
+        "sha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
+        "base": "24de100089f917e7067c49866c0f073dd98c0686",
+        "prNumber": 19,
+        "experimentId": "first-play-browser-protocol",
+        "verified": true,
+        "runId": "40502857332",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:docs/FIRST-PLAY-BROWSER.fr.md"
+        },
+        "status": "merged_documentation",
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        }
       },
-      "status": "manual_review"
+      {
+        "sha": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364",
+        "base": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
+        "prNumber": 15,
+        "experimentId": "published-vocabulary-discovery",
+        "verified": true,
+        "runId": "40414606922",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:src/components/game-guide.tsx"
+        },
+        "status": "awaiting_activation",
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        }
+      },
+      {
+        "sha": "2b5e68c1de8145f8d641eeb81e2f7f233a9e3797",
+        "base": "24de100089f917e7067c49866c0f073dd98c0686",
+        "prNumber": 11,
+        "experimentId": "word-guide-worked-deductions",
+        "verified": true,
+        "runId": "40387959783",
+        "status": "awaiting_activation",
+        "nativeVerifiedSha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
+        "rebase": {
+          "testOnly": true,
+          "previousHead": "3524bab3d352b09375da0075133d1a13cf8f365b"
+        },
+        "risk": {
+          "risk": "low",
+          "kind": "editorial-copy",
+          "requiresDeployment": true,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        }
+      },
+      {
+        "sha": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593",
+        "base": "24de100089f917e7067c49866c0f073dd98c0686",
+        "prNumber": 18,
+        "experimentId": "first-play-entry-audit",
+        "verified": true,
+        "runId": "40453920004",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:docs/FIRST-PLAY-AUDIT.fr.md"
+        },
+        "status": "merged_documentation",
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "validatedInBatch": {
+          "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+          "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+          "fullRunId": "40539308357",
+          "controllerRunId": "40549513756"
+        }
+      }
+    ],
+    "pendingDeployment": {
+      "sha": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+      "base": "24de100089f917e7067c49866c0f073dd98c0686",
+      "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+      "prNumber": 21,
+      "experimentId": "reviewed-growth-bootstrap",
+      "verified": true,
+      "status": "awaiting_activation",
+      "includedExperiments": [
+        "word-guide-worked-deductions",
+        "published-vocabulary-discovery"
+      ],
+      "validation": {
+        "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+        "fullRunId": "40539308357",
+        "controllerRunId": "40549513756"
+      },
+      "ownerAuthorizationRequired": true
+    },
+    "reviewedBatch": {
+      "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+      "main": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+      "reconciledAt": "2026-10-27T17:41:58.129Z",
+      "prs": [
+        {
+          "prNumber": 11,
+          "status": "awaiting_activation",
+          "originalHead": "2b5e68c1de8145f8d641eeb81e2f7f233a9e3797"
+        },
+        {
+          "prNumber": 15,
+          "status": "awaiting_activation",
+          "originalHead": "cb1f388a3c4aa44429dbd96cb3a5057ae684f364"
+        },
+        {
+          "prNumber": 18,
+          "status": "merged_documentation",
+          "originalHead": "0d38d5a5fde4b778efb9d91fd1b7c2569d3a8593"
+        },
+        {
+          "prNumber": 19,
+          "status": "merged_documentation",
+          "originalHead": "ef37c973f567bd2241f4542684905c4fa32b5fc6"
+        }
+      ],
+      "fullRunId": "40539308357",
+      "controllerRunId": "40549513756"
     }
   },
   "releaseValidationHistory": [
@@ -2531,13 +2694,75 @@
       "at": "2026-10-26T22:39:19.107Z",
       "runId": "40413975908",
       "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
-      "minutes": 90
+      "minutes": 18,
+      "reservedMinutes": 90,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-job-timestamps",
+        "jobId": 121891919223,
+        "attempt": 1,
+        "startedAt": "2026-10-26T22:39:27Z",
+        "completedAt": "2026-10-26T22:55:07Z",
+        "marginMinutes": 2
+      }
     },
     {
       "at": "2026-10-26T23:16:04.791Z",
       "runId": "40418453890",
       "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
-      "minutes": 90
+      "minutes": 20,
+      "reservedMinutes": 90,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-job-timestamps",
+        "jobId": 121906940014,
+        "attempt": 1,
+        "startedAt": "2026-10-26T23:16:14Z",
+        "completedAt": "2026-10-26T23:33:41Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T16:05:49Z",
+      "runId": "40537512719",
+      "sha": "67309ca867c415c50889a30558d79cd848f9cfcb",
+      "minutes": 7,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122306645194,
+        "startedAt": "2026-10-27T16:05:49Z",
+        "completedAt": "2026-10-27T16:09:53Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T16:16:39Z",
+      "runId": "40539308357",
+      "sha": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+      "minutes": 70,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122313025311,
+        "startedAt": "2026-10-27T16:16:39Z",
+        "completedAt": "2026-10-27T17:24:04Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-27T17:19:42Z",
+      "runId": "40549513756",
+      "sha": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+      "minutes": 3,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122349131474,
+        "startedAt": "2026-10-27T17:19:42Z",
+        "completedAt": "2026-10-27T17:20:27Z",
+        "marginMinutes": 2
+      }
     }
   ]
 }
