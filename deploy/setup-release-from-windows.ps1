@@ -18,7 +18,7 @@ if (-not $Apply) {
   return
 }
 if ($ApprovedCommit -notmatch '^[a-f0-9]{40}$' -or $PolicyHash -notmatch '^[a-f0-9]{64}$' -or $ValidationRunId -notmatch '^\d+$') { throw 'Révision, politique et exécution de validation exactes requises.' }
-foreach ($command in @('gh','ssh','scp','ssh-keygen','ssh-keyscan','tar')) {
+foreach ($command in @('gh','ssh','scp','ssh-keygen','tar')) {
   if (-not (Get-Command $command -ErrorAction SilentlyContinue)) { throw "Commande gratuite requise sur ce PC : $command." }
 }
 if (-not $AdminKey) { $AdminKey = Join-Path $env:USERPROFILE '.ssh\puzzoria_deploy' }
@@ -28,6 +28,21 @@ function Read-GitHubJson([string]$Endpoint) {
   $value = & gh api $Endpoint
   Assert-Native 'lecture GitHub'
   return (($value -join "`n") | ConvertFrom-Json)
+}
+function Read-VerifiedAdminHostKey([string]$Identity, [int]$Port, [string]$Fingerprint) {
+  # Use the owner's working SSH client and existing known_hosts, never trust a new key automatically.
+  $options = @('-i',$Identity,'-p',"$Port",'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o','HostKeyAlias=37.27.24.173','-o','PasswordAuthentication=no','-o','KbdInteractiveAuthentication=no','-o','ConnectTimeout=15')
+  $lines = & ssh @options 'root@37.27.24.173' 'cat /etc/ssh/ssh_host_ed25519_key.pub'
+  if ($LASTEXITCODE -ne 0) { throw 'Lecture de la cle publique via SSH verifie impossible. Aucune modification du VPS.' }
+  foreach ($line in $lines) {
+    if ($line -match '^ssh-ed25519\s+([A-Za-z0-9+/=]+)(?:\s|$)') {
+      $encoded = $Matches[1]
+      $algorithm = [Security.Cryptography.SHA256]::Create()
+      try { $observed = 'SHA256:' + [Convert]::ToBase64String($algorithm.ComputeHash([Convert]::FromBase64String($encoded))).TrimEnd('=') } finally { $algorithm.Dispose() }
+      if ($observed -eq $Fingerprint) { return $encoded }
+    }
+  }
+  throw 'Empreinte SSH du VPS differente de celle confirmee par le proprietaire. Aucune modification du VPS.'
 }
 $repo = 'Aimericv/puzzoria'
 $stateFile = Read-GitHubJson "repos/$repo/contents/agent/autonomy/state.json?ref=codex%2Fagent-state"
@@ -52,20 +67,7 @@ try {
   $manifest = Get-Content -Raw (Join-Path $directory 'VALIDATION.json') | ConvertFrom-Json
   if ($manifest.policyHash -ne $PolicyHash -or $manifest.source -ne $approval.validatedSource) { throw 'La politique ou la source du paquet ne correspond pas à la validation approuvée.' }
   $known = Join-Path $directory 'known_hosts'
-  $pinned = $null
-  $scanFile = Join-Path $directory 'host-key-scan.txt'
-  $scan = Start-Process -FilePath (Get-Command ssh-keyscan).Source -ArgumentList @('-T','10','-p',"$AdminSshPort",'-t','ed25519','37.27.24.173') -Wait -PassThru -NoNewWindow -RedirectStandardOutput $scanFile -RedirectStandardError (Join-Path $directory 'host-key-scan.stderr')
-  if ($scan.ExitCode -ne 0) { throw "Acces SSH administratif au port $AdminSshPort indisponible. Aucune modification du VPS." }
-  $keys = Get-Content -LiteralPath $scanFile
-  foreach ($line in $keys) {
-    if ($line -match '^\S+\s+ssh-ed25519\s+([A-Za-z0-9+/=]+)(?:\s|$)') {
-      $encoded = $Matches[1]
-      $algorithm = [Security.Cryptography.SHA256]::Create()
-      try { $fingerprint = 'SHA256:' + [Convert]::ToBase64String($algorithm.ComputeHash([Convert]::FromBase64String($encoded))).TrimEnd('=') } finally { $algorithm.Dispose() }
-      if ($fingerprint -eq 'SHA256:7wiefI6XYd5fbKwZfx9Dyvk2UNY2sqnHgMc7CD+oXeg') { $pinned = $encoded; break }
-    }
-  }
-  if (-not $pinned) { throw 'Empreinte SSH du VPS différente de celle confirmée par le propriétaire.' }
+  $pinned = Read-VerifiedAdminHostKey $AdminKey $AdminSshPort 'SHA256:7wiefI6XYd5fbKwZfx9Dyvk2UNY2sqnHgMc7CD+oXeg'
   $adminKnownHost = if ($AdminSshPort -eq 22) { '37.27.24.173' } else { "[37.27.24.173]:$AdminSshPort" }
   [IO.File]::WriteAllText($known, "$adminKnownHost ssh-ed25519 $pinned`n", [Text.UTF8Encoding]::new($false))
   $transportOptions = @('-i',$AdminKey,'-o','IdentitiesOnly=yes','-o','StrictHostKeyChecking=yes','-o',"UserKnownHostsFile=$known",'-o','ConnectTimeout=15')
