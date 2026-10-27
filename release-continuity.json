@@ -1,0 +1,76 @@
+{
+  "source": "a3e138ff59679473171d5baa47725ff6c8c8c878",
+  "base": "24de100089f917e7067c49866c0f073dd98c0686",
+  "pr": {
+    "number": 20,
+    "url": "https://github.com/Aimericv/puzzoria/pull/20"
+  },
+  "tests": 70,
+  "lint": true,
+  "fixtures": [
+    {
+      "test": "real-docker-image-rollback",
+      "status": "passed",
+      "verifiedBackup": true,
+      "writesRetained": 1,
+      "productionContacted": false
+    },
+    {
+      "test": "real-docker-crashed-app-recovery",
+      "status": "passed",
+      "verifiedBackup": true,
+      "writesRetained": 1,
+      "productionContacted": false
+    }
+  ],
+  "budget": {
+    "limit": 180,
+    "before": [
+      {
+        "runId": "40413975908",
+        "minutes": 90
+      },
+      {
+        "runId": "40418453890",
+        "minutes": 90
+      }
+    ],
+    "after": [
+      {
+        "runId": "40413975908",
+        "minutes": 18,
+        "settled": true,
+        "accounting": {
+          "source": "github-completed-job-timestamps",
+          "jobId": 121891919223,
+          "attempt": 1,
+          "startedAt": "2026-10-26T22:39:27Z",
+          "completedAt": "2026-10-26T22:55:07Z",
+          "marginMinutes": 2
+        }
+      },
+      {
+        "runId": "40418453890",
+        "minutes": 20,
+        "settled": true,
+        "accounting": {
+          "source": "github-completed-job-timestamps",
+          "jobId": 121906940014,
+          "attempt": 1,
+          "startedAt": "2026-10-26T23:16:14Z",
+          "completedAt": "2026-10-26T23:33:41Z",
+          "marginMinutes": 2
+        }
+      }
+    ],
+    "sourceStateUnchanged": true
+  },
+  "controller": {
+    "source": "a3e138ff59679473171d5baa47725ff6c8c8c878",
+    "policyHash": "f085d56eb082b7a4cd266e904b301e5b8966aae964f8440b270851854abad026",
+    "typescript": "5.9.3",
+    "productionEnabled": false
+  },
+  "productionEnabled": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40534259927"
+}
