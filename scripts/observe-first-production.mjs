@@ -1,7 +1,7 @@
 import {github} from './autonomy-pilot/github.mjs';
-const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),target='40584978293';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),target='40589012232';
 const r=await api('/actions/runs/'+target),{jobs}=await api('/actions/runs/'+target+'/jobs?per_page=100');
-if(r.head_branch!=='main'||r.path!=='.github/workflows/autonomy-agent.yml'||r.head_sha!=='69e4198f063fb499c45efdd4f0fdedc6a31b78a7')throw Error('Observe only the exact owner-dispatched first rollout');
+if(r.head_branch!=='main'||r.path!=='.github/workflows/autonomy-agent.yml'||r.head_sha!=='f1cc44089db87644299ea88a09fae7d9d25be18c')throw Error('Observe only the exact owner-dispatched first rollout');
 const f=await api('/contents/agent/autonomy/state.json?ref=codex/agent-state'),state=JSON.parse(Buffer.from(f.content,'base64'));
 const issue=await api('/issues/3'),lastPage=Math.max(1,Math.ceil(issue.comments/100));
 const comments=(await Promise.all([...new Set([Math.max(1,lastPage-1),lastPage])].map(page=>api('/issues/3/comments?per_page=100&page='+page)))).flat().sort((a,b)=>a.id-b.id).slice(-100);
@@ -19,6 +19,13 @@ if(r.status==='completed'&&gateJob){
  const data=await response.text(),match=data.match(/\{"productionAllowed":(true|false),"policyHash":"([a-f0-9]{64})"\}/);
  if(!match)throw Error('Structured gate result absent');
  out.gate={productionAllowed:match[1]==='true',policyHash:match[2]};
+}
+const productionJob=jobs.find(j=>j.name==='production'&&j.status==='completed'&&['success','failure'].includes(j.conclusion));
+if(r.status==='completed'&&productionJob){
+ const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${productionJob.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
+ if(!response.ok)throw Error('Completed production receipt unavailable');
+ const data=await response.text(),match=data.match(/\{"status":"(deployed|rolled_back)","sha":"([a-f0-9]{40})","previousCommit":"([a-f0-9]{40})","backupVerified":(true|false)\}/);
+ if(match)out.deploymentResult={status:match[1],sha:match[2],previousCommit:match[3],backupVerified:match[4]==='true'};
 }
 if(r.status==='completed'&&r.conclusion!=='success'){
  out.completedJobErrorCategories=[];
