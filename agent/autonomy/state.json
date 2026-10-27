@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 156,
+  "generation": 157,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2641,10 +2641,10 @@
       }
     ],
     "pendingDeployment": {
-      "sha": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-      "base": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
-      "mergeSha": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
-      "prNumber": 26,
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "base": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
+      "mergeSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "prNumber": 27,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
       "status": "awaiting_policy_refresh",
@@ -2655,9 +2655,9 @@
       "validation": {
         "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
         "fullRunId": "40539308357",
-        "controllerRunId": "40583971296",
-        "configurationSource": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-        "configurationRunId": "40584407324"
+        "controllerRunId": "40587465644",
+        "configurationSource": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+        "configurationRunId": "40588678094"
       },
       "ownerAuthorizationRequired": false,
       "ownerApprovedBootstrap": true
@@ -2692,12 +2692,12 @@
       "controllerRunId": "40549513756"
     },
     "productionBootstrapApproval": {
-      "sha": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
-      "policyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
+      "sha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "policyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961",
       "approvedAt": "2026-10-27T18:28:53Z",
-      "validationRunId": "40583971296",
-      "validatedSource": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-      "controllerArchiveSha256": "0472d86a94cb835fe48a7451ca34645724369c3c165455057c2e0a67c9958b8d",
+      "validationRunId": "40587465644",
+      "validatedSource": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "controllerArchiveSha256": "bf623fa03b3d93b92a11d59adb76533e19ed431fc9838ffa91de42b4d4d8e6a8",
       "appValidationSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
       "appValidationRunId": "40539308357",
       "authorizationSource": "Explicit owner authorization in this Codex conversation on 2026-10-27: install restricted controller, verify real VPS configuration and restorable backup, controlled first publication with site checks and rollback, then future low-risk publications only after observed bootstrap success. Sensitive changes remain subject to owner approval. No additional cost.",
@@ -2711,8 +2711,10 @@
         "verifiedSsh": true,
         "strictKnownHosts": true,
         "independentFingerprint": true,
-        "validationRunId": "40583971296"
-      }
+        "validationRunId": "40587465644"
+      },
+      "previousPolicyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
+      "hostPolicyRefreshRequired": true
     }
   },
   "releaseValidationHistory": [
