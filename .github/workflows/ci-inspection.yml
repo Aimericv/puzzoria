@@ -1,4 +1,4 @@
-name: Final validation of initial rollout and cancellation safeguards
+name: Stage the verified first rollout and held policy refresh
 on:
   push:
     branches: [codex/ci-inspection]
@@ -7,14 +7,16 @@ concurrency:
   group: puzzoria-autonomy-pilot
   cancel-in-progress: false
 jobs:
-  validate:
+  stage:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 3
     permissions:
       contents: write
-      actions: read
       pull-requests: write
+      statuses: write
+      actions: read
+      issues: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -24,38 +26,17 @@ jobs:
         with:
           path: candidate
           ref: c322fd20dd9d3188065fef48bf332fb740c0617e
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node ../control/scripts/initial-production-review.mjs reserve
+      - run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: candidate
-        env: &review-env
+      - run: node ../control/scripts/stage-initial-production.mjs
+        working-directory: candidate
+        env:
           GITHUB_TOKEN: ${{ github.token }}
           PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
           FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
           AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: candidate
-      - run: mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap && npm run lint && bash -n deploy/install-release-controller.sh
-        working-directory: candidate
-      - name: Verify PowerShell parser, no-change default and thirteen security cases
-        shell: pwsh
-        working-directory: candidate
-        run: |
-          & ./scripts/autonomy-agent/test-windows-host-key.ps1
-          & ./deploy/setup-release-from-windows.ps1
-      - run: node scripts/autonomy-agent/package-controller.mjs
-        working-directory: candidate
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-controller
-          include-hidden-files: true
-          path: |
-            candidate/.release/puzzoria-controller.tar.gz
-            candidate/.release/puzzoria-controller.sha256
-          retention-days: 7
-      - run: node ../control/scripts/initial-production-review.mjs publish
-        working-directory: candidate
-        env: *review-env
+          REVIEW_RUN_ID: '40587465644'
