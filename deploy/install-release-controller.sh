@@ -25,6 +25,10 @@ if [[ -f /root/.ssh/authorized_keys ]] && ssh-keygen -l -E sha256 -f /root/.ssh/
   echo 'Use a separate deployment key, never the existing administrative root key.' >&2
   exit 1
 fi
+# A separate listener preserves the owner's administrative SSH service and firewall rule.
+[[ -x /usr/sbin/sshd ]] || { echo 'Existing OpenSSH server required.' >&2; exit 1; }
+[[ -z "$(ss -H -lnt 'sport = :2222')" ]] || { echo 'Deployment port 2222 is already used; refusing a replacement.' >&2; exit 1; }
+/usr/sbin/sshd -t -f "$package_dir/puzzoria-release-sshd.conf"
 runtime_image='node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d'
 bootstrap_dir="$(mktemp -d /tmp/puzzoria-controller-install.XXXXXX)"
 container_id=''
@@ -67,10 +71,15 @@ import {readFileSync,writeFileSync,chownSync} from 'node:fs';import {execFileSyn
 const key=readFileSync(process.argv[2],'utf8').trim();if(!/^ssh-ed25519 [A-Za-z0-9+/=]+(?: [^\r\n]+)?$/.test(key))throw Error('Use one separate ed25519 public key');
 const path='/home/puzzoria-release/.ssh/authorized_keys';writeFileSync(path,'restrict,command="/usr/local/bin/puzzoria-release-entry" '+key+'\n',{mode:0o600});chownSync(path,Number(execFileSync('id',['-u','puzzoria-release'])),Number(execFileSync('id',['-g','puzzoria-release'])));
 JS
-printf '%s\n' 'puzzoria-release ALL=(root) NOPASSWD: /usr/bin/flock --nonblock --conflict-exit-code 75 /run/lock/puzzoria-release.lock /usr/local/lib/puzzoria-release/node /usr/local/lib/puzzoria-release/release-host.mjs release *' > /etc/sudoers.d/puzzoria-release
+printf '%s\n' 'puzzoria-release ALL=(root) NOPASSWD: /usr/bin/flock --nonblock --conflict-exit-code 75 /run/lock/puzzoria-release.lock /usr/local/lib/puzzoria-release/node /usr/local/lib/puzzoria-release/release-host.mjs check' 'puzzoria-release ALL=(root) NOPASSWD: /usr/bin/flock --nonblock --conflict-exit-code 75 /run/lock/puzzoria-release.lock /usr/local/lib/puzzoria-release/node /usr/local/lib/puzzoria-release/release-host.mjs release *' > /etc/sudoers.d/puzzoria-release
 chmod 0440 /etc/sudoers.d/puzzoria-release
 visudo -cf /etc/sudoers.d/puzzoria-release
 install -m 0644 "$package_dir/puzzoria-release-recover.service" "$package_dir/puzzoria-release-recover.timer" /etc/systemd/system/
+install -m 0600 "$package_dir/puzzoria-release-sshd.conf" /etc/puzzoria-release/sshd_config
+install -m 0644 "$package_dir/puzzoria-release-sshd.service" /etc/systemd/system/
+# Validate the installed policy before starting its listener. Administrative ssh.service is never restarted.
+/usr/sbin/sshd -t -f /etc/puzzoria-release/sshd_config
 systemctl daemon-reload
-systemctl enable --now puzzoria-release-recover.timer
+systemctl enable --now puzzoria-release-recover.timer puzzoria-release-sshd.service
+systemctl is-active --quiet puzzoria-release-sshd.service
 echo 'Restricted controller installed; existing application unchanged. First rollout still requires exact source approval and GitHub production gates.'

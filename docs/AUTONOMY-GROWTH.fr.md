@@ -211,3 +211,40 @@ nouvelles fusions applicatives jusqu'à son reçu réel. Une absence de reçu
 conserve le même SHA pour une reprise idempotente, au plus tôt six heures plus
 tard et au maximum trois échecs avant intervention. Un rollback confirmé n'est
 pas un succès ; ses données courantes restent conservées.
+
+
+## Transport SSH réservé au contrôleur
+
+Le port administratif 22 conserve sa règle Hetzner limitée à l'IP du
+propriétaire. Les IP variables des runners GitHub ne doivent pas être ajoutées
+à cet accès administratif. Le contrôleur utilise un autre serveur OpenSSH,
+`puzzoria-release-sshd.service`, sur **TCP 2222 en IPv4**. Ce serveur n'inclut
+pas la configuration SSH administrative : seul `puzzoria-release` est accepté,
+avec une clé publique, une commande forcée et aucun mot de passe, terminal,
+tunnel, transfert d'agent ou script utilisateur. Root y est interdit, même avec
+une clé valide. Le compte ne rejoint pas le groupe Docker. Le pare-feu peut
+admettre Any IPv4 sur ce port dédié ; cette règle n'expose pas le port 22.
+
+`check` est la seule opération de lecture ajoutée à la commande forcée. Elle
+renvoie l'image et le schéma observés et l'état privé du contrôleur, sans
+contenu de base ni secret. L'installateur Windows la vérifie sur 2222 avec la
+clé dédiée et l'empreinte hôte approuvée **avant** toute activation GitHub.
+La publication initiale conserve ses vérifications de sauvegarde restaurable,
+image privée, schéma et site public. Les sources applicatives n'ont pas changé.
+
+Si le chemin administratif 22 reste filtré avant le VPS, le paramètre
+`-AdminSshPort 2223` permet une installation par un accès temporaire **limité à
+l'IP du propriétaire dans Hetzner**, avec la même clé administrative locale.
+Ce paramètre n'ouvre aucun port, n'installe aucun serveur SSH administratif et
+n'accepte aucun autre numéro de port. Un éventuel accès initial alternatif
+est démarré manuellement dans la console Hetzner comme unité transitoire, avec
+clé uniquement et durée maximale de vingt minutes ; sa règle Hetzner est
+retirée après installation. La production ordinaire utilise uniquement 2222.
+Ne pas rendre l'accès root accessible à Any IPv4 pour contourner un filtrage.
+
+La validation de transport utilise un vrai serveur SSH sur loopback dans un
+runner jetable : authentification de la clé dédiée, refus de root avec cette
+même clé autorisée, refus des commandes arbitraires et des tunnels, acceptation
+des seuls `check` et `release` bornés. Elle ne contacte pas le VPS. Les fichiers
+du contrôleur de sauvegarde/rollback restent identiques aux deux fixtures
+Docker déjà validées ; aucun nouvel effet de production n'est revendiqué.
