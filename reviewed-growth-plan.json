@@ -1,0 +1,23 @@
+{
+  "source": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+  "pr": {
+    "number": 21,
+    "url": "https://github.com/Aimericv/puzzoria/pull/21"
+  },
+  "sourceStateGeneration": 146,
+  "protectedStateChanged": false,
+  "previousObservedMinutes": 38,
+  "previousReviews": [
+    {
+      "runId": 40537512719,
+      "minutes": 7,
+      "source": "completed-review-job-timestamps"
+    }
+  ],
+  "reviewJobMaximumMinutes": 100,
+  "safetyMarginMinutes": 2,
+  "withinValidationAllowance": true,
+  "limit": 180,
+  "productionEnabled": false,
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40539308357"
+}
