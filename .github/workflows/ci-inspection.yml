@@ -1,4 +1,4 @@
-name: Record final readiness without first production authorization
+name: Prepare explicitly authorized initial production rollout with external activation off
 on:
   push:
     branches: [codex/ci-inspection]
@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
       actions: read
-      pull-requests: read
+      pull-requests: write
       issues: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -24,12 +24,17 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           path: candidate
-          ref: 3e743001df87694f42a40d48e55c98d858829053
+          ref: 97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node ../control/scripts/record-first-activation-readiness.mjs
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+        working-directory: candidate
+      - run: mkdir -p .ci-results && node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/config-control.tap
+        working-directory: candidate
+      - run: node ../control/scripts/prepare-first-production.mjs
         working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
