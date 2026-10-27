@@ -1,0 +1,52 @@
+{
+  "source": "684d86c654e9b606181b5dca7cd87d153587d4b9",
+  "base": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
+  "paths": [
+    "agent/autonomy/control.json",
+    "deploy/setup-release-from-windows.ps1",
+    "docs/AUTONOMY-GROWTH.fr.md",
+    "scripts/autonomy-agent/test-windows-host-key.ps1"
+  ],
+  "controls": 77,
+  "windows": {
+    "publicKeyOnly": true,
+    "independentFingerprint": true,
+    "productionContacted": false,
+    "strictKnownHosts": true,
+    "failed": 0,
+    "sshKeyscanRequired": false,
+    "passed": 7
+  },
+  "powerShellParseAndDryRun": true,
+  "lint": true,
+  "policyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
+  "archiveSha256": "0472d86a94cb835fe48a7451ca34645724369c3c165455057c2e0a67c9958b8d",
+  "controllerSource": "684d86c654e9b606181b5dca7cd87d153587d4b9",
+  "unit": 359,
+  "e2e": 424,
+  "applicationUnchanged": true,
+  "hostRollbackModulesUnchanged": true,
+  "realSshProofRun": "40576205097",
+  "ssh": {
+    "status": "passed",
+    "realSshAuthentication": true,
+    "rootWithSameKeyRejected": true,
+    "passwordAndInteractiveAuthDisabled": true,
+    "readOnlyCheckAllowed": true,
+    "boundedReleaseAllowed": true,
+    "arbitraryCommandsRejected": 7,
+    "forbiddenMarkerAbsent": true,
+    "forwardingRejected": true,
+    "productionContacted": false,
+    "listener": "loopback-only",
+    "temporaryBootstrapPolicyValid": true,
+    "testUserProvisioningNeeded": false
+  },
+  "externalProductionEnabled": false,
+  "vpsContacted": false,
+  "pr": {
+    "number": 26,
+    "url": "https://github.com/Aimericv/puzzoria/pull/26"
+  },
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40583971296"
+}
