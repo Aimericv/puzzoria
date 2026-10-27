@@ -1,23 +1,33 @@
-name: Observe complete reviewed growth CI without raw logs
+name: Consolidate complete review evidence without main or production changes
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
 jobs:
-  observe:
+  ready:
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 5
     permissions:
       contents: write
-      actions: read
-      pull-requests: read
+      actions: write
+      pull-requests: write
+      issues: write
+      statuses: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          path: candidate
+          ref: bbcd110d7ee6390a3fb55ab7de16d9edb504e60b
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/observe-reviewed-growth-ci.mjs
+      - run: node ../control/scripts/consolidate-reviewed-release.mjs
+        working-directory: candidate
         env:
           GITHUB_TOKEN: ${{ github.token }}
