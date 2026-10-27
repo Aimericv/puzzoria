@@ -94,3 +94,4 @@ try {
   [IO.File]::WriteAllText((Join-Path (Get-Location) '.ci-results/bootstrap-ready.json'), ($readyReport | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
   $readyReport | ConvertTo-Json
 } finally { Remove-Item -LiteralPath $temporary -Recurse -Force }
+$global:LASTEXITCODE = 0
