@@ -1,42 +1,27 @@
-name: Stage the tested Windows installer under existing first activation consent
+name: Observe the owner-dispatched first production rollout
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  stage:
-    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' && vars.PUZZORIA_AUTODEPLOY_ENABLED != 'true'
+  observe:
+    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 3
     permissions:
       contents: write
-      pull-requests: write
-      statuses: write
       actions: read
-      issues: write
+      issues: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          path: candidate
-          ref: 684d86c654e9b606181b5dca7cd87d153587d4b9
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: candidate
-      - run: node ../control/scripts/stage-windows-installer.mjs
-        working-directory: candidate
+      - run: node scripts/observe-first-production.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
-          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
           AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
-          REVIEW_RUN_ID: '40583971296'
+          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
