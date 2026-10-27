@@ -211,6 +211,22 @@ lecture ne modifie pas le serveur et ne dépend plus de `ssh-keyscan`, dont la
 négociation peut échouer sous Windows alors que `ssh` fonctionne. Une connexion
 administrative vérifiée doit donc avoir déjà été établie depuis ce PC.
 
+Un lancement manuel `deploy-pending` ignore volontairement les sessions Codex.
+Le job de production utilise donc `always()` avec résultat réussi et sortie
+`allowed` du verrou ; les ancêtres ignorés ne doivent pas faire sauter une
+publication autorisée. Un verrou échoué ou refusé n'autorise aucune publication.
+
+`-RefreshBootstrapPolicy` est réservé à la préparation initiale : le journal
+hôte doit encore être sain sur le commit inconnu initial, sans publication ni
+transaction, les quatre modules installés doivent être identiques au paquet,
+et l'image et le schéma existants doivent être observables. Sous le même verrou
+hôte, seuls l'empreinte de politique et le SHA initial approuvé peuvent être
+actualisés, avec copie privée et écriture atomique de la configuration. Aucun
+code hôte, service, volume ou journal n'est remplacé. GitHub conserve l'état
+`awaiting_policy_refresh` jusqu'à la vérification de l'accès restreint ; une
+confirmation avec contrôle de concurrence le rend ensuite admissible. Toute
+mise à niveau après une publication reste hors de cette procédure.
+
 Cette installation unique requiert les commandes gratuites GitHub CLI (`gh`,
 connecté au compte propriétaire), OpenSSH et tar sur Windows. `-Activate` est
 une option séparée ; elle demande le premier `deploy-pending` seulement après

@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 umask 077
+if [[ "${1:-}" == --refresh-bootstrap-policy ]]; then
+  [[ "$(id -u)" == 0 && $# == 4 && "$4" =~ ^[a-f0-9]{64}$ ]] || { echo 'Exact reviewed previous policy and root are required.' >&2; exit 1; }
+  package_dir="$(dirname "$(realpath "$0")")"
+  /usr/bin/flock --nonblock --conflict-exit-code 75 /run/lock/puzzoria-release.lock /usr/local/lib/puzzoria-release/node "$package_dir/refresh-bootstrap-policy.mjs" "$(realpath "$2")" "$4" "$package_dir"
+  exit 0
+fi
 if [[ "${1:-}" != --apply ]]; then
   cat <<'HELP'
 Prepared only: no production activation or host change.
