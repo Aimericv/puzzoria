@@ -1,0 +1,23 @@
+{
+  "runId": "40537512719",
+  "status": "completed",
+  "conclusion": "failure",
+  "categories": [
+    "module_not_found",
+    "browser_global_error"
+  ],
+  "locations": [],
+  "phases": [
+    "isolation",
+    "lint",
+    "typecheck",
+    "content",
+    "social",
+    "seo",
+    "build",
+    "unit",
+    "browser desktop preflight",
+    "browser desktop full"
+  ],
+  "knownImports": []
+}
