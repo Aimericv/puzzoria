@@ -1,0 +1,50 @@
+{
+  "main": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "source": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+  "pr": {
+    "number": 27,
+    "url": "https://github.com/Aimericv/puzzoria/pull/27"
+  },
+  "controllerRunId": "40587465644",
+  "controllerArtifactId": 12771123678,
+  "controllerArtifactExpires": "2026-11-03T21:32:12Z",
+  "policyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961",
+  "archiveSha256": "bf623fa03b3d93b92a11d59adb76533e19ed431fc9838ffa91de42b4d4d8e6a8",
+  "windows": {
+    "strictKnownHosts": true,
+    "productionContacted": false,
+    "sshKeyscanRequired": false,
+    "passed": 7,
+    "publicKeyOnly": true,
+    "independentFingerprint": true,
+    "failed": 0
+  },
+  "controls": 86,
+  "ready": {
+    "failed": 0,
+    "exactBlobCompareAndSwap": true,
+    "passed": 6,
+    "productionContacted": false,
+    "memoryAndOwnerMessagesPreserved": true
+  },
+  "reproducer": {
+    "original": "skipped",
+    "fixed": "success",
+    "denied": "skipped"
+  },
+  "reproducerRun": "40586884415",
+  "unit": 359,
+  "e2e": 424,
+  "applicationUnchanged": true,
+  "hostRollbackModulesUnchanged": true,
+  "realSshProofRun": "40576205097",
+  "validationReservedMinutes": 164,
+  "validationLimit": 180,
+  "stateGeneration": 157,
+  "memoryAndAuthPreserved": true,
+  "ownerFirstActivationAlreadyAuthorized": true,
+  "externalProductionEnabled": true,
+  "publicationHeldForPolicyRefresh": true,
+  "vpsContacted": false,
+  "deployRequested": false
+}
