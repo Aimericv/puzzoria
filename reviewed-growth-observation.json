@@ -1,0 +1,103 @@
+{
+  "observedAt": "2026-10-27T16:18:04.765Z",
+  "run": {
+    "id": 40539308357,
+    "status": "in_progress",
+    "conclusion": null,
+    "source": "a27e25359ac2f08e23be0901611a48756ae76834",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40539308357"
+  },
+  "jobs": [
+    {
+      "name": "validate",
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Read-only funding and bounded validation admission; create draft PR",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify supervisor financial, queue and deployment gates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Parse Windows bootstrap and exercise its no-change default",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate exact source with complete isolated app and four browser suites",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "name": "Package the validated disabled production controller",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Publish filtered proof and PR status only",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+          "status": "pending",
+          "conclusion": null
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "number": 21,
+    "head": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+    "base": "24de100089f917e7067c49866c0f073dd98c0686",
+    "merged": false,
+    "draft": true,
+    "url": "https://github.com/Aimericv/puzzoria/pull/21"
+  },
+  "main": "24de100089f917e7067c49866c0f073dd98c0686"
+}
