@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 163,
+  "generation": 164,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -1165,7 +1165,15 @@
           "fullRunId": "40539308357",
           "controllerRunId": "40549513756"
         },
-        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "deployment": {
+          "status": "deployed",
+          "sha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+          "releasedAt": "2026-10-27T21:52:23.088Z",
+          "finishedAt": "2026-10-27T21:52:23.089Z",
+          "previousCommit": "0000000000000000000000000000000000000000",
+          "sharedRollout": true
+        }
       },
       {
         "id": "published-vocabulary-discovery",
@@ -1294,7 +1302,15 @@
           "fullRunId": "40539308357",
           "controllerRunId": "40549513756"
         },
-        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
+        "mergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "deployment": {
+          "status": "deployed",
+          "sha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+          "releasedAt": "2026-10-27T21:52:23.088Z",
+          "finishedAt": "2026-10-27T21:52:23.089Z",
+          "previousCommit": "0000000000000000000000000000000000000000",
+          "sharedRollout": true
+        }
       },
       {
         "id": "first-play-entry-audit",
@@ -2248,7 +2264,7 @@
       "prNumber": 27,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
-      "status": "awaiting_activation",
+      "status": "deployed",
       "includedExperiments": [
         "word-guide-worked-deductions",
         "published-vocabulary-discovery"
@@ -2319,7 +2335,8 @@
       },
       "previousPolicyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
       "hostPolicyRefreshRequired": true
-    }
+    },
+    "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c"
   },
   "releaseValidationHistory": [
     {
