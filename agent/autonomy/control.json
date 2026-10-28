@@ -52,7 +52,7 @@
     "productionEnabled": true,
     "productionAuthorization": {
       "approvedAt": "2026-10-27T18:28:53Z",
-      "policyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961",
+      "policyHash": "fc262eaa978c2860e71594f84670098abdbfff5e99463dbb60773bcd34bca795",
       "source": "Explicit owner authorization in this Codex conversation on 2026-10-27: install restricted controller, verify real VPS configuration and restorable backup, controlled first publication with site checks and rollback, then future low-risk publications only after observed bootstrap success. Sensitive changes remain subject to owner approval. No additional cost.",
       "transport": "Dedicated key-only SSH service, no root or passwords, TCP 2222; administrative TCP 22 remains IP-restricted. First rollout remains exact-owner-approved and external switch stays off until installation verification."
     },

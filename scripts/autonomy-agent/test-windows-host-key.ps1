@@ -90,6 +90,17 @@ try {
   Set-BootstrapReady 'Aimericv/puzzoria' ('1'*40) ('a'*64) '123' $temporary
   if ($null -ne $script:readyPayload) { throw 'Already confirmed state must not be rewritten.' }
   $readyPassed++
+  $script:readyState = $template | ConvertFrom-Json
+  $rows = @(1..1500 | ForEach-Object { @{root=@{one=@{two=@{three=@{a='keep';b='keep'}}}}} })
+  $script:readyState | Add-Member -NotePropertyName validation -NotePropertyValue @{rows=$rows}
+  $expanded = $script:readyState | ConvertTo-Json -Depth 100
+  if ([Text.Encoding]::UTF8.GetByteCount($expanded) -le 262144) { throw 'The regression fixture must reproduce the oversized Windows indentation.' }
+  $script:readyExit = 0
+  Set-BootstrapReady 'Aimericv/puzzoria' ('1'*40) ('a'*64) '123' $temporary
+  $compact = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($script:readyPayload.content))
+  $preserved = $compact | ConvertFrom-Json
+  if ([Text.Encoding]::UTF8.GetByteCount($compact) -gt 262144 -or $preserved.validation.rows.Count -ne 1500 -or $preserved.validation.rows[1499].root.one.two.three.b -ne 'keep' -or $preserved.pendingMessages[0].text -ne '/pause') { throw 'Compact state must preserve all large nested history and owner directives within the ordinary reader limit.' }
+  $readyPassed++
   $readyReport = @{passed=$readyPassed;failed=0;exactBlobCompareAndSwap=$true;memoryAndOwnerMessagesPreserved=$true;productionContacted=$false}
   [IO.File]::WriteAllText((Join-Path (Get-Location) '.ci-results/bootstrap-ready.json'), ($readyReport | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
   $readyReport | ConvertTo-Json

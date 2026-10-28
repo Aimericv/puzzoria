@@ -55,7 +55,7 @@ function Set-BootstrapReady([string]$Repository, [string]$Commit, [string]$Hash,
   if ($queued.status -eq 'awaiting_activation') { return }
   $queued.status = 'awaiting_activation'
   $fresh.generation = $fresh.generation + 1
-  $body = @{message='Confirm verified initial host policy refresh without changing memory or owner instructions';branch='codex/agent-state';sha=$file.sha;content=[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(($fresh | ConvertTo-Json -Depth 100)))}
+  $body = @{message='Confirm verified initial host policy refresh without changing memory or owner instructions';branch='codex/agent-state';sha=$file.sha;content=[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(($fresh | ConvertTo-Json -Depth 100 -Compress)))}
   $inputPath = Join-Path $Directory 'bootstrap-ready.json'
   [IO.File]::WriteAllText($inputPath, ($body | ConvertTo-Json -Depth 100), [Text.UTF8Encoding]::new($false))
   & gh api --method PUT "repos/$Repository/contents/agent/autonomy/state.json" --input $inputPath | Out-Null

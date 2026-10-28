@@ -31,7 +31,9 @@ runs:
       run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
     - name: Test control boundaries without Plus credentials
       shell: bash
-      run: node --test scripts/autonomy-agent/*.test.mjs
+      run: |
+        npm ci --ignore-scripts --no-audit --no-fund
+        node --test scripts/autonomy-agent/*.test.mjs
     - id: preflight
       name: Read the inbox and admission state
       shell: bash
