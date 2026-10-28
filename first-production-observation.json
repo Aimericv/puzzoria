@@ -1,0 +1,337 @@
+{
+  "observedAt": "2026-10-28T14:51:29.701Z",
+  "run": {
+    "id": 40589012232,
+    "attempt": 3,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40589012232",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "success",
+    "source": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "createdAt": "2026-10-27T21:42:28Z",
+    "updatedAt": "2026-10-28T14:47:31Z",
+    "jobs": [
+      {
+        "id": 122889928474,
+        "name": "first",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:46:51Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122889929431,
+        "name": "release-validation",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:46:51Z",
+        "completedAt": "2026-10-27T21:42:30Z",
+        "steps": []
+      },
+      {
+        "id": 122889929961,
+        "name": "production",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-28T14:46:54Z",
+        "completedAt": "2026-10-28T14:47:30Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Deploy through the restricted host command after policy and initial owner approval",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 122889930514,
+        "name": "release-finalize",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:46:52Z",
+        "completedAt": "2026-10-27T21:42:30Z",
+        "steps": []
+      },
+      {
+        "id": 122889931300,
+        "name": "release-prepare",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:46:52Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122889932994,
+        "name": "production-gate",
+        "status": "completed",
+        "conclusion": "success",
+        "startedAt": "2026-10-27T21:49:55Z",
+        "completedAt": "2026-10-27T21:50:22Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run node scripts/autonomy-agent/release-client.mjs gate",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 122889993631,
+        "name": "search-console-check",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:46:58Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      },
+      {
+        "id": 122890022678,
+        "name": "second",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:47:01Z",
+        "completedAt": "2026-10-27T21:42:29Z",
+        "steps": []
+      }
+    ]
+  },
+  "activation": {
+    "agent": true,
+    "production": true,
+    "noPaymentMethodDeclaration": true
+  },
+  "state": {
+    "generation": 164,
+    "status": "ready",
+    "nextEligibleAt": null,
+    "lastMessageId": 6434434856,
+    "issueNumber": 3,
+    "completedSessions": 23,
+    "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "pendingDeployment": {
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "mergeSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "prNumber": 27,
+      "status": "deployed",
+      "deploymentFailures": 1,
+      "nextDeploymentAttemptAt": "2026-10-28T03:52:23.394Z",
+      "lastDeploymentFailureAt": "2026-10-27T21:52:23.394Z"
+    },
+    "experimentCount": 4,
+    "validationReservedMinutes": 164
+  },
+  "communication": {
+    "url": "https://github.com/Aimericv/puzzoria/issues/3",
+    "recentOwnerMessages": [
+      {
+        "id": 6349565126,
+        "createdAt": "2026-10-22T19:35:16Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126",
+        "processed": true
+      }
+    ],
+    "recentReports": [
+      {
+        "id": 6450514179,
+        "createdAt": "2026-10-27T18:37:38Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6450514179",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6451063661,
+        "createdAt": "2026-10-27T19:04:41Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6451063661",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6452608343,
+        "createdAt": "2026-10-27T20:19:55Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6452608343",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6453650742,
+        "createdAt": "2026-10-27T21:10:31Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6453650742",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454284362,
+        "createdAt": "2026-10-27T21:40:44Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454284362",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454482237,
+        "createdAt": "2026-10-27T21:49:47Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454482237",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454536311,
+        "createdAt": "2026-10-27T21:52:26Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454536311",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": true
+      },
+      {
+        "id": 6472167237,
+        "createdAt": "2026-10-28T14:47:26Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6472167237",
+        "rolloutHealthy": true,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      }
+    ]
+  },
+  "productionAccessedByObserver": false,
+  "protectedStateChanged": false,
+  "stateEncoding": {
+    "githubReportedBytes": 170816,
+    "decodedBytes": 170816,
+    "schemaVersion": 1,
+    "repositoryMatches": true,
+    "generationIsInteger": true,
+    "approvalDateIsValid": true,
+    "pendingMessagesArray": true
+  },
+  "postRolloutMetadata": {
+    "releaseQueueIsArray": true,
+    "releaseQueueLength": 4,
+    "releaseQueueNullRows": 0,
+    "experiments": [
+      {
+        "index": 0,
+        "prNumber": 11,
+        "mergeShaType": "string",
+        "mergeShaIsValid": true,
+        "deploymentRecorded": true
+      },
+      {
+        "index": 1,
+        "prNumber": 15,
+        "mergeShaType": "string",
+        "mergeShaIsValid": true,
+        "deploymentRecorded": true
+      },
+      {
+        "index": 2,
+        "prNumber": 18,
+        "mergeShaType": "undefined",
+        "mergeShaIsValid": false,
+        "deploymentRecorded": false
+      },
+      {
+        "index": 3,
+        "prNumber": 19,
+        "mergeShaType": "undefined",
+        "mergeShaIsValid": false,
+        "deploymentRecorded": false
+      }
+    ]
+  },
+  "workflow": {
+    "state": "active",
+    "path": ".github/workflows/autonomy-agent.yml"
+  },
+  "publicHealth": {
+    "url": "https://puzzoria.com/api/health",
+    "status": 200,
+    "healthy": true
+  },
+  "gate": {
+    "productionAllowed": true,
+    "policyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961"
+  },
+  "deploymentResult": {
+    "status": "deployed",
+    "sha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "previousCommit": "0000000000000000000000000000000000000000",
+    "backupVerified": true
+  }
+}
