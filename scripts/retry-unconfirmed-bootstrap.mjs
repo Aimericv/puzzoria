@@ -8,11 +8,18 @@ const run=await api('/actions/runs/'+target),{jobs}=await api('/actions/runs/'+t
 if(run.status!=='completed'||run.conclusion!=='failure'||run.run_attempt!==2||run.head_sha!==source||!job||process.env.FREE_FLAG!=='true'||process.env.PRODUCTION_FLAG!=='true'||process.env.AGENT_FLAG!=='true')throw Error('Only the exact failed approved first rollout may be inspected');
 const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${job.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
 if(!response.ok)throw Error('Completed production log unavailable');
-const text=await response.text(),step=job.steps.find(s=>s.name==='Deploy through the restricted host command after policy and initial owner approval'),start=Date.parse(step.started_at),end=Date.parse(step.completed_at);
+const text=await response.text(),step=job.steps.find(s=>s.name==='Deploy through the restricted host command after policy and initial owner approval'),start=Date.parse(step.started_at)-1000,end=Date.parse(step.completed_at)+1000;
 const lines=text.split('\n').flatMap(line=>{const m=line.match(/^(\d{4}-\d\d-\d\dT\S+) (.*)$/);return m&&Date.parse(m[1])>=start&&Date.parse(m[1])<=end?[m[2].trim()]:[];});
 const network=lines.some(line=>/^(fetch failed|The operation was aborted due to timeout|This operation was aborted|The operation was aborted)$/.test(line));
 const knownMessages=['fetch failed','The operation was aborted due to timeout','This operation was aborted','The operation was aborted','Invalid GitHub path','Deployment did not return a valid private host receipt','Deployment receipt does not identify a verified rollout','SSH did not confirm successful rollout completion'];
 const report={target,source,completedProductionJob:job.id,knownErrorCategories:knownMessages.filter(value=>lines.includes(value)).map(value=>value.replaceAll(' ','_')),transientNetworkFailure:network,rerunRequested:false,productionAccessedByOperator:false};
+report.logMetadata={contentType:response.headers.get('content-type'),bytes:Buffer.byteLength(text),timestampedLines:text.split('\n').filter(line=>/^\d{4}-\d\d-\d\dT/.test(line)).length,scopedLines:lines.length};
+const terminal=lines.findLastIndex(line=>line.startsWith('##[error]Process completed with exit code'));
+if(terminal>0){
+ const candidates=lines.slice(0,terminal).filter(line=>line&&!line.startsWith('##[')&&!/^\s*[A-Z_]+:/.test(line));
+ const message=candidates.at(-1)?.replace(/\u001b\[[0-9;]*m/g,'')??'';
+ report.completedTerminalError=message.replace(/Bearer\s+\S+/gi,'Bearer [redacted]').replace(/(?:gh[pousr]_|github_pat_|sk-)[A-Za-z0-9_\-]+/g,'[redacted]').replace(/[A-Za-z0-9+/=]{80,}/g,'[redacted]').replace(/https?:\/\/[^\s?]+\?[^\s]+/g,'[redacted-url-query]').slice(0,300);
+}
 if(network){
  const control=JSON.parse(readFileSync('agent/autonomy/control.json')),{StateStore}=await import(pathToFileURL(resolve('scripts/autonomy-agent/store.mjs'))),{deploymentOwnerControl}=await import(pathToFileURL(resolve('scripts/autonomy-agent/deployment-owner-control.mjs')));
  const store=new StateStore(api,control,source),state=await store.load(),pending=state.growth.pendingDeployment;
