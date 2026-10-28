@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 161,
+  "generation": 162,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -282,240 +282,6 @@
     }
   },
   "validation": {
-    "40387959783": {
-      "sourceSha": "65bb234080929e3f6d27406f56bb84321c6b8287",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "40387959783",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-10-26T19:37:35.216Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "baseMain": "65bb234080929e3f6d27406f56bb84321c6b8287",
-          "sourceCommit": "65bb234080929e3f6d27406f56bb84321c6b8287",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 80,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793051632
-                },
-                "secondary": {
-                  "usedPercent": 28,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793620379
-                }
-              }
-            ]
-          },
-          "analytics": {
-            "status": "available",
-            "source": "https://puzzoria.com/api/agent/analytics",
-            "fetchedAt": "2026-10-26T19:37:42.025Z",
-            "sha256": "72624511a8dee8b50c634bb50f26726c7c75a43328e0b64477ff9ae0a892da62",
-            "readOnlySnapshot": true
-          },
-          "searchConsole": {
-            "status": "available",
-            "property": "sc-domain:puzzoria.com",
-            "fetchedAt": "2026-10-26T19:37:43.250Z",
-            "sha256": "4374ba4eb6e204408005a15b9b0c49448fe2a226a82a43ed49fc52b51f42bf32",
-            "readOnlySnapshot": true
-          },
-          "growth": {
-            "observationId": "2eda27878cb715e26ba3c88e2149051197f0895d0c6411d084bb6144c3098861",
-            "trendStatus": "available",
-            "trendSources": [
-              {
-                "id": "google-fr",
-                "status": "available"
-              },
-              {
-                "id": "google-us",
-                "status": "available"
-              },
-              {
-                "id": "google-de",
-                "status": "available"
-              },
-              {
-                "id": "google-es",
-                "status": "available"
-              },
-              {
-                "id": "tiktok-creative-center",
-                "status": "unavailable",
-                "reason": "request_failed"
-              }
-            ],
-            "readOnlySnapshots": true
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent/autonomy; cat docs/AUTONOMY-NEXT.fr.md'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/{growth-context,trends,puzzoria-analytics,search-console}.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat agent/autonomy/memory/PLAN.json; tail -75 agent/autonomy/memory/STATE.md; tail -60 agent/autonomy/memory/EXPERIMENTS.md; tail -40 agent/autonomy/memory/DECISIONS.md; python3 - <<'PY'\nimport json\nfor n in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'))\n print('\\\\n',n, json.dumps(d,ensure_ascii=False)[:18000] if n in ['growth-context','trends'] else str([(k,v) for k,v in d.items() if k not in ['repo",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files src | rg 'guide|article|seo'; rg -n 'Wordle|repet|duplic|repeated' src/lib/*guide* src/lib/*article*; cat package.json; ls node_modules/next/dist/docs/01-app/03-api-reference/04-functions/*metadata*\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat src/components/game-guide.tsx; head -100 src/lib/seo-content.ts; cat src/lib/word-article-i18n.ts; cat src/lib/server/word-articles.ts | head -90; cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.md | head -85; rg -n 'word:|Wordle|repeated|repet|doble' src/lib/seo-content.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'evaluate|feedback|function' src/games/word* src/lib/games/word*; sed -n '108,133p' src/lib/seo-content.ts; sed -n '184,210p' src/lib/seo-content.ts; sed -n '260,285p' src/lib/seo-content.ts; rg --files tests | rg 'seo|word'; cat /opt/puzzoria-pilot/readonly/search-console.json | head -55\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'export.*(evaluate|score|word)|function.*(evaluate|score)' src/lib/engine* src/lib/*word*; rg --files src | rg 'word|engine'\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/seo-content.ts'\ns=open(p).read()\nadd={\n'fr': [('Quel premier mot choisir ?', 'Commencez par un mot accepté de cinq lettres avec plusieurs lettres différentes, pour tester des voyelles et des consonnes en un essai. Aucun premier mot ne garantit de gagner. Au tour suivant, croisez les indices de toutes les lignes : gardez les lettres vertes à leur place, déplacez les jaunes et écartez les lettres entièrement grises. Une lettre répétée reste possible si le",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/seo.test.ts tests/games.test.ts'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"sed -n '37,65p' src/lib/seo-content.ts; python3 - <<'PY'\nimport json\nfor n in ['puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'))\n print(n)\n for k,v in d['reports'].items():\n  print(k, json.dumps({a:b for a,b in v.items() if a not in ['daily','games','actions','sources','devices','paths']},ensure_ascii=False)[:2600])\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run lint'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/seo-content.ts';s=open(p).read();s=s.replace('ce n’est pas la réponse du jour.', 'il ne donne aucun indice sur la partie du jour.').replace('not today’s answer.', 'independent of today’s puzzle.').replace('no es la solución de hoy.', 'no ofrece pistas sobre la partida de hoy.').replace('nicht die heutige Lösung.', 'unabhängig vom heutigen Rätsel.');open(p,'w').write(s)\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))['reports']['30']\nprint(list(x))\nfor k in ['playing','product','visits','retention']: print(k,str(x.get(k))[:1800])\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm test -- --configLoader=runner'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nm=Path('agent/autonomy/memory');old=json.loads((m/'PLAN.json').read_text());ctx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\nexperiment={'id':'word-guide-worked-deductions','objective':'seo','kind':'product','hypothesis':'Des guides Word plus utiles, avec méthode et exemples localisés de déduction, peuvent améliorer la visibilité organique des pages de jeu existantes.','expectedImpact':'Hausse exploratoir",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='agent/autonomy/memory/STATE.md';s=open(p).read().replace('Suite générale en cours, résultat à compléter.', 'Suite générale npm test -- --configLoader=runner : 350/351 tests réussis, 26/27 fichiers, code 1 ; seul operations.test.ts:55 dépasse 5000 ms. Ce délai est déjà consigné dans les sessions précédentes ; cause non établie, aucun test ni délai modifié.');open(p,'w').write(s)\nPY\nfind src tests e2e docs agent/autonomy/memory -type f -mmin -12 | head -35\"",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a179b8-1c6d-7c10-8f85-194e9f6b8da6",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 19,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 86,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793051632
-                },
-                "secondary": {
-                  "usedPercent": 29,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793620379
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 351,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "3d0c1fa8b2b1d5f45f7d8d3a866acb2ef078b402",
-            "url": "https://github.com/Aimericv/puzzoria/pull/11",
-            "number": 11
-          },
-          "toolCommands": 19,
-          "experiment": {
-            "id": "word-guide-worked-deductions",
-            "objective": "seo",
-            "metric": "google.impressions",
-            "decision": "propose"
-          },
-          "finishedAt": "2026-10-26T19:42:47.450Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40387959783"
-        }
-      }
-    },
     "40414606922": {
       "sourceSha": "692ddc9c815940e6df3df0287dcd3aceb7530b05",
       "jobs": {
@@ -1250,6 +1016,17 @@
           "reason": "ready",
           "workflowOutcome": "skipped",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40593881826"
+        }
+      }
+    },
+    "40692806191": {
+      "sourceSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "jobs": {
+        "first": {
+          "status": "no-model-or-setup-failed",
+          "reason": "ready",
+          "workflowOutcome": "skipped",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/40692806191"
         }
       }
     }
