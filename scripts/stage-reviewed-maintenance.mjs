@@ -17,6 +17,10 @@ const archive='.reviewed-controller/puzzoria-controller.tar.gz',archiveSha=creat
 if(archiveSha!==proof.archiveSha256)throw Error('Reviewed controller archive differs');
 const oldControl=await get('agent/autonomy/control.json',base),store=new StateStore(api,control,base),state=await store.load();
 if(state.growth.lastDeployedCommit!==base||state.growth.pendingDeployment?.mergeSha!==base||state.growth.pendingDeployment?.status!=='deployed'||state.growth.reviewedMaintenance||!await deploymentOwnerControl(api,state))throw Error('Preserve newer production, an existing maintenance or owner instructions');
+const active=await api('/actions/workflows/autonomy-agent.yml/runs?branch=main&per_page=30');
+if(active.workflow_runs.some(run=>run.status!=='completed'))throw Error('Let any existing autonomy or publication finish before suspending maintenance');
+await api('/actions/workflows/autonomy-agent.yml/disable','PUT');
+if((await api('/actions/workflows/autonomy-agent.yml')).state!=='disabled_manually')throw Error('Wakeups must be suspended until the maintenance is confirmed healthy');
 const digest=value=>{const copy=structuredClone(value);delete copy.generation;delete copy.releaseValidationHistory;delete copy.growth.reviewedMaintenance;delete copy.growth.pendingDeployment.status;return createHash('sha256').update(JSON.stringify(copy)).digest('hex');},before=digest(state);
 const row=state.releaseValidationHistory.find(r=>r.runId===reviewRun),start=Date.parse(jobs[0].started_at),end=Date.parse(jobs[0].completed_at);
 if(!row||!Number.isFinite(start)||!Number.isFinite(end)||end<start||end-start>4*60000)throw Error('Exact existing bounded review reservation required');
@@ -42,5 +46,5 @@ state.growth.reviewedMaintenance=approval;
 if(digest(state)!==before)throw Error('Preserve memory, authentication, receipts and owner directives');
 await store.save('Bind the exact reviewed maintenance package; preserve the healthy production receipt and keep publication held');
 writeFileSync('.release/maintenance/REVIEW.json',JSON.stringify(approval,null,2)+'\n');
-const report={...approval,pr:{number:28,url:pr.html_url},validationReservedMinutes:used,validationLimit:180,stateGeneration:state.generation,applicationUnchanged:true,hostModulesUnchanged:true,memoryAndAuthPreserved:true,productionChanged:false,operatorStillRequired:true};
+const report={...approval,pr:{number:28,url:pr.html_url},validationReservedMinutes:used,validationLimit:180,stateGeneration:state.generation,applicationUnchanged:true,hostModulesUnchanged:true,memoryAndAuthPreserved:true,productionChanged:false,workflowSuspendedUntilHealthy:true,operatorStillRequired:true};
 const parent=process.env.GITHUB_SHA,p=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:p.tree.sha,tree:[{path:'reviewed-maintenance-staged.json',mode:'100644',type:'blob',content:JSON.stringify(report,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record exact human-reviewed supervisor package and held root maintenance; no VPS changes',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/reviewed-maintenance-staged/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(report));
