@@ -1,0 +1,21 @@
+{
+  "runId": "40720356714",
+  "stagingStatus": "success",
+  "sha": "debb36f663cf027e91425d98420dd62467e54175",
+  "artifact": {
+    "id": 12829214606,
+    "name": "reviewed-puzzoria-maintenance",
+    "size": 4456215,
+    "expiresAt": "2026-11-04T15:53:17Z"
+  },
+  "workflowState": "disabled_manually",
+  "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "pendingStatus": "awaiting_policy_refresh",
+  "maintenanceStatus": "awaiting_operator",
+  "stateGeneration": 168,
+  "publicHealth": {
+    "status": 200,
+    "healthy": true
+  },
+  "productionChanged": false
+}
