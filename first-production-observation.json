@@ -1,0 +1,309 @@
+{
+  "observedAt": "2026-10-28T15:07:04.865Z",
+  "run": {
+    "id": 40710511698,
+    "attempt": 1,
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40710511698",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "failure",
+    "source": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "createdAt": "2026-10-28T14:54:05Z",
+    "updatedAt": "2026-10-28T14:54:34Z",
+    "jobs": [
+      {
+        "id": 122894206040,
+        "name": "first",
+        "status": "completed",
+        "conclusion": "failure",
+        "startedAt": "2026-10-28T14:54:08Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Read owner pause and instructions before metadata-only validation",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Run ./.github/actions/puzzoria-agent",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Read the trusted pending receipt without exposing a commit as a job output",
+            "status": "completed",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Run ./.github/actions/puzzoria-agent",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "id": 122894208333,
+        "name": "search-console-check",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:06Z",
+        "completedAt": "2026-10-28T14:54:06Z",
+        "steps": []
+      },
+      {
+        "id": 122894474446,
+        "name": "second",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:33Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      },
+      {
+        "id": 122894474848,
+        "name": "release-prepare",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:33Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      },
+      {
+        "id": 122894475186,
+        "name": "release-finalize",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:33Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      },
+      {
+        "id": 122894476143,
+        "name": "production-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:34Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      },
+      {
+        "id": 122894476314,
+        "name": "release-validation",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:34Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      },
+      {
+        "id": 122894477443,
+        "name": "production",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-28T14:54:34Z",
+        "completedAt": "2026-10-28T14:54:33Z",
+        "steps": []
+      }
+    ]
+  },
+  "activation": {
+    "agent": true,
+    "production": true,
+    "noPaymentMethodDeclaration": true
+  },
+  "state": {
+    "generation": 165,
+    "status": "ready",
+    "nextEligibleAt": null,
+    "lastMessageId": 6434434856,
+    "issueNumber": 3,
+    "completedSessions": 23,
+    "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "pendingDeployment": {
+      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
+      "mergeSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "prNumber": 27,
+      "status": "deployed",
+      "deploymentFailures": 1,
+      "nextDeploymentAttemptAt": "2026-10-28T03:52:23.394Z",
+      "lastDeploymentFailureAt": "2026-10-27T21:52:23.394Z"
+    },
+    "experimentCount": 4,
+    "validationReservedMinutes": 164
+  },
+  "communication": {
+    "url": "https://github.com/Aimericv/puzzoria/issues/3",
+    "recentOwnerMessages": [
+      {
+        "id": 6349565126,
+        "createdAt": "2026-10-22T19:35:16Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6349565126",
+        "processed": true
+      }
+    ],
+    "recentReports": [
+      {
+        "id": 6450514179,
+        "createdAt": "2026-10-27T18:37:38Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6450514179",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6451063661,
+        "createdAt": "2026-10-27T19:04:41Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6451063661",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6452608343,
+        "createdAt": "2026-10-27T20:19:55Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6452608343",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6453650742,
+        "createdAt": "2026-10-27T21:10:31Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6453650742",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454284362,
+        "createdAt": "2026-10-27T21:40:44Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454284362",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454482237,
+        "createdAt": "2026-10-27T21:49:47Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454482237",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6454536311,
+        "createdAt": "2026-10-27T21:52:26Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6454536311",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": true
+      },
+      {
+        "id": 6472167237,
+        "createdAt": "2026-10-28T14:47:26Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6472167237",
+        "rolloutHealthy": true,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
+      }
+    ]
+  },
+  "productionAccessedByObserver": false,
+  "protectedStateChanged": false,
+  "stateEncoding": {
+    "githubReportedBytes": 159161,
+    "decodedBytes": 159161,
+    "schemaVersion": 1,
+    "repositoryMatches": true,
+    "generationIsInteger": true,
+    "approvalDateIsValid": true,
+    "pendingMessagesArray": true
+  },
+  "postRolloutMetadata": {
+    "releaseQueueIsArray": true,
+    "releaseQueueLength": 4,
+    "releaseQueueNullRows": 0,
+    "experiments": [
+      {
+        "index": 0,
+        "prNumber": 11,
+        "mergeShaType": "string",
+        "mergeShaIsValid": true,
+        "deploymentRecorded": true
+      },
+      {
+        "index": 1,
+        "prNumber": 15,
+        "mergeShaType": "string",
+        "mergeShaIsValid": true,
+        "deploymentRecorded": true
+      },
+      {
+        "index": 2,
+        "prNumber": 18,
+        "mergeShaType": "undefined",
+        "mergeShaIsValid": false,
+        "deploymentRecorded": false
+      },
+      {
+        "index": 3,
+        "prNumber": 19,
+        "mergeShaType": "undefined",
+        "mergeShaIsValid": false,
+        "deploymentRecorded": false
+      }
+    ]
+  },
+  "newPullRequests": [],
+  "latestReport": {
+    "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6472167237",
+    "createdAt": "2026-10-28T14:47:26Z",
+    "summary": "Mise en service initiale autorisée par le propriétaire : deployed. Sauvegarde vérifiée, contrôles publics et image f1cc44089db87644299ea88a09fae7d9d25be18c. Les prochaines observations mesureront les résultats sur des fenêtres complètes."
+  },
+  "workflow": {
+    "state": "active",
+    "path": ".github/workflows/autonomy-agent.yml"
+  },
+  "publicHealth": {
+    "url": "https://puzzoria.com/api/health",
+    "status": 200,
+    "healthy": true
+  },
+  "completedJobErrorCategories": [
+    {
+      "job": "first",
+      "categories": [
+        "missing_typescript",
+        "module_not_found",
+        "control_tests_failed",
+        "owner_control",
+        "quota"
+      ]
+    }
+  ]
+}
