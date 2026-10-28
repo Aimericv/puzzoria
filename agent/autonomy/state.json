@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 165,
+  "generation": 166,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2351,6 +2351,18 @@
       "accounting": {
         "source": "bounded-windows-installer-staging-reservation",
         "maximumJobMinutes": 3,
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-28T15:31:26.575Z",
+      "runId": "40716770155",
+      "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
+      "minutes": 6,
+      "settled": false,
+      "accounting": {
+        "source": "bounded-clean-runner-maintenance-validation",
+        "maximumJobMinutes": 4,
         "marginMinutes": 2
       }
     }
