@@ -1,56 +1,23 @@
-name: Stage explicitly owner-reviewed runner and receipt maintenance
+name: Verify completed maintenance upload and suspended autonomy
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  stage:
+  observe:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
     permissions:
       contents: write
-      actions: write
-      pull-requests: write
-      statuses: write
-      issues: read
+      actions: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          path: candidate
-          ref: ef98d986c060a207222ae6d604e00e95f94b8cd9
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: candidate
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          name: reviewed-puzzoria-controller
-          run-id: 40716770155
-          github-token: ${{ github.token }}
-          path: candidate/.reviewed-controller
-      - run: node ../control/scripts/stage-reviewed-maintenance.mjs
-        working-directory: candidate
+      - run: node scripts/check-reviewed-maintenance-ready.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
-          OWNER_APPROVED_PR: '28'
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-maintenance
-          include-hidden-files: true
-          path: |
-            candidate/.release/maintenance/puzzoria-controller.tar.gz
-            candidate/.release/maintenance/reviewed.bundle
-            candidate/.release/maintenance/REVIEW.json
-          retention-days: 7
