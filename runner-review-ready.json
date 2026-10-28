@@ -1,0 +1,16 @@
+{
+  "pr": {
+    "number": 28,
+    "url": "https://github.com/Aimericv/puzzoria/pull/28",
+    "source": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
+    "draft": true,
+    "merged": false
+  },
+  "reviewRun": "40716770155",
+  "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "stateGeneration": 166,
+  "validationReservedMinutes": 170,
+  "maintenancePreparedNotActivated": true,
+  "ownerApprovalStillRequired": true,
+  "productionChanged": false
+}
