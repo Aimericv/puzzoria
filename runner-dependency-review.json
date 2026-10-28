@@ -1,0 +1,67 @@
+{
+  "source": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
+  "base": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "paths": [
+    ".github/actions/puzzoria-agent/action.yml",
+    "agent/autonomy/control.json",
+    "deploy/release-reviewed-maintenance.mjs",
+    "deploy/setup-release-from-windows.ps1",
+    "deploy/update-reviewed-maintenance.ps1",
+    "docs/AUTONOMY-GROWTH.fr.md",
+    "scripts/autonomy-agent/package-controller.mjs",
+    "scripts/autonomy-agent/release-client.mjs",
+    "scripts/autonomy-agent/release-receipt.mjs",
+    "scripts/autonomy-agent/release-receipt.test.mjs",
+    "scripts/autonomy-agent/reviewed-maintenance.test.mjs",
+    "scripts/autonomy-agent/test-windows-host-key.ps1"
+  ],
+  "cold": {
+    "missingTypeScriptReproduced": true,
+    "plusCredentialsExposed": false
+  },
+  "nativeControls": {
+    "tests": 85,
+    "passed": 85,
+    "failed": 0,
+    "skipped": 0
+  },
+  "controls": {
+    "tests": 98,
+    "passed": 98,
+    "failed": 0,
+    "skipped": 0
+  },
+  "windows": {
+    "strictKnownHosts": true,
+    "passed": 7,
+    "independentFingerprint": true,
+    "productionContacted": false,
+    "sshKeyscanRequired": false,
+    "failed": 0,
+    "publicKeyOnly": true
+  },
+  "ready": {
+    "passed": 7,
+    "productionContacted": false,
+    "failed": 0,
+    "memoryAndOwnerMessagesPreserved": true,
+    "exactBlobCompareAndSwap": true
+  },
+  "lint": true,
+  "powerShellParseAndDryRun": true,
+  "controllerPolicyHash": "fc262eaa978c2860e71594f84670098abdbfff5e99463dbb60773bcd34bca795",
+  "archiveSha256": "5dbb02c5f50878b9307e97eb91727654961e4e0f538361d4d315d97ec8b9ffd7",
+  "applicationUnchanged": true,
+  "hostModulesUnchanged": true,
+  "unit": 359,
+  "e2e": 424,
+  "previousHealthyProduction": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "productionChanged": false,
+  "modelCalled": false,
+  "ownerApprovalStillRequired": true,
+  "pr": {
+    "number": 28,
+    "url": "https://github.com/Aimericv/puzzoria/pull/28"
+  },
+  "url": "https://github.com/Aimericv/puzzoria/actions/runs/40716770155"
+}
