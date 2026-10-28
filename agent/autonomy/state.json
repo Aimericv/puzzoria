@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 166,
+  "generation": 167,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2025,7 +2025,7 @@
       "prNumber": 27,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
-      "status": "deployed",
+      "status": "awaiting_policy_refresh",
       "includedExperiments": [
         "word-guide-worked-deductions",
         "published-vocabulary-discovery"
@@ -2358,11 +2358,25 @@
       "at": "2026-10-28T15:31:26.575Z",
       "runId": "40716770155",
       "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
-      "minutes": 6,
+      "minutes": 4,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-review-job-timestamps",
+        "jobId": 122916466984,
+        "startedAt": "2026-10-28T15:31:12Z",
+        "completedAt": "2026-10-28T15:32:38Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-10-28T15:53:03.596Z",
+      "runId": "40720356714",
+      "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
+      "minutes": 5,
       "settled": false,
       "accounting": {
-        "source": "bounded-clean-runner-maintenance-validation",
-        "maximumJobMinutes": 4,
+        "source": "bounded-reviewed-maintenance-staging",
+        "maximumJobMinutes": 3,
         "marginMinutes": 2
       }
     }
