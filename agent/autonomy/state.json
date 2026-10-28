@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 167,
+  "generation": 168,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2097,7 +2097,23 @@
       "previousPolicyHash": "0ee131d537963725af78d876e06893791a46a3206f83fdb8b96a8a95ee22ce18",
       "hostPolicyRefreshRequired": true
     },
-    "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c"
+    "lastDeployedCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+    "reviewedMaintenance": {
+      "kind": "reviewed-controller-maintenance",
+      "ownerAuthorized": true,
+      "approvedAt": "2026-10-28T15:53:13.035Z",
+      "source": "Explicit owner approval of PR28 and controlled supervisor maintenance in this Codex conversation",
+      "sha": "debb36f663cf027e91425d98420dd62467e54175",
+      "previousCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+      "validatedSource": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
+      "policyHash": "fc262eaa978c2860e71594f84670098abdbfff5e99463dbb60773bcd34bca795",
+      "previousPolicyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961",
+      "controllerArchiveSha256": "5dbb02c5f50878b9307e97eb91727654961e4e0f538361d4d315d97ec8b9ffd7",
+      "bundleSha256": "69f7dcaf2c26cd9c386fc9f512a77019e78ad71023b7167e5ec777cbab55bba0",
+      "validationRunId": "40716770155",
+      "packageRunId": "40720356714",
+      "status": "awaiting_operator"
+    }
   },
   "releaseValidationHistory": [
     {
