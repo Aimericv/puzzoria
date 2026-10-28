@@ -1,0 +1,21 @@
+{
+  "target": "40589012232",
+  "source": "f1cc44089db87644299ea88a09fae7d9d25be18c",
+  "completedProductionJob": 122491685406,
+  "knownErrorCategories": [
+    "fetch_failed"
+  ],
+  "transientNetworkFailure": true,
+  "rerunRequested": true,
+  "productionAccessedByOperator": false,
+  "logMetadata": {
+    "contentType": "text/plain",
+    "bytes": 32055,
+    "timestampedLines": 314,
+    "scopedLines": 28
+  },
+  "completedTerminalError": "fetch failed",
+  "stateGeneration": 163,
+  "failureCountPreserved": true,
+  "retryDelayRespected": true
+}
