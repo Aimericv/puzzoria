@@ -1,17 +1,16 @@
-name: Verify held first publication and current public availability
+name: Wake ordinary autonomy after confirmed first production
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
 jobs:
-  observe:
-    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+  wake:
+    if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' && vars.PUZZORIA_AGENT_ENABLED == 'true' && vars.PUZZORIA_AUTODEPLOY_ENABLED == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
     permissions:
       contents: write
-      actions: read
-      issues: read
+      actions: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -19,7 +18,7 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/observe-first-production.mjs
+      - run: node scripts/wake-after-first-production.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
