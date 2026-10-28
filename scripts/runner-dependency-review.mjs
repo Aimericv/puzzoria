@@ -1,0 +1,32 @@
+import {readFileSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {github} from './autonomy-pilot/github.mjs';
+const source='ef98d986c060a207222ae6d604e00e95f94b8cd9',base='f1cc44089db87644299ea88a09fae7d9d25be18c';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),load=p=>import(pathToFileURL(resolve(p)));
+const control=JSON.parse(readFileSync('agent/autonomy/control.json')),{StateStore}=await load('scripts/autonomy-agent/store.mjs'),store=new StateStore(api,control,base),state=await store.load();
+if(process.env.FREE_FLAG!=='true'||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim()!==source||state.growth.lastDeployedCommit!==base)throw Error('Exact branch, free-only funding and already healthy production required');
+if(process.argv[2]==='reserve'){
+ const used=state.releaseValidationHistory.reduce((n,row)=>n+row.minutes,0);if(used+6+5>180)throw Error('Preserve the existing validation allowance');
+ state.releaseValidationHistory.push({at:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID,sha:source,minutes:6,settled:false,accounting:{source:'bounded-clean-runner-maintenance-validation',maximumJobMinutes:4,marginMinutes:2}});
+ await store.save('Reserve clean runner and receipt regression validation without changing production or autonomy');
+ console.log(JSON.stringify({reservedMinutes:6,totalReservedMinutes:used+6,limit:180,productionUnchanged:true}));
+}else if(process.argv[2]==='publish'){
+ const paths=execFileSync('git',['diff','--name-only',base,source],{encoding:'utf8'}).trim().split('\n');
+ const {MAINTENANCE_PATHS}=await load('deploy/release-reviewed-maintenance.mjs');
+ if(paths.length!==12||paths.some(path=>!MAINTENANCE_PATHS.has(path)))throw Error('Only reviewed runner, receipt and maintenance files may change');
+ const modules=['release-host.mjs','deployment-transaction.mjs','release-policy.mjs','public-probe.mjs'].map(p=>'scripts/autonomy-agent/'+p);
+ if(execFileSync('git',['diff','--name-only',base,source,'--',...modules],{encoding:'utf8'}).trim())throw Error('Existing real backup and rollback controller must stay identical');
+ const cold=JSON.parse(readFileSync('.ci-results/cold.json')),windows=JSON.parse(readFileSync('.ci-results/windows-host-key.json')),ready=JSON.parse(readFileSync('.ci-results/bootstrap-ready.json'));
+ const counts=file=>{const text=readFileSync(file,'utf8'),value=key=>Number(text.match(new RegExp('^# '+key+' (\\d+)','m'))?.[1]??0);return {tests:value('tests'),passed:value('pass'),failed:value('fail'),skipped:value('skipped')};};
+ const controls=counts('.ci-results/control.tap'),native=counts('.ci-results/native-controls.tap');
+ if(!cold.missingTypeScriptReproduced||controls.tests!==98||controls.passed!==98||controls.failed||controls.skipped||native.tests<80||native.passed!==native.tests||native.failed||native.skipped||windows.passed!==7||windows.failed||ready.passed!==7||ready.failed)throw Error('Cold reproduction, exact native action and all regression tests required');
+ const {releasePolicyHash}=await load('scripts/autonomy-agent/release-client.mjs'),manifest=JSON.parse(readFileSync('.release/controller/VALIDATION.json'));
+ if(manifest.source!==source||manifest.policyHash!==releasePolicyHash()||control.release.productionAuthorization.policyHash!==manifest.policyHash)throw Error('Exact reviewed controller package required');
+ const url=`https://github.com/Aimericv/puzzoria/actions/runs/${process.env.GITHUB_RUN_ID}`;
+ const existing=(await api('/pulls?state=all&head=Aimericv:codex/runner-dependencies'))[0];
+ const pr=existing??await api('/pulls','POST',{head:'codex/runner-dependencies',base:'main',draft:true,title:'Débloquer les réveils du runner et rendre les reçus de publication durables',body:`Le réveil normal échoue avant le modèle : les tests de contrôle importent TypeScript avant l’installation des dépendances applicatives. Le runner installe désormais le lockfile avec --ignore-scripts avant ces tests, sans identifiants Plus. Le premier déploiement réel a aussi révélé qu’une panne réseau d’attribution GitHub pouvait laisser un reçu sain non enregistré : le reçu est désormais durable avant toute attribution ou rapport facultatif ; une écriture primaire non confirmée restaure l’état avant la reprise bornée.\\n\\nLa maintenance est distincte des publications automatiques : accord humain exact, paquet et bundle vérifiés, clé root locale, liste fermée de fichiers non applicatifs et modules hôtes inchangés. Elle conserve le vrai commit précédent et réutilise la transaction existante de sauvegarde restaurable, prévisualisation, schéma, contrôles publics et rollback. La politique n’est activée qu’après succès. Aucun nouveau droit du compte SSH restreint, service ou dépense.\\n\\nValidation : reproduction sur runner vierge sans TypeScript, installation puis commande de tests native réussie, 98 contrôles (dont panne d’attribution, échec d’écriture primaire, rollback et maintenance exacte), lint ; 7 cas de clé SSH et 7 cas de confirmation Windows avec régression de JSON trop volumineux ; analyse PowerShell et mode sans changement. Application et quatre modules hôtes identiques aux preuves précédentes de 359 tests unitaires,424 Playwright et deux fixtures Docker de rollback. Aucun accès VPS, modèle ou publication dans ces tests. [Preuves](${url}).`});
+ const report={source,base,paths,cold,nativeControls:native,controls,windows,ready,lint:true,powerShellParseAndDryRun:true,controllerPolicyHash:manifest.policyHash,archiveSha256:readFileSync('.release/puzzoria-controller.sha256','utf8').trim().split(/\s+/)[0],applicationUnchanged:true,hostModulesUnchanged:true,unit:359,e2e:424,previousHealthyProduction:base,productionChanged:false,modelCalled:false,ownerApprovalStillRequired:true,pr:{number:pr.number,url:pr.html_url},url};
+ const parent=process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'runner-dependency-review.json',mode:'100644',type:'blob',content:JSON.stringify(report,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Record cold-runner dependency and durable receipt regression validation; production unchanged',tree:tree.sha,parents:[parent]});await api('/git/refs','POST',{ref:`refs/heads/codex/runner-dependency-review/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});console.log(JSON.stringify(report));
+}else throw Error('Explicit validation phase required');
