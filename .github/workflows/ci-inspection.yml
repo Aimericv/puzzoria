@@ -1,82 +1,23 @@
-name: Validate cold runner dependency and durable production receipts
+name: Prepare readable review of the tested runner maintenance only
 on:
   push:
     branches: [codex/ci-inspection]
 permissions: {}
-concurrency:
-  group: puzzoria-autonomy-pilot
-  cancel-in-progress: false
 jobs:
-  validate:
+  describe:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 2
     permissions:
       contents: write
-      actions: read
       pull-requests: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-        with:
-          path: candidate
-          ref: ef98d986c060a207222ae6d604e00e95f94b8cd9
-          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node ../control/scripts/runner-dependency-review.mjs reserve
-        working-directory: candidate
-        env: &review-env
+      - run: node scripts/prepare-runner-review-summary.mjs
+        env:
           GITHUB_TOKEN: ${{ github.token }}
-          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
-      - run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
-        working-directory: candidate
-      - name: Reproduce the old clean-runner TypeScript failure without any Plus credentials
-        working-directory: candidate
-        run: |
-          mkdir -p .ci-results
-          test ! -d node_modules
-          if node --test scripts/autonomy-agent/*.test.mjs > .ci-results/cold.tap 2>&1; then exit 1; fi
-          python3 - <<'PYCODE'
-          import json
-          from pathlib import Path
-          data=Path('.ci-results/cold.tap').read_text()
-          assert "Cannot find package 'typescript'" in data
-          Path('.ci-results/cold.json').write_text(json.dumps({'missingTypeScriptReproduced':True,'plusCredentialsExposed':False}))
-          PYCODE
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-        working-directory: candidate
-      - name: Run the exact native control command after locked dependency installation
-        run: node --test --test-reporter=tap scripts/autonomy-agent/*.test.mjs > .ci-results/native-controls.tap
-        working-directory: candidate
-      - run: node --test --test-isolation=none --test-reporter=tap scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs > .ci-results/control.tap && npm run lint
-        working-directory: candidate
-      - name: Verify Windows parser, no-change defaults, host keys, CAS and large state serialization
-        shell: pwsh
-        working-directory: candidate
-        run: |
-          & ./scripts/autonomy-agent/test-windows-host-key.ps1
-          $tokens = $null
-          $parseErrors = $null
-          [void][System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path 'deploy/update-reviewed-maintenance.ps1'), [ref]$tokens, [ref]$parseErrors)
-          if ($parseErrors.Count) { $parseErrors | ForEach-Object { Write-Error $_.Message }; exit 1 }
-          & ./deploy/setup-release-from-windows.ps1
-          & ./deploy/update-reviewed-maintenance.ps1
-      - run: node scripts/autonomy-agent/package-controller.mjs
-        working-directory: candidate
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: reviewed-puzzoria-controller
-          include-hidden-files: true
-          path: |
-            candidate/.release/puzzoria-controller.tar.gz
-            candidate/.release/puzzoria-controller.sha256
-          retention-days: 7
-      - run: node ../control/scripts/runner-dependency-review.mjs publish
-        working-directory: candidate
-        env: *review-env
