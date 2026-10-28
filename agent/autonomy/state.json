@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 162,
+  "generation": 163,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2248,7 +2248,7 @@
       "prNumber": 27,
       "experimentId": "reviewed-growth-bootstrap",
       "verified": true,
-      "status": "deployed",
+      "status": "awaiting_activation",
       "includedExperiments": [
         "word-guide-worked-deductions",
         "published-vocabulary-discovery"
