@@ -211,6 +211,28 @@ lecture ne modifie pas le serveur et ne dépend plus de `ssh-keyscan`, dont la
 négociation peut échouer sous Windows alors que `ssh` fonctionne. Une connexion
 administrative vérifiée doit donc avoir déjà été établie depuis ce PC.
 
+Les contrôles du runner installent les dépendances applicatives verrouillées
+avant les tests Node qui importent TypeScript. Cette installation utilise
+`--ignore-scripts` et précède toute exposition des identifiants Plus.
+
+Le reçu du VPS est enregistré avant les comparaisons GitHub d'attribution et
+le commentaire de rapport. Une panne réseau de ces opérations facultatives
+ne remet donc pas en attente une publication déjà confirmée. Si l'écriture
+primaire échoue, l'état précédent est restauré avant de programmer la reprise
+bornée ; aucun statut « deployed » sans commit confirmé n'est conservé.
+
+Après la première publication, une maintenance du superviseur reste une
+opération humaine distincte : PR exacte revue, bundle et paquet contrôlés,
+clé administrative locale et liste fermée de fichiers non applicatifs. Le
+script root `release-reviewed-maintenance.mjs` exige un journal sain, les quatre
+modules hôtes inchangés et un arbre identique à la source validée. Il conserve
+le vrai commit précédent et réutilise la transaction existante de construction,
+sauvegarde restaurable, prévisualisation, schéma, santé publique et rollback.
+La nouvelle politique n'est activée qu'après réussite ; le compte SSH restreint
+n'obtient aucune commande ni aucun droit supplémentaire. La configuration est
+sauvegardée et remplacée atomiquement. Les mises à jour de mémoire Windows
+utilisent un JSON compact et un contrôle de concurrence ; aucune troncature.
+
 Un lancement manuel `deploy-pending` ignore volontairement les sessions Codex.
 Le job de production utilise donc `always()` avec résultat réussi et sortie
 `allowed` du verrou ; les ancêtres ignorés ne doivent pas faire sauter une

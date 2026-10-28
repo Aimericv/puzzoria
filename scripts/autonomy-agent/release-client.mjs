@@ -9,9 +9,10 @@ import {deploymentAllowed} from './release-policy.mjs';
 import {github} from '../autonomy-pilot/github.mjs';
 import {StateStore} from './store.mjs';
 import {assertFunding,REPOSITORY} from './policy.mjs';
+import {commitObservedDeployment,attributeSharedRollouts} from './release-receipt.mjs';
 export function releasePolicyHash() {
   const files=['scripts/autonomy-agent/release-policy.mjs','scripts/autonomy-agent/release-controller.mjs','scripts/autonomy-agent/release-host.mjs','scripts/autonomy-agent/deployment-transaction.mjs','scripts/autonomy-agent/public-probe.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/release-check.mjs','scripts/autonomy-agent/release-validation.mjs','.github/containers/release-verifier.Dockerfile','.github/workflows/autonomy-agent.yml','.github/actions/puzzoria-agent/action.yml','deploy/puzzoria-release-entry.sh','deploy/install-release-controller.sh','deploy/setup-release-from-windows.ps1','deploy/puzzoria-release-recover.service','deploy/puzzoria-release-recover.timer','package-lock.json'];
-  files.push('deploy/refresh-bootstrap-policy.mjs','deploy/puzzoria-release-sshd.conf','deploy/puzzoria-release-sshd.service','scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs','scripts/autonomy-agent/deployment-owner-control.mjs');
+  files.push('scripts/autonomy-agent/release-receipt.mjs','deploy/release-reviewed-maintenance.mjs','deploy/update-reviewed-maintenance.ps1','deploy/refresh-bootstrap-policy.mjs','deploy/puzzoria-release-sshd.conf','deploy/puzzoria-release-sshd.service','scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs','scripts/autonomy-agent/deployment-owner-control.mjs');
   return createHash('sha256').update(files.map(file=>file+'\n'+readFileSync(file,'utf8')).join('\n')).digest('hex');
 }
 export function pendingDeploymentAllowed(control,state,now=Date.now()) {
@@ -75,21 +76,16 @@ export async function run(mode=process.argv[2]) {
     if(receipt.sha!==sha||!['healthy','rolled_back'].includes(receipt.phase)||receipt.backup?.verified!==true||
       (receipt.phase==='healthy'&&(receipt.currentCommit!==sha||!Number.isFinite(Date.parse(receipt.releasedAt)))))throw Error('Deployment receipt does not identify a verified rollout');
     if(receipt.phase==='healthy'&&result.status!==0)throw Error('SSH did not confirm successful rollout completion');
-    candidate.status=receipt.phase==='healthy'?'deployed':'rolled_back';
-    const queued=state.growth.releaseQueue?.find(row=>row.prNumber===candidate.prNumber&&row.sha===candidate.sha);if(queued)queued.status=candidate.status;
-    const deployment={status:candidate.status,sha,releasedAt:receipt.releasedAt??null,finishedAt:receipt.finishedAt,previousCommit:expected};
-    if(experiment)experiment.deployment=deployment;
-    if(candidate.status==='deployed')for(const row of state.growth.experiments)if(row!==experiment&&row.mergeSha&&!row.deployment?.releasedAt){const comparison=await api(`/compare/${row.mergeSha}...${sha}`);if(['ahead','identical'].includes(comparison.status))row.deployment={...deployment,sharedRollout:true};}
-    if(candidate.status==='deployed')state.growth.lastDeployedCommit=sha;
-    await store.save('Record an observed host rollout or image rollback; never invent deployment success');confirmed=true;
-    await api('/issues/3/comments','POST',{body:`${experiment?`Expérience ${experiment.id}`:'Mise en service initiale autorisée par le propriétaire'} : ${candidate.status}. Sauvegarde vérifiée, contrôles publics et image ${sha}. ${candidate.status==='rolled_back'?'Retour automatique à l’image précédente ; les données courantes sont conservées.':'Les prochaines observations mesureront les résultats sur des fenêtres complètes.'}`});
+    const deployment=await commitObservedDeployment({state,store,candidate,experiment,receipt,sha,expected});confirmed=true;
+    await attributeSharedRollouts({api,state,store,experiment,deployment,onDeferred:event=>console.log(JSON.stringify(event))});
+    try{await api('/issues/3/comments','POST',{body:`${experiment?`Expérience ${experiment.id}`:'Mise en service initiale autorisée par le propriétaire'} : ${deployment.status}. Sauvegarde vérifiée, contrôles publics et image ${sha}. ${deployment.status==='rolled_back'?'Retour automatique à l’image précédente ; les données courantes sont conservées.':'Les prochaines observations mesureront les résultats sur des fenêtres complètes.'}`});}catch{console.log(JSON.stringify({deploymentReportDeferred:true}));}
     console.log(JSON.stringify({status:candidate.status,sha,previousCommit:expected,backupVerified:receipt.backup?.verified}));
     if(candidate.status==='rolled_back')process.exitCode=1;
   } catch(error) {
     if(!confirmed){
-      recordDeploymentFailure(candidate);
+      const unconfirmed=pendingDeployment(state);recordDeploymentFailure(unconfirmed);
       try{await store.save('Preserve an unconfirmed deployment; wait before idempotent retry and require review after three failures');}catch{/* Never override a concurrently changed state. */}
-      try{await api('/issues/3/comments','POST',{body:`Publication ${sha} : aucun reçu de déploiement confirmé. ${candidate.status==='manual_intervention'?'Revue nécessaire après trois échecs.':'Reprise idempotente au plus tôt dans six heures ; les nouvelles fusions applicatives attendent cette confirmation.'} Aucun succès ni effet de croissance attribué. [Exécution](https://github.com/${REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}).`});}catch{/* Preserve the original failure. */}
+      try{await api('/issues/3/comments','POST',{body:`Publication ${sha} : aucun reçu de déploiement confirmé. ${unconfirmed.status==='manual_intervention'?'Revue nécessaire après trois échecs.':'Reprise idempotente au plus tôt dans six heures ; les nouvelles fusions applicatives attendent cette confirmation.'} Aucun succès ni effet de croissance attribué. [Exécution](https://github.com/${REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}).`});}catch{/* Preserve the original failure. */}
     }
     throw error;
   } finally {rmSync(directory,{recursive:true,force:true});}
