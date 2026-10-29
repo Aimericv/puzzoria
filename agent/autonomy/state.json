@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 171,
-  "status": "ready",
+  "generation": 172,
+  "status": "running",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -916,7 +916,7 @@
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/11",
         "status": "merged",
         "assessment": {
-          "status": "awaiting_verified_deployment",
+          "status": "waiting_complete_windows",
           "causalClaim": false
         },
         "requiresDeployment": true,
@@ -1053,7 +1053,7 @@
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/15",
         "status": "merged",
         "assessment": {
-          "status": "awaiting_verified_deployment",
+          "status": "waiting_complete_windows",
           "causalClaim": false
         },
         "requiresDeployment": true,
@@ -1885,7 +1885,11 @@
           "fullRunId": "40539308357",
           "controllerRunId": "40549513756"
         },
-        "publicationMergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0"
+        "publicationMergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+        "assessment": {
+          "status": "awaiting_verified_deployment",
+          "causalClaim": false
+        }
       }
     ],
     "legacyWork": {
@@ -1894,18 +1898,18 @@
       "branch": "codex/agent-work"
     },
     "lastObservation": {
-      "id": "48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78",
-      "collectedAt": "2026-10-27T12:23:28.570Z",
+      "id": "f2b133293868b966bc27482a2e4561a3e75408df086cf9ac84204b0fab01db4a",
+      "collectedAt": "2026-10-29T23:23:47.643Z",
       "sources": {
         "puzzoria": {
           "status": "available",
-          "fetchedAt": "2026-10-27T12:23:23.397Z",
-          "sha256": "e653b88e3827dbde0b4fc5d25f129ccaeda90964b344487da0e5c836a408483e"
+          "fetchedAt": "2026-10-29T23:23:42.265Z",
+          "sha256": "7c4efa83c3c6f360b2b22d33c69aa44875cba997c317a54ea860e07fde6289a1"
         },
         "google": {
           "status": "available",
-          "fetchedAt": "2026-10-27T12:23:24.955Z",
-          "sha256": "e3a144ffbcf47ee0eee0c1ba399266a67518cf47944a6fe513d8a238a5b6d5c0"
+          "fetchedAt": "2026-10-29T23:23:43.920Z",
+          "sha256": "e56a22d15806006086ef49f2acfbf53a031341f2c1b420cba8e7464753882d98"
         }
       }
     },
