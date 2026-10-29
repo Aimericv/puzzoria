@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 170,
+  "generation": 171,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
   "checkpoint": {
-    "artifactId": 12733991144,
-    "runId": "40502857332",
-    "name": "puzzoria-agent-auth-40502857332-25",
-    "generation": 25,
+    "artifactId": 12941521041,
+    "runId": "40972604895",
+    "name": "puzzoria-agent-auth-40972604895-26",
+    "generation": 26,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "40502857332",
+      "runId": "40972604895",
       "phase": "autonomous-agent",
-      "generation": 25
+      "generation": 26
     },
-    "expiresAt": "2027-01-25T12:19:30Z",
-    "digest": "185d21d5a64061df4adeedff9e8a8c93f877a58fc5dd884a4cd0175dfd2b06cc"
+    "expiresAt": "2027-01-27T23:21:41Z",
+    "digest": "ed08df0c92444afb7baa1946bdf6cf32b654fffddfae484683e0bf1117fe7097"
   },
   "lastMessageId": 6472167237,
   "completedSessions": 23,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "40502857332",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40502857332"
+    "id": "40972604895",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/40972604895"
   },
   "memory": {
     "STATE.md": "# État — 27 octobre 2026 — source 24de1000 — protocole navigateur\n\nSource annoncée : 24de100089f917e7067c49866c0f073dd98c0686. AGENTS.md, mandat, inbox vide, quatre mémoires et quatre rapports readonly lus depuis le disque. Guide Next use-client.md consulté. Aucun Git, réseau externe, achat, merge ou déploiement. Le rapport FIRST-PLAY-AUDIT.fr.md mentionné par la mémoire précédente est absent de cette source ; il n’a pas été supposé livré ni réintroduit.\n\nDécision : poursuivre l’investigation première partie par des scénarios navigateur, sans intervention applicative avant reproduction. Contribution : e2e/first-play-entry.spec.ts et docs/FIRST-PLAY-BROWSER.fr.md. Trois scénarios par langue, quatre langues et quatre projets existants : 48 cas découverts. Word : première lettre via clavier affiché sans inscription. Mots mêlés : preview sous création retenue, run réel non démarré, masque visuel et contrôles désactivés, premier start refusé puis reprise réelle, sélection après départ. Autre scénario : création refusée puis Réessayer sur la même page. Les instantanés ARIA avant départ sont des pièces à examiner, pas des assertions de conformité. Pas de changement applicatif, de tracking ni de moteur.\n\nContexte observation 48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78, collecté à 12:23:28.570Z : trois expériences précédentes awaiting_verified_deployment ; lastFailure et unverifiedWork null. Ne pas reproduire les PR précédentes sur cette source ni leur attribuer un effet.\n\nSearch Console available à 12:23:24.955Z : 30 jours demandés du 27 septembre au 26 octobre, dernière date rapportée 25 octobre, America/Los_Angeles, 177 impressions et six clics. Lignes partielles /es/palabra 29 impressions, /fr/mots-meles 13, sans clic. Pas de jointure page/requête ni de funnel Google vers départ. Analytics available à 12:23:23.397Z : 30 jours UTC 28 septembre–27 octobre, jour courant partiel, six identités compte/appareil, 20 départs et 18 fins. Identités distinctes de personnes ; visites consenties distinctes du trafic total. D+7 mature cinq, zéro retour ; D+30 dénominateur zéro, pourcentage null. Trends à 12:23:27.471Z : RSS FR/US/DE/ES disponibles, TikTok indisponible. Les signaux publics ne démontrent aucune demande Puzzoria justifiant un nouveau jeu.\n\nVérifications locales finales : npm run typecheck code 0 ; npm run lint code 0 puis npx eslint e2e/first-play-entry.spec.ts --max-warnings 0 code 0 après ajout du troisième scénario ; npx playwright test e2e/first-play-entry.spec.ts --list code 0, 48 cas. Aucun cas navigateur exécuté. Pas de suite unitaire générale ni validation contenu relancée : aucun code applicatif ni contenu de jeu modifié. Build et serveurs réservés au superviseur. La découverte et le typage ne garantissent pas la réussite des scénarios.\n\nIncertitude concrète : le plateau du vrai run conserve c.grid[i] dans les aria-label avant Démarrer alors que le CSS rend le texte transparent. Cela établit un chemin dans le code, sans preuve navigateur de l’exposition actuelle. Le preview page-preview-v1 est un puzzle distinct : ne pas le confondre avec le run réservé. Les tests attachent les deux instantanés séparément. Aucun temps de préparation habituel, usage lecteur d’écran physique, effet de conversion ou comportement Safari physique mesuré.\n\nNouvelle recherche first-play-browser-protocol, decision continue : playing.starts, suivi exploratoire 14 jours complets, minimum 20 dans chacune des fenêtres, +20 %. Aucun effet immédiat attendu du protocole, baseline et dates au superviseur. Le protocole de first-play-entry-audit arrêté et ceux des anciennes expériences restent inchangés dans EXPERIMENTS.\n\nProchaine mission choisie : examiner résultats et instantanés superviseur ; si les lettres du vrai run sont exposées avant départ, corriger le rendu accessible et ajouter une assertion de non-exposition avec contrôle positif après Démarrer. Sinon réévaluer l’hypothèse sans correction artificielle. Quatre mémoires mises à jour, nonce préservé. Publication à déterminer par le superviseur après arrêt des outils.\n",
