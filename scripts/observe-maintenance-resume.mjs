@@ -1,0 +1,53 @@
+import {github} from './autonomy-pilot/github.mjs';
+const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),target='40972604895';
+let proofHead=null;
+async function snapshot(){
+const r=await api('/actions/runs/'+target),{jobs}=await api('/actions/runs/'+target+'/jobs?per_page=100');
+if(r.head_branch!=='main'||r.path!=='.github/workflows/autonomy-agent.yml'||r.head_sha!=='debb36f663cf027e91425d98420dd62467e54175')throw Error('Observe only the exact owner-dispatched wake after verified maintenance');
+const f=await api('/contents/agent/autonomy/state.json?ref=codex/agent-state'),state=JSON.parse(Buffer.from(f.content,'base64'));
+const issue=await api('/issues/3'),lastPage=Math.max(1,Math.ceil(issue.comments/100));
+const comments=(await Promise.all([...new Set([Math.max(1,lastPage-1),lastPage])].map(page=>api('/issues/3/comments?per_page=100&page='+page)))).flat().sort((a,b)=>a.id-b.id).slice(-100);
+const owner=(await api('')).owner.id;
+const out={observedAt:new Date().toISOString(),run:{id:r.id,attempt:r.run_attempt,url:r.html_url,event:r.event,status:r.status,conclusion:r.conclusion,source:r.head_sha,createdAt:r.created_at,updatedAt:r.updated_at,jobs:jobs.map(j=>({id:j.id,name:j.name,status:j.status,conclusion:j.conclusion,startedAt:j.started_at,completedAt:j.completed_at,steps:j.steps?.map(s=>({name:s.name,status:s.status,conclusion:s.conclusion}))}))},activation:{agent:process.env.AGENT_FLAG==='true',production:process.env.PRODUCTION_FLAG==='true',noPaymentMethodDeclaration:process.env.FREE_FLAG==='true'},state:{generation:state.generation,status:state.status,nextEligibleAt:state.nextEligibleAt,lastMessageId:state.lastMessageId,issueNumber:state.issueNumber,completedSessions:state.completedSessions,lastDeployedCommit:state.growth?.lastDeployedCommit??null,pendingDeployment:state.growth?.pendingDeployment?Object.fromEntries(['sha','mergeSha','prNumber','status','deploymentFailures','nextDeploymentAttemptAt','lastDeploymentFailureAt'].map(k=>[k,state.growth.pendingDeployment[k]??null])):null,experimentCount:state.growth?.experiments?.length??0,validationReservedMinutes:state.releaseValidationHistory?.reduce((n,row)=>n+row.minutes,0)},communication:{url:'https://github.com/Aimericv/puzzoria/issues/3',recentOwnerMessages:comments.filter(c=>c.user.id===owner&&c.user.type==='User').map(c=>({id:c.id,createdAt:c.created_at,url:c.html_url,processed:c.id<=state.lastMessageId})),recentReports:comments.filter(c=>c.user.type==='Bot').slice(-8).map(c=>({id:c.id,createdAt:c.created_at,url:c.html_url,rolloutHealthy:c.body.includes(' : deployed. Sauvegarde vérifiée'),rolloutRolledBack:c.body.includes(' : rolled_back. Sauvegarde vérifiée'),rolloutUnconfirmed:c.body.includes('aucun reçu de déploiement confirmé')}))},productionAccessedByObserver:false,protectedStateChanged:false};
+out.reviewedMaintenance=state.growth?.reviewedMaintenance?{sha:state.growth.reviewedMaintenance.sha,status:state.growth.reviewedMaintenance.status,policyHash:state.growth.reviewedMaintenance.policyHash,receipt:state.growth.reviewedMaintenance.receipt?{sha:state.growth.reviewedMaintenance.receipt.sha,currentCommit:state.growth.reviewedMaintenance.receipt.currentCommit,phase:state.growth.reviewedMaintenance.receipt.phase,backupVerified:state.growth.reviewedMaintenance.receipt.backup?.verified,policyUpdated:state.growth.reviewedMaintenance.receipt.policyUpdated}:null}:null;
+out.stateEncoding={githubReportedBytes:f.size,decodedBytes:Buffer.byteLength(Buffer.from(f.content,'base64')),schemaVersion:state.schemaVersion,repositoryMatches:state.repository==='Aimericv/puzzoria',generationIsInteger:Number.isSafeInteger(state.generation),approvalDateIsValid:Number.isFinite(Date.parse(state.growth?.productionBootstrapApproval?.approvedAt)),pendingMessagesArray:state.pendingMessages===undefined||Array.isArray(state.pendingMessages)};
+out.postRolloutMetadata={releaseQueueIsArray:Array.isArray(state.growth?.releaseQueue),releaseQueueLength:state.growth?.releaseQueue?.length??null,releaseQueueNullRows:Array.isArray(state.growth?.releaseQueue)?state.growth.releaseQueue.filter(v=>v===null).length:null,experiments:Array.isArray(state.growth?.experiments)?state.growth.experiments.map((row,index)=>({index,prNumber:Number.isSafeInteger(row.prNumber)?row.prNumber:null,mergeShaType:typeof row.mergeSha,mergeShaIsValid:/^[a-f0-9]{40}$/.test(row.mergeSha??''),deploymentRecorded:!!row.deployment?.releasedAt})):null};
+const recentPrs=await api('/pulls?state=all&sort=created&direction=desc&per_page=20');
+out.newPullRequests=recentPrs.filter(pr=>Date.parse(pr.created_at)>=Date.parse(r.created_at)).map(pr=>({number:pr.number,title:pr.title,url:pr.html_url,state:pr.state,draft:pr.draft}));
+const report=comments.filter(c=>c.user.type==='Bot').at(-1);
+if(report)out.latestReport={url:report.html_url,createdAt:report.created_at,summary:report.body.replace(/Bearer\s+\S+/gi,'Bearer [redacted]').replace(/(?:gh[pousr]_|github_pat_|sk-)[A-Za-z0-9_\-]+/g,'[redacted]').replace(/[A-Za-z0-9+/=]{80,}/g,'[redacted]').slice(0,1800)};
+const workflow=await api('/actions/workflows/autonomy-agent.yml');
+out.workflow={state:workflow.state,path:workflow.path};
+const health=await fetch('https://puzzoria.com/api/health',{redirect:'error',signal:AbortSignal.timeout(20000)});
+const value=await health.json();
+out.publicHealth={url:'https://puzzoria.com/api/health',status:health.status,healthy:health.status===200&&value.status==='ok'};
+const gateJob=jobs.find(j=>j.name==='production-gate'&&j.status==='completed'&&j.conclusion==='success');
+if(r.status==='completed'&&gateJob){
+ const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${gateJob.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
+ if(!response.ok)throw Error('Completed gate result unavailable');
+ const data=await response.text(),match=data.match(/\{"productionAllowed":(true|false),"policyHash":"([a-f0-9]{64})"\}/);
+ if(!match)throw Error('Structured gate result absent');
+ out.gate={productionAllowed:match[1]==='true',policyHash:match[2]};
+}
+const productionJob=jobs.find(j=>j.name==='production'&&j.status==='completed'&&['success','failure'].includes(j.conclusion));
+if(r.status==='completed'&&productionJob){
+ const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${productionJob.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
+ if(!response.ok)throw Error('Completed production receipt unavailable');
+ const data=await response.text(),match=data.match(/\{"status":"(deployed|rolled_back)","sha":"([a-f0-9]{40})","previousCommit":"([a-f0-9]{40})","backupVerified":(true|false)\}/);
+ if(match)out.deploymentResult={status:match[1],sha:match[2],previousCommit:match[3],backupVerified:match[4]==='true'};
+}
+if(r.status==='completed'&&r.conclusion!=='success'){
+ out.completedJobErrorCategories=[];
+ const patterns=[['missing_typescript',/Cannot find package 'typescript'|Cannot find module 'typescript'/],['module_not_found',/ERR_MODULE_NOT_FOUND|MODULE_NOT_FOUND/],['control_tests_failed',/test failed|fail [1-9]/],['sandbox_prepare_failed',/sandbox.*failed|Unexpected managed policy/],['cannot_read_property',/Cannot read properties|Cannot read property/],['not_a_function',/is not a function/],['not_iterable',/is not iterable/],['undefined_variable',/is not defined|Cannot access .+ before initialization/],['cannot_create_property',/Cannot create property/],['command_failed',/Command failed/],['invalid_receipt',/Deployment did not return|Deployment receipt does not|SSH did not confirm/],['invalid_github_path',/Invalid GitHub path/],['concurrent_state_change',/Agent state changed concurrently/],['compare_404',/GitHub GET \/compare\/[^\s]+ returned 404/],['compare_403',/GitHub GET \/compare\/[^\s]+ returned 403/],['github_422',/returned 422/],['github_429',/returned 429/],['github_500',/returned 500|returned 502|returned 503/],['invalid_state_save',/Persistent state exceeds its limit/],['unexpected_state_file',/Unexpected state file/],['invalid_persistent_state',/Invalid persistent state/],['state_too_large',/Persistent state exceeds its limit/],['funding_unverified',/Actions funding is unverified/],['missing_file',/ENOENT/],['syntax_error',/SyntaxError/],['type_error',/TypeError/],['invalid_json',/Unexpected token|not valid JSON/],['github_authorization',/returned 403/],['github_missing',/returned 404/],['ssh_timeout',/Connection timed out/i],['ssh_refused',/Connection refused/i],['ssh_authentication',/Permission denied \(publickey/],['invalid_host_receipt',/Deployment did not return a valid private host receipt/],['invalid_rollout_receipt',/Deployment receipt does not identify a verified rollout/],['ssh_unconfirmed_completion',/SSH did not confirm successful rollout completion/],['unapproved_policy',/Production activation is not approved/],['owner_control',/owner-control|new-owner-directive/],['quota',/quota|spending limit/i]];
+ for(const job of jobs.filter(j=>j.status==='completed'&&j.conclusion==='failure')){
+  const response=await fetch(`https://api.github.com/repos/Aimericv/puzzoria/actions/jobs/${job.id}/logs`,{headers:{Authorization:`Bearer ${process.env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(30000)});
+  if(!response.ok)throw Error('Completed log categorization unavailable');
+  const data=await response.text();
+  out.completedJobErrorCategories.push({job:job.name,categories:patterns.filter(([,p])=>p.test(data)).map(([name])=>name)});
+ }
+}
+const parent=proofHead??process.env.GITHUB_SHA,c=await api('/git/commits/'+parent),tree=await api('/git/trees','POST',{base_tree:c.tree.sha,tree:[{path:'maintenance-resume-observation.json',mode:'100644',type:'blob',content:JSON.stringify(out,null,2)+'\n'}]}),commit=await api('/git/commits','POST',{message:'Observe owner-authorized resumed autonomy after healthy maintenance; no production or protected-state writes',tree:tree.sha,parents:[parent]});
+if(proofHead)await api(`/git/refs/heads/codex/maintenance-resume-observation/${process.env.GITHUB_RUN_ID}`,'PATCH',{sha:commit.sha,force:false});else await api('/git/refs','POST',{ref:`refs/heads/codex/maintenance-resume-observation/${process.env.GITHUB_RUN_ID}`,sha:commit.sha});proofHead=commit.sha;console.log(JSON.stringify(out));return r.status;
+}
+for(let attempt=0;attempt<5;attempt++){if(await snapshot()==='completed')break;if(attempt<4)await new Promise(resolve=>setTimeout(resolve,30000));}
+

@@ -1,4 +1,4 @@
-name: Verify completed maintenance upload and suspended autonomy
+name: Observe resumed autonomous development after healthy approved maintenance
 on:
   push:
     branches: [codex/ci-inspection]
@@ -7,10 +7,12 @@ jobs:
   observe:
     if: vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 2
+    timeout-minutes: 3
     permissions:
       contents: write
       actions: read
+      issues: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -18,6 +20,9 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/check-reviewed-maintenance-ready.mjs
+      - run: node scripts/observe-maintenance-resume.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          PRODUCTION_FLAG: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
+          AGENT_FLAG: ${{ vars.PUZZORIA_AGENT_ENABLED }}
+          FREE_FLAG: ${{ vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD }}
