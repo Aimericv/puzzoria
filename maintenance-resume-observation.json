@@ -1,23 +1,23 @@
 {
-  "observedAt": "2026-10-29T23:25:18.020Z",
+  "observedAt": "2026-10-29T23:25:52.894Z",
   "run": {
     "id": 40972604895,
     "attempt": 1,
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/40972604895",
     "event": "workflow_dispatch",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "source": "debb36f663cf027e91425d98420dd62467e54175",
     "createdAt": "2026-10-29T23:21:40Z",
-    "updatedAt": "2026-10-29T23:21:44Z",
+    "updatedAt": "2026-10-29T23:25:43Z",
     "jobs": [
       {
         "id": 123792761804,
         "name": "first",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "failure",
         "startedAt": "2026-10-29T23:21:43Z",
-        "completedAt": null,
+        "completedAt": "2026-10-29T23:25:42Z",
         "steps": [
           {
             "name": "Set up job",
@@ -41,23 +41,28 @@
           },
           {
             "name": "Run ./.github/actions/puzzoria-agent",
-            "status": "in_progress",
-            "conclusion": null
+            "status": "completed",
+            "conclusion": "failure"
           },
           {
             "name": "Read the trusted pending receipt without exposing a commit as a job output",
-            "status": "pending",
-            "conclusion": null
+            "status": "completed",
+            "conclusion": "skipped"
           },
           {
             "name": "Post Run ./.github/actions/puzzoria-agent",
-            "status": "pending",
-            "conclusion": null
+            "status": "completed",
+            "conclusion": "success"
           },
           {
             "name": "Post Run actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09",
-            "status": "pending",
-            "conclusion": null
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success"
           }
         ]
       },
@@ -69,6 +74,60 @@
         "startedAt": "2026-10-29T23:21:41Z",
         "completedAt": "2026-10-29T23:21:41Z",
         "steps": []
+      },
+      {
+        "id": 123794330369,
+        "name": "second",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:42Z",
+        "completedAt": "2026-10-29T23:25:42Z",
+        "steps": []
+      },
+      {
+        "id": 123794330679,
+        "name": "release-prepare",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:42Z",
+        "completedAt": "2026-10-29T23:25:42Z",
+        "steps": []
+      },
+      {
+        "id": 123794331118,
+        "name": "release-validation",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:43Z",
+        "completedAt": "2026-10-29T23:25:42Z",
+        "steps": []
+      },
+      {
+        "id": 123794331907,
+        "name": "release-finalize",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:43Z",
+        "completedAt": "2026-10-29T23:25:42Z",
+        "steps": []
+      },
+      {
+        "id": 123794332422,
+        "name": "production-gate",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:43Z",
+        "completedAt": "2026-10-29T23:25:42Z",
+        "steps": []
+      },
+      {
+        "id": 123794333265,
+        "name": "production",
+        "status": "completed",
+        "conclusion": "skipped",
+        "startedAt": "2026-10-29T23:25:43Z",
+        "completedAt": "2026-10-29T23:25:43Z",
+        "steps": []
       }
     ]
   },
@@ -78,9 +137,9 @@
     "noPaymentMethodDeclaration": true
   },
   "state": {
-    "generation": 172,
-    "status": "running",
-    "nextEligibleAt": null,
+    "generation": 174,
+    "status": "retrying",
+    "nextEligibleAt": "2026-10-29T23:40:29.115Z",
     "lastMessageId": 6472167237,
     "issueNumber": 3,
     "completedSessions": 23,
@@ -108,14 +167,6 @@
       }
     ],
     "recentReports": [
-      {
-        "id": 6451063661,
-        "createdAt": "2026-10-27T19:04:41Z",
-        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6451063661",
-        "rolloutHealthy": false,
-        "rolloutRolledBack": false,
-        "rolloutUnconfirmed": false
-      },
       {
         "id": 6452608343,
         "createdAt": "2026-10-27T20:19:55Z",
@@ -171,6 +222,14 @@
         "rolloutHealthy": false,
         "rolloutRolledBack": false,
         "rolloutUnconfirmed": false
+      },
+      {
+        "id": 6510908902,
+        "createdAt": "2026-10-29T23:25:34Z",
+        "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6510908902",
+        "rolloutHealthy": false,
+        "rolloutRolledBack": false,
+        "rolloutUnconfirmed": false
       }
     ]
   },
@@ -189,8 +248,8 @@
     }
   },
   "stateEncoding": {
-    "githubReportedBytes": 162000,
-    "decodedBytes": 162000,
+    "githubReportedBytes": 154957,
+    "decodedBytes": 154957,
     "schemaVersion": 1,
     "repositoryMatches": true,
     "generationIsInteger": true,
@@ -234,9 +293,9 @@
   },
   "newPullRequests": [],
   "latestReport": {
-    "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6510882229",
-    "createdAt": "2026-10-29T23:23:50Z",
-    "summary": "Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria.\n\nStatistiques Puzzoria : available (7/30/90 jours, collectées à 2026-10-29T23:23:42.265Z).\n\nSearch Console : available (sc-domain:puzzoria.com, collectée à 2026-10-29T23:23:43.920Z). Lecture des agrégats seulement ; aucune modification de production.\n\nÉtat : **running**. Sessions validées : 23.\n\n[Exécution GitHub](https://github.com/Aimericv/puzzoria/actions/runs/40972604895)"
+    "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6510908902",
+    "createdAt": "2026-10-29T23:25:34Z",
+    "summary": "Session interrompue : Memory exceeds its publication bound. La mémoire et le dernier checkpoint confirmé sont conservés.\n\nÉtat : **retrying**. Sessions validées : 23. Prochaine admissibilité : 2026-10-29T23:40:29.115Z.\n\n[Exécution GitHub](https://github.com/Aimericv/puzzoria/actions/runs/40972604895)"
   },
   "workflow": {
     "state": "active",
@@ -246,5 +305,13 @@
     "url": "https://puzzoria.com/api/health",
     "status": 200,
     "healthy": true
-  }
+  },
+  "completedJobErrorCategories": [
+    {
+      "job": "first",
+      "categories": [
+        "quota"
+      ]
+    }
+  ]
 }
