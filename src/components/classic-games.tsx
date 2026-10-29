@@ -456,7 +456,7 @@ export function ClassicGame({
                 onFocus={() => setFocus(i)}
                 className={`puzzle-cell ${revealed ? "revealed" : ""} ${flagged ? "flagged" : ""} ${bomb ? "bomb" : ""} ${found ? "found" : ""} ${selected.includes(i) ? "selecting" : ""} ${c.kind === "mines" && !state.moves && i === c.start ? "safe-start" : ""}`}
                 data-number={state.grid[i]}
-                aria-label={`${m.cell} ${Math.floor(i / size) + 1}, ${(i % size) + 1}: ${c.kind === "wordsearch" ? c.grid[i] : bomb ? m.mine : flagged ? m.flag : revealed ? state.grid[i] : !state.moves && i === c.start ? m.safeStart : m.hidden}`}
+                aria-label={`${m.cell} ${Math.floor(i / size) + 1}, ${(i % size) + 1}: ${c.kind === "wordsearch" ? waiting ? m.hidden : c.grid[i] : bomb ? m.mine : flagged ? m.flag : revealed ? state.grid[i] : !state.moves && i === c.start ? m.safeStart : m.hidden}`}
                 onClick={() => {
                   if (
                     c.kind === "mines" &&
@@ -481,7 +481,7 @@ export function ClassicGame({
                 }}
               >
                 {c.kind === "wordsearch"
-                  ? c.grid[i]
+                  ? waiting ? "" : c.grid[i]
                   : bomb
                     ? "✹"
                     : flagged

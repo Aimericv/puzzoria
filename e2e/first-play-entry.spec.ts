@@ -59,7 +59,20 @@ for (const locale of locales) {
     await expect(board).toHaveAttribute("data-locked", "true");
     await expect(board.locator("button").first()).toBeDisabled();
     await expect(board.locator("button").first()).toHaveCSS("color", "rgba(0, 0, 0, 0)");
-    // Capture exposure separately from visual masking: this is evidence, not an accessibility pass.
+    const cells = board.locator("button");
+    const expectHiddenLetters = async () => {
+      const hidden = await cells.evaluateAll((buttons) => buttons.map((button) => ({
+        text: button.textContent,
+        label: button.getAttribute("aria-label"),
+      })));
+      expect(hidden.length).toBeGreaterThan(0);
+      for (const [index, cell] of hidden.entries()) {
+        expect(cell.text).toBe("");
+        const size = Math.sqrt(hidden.length);
+        expect(cell.label).toBe(`${t(locale).cell} ${Math.floor(index / size) + 1}, ${(index % size) + 1}: ${t(locale).hidden}`);
+      }
+    };
+    await expectHiddenLetters();
     await info.attach(`before-start-${locale}`, { body: await board.ariaSnapshot(), contentType: "text/plain" });
     expect(actions.filter((action) => action === "start")).toHaveLength(0);
     expect(runId).not.toBe("");
@@ -71,6 +84,7 @@ for (const locale of locales) {
     await expect(page.locator(".game-error")).toContainText(t(locale).networkError);
     await expect(start).toBeEnabled();
     await expect(board).toHaveAttribute("data-locked", "true");
+    await expectHiddenLetters();
     const rejected = await page.request.get(`/api/play?runId=${encodeURIComponent(runId)}`);
     expect((await rejected.json()).startedAt).toBeNull();
 
@@ -83,6 +97,15 @@ for (const locale of locales) {
     expect(started.ok()).toBe(true);
     expect((await started.json()).startedAt).toEqual(expect.any(String));
     expect(actions.filter((action) => action === "start")).toHaveLength(2);
+    const revealedCells = await cells.evaluateAll((buttons) => buttons.map((button) => ({
+      text: button.textContent,
+      label: button.getAttribute("aria-label"),
+    })));
+    for (const [index, cell] of revealedCells.entries()) {
+      expect(cell.text).toMatch(/^[A-Z]$/);
+      const size = Math.sqrt(revealedCells.length);
+      expect(cell.label).toBe(`${t(locale).cell} ${Math.floor(index / size) + 1}, ${(index % size) + 1}: ${cell.text}`);
+    }
     await board.locator("button").first().click();
     await expect(board.locator(".selecting")).toHaveCount(1);
   });
