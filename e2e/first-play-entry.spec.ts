@@ -24,6 +24,10 @@ for (const locale of locales) {
     let newRequested!: () => void;
     const requested = new Promise<void>((resolve) => { newRequested = resolve; });
     let runId = "";
+    let confirmStart!: () => void;
+    const startGate = new Promise<void>((resolve) => { confirmStart = resolve; });
+    let startRequested!: () => void;
+    const pendingStart = new Promise<void>((resolve) => { startRequested = resolve; });
     await page.route("**/api/play", async (route) => {
       const request = route.request();
       if (request.method() !== "POST") return route.continue();
@@ -40,6 +44,10 @@ for (const locale of locales) {
       if (body.action === "start" && rejectStart) {
         rejectStart = false;
         return route.fulfill({ status: 503, json: { error: "networkError" } });
+      }
+      if (body.action === "start") {
+        startRequested();
+        await startGate;
       }
       return route.continue();
     });
@@ -88,7 +96,19 @@ for (const locale of locales) {
     const rejected = await page.request.get(`/api/play?runId=${encodeURIComponent(runId)}`);
     expect((await rejected.json()).startedAt).toBeNull();
 
-    await start.click();
+    try {
+      await start.click();
+      await pendingStart;
+      await expect(start).toBeDisabled();
+      await expect(board).toHaveAttribute("data-locked", "true");
+      await expect(cells.first()).toBeDisabled();
+      await expectHiddenLetters();
+      const pending = await page.request.get(`/api/play?runId=${encodeURIComponent(runId)}`);
+      expect(pending.ok()).toBe(true);
+      expect((await pending.json()).startedAt).toBeNull();
+    } finally {
+      confirmStart();
+    }
     await expect(start).toHaveCount(0);
     await expect(board).not.toHaveAttribute("data-locked", "true");
     await expect(board.locator("button").first()).toBeEnabled();
