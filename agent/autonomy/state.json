@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 198,
+  "generation": 199,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -3764,7 +3764,8 @@
         "candidateSha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
         "prNumber": 32,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/32",
-        "status": "proposed"
+        "status": "merged",
+        "mergeSha": "88b38e1b0c898a29a4335f083cecc29495b2b543"
       }
     ],
     "legacyWork": {
@@ -3795,13 +3796,28 @@
       "experimentId": "five-capitals-feasibility",
       "verified": true,
       "runId": "41136871984",
-      "status": "validating",
+      "status": "merged_documentation",
       "risk": {
         "risk": "low",
         "kind": "documentation",
         "requiresDeployment": false,
         "reason": "unchanged executable code; bounded text edits or pure section insertions"
-      }
+      },
+      "result": {
+        "status": "merged",
+        "sha": "88b38e1b0c898a29a4335f083cecc29495b2b543",
+        "candidate": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
+        "previousMain": "debb36f663cf027e91425d98420dd62467e54175",
+        "previousTree": "617dd91c3301059a35db25ca8d1c08e5d041185d",
+        "risk": {
+          "risk": "low",
+          "kind": "documentation",
+          "requiresDeployment": false,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "prNumber": 32
+      },
+      "mergeSha": "88b38e1b0c898a29a4335f083cecc29495b2b543"
     },
     "releaseQueue": [
       {
@@ -3886,13 +3902,28 @@
         "experimentId": "five-capitals-feasibility",
         "verified": true,
         "runId": "41136871984",
-        "status": "validating",
+        "status": "merged_documentation",
         "risk": {
           "risk": "low",
           "kind": "documentation",
           "requiresDeployment": false,
           "reason": "unchanged executable code; bounded text edits or pure section insertions"
-        }
+        },
+        "result": {
+          "status": "merged",
+          "sha": "88b38e1b0c898a29a4335f083cecc29495b2b543",
+          "candidate": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
+          "previousMain": "debb36f663cf027e91425d98420dd62467e54175",
+          "previousTree": "617dd91c3301059a35db25ca8d1c08e5d041185d",
+          "risk": {
+            "risk": "low",
+            "kind": "documentation",
+            "requiresDeployment": false,
+            "reason": "unchanged executable code; bounded text edits or pure section insertions"
+          },
+          "prNumber": 32
+        },
+        "mergeSha": "88b38e1b0c898a29a4335f083cecc29495b2b543"
       },
       {
         "sha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
