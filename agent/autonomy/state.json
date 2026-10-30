@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 194,
-  "status": "ready",
+  "generation": 195,
+  "status": "running",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -3184,7 +3184,11 @@
         "candidateSha": "b629fa4acffda82f45332752318a017736a796e2",
         "prNumber": 31,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/31",
-        "status": "proposed"
+        "status": "proposed",
+        "assessment": {
+          "status": "awaiting_verified_deployment",
+          "causalClaim": false
+        }
       }
     ],
     "legacyWork": {
@@ -3193,17 +3197,17 @@
       "branch": "codex/agent-work"
     },
     "lastObservation": {
-      "id": "89599514453ab342db33974abd28835a811774409690d7f8e7ef1afcd9fab7f2",
-      "collectedAt": "2026-10-30T19:13:12.254Z",
+      "id": "34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76",
+      "collectedAt": "2026-10-30T22:17:35.527Z",
       "sources": {
         "puzzoria": {
           "status": "available",
-          "fetchedAt": "2026-10-30T19:13:07.855Z",
-          "sha256": "120df99efa2a0cf0d882f96ad1cd5df3bdce3cc3e7466865c2e786ebd2646953"
+          "fetchedAt": "2026-10-30T22:17:30.570Z",
+          "sha256": "3dd644b4f0334403f4fed2ad87a34b7b75ddc1cd565c44bf26746926b02b353b"
         },
         "google": {
           "status": "available",
-          "fetchedAt": "2026-10-30T19:13:09.112Z",
+          "fetchedAt": "2026-10-30T22:17:32.259Z",
           "sha256": "1d5a0d7c5919837a7a092935b8b2dc4e7d1a00e2c50d1e037da4c3c20eb51373"
         }
       }
