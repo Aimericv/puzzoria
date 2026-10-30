@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 186,
+  "generation": 187,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -21,7 +21,7 @@
     "expiresAt": "2027-01-28T12:48:15Z",
     "digest": "c17156bf480783ba9fd4d5f11cecd517ff756166935b4299380fa4e6c5141030"
   },
-  "lastMessageId": 6515986595,
+  "lastMessageId": 6531400663,
   "completedSessions": 25,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
@@ -36,7 +36,13 @@
     "PLAN.json": "{\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\",\n  \"summary\": \"Audit /de/wort terminé : promesse, guide et saisie cohérents par lecture, aucun ajout produit justifié. 36 tests SEO/guide passent. Mots mêlés reste dans sa PR en revue humaine, absent de cette base.\",\n  \"nextMission\": \"Auditer le parcours fin Word → prochain Daily et son repère de renouvellement dans les quatre langues. Chercher un manque concret avant intervention, sans ajouter de notification ou tracking. Lire RETENTION.md avant changement concerné. Observer les deux expériences SEO avec leurs critères fixes.\",\n  \"blockedReason\": null,\n  \"experiment\": {\n    \"id\": \"german-word-entry-fit-audit\",\n    \"objective\": \"acquisition\",\n    \"kind\": \"research\",\n    \"hypothesis\": \"Un écart entre promesse Google et première interaction allemande pourrait freiner les départs ; vérifier le parcours existant avant intervention.\",\n    \"expectedImpact\": \"Aucun gain direct attendu de la recherche ; éviter une page ou un ajout éditorial redondant. Aucun effet causal mesurable attribué à cet audit.\",\n    \"evidence\": [\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/growth-context.json\",\n        \"observationId\": \"708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c\",\n        \"collectedAt\": \"2026-10-30T12:50:05.341Z\",\n        \"finding\": \"lastFailure et unverifiedWork null ; masquage Mots mêlés manual_review ; deux expériences SEO déployées ensemble, fenêtres immatures.\"\n      },\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/search-console.json\",\n        \"collectedAt\": \"2026-10-30T12:50:02.628Z\",\n        \"finding\": \"Available : 179 impressions, six clics sur 30 jours demandés 30 septembre–29 octobre ; dernière date 28 octobre Pacific. /de/wort dix impressions, deux clics ; aucune jointure page/requête.\"\n      },\n      {\n        \"source\": \"docs/WORD-DE-ENTRY-AUDIT.fr.md\",\n        \"finding\": \"Guide complet et première lettre déclenchant session.start établis par lecture ; 36 tests SEO/guide passent, aucun navigateur exécuté. Pas de manque concret justifiant une retouche.\"\n      }\n    ],\n    \"metric\": \"playing.starts\",\n    \"observationDays\": 14,\n    \"minimumSamples\": 20,\n    \"minimumRelativeImprovement\": 0.2,\n    \"decision\": \"stop\"\n  }\n}\n"
   },
   "controlSha": "debb36f663cf027e91425d98420dd62467e54175",
-  "pendingMessages": [],
+  "pendingMessages": [
+    {
+      "id": 6531400663,
+      "text": "L'objectif prioritaire est la croissance du nombre de nouveaux utilisateurs de Puzzoria. Tu dois consacrer l'essentiel de tes efforts à l'acquisition : SEO, nouveaux jeux à fort potentiel, quiz, distribution et opportunités de trafic. Les améliorations mineures d'interface ne doivent pas prendre le dessus tant que le trafic reste faible. Tu conserves ton autonomie pour choisir les stratégies, les tester et les abandonner si elles ne fonctionnent pas. Mesure systématiquement les résultats réels. Dans un premier temps j'aurais dit qu'un jeu style jetpunk serait pertinent mais je te laisse le choix.",
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6531400663"
+    }
+  ],
   "retryCount": 0,
   "blockedReason": null,
   "lastSession": {
