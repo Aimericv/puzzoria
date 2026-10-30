@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 185,
+  "generation": 186,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2788,7 +2788,7 @@
         "candidateSha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
         "prNumber": 30,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/30",
-        "status": "proposed"
+        "status": "cancelled"
       }
     ],
     "legacyWork": {
@@ -2889,7 +2889,7 @@
         "experimentId": "german-word-entry-fit-audit",
         "verified": true,
         "runId": "41058113774",
-        "status": "proposed"
+        "status": "cancelled_by_strategy"
       },
       {
         "sha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
