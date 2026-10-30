@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 179,
+  "generation": 180,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -2240,7 +2240,7 @@
         "candidateSha": "2d27561a8a9021359865ffb8fc71dc55008a85e1",
         "prNumber": 29,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/29",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -2328,7 +2328,11 @@
         "experimentId": "wordsearch-prestart-accessible-mask",
         "verified": true,
         "runId": "41009824242",
-        "status": "proposed"
+        "status": "manual_review",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:e2e/first-play-entry.spec.ts"
+        }
       },
       {
         "sha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
