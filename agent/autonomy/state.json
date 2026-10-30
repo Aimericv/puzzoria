@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 191,
+  "generation": 192,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -3215,7 +3215,13 @@
       "experimentId": "sudoku-guide-single-deductions",
       "verified": true,
       "runId": "41113159580",
-      "status": "proposed"
+      "status": "waiting_validation_budget",
+      "risk": {
+        "risk": "low",
+        "kind": "editorial-copy",
+        "requiresDeployment": true,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
+      }
     },
     "releaseQueue": [
       {
@@ -3285,7 +3291,13 @@
         "experimentId": "sudoku-guide-single-deductions",
         "verified": true,
         "runId": "41113159580",
-        "status": "proposed"
+        "status": "waiting_validation_budget",
+        "risk": {
+          "risk": "low",
+          "kind": "editorial-copy",
+          "requiresDeployment": true,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        }
       },
       {
         "sha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
