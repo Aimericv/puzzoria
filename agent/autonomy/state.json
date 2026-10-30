@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 181,
+  "generation": 182,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "2d27561a8a9021359865ffb8fc71dc55008a85e1",
   "checkpoint": {
-    "artifactId": 12956693185,
-    "runId": "41009824242",
-    "name": "puzzoria-agent-auth-41009824242-27",
-    "generation": 27,
+    "artifactId": 12977052954,
+    "runId": "41058113774",
+    "name": "puzzoria-agent-auth-41058113774-28",
+    "generation": 28,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41009824242",
+      "runId": "41058113774",
       "phase": "autonomous-agent",
-      "generation": 27
+      "generation": 28
     },
-    "expiresAt": "2027-01-28T05:41:26Z",
-    "digest": "ffae40d4dd07cc13b42737b6e22a129e1b13c13c0aa2f7aadab596b0c3c70730"
+    "expiresAt": "2027-01-28T12:48:15Z",
+    "digest": "c17156bf480783ba9fd4d5f11cecd517ff756166935b4299380fa4e6c5141030"
   },
   "lastMessageId": 6515986595,
   "completedSessions": 24,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41009824242",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41009824242"
+    "id": "41058113774",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41058113774"
   },
   "memory": {
     "STATE.md": "# État — 30 octobre 2026 — source 19f2e29b\n\nAGENTS.md, mandat, inbox vide, quatre mémoires et rapports readonly consultés depuis le disque ; guide Next use-client.md lu. Aucun Git, réseau externe, achat, merge ou déploiement. Source fournie identique à unverifiedWork ; dernier échec superviseur run 40972604895 : « Memory exceeds its publication bound ». Cette session condense la mémoire (auparavant 65 534 octets) sans modifier protections ni seuils ; aucune acceptation machine présumée.\n\n## Contribution\n\nLe correctif hérité de src/components/classic-games.tsx masque déjà texte et aria-label via waiting avant départ Mots mêlés. Ne pas le dupliquer. Il reste non vérifié/non publié selon le contexte ; son puzzle reste présent dans les données navigateur.\n\nAjout dans e2e/first-play-entry.spec.ts : retenir le départ après reprise, exiger masquage/verrouillage et startedAt nul pendant l’attente ; libérer dans finally, conserver le contrôle positif après confirmation. Documentation FIRST-PLAY-BROWSER mise à jour. Nouvelle revue docs/GROWTH-REVIEW-2026-10-30.fr.md : états de publication, observations datées, fenêtres immatures et prochaine piste d’acquisition. Aucun nouveau moteur, tracking ou changement serveur. Quatre mémoires condensées, nonce conservé.\n\n## Vérifications réellement exécutées\n\nnpm run lint : code 0. npm run typecheck : code 0, puis relancé après changement E2E, code 0. ESLint ciblé sur le scénario final : code 0. Playwright --list final : code 0, 48 cas, zéro exécuté. npm test -- --configLoader=runner tests/classic-games.test.ts tests/seo.test.ts tests/game-guide.test.ts : 55/55, trois fichiers réussis, code 0. Ce sont des tests existants moteur/SEO/guide, pas une preuve du rendu accessible. Pas de suite générale ni contenu régénéré ; aucun contenu de puzzle modifié. Serveurs, E2E et build au superviseur, pas de réussite revendiquée.\n\n## Preuves de croissance et limites\n\nObservation aaf13f186facecec3bb37fc676f821d22888b497fd8dc55c6bcee4203722da8b, collecte 2026-10-30T05:43:16.611Z : les deux expériences SEO sont merged et deployed ensemble le 27 octobre 21:52:23.088Z (f1cc44089db87644299ea88a09fae7d9d25be18c), waiting_complete_windows. C’est un constat du rapport, aucune action de déploiement par l’agent. Les documents première partie sont merged_documentation, pas une preuve des nouveaux E2E.\n\nAnalytics available, collecte 05:43:12.560Z : 30 jours UTC 1–30 octobre, jour courant partiel, six identités compte/appareil, 20 départs, 18 fins, trois sessions consenties ; zéro départ sur les sept jours 24–30 octobre. Aucune identité ne représente une personne unique et les visites consenties ne couvrent pas tout le trafic. D+7 sur 30 jours : six matures, zéro retour ; D+30 : zéro mature, pourcentage null. Aucun départ Mots mêlés sur 30 jours ; pas de diagnostic de conversion démontré.\n\nGoogle available, collecte 05:43:13.758Z : 30 jours demandés 29 septembre–28 octobre, dernière date rapportée 27 octobre, finales America/Los_Angeles : 178 impressions/six clics. Lignes incomplètes ; /de/wort dix impressions/deux clics ; requête « rätsel mit 5 buchstaben » cinq impressions/deux clics, sans jointure entre elles. Fenêtres post-déploiement 30 jours absentes ; ne pas attribuer effet ni recalculer baselines. Trends collecte 05:43:15.568Z : RSS FR/US/DE/ES disponibles, aucune pertinence produit établie ; TikTok indisponible.\n\n## Suite choisie\n\nReprendre d’abord les preuves navigateur du masquage et leur éventuel échec concret. Puis auditer /de/wort (promesse Google, métadonnées, guide et première interaction), en préservant le guide déployé et sans créer une page proche ou une correction sans manque établi. Continuer l’observation des expériences SEO avec critères inchangés. Aucun gain d’acquisition/rétention revendiqué ; publication et validation restent au superviseur.\n",
