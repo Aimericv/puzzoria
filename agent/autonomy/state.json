@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 187,
+  "generation": 188,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
   "checkpoint": {
-    "artifactId": 12977052954,
-    "runId": "41058113774",
-    "name": "puzzoria-agent-auth-41058113774-28",
-    "generation": 28,
+    "artifactId": 13005315512,
+    "runId": "41113159580",
+    "name": "puzzoria-agent-auth-41113159580-29",
+    "generation": 29,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41058113774",
+      "runId": "41113159580",
       "phase": "autonomous-agent",
-      "generation": 28
+      "generation": 29
     },
-    "expiresAt": "2027-01-28T12:48:15Z",
-    "digest": "c17156bf480783ba9fd4d5f11cecd517ff756166935b4299380fa4e6c5141030"
+    "expiresAt": "2027-01-28T19:11:15Z",
+    "digest": "7a6acf3497397657fb1224c7f0f0b76482a3dbf00eb94316d21c7b9b8050257b"
   },
   "lastMessageId": 6531400663,
   "completedSessions": 25,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41058113774",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41058113774"
+    "id": "41113159580",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41113159580"
   },
   "memory": {
     "STATE.md": "# État — 30 octobre 2026, session 12:50 UTC\n\nSource debb36f663cf027e91425d98420dd62467e54175. Consignes, mandat, inbox vide, quatre mémoires et quatre rapports readonly lus sur disque ; guide Next use-client lu. Aucun réseau externe, Git, achat, merge ou déploiement.\n\nContribution : docs/WORD-DE-ENTRY-AUDIT.fr.md. Audit de correspondance Google → guide → première interaction allemande ; pas de manque concret trouvé par lecture, aucune modification applicative artificielle. Prochaine mission : fin Word → prochain Daily, messages et repères existants dans quatre langues.\n\nVérification exécutée : npm test -- --configLoader=runner tests/seo.test.ts tests/game-guide.test.ts tests/word.test.ts, code 0, deux fichiers, 36 tests passent. Le troisième chemin n'existe pas et n'ajoute aucune couverture. Aucun E2E/build/serveur exécuté, aucune preuve de conversion.\n\nContexte observation 708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c à 12:50:05.341Z : lastFailure/unverifiedWork null. PR 29 masquage Mots mêlés manual_review, pas de déploiement établi ; correctif et départ retenu absents de cette base, ne pas réimplémenter. Les descriptions de source non vérifiée dans la mémoire précédente sont historiques. Deux expériences SEO déployées ensemble le 27 octobre, waiting_complete_windows.\n\nGoogle available à 12:50:02.628Z : 179 impressions/six clics sur 30 jours demandés 30 septembre–29 octobre ; dernière date rapportée 28 octobre Pacific. /de/wort dix impressions/deux clics, sans jointure requête/page. Analytics available à 12:50:01.269Z : six identités compte/appareil, 20 départs, 18 fins, trois sessions consenties sur 1–30 octobre UTC, jour courant partiel ; D+7 six matures/zéro retour, D+30 zéro mature/taux null. Aucune personne unique ni conversion déduite. Trends 12:50:04.975Z : RSS quatre pays disponibles, TikTok indisponible ; pas de demande produit établie.\n\nQuatre mémoires mises à jour, nonce conservé. Publication et contrôles superviseur non présumés.\n",
