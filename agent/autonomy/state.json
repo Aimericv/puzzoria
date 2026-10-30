@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 197,
+  "generation": 198,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -3795,7 +3795,13 @@
       "experimentId": "five-capitals-feasibility",
       "verified": true,
       "runId": "41136871984",
-      "status": "proposed"
+      "status": "validating",
+      "risk": {
+        "risk": "low",
+        "kind": "documentation",
+        "requiresDeployment": false,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
+      }
     },
     "releaseQueue": [
       {
@@ -3880,7 +3886,13 @@
         "experimentId": "five-capitals-feasibility",
         "verified": true,
         "runId": "41136871984",
-        "status": "proposed"
+        "status": "validating",
+        "risk": {
+          "risk": "low",
+          "kind": "documentation",
+          "requiresDeployment": false,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        }
       },
       {
         "sha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
@@ -4328,6 +4340,13 @@
         "maximumJobMinutes": 3,
         "marginMinutes": 2
       }
+    },
+    {
+      "at": "2026-10-30T22:22:25.760Z",
+      "runId": "41136871984",
+      "attempt": 1,
+      "sha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
+      "minutes": 7
     }
   ]
 }
