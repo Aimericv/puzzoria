@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 206,
+  "generation": 207,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4232,7 +4232,7 @@
         "candidateSha": "e0a6e36bc0d4a429bfd3c7336a45828e3115112a",
         "prNumber": 33,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/33",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -4257,13 +4257,24 @@
       }
     },
     "releaseCandidate": {
-      "sha": "e0a6e36bc0d4a429bfd3c7336a45828e3115112a",
+      "sha": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4",
       "base": "88b38e1b0c898a29a4335f083cecc29495b2b543",
-      "prNumber": 33,
-      "experimentId": "five-capitals-answer-prototype",
+      "prNumber": 31,
+      "experimentId": "sudoku-guide-single-deductions",
       "verified": true,
-      "runId": "41173140053",
-      "status": "proposed"
+      "runId": "41113159580",
+      "status": "waiting_validation_budget",
+      "risk": {
+        "risk": "low",
+        "kind": "editorial-copy",
+        "requiresDeployment": true,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
+      },
+      "nativeVerifiedSha": "b629fa4acffda82f45332752318a017736a796e2",
+      "rebase": {
+        "automatic": true,
+        "previousHead": "b629fa4acffda82f45332752318a017736a796e2"
+      }
     },
     "releaseQueue": [
       {
@@ -4353,7 +4364,11 @@
         "experimentId": "five-capitals-answer-prototype",
         "verified": true,
         "runId": "41173140053",
-        "status": "proposed"
+        "status": "manual_review",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:src/lib/experiments/capital-answers.ts"
+        }
       },
       {
         "sha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
