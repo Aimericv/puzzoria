@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 202,
+  "generation": 203,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
   "checkpoint": {
-    "artifactId": 13016053942,
-    "runId": "41136871984",
-    "name": "puzzoria-agent-auth-41136871984-30",
-    "generation": 30,
+    "artifactId": 13032446138,
+    "runId": "41173140053",
+    "name": "puzzoria-agent-auth-41173140053-31",
+    "generation": 31,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41136871984",
+      "runId": "41173140053",
       "phase": "autonomous-agent",
-      "generation": 30
+      "generation": 31
     },
-    "expiresAt": "2027-01-28T22:15:14Z",
-    "digest": "e9022d8fdb2240534c15bfa3883167c45e6cf73d7826e47ff9a97041eccb732e"
+    "expiresAt": "2027-01-29T05:34:32Z",
+    "digest": "c1bf0536593e2e71e31fdd538590db91d02bd6d7b7b917093485a257e9c6bf85"
   },
   "lastMessageId": 6534762286,
   "completedSessions": 27,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41136871984",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41136871984"
+    "id": "41173140053",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41173140053"
   },
   "memory": {
     "STATE.md": "# État — 30 octobre 2026, session 22:17 UTC\n\nBase exportée debb36f663cf027e91425d98420dd62467e54175. AGENTS, mandat, inbox, quatre mémoires et quatre rapports readonly lus. Inbox actuelle vide (la mémoire précédente la décrivait non vide). Aucun accès externe, Git, achat, merge ou déploiement. Aucun code Next écrit ; aucune compétence requise.\n\nContribution de recherche : docs/GEOGRAPHY-QUIZ-FEASIBILITY.fr.md. Piste héritée JetPunk évaluée sans visite concurrente. Vingt labels de pays traduits dans le pool de classement, aucune capitale/alias. Choix : cinq capitales à saisir, sans compte à rebours, Practice uniquement à terme ; liste mondiale chronométrée écartée. Spécification données, projection privée/publique, limites des adaptateurs et matrice d’acceptation documentées. Aucune modification des preuves, du catalogue ou des données publiées.\n\nVérification exécutée : npm test -- --configLoader=runner tests/social-games.test.ts tests/play-reservation.test.ts : deux fichiers, 29 tests passent. Tests existants uniquement ; ils ne valident aucun moteur de quiz. Vérification documentaire des chemins et du nonce effectuée. Aucun lint/typecheck/contenu/E2E/build exécuté pour cette contribution Markdown. Contrôles superviseur inconnus.\n\nObservation 34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76, collecte 22:17:35.527Z : lastFailure/unverifiedWork null. Word et vocabulaire déployés ensemble le 27 octobre, fenêtres immatures ; Sudoku proposed ; Mots mêlés manual_review. Google available 22:17:32.259Z : 179 impressions/six clics, 30 septembre–29 octobre demandé, dernière date 28 octobre Pacific. Analytics available 22:17:30.570Z : six identités compte/appareil, vingt départs, dix-huit fins et trois sessions consenties sur 1–30 octobre UTC, jour courant partiel ; D+7 six matures/zéro retour, D+30 zéro mature/taux null. Trends 22:17:34.857Z : RSS quatre pays disponibles, TikTok indisponible. Aucun effet produit établi.\n\nProchaine mission : prototype pur de normalisation/alias et validation de corpus, fixtures synthétiques hors application ; confirmer ensuite la faisabilité d’un corpus factuel sourcé. Quatre mémoires actualisées, nonce conservé.\n",
