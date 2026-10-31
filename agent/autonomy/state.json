@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 207,
+  "generation": 208,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4533,37 +4533,29 @@
     "reviewedMaintenance": {
       "kind": "reviewed-controller-maintenance",
       "ownerAuthorized": true,
-      "approvedAt": "2026-10-28T15:53:13.035Z",
-      "source": "Explicit owner approval of PR28 and controlled supervisor maintenance in this Codex conversation",
-      "sha": "debb36f663cf027e91425d98420dd62467e54175",
-      "previousCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
-      "validatedSource": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
-      "policyHash": "fc262eaa978c2860e71594f84670098abdbfff5e99463dbb60773bcd34bca795",
-      "previousPolicyHash": "6ccc7eeffdd96a708e45d791476cd5bc076c0ee2beb9cefcab086926169d4961",
-      "controllerArchiveSha256": "5dbb02c5f50878b9307e97eb91727654961e4e0f538361d4d315d97ec8b9ffd7",
-      "bundleSha256": "69f7dcaf2c26cd9c386fc9f512a77019e78ad71023b7167e5ec777cbab55bba0",
-      "validationRunId": "40716770155",
-      "packageRunId": "40720356714",
-      "status": "deployed",
-      "receipt": {
-        "sha": "debb36f663cf027e91425d98420dd62467e54175",
-        "previousCommit": "f1cc44089db87644299ea88a09fae7d9d25be18c",
-        "currentCommit": "debb36f663cf027e91425d98420dd62467e54175",
-        "previousImage": "sha256:8d75d01a17908118604eda58fac57589daf4c03aa6059383ca49ca71e2b34708",
-        "candidateImage": "sha256:54934cc5a5cde61ac9ab31bdea5913d47f5d83888b0890cb1920db4e498fbaea",
-        "schema": "810352d1c6e8861036bd24cfb63b55ddcf2875fdbfdba18360f3c5da0f095711",
-        "backup": {
-          "verified": true,
-          "file": "/backups/dailygrid-2026-10-29T23-21-05-837Z-1e491b63-7dde-458f-a7ad-5a2f080c7eee.sqlite",
-          "erasuresReapplied": 0
-        },
-        "startedAt": "2026-10-29T23:21:10.134Z",
-        "phase": "healthy",
-        "currentImage": "sha256:54934cc5a5cde61ac9ab31bdea5913d47f5d83888b0890cb1920db4e498fbaea",
-        "releasedAt": "2026-10-29T23:21:30.179Z",
-        "finishedAt": "2026-10-29T23:21:30.179Z",
-        "policyUpdated": true
-      }
+      "approvedAt": "2026-10-31T13:59:22.097Z",
+      "authorizationSource": "Explicit owner instruction of 2026-10-31 to implement the Actions monthly cap and autonomous renewal, without additional spending.",
+      "sha": "773f6c4959ed9670d9a46053e23117c247a829ff",
+      "previousCommit": "debb36f663cf027e91425d98420dd62467e54175",
+      "validatedSource": "4ebca4d47c22e16be7fffb2e5e1278dc27a26a67",
+      "previousPolicyHash": "fc262eaa978c2860e71594f84670098abdbfff5e99463dbb60773bcd34bca795",
+      "policyHash": "343f9e7a27f6a316fb8c662ce35a2ad929b568fd975072b9273659aa55661a95",
+      "bundleSha256": "bf9bb96c866a769f3330e566c59a521e565f77f223d405ed4644798af9912501",
+      "controllerArchiveSha256": "5a4f0937b66d1456d57ac3ab6098fbe02caee205b8dd1180f5d38c446948f3cd",
+      "packageRunId": null,
+      "status": "awaiting_operator",
+      "packageSource": "locally-built; no hosted Actions minutes",
+      "validation": {
+        "node": "24.15.0",
+        "platform": "Linux; pinned existing verifier image",
+        "testsPassed": 118,
+        "testsFailed": 0,
+        "testsSkipped": 0,
+        "lint": "passed",
+        "yaml": "passed",
+        "applicationAndHostInputsUnchanged": true
+      },
+      "blocker": "Administrative SSH TCP 22 times out for both owner and session; restricted TCP 2222 independently confirms healthy production."
     }
   },
   "releaseValidationHistory": [
