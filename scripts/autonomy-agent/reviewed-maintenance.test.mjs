@@ -33,6 +33,12 @@ test('maintenance cannot expand to application code, dependency changes, deletes
  const f=fixture();
  for(const row of [{path:'src/app/page.tsx',status:'M',mode:'100644'},{path:'package-lock.json',status:'M',mode:'100644'},{path:'scripts/autonomy-agent/release-host.mjs',status:'M',mode:'100644'},{path:'.github/actions/puzzoria-agent/action.yml',status:'D',mode:'100644'},{path:'.github/actions/puzzoria-agent/action.yml',status:'M',mode:'120000'}])assert.throws(()=>validateMaintenance({...valid(f),changes:[row]}));
 });
+
+test('budget maintenance remains an exact root review with application and host code excluded',()=>{
+ const f=fixture();
+ for(const path of ['.github/workflows/actions-budget.yml','scripts/autonomy-agent/actions-budget-runtime.mjs','docs/ACTIONS-BUDGET.fr.md'])validateMaintenance({...valid(f),changes:[{path,status:'A',mode:'100644'}]});
+ for(const path of ['src/lib/server/db.ts','.github/workflows/unreviewed.yml','scripts/autonomy-agent/release-host.mjs','content/new-game.json'])assert.throws(()=>validateMaintenance({...valid(f),changes:[{path,status:'M',mode:'100644'}]}));
+});
 test('maintenance refuses missing owner consent, stale sources and interrupted production',()=>{
  for(const mutate of [v=>v.approval.ownerAuthorized=false,v=>v.approval.approvedAt='bad',v=>v.approval.kind='automatic',v=>v.manifest.source='f'.repeat(40),v=>v.currentPolicy='f'.repeat(64),v=>v.state.phase='checking',v=>v.state.currentCommit='f'.repeat(40)]){
   const f=fixture(),value=valid(f);mutate(value);assert.throws(()=>validateMaintenance(value));

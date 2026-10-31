@@ -7,8 +7,35 @@ permissions:
   contents: read
 
 jobs:
-  check:
+  budget:
     if: github.ref == 'refs/heads/main' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    concurrency:
+      group: puzzoria-actions-budget
+      cancel-in-progress: false
+      queue: max
+    permissions:
+      contents: write
+      actions: write
+      pull-requests: read
+    outputs:
+      allowed: ${{ steps.admit.outputs.allowed }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - id: admit
+        run: node scripts/autonomy-agent/actions-budget-run.mjs admit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_BUDGET_KIND: analytics
+  check:
+    needs: budget
+    if: needs.budget.outputs.allowed == 'true' && github.ref == 'refs/heads/main' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
@@ -18,6 +45,11 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+      - name: Verify the protected monthly grant
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 3
       - name: Verify the existing funding declaration
         run: node --input-type=module -e 'import {readFileSync} from "node:fs";import {assertFunding} from "./scripts/autonomy-agent/policy.mjs";assertFunding(JSON.parse(readFileSync("agent/autonomy/control.json")))'
       - name: Verify actual reports without running Codex or logging their contents
@@ -29,5 +61,5 @@ jobs:
           import {collectAnalytics} from './scripts/autonomy-agent/analytics.mjs';
           const result=await collectAnalytics({token:process.env.PUZZORIA_ANALYTICS_READ_TOKEN});
           if(result.status!=='available')throw new Error(`Puzzoria analytics: ${result.status} (${result.reason ?? 'configure the dedicated secret and server digest'})`);
-          appendFileSync(process.env.GITHUB_STEP_SUMMARY,`Rapports Puzzoria 7/30/90 jours accessibles en lecture seule.\n\nCollecte : ${result.fetchedAt}\n\nSHA-256 : ${result.sha256}\n\nAucune inférence Codex, aucun déploiement.\n`);
+          appendFileSync(process.env.GITHUB_STEP_SUMMARY,`Rapports Puzzoria 7/30/90 jours accessibles en lecture seule.\n\nCollecte : ${result.fetchedAt}\n\nSHA-256 : ${result.sha256}\n\nAucune infÃƒÂ©rence Codex, aucun dÃƒÂ©ploiement.\n`);
           JS
