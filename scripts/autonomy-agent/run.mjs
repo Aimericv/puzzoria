@@ -15,6 +15,8 @@ import {collectAnalytics,ANALYTICS_FILE} from "./analytics.mjs";
 import {collectSearchConsole,SEARCH_CONSOLE_FILE} from "./search-console.mjs";
 import {collectTrends,TRENDS_FILE} from './trends.mjs';
 import {observation,growthContext,validateExperiment,recordExperiment,GROWTH_FILE} from './growth.mjs';
+import {requireJobBudget,loadUsage} from './actions-budget-runtime.mjs';
+import {chargedMinutes,reservedMinutes,ACTIONS_LIMIT} from './actions-budget.mjs';
 
 const base="/opt/puzzoria-pilot", work=base+"/work", auth=base+"/auth", readonly=base+"/readonly",uid=3050;
 const cli=readonly+"/node_modules/@openai/codex/bin/codex.js", node=process.execPath;
@@ -23,6 +25,8 @@ const funding=assertFunding(control),validation=process.env.AGENT_MODE==="valida
 if(process.getuid()!==0 || process.env.GITHUB_REPOSITORY!==REPOSITORY || !process.env.CODEX_PILOT_VAULT_KEY) throw new Error("Trusted runner context required");
 if(!validation && (control.permanentActivationApproved!==true || process.env.PUZZORIA_AGENT_ENABLED!=="true")) throw new Error("Permanent activation remains disabled");
 const api=github(process.env.GITHUB_TOKEN,REPOSITORY), store=new StateStore(api,control,process.env.GITHUB_SHA),state=await store.load();
+const jobTimeout=Number(process.env.PUZZORIA_JOB_TIMEOUT);
+await requireJobBudget(api,process.env.GITHUB_JOB,jobTimeout);
 const runId=process.env.GITHUB_RUN_ID, output=resolve(".agent-out");mkdirSync(output,{recursive:true,mode:0o755});
 const secrets=[process.env.GITHUB_TOKEN,process.env.CODEX_PILOT_VAULT_KEY,process.env.PUZZORIA_ANALYTICS_READ_TOKEN,process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN,process.env.ACTIONS_ID_TOKEN_REQUEST_URL];
 const evidence={schemaVersion:1,runId,job:process.env.GITHUB_JOB,mode:validation?"validation":"autonomous",funding,startedAt:new Date().toISOString(),status:"starting",commands:[],productionDeployment:false};
@@ -79,7 +83,16 @@ try {
   await rpc.request("initialize",{clientInfo:{name:"puzzoria-autonomous-agent",version:"1"}});rpc.send({method:"initialized"});
   const account=(await rpc.request("account/read",{refreshToken:true})).account;
   await checkpoints.flush(); // An upload and state pointer are confirmed before inference.
-  const gate=quotaGate(account,await rpc.request("account/rateLimits/read"));evidence.quotaBefore=gate;
+  let gate=quotaGate(account,await rpc.request("account/rateLimits/read"));evidence.quotaBefore=gate;
+  const {jobs:runnerJobs}=await api(`/actions/runs/${runId}/jobs?per_page=100`);
+  const runner=runnerJobs.find(job=>job.name===process.env.GITHUB_JOB&&job.status==='in_progress');
+  const elapsed=Date.now()-Date.parse(runner?.started_at);
+  const modelDeadline=Date.parse(runner?.started_at)+(jobTimeout-4)*60000;
+  let modelMilliseconds=Math.min(12*60000,jobTimeout*60000-elapsed-4*60000);
+  if(gate.status==='ready'&&(!Number.isFinite(modelMilliseconds)||modelMilliseconds<30000))gate={status:'waiting_runner_time',reason:'Runner preparation left insufficient time for a model turn and independent verification'};
+  const {usage:monthlyUsage}=await loadUsage(api);
+  evidence.actionsBudget={month:monthlyUsage.month,limit:ACTIONS_LIMIT,charged:chargedMinutes(monthlyUsage),reserved:reservedMinutes(monthlyUsage),modelMilliseconds:Math.max(0,modelMilliseconds||0)};
+  writeFileSync(readonly+'/actions-budget.json',JSON.stringify(evidence.actionsBudget)+'\n',{mode:0o444});
   if(gate.status!=="ready") {
     state.status=gate.status;state.nextEligibleAt=gate.nextEligibleAt ?? null;state.blockedReason=gate.reason;evidence.status=gate.status;
     await store.save("Pause before inference until the actual blocking quota resets");
@@ -105,6 +118,8 @@ try {
       for(const path of [TRENDS_FILE,GROWTH_FILE])sandbox([node,'--input-type=module','-e',`import {readFileSync,writeFileSync} from 'node:fs';const path=${JSON.stringify(path)};JSON.parse(readFileSync(path,'utf8'));let denied=false;try{writeFileSync(path,'tampered')}catch{denied=true}if(!denied)throw Error('Growth snapshot is writable');`]);
       evidence.growth={observationId:growthSnapshot.id,trendStatus:trends.status,trendSources:trends.sources.map(({id,status,reason})=>({id,status,reason})),readOnlySnapshots:true};
     }
+    modelMilliseconds=Math.min(modelMilliseconds,modelDeadline-Date.now());
+    if(!Number.isFinite(modelMilliseconds)||modelMilliseconds<30000)throw Object.assign(Error('Runner preparation and metric collection left insufficient time for inference and independent verification'),{code:'RUNNER_WINDOW'});
     state.status="running";state.nextEligibleAt=null;state.blockedReason=null;await store.save("Start an admissible autonomous Puzzoria session");
     await report(api,state,`Session démarrée : lecture de la mémoire et des consignes, choix autonome d'une contribution Puzzoria.\n\nStatistiques Puzzoria : ${metrics.status}${metrics.status==="available"?` (7/30/90 jours, collectées à ${metrics.fetchedAt})`:metrics.reason?` (${metrics.reason})`:""}.\n\nSearch Console : ${google.status}${google.status==="available"?` (${google.property}, collectée à ${google.fetchedAt})`:google.reason?` (${google.reason})`:""}. Lecture des agrégats seulement ; aucune modification de production.`);
     checkpoints.start(()=>{try{process.kill(-child.pid,"SIGTERM");}catch{/* Already exited. */}});watching=true;
@@ -123,7 +138,7 @@ try {
     if(evidence.threadId===state.lastSession?.threadId) throw new Error("The independent session reused the previous thread unexpectedly");
     let timeout;
     try {
-      await Promise.race([rpc.turn(thread.thread.id,`${validation?"Validation réelle : réalise une petite contribution de développement Puzzoria de ton choix et ses tests, sans roadmap imposée. ":"Poursuis le mandat autonome de Puzzoria. "}Lis d'abord la mémoire et les consignes depuis le disque, puis décide et agis. Le code source exporté correspond au commit ${evidence.sourceCommit}. Le dépôt Git et les identités ne sont pas exposés aux outils ; le superviseur calcule le diff et publie. La limite de temps de cette session est opérationnelle, pas un budget stratégique par expérience. Laisse une mémoire et une prochaine mission choisie par toi.`),new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error("Session time boundary reached; preserve work for the next wake")),22*60*1000);})]);
+      await Promise.race([rpc.turn(thread.thread.id,`${validation?"Validation réelle : réalise une petite contribution de développement Puzzoria de ton choix et ses tests, sans roadmap imposée. ":"Poursuis le mandat autonome de Puzzoria. "}Lis d'abord la mémoire, les consignes et /opt/puzzoria-pilot/readonly/actions-budget.json depuis le disque, puis décide et agis. Le code source exporté correspond au commit ${evidence.sourceCommit}. Le dépôt Git et les identités ne sont pas exposés aux outils ; le superviseur calcule le diff et publie. Fenêtre disponible pour ce tour : ${Math.floor(modelMilliseconds/1000)} secondes, contrôles indépendants réservés ensuite. Cette limite technique ne fixe ni budget par expérience ni nombre de tentatives ; une expérience peut continuer sur plusieurs sessions. Termine ta mémoire avant cette échéance. Laisse une prochaine mission choisie par toi.`),new Promise((_,reject)=>{timeout=setTimeout(()=>reject(Object.assign(new Error("Session time boundary reached; preserve work for the next wake"),{code:"RUNNER_WINDOW"})),modelMilliseconds);})]);
     } finally {clearTimeout(timeout);}
     await checkpoints.stop();watching=false;
     const endGate=quotaGate((await rpc.request("account/read")).account,await rpc.request("account/rateLimits/read"));evidence.quotaAfter=endGate;
@@ -170,9 +185,10 @@ try {
 } catch(error) {
   if(child){try{process.kill(-child.pid,"SIGTERM");}catch{/* Already stopped. */}}stopAgent();child=null;
   if(watching){try{await checkpoints.stop();}catch{/* The error is retained below/finally. */}watching=false;}
-  evidence.status="failed";evidence.error=redact(error.message,secrets);
-  state.retryCount=(state.retryCount ?? 0)+1;
-  state.status=state.retryCount<=3?"retrying":"blocked";
+  const continuation=error.code==="RUNNER_WINDOW";
+  evidence.status=continuation?"deferred_runner_window":"failed";evidence.error=redact(error.message,secrets);
+  state.retryCount=continuation?0:(state.retryCount ?? 0)+1;
+  state.status=continuation?"ready":state.retryCount<=3?"retrying":"blocked";
   state.nextEligibleAt=state.status==="retrying"?new Date(Date.now()+15*60*1000).toISOString():null;
   state.blockedReason=evidence.error;state.lastSession=evidence;
   try {
@@ -194,7 +210,7 @@ try {
       state.memory=partialMemory;
     }
   } catch(snapshotError) {evidence.snapshotError=redact(snapshotError.message,secrets);}
-  process.exitCode=1;
+  if(!continuation)process.exitCode=1;
   try {await store.save("Preserve an autonomous session failure without activating or deploying");await report(api,state,`Session interrompue : ${evidence.error}. La mémoire et le dernier checkpoint confirmé sont conservés.`);} catch {/* Independent proof publication is attempted by the workflow. */}
   console.error(evidence.error);
 } finally {

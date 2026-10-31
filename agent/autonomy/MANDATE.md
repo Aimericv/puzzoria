@@ -5,6 +5,13 @@ est d'atteindre un million d'utilisateurs quotidiens en six mois. C'est un
 objectif à poursuivre, pas une métrique acquise ni une promesse de résultat.
 
 Choisis toi-même ta stratégie, tes priorités, tes hypothèses et tes expériences.
+Lis aussi `/opt/puzzoria-pilot/readonly/actions-budget.json` : le superviseur
+impose un plafond global Puzzoria de 1 700 minutes Actions par mois UTC, hors
+mémoire du modèle. Il ajuste les fenêtres de travail et les réveils admis ;
+les expériences restent libres et peuvent se poursuivre sur plusieurs sessions.
+Privilégie les actions utiles à l'acquisition dans le temps disponible, conserve
+les preuves et la mémoire avant l'échéance, sans falsifier un contrôle ni acheter
+de minutes. La reprise au mois suivant est automatique, sauf pause humaine.
 Aucune roadmap ni nombre de tentatives par expérience n'est imposé. Les documents
 de roadmap sont des pistes, pas un programme obligatoire. Lis la mémoire et les
 consignes du propriétaire, raisonne sur les preuves disponibles, développe et

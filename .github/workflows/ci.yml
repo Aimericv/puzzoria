@@ -1,97 +1,116 @@
 name: Repository checks
-
 on:
   pull_request:
-    branches: [main, codex/autonomy-pilot]
-  push:
-    branches: [codex/autonomy-pilot]
-
-permissions:
-  contents: read
+    branches: [main]
+permissions: {}
 concurrency:
   group: ci-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
-
 jobs:
-  inspect:
-    if: github.event_name == 'pull_request' && github.event.pull_request.number == 4 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent'
+  budget:
+    if: github.event.pull_request.head.repo.full_name == github.repository && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 2
+    concurrency:
+      group: puzzoria-actions-budget
+      cancel-in-progress: false
+      queue: max
     permissions:
       contents: write
-      actions: read
-      deployments: read
+      actions: write
       pull-requests: read
-      issues: read
-      checks: read
-      statuses: read
+    outputs:
+      allowed: ${{ steps.admit.outputs.allowed }}
+      scope: ${{ steps.admit.outputs.scope }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          ref: main
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - run: node scripts/autonomy-agent/ci-proof.mjs inspect
+      - id: admit
+        run: node scripts/autonomy-agent/actions-budget-run.mjs admit
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
+          PUZZORIA_BUDGET_KIND: ci
   checks:
-    if: >-
-      vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' ||
-      (github.event_name == 'pull_request' && github.event.pull_request.number == 4 &&
-       github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent')
+    needs: budget
+    if: needs.budget.outputs.allowed == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: ${{ needs.budget.outputs.scope == 'documentation' && 3 || 12 }}
+    permissions:
+      contents: read
+      actions: read
     env:
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - name: Verify funding declaration and require current main as an ancestor
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            scripts/autonomy-pilot/runtime/package-lock.json
+      - name: Check protected monthly admission before installing or testing
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: ${{ needs.budget.outputs.scope == 'documentation' && 3 || 12 }}
+      - name: Verify source and funding
         run: |
           node --input-type=module -e 'import {readFileSync} from "node:fs";import {assertFunding} from "./scripts/autonomy-agent/policy.mjs";assertFunding(JSON.parse(readFileSync("agent/autonomy/control.json")))'
           git merge-base --is-ancestor origin/main HEAD
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
-      - run: node --test scripts/autonomy-agent/*.test.mjs
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json
-      - run: npm run content:validate
-      - run: npm run content:social
-      - run: npm run seo:check
+      - if: needs.budget.outputs.scope != 'documentation'
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - if: needs.budget.outputs.scope != 'documentation'
+        run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
+      - if: needs.budget.outputs.scope != 'documentation'
+        run: node --test --test-isolation=none scripts/autonomy-agent/*.test.mjs tests/infrastructure/*.test.mjs
+      - if: needs.budget.outputs.scope != 'documentation'
+        run: npm run lint
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm run typecheck
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm test -- --maxWorkers=2 --reporter=json --outputFile=.ci-results/unit.json
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm run content:validate
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm run content:social
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm run seo:check
         env:
           NEXT_PUBLIC_SITE_URL: https://puzzoria.com
-      - run: npm run build
+      - if: needs.budget.outputs.scope == 'application'
+        run: npm run build
         env:
           NEXT_PUBLIC_SITE_URL: https://puzzoria.com
-      - name: Preserve sanitized test counts
-        if: always()
+      - name: Record the actual scope; unrun application checks are not claimed
+        run: echo 'Validated scope = ${{ needs.budget.outputs.scope }}' >> "$GITHUB_STEP_SUMMARY"
+      - if: always() && needs.budget.outputs.scope == 'application'
         run: node scripts/autonomy-agent/ci-proof.mjs summarize
         env:
           CI_PROOF_PROJECT: checks
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+      - if: always() && needs.budget.outputs.scope == 'application'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: ci-evidence-${{ github.run_id }}-checks
           path: .ci-results/summary.json
-          retention-days: 14
-
+          retention-days: 7
   e2e:
     name: E2E (${{ matrix.project }})
-    needs: checks
-    if: >-
-      vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' ||
-      (github.event_name == 'pull_request' && github.event.pull_request.number == 4 &&
-       github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent')
+    needs: [budget, checks]
+    if: needs.budget.outputs.allowed == 'true' && needs.budget.outputs.scope == 'application'
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -107,63 +126,36 @@ jobs:
     env:
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
-        with:
-          node-version: 24.15.0
-      - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npx playwright install --with-deps ${{ matrix.browser }}
-      # Exercise the observed Linux regressions before the full browser suite.
-      - name: Verify exports, hydrated navigation and deterministic fixtures
-        run: >-
-          npm run test:e2e -- e2e/social-games.spec.ts e2e/site-analytics.spec.ts e2e/rare-word.spec.ts
-          --grep "new SEO pages|internal analytics require|Unusual Word plays" --project=${{ matrix.project }} --reporter=line,json
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/preflight.json
-      - run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line,json
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/full.json
-      - name: Preserve sanitized browser results without traces or databases
-        if: always()
-        run: node scripts/autonomy-agent/ci-proof.mjs summarize
-        env:
-          CI_PROOF_PROJECT: ${{ matrix.project }}
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: ci-evidence-${{ github.run_id }}-${{ matrix.project }}
-          path: .ci-results/summary.json
-          retention-days: 14
-      # Never upload the disposable SQLite DB, browser state or raw traces.
-
-  evidence:
-    needs: [checks, e2e]
-    if: always() && github.event_name == 'pull_request' && github.event.pull_request.number == 4 && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'codex/autonomy-agent'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    permissions:
-      contents: write
-      actions: read
-      deployments: read
-      pull-requests: read
-      issues: read
-      checks: read
-      statuses: read
-    steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
-        with:
-          pattern: ci-evidence-${{ github.run_id }}-*
-          path: .ci-evidence
-      - name: Publish validation and read-only deployment inspection
-        if: always()
-        run: node scripts/autonomy-agent/ci-proof.mjs publish
+          cache: npm
+      - name: Check protected reservation for this browser job
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_BUDGET_JOB: E2E (${{ matrix.project }})
+          PUZZORIA_JOB_TIMEOUT: 30
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      # Every assertion from the old preflight is already in this full suite.
+      - run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/full.json
+      - if: always()
+        run: node scripts/autonomy-agent/ci-proof.mjs summarize
+        env:
+          CI_PROOF_PROJECT: ${{ matrix.project }}
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ci-evidence-${{ github.run_id }}-${{ matrix.project }}
+          path: .ci-results/summary.json
+          retention-days: 7

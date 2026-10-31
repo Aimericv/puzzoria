@@ -19,21 +19,56 @@ on:
         description: Verify Google read-only collection without running Codex
         type: boolean
         default: false
-  push:
-    branches: [codex/autonomy-agent]
 
 permissions: {}
 concurrency:
   group: puzzoria-autonomy-pilot
   cancel-in-progress: false
+  queue: max
 env:
   PUZZORIA_AGENT_ENABLED: ${{ vars.PUZZORIA_AGENT_ENABLED }}
 
 jobs:
-  search-console-check:
-    if: github.event_name == 'workflow_dispatch' && inputs.check-search-console && github.ref == 'refs/heads/main' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+  budget:
+    if: >-
+      github.ref == 'refs/heads/main' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' &&
+      (vars.PUZZORIA_AGENT_ENABLED == 'true' || inputs.check-search-console) &&
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'issue_comment' && github.event.issue.number == 3 && !github.event.issue.pull_request &&
+        github.event.comment.user.id == github.event.repository.owner.id && github.event.comment.user.type == 'User'))
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 2
+    concurrency:
+      group: puzzoria-actions-budget
+      cancel-in-progress: false
+      queue: max
+    permissions:
+      contents: write
+      actions: write
+      pull-requests: read
+    outputs:
+      allowed: ${{ steps.admit.outputs.allowed }}
+      session_timeout: ${{ steps.admit.outputs.session_timeout }}
+      release_allowed: ${{ steps.admit.outputs.release_allowed }}
+      production_allowed: ${{ steps.admit.outputs.production_allowed }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: 24.15.0
+      - id: admit
+        run: node scripts/autonomy-agent/actions-budget-run.mjs admit
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_BUDGET_KIND: autonomy
+
+  search-console-check:
+    needs: budget
+    if: needs.budget.outputs.allowed == 'true' && github.event_name == 'workflow_dispatch' && inputs.check-search-console && github.ref == 'refs/heads/main' && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
     permissions:
       contents: read
       id-token: write
@@ -44,19 +79,19 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+      - name: Verify the protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 3
       - name: Verify Google authorization and real reports without Codex or raw logs
         run: node scripts/autonomy-agent/check-search-console.mjs
 
   first:
-    # Only the operator's explicit validation commit bypasses the permanent-off switch.
-    if: >-
-      (github.event_name == 'push' && contains(github.event.head_commit.message, '[validate-agent]')) ||
-      (vars.PUZZORIA_AGENT_ENABLED == 'true' && !inputs.check-search-console && !inputs.deploy-pending &&
-       (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' ||
-        (github.event_name == 'issue_comment' && !github.event.issue.pull_request &&
-         github.event.comment.user.id == github.event.repository.owner.id && github.event.comment.user.type == 'User')))
+    needs: budget
+    if: needs.budget.outputs.allowed == 'true' && vars.PUZZORIA_AGENT_ENABLED == 'true' && !inputs.check-search-console && !inputs.deploy-pending
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: ${{ fromJSON(needs.budget.outputs.session_timeout) }}
     permissions:
       contents: write
       issues: write
@@ -66,6 +101,7 @@ jobs:
     outputs:
       admitted: ${{ steps.session.outputs.run_model }}
       candidate: ${{ steps.pending.outputs.eligible }}
+      pending_deploy: ${{ steps.pending.outputs.deploy }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -84,7 +120,8 @@ jobs:
         if: '!inputs.validate-pending'
         uses: ./.github/actions/puzzoria-agent
         with:
-          mode: ${{ github.event_name == 'push' && 'validation' || 'autonomous' }}
+          mode: autonomous
+          session-timeout: ${{ needs.budget.outputs.session_timeout }}
           github-token: ${{ github.token }}
           vault-key: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
           analytics-token: ${{ secrets.PUZZORIA_ANALYTICS_READ_TOKEN }}
@@ -96,10 +133,14 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
 
   release-prepare:
-    needs: first
-    if: github.ref == 'refs/heads/main' && needs.first.outputs.candidate == 'true' && needs.first.result == 'success'
+    needs: [budget, first]
+    if: needs.budget.outputs.release_allowed == 'true' && github.ref == 'refs/heads/main' && needs.first.outputs.candidate == 'true' && needs.first.result == 'success'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 4
+    concurrency:
+      group: puzzoria-actions-budget
+      cancel-in-progress: false
+      queue: max
     permissions:
       contents: write
       pull-requests: write
@@ -107,6 +148,7 @@ jobs:
       actions: read
     outputs:
       eligible: ${{ steps.prepare.outputs.eligible }}
+      kind: ${{ steps.prepare.outputs.kind }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
@@ -114,6 +156,12 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+          cache: npm
+      - name: Verify this job's protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 4
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - id: prepare
         run: node scripts/autonomy-agent/release-check.mjs prepare
@@ -142,10 +190,16 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+          cache: npm
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: release-request-${{ github.run_id }}
           path: .release
+      - name: Verify this job's protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: ${{ needs.release-prepare.outputs.kind == 'documentation' && 5 || 90 }}
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Validate the pinned candidate with no credentials or external network in its containers
         run: sudo --preserve-env=GITHUB_REPOSITORY,GITHUB_SHA,GITHUB_TOKEN,PATH "$(command -v node)" scripts/autonomy-agent/release-check.mjs validate
@@ -161,10 +215,12 @@ jobs:
           retention-days: 14
 
   release-finalize:
+    outputs:
+      deploy: ${{ steps.finalize.outputs.deploy }}
     needs: [release-prepare, release-validation]
     if: always() && needs.release-prepare.outputs.eligible == 'true'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 4
     permissions:
       contents: write
       issues: write
@@ -177,6 +233,12 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+          cache: npm
+      - name: Verify this job's protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 4
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -187,23 +249,31 @@ jobs:
         with:
           name: release-proof-${{ github.run_id }}
           path: .release
-      - run: node scripts/autonomy-agent/release-check.mjs finalize
+      - id: finalize
+        run: node scripts/autonomy-agent/release-check.mjs finalize
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
   production-gate:
-    needs: [first, release-finalize]
+    needs: [budget, first, release-finalize]
     if: >-
-      always() && github.ref == 'refs/heads/main' && vars.PUZZORIA_AGENT_ENABLED == 'true' &&
+      always() && needs.budget.outputs.allowed == 'true' && needs.budget.outputs.production_allowed == 'true' &&
+      (needs.first.outputs.pending_deploy == 'true' || needs.release-finalize.outputs.deploy == 'true' || inputs.deploy-pending) &&
+      github.ref == 'refs/heads/main' && vars.PUZZORIA_AGENT_ENABLED == 'true' &&
       vars.PUZZORIA_AUTODEPLOY_ENABLED == 'true' &&
       (needs.first.result == 'success' || (github.event_name == 'workflow_dispatch' && inputs.deploy-pending))
     runs-on: ubuntu-24.04
     timeout-minutes: 3
+    concurrency:
+      group: puzzoria-actions-budget
+      cancel-in-progress: false
+      queue: max
     permissions:
-      contents: read
+      contents: write
       issues: read
+      actions: read
     outputs:
-      allowed: ${{ steps.gate.outputs.allowed }}
+      allowed: ${{ steps.gate.outputs.allowed == 'true' && steps.production-budget.outputs.allowed == 'true' }}
       sha: ${{ steps.gate.outputs.sha }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -212,12 +282,23 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+          cache: npm
+      - name: Verify this job's protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 3
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - id: gate
         run: node scripts/autonomy-agent/release-client.mjs gate
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PUZZORIA_AUTODEPLOY_ENABLED: ${{ vars.PUZZORIA_AUTODEPLOY_ENABLED }}
+      - id: production-budget
+        if: steps.gate.outputs.allowed == 'true'
+        run: node scripts/autonomy-agent/actions-budget-run.mjs extend-production
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
   production:
     needs: production-gate
@@ -235,6 +316,12 @@ jobs:
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
           node-version: 24.15.0
+          cache: npm
+      - name: Verify this job's protected monthly reservation
+        run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PUZZORIA_JOB_TIMEOUT: 30
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Deploy through the restricted host command after policy and initial owner approval
         run: node scripts/autonomy-agent/release-client.mjs deploy
@@ -244,25 +331,3 @@ jobs:
           RELEASE_SHA: ${{ needs.production-gate.outputs.sha }}
           PUZZORIA_DEPLOY_KEY: ${{ secrets.PUZZORIA_DEPLOY_KEY }}
           PUZZORIA_DEPLOY_KNOWN_HOSTS: ${{ secrets.PUZZORIA_DEPLOY_KNOWN_HOSTS }}
-
-  second:
-    needs: first
-    if: github.event_name == 'push' && needs.first.result == 'success' && needs.first.outputs.admitted == 'true'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 40
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      actions: read
-      id-token: write
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-        with:
-          persist-credentials: false
-      - uses: ./.github/actions/puzzoria-agent
-        with:
-          mode: validation
-          github-token: ${{ github.token }}
-          vault-key: ${{ secrets.CODEX_PILOT_VAULT_KEY }}
-          analytics-token: ${{ secrets.PUZZORIA_ANALYTICS_READ_TOKEN }}
