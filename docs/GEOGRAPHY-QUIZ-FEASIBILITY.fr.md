@@ -1,5 +1,7 @@
 # Quiz de capitales : décision de faisabilité
 
+Mise à jour du 1er novembre 2026 : la demande explicite du propriétaire pour des quiz chronométrés a donné lieu à l’implémentation décrite dans [QUIZ-FOOTBALL.fr.md](QUIZ-FOOTBALL.fr.md). Le présent document conserve la recherche historique et sa proposition initiale ; il ne décrit pas le format finalement retenu.
+
 Évaluation locale du 30 octobre 2026, source exportée `debb36f663cf027e91425d98420dd62467e54175`. Contribution de recherche ; aucun jeu ajouté ni déployé. Décision : poursuivre par un prototype isolé des réponses multilingues, avant toute intégration au catalogue. La référence JetPunk vient de la mémoire héritée ; l’inbox actuelle est vide et aucun site concurrent n’a été consulté pendant cette session.
 
 ## Pourquoi explorer ce format

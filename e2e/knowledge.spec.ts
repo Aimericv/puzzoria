@@ -21,6 +21,8 @@ for(const locale of locales) {
     await game.getByRole("button",{name:m.start,exact:true}).click();
     await expect(game.locator('[data-quiz-item]')).toHaveCount(8);
     const input=game.getByLabel(m.answer,{exact:true});
+    await game.locator('[data-quiz-item]').last().scrollIntoViewIfNeeded();
+    await expect(input).toBeInViewport();await expect(game.locator('.knowledge-form-clock')).toBeInViewport();
     await input.fill("Mercury");
     // JetPunk-style automatic acceptance, without requiring a submit click.
     await expect(game.locator('[data-quiz-item="0"]')).toHaveClass(/found/);

@@ -20,6 +20,7 @@ export function smoothScrollTo(element: HTMLElement, onEnd = () => {}) {
     cancelAnimationFrame(frame);
     window.removeEventListener("wheel", cancel);
     window.removeEventListener("touchstart", cancel);
+    window.removeEventListener("pointerdown", cancel);
     window.removeEventListener("keydown", cancel);
     if (cancelCurrent === cancel) cancelCurrent = undefined;
     onEnd();
@@ -35,6 +36,7 @@ export function smoothScrollTo(element: HTMLElement, onEnd = () => {}) {
   cancelCurrent = cancel;
   window.addEventListener("wheel", cancel, {passive: true});
   window.addEventListener("touchstart", cancel, {passive: true});
+  window.addEventListener("pointerdown", cancel, {passive: true});
   window.addEventListener("keydown", cancel);
   frame = requestAnimationFrame(tick);
   return cancel;

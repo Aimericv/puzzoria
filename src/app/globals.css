@@ -40,7 +40,9 @@
 .knowledge-scoreboard .urgent strong { color: #bd3429; }
 .knowledge-progress { height: 7px; background: var(--line); border-radius: 10px; overflow: hidden; margin: 8px 0 22px; }
 .knowledge-progress > span { display: block; height: 100%; background: var(--knowledge-accent); border-radius: inherit; transition: width .25s ease; }
-.knowledge-answer-form { text-align: left; margin: 22px 0 8px; }
+.knowledge-answer-form { position: sticky; top: 12px; z-index: 4; background: var(--surface); padding: 12px 0 1px; border-bottom: 1px solid var(--line); text-align: left; margin: 22px 0 8px; }
+.knowledge-form-clock { float: right; display: flex; align-items: center; gap: 5px; font-size: .85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.knowledge-form-clock.urgent { color: #bd3429; }
 .knowledge-answer-form label { display: block; font-size: .88rem; font-weight: 700; margin-bottom: 8px; }
 .knowledge-answer-form > div { display: flex; gap: 9px; }
 .knowledge-answer-form input { flex: 1; min-width: 0; width: 100%; border: 1px solid #b4becf; border-radius: 12px; background: var(--surface); color: var(--ink); padding: 12px 14px; font-size: 16px; min-height: 48px; }
@@ -3025,5 +3027,5 @@ tr:last-child td {
 .knowledge-duel-answers { margin-top: 18px; }
 .knowledge-duel-answers summary { cursor: pointer; font-weight: 700; }
 .knowledge-duel-answers dl { display: grid; gap: 8px; }
-.knowledge-duel-answers dl > div { display: flex; gap: 16px; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.knowledge-duel-answers dl > div { display: flex; gap: 16px; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .knowledge-duel-answers dd { margin: 0; font-weight: 700; text-align: right; }

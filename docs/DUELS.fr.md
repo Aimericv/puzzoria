@@ -2,6 +2,8 @@
 
 Le bouton **Défier un ami** crée désormais un salon privé `/[locale]/live/[code]`. Il fonctionne avant une partie et depuis son résultat. Les anciennes invitations `/friend` et salles `/number-room` restent compatibles, mais les nouveaux boutons utilisent le mode simultané.
 
+Extension du 1er novembre 2026 : les quiz chronométrés et les carrières de footballeurs utilisent aussi ces salons privés. Voir [le contenu et les cohortes](QUIZ-FOOTBALL.fr.md).
+
 ## Parcours commun
 
 Compte facultatif ; pseudo invité modifiable, lien à envoyer, deuxième joueur, boutons Prêt, décompte de trois secondes. Le serveur génère une énigme neuve après les deux confirmations. Aucun joueur ne voit le puzzle avant l'instant commun de départ. La langue du puzzle est commune, l'interface du destinataire peut être différente. L'hôte choisit la difficulté du Sudoku/Démineur ou la catégorie des jeux d'opinion avant le départ ; un changement annule les confirmations.
@@ -19,6 +21,8 @@ Deux panneaux côte à côte montrent les présences et les progrès, sans répo
 | Devine le nombre | Deux secrets manuels, propositions simultanées ; réussite, moins d'essais, puis instant de fin. Aucun nombre/range proposé par le site. | 5 min / 30 essais chacun |
 | Classement à l'aveugle | Même catégorie et cinq items ; révélation des deux tableaux après les deux fins. Aucun gagnant de vitesse. | 10 min |
 | Tu préfères | Dix questions communes ; révélation des votes et nombre de choix en commun après les deux fins. | 10 min |
+| Quiz chrono | Même thème et mêmes réponses ; score supérieur, puis instant de fin. | 60–120 s selon le thème |
+| Devine le footballeur | Même parcours ; réussite, moins d’essais, puis instant de fin. | 10 min / 6 essais |
 
 Le Mot insolite reste exclusivement quotidien ; son bouton propose un duel Wordle classique neuf. Aucun second mot insolite n'est généré.
 

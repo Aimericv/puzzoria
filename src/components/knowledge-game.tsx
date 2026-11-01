@@ -79,6 +79,7 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
       </div>
       {c.kind==="quiz"&&<div className="knowledge-progress" role="progressbar" aria-label={m.found} aria-valuenow={shown.found.length} aria-valuemin={0} aria-valuemax={c.items.length}><span style={{width:`${shown.found.length*100/c.items.length}%`}}/></div>}
       {!shown.completed&&<form className="knowledge-answer-form" onSubmit={e=>{e.preventDefault();lastAuto.current=input;void act({kind:"answer",value:input});}}>
+        {c.kind==="quiz"&&<span className={`knowledge-form-clock${seconds!==null&&seconds<=15?" urgent":""}`} aria-label={m.remaining}><Clock3 size={15}/>{clockText(seconds??c.seconds)}</span>}
         <label htmlFor={`knowledge-answer-${c.id}`}>{c.kind==="quiz"?m.answer:m.player}</label><div><input id={`knowledge-answer-${c.id}`} ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} maxLength={100} autoComplete="off" autoCapitalize="words" spellCheck={false} readOnly={busy} disabled={!started} enterKeyHint="go"/><button className="primary-button" disabled={disabled||!input.trim()}><Send size={17}/>{m.submit}</button></div>
         <p className={`knowledge-feedback ${shown.feedback??""}`} role="status">{shown.feedback?m[shown.feedback]:"\u00a0"}</p>
       </form>}
