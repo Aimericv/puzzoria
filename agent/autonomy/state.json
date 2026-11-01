@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 214,
+  "generation": 215,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -3423,11 +3423,12 @@
         "candidateSha": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
         "prNumber": 31,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/31",
-        "status": "proposed",
+        "status": "merged",
         "assessment": {
           "status": "awaiting_verified_deployment",
           "causalClaim": false
-        }
+        },
+        "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
       },
       {
         "id": "five-capitals-feasibility",
@@ -4402,7 +4403,7 @@
       "experimentId": "sudoku-guide-single-deductions",
       "verified": true,
       "runId": "41113159580",
-      "status": "validating",
+      "status": "awaiting_activation",
       "risk": {
         "risk": "low",
         "kind": "editorial-copy",
@@ -4413,7 +4414,22 @@
       "rebase": {
         "automatic": true,
         "previousHead": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4"
-      }
+      },
+      "result": {
+        "status": "merged",
+        "sha": "64e54ff6be42055870e359a6015e9825a1a831a5",
+        "candidate": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
+        "previousMain": "773f6c4959ed9670d9a46053e23117c247a829ff",
+        "previousTree": "58bab5f4143fedc0603f309c2e07c4f62e700cca",
+        "risk": {
+          "risk": "low",
+          "kind": "editorial-copy",
+          "requiresDeployment": true,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "prNumber": 31
+      },
+      "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
     },
     "releaseQueue": [
       {
@@ -4483,7 +4499,7 @@
         "experimentId": "sudoku-guide-single-deductions",
         "verified": true,
         "runId": "41113159580",
-        "status": "validating",
+        "status": "awaiting_activation",
         "risk": {
           "risk": "low",
           "kind": "editorial-copy",
@@ -4494,7 +4510,22 @@
         "rebase": {
           "automatic": true,
           "previousHead": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4"
-        }
+        },
+        "result": {
+          "status": "merged",
+          "sha": "64e54ff6be42055870e359a6015e9825a1a831a5",
+          "candidate": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
+          "previousMain": "773f6c4959ed9670d9a46053e23117c247a829ff",
+          "previousTree": "58bab5f4143fedc0603f309c2e07c4f62e700cca",
+          "risk": {
+            "risk": "low",
+            "kind": "editorial-copy",
+            "requiresDeployment": true,
+            "reason": "unchanged executable code; bounded text edits or pure section insertions"
+          },
+          "prNumber": 31
+        },
+        "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
       },
       {
         "sha": "e0a6e36bc0d4a429bfd3c7336a45828e3115112a",
@@ -4605,29 +4636,39 @@
       }
     ],
     "pendingDeployment": {
-      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
-      "base": "69e4198f063fb499c45efdd4f0fdedc6a31b78a7",
-      "mergeSha": "f1cc44089db87644299ea88a09fae7d9d25be18c",
-      "prNumber": 27,
-      "experimentId": "reviewed-growth-bootstrap",
+      "sha": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
+      "base": "773f6c4959ed9670d9a46053e23117c247a829ff",
+      "prNumber": 31,
+      "experimentId": "sudoku-guide-single-deductions",
       "verified": true,
-      "status": "deployed",
-      "includedExperiments": [
-        "word-guide-worked-deductions",
-        "published-vocabulary-discovery"
-      ],
-      "validation": {
-        "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
-        "fullRunId": "40539308357",
-        "controllerRunId": "40587465644",
-        "configurationSource": "c322fd20dd9d3188065fef48bf332fb740c0617e",
-        "configurationRunId": "40588678094"
+      "runId": "41113159580",
+      "status": "awaiting_activation",
+      "risk": {
+        "risk": "low",
+        "kind": "editorial-copy",
+        "requiresDeployment": true,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
       },
-      "ownerAuthorizationRequired": false,
-      "ownerApprovedBootstrap": true,
-      "deploymentFailures": 1,
-      "lastDeploymentFailureAt": "2026-10-27T21:52:23.394Z",
-      "nextDeploymentAttemptAt": "2026-10-28T03:52:23.394Z"
+      "nativeVerifiedSha": "b629fa4acffda82f45332752318a017736a796e2",
+      "rebase": {
+        "automatic": true,
+        "previousHead": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4"
+      },
+      "result": {
+        "status": "merged",
+        "sha": "64e54ff6be42055870e359a6015e9825a1a831a5",
+        "candidate": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
+        "previousMain": "773f6c4959ed9670d9a46053e23117c247a829ff",
+        "previousTree": "58bab5f4143fedc0603f309c2e07c4f62e700cca",
+        "risk": {
+          "risk": "low",
+          "kind": "editorial-copy",
+          "requiresDeployment": true,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "prNumber": 31
+      },
+      "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
     },
     "reviewedBatch": {
       "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
