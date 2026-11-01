@@ -75,6 +75,14 @@ const content: Record<Locale, SeoCopy> = {
             text: "Pour une case vide, retirez les chiffres déjà présents dans sa ligne, sa colonne et son carré. Si un seul candidat reste, vous pouvez le placer. Le mode Notes permet de conserver plusieurs possibilités sans remplir la case. L'affichage facultatif des conflits aide à repérer une répétition ; l'absence de conflit ne garantit pas que toute la grille est correcte.",
           },
           {
+            title: "Un exemple de candidat unique",
+            text: "Exemple fictif, indépendant de la grille du jour : une ligne contient 1, 2, 3, 4, une case vide, 6, 7, une case vide, 9. Il manque 5 et 8. Si la cinquième colonne contient déjà un 8, la cinquième case ne peut être que 5 ; la huitième case reçoit alors 8. Vérifiez aussi les carrés de 3 × 3 avant de placer les chiffres. Après chaque placement, actualisez les notes des cases qui partagent sa ligne, sa colonne ou son carré.",
+          },
+          {
+            title: "Repérer un chiffre à une seule place",
+            text: "Un chiffre peut avoir une seule place dans une ligne, même si chaque case a plusieurs candidats. Exemple fictif : il manque 2, 5, 7 et 9, et les candidats complets des quatre cases vides sont {2, 7}, {2, 5}, {5, 9} et {2, 9}. Seule la première case autorise 7 : placez-le là. Le même raisonnement vaut pour une colonne ou un carré. Si plusieurs places restent possibles, examinez une autre zone et vérifiez que vos notes sont à jour, sans choisir au hasard.",
+          },
+          {
             title: "Choisir un niveau et reprendre sa grille",
             text: "Les niveaux changent les grilles et la quantité de chiffres initiaux ; ils ne constituent pas une mesure précise des techniques nécessaires. Le Quotidien propose une seule grille commune à tous. Les trois niveaux sont disponibles en Illimité. Le mode Illimité propose de nouvelles grilles, et les archives donnent accès aux jours précédents. Les notes et saisies sont sauvegardées. Le chronomètre peut être mis en pause.",
           },
@@ -157,6 +165,14 @@ const content: Record<Locale, SeoCopy> = {
           {
             title: "Find candidates before guessing",
             text: "For an empty square, remove the digits already present in its row, column and box. If one candidate remains, it can be placed. Notes let you keep several possibilities without filling the square. Optional conflict highlighting can reveal repeated digits; having no highlighted conflict does not prove that the completed grid is correct.",
+          },
+          {
+            title: "A worked single-candidate example",
+            text: "This fictional example is independent of today’s puzzle: a row contains 1, 2, 3, 4, an empty cell, 6, 7, an empty cell, 9. The missing digits are 5 and 8. If the fifth column already contains an 8, the fifth cell must be 5; the eighth cell then takes 8. Check the 3 × 3 boxes too before placing the digits. After each placement, update the notes in cells sharing its row, column or box.",
+          },
+          {
+            title: "Find a digit with only one possible place",
+            text: "A digit can have just one place in a row even when every empty cell has several candidates. In a fictional example, the missing digits are 2, 5, 7 and 9, and the complete candidate lists for the four empty cells are {2, 7}, {2, 5}, {5, 9} and {2, 9}. Only the first cell allows 7, so place it there. This also works in a column or box. If several places remain possible, examine another area and check that your notes are up to date instead of guessing.",
           },
           {
             title: "Levels and saved puzzles",
@@ -243,6 +259,14 @@ const content: Record<Locale, SeoCopy> = {
             text: "Para una casilla vacía, descarta los números que ya aparecen en su fila, columna y bloque. Si queda un solo candidato, puedes colocarlo. Las notas guardan varias posibilidades sin completar la casilla. El aviso opcional de conflictos detecta repeticiones; que no haya conflictos visibles no garantiza que toda la cuadrícula sea correcta.",
           },
           {
+            title: "Un ejemplo de candidato único",
+            text: "Ejemplo ficticio, independiente del sudoku de hoy: una fila contiene 1, 2, 3, 4, una casilla vacía, 6, 7, una casilla vacía, 9. Faltan 5 y 8. Si la quinta columna ya contiene un 8, la quinta casilla debe ser 5; la octava recibe entonces el 8. Comprueba también los bloques de 3 × 3 antes de colocar los números. Tras cada número colocado, actualiza las notas de las casillas que comparten su fila, columna o bloque.",
+          },
+          {
+            title: "Encontrar la única posición de un número",
+            text: "Un número puede tener una sola posición en una fila aunque cada casilla tenga varios candidatos. Ejemplo ficticio: faltan 2, 5, 7 y 9, y las listas completas de candidatos de las cuatro casillas vacías son {2, 7}, {2, 5}, {5, 9} y {2, 9}. Solo la primera admite el 7: colócalo ahí. El mismo razonamiento sirve para una columna o un bloque. Si quedan varias posiciones posibles, examina otra zona y comprueba que tus notas estén actualizadas, sin elegir al azar.",
+          },
+          {
             title: "Niveles y partidas guardadas",
             text: "Los niveles usan cuadrículas y cantidades de pistas diferentes; no son una clasificación exacta de las técnicas necesarias. El modo diario ofrece una única cuadrícula compartida. Los tres niveles están disponibles en Ilimitado. Ilimitado genera nuevas cuadrículas y el archivo ofrece días anteriores. Se guardan las entradas y notas, y puedes pausar el cronómetro.",
           },
@@ -325,6 +349,14 @@ const content: Record<Locale, SeoCopy> = {
           {
             title: "Kandidaten finden",
             text: "Streiche für ein leeres Feld die Zahlen, die bereits in seiner Zeile, Spalte und seinem Block stehen. Bleibt genau ein Kandidat, kannst du ihn einsetzen. Notizen halten mehrere Möglichkeiten fest, ohne das Feld auszufüllen. Die optionale Konfliktanzeige erkennt Wiederholungen; fehlende Konflikte beweisen noch keine korrekte Gesamtlösung.",
+          },
+          {
+            title: "Ein Beispiel mit nur einem Kandidaten",
+            text: "Dieses erfundene Beispiel ist unabhängig vom heutigen Rätsel: Eine Zeile enthält 1, 2, 3, 4, ein leeres Feld, 6, 7, ein leeres Feld, 9. Es fehlen 5 und 8. Steht in der fünften Spalte bereits eine 8, muss das fünfte Feld eine 5 sein; ins achte Feld kommt dann die 8. Prüfe vor dem Eintragen auch die 3 × 3-Blöcke. Aktualisiere nach jeder eingetragenen Zahl die Notizen der Felder in derselben Zeile, Spalte oder demselben Block.",
+          },
+          {
+            title: "Eine Zahl mit nur einem möglichen Platz finden",
+            text: "Eine Zahl kann in einer Zeile nur einen möglichen Platz haben, obwohl jedes leere Feld mehrere Kandidaten hat. Erfundenes Beispiel: Es fehlen 2, 5, 7 und 9. Die vollständigen Kandidatenlisten der vier leeren Felder sind {2, 7}, {2, 5}, {5, 9} und {2, 9}. Nur das erste Feld erlaubt die 7: Trage sie dort ein. Das funktioniert auch in einer Spalte oder einem Block. Bleiben mehrere Plätze möglich, prüfe einen anderen Bereich und aktualisiere deine Notizen, statt zu raten.",
           },
           {
             title: "Stufen und gespeicherte Spiele",
