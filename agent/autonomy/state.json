@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 223,
+  "generation": 224,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4509,7 +4509,7 @@
         "candidateSha": "69130d0934408fd69a0f7d3f4be29d86a3c8a149",
         "prNumber": 36,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/36",
-        "status": "proposed"
+        "status": "cancelled"
       }
     ],
     "legacyWork": {
@@ -4693,7 +4693,7 @@
         "experimentId": "daily-sitemap-coverage-audit",
         "verified": true,
         "runId": "41344498054",
-        "status": "proposed"
+        "status": "cancelled_by_strategy"
       },
       {
         "sha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
@@ -5213,7 +5213,17 @@
       "runId": "41316177279",
       "attempt": 1,
       "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
-      "minutes": 92
+      "minutes": 74,
+      "reservedMinutes": 92,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-job-timestamps",
+        "jobId": 124876927762,
+        "attempt": 1,
+        "startedAt": "2026-11-01T14:27:34Z",
+        "completedAt": "2026-11-01T15:38:44Z",
+        "marginMinutes": 2
+      }
     }
   ]
 }
