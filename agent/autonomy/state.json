@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 216,
+  "generation": 217,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4369,7 +4369,7 @@
             "google.impressions": null
           }
         },
-        "candidateSha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
+        "candidateSha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
         "prNumber": 35,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/35",
         "status": "proposed"
@@ -4397,39 +4397,24 @@
       }
     },
     "releaseCandidate": {
-      "sha": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
-      "base": "773f6c4959ed9670d9a46053e23117c247a829ff",
-      "prNumber": 31,
-      "experimentId": "sudoku-guide-single-deductions",
+      "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+      "base": "64e54ff6be42055870e359a6015e9825a1a831a5",
+      "prNumber": 35,
+      "experimentId": "mines-guide-certain-neighbours",
       "verified": true,
-      "runId": "41113159580",
-      "status": "awaiting_activation",
+      "runId": "41310807978",
+      "status": "validating",
       "risk": {
         "risk": "low",
         "kind": "editorial-copy",
         "requiresDeployment": true,
         "reason": "unchanged executable code; bounded text edits or pure section insertions"
       },
-      "nativeVerifiedSha": "b629fa4acffda82f45332752318a017736a796e2",
+      "nativeVerifiedSha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
       "rebase": {
         "automatic": true,
-        "previousHead": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4"
-      },
-      "result": {
-        "status": "merged",
-        "sha": "64e54ff6be42055870e359a6015e9825a1a831a5",
-        "candidate": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
-        "previousMain": "773f6c4959ed9670d9a46053e23117c247a829ff",
-        "previousTree": "58bab5f4143fedc0603f309c2e07c4f62e700cca",
-        "risk": {
-          "risk": "low",
-          "kind": "editorial-copy",
-          "requiresDeployment": true,
-          "reason": "unchanged executable code; bounded text edits or pure section insertions"
-        },
-        "prNumber": 31
-      },
-      "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
+        "previousHead": "8b3a5a7ad83450fee847e6a91a554158f00934a2"
+      }
     },
     "releaseQueue": [
       {
@@ -4541,18 +4526,23 @@
         }
       },
       {
-        "sha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
-        "base": "773f6c4959ed9670d9a46053e23117c247a829ff",
+        "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+        "base": "64e54ff6be42055870e359a6015e9825a1a831a5",
         "prNumber": 35,
         "experimentId": "mines-guide-certain-neighbours",
         "verified": true,
         "runId": "41310807978",
-        "status": "proposed",
+        "status": "validating",
         "risk": {
           "risk": "low",
           "kind": "editorial-copy",
           "requiresDeployment": true,
           "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "nativeVerifiedSha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
+        "rebase": {
+          "automatic": true,
+          "previousHead": "8b3a5a7ad83450fee847e6a91a554158f00934a2"
         }
       },
       {
@@ -5056,6 +5046,23 @@
       "runId": "41310807978",
       "attempt": 1,
       "sha": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
+      "minutes": 59,
+      "reservedMinutes": 92,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-job-timestamps",
+        "jobId": 124862450522,
+        "attempt": 1,
+        "startedAt": "2026-11-01T13:28:33Z",
+        "completedAt": "2026-11-01T14:25:33Z",
+        "marginMinutes": 2
+      }
+    },
+    {
+      "at": "2026-11-01T14:27:25.869Z",
+      "runId": "41316177279",
+      "attempt": 1,
+      "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
       "minutes": 92
     }
   ]
