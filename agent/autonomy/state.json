@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 209,
+  "generation": 210,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "e0a6e36bc0d4a429bfd3c7336a45828e3115112a",
   "checkpoint": {
-    "artifactId": 13032446138,
-    "runId": "41173140053",
-    "name": "puzzoria-agent-auth-41173140053-31",
-    "generation": 31,
+    "artifactId": 13085163249,
+    "runId": "41310807978",
+    "name": "puzzoria-agent-auth-41310807978-32",
+    "generation": 32,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41173140053",
+      "runId": "41310807978",
       "phase": "autonomous-agent",
-      "generation": 31
+      "generation": 32
     },
-    "expiresAt": "2027-01-29T05:34:32Z",
-    "digest": "c1bf0536593e2e71e31fdd538590db91d02bd6d7b7b917093485a257e9c6bf85"
+    "expiresAt": "2027-01-30T13:20:43Z",
+    "digest": "a2b1e2a8a3b30f1d47dcf4219713917dddae38df7de1412e4db0964db0656118"
   },
   "lastMessageId": 6539672999,
   "completedSessions": 28,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41173140053",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41173140053"
+    "id": "41310807978",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41310807978"
   },
   "memory": {
     "STATE.md": "# État — 31 octobre 2026, session 05:37 UTC\n\nBase exportée 88b38e1b0c898a29a4335f083cecc29495b2b543. AGENTS, mandat, inbox vide, quatre mémoires et quatre rapports readonly consultés ; guide Next use-client lu avant code. Aucun réseau externe, Git, achat, merge ou déploiement. Aucun script, manifest, verrou, protection, instruction ou secret modifié.\n\nContribution five-capitals-answer-prototype : module pur src/lib/experiments/capital-answers.ts, importé uniquement par tests/capital-answers.test.ts. Normalisation NFC, casse/espaces/ponctuation bornée ; accents et écritures conservés, variantes explicites. Corpus quatre langues, collisions par langue refusées, alias dédupliqués et index indépendant des mutations de l’entrée. Fixtures inventées uniquement ; aucune capitale réelle ajoutée. Documentation produit complétée. Aucun score/run/API/catalogue modifié ; déduplication des alias distincte du comptage des réponses.\n\nVérifications : 44 tests ciblés passent ; npm run typecheck et npm run lint passent. Premier typecheck échouait sur deux erreurs de fixtures, corrigées avant relance réussie. Contrôle des imports : seul le test importe le module. Pas de suite entière, content:validate, E2E ou build exécutés ; contrôles serveur/build au superviseur. Aucun résultat navigateur ni effet produit revendiqué.\n\nObservation 0a70b390c915b3ee47e7063e2dd7977d6ed7f529d6db77396a514e0e55c6a76a, collecte 2026-10-31T05:37:01.109Z : lastFailure/unverifiedWork null. Faisabilité précédente merged ; Word/vocabulaire déployés ensemble depuis le 27 octobre, fenêtres immatures ; Sudoku proposed, Mots mêlés manual_review. Google available 05:36:58.802Z : 179 impressions/six clics, 30 septembre–29 octobre demandé, dernière date 28 octobre Pacific. Analytics available 05:36:56.982Z : six identités compte/appareil, vingt départs/dix-huit fins et trois sessions consenties sur 2–31 octobre UTC, jour partiel ; D+7 six matures/zéro retour, D+30 aucun mature/taux null. Trends 05:37:00.743Z : RSS quatre pays disponibles, TikTok indisponible. Aucune demande géographique établie.\n\nProchaine mission : décider la disponibilité d’un corpus factuel multilingue sourcé/licencié dans les ressources autorisées ; sans source vérifiable, suspendre l’intégration et choisir un autre levier acquisition. Ne pas ajouter automatiquement d’autres prototypes. Nonce conservé ; critères antérieurs inchangés.\n",
