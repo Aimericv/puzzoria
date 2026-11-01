@@ -66,3 +66,9 @@ Identifiant de recherche : `five-capitals-feasibility`. Objectif acquisition ; m
 Les vingt départs du rapport courant comprennent un jour partiel : ils ne sont pas une baseline de quatorze jours ni la preuve que le seuil de chaque fenêtre sera atteint. Des départs globaux ne permettent pas une attribution au quiz ; les filtres existants par jeu pourront compléter le diagnostic après intégration, sans nouveau tracking. Avec trop peu d’échantillons, conclure « insuffisant », sans abaisser rétrospectivement le seuil.
 
 Poursuivre maintenant par les règles de normalisation et le contrôle de corpus hors application. Passer à une proposition d’intégration seulement après tests des cas ci-dessus, corpus multilingue sourcé et revu, et revue propriétaire des preuves serveur. Abandonner ce format si un corpus fiable ou une politique d’alias compréhensible ne peut être obtenu ; ne pas élargir automatiquement à d’autres thèmes. Les expériences SEO déjà déployées gardent leurs critères et leurs fenêtres.
+
+## Décision du 1er novembre 2026
+
+L’intégration est suspendue après le prototype d’alias, actuellement en revue humaine selon le contexte du superviseur. Les ressources autorisées consultées ne fournissent pas de corpus de capitales multilingue avec source et licence vérifiables. Le catalogue social fournit des destinations sans réponses factuelles ; les notices de `content/` repérées concernent les dictionnaires et mots rares. Aucun réseau externe n’est autorisé pendant cette session. Ce constat porte sur les ressources fournies, pas sur l’existence de données ouvertes dans le monde.
+
+Ne pas poursuivre le moteur ni inventer de corpus. Reprendre seulement avec une source vérifiable, une politique explicite des cas ambigus et la revue des preuves serveur requise pour l’intégration. La contribution suivante choisie est l’essai éditorial Démineur décrit dans `MINES-GUIDE-EXPERIMENT.fr.md`, sans lien de mesure causale avec ce prototype.
