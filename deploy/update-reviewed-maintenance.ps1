@@ -1,24 +1,30 @@
 [CmdletBinding()]
-param([switch]$Apply,[switch]$Activate,[string]$ApprovedCommit,[string]$PolicyHash,[string]$PackageRunId)
+param([switch]$Apply,[switch]$Activate,[switch]$NoWake,[string]$ApprovedCommit,[string]$PolicyHash,[string]$PackageRunId,[string]$LocalPackageDirectory)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 if (-not $Apply) { Write-Output 'Preparation uniquement : aucun acces VPS, publication ou activation.'; return }
-if ($ApprovedCommit -notmatch '^[a-f0-9]{40}$' -or $PolicyHash -notmatch '^[a-f0-9]{64}$' -or $PackageRunId -notmatch '^\d+$') { throw 'Maintenance exacte revue requise.' }
+if ($ApprovedCommit -notmatch '^[a-f0-9]{40}$' -or $PolicyHash -notmatch '^[a-f0-9]{64}$' -or (-not $LocalPackageDirectory -and $PackageRunId -notmatch '^\d+$')) { throw 'Maintenance exacte revue requise.' }
 function Assert-Command([string]$Operation) { if ($LASTEXITCODE -ne 0) { throw "Echec : $Operation." } }
 function Read-Json([string]$Path) { $value = & gh api $Path; Assert-Command 'lecture GitHub'; return (($value -join "`n") | ConvertFrom-Json) }
 $repo = 'Aimericv/puzzoria'
 $stateFile = Read-Json "repos/$repo/contents/agent/autonomy/state.json?ref=codex%2Fagent-state"
 $state = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($stateFile.content)) | ConvertFrom-Json
 $approval = $state.growth.reviewedMaintenance
-if ($approval.kind -ne 'reviewed-controller-maintenance' -or $approval.ownerAuthorized -ne $true -or -not $approval.approvedAt -or $approval.sha -ne $ApprovedCommit -or $approval.policyHash -ne $PolicyHash -or $approval.packageRunId -ne $PackageRunId -or $approval.status -notin @('awaiting_operator','deployed') -or $state.growth.lastDeployedCommit -notin @($approval.previousCommit,$ApprovedCommit)) { throw 'Accord exact de maintenance absent ou production plus recente.' }
+if ($approval.kind -ne 'reviewed-controller-maintenance' -or $approval.ownerAuthorized -ne $true -or -not $approval.approvedAt -or $approval.sha -ne $ApprovedCommit -or $approval.policyHash -ne $PolicyHash -or (-not $LocalPackageDirectory -and $approval.packageRunId -ne $PackageRunId) -or $approval.status -notin @('awaiting_operator','deployed') -or $state.growth.lastDeployedCommit -notin @($approval.previousCommit,$ApprovedCommit)) { throw 'Accord exact de maintenance absent ou production plus recente.' }
 $adminKey = Join-Path $env:USERPROFILE '.ssh\puzzoria_deploy'
 $deployKey = Join-Path $env:USERPROFILE '.ssh\puzzoria_release_auto_ed25519'
 foreach ($key in @($adminKey,$deployKey)) { if (-not (Test-Path -LiteralPath $key -PathType Leaf)) { throw 'Cle locale existante requise ; aucune regeneration.' } }
 $directory = Join-Path ([IO.Path]::GetTempPath()) ('puzzoria-maintenance-' + [Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory $directory | Out-Null
 try {
-  & gh run download $PackageRunId --repo $repo --name reviewed-puzzoria-maintenance --dir $directory
-  Assert-Command 'telechargement du paquet revu'
+  if ($LocalPackageDirectory) {
+    foreach ($name in @('puzzoria-controller.tar.gz','reviewed.bundle')) {
+      Copy-Item -LiteralPath (Join-Path $LocalPackageDirectory $name) -Destination (Join-Path $directory $name)
+    }
+  } else {
+    & gh run download $PackageRunId --repo $repo --name reviewed-puzzoria-maintenance --dir $directory
+    Assert-Command 'telechargement du paquet revu'
+  }
   $archive = Join-Path $directory 'puzzoria-controller.tar.gz'
   $bundle = Join-Path $directory 'reviewed.bundle'
   if ((Get-FileHash -Algorithm SHA256 $archive).Hash.ToLowerInvariant() -ne $approval.controllerArchiveSha256 -or (Get-FileHash -Algorithm SHA256 $bundle).Hash.ToLowerInvariant() -ne $approval.bundleSha256) { throw 'Empreinte du paquet ou du bundle differente de la revue.' }
@@ -70,8 +76,10 @@ try {
   if ($Activate) {
     & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body true
     Assert-Command 'reactivation deja autorisee des publications a faible risque'
-    & gh workflow run autonomy-agent.yml --repo $repo --ref main
-    if ($LASTEXITCODE -ne 0) { & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body false; throw 'Reveil non confirme ; publications suspendues.' }
+    if (-not $NoWake) {
+      & gh workflow run autonomy-agent.yml --repo $repo --ref main
+      if ($LASTEXITCODE -ne 0) { & gh variable set PUZZORIA_AUTODEPLOY_ENABLED --repo $repo --body false; throw 'Reveil non confirme ; publications suspendues.' }
+    }
   }
   Write-Output 'Maintenance saine, sauvegarde verifiee et recu enregistre. Suivi : https://github.com/Aimericv/puzzoria/issues/3'
 } finally { Remove-Item -LiteralPath $directory -Recurse -Force -ErrorAction SilentlyContinue }

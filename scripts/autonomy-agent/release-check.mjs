@@ -5,7 +5,8 @@ import {assertFunding,pendingReleaseReady,REPOSITORY} from './policy.mjs';
 import {mergeSafeCandidate} from './release-controller.mjs';
 import {validateRelease} from './release-validation.mjs';
 import {loadReleaseFiles,selectReleaseCandidate} from './release-selection.mjs';
-import {reconcileValidationReservations,validationReservation,validationBudgetAvailable} from './release-budget.mjs';
+import {reconcileValidationReservations,validationReservation} from './release-budget.mjs';
+import {extendUsage} from './actions-budget-runtime.mjs';
 import {ensureReleaseQueue,deploymentBlocksNewRuntime} from './release-queue.mjs';
 
 const mode=process.argv[2],control=JSON.parse(readFileSync('agent/autonomy/control.json','utf8'));assertFunding(control);
@@ -22,10 +23,10 @@ if(mode==='prepare') {
   if(!receipt){await store.save('Preserve queued proposals and require review of sensitive or changed publications');process.exit(0);}
   if(receipt.risk.requiresDeployment&&deploymentBlocksNewRuntime(state)){receipt.status='waiting_deployment_confirmation';await store.save('Preserve the initially approved or unconfirmed host rollout before merging newer runtime work');process.exit(0);}
   const reservation=validationReservation(receipt.risk.kind,control.release.maximumValidationMinutes);
-  if(!validationBudgetAvailable(state.releaseValidationHistory,reservation,control.release.validationBudgetMinutes7d)){
+  if(!await extendUsage(api,{'release-validation':receipt.risk.kind==='documentation'?5:control.release.maximumValidationMinutes,'release-finalize':4})){
     const changed=receipt.status!=='waiting_validation_budget';receipt.status='waiting_validation_budget';
-    await store.save('Retain remaining completed-job accounting and wait within the unchanged allowance');
-    if(changed)await report(`[PR #${receipt.prNumber}](https://github.com/${REPOSITORY}/pull/${receipt.prNumber}) : validation en attente du plafond interne. Les réveils restent actifs ; aucun repli payant ni déploiement.`);
+    await store.save('Preserve the candidate until the global monthly Actions envelope admits its complete validation');
+    if(changed)await report(`[PR #${receipt.prNumber}](https://github.com/${REPOSITORY}/pull/${receipt.prNumber}) : validation conservée en attente du budget mensuel Actions. Aucune fusion sans tous les contrôles, aucun repli payant.`);
     process.exit(0);
   }
   state.releaseValidationHistory.push({at:new Date().toISOString(),runId:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),sha:receipt.sha,minutes:reservation});

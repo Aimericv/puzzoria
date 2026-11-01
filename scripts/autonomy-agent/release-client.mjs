@@ -11,9 +11,10 @@ import {StateStore} from './store.mjs';
 import {assertFunding,REPOSITORY} from './policy.mjs';
 import {commitObservedDeployment,attributeSharedRollouts} from './release-receipt.mjs';
 export function releasePolicyHash() {
+  const accounting=['scripts/autonomy-agent/actions-budget.mjs','scripts/autonomy-agent/actions-budget-runtime.mjs','scripts/autonomy-agent/actions-budget-run.mjs','.github/workflows/actions-budget.yml','.github/workflows/ci.yml','.github/workflows/analytics-check.yml'];
   const files=['scripts/autonomy-agent/release-policy.mjs','scripts/autonomy-agent/release-controller.mjs','scripts/autonomy-agent/release-host.mjs','scripts/autonomy-agent/deployment-transaction.mjs','scripts/autonomy-agent/public-probe.mjs','scripts/autonomy-agent/release-client.mjs','scripts/autonomy-agent/release-check.mjs','scripts/autonomy-agent/release-validation.mjs','.github/containers/release-verifier.Dockerfile','.github/workflows/autonomy-agent.yml','.github/actions/puzzoria-agent/action.yml','deploy/puzzoria-release-entry.sh','deploy/install-release-controller.sh','deploy/setup-release-from-windows.ps1','deploy/puzzoria-release-recover.service','deploy/puzzoria-release-recover.timer','package-lock.json'];
   files.push('scripts/autonomy-agent/release-receipt.mjs','deploy/release-reviewed-maintenance.mjs','deploy/update-reviewed-maintenance.ps1','deploy/refresh-bootstrap-policy.mjs','deploy/puzzoria-release-sshd.conf','deploy/puzzoria-release-sshd.service','scripts/autonomy-pilot/github.mjs','scripts/autonomy-agent/pending-release.mjs','scripts/autonomy-agent/policy.mjs','scripts/autonomy-agent/release-budget.mjs','scripts/autonomy-agent/release-queue.mjs','scripts/autonomy-agent/release-selection.mjs','scripts/autonomy-agent/deployment-owner-control.mjs');
-  return createHash('sha256').update(files.map(file=>file+'\n'+readFileSync(file,'utf8')).join('\n')).digest('hex');
+  return createHash('sha256').update([...files,...accounting].map(file=>file+'\n'+readFileSync(file,'utf8').replace(/\r\n/g,'\n')).join('\n')).digest('hex');
 }
 export function pendingDeploymentAllowed(control,state,now=Date.now()) {
   const pending=pendingDeployment(state);

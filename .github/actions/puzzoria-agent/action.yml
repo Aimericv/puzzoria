@@ -13,6 +13,9 @@ inputs:
   analytics-token:
     description: Optional read-only Puzzoria credential; trusted supervisor only.
     required: false
+  session-timeout:
+    description: Protected monthly allocation for this runner, including setup and independent checks.
+    default: '20'
 outputs:
   candidate_sha:
     description: A trusted pending isolated growth candidate; never a model claim.
@@ -26,14 +29,16 @@ runs:
     - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
       with:
         node-version: 24.15.0
-    - name: Install the locked trusted CLI and artifact client
+        cache: npm
+        cache-dependency-path: |
+          package-lock.json
+          scripts/autonomy-pilot/runtime/package-lock.json
+    - name: Verify the protected monthly grant before preparing any model runtime
       shell: bash
-      run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
-    - name: Test control boundaries without Plus credentials
-      shell: bash
-      run: |
-        npm ci --ignore-scripts --no-audit --no-fund
-        node --test scripts/autonomy-agent/*.test.mjs
+      run: node scripts/autonomy-agent/actions-budget-run.mjs assert
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        PUZZORIA_JOB_TIMEOUT: ${{ inputs.session-timeout }}
     - id: preflight
       name: Read the inbox and admission state
       shell: bash
@@ -42,6 +47,10 @@ runs:
         AGENT_MODE: ${{ inputs.mode }}
         PUZZORIA_AGENT_ENABLED: ${{ env.PUZZORIA_AGENT_ENABLED }}
       run: node scripts/autonomy-agent/preflight.mjs
+    - name: Install the locked CLI only for an admitted session
+      if: steps.preflight.outputs.run_model == 'true'
+      shell: bash
+      run: npm ci --ignore-scripts --no-audit --no-fund --prefix scripts/autonomy-pilot/runtime
     - name: Prepare the existing sandbox before exposing Plus credentials
       if: steps.preflight.outputs.run_model == 'true'
       shell: bash
@@ -56,6 +65,7 @@ runs:
         PUZZORIA_ANALYTICS_READ_TOKEN: ${{ inputs.analytics-token }}
         AGENT_MODE: ${{ inputs.mode }}
         PUZZORIA_AGENT_ENABLED: ${{ env.PUZZORIA_AGENT_ENABLED }}
+        PUZZORIA_JOB_TIMEOUT: ${{ inputs.session-timeout }}
     - name: Preserve only sanitized machine evidence
       if: always()
       uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
