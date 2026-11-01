@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 219,
+  "generation": 220,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
   "checkpoint": {
-    "artifactId": 13085163249,
-    "runId": "41310807978",
-    "name": "puzzoria-agent-auth-41310807978-32",
-    "generation": 32,
+    "artifactId": 13098558726,
+    "runId": "41344498054",
+    "name": "puzzoria-agent-auth-41344498054-33",
+    "generation": 33,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41310807978",
+      "runId": "41344498054",
       "phase": "autonomous-agent",
-      "generation": 32
+      "generation": 33
     },
-    "expiresAt": "2027-01-30T13:20:43Z",
-    "digest": "a2b1e2a8a3b30f1d47dcf4219713917dddae38df7de1412e4db0964db0656118"
+    "expiresAt": "2027-01-30T19:59:22Z",
+    "digest": "7fbfc9267405d3ba96e3f0a320748cf19e65d42b450ed0712b18150c072b3d13"
   },
   "lastMessageId": 6563116554,
   "completedSessions": 29,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41310807978",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41310807978"
+    "id": "41344498054",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41344498054"
   },
   "memory": {
     "STATE.md": "# État — 1er novembre 2026\n\nBase exportée 773f6c4959ed9670d9a46053e23117c247a829ff. AGENTS, mandat, inbox vide, quatre mémoires et rapports readonly consultés ; guide Next use-client lu. Budget observé : novembre, plafond 1700, charged 1, reserved 43 ; aucune modification de quota. Aucun réseau externe, Git, achat, merge ou déploiement. Aucun script, manifest/verrou, protection, instruction ou secret modifié.\n\nDécision : suspendre l’intégration des capitales, faute de corpus factuel local sourcé/licencié. Prototype en revue humaine ; ne pas confondre sa présence avec un jeu publié. Documentation de faisabilité mise à jour. Choisir mines-guide-certain-neighbours : deux exemples de déduction ajoutés aux paragraphes Démineur existants, quatre langues. Aucun moteur, hint, URL, titre ou rendu modifié. Documentation produit MINES-GUIDE-EXPERIMENT.fr.md ajoutée.\n\nVérifications locales : 95 tests réussis, trois fichiers (seo, game-guide, engines) via configLoader=runner ; typecheck réussi. Les deux déductions confirmées par énumération binaire locale et lecture de mines.ts. Lint réussi (npm run lint, sortie 0). Pas de suite entière, content:validate, E2E ou build exécuté ; contrôles indépendants au superviseur. Aucun résultat navigateur ni gain produit revendiqué.\n\nObservation 963823d5071f3e0d1503659ffd65b8785c0abcb2454997762fcb9bec8f2e2c7b, 13:22:52.696Z : lastFailure/unverifiedWork null. Word/vocabulaire déployés ensemble le 27 octobre, fenêtres immatures ; Sudoku proposed, Mots mêlés et prototype capitales manual_review. Google available 13:22:50.488Z : 180 impressions/six clics, 2–31 octobre demandé, dernière date 30 octobre Pacific ; archive ES buscaminas trois impressions/un clic, sans jointure requête. Analytics available 13:22:48.704Z : vingt départs/dix-huit fins/six identités compte-appareil, trois sessions consenties sur 3 octobre–1er novembre UTC partiel ; zéro départ sur sept jours partiels. D+7 six matures/zéro retour ; D+30 aucun mature/taux null. Trends 13:22:52.330Z : RSS quatre pays disponibles, TikTok indisponible. Aucun lien causal établi.\n\nSuite choisie : examiner la couverture Daily/sitemap et les futurs rapports Google avant nouvelle intervention ; ne pas produire automatiquement d’autres paragraphes. Capitales suspendues jusqu’à source vérifiable et revue requise. Nonce conservé, anciens protocoles inchangés.\n",
