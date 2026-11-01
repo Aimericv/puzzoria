@@ -5,8 +5,10 @@ type RunResponse = {
   runId: string;
   challenge: PublicChallenge;
   startedAt: string | null;
+  serverNow?: number;
   result?: Record<string, unknown>;
   progress?:
+    | import("./knowledge-types").KnowledgeState
     | import("./new-play").PuzzleState
     | import("./social-types").SocialState
     | null;
@@ -31,7 +33,8 @@ async function reserveInner(challenge: PublicChallenge): Promise<
       completion?: Completion;
       state?:
         | import("./new-play").PuzzleState
-        | import("./social-types").SocialState;
+        | import("./social-types").SocialState
+        | import("./knowledge-types").KnowledgeState;
     };
   }
 > {

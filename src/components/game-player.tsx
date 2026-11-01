@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { scheduleGameScroll } from "@/lib/replay-scroll";
 import { DevFinish } from "./dev-finish";
 import type { Locale, PublicChallenge } from "@/lib/types";
+import { KnowledgeGame } from "./knowledge-game";
 import { WordGame } from "./word-game";
 import { SudokuGame } from "./sudoku-game";
 import { MathGame } from "./math-game";
@@ -69,7 +70,7 @@ export function GamePlayer({
     return <GamePreview challenge={challenge} locale={locale} />;
   return (
     <div key={account.user?.id ?? "guest"} ref={rootRef} data-game-root data-challenge-id={challenge.id} tabIndex={-1}>
-      {!challenge.roomId && <div className="live-entry"><LiveInvite game={challenge.kind} locale={locale} difficulty={"difficulty" in challenge ? challenge.difficulty : undefined}/></div>}
+      {!challenge.roomId && <div className="live-entry"><LiveInvite game={challenge.kind} locale={locale} category={challenge.kind === "quiz" ? challenge.topic : undefined} difficulty={"difficulty" in challenge ? challenge.difficulty : undefined}/></div>}
       {challenge.roomId ? <Player challenge={challenge} locale={locale} ratherOffset={ratherOffset}/> : <DevFinish key={challenge.id} challenge={challenge} locale={locale}><Player
         challenge={challenge}
         locale={locale}
@@ -88,6 +89,9 @@ function Player({
   ratherOffset: number;
 }) {
   switch (challenge.kind) {
+    case "quiz":
+    case "football":
+      return <KnowledgeGame key={challenge.id} challenge={challenge} locale={locale}/>;
     case "ranking":
     case "rather":
     case "guess":

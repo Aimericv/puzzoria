@@ -2,6 +2,7 @@ import { seededRandom, shuffled } from "../random";
 import { numberRuleSet } from "../number-duel";
 import { comparisonStatistics, type Comparison } from "../statistics";
 import type { Completion } from "../types";
+import { quizTopic } from "../knowledge-catalog";
 import type { GuessChallenge, GuessCommunity, SocialState, VoteCommunity } from "../social-types";
 
 // Presentation only: these populations are never inserted into SQLite or analytics.
@@ -9,15 +10,15 @@ export const starterStatisticsEnabled = () => process.env.COMMUNITY_STARTER_STAT
 const populationSize = (seed: string) => 240 + Math.floor(seededRandom(`population:${seed}`)() * 480);
 
 export function starterComparison(current: Completion): Comparison {
-  const cohort = [current.game, current.mode, current.locale, current.difficulty,
+  const cohort = [current.game, current.mode, current.game === "football" ? "universal" : current.locale, current.difficulty,
     current.wordLength, current.maxAttempts,
-    current.mode === "daily" ? current.challengeId : current.date].join(":");
+    current.mode === "daily" ? current.challengeId : current.date, ...(current.knowledgeSet ? [current.knowledgeSet] : [])].join(":");
   const random = seededRandom(`performance:${cohort}`), count = populationSize(cohort);
   const baseline = {word:115,rareword:230,sudoku:330,math:55,mines:95,wordsearch:165,
-    "2048":360,guess:90,ranking:60,rather:90}[current.game]
+    "2048":360,guess:90,ranking:60,rather:90,quiz:90,football:60}[current.game]
     * (current.difficulty === "hard" ? 2 : current.difficulty === "medium" ? 1.45 : 1);
   const winRate = {word:.87,rareword:.67,mines:.64,math:.56,guess:.62,
-    sudoku:1,wordsearch:1,"2048":1,ranking:1,rather:1}[current.game];
+    sudoku:1,wordsearch:1,"2048":1,ranking:1,rather:1,quiz:1,football:.7}[current.game];
   const budget = current.maxAttempts ?? (current.game === "rareword" ? 8 : 6);
   const word = current.game === "word" || current.game === "rareword";
   const weights = Array.from({length:budget},(_,i) =>
@@ -29,11 +30,19 @@ export function starterComparison(current: Completion): Comparison {
     return budget;
   };
   const peers: Completion[] = Array.from({length:count},(_,i)=>{
+    if (current.game === "quiz") {
+      const topic=quizTopic(current.knowledgeSet?.split(":")[1] ?? ""), total=current.answersTotal ?? topic?.count ?? 1;
+      const found=Math.min(total,Math.floor(Math.pow(random(),.48)*(total+1)));
+      const success=found===total, limit=topic?.seconds ?? 120;
+      return {...current,runId:`starter:${cohort}:${i}`,success,answersFound:found,answersTotal:total,
+        score:Math.round(found*1000/total),attempts:undefined,duration:success?Math.max(3,Math.round(limit*(.35+random()*.65))):limit};
+    }
     const success = random() < winRate;
+    const footballAttempts=current.game === "football" ? success ? 1+Math.floor(random()*6) : 6 : undefined;
     return {...current,runId:`starter:${cohort}:${i}`,success,
       duration:Math.max(1,Math.round(baseline * (.35 - Math.log(Math.max(.001,random())) * .65))),
-      score:current.game==="2048" ? Math.round((400+random()*8500)/4)*4 : current.score,
-      attempts:word ? attempts() : undefined,
+      score:current.game==="2048" ? Math.round((400+random()*8500)/4)*4 : current.game==="football" ? success ? (7-footballAttempts!)*100 : 0 : current.score,
+      attempts:word ? attempts() : footballAttempts,
       ...(current.game==="math" ? {mathDistance:success ? 0 : 1+Math.floor(random()*110)} : {})};
   });
   return {...comparisonStatistics(peers,current)!,source:"starter"};

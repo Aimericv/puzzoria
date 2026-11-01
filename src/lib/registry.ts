@@ -13,7 +13,10 @@ export const registry: Record<
       | "searchCategory"
       | "rankingCategory"
       | "guessCategory"
-      | "ratherCategory";
+      | "ratherCategory"
+      | "quizCategory"
+      | "footballCategory";
+    // Knowledge games share the same catalogue contract as existing adapters.
     name:
       | "rarewordName"
       | "wordName"
@@ -24,7 +27,9 @@ export const registry: Record<
       | "searchName"
       | "rankingName"
       | "guessName"
-      | "ratherName";
+      | "ratherName"
+      | "quizName"
+      | "footballName";
     description:
       | "rarewordDesc"
       | "wordDesc"
@@ -35,7 +40,9 @@ export const registry: Record<
       | "searchDesc"
       | "rankingDesc"
       | "guessDesc"
-      | "ratherDesc";
+      | "ratherDesc"
+      | "quizDesc"
+      | "footballDesc";
     rules:
       | "rarewordRules"
       | "wordRules"
@@ -46,12 +53,16 @@ export const registry: Record<
       | "searchRules"
       | "rankingRules"
       | "guessRules"
-      | "ratherRules";
+      | "ratherRules"
+      | "quizRules"
+      | "footballRules";
     minutes: string;
     locales: readonly Locale[];
     color: string;
   }
 > = {
+  quiz: { name:"quizName", description:"quizDesc", category:"quizCategory", rules:"quizRules", minutes:"1–3", locales:["en","fr","es","de"], color:"quiz" },
+  football: { name:"footballName", description:"footballDesc", category:"footballCategory", rules:"footballRules", minutes:"1–3", locales:["en","fr","es","de"], color:"football" },
   rareword: { name: "rarewordName", description: "rarewordDesc", category: "rarewordCategory", rules: "rarewordRules", minutes: "3–8", locales: ["en", "fr", "es", "de"], color: "word" },
   ranking: {
     name: "rankingName",

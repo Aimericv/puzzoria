@@ -34,6 +34,7 @@ export function completionFromRow(row: ResultRow): Completion {
   return {
     ...(typeof metadata.roomId === "string" ? { roomId: metadata.roomId } : {}),
     ...readResultDetails(row.game, metadata.details),
+    ...(typeof metadata.knowledgeSet === "string" ? {knowledgeSet:metadata.knowledgeSet} : {}),
     ...(["higher-lower", "legacy", "mixed"].includes(metadata.numberRules)
       ? { numberRules: metadata.numberRules as Completion["numberRules"] }
       : {}),

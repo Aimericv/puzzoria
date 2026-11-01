@@ -69,7 +69,7 @@ export function validCompletions(value: unknown): value is Completion[] {
         c.score >= 0 &&
         (c.attempts === undefined ||
           (Number.isInteger(c.attempts) &&
-            c.attempts >= (c.game === "guess" ? 0 : 1) &&
+            c.attempts >= (c.game === "guess" || c.game === "football" ? 0 : 1) &&
             c.attempts <= (c.game === "guess" ? 30 : c.game === "rareword" ? (c.maxAttempts ?? 10) : 6))) &&
         typeof c.completedAt === "string" &&
         !Number.isNaN(Date.parse(c.completedAt)),

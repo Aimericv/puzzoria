@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Flame, Trophy, ChartNoAxesColumnIncreasing } from "lucide-react";
+import { kt } from "@/lib/knowledge-i18n";
 import { gameIds, type Locale, type PlayMode } from "@/lib/types";
 import { t, gamePath } from "@/lib/i18n";
 import { gameName } from "@/lib/registry";
@@ -132,7 +133,7 @@ export function StatsView({ locale }: { locale: Locale }) {
                     {stats.bestTime === null ? "—" : clockText(stats.bestTime)}
                   </dd>
                 </div>}
-                {(game === "word" || game === "rareword" || game === "guess") && (
+                {(game === "word" || game === "rareword" || game === "guess" || game === "football") && (
                   <div>
                     <dt>{n.averageAttempts}</dt>
                     <dd>
@@ -143,8 +144,9 @@ export function StatsView({ locale }: { locale: Locale }) {
                   </div>
                 )}
                 {game === "math" && <><div><dt>{gameStatisticsCopy(locale).bestGap}</dt><dd>{stats.bestDistance??"—"}</dd></div><div><dt>{gameStatisticsCopy(locale).averageGap}</dt><dd>{stats.averageDistance===null?"—":new Intl.NumberFormat(locale,{maximumFractionDigits:1}).format(stats.averageDistance)}</dd></div></>}
+                {game === "quiz" && <><div><dt>{kt(locale).best}</dt><dd>{stats.bestScore===null?"—":`${Math.round(stats.bestScore/10)}%`}</dd></div><div><dt>{kt(locale).average}</dt><dd>{stats.averageScore===null?"—":`${Math.round(stats.averageScore/10)}%`}</dd></div><div><dt>{kt(locale).perfect}</dt><dd>{stats.won}</dd></div></>}
                 {game === "2048" && <div><dt>{gameStatisticsCopy(locale).largestTile}</dt><dd>{stats.largestTile??"—"}</dd></div>}
-                {(game === "word" || game === "rareword" || game === "guess") && <div><dt>{gameStatisticsCopy(locale).recordAttempts}</dt><dd>{stats.bestAttempts??"—"}</dd></div>}
+                {(game === "word" || game === "rareword" || game === "guess" || game === "football") && <div><dt>{gameStatisticsCopy(locale).recordAttempts}</dt><dd>{stats.bestAttempts??"—"}</dd></div>}
                 {game === "2048" && <div>
                   <dt>{n.bestScore}</dt>
                   <dd>{stats.bestScore ?? "—"}</dd>

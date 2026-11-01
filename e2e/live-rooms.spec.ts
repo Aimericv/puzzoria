@@ -147,6 +147,8 @@ for (const game of liveGames)
       await expect(peer.locator(".completion-panel")).not.toContainText(
         "undefined",
       );
+      if(game === "football") await expect(peer.locator(".completion-panel .football-reveal strong")).not.toBeEmpty();
+      if(game === "quiz") {await peer.locator(".knowledge-duel-answers summary").click();await expect(peer.locator(".knowledge-duel-answers dd")).not.toHaveCount(0);}
       await expect(
         page.locator(game === "guess" ? ".number-arena" : ".live-board"),
       ).toBeVisible();

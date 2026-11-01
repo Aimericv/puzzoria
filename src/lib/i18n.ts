@@ -1,3 +1,4 @@
+import { kt } from "./knowledge-i18n";
 import { nt } from "./new-games-i18n";
 import { st } from "./social-i18n";
 import { rareWordCopy } from "./rare-word-i18n";
@@ -16,7 +17,7 @@ const en = {
   daily: "YOUR DAILY BRAIN BREAK",
   headline: "A little challenge. Every day.",
   intro:
-    "Nine games to explore. A few minutes for yourself. Ready when you are.",
+    "Games to explore. A few minutes for yourself. Ready when you are.",
   play: "Play now",
   continue: "Continue",
   completed: "Completed",
@@ -146,7 +147,7 @@ const fr: Messages = {
   stats: "Mes stats",
   daily: "VOTRE PAUSE CÉRÉBRALE QUOTIDIENNE",
   headline: "Un petit défi. Chaque jour.",
-  intro: "Neuf jeux à découvrir. Quelques minutes pour vous. À vous de jouer.",
+  intro: "Des jeux à découvrir. Quelques minutes pour vous. À vous de jouer.",
   play: "Jouer",
   continue: "Continuer",
   completed: "Terminé",
@@ -278,7 +279,7 @@ const es: Messages = {
   stats: "Mis estadísticas",
   daily: "TU PAUSA MENTAL DIARIA",
   headline: "Un pequeño reto. Cada día.",
-  intro: "Nueve juegos para descubrir. Unos minutos para ti. Juega a tu ritmo.",
+  intro: "Juegos para descubrir. Unos minutos para ti. Juega a tu ritmo.",
   play: "Jugar",
   continue: "Continuar",
   completed: "Completado",
@@ -408,7 +409,7 @@ const de: Messages = {
   daily: "DEINE TÄGLICHE DENKPAUSE",
   headline: "Eine kleine Herausforderung. Jeden Tag.",
   intro:
-    "Neun Spiele zum Entdecken. Ein paar Minuten für dich. In deinem Tempo.",
+    "Spiele zum Entdecken. Ein paar Minuten für dich. In deinem Tempo.",
   play: "Jetzt spielen",
   continue: "Weiterspielen",
   completed: "Abgeschlossen",
@@ -533,11 +534,12 @@ const de: Messages = {
   paused: "Zeit angehalten",
 };
 export const messages = { en, fr, es, de };
+type KnowledgeMetaKey = `${"quiz" | "football"}${"Name" | "Category" | "Desc" | "Rules"}`;
 type SocialMetaKey =
   `${"ranking" | "guess" | "rather"}${"Name" | "Category" | "Desc" | "Rules"}`;
 export function t(
   locale: Locale,
-): Messages &
+): Messages & Pick<ReturnType<typeof kt>,KnowledgeMetaKey> &
   ReturnType<typeof rareWordCopy> &
   ReturnType<typeof nt> &
   Pick<ReturnType<typeof st>, SocialMetaKey> {
@@ -546,10 +548,13 @@ export function t(
       /^(ranking|guess|rather)(Name|Category|Desc|Rules)$/.test(key),
     ),
   ) as Pick<ReturnType<typeof st>, SocialMetaKey>;
-  return { ...messages[locale], ...nt(locale), ...meta, ...rareWordCopy(locale) };
+  const knowledgeMeta=Object.fromEntries(Object.entries(kt(locale)).filter(([key])=>/^(quiz|football)(Name|Category|Desc|Rules)$/.test(key))) as Pick<ReturnType<typeof kt>,KnowledgeMetaKey>;
+  return { ...messages[locale], ...nt(locale), ...meta, ...rareWordCopy(locale), ...knowledgeMeta };
 }
 export const slugs: Record<Locale, Record<GameId, string>> = {
   en: {
+    quiz: "quiz",
+    football: "guess-the-football-player",
     rareword: "unusual-word",
     word: "word",
     sudoku: "sudoku",
@@ -562,6 +567,8 @@ export const slugs: Record<Locale, Record<GameId, string>> = {
     rather: "would-you-rather",
   },
   fr: {
+    quiz: "quiz",
+    football: "devine-le-footballeur",
     rareword: "mot-insolite",
     word: "mot",
     sudoku: "sudoku",
@@ -574,6 +581,8 @@ export const slugs: Record<Locale, Record<GameId, string>> = {
     rather: "tu-preferes",
   },
   es: {
+    quiz: "quiz",
+    football: "adivina-el-futbolista",
     rareword: "palabra-curiosa",
     word: "palabra",
     sudoku: "sudoku",
@@ -586,6 +595,8 @@ export const slugs: Record<Locale, Record<GameId, string>> = {
     rather: "que-prefieres",
   },
   de: {
+    quiz: "quiz",
+    football: "fussballspieler-erraten",
     rareword: "wortentdeckung",
     word: "wort",
     sudoku: "sudoku",

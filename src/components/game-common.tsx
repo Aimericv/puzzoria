@@ -93,10 +93,12 @@ export function CompletionPanel({
   title,
   primaryAction,
   shareLines,
+  sharePath,
   comparisonContent,
   resultDetails,
   roomResult = false,
   resultSuccess,
+  revealContent,
 }: {
   completion: Completion;
   locale: Locale;
@@ -106,10 +108,12 @@ export function CompletionPanel({
   title?: string;
   primaryAction?: React.ReactNode;
   shareLines?: string[];
+  sharePath?: string;
   comparisonContent?: React.ReactNode;
   resultDetails?: ResultDetails;
   roomResult?: boolean;
   resultSuccess?: boolean;
+  revealContent?: React.ReactNode;
 }) {
   const live = useLiveRoom();
   const hidden = live && !roomResult;
@@ -125,7 +129,7 @@ export function CompletionPanel({
     setShareBusy(true);
     setShareStatus("");
     setManualShare(false);
-    const text = (preview ? devPreviewCopy(locale).local + "\n" : "") + (shareLines ? [...shareLines, window.location.origin + gamePath(locale, completion.game)].join("\n") : shareSummary(completion, locale, window.location.origin, rows));
+    const text = (preview ? devPreviewCopy(locale).local + "\n" : "") + (shareLines ? [...shareLines, window.location.origin + (sharePath ?? gamePath(locale, completion.game))].join("\n") : shareSummary(completion, locale, window.location.origin, rows));
     setSummary(text);
     try {
       const method = await shareText(text);
@@ -245,6 +249,7 @@ export function CompletionPanel({
         <ShareTextFallback text={summary} manual={manualShare} locale={locale} />
       )}
       <ResultMetrics completion={completion} locale={locale} answer={answer} details={resultDetails}/>
+      {revealContent}
       {comparisonContent ? <div className="result-insights"><section className="comparison-panel">{comparisonContent}</section><PersonalProgress completion={completion} locale={locale}/></div> : <ResultExtras completion={completion} locale={locale}>
         <PersonalProgress completion={completion} locale={locale} />
       </ResultExtras>}

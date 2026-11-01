@@ -14,6 +14,7 @@ export type LocalPreviewFixture = {
   grid?: number[];
   mathResult?: import("./math").MathResult & {reference: string};
   expression?: string;
+  knowledgeState?: import("./knowledge-types").KnowledgeState;
   puzzleState?: import("./new-play").PuzzleState;
 };
 export const isLoopback = (host: string) => ["localhost", "127.0.0.1", "[::1]", "::1"].includes(host);

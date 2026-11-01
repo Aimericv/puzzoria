@@ -1,3 +1,4 @@
+import { replayKnowledge } from "../knowledge-play";
 import { randomInt, randomUUID } from "node:crypto";
 import { generateChallenge, publicChallenge } from "../challenges";
 import { utcDay } from "../date";
@@ -17,7 +18,7 @@ export function localPreviewFixture(game: GameId, locale: Locale, difficulty: Di
   const now = new Date().toISOString(), samples = randomInt(200, 2001), successes = randomInt(Math.ceil(samples * .6), samples);
   const completion: LocalPreviewFixture["completion"] = {
     challengeId: `dev-preview:${randomUUID()}`, game, locale, date: c.date, mode, success: true,
-    duration: randomInt(60, 240), score: game === "2048" ? 4096 : 1000, completedAt: now, provenance: "server", eligible: false,
+    duration: c.kind === "quiz" ? randomInt(10,c.seconds+1) : randomInt(60, 240), score: game === "2048" ? 4096 : 1000, completedAt: now, provenance: "server", eligible: false,
     ...("difficulty" in c ? {difficulty: c.difficulty} : {}),
     ...(c.kind === "word" || c.kind === "rareword" ? {attempts: randomInt(2, 5), wordLength: c.length, maxAttempts: c.attempts} : {}),
     ...(c.kind === "guess" ? {numberRules: "higher-lower" as const, outcome: "win" as const, attempts: 5} : {}),
@@ -60,15 +61,24 @@ export function localPreviewFixture(game: GameId, locale: Locale, difficulty: Di
     state.events=Array.from({length:4},(_,i)=>({actor:"bot" as const,action:{kind:"try" as const,value:20+i*10},answer:false,direction:"higher" as const,eliminated:10,remaining:90-i*10}));
     community = {kind: "guess", samples, faster: randomInt(60, 96), fooled: randomInt(60, 96)};
   }
-  const details=verifiedResultDetails(c,c.kind==="math" ? evaluateExpression(c.reference,c.numbers,c.target) : {state:state??puzzleState});
+  const knowledgeState=c.kind === "quiz" ? replayKnowledge(c,c.items.map(i=>({kind:"answer",value:i.answer}))) : c.kind === "football" ? replayKnowledge(c,[{kind:"answer",value:c.answer}]) : undefined;
+  if (c.kind === "quiz" || c.kind === "football") {
+    completion.knowledgeSet=c.cohortKey;completion.score=knowledgeState!.score;if(c.kind === "football")completion.attempts=1;
+    for (const prior of history) {
+      prior.knowledgeSet=c.cohortKey;
+      if(c.kind === "quiz") {prior.duration=c.seconds;prior.answersFound=c.items.length-2;prior.answersTotal=c.items.length;prior.score=Math.round(prior.answersFound*1000/c.items.length);prior.success=false;}
+      else {prior.attempts=prior.success?3:6;prior.score=prior.success?400:0;}
+    }
+  }
+  const details=verifiedResultDetails(c,c.kind==="math" ? evaluateExpression(c.reference,c.numbers,c.target) : {state:knowledgeState??state??puzzleState});
   Object.assign(completion,details);
-  for(const prior of history) Object.assign(prior,details);
+  if (c.kind !== "quiz") for(const prior of history) Object.assign(prior,details);
   return {completion, history, challenge: c.kind === "ranking" ? c : publicChallenge(c), state, community,
-    puzzleState,
+    puzzleState, knowledgeState,
     ...(c.kind === "sudoku" ? {grid:c.solution} : {}),
     ...(c.kind === "math" ? {expression:c.reference, mathResult:{...evaluateExpression(c.reference,c.numbers,c.target),reference:c.reference}} : {}),
     comparison: {samples, successes, successRate: successes * 100 / samples, averageTime: 280, medianTime:250, precisionSamples:samples,closerThanPercent:game==="math"?randomInt(60,90):null,fewerAttemptsThanPercent:completion.attempts===undefined?null:randomInt(60,90),attemptDistribution:game==="word"||game==="rareword"?[{attempts:2,count:successes*.2,percent:20},{attempts:3,count:successes*.4,percent:40},{attempts:4,count:successes*.4,percent:40}]:[],fasterThanPercent: randomInt(60, 98),
-      betterScoreThanPercent: game === "2048" ? randomInt(60, 98) : null, averageAttempts: completion.attempts === undefined ? null : completion.attempts + 1.4,
+      betterScoreThanPercent: game === "2048" || game === "quiz" ? randomInt(60, 98) : null, averageAttempts: completion.attempts === undefined ? null : completion.attempts + 1.4,
       fewerAttemptsThanAverage: completion.attempts === undefined ? null : 1.4, commonAttempts: completion.attempts === undefined ? [] : [completion.attempts + 1]},
     ...(c.kind === "word" || c.kind === "rareword" ? {answer: c.answer,
       wordGuesses:[...(progress?.guesses ?? []).slice(0,c.attempts-1),c.answer],

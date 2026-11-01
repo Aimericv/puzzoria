@@ -1,3 +1,7 @@
+import { generateKnowledge } from "./knowledge-content";
+import { replayKnowledge } from "../knowledge-play";
+import { knowledgeGame, type KnowledgeAction, type KnowledgeState } from "../knowledge-types";
+import { validQuizTopic } from "../knowledge-catalog";
 import { randomUUID } from "node:crypto";
 import {
   generateChallenge,
@@ -52,8 +56,8 @@ type Progress = {
   hints: number;
   errors?: number;
   recovered?: boolean;
-  actions?: (PuzzleAction | SocialAction)[];
-  state?: PuzzleState | SocialState;
+  actions?: (PuzzleAction | SocialAction | KnowledgeAction)[];
+  state?: PuzzleState | SocialState | KnowledgeState;
 };
 export function ownedRun(id: unknown, who: Identity): Run {
   if (typeof id !== "string" || id.length > 64) throw new ApiError("invalid");
@@ -77,7 +81,8 @@ function runPublic(run: Run) {
     runId: run.id,
     challenge: publicChallenge(challenge),
     startedAt: run.started_at,
-    ...(["2048", "mines", "wordsearch", "ranking", "guess", "rather"].includes(
+    serverNow: Date.now(),
+    ...(["2048", "mines", "wordsearch", "ranking", "guess", "rather", "quiz", "football"].includes(
       challenge.kind,
     )
       ? { progress: JSON.parse(run.progress_json).state ?? null }
@@ -122,6 +127,7 @@ export async function createRun(body: Record<string, unknown>, who: Identity) {
     throw new ApiError("invalid");
   rateLimit(`new-run:${who.owner}`, 120, 60000);
   if (
+    (game === "quiz" && body.category !== undefined && (typeof body.category !== "string" || !validQuizTopic(body.category))) ||
     body.category !== undefined &&
     (typeof body.category !== "string" ||
       ((game === "ranking" || game === "rather") &&
@@ -129,9 +135,10 @@ export async function createRun(body: Record<string, unknown>, who: Identity) {
   )
     throw new ApiError("invalid");
 
+  const previous = mode === "practice" && knowledgeGame(game) && body.previousRunId ? JSON.parse(ownedRun(body.previousRunId,who).challenge_json) : undefined;
   const challenge =
     mode === "practice"
-      ? generateChallenge(
+      ? knowledgeGame(game) ? generateKnowledge(game,locale,date,randomUUID(),typeof body.category === "string" ? body.category : undefined,previous) : generateChallenge(
           game,
           locale,
           date,
@@ -177,6 +184,12 @@ export function validateProof(
   challenge: Challenge,
   body: Record<string, unknown>,
 ) {
+  if (challenge.kind === "quiz" || challenge.kind === "football") {
+    try {
+      const state = replayKnowledge(challenge, body.actions);
+      return {state, success:state.success, completed:state.completed, score:state.score, ...(challenge.kind === "football" ? {attempts:state.guesses.length} : {})};
+    } catch { throw new ApiError("invalid"); }
+  }
   if (
     challenge.kind === "ranking" ||
     challenge.kind === "rather" ||
@@ -293,9 +306,10 @@ export function submitRun(
         challenge.kind === "wordsearch" ||
         challenge.kind === "ranking" ||
         challenge.kind === "guess" ||
-        challenge.kind === "rather"
+        challenge.kind === "rather" || knowledgeGame(challenge.kind)
       ) {
         const prior = progress.actions ?? [];
+        if (knowledgeGame(challenge.kind) && body.step && typeof body.step === "object" && "kind" in body.step && body.step.kind === "answer" && "value" in body.step && typeof body.step.value === "string") body = {...body, step:{kind:"answer",value:body.step.value.trim()}};
         if (body.step !== undefined) {
           if (
             body.sequence === prior.length - 1 &&
@@ -314,6 +328,10 @@ export function submitRun(
           if (body.sequence !== prior.length) throw new ApiError("invalid");
           body = { ...body, actions: prior };
         }
+      }
+      // Arrival time is authoritative: late answers can only close the saved quiz.
+      if (challenge.kind === "quiz" && Date.now() >= Date.parse(run.started_at) + challenge.seconds * 1000) {
+        body = {...body, actions:[...(progress.actions ?? []), {kind:"finish"}]};
       }
       const result = validateProof(challenge, body);
       if ("state" in result && result.state) {
@@ -369,7 +387,8 @@ export function submitRun(
         return "state" in result && result.state
           ? { ...result, state: { ...result.state, actions: [] } }
           : result;
-      const completedAt = new Date(typeof live === "number" ? live : Date.now()).toISOString(),
+      const endTime = challenge.kind === "quiz" ? Math.min(Date.now(), Date.parse(run.started_at) + challenge.seconds * 1000) : Date.now();
+      const completedAt = new Date(typeof live === "number" ? live : endTime).toISOString(),
         duration = Math.max(
           0,
           Math.floor(
@@ -387,6 +406,8 @@ export function submitRun(
         ranking: 3,
         rather: 3,
         guess: 5,
+        quiz: 3,
+        football: 3,
       }[challenge.kind];
       const prior = database()
         .prepare("SELECT id FROM results WHERE owner=? AND challenge_id=?")
@@ -417,6 +438,7 @@ export function submitRun(
           : {}),
         ...((challenge.kind === "word" || challenge.kind === "rareword") ? { wordLength: challenge.length, maxAttempts: challenge.attempts } : {}),
         ...verifiedResultDetails(challenge, result),
+        ...((challenge.kind === "quiz" || challenge.kind === "football") ? {knowledgeSet:challenge.cohortKey} : {}),
         challengeId: challenge.id,
         game: challenge.kind,
         mode: run.mode,
@@ -445,6 +467,7 @@ export function submitRun(
       // Fast practice games are real personal results, but not comparison samples.
       const metadata = {
         details: verifiedResultDetails(challenge, result),
+        ...((challenge.kind === "quiz" || challenge.kind === "football") ? {knowledgeSet:challenge.cohortKey} : {}),
         ...(completion.wordLength ? { wordLength: completion.wordLength, maxAttempts: completion.maxAttempts } : {}),
         ...(completion.outcome ? { outcome: completion.outcome } : {}),
         ...(challenge.kind === "guess" && "state" in result
@@ -515,6 +538,7 @@ export function compareRun(id: unknown, who: Identity): Comparison | null {
     AND (game NOT IN ('word','rareword','wordsearch') OR locale=?) AND COALESCE(difficulty,'')=COALESCE(?,'')
     AND (mode!='daily' OR challenge_id=?) AND id!=? AND owner!=?
     AND (game!='rareword' OR (json_extract(metadata_json,'$.wordLength')=? AND json_extract(metadata_json,'$.maxAttempts')=?))
+    AND (game NOT IN ('quiz','football') OR json_extract(metadata_json,'$.knowledgeSet')=?)
     AND json_extract(metadata_json,'$.comparisonEligible')=1 ORDER BY completed_at DESC LIMIT 10000`,
     )
     .all(
@@ -527,6 +551,7 @@ export function compareRun(id: unknown, who: Identity): Comparison | null {
       current.owner,
       JSON.parse(current.metadata_json).wordLength ?? null,
       JSON.parse(current.metadata_json).maxAttempts ?? null,
+      metadata.knowledgeSet ?? null,
     ) as ResultRow[];
   // Each other account/device contributes its latest qualifying result once.
   const peers = new Map<string, ResultRow>();

@@ -12,6 +12,8 @@ import {
   ListOrdered,
   MessagesSquare,
   CircleHelp,
+  Timer,
+  Goal,
 } from "lucide-react";
 import type { GameId, Locale, PublicChallenge } from "@/lib/types";
 import { gameFamily } from "@/lib/types";
@@ -36,6 +38,8 @@ export function GameIcon({ game, size = 20 }: { game: GameId; size?: number }) {
     ranking: ListOrdered,
     guess: CircleHelp,
     rather: MessagesSquare,
+    quiz: Timer,
+    football: Goal,
   }[game];
   return <Icon size={size} />;
 }
@@ -118,7 +122,7 @@ export function GameCards({
                         </span>
                       ))}
                   </div>
-                ) : c.kind === "sudoku" ? (
+                ) : c.kind === "quiz" ? (<div className="knowledge-card-preview"><Timer size={30}/><strong>12 / 20</strong><span>01:30</span></div>) : c.kind === "football" ? (<div className="knowledge-card-preview"><Goal size={30}/><strong>① → ② → ③</strong><span>?</span></div>) : c.kind === "sudoku" ? (
                   <div className="sudoku-preview">
                     {c.grid.slice(0, 9).map((n, i) => (
                       <span key={i}>{n || <i />}</span>
@@ -175,7 +179,7 @@ export function GameCards({
               <h2>
                 {m[game.name]}
                 <span className="card-number">
-                  0{challenges.indexOf(c) + 1}
+                  {String(challenges.indexOf(c) + 1).padStart(2,"0")}
                 </span>
               </h2>
               <p>{dailyGoal(c.kind, locale) ?? m[game.description]}</p>
