@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 217,
+  "generation": 218,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4372,7 +4372,8 @@
         "candidateSha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
         "prNumber": 35,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/35",
-        "status": "proposed"
+        "status": "merged",
+        "mergeSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07"
       }
     ],
     "legacyWork": {
@@ -4403,7 +4404,7 @@
       "experimentId": "mines-guide-certain-neighbours",
       "verified": true,
       "runId": "41310807978",
-      "status": "validating",
+      "status": "awaiting_activation",
       "risk": {
         "risk": "low",
         "kind": "editorial-copy",
@@ -4414,7 +4415,22 @@
       "rebase": {
         "automatic": true,
         "previousHead": "8b3a5a7ad83450fee847e6a91a554158f00934a2"
-      }
+      },
+      "result": {
+        "status": "merged",
+        "sha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
+        "candidate": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+        "previousMain": "64e54ff6be42055870e359a6015e9825a1a831a5",
+        "previousTree": "b340f5d02804a288d2754e52da1c5021b4475496",
+        "risk": {
+          "risk": "low",
+          "kind": "editorial-copy",
+          "requiresDeployment": true,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        },
+        "prNumber": 35
+      },
+      "mergeSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07"
     },
     "releaseQueue": [
       {
@@ -4532,7 +4548,7 @@
         "experimentId": "mines-guide-certain-neighbours",
         "verified": true,
         "runId": "41310807978",
-        "status": "validating",
+        "status": "awaiting_activation",
         "risk": {
           "risk": "low",
           "kind": "editorial-copy",
@@ -4543,7 +4559,22 @@
         "rebase": {
           "automatic": true,
           "previousHead": "8b3a5a7ad83450fee847e6a91a554158f00934a2"
-        }
+        },
+        "result": {
+          "status": "merged",
+          "sha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
+          "candidate": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+          "previousMain": "64e54ff6be42055870e359a6015e9825a1a831a5",
+          "previousTree": "b340f5d02804a288d2754e52da1c5021b4475496",
+          "risk": {
+            "risk": "low",
+            "kind": "editorial-copy",
+            "requiresDeployment": true,
+            "reason": "unchanged executable code; bounded text edits or pure section insertions"
+          },
+          "prNumber": 35
+        },
+        "mergeSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07"
       },
       {
         "sha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
@@ -4626,12 +4657,12 @@
       }
     ],
     "pendingDeployment": {
-      "sha": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
-      "base": "773f6c4959ed9670d9a46053e23117c247a829ff",
-      "prNumber": 31,
-      "experimentId": "sudoku-guide-single-deductions",
+      "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+      "base": "64e54ff6be42055870e359a6015e9825a1a831a5",
+      "prNumber": 35,
+      "experimentId": "mines-guide-certain-neighbours",
       "verified": true,
-      "runId": "41113159580",
+      "runId": "41310807978",
       "status": "awaiting_activation",
       "risk": {
         "risk": "low",
@@ -4639,26 +4670,26 @@
         "requiresDeployment": true,
         "reason": "unchanged executable code; bounded text edits or pure section insertions"
       },
-      "nativeVerifiedSha": "b629fa4acffda82f45332752318a017736a796e2",
+      "nativeVerifiedSha": "8b3a5a7ad83450fee847e6a91a554158f00934a2",
       "rebase": {
         "automatic": true,
-        "previousHead": "2aad6db33b5dc0a560ce9c6cd024152dd8bde8b4"
+        "previousHead": "8b3a5a7ad83450fee847e6a91a554158f00934a2"
       },
       "result": {
         "status": "merged",
-        "sha": "64e54ff6be42055870e359a6015e9825a1a831a5",
-        "candidate": "3792040b5e30629ec12a11de5e59f27aaae0b9eb",
-        "previousMain": "773f6c4959ed9670d9a46053e23117c247a829ff",
-        "previousTree": "58bab5f4143fedc0603f309c2e07c4f62e700cca",
+        "sha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
+        "candidate": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
+        "previousMain": "64e54ff6be42055870e359a6015e9825a1a831a5",
+        "previousTree": "b340f5d02804a288d2754e52da1c5021b4475496",
         "risk": {
           "risk": "low",
           "kind": "editorial-copy",
           "requiresDeployment": true,
           "reason": "unchanged executable code; bounded text edits or pure section insertions"
         },
-        "prNumber": 31
+        "prNumber": 35
       },
-      "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5"
+      "mergeSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07"
     },
     "reviewedBatch": {
       "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
