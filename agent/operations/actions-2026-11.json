@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "month": "2026-11",
+  "jobs": {},
+  "runs": {
+    "41278513502": {
+      "attempt": 1,
+      "completed": false
+    },
+    "41173566090": {
+      "attempt": 1,
+      "completed": true
+    },
+    "41200636661": {
+      "attempt": 1,
+      "completed": true
+    },
+    "41173140053": {
+      "attempt": 1,
+      "completed": true
+    }
+  },
+  "reservations": {
+    "41278513502:1": {
+      "run": "41278513502",
+      "attempt": 1,
+      "total": 8,
+      "before": 0,
+      "at": "2026-11-01T05:51:30.700Z",
+      "jobs": {
+        "budget": 8
+      }
+    }
+  },
+  "lastModelAt": null,
+  "deferredCI": [],
+  "observedAt": "2026-11-01T05:51:30.700Z",
+  "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
+  "limit": 1700
+}
