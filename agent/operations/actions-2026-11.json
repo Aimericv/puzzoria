@@ -85,6 +85,10 @@
     "124992551383": {
       "run": "41354822609",
       "minutes": 1
+    },
+    "125118928235": {
+      "run": "41396524869",
+      "minutes": 1
     }
   },
   "runs": {
@@ -141,6 +145,10 @@
       "completed": true
     },
     "41396524869": {
+      "attempt": 1,
+      "completed": true
+    },
+    "41397154265": {
       "attempt": 1,
       "completed": false
     }
@@ -233,11 +241,24 @@
       "jobs": {
         "budget": 8
       }
+    },
+    "41397154265:1": {
+      "run": "41397154265",
+      "attempt": 1,
+      "total": 41,
+      "before": 0,
+      "at": "2026-11-02T05:59:27.727Z",
+      "jobs": {
+        "budget": 8,
+        "first": 8,
+        "release-prepare": 4,
+        "production-gate": 3
+      }
     }
   },
-  "lastModelAt": "2026-11-01T19:59:36.067Z",
+  "lastModelAt": "2026-11-02T05:59:27.727Z",
   "deferredCI": [],
-  "observedAt": "2026-11-02T05:52:36.548Z",
+  "observedAt": "2026-11-02T05:59:27.727Z",
   "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
   "limit": 1700
 }
