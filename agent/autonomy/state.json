@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 234,
+  "generation": 235,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4802,7 +4802,7 @@
         "candidateSha": "0ecade23b7317f9389e86f98f0c4328e82e9c227",
         "prNumber": 38,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/38",
-        "status": "proposed"
+        "status": "cancelled"
       }
     ],
     "legacyWork": {
@@ -4986,7 +4986,7 @@
         "experimentId": "post-word-discovery-audit",
         "verified": true,
         "runId": "41475188162",
-        "status": "proposed"
+        "status": "cancelled_by_strategy"
       },
       {
         "sha": "69130d0934408fd69a0f7d3f4be29d86a3c8a149",
