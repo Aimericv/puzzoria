@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Clock3, Goal, Send, Timer } from "lucide-react";
 import { kt } from "@/lib/knowledge-i18n";
+import { FootballCareer } from "./football-career";
 import { quizTopic, quizTopicPath } from "@/lib/knowledge-catalog";
 import { initialKnowledge, normalizeAnswer, type KnowledgeAction, type KnowledgeState, type PublicKnowledge } from "@/lib/knowledge-types";
 import type { Locale } from "@/lib/types";
@@ -87,7 +88,7 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
         const found=shown.found.find(a=>a.id===item.id),answer=found?.answer??shown.reveal?.find(a=>a.id===item.id)?.answer;
         const flag=c.topic==="flags"?[...item.prompt].map(v=>String.fromCharCode(v.codePointAt(0)!-0x1f1e6+97)).join(""):null;
         return <div key={item.id} className={`knowledge-answer-row${found?" found":shown.completed?" missed":""}`} data-quiz-item={item.id}><span className="knowledge-clue">{flag?<Image src={`/flags/${flag}.svg`} width={44} height={30} alt={`${m.quizCategory} ${Number(item.id)+1}`} unoptimized/>:item.prompt}</span><span>{answer??"—"}</span>{found&&<Check size={15} aria-hidden="true"/>}</div>;
-      })}</div>:<><ol className="football-timeline" aria-label={m.career}>{c.clubs.map((spell,i)=><li key={i}><span className="football-stop">{i+1}</span><div><strong>{spell.club}</strong><span>{spell.years}{spell.loan&&<small>{m.loan}</small>}</span></div></li>)}</ol>{!!shown.guesses.length&&<ol className="football-guesses" aria-label={m.attempts}>{shown.guesses.map((guess,i)=><li key={i} className={shown.success&&i===shown.guesses.length-1?"correct":""}>{i+1}. {guess}{shown.success&&i===shown.guesses.length-1?" ✓":" ✕"}</li>)}</ol>}</>}
+      })}</div>:<><FootballCareer clubs={c.clubs} locale={locale}/>{!!shown.guesses.length&&<ol className="football-guesses" aria-label={m.attempts}>{shown.guesses.map((guess,i)=><li key={i} className={shown.success&&i===shown.guesses.length-1?"correct":""}>{i+1}. {guess}{shown.success&&i===shown.guesses.length-1?" ✓":" ✕"}</li>)}</ol>}</>}
       {!shown.completed&&<button type="button" className="knowledge-give-up" disabled={disabled} onClick={()=>{if(window.confirm(m.confirmFinish))void act({kind:"finish"});}}>{m.finish}</button>}
     </>}
     <ErrorMessage error={error} locale={locale}/>{error&&<button className="secondary-button" onClick={()=>{setError("");void reservePlay(c).then(data=>{accept(data);setLoaded(true);}).catch(()=>setError("networkError"));}}>{m.retry}</button>}

@@ -1,6 +1,6 @@
 # Quiz et parcours de footballeurs
 
-Sélection éditoriale initiale : 1er novembre 2026. Les indices, traductions et mises en page sont originaux. Aucun quiz, logo de club ou portrait d'un autre site n'est reproduit. JetPunk est une référence de mécanique de jeu, sans affiliation.
+Sélection éditoriale initiale : 1er novembre 2026. Les indices, traductions et mises en page sont originaux. Les quiz et indices ne reprennent pas ceux d’un autre site ; aucun portrait de joueur n’est utilisé. JetPunk est une référence de mécanique de jeu, sans affiliation.
 
 ## Quiz
 
@@ -22,3 +22,9 @@ La banque de vingt joueurs retraités est privée. Chaque entrée contient ses s
 L'ordre est celui des passages joués en équipes premières professionnelles ; équipes de jeunes et réserves sont exclues. Les prêts et retours apparaissent séparément : notamment Beckham à Preston/Milan, Henry à Arsenal, Kaká à São Paulo et Lampard à Swansea. Un contrat signé avant un prêt sans apparition n'ajoute pas une fausse étape (Villa/Melbourne avant ses débuts à New York ; Kaká/São Paulo avant Orlando ; Lampard/Swansea avant ses débuts en équipe première à West Ham). Les années désignent les passages joués, pas tous les contrats administratifs.
 
 Les carrières sont gelées dans les runs déjà créés. Un ajout au deck ne doit jamais changer un run sauvegardé. À l'ajout de joueurs actifs, il faudra dater explicitement les carrières, vérifier chaque transfert et renouveler la cohorte ; le deck initial privilégie les joueurs retraités pour éviter cette ambiguïté.
+
+## Blasons des clubs
+
+Les 54 blasons locaux de `public/club-badges` proviennent du dépôt [JoseArroyave/football-logos](https://github.com/JoseArroyave/football-logos), révision `5ab11fed47427b3003f4b276554491fe683387b1`. La notice MIT du dépôt est conservée dans `football-badges.LICENSE.txt` ; les marques des clubs restent à leurs propriétaires. Le manifeste `football-badges.sources.json` précise chaque fichier, sa provenance et son SHA-256 après suppression des métadonnées et contenus SVG actifs/externes. Aucun appel tiers dans le navigateur.
+
+Ce sont des blasons contemporains d’identification des clubs, pas une reconstitution du blason porté à chaque année du parcours. Emirates Club conserve son nom faute de blason dans cette sélection ; un logo absent ou en erreur affiche aussi le nom. Les noms restent disponibles aux technologies d’assistance, au survol et via un bouton traduit. Aucune réponse, graine ou liste de joueurs n’entre dans le module public des blasons.

@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import { kt } from "../src/lib/knowledge-i18n";
 import { quizTopics, quizTopicPath } from "../src/lib/knowledge-catalog";
 import { footballPlayers } from "../src/lib/server/knowledge-content";
+import { clubBadge } from "../src/lib/football-badges";
 import { rt } from "../src/lib/retention-i18n";
 import { gamePath } from "../src/lib/i18n";
 import { locales } from "../src/lib/types";
@@ -53,6 +54,13 @@ for(const locale of locales) {
     await game.getByRole("button",{name:m.start,exact:true}).click();
     await expect(game.locator(".football-timeline")).toBeVisible();
     const clubs=await game.locator(".football-timeline strong").allTextContents();
+    const badges=game.locator('.football-club-badge');
+    await expect(badges).toHaveCount(clubs.filter(club=>clubBadge(club)).length);
+    await expect.poll(()=>badges.evaluateAll(images=>images.every(image=>(image as HTMLImageElement).complete&&(image as HTMLImageElement).naturalWidth>0))).toBe(true);
+    await expect(game.locator('.football-club-name-hidden')).toHaveCount(clubs.filter(club=>clubBadge(club)).length);
+    await game.getByRole('button',{name:m.showClubNames,exact:true}).click();
+    await expect(game.locator('.football-club-name-hidden')).toHaveCount(0);
+    await game.getByRole('button',{name:m.hideClubNames,exact:true}).click();
     const player=footballPlayers.find(p=>JSON.stringify(p.clubs.map(c=>c.club))===JSON.stringify(clubs));expect(player).toBeDefined();
     const input=game.getByLabel(m.player,{exact:true});await input.fill("A wrong name");
     await game.getByRole("button",{name:m.submit,exact:true}).click();
@@ -71,3 +79,14 @@ for(const locale of locales) {
     expect(await unhandledRejections(page)).toEqual([]);
   });
 }
+
+test('football keeps club names usable when badge loading fails',async({page})=>{
+  await page.route('**/club-badges/*.svg',route=>route.abort());
+  await page.goto(gamePath('fr','football'));
+  const game=page.locator('[data-knowledge-game="football"]');
+  await game.getByRole('button',{name:kt('fr').start,exact:true}).click();
+  await expect(game.locator('.football-timeline')).toBeVisible();
+  await expect(game.locator('.football-club-badge')).toHaveCount(0);
+  await expect(game.locator('.football-club-name-hidden')).toHaveCount(0);
+  for(const name of await game.locator('.football-timeline strong').allTextContents())await expect(game.locator('.football-timeline').getByText(name,{exact:true}).first()).toBeVisible();
+});
