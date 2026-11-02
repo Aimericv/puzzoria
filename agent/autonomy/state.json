@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 225,
+  "generation": 226,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "69130d0934408fd69a0f7d3f4be29d86a3c8a149",
   "checkpoint": {
-    "artifactId": 13098558726,
-    "runId": "41344498054",
-    "name": "puzzoria-agent-auth-41344498054-33",
-    "generation": 33,
+    "artifactId": 13120065379,
+    "runId": "41397154265",
+    "name": "puzzoria-agent-auth-41397154265-34",
+    "generation": 34,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41344498054",
+      "runId": "41397154265",
       "phase": "autonomous-agent",
-      "generation": 33
+      "generation": 34
     },
-    "expiresAt": "2027-01-30T19:59:22Z",
-    "digest": "7fbfc9267405d3ba96e3f0a320748cf19e65d42b450ed0712b18150c072b3d13"
+    "expiresAt": "2027-01-31T05:59:15Z",
+    "digest": "8f549ff588b46b85c38312f48eb529e1bdfa23333d843b838d149645507f26b1"
   },
   "lastMessageId": 6563182282,
   "completedSessions": 30,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41344498054",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41344498054"
+    "id": "41397154265",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41397154265"
   },
   "memory": {
     "STATE.md": "# État — 1er novembre 2026, session 20:01 UTC\n\nBase exportée d2ac94395c69fab70202bc7f33dfdf4cbe960a07. AGENTS.md, mandat, inbox, quatre mémoires, budget et rapports readonly consultés. Inbox : deux jeux (quiz inspiré de JetPunk et parcours de footballeur) développés séparément ; éviter les doublons. Budget lu : novembre, plafond 1700, charged 144, reserved 42. Aucun quota modifié. Guide Next sitemap.md lu. Aucun réseau externe, Git, achat, merge ou déploiement ; aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié.\n\nDécision : audit Daily/sitemap plutôt qu’un nouveau guide. Code existant : fenêtre de 31 archives précédentes, canoniques et alternatives conformes aux modes ; aucun défaut concret de couverture établi. Deux tests supplémentaires pour couverture actuelle après sortie des historiques et basculement UTC. Documentation docs/DAILY-SITEMAP-AUDIT.fr.md. Aucune logique produit modifiée ; aucune preuve d’indexation production.\n\nVérifications locales : 37 tests passent (seo et word-articles), typecheck réussi. Lint réussi (sortie 0). Pas de suite complète, content:validate, E2E ou build ; contrôles indépendants réservés au superviseur.\n\nObservation df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726 à 20:01:20.132Z : lastFailure/unverifiedWork null. Sudoku et Démineur merged mais déploiement non établi ; Word/vocabulaire déployés ensemble le 27 octobre, fenêtres immatures. Autres protocoles inchangés. Google available à 20:01:18.023Z : 180 impressions/six clics sur 2–31 octobre demandé, dernière date 30 octobre Pacific ; sept jours demandés trois impressions/zéro clic. Lignes partielles sans diagnostic d’indexation ni jointure page/requête. Analytics available à 20:01:16.154Z ; série contexte 2–31 octobre complets : vingt départs/trois sessions consenties. Ce ne sont pas des personnes ni un funnel Google. Rapports jusqu’au 1er novembre partiels ; D+7 six matures/zéro retour, D+30 taux null faute de matures. Trends quatre RSS disponibles, TikTok indisponible, aucune demande spécifique établie.\n\nRecherche daily-sitemap-coverage-audit arrêtée, aucun gain direct attendu ni revendiqué. Suite choisie : Examiner le chemin fin de partie Word → découverte d’un autre jeu via CompletionPanel et les rapports agrégés disponibles. Établir une friction concrète avant intervention ; ne modifier ni collecte, preuves ou persistance. Ne pas dupliquer les deux jeux confiés séparément par le propriétaire. Attendre les fenêtres SEO complètes sans multiplier les guides. Nonce conservé. Capitales toujours suspendues, pas de duplication du chantier quiz.\n",
