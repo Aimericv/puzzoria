@@ -1,3 +1,4 @@
+import { knowledgeSeo } from "./knowledge-seo";
 import { rareWordSeo } from "./rare-word-seo";
 import { newGamesSeo } from "./new-games-seo";
 import { socialSeo } from "./social-seo";
@@ -390,10 +391,10 @@ const content: Record<Locale, SeoCopy> = {
 export const seoCopy = (locale: Locale) => ({
   ...content[locale],
   homeDescription: {
-    fr: "Jeux gratuits : Wordle, sudoku, 2048, démineur, mots mêlés, classement à l’aveugle et Tu préfères. Défis quotidiens, illimités et entre amis.",
-    en: "Free Wordle, Sudoku, 2048, Minesweeper, word search, Blind Ranking and Would You Rather. Daily challenges, unlimited play and games with friends.",
-    es: "Wordle, sudoku, 2048, buscaminas, sopa de letras, ranking a ciegas y dilemas gratis. Retos diarios, ilimitados y juegos con amigos.",
-    de: "Kostenlos: Wordle, Sudoku, 2048, Minesweeper, Wortsuche, Blind Ranking und Dilemmas. Tägliche Aufgaben, unbegrenztes Spielen und Duelle mit Freunden.",
+    fr: "Jeux gratuits : Wordle, sudoku, 2048, démineur, quiz chrono et footballeurs à deviner. Joue sans compte, chaque jour, en illimité ou entre amis.",
+    en: "Free Wordle, Sudoku, 2048, Minesweeper, timed trivia quizzes and football player guessing games. Play daily, unlimited or with friends, without signing up.",
+    es: "Wordle, sudoku, 2048, buscaminas, quizzes con tiempo y futbolistas por adivinar. Juega gratis sin registro, cada día, sin límite o con amigos.",
+    de: "Kostenlos: Wordle, Sudoku, 2048, Minesweeper, Zeitquiz und Fußballspieler erraten. Spiele ohne Anmeldung, täglich, unbegrenzt oder mit Freunden.",
   }[locale],
   homeBody:
     {
@@ -414,5 +415,6 @@ export const seoCopy = (locale: Locale) => ({
     ...newGamesSeo(locale),
     ...socialSeo(locale),
     ...rareWordSeo(locale),
+    ...knowledgeSeo(locale),
   },
 });

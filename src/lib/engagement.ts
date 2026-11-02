@@ -63,9 +63,10 @@ export function personalProgress(all: Completion[], current: Completion) {
       (c) =>
         c.provenance === "server" &&
         c.game === current.game &&
+        (c.game !== "quiz" && c.game !== "football" || c.knowledgeSet === current.knowledgeSet) &&
         (c.game !== "rareword" || (c.wordLength === current.wordLength && c.maxAttempts === current.maxAttempts)) &&
         modeOf(c) === modeOf(current) &&
-        ((c.game !== "word" && c.game !== "rareword" && c.game !== "wordsearch") ||
+        ((c.game !== "word" && c.game !== "rareword" && c.game !== "wordsearch" && c.game !== "quiz") ||
           c.locale === current.locale) &&
         ((c.game !== "sudoku" && c.game !== "mines" && c.game !== "guess") ||
           (c.difficulty ?? c.challengeId.split(":").at(-1)) ===
@@ -90,6 +91,8 @@ export function personalProgress(all: Completion[], current: Completion) {
             ranking: 3,
             rather: 3,
             guess: 5,
+        quiz: 3,
+        football: 3,
           }[c.game] && c.duration <= 86400,
     )
     .map((c) => c.duration);
@@ -106,6 +109,8 @@ export function personalProgress(all: Completion[], current: Completion) {
         ranking: 3,
         rather: 3,
         guess: 5,
+        quiz: 3,
+        football: 3,
       }[current.game] && current.duration <= 86400;
   const attempts = wins.flatMap((c) =>
     c.attempts === undefined ? [] : [c.attempts],
@@ -124,14 +129,14 @@ export function personalProgress(all: Completion[], current: Completion) {
       records.push("timeRecord");
     if (
       current.success &&
-      (current.game === "word" || current.game === "rareword" || current.game === "guess") &&
+      (current.game === "word" || current.game === "rareword" || current.game === "guess" || current.game === "football") &&
       current.attempts !== undefined &&
       attempts.length &&
       current.attempts < Math.min(...attempts)
     )
       records.push("attemptsRecord");
     if (
-      (current.game === "math" || current.game === "2048") &&
+      (current.game === "math" || current.game === "2048" || current.game === "quiz") &&
       comparable.length &&
       current.score > Math.max(...comparable.map((c) => c.score))
     )
@@ -168,12 +173,13 @@ export function personalResultStatistics(
     if (
       c.provenance !== "server" ||
       c.game !== current.game ||
+      ((c.game === "quiz" || c.game === "football") && c.knowledgeSet !== current.knowledgeSet) ||
       (c.game === "rareword" && modeOf(current) === "practice" && (c.wordLength !== current.wordLength || c.maxAttempts !== current.maxAttempts)) ||
       modeOf(c) !== modeOf(current)
     )
       continue;
     if (
-      (c.game === "word" || c.game === "rareword" || c.game === "wordsearch") &&
+      (c.game === "word" || c.game === "rareword" || c.game === "wordsearch" || c.game === "quiz") &&
       c.locale !== current.locale
     )
       continue;

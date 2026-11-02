@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { quizTopics, quizTopicPath } from "@/lib/knowledge-catalog";
+import { kt } from "@/lib/knowledge-i18n";
+import { quizTopicStructuredData } from "@/lib/knowledge-seo";
+import { QuizTopics } from "@/components/quiz-topics";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronLeft, Info, CalendarDays } from "lucide-react";
 import {
@@ -51,6 +55,7 @@ function resolve(
   difficulty: Difficulty;
   archived: boolean;
   practice: boolean;
+  quizCategory?: string;
 } | null {
   if (!isLocale(locale)) return null;
   const game = gameFromSlug(segments[0], locale);
@@ -60,6 +65,8 @@ function resolve(
     archived = false,
     practice = false;
   const remaining = segments.slice(1);
+  const topic = game === "quiz" && remaining.length === 1 ? quizTopics.find(t=>t.slug[locale] === remaining[0]) : undefined;
+  if (topic) remaining.shift();
   if (remaining[0] === "practice") {
     practice = true;
     remaining.shift();
@@ -86,12 +93,18 @@ function resolve(
   if (game === "sudoku" && archived && !dailyDifficulties(game, date).includes(difficulty)) return null;
   if (game === "sudoku" && !practice && !archived && difficulty !== "easy")
     permanentRedirect(gamePath(locale, "sudoku"));
-  return { locale, game, date, difficulty, archived, practice };
+  return { locale, game, date, difficulty, archived, practice, ...(topic ? {quizCategory:topic.id} : {}) };
 }
 export async function generateMetadata({ params }: Props) {
   const p = await params,
     r = resolve(p.locale, p.segments);
   if (!r) notFound();
+  if (r.quizCategory) {
+    const topic=quizTopics.find(t=>t.id===r.quizCategory)!;
+    const metadata=pageMetadata(r.locale,`Quiz : ${topic.title[r.locale]} | Puzzoria`,topic.description[r.locale]);
+    const languages=Object.fromEntries(locales.map(l=>[l,quizTopicPath(l,topic)]));
+    return {...metadata,alternates:{canonical:quizTopicPath(r.locale,topic),languages:{...languages,"x-default":languages.en}},openGraph:{...metadata.openGraph,url:quizTopicPath(r.locale,topic)}};
+  }
   if (p.segments[1] === "practice")
     return {
       ...pageMetadata(
@@ -147,7 +160,7 @@ export default async function GamePage({ params }: Props) {
       archived && (date !== utcDay() || !hasDaily(game)) ? "archive" : "daily";
   return (
     <>
-      {p.segments[1] !== "practice" && (
+      {p.segments[1] !== "practice" && !r.quizCategory && (
         <StructuredData
           value={gameStructuredData(
             locale,
@@ -159,6 +172,7 @@ export default async function GamePage({ params }: Props) {
           )}
         />
       )}
+      {r.quizCategory && <StructuredData value={quizTopicStructuredData(locale,quizTopics.find(t=>t.id===r.quizCategory)!)}/>}
       <Link className="back-link" href={`/${locale}`}>
         <ChevronLeft size={17} />
         {m.back}
@@ -176,7 +190,7 @@ export default async function GamePage({ params }: Props) {
                 ? m.archiveGame
                 : pg(locale).daily}
           </span>
-          <h1>{gameName(gameFamily(game), locale)}</h1>
+          <h1>{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.title[locale] : gameName(gameFamily(game), locale)}</h1>
         </div>
         <span className="game-date">
           {practice
@@ -252,7 +266,7 @@ export default async function GamePage({ params }: Props) {
             ? rt(locale).dailyIntro
             : dailyGoal(game, locale)}
       </p>
-      <p className="game-intro">{seoCopy(locale).games[game].intro}</p>
+      <p className="game-intro">{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.description[locale]+" "+kt(locale).topicIntro.replace("{n}",String(quizTopics.find(t=>t.id===r.quizCategory)!.count)).replace("{seconds}",String(quizTopics.find(t=>t.id===r.quizCategory)!.seconds)) : seoCopy(locale).games[game].intro}</p>
       {((game === "sudoku" && (practice || archived && dailyDifficulties(game, date).length > 1)) || game === "mines" || game === "guess") && (
         <nav className="difficulty-nav" aria-label={m.difficulty}>
           {difficulties.map((d) => (
@@ -277,6 +291,7 @@ export default async function GamePage({ params }: Props) {
               game={game}
               locale={locale}
               difficulty={difficulty}
+              quizCategory={r.quizCategory}
               preview={publicChallenge(
                 generateChallenge(
                   game,
@@ -284,6 +299,7 @@ export default async function GamePage({ params }: Props) {
                   date,
                   difficulty,
                   "page-preview-v1",
+                  r.quizCategory,
                 ),
               )}
             />
@@ -351,6 +367,7 @@ export default async function GamePage({ params }: Props) {
           )}
         </aside>
       </div>
+      {game === "quiz" && <QuizTopics locale={locale} selected={r.quizCategory}/>}
       <GameGuide locale={locale} game={game} />
     </>
   );

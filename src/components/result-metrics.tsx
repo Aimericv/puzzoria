@@ -1,5 +1,6 @@
 import type { Completion, Locale, ResultDetails } from "@/lib/types";
 import { gameStatisticsCopy } from "@/lib/game-statistics-i18n";
+import { kt } from "@/lib/knowledge-i18n";
 import { t } from "@/lib/i18n";
 import { clockText } from "./storage";
 
@@ -7,6 +8,8 @@ export function ResultMetrics({completion:c,locale,answer,details={}}:{completio
   const m=gameStatisticsCopy(locale), base=t(locale), d={...c,...details};
   const items: [string,string|number|undefined][] = c.game === "math"
     ? [[m.target,d.mathTarget],[m.value,d.mathValue],[m.gap,d.mathDistance],[base.timer,clockText(c.duration)]]
+    : c.game === "quiz" ? [[kt(locale).score,`${d.answersFound??0}/${d.answersTotal??0}`],[base.timer,clockText(c.duration)]]
+    : c.game === "football" ? [[kt(locale).attempts,`${c.attempts??0}/6`],[base.timer,clockText(c.duration)]]
     : c.game === "2048" ? [[base.score,c.score],[m.largestTile,d.largestTile],[m.moves,d.moves]]
     : c.game === "guess" ? [[m.yourGuesses,c.attempts],[m.botGuesses,d.botAttempts]]
     : c.game === "ranking" || c.game === "rather" ? [[m.choices,d.choicesCount]]

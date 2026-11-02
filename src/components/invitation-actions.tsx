@@ -87,7 +87,7 @@ export function InvitationActions({
     }
   }
   const inviteButton = (
-    <LiveInvite game={completion.game} locale={locale} difficulty={completion.difficulty}/>
+    <LiveInvite game={completion.game} locale={locale} category={completion.game === "quiz" ? completion.knowledgeSet?.split(":")[1] : undefined} difficulty={completion.difficulty}/>
   );
   return (
     <>

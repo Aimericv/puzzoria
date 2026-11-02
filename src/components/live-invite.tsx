@@ -12,10 +12,12 @@ export function LiveInvite({
   game,
   locale,
   difficulty,
+  category,
 }: {
   game: GameId;
   locale: Locale;
   difficulty?: Difficulty;
+  category?: string;
 }) {
   const router = useRouter(),
     [busy, setBusy] = useState(false),
@@ -29,6 +31,7 @@ export function LiveInvite({
         game: liveGame(game),
         locale,
         difficulty,
+        category,
       });
       track("friend_invite", { locale, game_id: liveGame(game) });
       router.push(`/${locale}/live/${room.code}`);

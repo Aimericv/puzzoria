@@ -5,6 +5,9 @@ import { isDifficulty, isGameId, isLocale, locales } from "../src/lib/types";
 import { wordArticles } from "../src/lib/server/word-articles";
 const root = path.join(process.cwd(), "content", "daily");
 let count = 0;
+const {validateKnowledgeContent} = await import("../src/lib/server/knowledge-content");
+validateKnowledgeContent();
+console.log("Validated multilingual quizzes and football careers.");
 for (const directory of await readdir(root, { withFileTypes: true }))
   if (directory.isDirectory()) {
     for (const file of await readdir(path.join(root, directory.name)))

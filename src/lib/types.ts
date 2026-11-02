@@ -11,6 +11,8 @@ export const gameIds = [
   "ranking",
   "guess",
   "rather",
+  "quiz",
+  "football",
 ] as const;
 export type GameId = (typeof gameIds)[number];
 // Word variants keep independent run IDs and records, but share one catalogue entry.
@@ -95,6 +97,7 @@ export type Challenge =
   | SudokuChallenge
   | MathChallenge
   | NewChallenge
+  | import("./knowledge-types").KnowledgeChallenge
   | import("./social-types").SocialChallenge;
 export type PublicChallenge =
   | Omit<WordChallenge, "answer">
@@ -104,6 +107,7 @@ export type PublicChallenge =
   | Omit<TileChallenge, "spawnSeed">
   | Omit<MinesChallenge, "mines">
   | Omit<SearchChallenge, "placements">
+  | import("./knowledge-types").PublicKnowledge
   | import("./social-types").PublicSocialChallenge;
 export type ResultDetails = {
   mathTarget?: number;
@@ -116,8 +120,11 @@ export type ResultDetails = {
   wordsTotal?: number;
   botAttempts?: number;
   choicesCount?: number;
+  answersFound?: number;
+  answersTotal?: number;
 };
 export type Completion = ResultDetails & {
+  knowledgeSet?: string;
   roomId?: string;
   wordLength?: number;
   maxAttempts?: number;

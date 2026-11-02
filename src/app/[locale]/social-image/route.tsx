@@ -21,6 +21,8 @@ export async function GET(
     ranking: "#784dbe",
     guess: "#087f75",
     rather: "#215eda",
+    quiz: "#91513b",
+    football: "#14735c",
   };
   return new ImageResponse(
     (

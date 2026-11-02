@@ -1,3 +1,4 @@
+import { quizTopics, quizTopicPath } from "@/lib/knowledge-catalog";
 import { gameAvailable } from "@/lib/challenges";
 import type { MetadataRoute } from "next";
 import { locales, gameIds, difficulties } from "@/lib/types";
@@ -66,6 +67,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           "monthly",
           0.5,
         );
+  if (gameAvailable("quiz",utcDay())) for (const topic of quizTopics) add(Object.fromEntries(locales.map(l=>[l,quizTopicPath(l,topic)])),"monthly",.8);
   for (const locale of locales) for (const article of publishedWordArticles(locale)) {
     const languages = Object.fromEntries(Object.entries(articleAlternatives(article)).map(([l, p]) => [l, siteOrigin + p]));
     entries.push({url: siteOrigin + wordArticlePath(locale, article.word), lastModified: article.publicFrom,

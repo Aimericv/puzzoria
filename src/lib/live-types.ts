@@ -16,6 +16,8 @@ export const liveGames = [
   "guess",
   "ranking",
   "rather",
+  "quiz",
+  "football",
 ] as const;
 export type LiveGame = (typeof liveGames)[number];
 export const liveGame = (game: GameId): LiveGame =>
@@ -57,6 +59,9 @@ export type LiveView = {
   runId?: string;
   completion?: Completion;
   wordAnswer?: string;
+  footballAnswer?: string;
+  footballSources?: string[];
+  quizAnswers?: {prompt: string; answer: string}[];
   rankingItems?: RankedItem[];
   choices?: { ranking: (string | null)[]; votes: ("a" | "b")[] }[];
   ownSecret?: number | null;

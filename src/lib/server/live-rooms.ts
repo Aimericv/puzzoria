@@ -1,3 +1,5 @@
+import { validQuizTopic } from "../knowledge-catalog";
+import { generateKnowledge } from "./knowledge-content";
 import { randomUUID } from "node:crypto";
 import {
   generateChallenge,
@@ -106,6 +108,8 @@ function progress(p: Player, room: Room) {
   const r = run(p),
     data = r ? JSON.parse(r.progress_json) : {},
     s = data.state;
+  if (room.game === "quiz") return [s?.found?.length ?? 0, room.challenge?.kind === "quiz" ? room.challenge.items.length : 0];
+  if (room.game === "football") return [s?.guesses?.length ?? 0, 6];
   if (room.game === "word") return [data.guesses?.length ?? 0, 6];
   if (room.game === "sudoku")
     return [
@@ -165,6 +169,13 @@ function settle(room: Room, now: number) {
         p.finishedAt = room.endAt;
       }
     }
+  if (timeout && (room.game === "quiz" || room.game === "football")) for (const p of room.players) {
+    const r=run(p), data=r ? JSON.parse(r.progress_json) : null;
+    if (r && !p.completion && !p.forfeit) {
+      const result=submitRun(r.id,identityOf(p),{step:{kind:"finish"},sequence:data?.actions?.length ?? 0},room.endAt!);
+      p.completion=result.completion; p.finishedAt=room.endAt;
+    }
+  }
   const first = room.players.findIndex(
     (p) => p.completion?.success && !p.forfeit,
   );
@@ -186,6 +197,7 @@ function settle(room: Room, now: number) {
   const value = (p: Player): number[] => {
     if (p.forfeit) return [-2];
     if (room.game === "2048") return [p.completion?.score ?? 0];
+    if (room.game === "quiz") return [p.completion?.score ?? 0, -(p.finishedAt! - room.startAt!)];
     if (!p.completion?.success && room.game !== "math") return [-1];
     if (room.game === "math")
       return p.completion
@@ -197,7 +209,7 @@ function settle(room: Room, now: number) {
         : [-1];
     return [
       1,
-      ...(["word", "guess"].includes(room.game)
+      ...(["word", "guess", "football"].includes(room.game)
         ? [-(p.completion?.attempts ?? Infinity)]
         : []),
       -(p.finishedAt! - room.startAt!),
@@ -254,7 +266,7 @@ function view(code: string, room: Room, who: Identity): LiveView {
         attempts:
           room.game === "guess"
             ? p.guesses.length
-            : (p.completion?.attempts ?? 0),
+            : (p.completion?.attempts ?? (room.game === "football" ? s?.guesses?.length : 0) ?? 0),
         duration:
           p.finishedAt && room.startAt !== null
             ? Math.max(0, Math.floor((p.finishedAt - room.startAt) / 1000))
@@ -272,6 +284,12 @@ function view(code: string, room: Room, who: Identity): LiveView {
       result.wordAnswer = normalizeWord(room.challenge.answer);
     if (room.done && room.challenge.kind === "ranking")
       result.rankingItems = room.challenge.items;
+    if (room.done && room.challenge.kind === "football") {
+      result.footballAnswer = room.challenge.answer;
+      result.footballSources = room.challenge.sources;
+    }
+    if (room.done && room.challenge.kind === "quiz")
+      result.quizAnswers = room.challenge.items.map(({prompt,answer})=>({prompt,answer}));
     if (room.game === "guess") {
       result.ownSecret = me.secret;
       result.guesses = me.guesses;
@@ -299,6 +317,7 @@ export function createLive(body: Record<string, unknown>, who: Identity) {
     typeof difficulty !== "string" ||
     !isDifficulty(difficulty) ||
     typeof category !== "string" ||
+    (game === "quiz" && !validQuizTopic(category)) ||
     (opinionGame(String(game)) &&
       !validSocialCategory(category, game as "ranking" | "rather"))
   )
@@ -361,7 +380,11 @@ function start(code: string, room: Room) {
             ? 300
             : 600) *
         1000;
-    const c = generateChallenge(
+    const prior = (room.game === "quiz" || room.game === "football") && room.round > 1
+      ? database().prepare("SELECT challenge_json FROM runs WHERE challenge_id=? LIMIT 1").get(`live:${room.game}:${code}:${room.round-1}`) as {challenge_json:string}|undefined : undefined;
+    const c = room.game === "quiz" || room.game === "football"
+      ? generateKnowledge(room.game, room.locale, utcDay(), randomUUID(), room.category, prior ? JSON.parse(prior.challenge_json) : undefined)
+      : generateChallenge(
       room.game,
       room.locale,
       utcDay(),
@@ -369,6 +392,7 @@ function start(code: string, room: Room) {
       randomUUID(),
       room.category,
     );
+    if (c.kind === "quiz") room.endAt=room.startAt!+c.seconds*1000;
     c.id = `live:${room.game}:${code}:${room.round}`;
     c.mode = "practice";
     c.roomId = code;
@@ -427,9 +451,8 @@ export function liveAction(
     }
     if (body.category !== undefined) {
       if (
-        !opinionGame(room.game) ||
         typeof body.category !== "string" ||
-        !validSocialCategory(body.category, room.game as "ranking" | "rather")
+        (room.game === "quiz" ? !validQuizTopic(body.category) : !opinionGame(room.game) || !validSocialCategory(body.category, room.game as "ranking" | "rather"))
       )
         throw new ApiError("invalid");
       room.category = body.category;

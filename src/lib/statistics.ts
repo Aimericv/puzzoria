@@ -36,6 +36,7 @@ export function personalStatistics(
     averageTime: average(times),
     bestTime: times.length ? Math.min(...times) : null,
     averageAttempts: average(attempts),
+    averageScore: average(played.map(r=>r.score)),
     bestScore: played.length ? Math.max(...played.map((r) => r.score)) : null,
     bestAttempts: attempts.length ? Math.min(...attempts) : null,
     bestDistance: distances.length ? Math.min(...distances) : null,
@@ -83,7 +84,7 @@ export function comparisonStatistics(
     closerThanPercent: current.game === "math" && current.mathDistance!==undefined && distances.length>=COMPARISON_MIN_SAMPLES
       ? distances.filter(r=>r.mathDistance!>current.mathDistance!).length*100/distances.length : null,
     betterScoreThanPercent:
-      current.game === "2048"
+      (current.game === "2048" || current.game === "quiz")
         ? (others.filter((r) => r.score < current.score).length /
             others.length) *
           100

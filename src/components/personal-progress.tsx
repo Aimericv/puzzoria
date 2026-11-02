@@ -1,4 +1,5 @@
 "use client";
+import { kt } from "@/lib/knowledge-i18n";
 import { et } from "@/lib/engagement-i18n";
 import { personalProgress, personalResultStatistics } from "@/lib/engagement";
 import type { Completion, Locale } from "@/lib/types";
@@ -28,13 +29,14 @@ export function PersonalProgress({
   const metric = (c: Completion) =>
     (c.game === "word" || c.game === "rareword")
       ? (c.attempts ?? 6)
-      : c.game === "math" ? (c.mathDistance??0) : c.game === "guess" ? (c.attempts??0) : c.game === "2048"
+      : c.game === "math" ? (c.mathDistance??0) : c.game === "guess" || c.game === "football" ? (c.attempts??0) : c.game === "2048" || c.game === "quiz"
         ? c.score
         : c.duration;
   const max = Math.max(1, ...p.history.map(metric));
   const labels=gameStatisticsCopy(locale);
-  const record: [string,string|number|null] | null = completion.game === "word" || completion.game === "rareword" || completion.game === "guess"
+  const record: [string,string|number|null] | null = completion.game === "word" || completion.game === "rareword" || completion.game === "guess" || completion.game === "football"
     ? [labels.recordAttempts,stats.bestAttempts]
+    : completion.game === "quiz" ? [kt(locale).best, stats.bestScore===null?null:`${format(stats.bestScore/10)}%`]
     : completion.game === "2048" ? [m.scoreRecord,stats.bestScore]
     : completion.game === "math" ? completion.success ? [labels.exactRecord,stats.bestTime===null?null:clockText(stats.bestTime)] : [labels.bestGap,stats.bestDistance]
     : hasTimeComparison(completion.game) ? [resultCopy(locale).best,stats.bestTime===null?null:clockText(stats.bestTime)] : null;
@@ -73,8 +75,9 @@ export function PersonalProgress({
           </dd>
         </div>}
         {(completion.game === "wordsearch" || completion.game === "sudoku") && <div><dt>{resultCopy(locale).best}</dt><dd>{stats.bestTime === null ? "—" : clockText(stats.bestTime)}</dd></div>}
+        {completion.game === "quiz" && <><div><dt>{kt(locale).average}</dt><dd>{stats.averageScore===null?"—":`${format(stats.averageScore/10)}%`}</dd></div><div><dt>{kt(locale).perfect}</dt><dd>{stats.won}</dd></div></>}
         {completion.game === "2048" && <div><dt>{m.scoreRecord}</dt><dd>{stats.bestScore ?? "—"}</dd></div>}
-        {(completion.game === "word" || completion.game === "rareword" || completion.game === "guess") && (
+        {(completion.game === "word" || completion.game === "rareword" || completion.game === "guess" || completion.game === "football") && (
           <div>
             <dt>{rt(locale).averageAttempts}</dt>
             <dd>
@@ -115,7 +118,7 @@ export function PersonalProgress({
                 ? `${c.success ? c.attempts : "X"}/${c.maxAttempts ?? 6}`
                 : c.game === "math" ? `${labels.gap}: ${c.mathDistance??"—"}` : c.game === "2048"
                   ? `${c.score} ${t(locale).score}`
-                  : c.game === "guess" ? `${labels.yourGuesses}: ${c.attempts??"—"}` : c.game === "ranking" || c.game === "rather" ? dateLabel(c.date,locale) : clockText(c.duration)}
+                  : c.game === "quiz" ? `${c.answersFound??"—"}/${c.answersTotal??"—"}` : c.game === "football" ? `${labels.yourGuesses}: ${c.attempts??0}/6` : c.game === "guess" ? `${labels.yourGuesses}: ${c.attempts??"—"}` : c.game === "ranking" || c.game === "rather" ? dateLabel(c.date,locale) : clockText(c.duration)}
             </strong>
           </li>
         ))}

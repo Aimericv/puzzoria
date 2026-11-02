@@ -2,7 +2,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Users, Copy, Zap } from "lucide-react";
+import { Users, Copy, Zap, Goal } from "lucide-react";
+import { kt } from "@/lib/knowledge-i18n";
+import { quizTopics } from "@/lib/knowledge-catalog";
 import { gameName } from "@/lib/registry";
 import { gamePath, t } from "@/lib/i18n";
 import { lt } from "@/lib/live-i18n";
@@ -137,6 +139,7 @@ export function LiveCreate({ locale }: { locale: Locale }) {
             </select>
           </label>
         )}
+        {game === "quiz" && <label>{kt(locale).choose}<select value={category} onChange={e=>setCategory(e.target.value)}><option value="all">{kt(locale).all}</option>{quizTopics.map(topic=><option key={topic.id} value={topic.id}>{topic.title[locale]}</option>)}</select></label>}
         {!account.user && (
           <label>
             {m.name}
@@ -340,13 +343,14 @@ export function LiveRoom({ locale, code }: { locale: Locale; code: string }) {
     date: new Date(room.startAt ?? room.serverNow).toISOString().slice(0, 10),
     success: room.winner === room.you && !opinionGame(room.game),
     score: me?.score ?? 0,
-    ...(["word", "guess"].includes(room.game)
+    ...(["word", "guess", "football"].includes(room.game)
       ? { attempts: me?.progress ?? 0 }
       : {}),
     ...(opinionGame(room.game) ? { choicesCount: me?.progress ?? 0 } : {}),
     ...(room.game === "wordsearch"
       ? { wordsFound: me?.progress ?? 0, wordsTotal: me?.total ?? 0 }
       : {}),
+    ...(room.game === "quiz" ? {answersFound:me?.progress ?? 0,answersTotal:me?.total ?? 0} : {}),
     duration:
       me?.duration ??
       Math.max(
@@ -407,7 +411,7 @@ export function LiveRoom({ locale, code }: { locale: Locale; code: string }) {
                       <span>
                         {room.game === "2048"
                           ? m.score
-                          : ["word", "guess"].includes(room.game)
+                          : ["word", "guess", "football"].includes(room.game)
                             ? m.attempts
                             : p.total
                               ? `/ ${p.total}`
@@ -567,6 +571,7 @@ export function LiveRoom({ locale, code }: { locale: Locale; code: string }) {
                           </select>
                         </label>
                       )}
+                    {room.you === 0 && room.game === "quiz" && <label className="live-setting">{kt(locale).choose}<select value={room.category} disabled={busy} onChange={e=>void action("configure",{category:e.target.value})}><option value="all">{kt(locale).all}</option>{quizTopics.map(topic=><option key={topic.id} value={topic.id}>{topic.title[locale]}</option>)}</select></label>}
                     {room.game === "guess" && (
                       <>
                         <p>{m.secretHelp}</p>
@@ -726,6 +731,7 @@ export function LiveRoom({ locale, code }: { locale: Locale; code: string }) {
                     </button>
                   }
                   shareLines={liveShareLines(room, locale, title)}
+                  revealContent={room.footballAnswer ? <div className="football-reveal"><Goal size={27}/><strong>{room.footballAnswer}</strong><details><summary>{kt(locale).source}</summary><ul>{room.footballSources?.map((source,i)=><li key={source}><a href={source} target="_blank" rel="noopener noreferrer">{kt(locale).source} {i+1} · {new URL(source).hostname}</a></li>)}</ul></details></div> : room.quizAnswers ? <details className="knowledge-duel-answers"><summary>{kt(locale).solution}</summary><dl>{room.quizAnswers.map((item,i)=><div key={i}><dt>{item.prompt}</dt><dd>{item.answer}</dd></div>)}</dl></details> : undefined}
                   comparisonContent={
                     <>
                       <h3>
@@ -783,7 +789,7 @@ function liveShareLines(room: LiveView, locale: Locale, title: string) {
           ? `${gameStatisticsCopy(locale).gap}: ${p.distance ?? "—"}`
           : room.game === "2048"
             ? `${m.score}: ${p.score}`
-            : ["word", "guess"].includes(room.game)
+            : ["word", "guess", "football"].includes(room.game)
               ? `${m.attempts}: ${p.progress}`
               : `${m.progress}: ${p.progress}/${p.total}`;
       lines.push(
@@ -867,7 +873,7 @@ function LiveComparison({ room, locale }: { room: LiveView; locale: Locale }) {
           <span>
             {m.time}: {p.duration === null ? "—" : clockText(p.duration)}
           </span>
-          {["word", "guess"].includes(room.game) ? (
+          {["word", "guess", "football"].includes(room.game) ? (
             <span>
               {m.attempts}: {p.progress}
             </span>

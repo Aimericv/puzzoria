@@ -12,7 +12,7 @@ export const hasDaily = (game: GameId) =>
 // Keep already published puzzles accessible by their historical URLs.
 export const DAILY_REMOVED_FROM = "2026-10-05";
 export const historicalDailyAvailable = (game: GameId, date: string) =>
-  hasDaily(game) || date < DAILY_REMOVED_FROM;
+  game !== "quiz" && game !== "football" && (hasDaily(game) || date < DAILY_REMOVED_FROM);
 
 const goals: Record<Locale, Record<(typeof dailyGameIds)[number], string>> = {
   fr: {

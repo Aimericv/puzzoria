@@ -44,7 +44,7 @@ test("home, locale navigation and responsive layout", async ({
 }, testInfo) => {
   await page.goto("/fr", { waitUntil: "networkidle" });
   await expect(page.locator("html")).toHaveAttribute("lang", "fr");
-  await expect(page.locator(".game-card")).toHaveCount(9);
+  await expect(page.locator(".game-card")).toHaveCount(11);
   await expect(
     page
       .locator(".game-card")

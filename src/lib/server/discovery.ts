@@ -17,6 +17,7 @@ export async function discoverRun(
   rateLimit(`discovery:${who.owner}`, 120, 60000);
   const challenge = JSON.parse(run.challenge_json) as Challenge;
   if (
+    challenge.kind === "quiz" || challenge.kind === "football" ||
     challenge.kind === "ranking" ||
     challenge.kind === "rather" ||
     challenge.kind === "guess"

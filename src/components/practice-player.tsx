@@ -1,6 +1,8 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Difficulty, GameId, Locale, PublicChallenge } from "@/lib/types";
+import { quizTopics, validQuizTopic } from "@/lib/knowledge-catalog";
+import { kt } from "@/lib/knowledge-i18n";
 import { rt } from "@/lib/retention-i18n";
 import { postJson, rememberRun } from "@/lib/play-client";
 import { readLocal, writeLocal } from "@/lib/browser-storage";
@@ -27,11 +29,13 @@ export function PracticePlayer({
   locale,
   difficulty,
   preview,
+  quizCategory,
 }: {
   game: GameId;
   locale: Locale;
   difficulty: Difficulty;
   preview?: PublicChallenge;
+  quizCategory?: string;
 }) {
   const account = useAccount(),
     [challenge, setChallenge] = useState<PublicChallenge | null>(null),
@@ -43,18 +47,19 @@ export function PracticePlayer({
     progress = useRef({ offset: 0, count: 0 }),
     [ratherOffset, setRatherOffset] = useState(0);
   const {
-    value: category,
+    value: selectedCategory,
     setValue: setCategory,
     ready: categoryReady,
   } = useStoredState<string>(
     `dailygrid:preferences:category:${game}`,
     "all",
     (v): v is string =>
-      game === "ranking" || game === "rather"
+      game === "quiz" ? validQuizTopic(v) : game === "ranking" || game === "rather"
         ? validSocialCategory(v, game)
         : v === "all",
   );
-  const key = `dailygrid:practice:${game}:${locale}:${difficulty}${game === "ranking" || game === "rather" ? ":" + category : ""}`;
+  const category = quizCategory ?? selectedCategory;
+  const key = `dailygrid:practice:${game}:${locale}:${difficulty}${game === "ranking" || game === "rather" || game === "quiz" ? ":" + category : ""}`;
   const load = useCallback(
     async (fresh = false, continuation = false, answered?: number) => {
       if (fresh) preserveReplaySpace();
@@ -98,6 +103,8 @@ export function PracticePlayer({
                   ? Number(answered)
                   : progress.current.count)
               : 0;
+          let previousRunId: string | undefined;
+          if (fresh && (game === "quiz" || game === "football")) {try {previousRunId=JSON.parse(readLocal(key) ?? "null")?.runId;}catch { /* An unreadable cache cannot prevent a fresh game. */ }}
           return {
             ...((await postJson("/api/play", {
               action: "new",
@@ -106,6 +113,7 @@ export function PracticePlayer({
               locale,
               difficulty,
               category,
+              previousRunId,
             })) as unknown as Practice),
             offset,
           };
@@ -170,6 +178,7 @@ export function PracticePlayer({
     );
   return (
     <div aria-busy={busy}>
+      {game === "quiz" && !quizCategory && <label className="practice-category">{kt(locale).choose}<select value={category} onChange={e=>setCategory(e.target.value)} disabled={busy || !categoryReady || !account.ready}><option value="all">{kt(locale).all}</option>{quizTopics.map(topic=><option key={topic.id} value={topic.id}>{topic.title[locale]}</option>)}</select></label>}
       {(game === "ranking" || game === "rather") && (
         <label className="practice-category">
           {st(locale).category}

@@ -1,6 +1,6 @@
 import type { GameId, Locale } from "./types";
-export const hasWinRate = (game: GameId) => ["word", "rareword", "mines", "guess", "math"].includes(game);
-export const hasTimeComparison = (game: GameId) => !["ranking", "rather", "2048", "guess"].includes(game);
+export const hasWinRate = (game: GameId) => ["word", "rareword", "mines", "guess", "math", "football"].includes(game);
+export const hasTimeComparison = (game: GameId) => !["ranking", "rather", "2048", "guess", "quiz"].includes(game);
 export const resultCopy = (locale: Locale) => ({
   fr: {start:"Commencer", ready:"Appuie sur Commencer pour révéler la grille et lancer le chrono.", completed:"Grilles terminées", best:"Meilleur temps", exact:"Cibles atteintes exactement", exactPersonal:"Tes parties avec cible exacte", exactCommunity:"Autres joueurs avec cible exacte", exactTime:"Temps moyen · cible exacte", operations:"Opérations utilisées", choices:"Choix enregistrés", wordPractice:"Jouer au Wordle illimité", rareDone:"Un seul mot insolite par jour. Reviens demain pour une nouvelle découverte."},
   en: {start:"Start", ready:"Press Start to reveal the grid and start the timer.", completed:"Completed grids", best:"Best time", exact:"Exact targets reached", exactPersonal:"Your games with an exact target", exactCommunity:"Other players reaching the exact target", exactTime:"Mean time · exact target", operations:"Operations used", choices:"Recorded choices", wordPractice:"Play unlimited Wordle", rareDone:"One unusual word a day. Come back tomorrow for a new discovery."},

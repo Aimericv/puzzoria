@@ -28,7 +28,7 @@ test("all result screens share the same actions, preserve boards and replay a fr
     await panel.locator(".share-button").click();
     const shared = await page.locator("html").getAttribute("data-preview-share");
     expect(shared).toContain(devPreviewCopy("fr").local);
-    expect(shared).toContain(["ranking","rather","guess"].includes(game) ? gamePath("fr",game) : `/play/${game}?`);
+    expect(shared).toContain(["ranking","rather","guess","quiz","football"].includes(game) ? gamePath("fr",game) : `/play/${game}?`);
     await expect(panel.locator(".share-button")).toBeEnabled();
     if (["ranking","rather"].includes(game)) await expect(page.locator("[data-finished-board]")).toBeVisible();
     if (game === "guess") await expect(page.locator(".number-arena")).toBeVisible();

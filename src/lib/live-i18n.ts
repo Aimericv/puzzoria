@@ -54,6 +54,8 @@ const en = {
   secretHelp:
     "Choose your secret number before marking yourself ready. Both players search at the same time.",
   rules: {
+    quiz: "Same timed quiz · most correct answers wins, then time. The countdown starts together.",
+    football: "Same career · six guesses · fewest guesses wins, then time · 10-minute limit.",
     word: "Same new word · fewest attempts wins · time breaks ties · 10-minute limit.",
     sudoku: "Same new grid · first correct completion wins · 30-minute limit.",
     math: "Same numbers and target · one submitted expression each · closest answer wins, then time · 10-minute limit.",
@@ -127,6 +129,8 @@ const fr: Copy = {
   secretHelp:
     "Choisis ton nombre secret avant de te déclarer prêt. Vous cherchez tous les deux en même temps.",
   rules: {
+    quiz: "Même quiz chronométré · le plus de bonnes réponses gagne, puis le temps départage. Départ simultané.",
+    football: "Même parcours · six essais · le moins d’essais gagne, puis le temps · limite de 10 minutes.",
     word: "Même nouveau mot · le moins d’essais gagne · le temps départage les égalités · limite de 10 minutes.",
     sudoku:
       "Même nouvelle grille · le premier à la terminer correctement gagne · limite de 30 minutes.",
@@ -200,6 +204,8 @@ const es: Copy = {
   secretHelp:
     "Elige tu número secreto antes de marcarte listo. Ambos buscan al mismo tiempo.",
   rules: {
+    quiz: "Mismo quiz con tiempo · gana quien acierte más, después decide el tiempo. Inicio simultáneo.",
+    football: "Misma carrera · seis intentos · gana quien use menos intentos, después el tiempo · límite de 10 minutos.",
     word: "Misma palabra nueva · gana quien use menos intentos · desempata el tiempo · límite de 10 minutos.",
     sudoku:
       "Misma cuadrícula nueva · gana quien la complete correctamente primero · límite de 30 minutos.",
@@ -274,6 +280,8 @@ const de: Copy = {
   secretHelp:
     "Wähle deine Geheimzahl, bevor du dich bereit meldest. Beide suchen gleichzeitig.",
   rules: {
+    quiz: "Gleiches Zeitquiz · mehr richtige Antworten gewinnen, danach die Zeit. Gemeinsamer Start.",
+    football: "Gleiche Karriere · sechs Versuche · weniger Versuche gewinnen, dann die Zeit · 10 Minuten Zeitlimit.",
     word: "Dasselbe neue Wort · weniger Versuche gewinnen · bei Gleichstand entscheidet die Zeit · 10 Minuten Zeitlimit.",
     sudoku:
       "Dasselbe neue Raster · wer es zuerst richtig löst, gewinnt · 30 Minuten Zeitlimit.",

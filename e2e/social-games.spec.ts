@@ -683,7 +683,7 @@ test("new SEO pages work without JavaScript in all locales, rooms remain noindex
   }
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/fr");
-  await expect(page.locator(".game-card")).toHaveCount(9);
+  await expect(page.locator(".game-card")).toHaveCount(11);
   await page
     .locator(".game-cards")
     .screenshot({ path: "test-results/social-home-320.png" });

@@ -1,3 +1,4 @@
+import { generateKnowledge } from "./server/knowledge-content";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type {
@@ -24,7 +25,7 @@ import { generateSocial } from "./social-data";
 import { rareWordFor, rareEntry, RARE_WORD_FROM } from "./rare-word";
 export const NEW_GAMES_FROM = "2026-10-03";
 export const gameAvailable = (game: GameId, date: string) =>
-  game === "rareword" ? date >= RARE_WORD_FROM : !["2048", "mines", "wordsearch", "ranking", "guess", "rather"].includes(
+  game === "quiz" || game === "football" ? date >= "2026-11-01" : game === "rareword" ? date >= RARE_WORD_FROM : !["2048", "mines", "wordsearch", "ranking", "guess", "rather"].includes(
     game,
   ) || date >= NEW_GAMES_FROM;
 export const ENGAGEMENT_CONTENT_FROM = "2026-10-04";
@@ -37,6 +38,10 @@ export function generateChallenge(
   category?: string,
 ): Challenge {
   if (!validDate(date)) throw new Error("Invalid date");
+  if (game === "quiz" || game === "football") {
+    if (!practiceSeed) throw new Error("Knowledge games are Practice-only");
+    return generateKnowledge(game, locale, date, practiceSeed, category);
+  }
   if (game === "ranking" || game === "rather" || game === "guess")
     return generateSocial(
       game,
@@ -128,7 +133,11 @@ export function generateChallenge(
 export function validateChallenge(challenge: Challenge): void {
   if (!validDate(challenge.date) || !challenge.id)
     throw new Error("Invalid challenge metadata");
-  if (challenge.kind === "ranking") {
+  if (challenge.kind === "quiz") {
+    if (challenge.items.length < 5 || challenge.items.length > 100 || new Set(challenge.items.map(i=>i.id)).size !== challenge.items.length || !Number.isInteger(challenge.seconds) || challenge.seconds < 30 || challenge.seconds > 600 || challenge.items.some(i=>!i.answer || !i.prompt || !i.aliases.length)) throw new Error("Invalid quiz");
+  } else if (challenge.kind === "football") {
+    if (!challenge.answer || challenge.clubs.length < 2 || challenge.attempts !== 6 || !challenge.sources.length) throw new Error("Invalid football career");
+  } else if (challenge.kind === "ranking") {
     if (
       challenge.items.length !== 5 ||
       new Set(challenge.items.map((i) => i.id)).size !== 5
@@ -249,6 +258,12 @@ export async function getChallenge(
   return generateChallenge(game, locale, date, difficulty);
 }
 export function publicChallenge(c: Challenge): PublicChallenge {
+  if (c.kind === "quiz") return {...c, items:c.items.map(({id,prompt})=>({id,prompt}))};
+  if (c.kind === "football") {
+    const {answer,aliases,sources,...publicData}=c;
+    void answer; void aliases; void sources;
+    return publicData;
+  }
   if (c.kind === "ranking") return { ...c, items: c.items.slice(0, 1) };
   if (c.kind === "rather") return c;
   if (c.kind === "guess") {

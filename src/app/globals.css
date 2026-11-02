@@ -11,6 +11,99 @@
   --font: "DM Sans", system-ui, sans-serif;
   --heading: "Manrope", system-ui, sans-serif;
 }
+.quiz { --game-color: #965235; }
+.football { --game-color: #14735c; }
+.quiz .game-preview, .game-heading.quiz .game-heading-icon, .mini-game-icon.quiz { background: #fff0e6; color: #874329; }
+.football .game-preview, .game-heading.football .game-heading-icon, .mini-game-icon.football { background: #e8f5ee; color: #14735c; }
+.quiz .category, .quiz .card-play { color: #874329; }
+.football .category, .football .card-play { color: #14735c; }
+.knowledge-card-preview { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.knowledge-card-preview strong { font-size: 1.4rem; }
+.knowledge-card-preview > span { padding: 6px 10px; border: 1px solid currentColor; border-radius: 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.knowledge-game { max-width: 760px; width: 100%; margin: 0 auto; --knowledge-accent: #965235; }
+.knowledge-football { --knowledge-accent: #14735c; }
+.knowledge-heading { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; text-align: left; }
+.knowledge-heading h2 { margin: 3px 0 0; font-family: var(--heading); font-size: clamp(1.15rem, 2.5vw, 1.65rem); line-height: 1.35; overflow-wrap: anywhere; }
+.knowledge-heading small { color: var(--muted); font-weight: 650; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+.knowledge-mark { flex: 0 0 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 16px; color: var(--knowledge-accent); }
+.knowledge-start { padding: 28px 22px; border: 1px dashed #cbd3df; border-radius: 18px; background: var(--bg); text-align: center; }
+.knowledge-start > p { max-width: 420px; margin: 0 auto 22px; color: var(--muted); line-height: 1.65; }
+.knowledge-start .primary-button { min-height: 48px; }
+.knowledge-format { display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: wrap; }
+.knowledge-format strong { color: var(--ink); }
+.knowledge-scoreboard { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 18px 22px; background: var(--bg); border: 1px solid var(--line); border-radius: 16px; margin-bottom: 14px; text-align: left; }
+.knowledge-scoreboard > div:last-child { text-align: right; }
+.knowledge-scoreboard span { display: block; color: var(--muted); font-size: .79rem; }
+.knowledge-scoreboard strong { display: flex; gap: 7px; align-items: baseline; font-size: 2rem; font-variant-numeric: tabular-nums; margin-top: 3px; }
+.knowledge-scoreboard > div:last-child strong { justify-content: flex-end; }
+.knowledge-scoreboard strong small { font-size: 1rem; color: var(--muted); font-weight: 550; }
+.knowledge-scoreboard .urgent strong { color: #bd3429; }
+.knowledge-progress { height: 7px; background: var(--line); border-radius: 10px; overflow: hidden; margin: 8px 0 22px; }
+.knowledge-progress > span { display: block; height: 100%; background: var(--knowledge-accent); border-radius: inherit; transition: width .25s ease; }
+.knowledge-answer-form { position: sticky; top: 12px; z-index: 4; background: var(--surface); padding: 12px 0 1px; border-bottom: 1px solid var(--line); text-align: left; margin: 22px 0 8px; }
+.knowledge-form-clock { float: right; display: flex; align-items: center; gap: 5px; font-size: .85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.knowledge-form-clock.urgent { color: #bd3429; }
+.knowledge-answer-form label { display: block; font-size: .88rem; font-weight: 700; margin-bottom: 8px; }
+.knowledge-answer-form > div { display: flex; gap: 9px; }
+.knowledge-answer-form input { flex: 1; min-width: 0; width: 100%; border: 1px solid #b4becf; border-radius: 12px; background: var(--surface); color: var(--ink); padding: 12px 14px; font-size: 16px; min-height: 48px; }
+.knowledge-answer-form input:focus-visible { outline: 3px solid #d7e3ff; border-color: var(--blue); outline-offset: 1px; }
+.knowledge-answer-form button { flex-shrink: 0; min-height: 48px; }
+.knowledge-feedback { min-height: 24px; margin: 7px 0; font-size: .84rem; color: var(--muted); }
+.knowledge-feedback.correct { color: #14735c; }
+.knowledge-answer-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+.knowledge-answer-row { display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); text-align: left; font-size: .83rem; overflow-wrap: anywhere; transition: background .2s ease, border-color .2s ease; }
+.knowledge-clue { color: var(--muted); flex: 1; min-width: 0; }
+.knowledge-clue img { object-fit: contain; object-position: left; max-width: 100%; }
+.knowledge-answer-row > span:nth-child(2) { flex: 1; min-width: 0; font-weight: 700; }
+.knowledge-answer-row.found { background: #eef8f2; border-color: #b9dccc; }
+.knowledge-answer-row.found > svg { color: #14735c; flex-shrink: 0; }
+.knowledge-answer-row.missed { background: #fff4ed; border-color: #ecd5c5; }
+.knowledge-give-up { border: 0; background: none; text-decoration: underline; color: var(--muted); font-size: .83rem; margin: 18px 0 2px; padding: 9px; min-height: 44px; }
+.knowledge-give-up:hover { color: var(--ink); }
+.knowledge-help { color: var(--muted); font-size: .78rem; line-height: 1.65; margin: 18px auto 10px; }
+.football-timeline { padding: 0; margin: 24px 0; list-style: none; text-align: left; }
+.football-timeline li { display: flex; gap: 15px; align-items: flex-start; min-height: 69px; position: relative; }
+.football-timeline li:not(:last-child)::before { content: ""; position: absolute; top: 33px; bottom: -3px; left: 16px; width: 2px; background: #d4e4dd; }
+.football-stop { width: 34px; height: 34px; display: grid; place-items: center; background: #e8f5ee; border: 1px solid #bedbcf; border-radius: 50%; font-size: .8rem; font-weight: 750; color: #14735c; flex-shrink: 0; }
+.football-timeline li > div { padding: 2px 0 17px; min-width: 0; }
+.football-timeline strong { display: block; font-size: 1rem; overflow-wrap: anywhere; }
+.football-timeline div > span { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--muted); margin-top: 3px; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.football-timeline small { padding: 1px 6px; border: 1px solid var(--line); border-radius: 5px; font-size: .68rem; }
+.football-guesses { display: flex; flex-wrap: wrap; padding: 0; margin: 18px 0; gap: 8px; list-style: none; }
+.football-guesses li { padding: 7px 11px; font-size: .83rem; background: #f3f4f7; border: 1px solid var(--line); border-radius: 8px; overflow-wrap: anywhere; }
+.football-guesses li.correct { background: #e8f5ee; color: #14735c; }
+.football-reveal { padding: 22px; background: #edf7f1; border: 1px solid #bedbcf; border-radius: 16px; margin-top: 20px; display: flex; align-items: center; flex-direction: column; gap: 12px; color: #14735c; }
+.football-reveal > strong { font-size: 1.5rem; }
+.football-reveal details { font-size: .82rem; max-width: 100%; overflow-wrap: anywhere; }
+.football-reveal ul { text-align: left; padding-left: 20px; line-height: 1.8; }
+.quiz-topics { margin: 34px 0; }
+.quiz-topics h2 { font-size: 1.35rem; margin-bottom: 18px; }
+.quiz-topic-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.quiz-topic-card { display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; text-decoration: none; color: var(--ink); transition: border-color .15s, transform .15s; }
+.quiz-topic-card:hover, .quiz-topic-card.selected { border-color: #b7795b; }
+.quiz-topic-card:hover { transform: translateY(-2px); }
+.quiz-topic-emoji { font-size: 1.9rem; flex-shrink: 0; }
+.quiz-topic-card > span:last-child { min-width: 0; }
+.quiz-topic-card small { display: block; color: var(--muted); font-size: .73rem; margin-bottom: 5px; }
+.quiz-topic-card strong { display: block; font-size: 1rem; line-height: 1.35; overflow-wrap: anywhere; }
+.quiz-topic-card span span { display: block; font-size: .75rem; color: var(--muted); margin-top: 7px; }
+@media (max-width: 600px) {
+  .quiz-topic-grid { grid-template-columns: 1fr; }
+  .knowledge-heading { gap: 10px; margin-bottom: 18px; }
+  .knowledge-mark { flex-basis: 43px; height: 43px; border-radius: 12px; }
+  .knowledge-answer-grid { grid-template-columns: 1fr; }
+  .knowledge-scoreboard { padding: 14px; }
+  .knowledge-scoreboard strong { font-size: 1.65rem; }
+  .knowledge-answer-form > div { flex-wrap: wrap; }
+  .knowledge-answer-form input { flex-basis: 180px; }
+  .knowledge-answer-form button { flex: 1; }
+  .knowledge-answer-row { min-height: 53px; }
+  .quiz-topic-card { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .knowledge-progress > span, .knowledge-answer-row, .quiz-topic-card { transition: none; }
+  .quiz-topic-card:hover { transform: none; }
+}
 .tiles, .game-heading.\32 048, .mini-game-icon.\32 048 { --game-color: #a96620; }
 .mines { --game-color: #426f82; }
 .wordsearch { --game-color: #8055ac; }
@@ -2930,3 +3023,15 @@ tr:last-child td {
 .live-room .result-insights:has(> :only-child) { grid-template-columns:1fr; }
 .live-room .live-result-surface { margin-top:1.3rem; }
 .live-room .live-result-surface .completion-panel { border-top:0; margin-top:0; }
+
+.knowledge-duel-answers { margin-top: 18px; }
+.knowledge-duel-answers summary { cursor: pointer; font-weight: 700; }
+.knowledge-duel-answers dl { display: grid; gap: 8px; }
+.knowledge-duel-answers dl > div { display: flex; gap: 16px; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.knowledge-duel-answers dd { margin: 0; font-weight: 700; text-align: right; }
+
+.football-name-toggle { display: block; margin: 22px 0 0; padding: 8px 0; min-height: 44px; border: 0; background: none; color: var(--knowledge-accent); font-size: .82rem; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.football-timeline .football-club-spell { display: flex; align-items: center; gap: 18px; min-height: 90px; padding: 0 0 18px; }
+.football-club-badge { width: 72px; height: 72px; flex-shrink: 0; object-fit: contain; padding: 4px; background: white; border: 1px solid var(--line); border-radius: 12px; }
+.football-timeline strong.football-club-name-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media(max-width: 600px) { .football-timeline .football-club-spell { gap: 12px; } .football-club-badge { width: 64px; height: 64px; } }

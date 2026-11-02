@@ -208,7 +208,7 @@ describe("structured data", () => {
     ]);
     expect(jsonLd(graph)).not.toMatch(/aggregateRating|Review|FAQPage/);
   });
-  it("identifies nine games with Word variants in one catalogue entry", () => {
+  it("identifies eleven games with Word variants in one catalogue entry", () => {
     const graph = homeStructuredData("es")["@graph"];
     expect(graph[0].inLanguage).toEqual(["en", "fr", "es", "de"]);
     expect(
@@ -223,6 +223,8 @@ describe("structured data", () => {
       `${siteOrigin}/es/ranking-a-ciegas`,
       `${siteOrigin}/es/adivina-el-numero`,
       `${siteOrigin}/es/que-prefieres`,
+      `${siteOrigin}/es/quiz`,
+      `${siteOrigin}/es/adivina-el-futbolista`,
     ]);
   });
 });
