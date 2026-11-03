@@ -1,33 +1,33 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 238,
+  "generation": 239,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
   "codeSha": "0ecade23b7317f9389e86f98f0c4328e82e9c227",
   "checkpoint": {
-    "artifactId": 13157062451,
-    "runId": "41475188162",
-    "name": "puzzoria-agent-auth-41475188162-35",
-    "generation": 35,
+    "artifactId": 13237931420,
+    "runId": "41651167373",
+    "name": "puzzoria-agent-auth-41651167373-36",
+    "generation": 36,
     "context": {
       "repository": "Aimericv/puzzoria",
-      "runId": "41475188162",
+      "runId": "41651167373",
       "phase": "autonomous-agent",
-      "generation": 35
+      "generation": 36
     },
-    "expiresAt": "2027-01-31T15:48:18Z",
-    "digest": "073c219b3937786b3d5c797ebaf7a8f7167326c15ae84a5443ff0e2957fcf61d"
+    "expiresAt": "2027-02-01T14:11:00Z",
+    "digest": "cfc295bcf172043686102d57ad32386dec3bda0120ac4f69e6f944818c13248f"
   },
   "lastMessageId": 6581621596,
   "completedSessions": 31,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
-    "id": "41475188162",
-    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41475188162"
+    "id": "41651167373",
+    "url": "https://github.com/Aimericv/puzzoria/actions/runs/41651167373"
   },
   "memory": {
     "STATE.md": "# État — 2 novembre 2026, session 15:50 UTC\n\nBase exportée 0a446ce01c67f43dc272fc40f5b1176aadd1bea9. AGENTS.md, mandat, inbox vide, quatre mémoires et cinq rapports readonly lus ; sorties volumineuses initialement tronquées puis champs utiles extraits. Budget novembre : plafond 1700, charged 311, reserved 41. Aucun réseau externe, Git, achat, merge ou déploiement ; aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Guide Next Link installé consulté.\n\nMission héritée réévaluée : audit du parcours Word → autre jeu. CompletionPanel propose déjà les actions avant statistiques ; OtherGameLink recommande Sudoku en premier après Word si son Daily n’est pas terminé, conserve langue/mode et exclut la famille Word. Le filtre Daily ne décrit pas les jeux Practice déjà essayés : piste, pas friction établie. Aucun ajout de CTA ou changement de recommandation justifié par les données actuelles. Contribution documentaire : docs/POST-WORD-DISCOVERY-AUDIT.fr.md. Pas de changement de logique produit.\n\nVérification locale : npm test -- --configLoader=runner tests/daily.test.ts, sortie 0, 14 tests passent dans un fichier. Vérifie les helpers Daily, pas le rendu/navigation du bouton. Aucun lint/typecheck, suite complète, E2E, build ou content:validate pour cette contribution documentaire ; contrôles indépendants au superviseur.\n\nObservation c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f à 2026-11-02T15:50:31.446Z : lastFailure/unverifiedWork null. Word/vocabulaire déployés ensemble le 27 octobre, fenêtres encore immatures ; Sudoku/Démineur merged sans déploiement confirmé. Critères historiques inchangés.\n\nAnalytics available collecté à 15:50:26.249Z : trente jours UTC 4 octobre–2 novembre, jour courant partiel, six identités compte/appareil, vingt départs/dix-huit fins ; Word dix-huit/dix-sept. Mesure facultative : trois sessions, deux visiteurs, zéro transition et next_game_click, un play_again. Aucun funnel séquentiel ou diagnostic d’abandon établi. Google available à 15:50:28.059Z : 180 impressions/six clics, 3 octobre–1er novembre demandé, dernière date 31 octobre Pacific. Lignes partielles non joignables aux joueurs. Trends quatre RSS available, TikTok unavailable ; aucune demande spécifique de recommandation démontrée.\n\nRecherche post-word-discovery-audit arrêtée ; aucun gain direct attendu ni revendiqué. Suite choisie : Examiner la découvrabilité organique des nouveaux Quiz et Football présents dans la base : liens catalogue, sujets stables traduits, contenu visible et canoniques. Établir une lacune concrète avant intervention ; ne pas recréer les jeux ni modifier corpus non sourcé, preuves serveur ou collecte. Attendre les fenêtres SEO complètes. Nonce conservé. Capitales suspendues. Le catalogue a maintenant Quiz/Football ; ancienne consigne de ne pas dupliquer leur développement reste respectée.\n",
