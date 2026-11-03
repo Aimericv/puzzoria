@@ -2,11 +2,14 @@ import { quizTopics, quizTopicPath } from "./knowledge-catalog";
 import { slugs } from "./i18n";
 import type { GameId, Locale } from "./types";
 import { articleSection } from "./word-article-path";
+import { resolveQuizTheme, quizThemePath } from "./quiz-themes";
 
 export function localizedPath(pathname: string, current: Locale, next: Locale) {
   const parts = pathname.split("/");
   if (parts[2] === articleSection[current]) return `/${next}/${slugs[next].rareword}`;
   if (parts[2] === "quiz" && parts[3]) {
+    const theme=resolveQuizTheme(current,parts.slice(2));
+    if(theme)return quizThemePath(next,theme);
     const topic=quizTopics.find(t=>t.slug[current]===parts[3]);
     if (topic) return quizTopicPath(next,topic);
   }

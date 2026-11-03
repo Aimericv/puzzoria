@@ -1,5 +1,7 @@
 # Acquisition par les quiz — première sélection, 3 novembre 2026
 
+Suite autorisée après l’analyse concurrentielle : [pages thématiques, maillage éditorial et premiers enrichissements](QUIZ-THEMES.fr.md). Le rapport ajoute les URL thématiques sans changer les 96 lignes de sujets ni les définitions de nouveaux joueurs.
+
 ## Décision et limites des données
 
 Livrer **16 nouveaux quiz jouables**, soit **64 pages localisées** EN/FR/ES/DE, plutôt qu'une série de pages sans jeu. Le catalogue passe de huit à vingt-quatre sujets. Les 635 nouvelles réponses sont vérifiées séparément de leurs variantes linguistiques et restent privées côté serveur.

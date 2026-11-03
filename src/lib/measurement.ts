@@ -2,6 +2,7 @@ import { slugs } from "./i18n";
 import { isLocale, type GameId, type Locale, type PlayMode } from "./types";
 import { hasDaily } from "./game-modes";
 import { quizTopics, quizTopicPath } from "./knowledge-catalog";
+import { resolveQuizTheme, quizThemePath } from "./quiz-themes";
 
 export const measurementEvents = ["page_view", "active_time", "game_view", "game_abandon", "next_game_click", "share", "friend_invite", "play_again", "account_prompt_view", "account_prompt_dismiss", "account_prompt_never_show", "signup_start", "signup_complete", "login", "local_data_migrated", "stats_view", "leaderboard_view", "locale", "client_error", "ad_opportunity", "ad_request", "ad_render", "ad_viewable", "video_offer", "video_accept", "video_start", "video_complete"] as const;
 export type MeasurementName = typeof measurementEvents[number];
@@ -11,6 +12,8 @@ export type PageContext = { page: string; locale: Locale; game?: GameId; mode?: 
 export function measurementPage(path: string): PageContext | null {
   const parts = path.split("?")[0].split("/").filter(Boolean), locale = parts[0];
   if (!isLocale(locale) || parts[1] === "admin") return null;
+  const theme=resolveQuizTheme(locale,parts.slice(1));
+  if(theme)return {page:quizThemePath(locale,theme),locale};
   const game = (Object.keys(slugs[locale]) as GameId[]).find(g => slugs[locale][g] === parts[1]);
   if(game==="quiz"&&parts.length===3){const topic=quizTopics.find(t=>t.slug[locale]===parts[2]);if(topic)return {page:quizTopicPath(locale,topic),locale,game,mode:"practice"};}
   if (game) return { page: `/${locale}/${slugs[locale][game]}${parts.includes("practice") ? "/practice" : parts.some(p => /^\d{4}-\d{2}-\d{2}$/.test(p)) ? "/archive" : ""}`, locale, game, mode: parts.includes("practice") ? "practice" : parts.some(p => /^\d{4}-\d{2}-\d{2}$/.test(p)) ? "archive" : hasDaily(game) ? "daily" : "practice" };
