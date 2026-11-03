@@ -86,7 +86,7 @@ it("preserves first-match and duplicate semantics for saved legacy answer aliase
 });
 it("joins trusted page-level Google and playing exports without treating missing top-100 rows as zero or exposing queries",()=>{
  const google={status:"available",timezone:"America/Los_Angeles",breakdowns:{period:{startDate:"2026-10-01",endDate:"2026-10-30"},exhaustive:false,page:{rows:[{key:"https://puzzoria.com/fr/quiz/pays-du-monde",clicks:4,impressions:120,position:14}]},query:{rows:[{key:"PRIVATE QUERY"}]}}};
- const analytics={schema:"puzzoria.analytics",timezone:"UTC",report:{product:{quizTopics:quizAnalytics({days:30},now)}}};
+ const analytics={schema:"puzzoria.analytics",timezone:"UTC",period:{from:date,to:date,privateField:"PRIVATE QUERY"},report:{product:{quizTopics:quizAnalytics({days:30},now)}}};
  const r=quizAcquisitionReport(google,analytics);
  expect(r.rows.find(p=>p.topic==="countries-world"&&p.locale==="fr")?.google).toEqual({clicks:4,impressions:120,position:14,rowReturned:true});
  expect(r.rows.find(p=>p.topic==="countries-africa"&&p.locale==="fr")?.google).toEqual({clicks:null,impressions:null,position:null,rowReturned:false});
