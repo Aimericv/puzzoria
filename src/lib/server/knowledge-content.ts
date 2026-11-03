@@ -1,6 +1,6 @@
 import { quizTopics, quizTopic, languages as l, type Localized } from "../knowledge-catalog";
 import { footballDailyPlayersV1 } from "./football-daily-content";
-import expandedContents from "./data/quiz-expansion.v1.json";
+import expandedContents from "./data/quiz-expansion.v1.json" with { type: "json" };
 import { seededRandom, shuffled } from "../random";
 import type { ClubSpell, KnowledgeChallenge, QuizItem } from "../knowledge-types";
 import { normalizeAnswer } from "../knowledge-types";

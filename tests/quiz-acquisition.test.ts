@@ -17,7 +17,7 @@ import {createRun,beginRun,ownedRun,submitRun,getRun} from "../src/lib/server/pl
 import {quizAnalytics} from "../src/lib/server/quiz-analytics";
 import {collectMeasurement,recordMeasuredRun,MEASUREMENT_COOKIE} from "../src/lib/server/measurement";
 import {digest,json} from "../src/lib/server/http";
-import data from "../src/lib/server/data/quiz-expansion.v1.json";
+import data from "../src/lib/server/data/quiz-expansion.v1.json" with { type: "json" };
 import {quizAcquisitionReport} from "../src/lib/quiz-acquisition";
 const date="2026-11-03",now=new Date(date+"T12:00:00Z");
 const who=(id="one")=>({user:null,guestId:id,owner:`g:${id}`});
