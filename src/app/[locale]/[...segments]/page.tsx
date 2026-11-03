@@ -3,6 +3,10 @@ import { quizTopics, quizTopicPath } from "@/lib/knowledge-catalog";
 import { kt } from "@/lib/knowledge-i18n";
 import { quizTopicStructuredData } from "@/lib/knowledge-seo";
 import { QuizTopics } from "@/components/quiz-topics";
+import { QuizThemeNav, QuizThemePage, QuizEditorial } from "@/components/quiz-theme";
+import { resolveQuizTheme } from "@/lib/quiz-themes";
+import { quizThemeMetadata } from "@/lib/knowledge-seo";
+import { quizEditorial } from "@/lib/quiz-editorial";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronLeft, Info, CalendarDays } from "lucide-react";
 import {
@@ -96,8 +100,10 @@ function resolve(
   return { locale, game, date, difficulty, archived, practice, ...(topic ? {quizCategory:topic.id} : {}) };
 }
 export async function generateMetadata({ params }: Props) {
-  const p = await params,
-    r = resolve(p.locale, p.segments);
+  const p = await params;
+  const theme = isLocale(p.locale) ? resolveQuizTheme(p.locale, p.segments) : undefined;
+  if (theme && isLocale(p.locale) && gameAvailable("quiz", utcDay())) return quizThemeMetadata(p.locale, theme);
+  const r = resolve(p.locale, p.segments);
   if (!r) notFound();
   if (r.quizCategory) {
     const topic=quizTopics.find(t=>t.id===r.quizCategory)!;
@@ -145,8 +151,10 @@ export async function generateMetadata({ params }: Props) {
   );
 }
 export default async function GamePage({ params }: Props) {
-  const p = await params,
-    r = resolve(p.locale, p.segments);
+  const p = await params;
+  const theme = isLocale(p.locale) ? resolveQuizTheme(p.locale, p.segments) : undefined;
+  if (theme && isLocale(p.locale) && gameAvailable("quiz", utcDay())) return <QuizThemePage locale={p.locale} theme={theme}/>;
+  const r = resolve(p.locale, p.segments);
   if (!r) notFound();
   const { locale, game, date, difficulty, archived, practice } = r,
     m = t(locale),
@@ -268,6 +276,7 @@ export default async function GamePage({ params }: Props) {
       </p>
       <p className="game-intro">{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.description[locale]+" "+kt(locale).topicIntro.replace("{n}",String(quizTopics.find(t=>t.id===r.quizCategory)!.count)).replace("{seconds}",String(quizTopics.find(t=>t.id===r.quizCategory)!.seconds)) : seoCopy(locale).games[game].intro}</p>
       {r.quizCategory&&quizTopics.find(t=>t.id===r.quizCategory)?.scope&&<p className="quiz-scope" data-quiz-scope>{quizTopics.find(t=>t.id===r.quizCategory)!.scope![locale]}</p>}
+      {(game === "quiz" || game === "football") && <QuizThemeNav locale={locale}/>}
       {((game === "sudoku" && (practice || archived && dailyDifficulties(game, date).length > 1)) || game === "mines" || game === "guess") && (
         <nav className="difficulty-nav" aria-label={m.difficulty}>
           {difficulties.map((d) => (
@@ -369,7 +378,8 @@ export default async function GamePage({ params }: Props) {
         </aside>
       </div>
       {game === "quiz" && <QuizTopics locale={locale} selected={r.quizCategory}/>}
-      <GameGuide locale={locale} game={game} />
+      {r.quizCategory && <QuizEditorial locale={locale} topicId={r.quizCategory}/>}
+      {(!r.quizCategory || !quizEditorial[r.quizCategory]) && <GameGuide locale={locale} game={game} />}
     </>
   );
 }
