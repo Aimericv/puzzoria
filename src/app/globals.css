@@ -23,6 +23,13 @@
 .knowledge-card-preview > span { padding: 6px 10px; border: 1px solid currentColor; border-radius: 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .knowledge-game { max-width: 760px; width: 100%; margin: 0 auto; --knowledge-accent: #965235; }
 .knowledge-football { --knowledge-accent: #14735c; }
+.football-mode { padding: 16px 18px; margin-bottom: 22px; border: 1px solid #bedbcf; border-radius: 14px; background: #edf7f1; text-align: left; }
+.football-mode > strong { display: flex; align-items: center; gap: 8px; color: #14735c; }
+.football-mode > p { margin: 8px 0 0; font-size: .85rem; line-height: 1.6; color: #52617a; }
+.football-daily-clock { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-top: 12px; font-size: .78rem; color: #52617a; }
+.football-daily-clock b { color: #14735c; font-variant-numeric: tabular-nums; }
+.football-new-day { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; font-size: .85rem; }
+.football-new-day a { font-weight: 700; color: #14735c; }
 .knowledge-heading { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; text-align: left; }
 .knowledge-heading h2 { margin: 3px 0 0; font-family: var(--heading); font-size: clamp(1.15rem, 2.5vw, 1.65rem); line-height: 1.35; overflow-wrap: anywhere; }
 .knowledge-heading small { color: var(--muted); font-weight: 650; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }

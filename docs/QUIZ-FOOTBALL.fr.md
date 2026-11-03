@@ -1,6 +1,14 @@
 # Quiz chrono et Devine le footballeur
 
-Les identifiants `quiz` et `football` étendent le catalogue existant. Les deux jeux sont illimités, sans Daily ni archives artificielles. Leurs alias `/practice` gardent le noindex habituel. Ils réutilisent les identités invité/compte, les runs, la synchronisation, les résultats, les événements de mesure existants, le partage texte et `CompletionPanel`. Aucun nouveau schéma de base, consentement, paiement ou service externe n'est ajouté.
+Les identifiants `quiz` et `football` étendent le catalogue existant. Le quiz est uniquement illimité. Sur demande de l'éditeur du 3 novembre 2026, le football propose aussi un **Footballeur du jour**, plus difficile, depuis ses URL principales. L'illimité reste sur `/practice`, avec les vingt joueurs initiaux et les sauvegardes existantes. Ces URL `/practice` gardent le noindex habituel. Les jeux réutilisent les identités invité/compte, les runs, la synchronisation, les résultats, les événements de mesure existants, le partage texte et `CompletionPanel`. Aucun nouveau schéma de base, consentement, paiement ou service externe n'est ajouté.
+
+## Footballeur du jour — 3 novembre 2026
+
+Une sélection privée distincte de seize joueurs retraités moins évidents fournit une carrière commune aux quatre langues. Six essais, début explicite, un seul run/résultat officiel par propriétaire et date UTC : changer de langue ou recharger reprend la même partie. Le joueur et les clubs changent à 00:00 UTC ; l'interface affiche le mode, la difficulté éditoriale et le prochain renouvellement au-dessus du jeu. Une partie terminée reste consultable ; Rejouer ouvre une nouvelle partie illimitée. Les duels restent des parties Practice de la banque initiale.
+
+`src/lib/server/football-daily-content.ts` garde la sélection initiale gelée et une liste de collections avec date d'effet. Pour enrichir le quotidien, ajouter une nouvelle collection datée dans le futur ; ne pas modifier l'ordre, les réponses ou les clubs d'une collection déjà publiée. Chaque cycle est mélangé de façon déterministe, sans répétition avant épuisement des seize joueurs et sans doublon entre deux cycles. L'identifiant `football:DATE:universal` déduplique les langues. Les archives commencent le 3 novembre 2026 ; les anciennes dates restent indisponibles. Les séries, comparaisons et classements quotidiens utilisent le circuit serveur existant et excluent l'illimité, les duels et les fins tardives. Le classement de performance tient compte du nombre d'essais. La cohorte Daily difficile est distincte de `football:retired-v1`.
+
+Les pages principales restent canoniques, indexables et réciproques dans les quatre langues ; leur présentation SEO décrit les deux modes. Le partage du quotidien contient la date et ouvre sa carrière d'archive stable, sans dévoiler le nom. Le partage illimité ouvre `/practice`. Aucun identifiant aléatoire ne crée d'URL indexable.
 
 ## Contenus et acquisition
 

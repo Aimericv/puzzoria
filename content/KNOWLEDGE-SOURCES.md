@@ -25,6 +25,29 @@ Les carrières sont gelées dans les runs déjà créés. Un ajout au deck ne do
 
 ## Blasons des clubs
 
-Les 54 blasons locaux de `public/club-badges` proviennent du dépôt [JoseArroyave/football-logos](https://github.com/JoseArroyave/football-logos), révision `5ab11fed47427b3003f4b276554491fe683387b1`. La notice MIT du dépôt est conservée dans `football-badges.LICENSE.txt` ; les marques des clubs restent à leurs propriétaires. Le manifeste `football-badges.sources.json` précise chaque fichier, sa provenance et son SHA-256 après suppression des métadonnées et contenus SVG actifs/externes. Aucun appel tiers dans le navigateur.
+Les 140 blasons locaux de `public/club-badges` proviennent du dépôt [JoseArroyave/football-logos](https://github.com/JoseArroyave/football-logos), révision `5ab11fed47427b3003f4b276554491fe683387b1`. Les 86 ajouts du 3 novembre accompagnent les parcours quotidiens. La notice MIT du dépôt est conservée dans `football-badges.LICENSE.txt` ; les marques des clubs restent à leurs propriétaires. Le manifeste `football-badges.sources.json` précise chaque fichier, sa provenance et son SHA-256 après suppression des métadonnées et contenus SVG actifs/externes. Aucun appel tiers dans le navigateur.
 
 Ce sont des blasons contemporains d’identification des clubs, pas une reconstitution du blason porté à chaque année du parcours. Emirates Club conserve son nom faute de blason dans cette sélection ; un logo absent ou en erreur affiche aussi le nom. Les noms restent disponibles aux technologies d’assistance, au survol et via un bouton traduit. Aucune réponse, graine ou liste de joueurs n’entre dans le module public des blasons.
+
+## Sélection quotidienne difficile — 3 novembre 2026
+
+Les seize parcours sont privés dans `src/lib/server/football-daily-content.ts`, séparés des vingt joueurs de l'illimité. Les faits de carrière proviennent des profils ci-dessous, consultés le 3 novembre 2026. Les tableaux d'équipes premières ont été relus pour distinguer contrats administratifs, réserves, prêts, retours et apparitions en coupe ; les textes d'articles ne sont pas reproduits. Les dates représentent les périodes jouées, et non toute la durée d'un contrat.
+
+- Javier Saviola : [profil officiel FC Barcelona](https://players.fcbarcelona.com/en/player/809-saviola-javier-pedro-saviola-fernandez), incluant son retour en 2006–2007.
+- Steven Pienaar : [carrière](https://en.wikipedia.org/wiki/Steven_Pienaar), avec les deux prêts à Everton puis les transferts définitifs.
+- Niko Kranjčar : [carrière](https://en.wikipedia.org/wiki/Niko_Kranj%C4%8Dar) et [historique FotMob](https://www.fotmob.com/players/38820/niko-kranjcar), incluant l'apparition au retour à Kyiv en 2015–2016.
+- Kim Källström : [carrière](https://en.wikipedia.org/wiki/Kim_K%C3%A4llstr%C3%B6m), prêt à Arsenal et retour au Spartak inclus.
+- Mathieu Bodmer : [carrière](https://en.wikipedia.org/wiki/Mathieu_Bodmer).
+- Alou Diarra : [carrière](https://en.wikipedia.org/wiki/Alou_Diarra) et [profil Sky Sports](https://www.skysports.com/football/news/2375410/player-profile-alou-diarra). Bayern Munich et Liverpool sont exclus : aucune apparition officielle en équipe première, contrairement aux clubs de ses prêts.
+- Mohamed Sissoko : [carrière](https://en.wikipedia.org/wiki/Mohamed_Sissoko). Auxerre est exclu faute d'apparition en équipe première.
+- Sulley Muntari : [carrière](https://en.wikipedia.org/wiki/Sulley_Muntari), avec retour à l'Inter et distinction du prêt/transfert à Milan.
+- Blerim Džemaili : [carrière](https://en.wikipedia.org/wiki/Blerim_D%C5%BEemaili) et [Bolton : son match de FA Cup](https://www.bwfc.co.uk/news/2020/april/one-game-wonders-blerim-dzemaili). Bolton est inclus malgré zéro match de championnat ; Shenzhen, sans apparition, est exclu.
+- Gelson Fernandes : [carrière](https://en.wikipedia.org/wiki/Gelson_Fernandes).
+- Frédéric Kanouté : [carrière](https://en.wikipedia.org/wiki/Fr%C3%A9d%C3%A9ric_Kanout%C3%A9) et [portrait officiel LALIGA](https://www.laliga.com/en-GB/news/what-became-of-kanoute).
+- Marko Marin : [carrière](https://en.wikipedia.org/wiki/Marko_Marin). La Fiorentina est incluse pour ses matchs européens, malgré zéro match de Serie A ; les réserves sont exclues.
+- Kevin-Prince Boateng : [carrière](https://en.wikipedia.org/wiki/Kevin-Prince_Boateng). Le contrat au Genoa sans apparition n'ajoute pas une étape avant son prêt à Milan.
+- Tomáš Rosický : [carrière](https://en.wikipedia.org/wiki/Tom%C3%A1%C5%A1_Rosick%C3%BD).
+- Eiður Guðjohnsen : [carrière](https://en.wikipedia.org/wiki/Ei%C3%B0ur_Gu%C3%B0johnsen). Pune City sans apparition est exclu ; variantes usuelles sans caractères islandais acceptées.
+- Florent Sinama-Pongolle : [carrière](https://en.wikipedia.org/wiki/Florent_Sinama_Pongolle) et [fiche officielle FFF](https://www.fff.fr/equipe-nationale/joueur/8644-sinama-pongolle-florent/fiche.html). Les débuts en prêt au Havre précèdent ses premiers matchs à Liverpool. Lausanne sans apparition et la fin amateur à Saint-Pierroise sont exclus du parcours professionnel.
+
+Les clubs sans SVG vérifié (Ajax Cape Town, Bidvest Wits, Chainat Hornbill, Mitra Kukar, Pune City et Shijiazhuang Ever Bright) restent lisibles par leur nom ; aucun blason d'un autre club n'est substitué. La collection quotidienne initiale est gelée. Une nouvelle collection s'ajoute avec une date d'effet future pour préserver les joueurs et identifiants déjà publiés.

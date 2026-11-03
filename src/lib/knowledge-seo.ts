@@ -2,11 +2,12 @@ import { kt } from "./knowledge-i18n";
 import type { Locale } from "./types";
 import { quizTopicPath, type QuizTopic } from "./knowledge-catalog";
 import { siteOrigin } from "./site-origin";
+import { footballDailyCopy } from "./football-daily-i18n";
 export function knowledgeSeo(locale: Locale) {
   const m = kt(locale);
   return {
     quiz: { title:m.quizSeo, description:m.quizMeta, intro:m.quizIntro, sections:[{title:m.quizName,text:m.quizRules},{title:m.strategy,text:m.quizStrategy},{title:m.saved,text:m.quizSaved}] },
-    football: { title:m.footballSeo, description:m.footballMeta, intro:m.footballIntro, sections:[{title:m.footballName,text:m.footballRules},{title:m.strategy,text:m.footballStrategy},{title:m.saved,text:m.footballSaved}] },
+    football: { title:footballDailyCopy(locale).seoTitle, description:footballDailyCopy(locale).seoDescription, intro:footballDailyCopy(locale).intro, sections:[{title:m.footballName,text:m.footballRules},{title:m.strategy,text:m.footballStrategy},{title:m.saved,text:m.footballSaved}] },
   };
 }
 export function quizTopicStructuredData(locale: Locale, topic: QuizTopic) {

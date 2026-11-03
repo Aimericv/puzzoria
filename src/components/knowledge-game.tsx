@@ -4,6 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Clock3, Goal, Send, Timer } from "lucide-react";
 import { kt } from "@/lib/knowledge-i18n";
 import { FootballCareer } from "./football-career";
+import { FootballMode } from "./football-mode";
+import { footballDailyCopy } from "@/lib/football-daily-i18n";
+import { practicePath } from "@/lib/play-path";
+import { gamePath } from "@/lib/i18n";
 import { quizTopic, quizTopicPath } from "@/lib/knowledge-catalog";
 import { initialKnowledge, normalizeAnswer, type KnowledgeAction, type KnowledgeState, type PublicKnowledge } from "@/lib/knowledge-types";
 import type { Locale } from "@/lib/types";
@@ -18,11 +22,12 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
   const draft=useStoredState<{result:KnowledgeState|null}>(`dailygrid:game:${c.id}`,{result:null},validDraft), {setValue:setDraft}=draft;
   const [state,setState]=useState<KnowledgeState>(initialKnowledge), [loaded,setLoaded]=useState(false), [startedAt,setStartedAt]=useState<string|null>(c.roomStartedAt??null), [now,setNow]=useState(0), [input,setInput]=useState(""), [busy,setBusy]=useState(false), [error,setError]=useState("");
   const current=useRef(state), locked=useRef(false), inputRef=useRef<HTMLInputElement>(null), offset=useRef(0), lastAuto=useRef("");
+  const [serverOffset,setServerOffset]=useState(0);
   useEffect(()=>{sessionRef.current=session;});
   const accept=useCallback((data:Awaited<ReturnType<typeof reservePlay>>)=>{
     const result=(data.result?.state??data.progress??initialKnowledge()) as KnowledgeState;
     current.current=result; setState(result); setDraft({result});
-    if (data.serverNow) offset.current=data.serverNow-Date.now();
+    if (data.serverNow) {offset.current=data.serverNow-Date.now();setServerOffset(offset.current);}
     if (data.startedAt || c.roomStartedAt) setStartedAt(data.startedAt??c.roomStartedAt!);
     if (data.result?.completion) {rememberCompletion(data.result.completion); sessionRef.current.finish(data.result.completion.success,data.result.completion.score,data.result.completion.attempts);}
     else if(data.startedAt || c.roomStartedAt) sessionRef.current.setValue(s=>({...s,started:true,paused:false}));
@@ -73,8 +78,9 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
   const disabled=busy||!loaded||!draft.ready||!session.ready||shown.completed||!started||seconds===0;
   const title=c.kind==="quiz"?c.title:m.footballName;
   return <div className={`knowledge-game knowledge-${c.kind}`} data-knowledge-game={c.kind}>
+    {c.kind==="football"&&<FootballMode challenge={c} locale={locale} serverOffset={serverOffset}/>}
     <header className="knowledge-heading"><span className="knowledge-mark" aria-hidden="true">{c.kind==="quiz"?<Timer size={27}/>:<Goal size={27}/>}</span><div><small>{c.kind==="quiz"?m.theme:m.footballCategory}</small><h2>{title}</h2></div></header>
-    {!started ? <div className="knowledge-start"><p>{c.kind==="quiz"?m.readyQuiz:m.readyFootball}</p>{c.kind==="quiz"&&<p className="knowledge-format"><strong>{c.items.length}</strong> {m.total.toLocaleLowerCase(locale)} <span>·</span> <Clock3 size={17}/> {clockText(c.seconds)}</p>}<button type="button" className="primary-button" disabled={!loaded||busy||!session.ready||!draft.ready} onClick={()=>void start()}>{loaded?m.start:m.loading}</button></div> : <>
+    {!started ? <div className="knowledge-start"><p>{c.kind==="quiz"?m.readyQuiz:c.mode!=="practice"?footballDailyCopy(locale).ready:m.readyFootball}</p>{c.kind==="quiz"&&<p className="knowledge-format"><strong>{c.items.length}</strong> {m.total.toLocaleLowerCase(locale)} <span>·</span> <Clock3 size={17}/> {clockText(c.seconds)}</p>}<button type="button" className="primary-button" disabled={!loaded||busy||!session.ready||!draft.ready} onClick={()=>void start()}>{loaded?m.start:m.loading}</button></div> : <>
       <div className="knowledge-scoreboard">
         {c.kind==="quiz"?<><div><span>{m.found}</span><strong>{shown.found.length}<small>/{c.items.length}</small></strong></div><div className={seconds!==null&&seconds<=15&&!shown.completed?"urgent":""}><span>{m.remaining}</span><strong>{clockText(shown.completed&&completion?Math.max(0,c.seconds-completion.duration):seconds??c.seconds)}</strong></div></>:<><div><span>{m.attempts}</span><strong>{shown.guesses.length}<small>/{c.attempts}</small></strong></div><div><span>{m.career}</span><strong>{c.clubs.length} <Goal size={20}/></strong></div></>}
       </div>
@@ -93,8 +99,9 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
     </>}
     <ErrorMessage error={error} locale={locale}/>{error&&<button className="secondary-button" onClick={()=>{setError("");void reservePlay(c).then(data=>{accept(data);setLoaded(true);}).catch(()=>setError("networkError"));}}>{m.retry}</button>}
     <p className="knowledge-help">{c.kind==="quiz"?m.timeHelp:m.footballHelp}</p><SaveNotice locale={locale} saved={draft.saved}/>
-    {completion&&<CompletionPanel completion={completion} locale={locale} title={c.kind==="quiz"?(shown.success?m.complete:m.ended):(shown.success?m.solved:m.missed)} sharePath={c.kind==="quiz"?quizTopicPath(locale,quizTopic(c.topic)!):undefined} shareLines={[
+    {completion&&<CompletionPanel completion={completion} locale={locale} title={c.kind==="quiz"?(shown.success?m.complete:m.ended):(shown.success?m.solved:m.missed)} sharePath={c.kind==="quiz"?quizTopicPath(locale,quizTopic(c.topic)!):c.mode==="practice"?practicePath(locale,"football"):gamePath(locale,"football",c.date)} shareLines={[
       `Puzzoria · ${c.kind==="quiz"?m.quizName:m.footballName}`,
+      ...(c.kind==="football"?[c.mode==="practice"?footballDailyCopy(locale).unlimited:`${footballDailyCopy(locale).name} · ${c.date}`]:[]),
       c.kind==="quiz"?c.title:c.clubs.map(s=>s.club).join(" → "),
       c.kind==="quiz"?`${shown.found.length}/${c.items.length} · ${clockText(completion.duration)}`:`${shown.success?"✅":"❌"} ${shown.success?shown.guesses.length:"X"}/${c.attempts}`,
       c.kind==="quiz"?m.shareQuiz:m.shareFootball,

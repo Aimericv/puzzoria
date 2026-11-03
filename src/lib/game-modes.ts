@@ -1,7 +1,9 @@
 import { difficulties, type Difficulty, type GameId, type Locale } from "./types";
 import { rareWordCopy } from "./rare-word-i18n";
+import { FOOTBALL_DAILY_FROM } from "./football-daily";
+import { footballDailyCopy } from "./football-daily-i18n";
 
-export const dailyGameIds = ["word", "rareword", "sudoku", "math", "mines"] as const;
+export const dailyGameIds = ["word", "rareword", "sudoku", "math", "mines", "football"] as const;
 export const SINGLE_SUDOKU_FROM = "2026-10-05";
 export const dailyDifficulties = (game: GameId, date: string): readonly Difficulty[] =>
   game === "sudoku" ? date < SINGLE_SUDOKU_FROM ? difficulties : ["easy"] :
@@ -12,10 +14,11 @@ export const hasDaily = (game: GameId) =>
 // Keep already published puzzles accessible by their historical URLs.
 export const DAILY_REMOVED_FROM = "2026-10-05";
 export const historicalDailyAvailable = (game: GameId, date: string) =>
-  game !== "quiz" && game !== "football" && (hasDaily(game) || date < DAILY_REMOVED_FROM);
+  game === "football" ? date >= FOOTBALL_DAILY_FROM : game !== "quiz" && (hasDaily(game) || date < DAILY_REMOVED_FROM);
 
 const goals: Record<Locale, Record<(typeof dailyGameIds)[number], string>> = {
   fr: {
+    football: footballDailyCopy("fr").goal,
     rareword: rareWordCopy("fr").dailyGoal,
     word: "Trouve le mot du jour en un minimum d’essais.",
     mines: "Termine la grille du jour le plus vite possible.",
@@ -23,6 +26,7 @@ const goals: Record<Locale, Record<(typeof dailyGameIds)[number], string>> = {
     sudoku: "Résous le Sudoku du jour et compare ton temps.",
   },
   en: {
+    football: footballDailyCopy("en").goal,
     rareword: rareWordCopy("en").dailyGoal,
     word: "Find today’s word in as few guesses as possible.",
     mines: "Clear today’s board as quickly as possible.",
@@ -30,6 +34,7 @@ const goals: Record<Locale, Record<(typeof dailyGameIds)[number], string>> = {
     sudoku: "Solve today’s Sudoku and compare your time.",
   },
   es: {
+    football: footballDailyCopy("es").goal,
     rareword: rareWordCopy("es").dailyGoal,
     word: "Encuentra la palabra del día con el menor número de intentos.",
     mines: "Completa el tablero del día lo más rápido posible.",
@@ -37,6 +42,7 @@ const goals: Record<Locale, Record<(typeof dailyGameIds)[number], string>> = {
     sudoku: "Resuelve el sudoku del día y compara tu tiempo.",
   },
   de: {
+    football: footballDailyCopy("de").goal,
     rareword: rareWordCopy("de").dailyGoal,
     word: "Finde das Wort des Tages mit möglichst wenigen Versuchen.",
     mines: "Löse das Spielfeld des Tages so schnell wie möglich.",

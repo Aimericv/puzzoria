@@ -83,7 +83,7 @@ export function leaderboard(
                       : r.success
                         ? game === "word"
                           ? (7 - (r.attempts ?? 6)) * 100
-                          : game === "math" || game === "rareword"
+                          : game === "math" || game === "rareword" || game === "football"
                             ? r.score
                             : 1000
                         : 0),

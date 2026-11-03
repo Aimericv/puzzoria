@@ -1,4 +1,5 @@
 import { quizTopics, quizTopic, languages as l, type Localized } from "../knowledge-catalog";
+import { footballDailyPlayersV1 } from "./football-daily-content";
 import { seededRandom, shuffled } from "../random";
 import type { ClubSpell, KnowledgeChallenge, QuizItem } from "../knowledge-types";
 import { normalizeAnswer } from "../knowledge-types";
@@ -87,5 +88,8 @@ export function validateKnowledgeContent() {
       }
     });
   }
-  if (new Set(footballPlayers.map(p=>p.id)).size !== footballPlayers.length || footballPlayers.some(p=>!p.name || p.clubs.length<2 || !p.sources.length || p.sources.some(s=>!s.startsWith("https://")))) throw new Error("Invalid football deck");
+  for(const deck of [footballPlayers,footballDailyPlayersV1]) {
+    if (new Set(deck.map(p=>p.id)).size !== deck.length || deck.some(p=>!p.name || !p.aliases.length || p.clubs.length<2 || !p.sources.length || p.sources.some(s=>!s.startsWith("https://")) || p.clubs.some(c=>!c.club || !/^\d{4}(?:–\d{4})?$/.test(c.years)))) throw new Error("Invalid football deck");
+  }
+  if(footballDailyPlayersV1.some(p=>footballPlayers.some(q=>q.id===p.id)))throw new Error("Daily football must use its own harder selection");
 }
