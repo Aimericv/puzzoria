@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 239,
-  "status": "ready",
+  "generation": 240,
+  "status": "running",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -3308,7 +3308,7 @@
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/31",
         "status": "merged",
         "assessment": {
-          "status": "awaiting_verified_deployment",
+          "status": "waiting_complete_windows",
           "causalClaim": false
         },
         "mergeSha": "64e54ff6be42055870e359a6015e9825a1a831a5",
@@ -3352,318 +3352,6 @@
           "series": {
             "playing.starts": [
               {
-                "date": "2026-08-02",
-                "value": 0
-              },
-              {
-                "date": "2026-08-03",
-                "value": 0
-              },
-              {
-                "date": "2026-08-04",
-                "value": 0
-              },
-              {
-                "date": "2026-08-05",
-                "value": 0
-              },
-              {
-                "date": "2026-08-06",
-                "value": 0
-              },
-              {
-                "date": "2026-08-07",
-                "value": 0
-              },
-              {
-                "date": "2026-08-08",
-                "value": 0
-              },
-              {
-                "date": "2026-08-09",
-                "value": 0
-              },
-              {
-                "date": "2026-08-10",
-                "value": 0
-              },
-              {
-                "date": "2026-08-11",
-                "value": 0
-              },
-              {
-                "date": "2026-08-12",
-                "value": 0
-              },
-              {
-                "date": "2026-08-13",
-                "value": 0
-              },
-              {
-                "date": "2026-08-14",
-                "value": 0
-              },
-              {
-                "date": "2026-08-15",
-                "value": 0
-              },
-              {
-                "date": "2026-08-16",
-                "value": 0
-              },
-              {
-                "date": "2026-08-17",
-                "value": 0
-              },
-              {
-                "date": "2026-08-18",
-                "value": 0
-              },
-              {
-                "date": "2026-08-19",
-                "value": 0
-              },
-              {
-                "date": "2026-08-20",
-                "value": 0
-              },
-              {
-                "date": "2026-08-21",
-                "value": 0
-              },
-              {
-                "date": "2026-08-22",
-                "value": 0
-              },
-              {
-                "date": "2026-08-23",
-                "value": 0
-              },
-              {
-                "date": "2026-08-24",
-                "value": 0
-              },
-              {
-                "date": "2026-08-25",
-                "value": 0
-              },
-              {
-                "date": "2026-08-26",
-                "value": 0
-              },
-              {
-                "date": "2026-08-27",
-                "value": 0
-              },
-              {
-                "date": "2026-08-28",
-                "value": 0
-              },
-              {
-                "date": "2026-08-29",
-                "value": 0
-              },
-              {
-                "date": "2026-08-30",
-                "value": 0
-              },
-              {
-                "date": "2026-08-31",
-                "value": 0
-              },
-              {
-                "date": "2026-09-01",
-                "value": 0
-              },
-              {
-                "date": "2026-09-02",
-                "value": 0
-              },
-              {
-                "date": "2026-09-03",
-                "value": 0
-              },
-              {
-                "date": "2026-09-04",
-                "value": 0
-              },
-              {
-                "date": "2026-09-05",
-                "value": 0
-              },
-              {
-                "date": "2026-09-06",
-                "value": 0
-              },
-              {
-                "date": "2026-09-07",
-                "value": 0
-              },
-              {
-                "date": "2026-09-08",
-                "value": 0
-              },
-              {
-                "date": "2026-09-09",
-                "value": 0
-              },
-              {
-                "date": "2026-09-10",
-                "value": 0
-              },
-              {
-                "date": "2026-09-11",
-                "value": 0
-              },
-              {
-                "date": "2026-09-12",
-                "value": 0
-              },
-              {
-                "date": "2026-09-13",
-                "value": 0
-              },
-              {
-                "date": "2026-09-14",
-                "value": 0
-              },
-              {
-                "date": "2026-09-15",
-                "value": 0
-              },
-              {
-                "date": "2026-09-16",
-                "value": 0
-              },
-              {
-                "date": "2026-09-17",
-                "value": 0
-              },
-              {
-                "date": "2026-09-18",
-                "value": 0
-              },
-              {
-                "date": "2026-09-19",
-                "value": 0
-              },
-              {
-                "date": "2026-09-20",
-                "value": 0
-              },
-              {
-                "date": "2026-09-21",
-                "value": 0
-              },
-              {
-                "date": "2026-09-22",
-                "value": 0
-              },
-              {
-                "date": "2026-09-23",
-                "value": 0
-              },
-              {
-                "date": "2026-09-24",
-                "value": 0
-              },
-              {
-                "date": "2026-09-25",
-                "value": 0
-              },
-              {
-                "date": "2026-09-26",
-                "value": 0
-              },
-              {
-                "date": "2026-09-27",
-                "value": 0
-              },
-              {
-                "date": "2026-09-28",
-                "value": 0
-              },
-              {
-                "date": "2026-09-29",
-                "value": 0
-              },
-              {
-                "date": "2026-09-30",
-                "value": 0
-              },
-              {
-                "date": "2026-10-01",
-                "value": 0
-              },
-              {
-                "date": "2026-10-02",
-                "value": 0
-              },
-              {
-                "date": "2026-10-03",
-                "value": 0
-              },
-              {
-                "date": "2026-10-04",
-                "value": 0
-              },
-              {
-                "date": "2026-10-05",
-                "value": 0
-              },
-              {
-                "date": "2026-10-06",
-                "value": 0
-              },
-              {
-                "date": "2026-10-07",
-                "value": 1
-              },
-              {
-                "date": "2026-10-08",
-                "value": 0
-              },
-              {
-                "date": "2026-10-09",
-                "value": 0
-              },
-              {
-                "date": "2026-10-10",
-                "value": 0
-              },
-              {
-                "date": "2026-10-11",
-                "value": 9
-              },
-              {
-                "date": "2026-10-12",
-                "value": 1
-              },
-              {
-                "date": "2026-10-13",
-                "value": 6
-              },
-              {
-                "date": "2026-10-14",
-                "value": 2
-              },
-              {
-                "date": "2026-10-15",
-                "value": 0
-              },
-              {
-                "date": "2026-10-16",
-                "value": 0
-              },
-              {
-                "date": "2026-10-17",
-                "value": 0
-              },
-              {
-                "date": "2026-10-18",
-                "value": 0
-              },
-              {
                 "date": "2026-10-19",
                 "value": 0
               },
@@ -3706,12 +3394,26 @@
               {
                 "date": "2026-10-29",
                 "value": 0
+              },
+              {
+                "date": "2026-10-30",
+                "value": 0
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
+              },
+              {
+                "date": "2026-11-01",
+                "value": 0
               }
             ]
           },
           "retention": {
             "playing.starts": null
-          }
+          },
+          "frozen": true,
+          "completedFromObservation": "120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba"
         },
         "candidateSha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
         "prNumber": 32,
@@ -3719,7 +3421,7 @@
         "status": "merged",
         "mergeSha": "88b38e1b0c898a29a4335f083cecc29495b2b543",
         "assessment": {
-          "status": "awaiting_verified_deployment",
+          "status": "waiting_complete_windows",
           "causalClaim": false
         },
         "deployment": {
@@ -4274,7 +3976,7 @@
         "status": "merged",
         "mergeSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
         "assessment": {
-          "status": "awaiting_verified_deployment",
+          "status": "waiting_complete_windows",
           "causalClaim": false
         },
         "deployment": {
@@ -4826,7 +4528,11 @@
         "candidateSha": "0ecade23b7317f9389e86f98f0c4328e82e9c227",
         "prNumber": 38,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/38",
-        "status": "cancelled"
+        "status": "cancelled",
+        "assessment": {
+          "status": "awaiting_verified_deployment",
+          "causalClaim": false
+        }
       }
     ],
     "legacyWork": {
@@ -4835,18 +4541,18 @@
       "branch": "codex/agent-work"
     },
     "lastObservation": {
-      "id": "c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f",
-      "collectedAt": "2026-11-02T15:50:31.446Z",
+      "id": "120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba",
+      "collectedAt": "2026-11-03T14:13:22.594Z",
       "sources": {
         "puzzoria": {
           "status": "available",
-          "fetchedAt": "2026-11-02T15:50:26.249Z",
-          "sha256": "381856c45f879ccd5dbccfff19912c4932967022664fcbd78cbb17fa9d4acbdf"
+          "fetchedAt": "2026-11-03T14:13:17.857Z",
+          "sha256": "e1ad4c6032fe6cd315ff500cdd20fcb5f9ea37856a63ea8667ee266952470bd1"
         },
         "google": {
           "status": "available",
-          "fetchedAt": "2026-11-02T15:50:28.059Z",
-          "sha256": "92a3cd8f3cd6fc406c3915306ce2e3d4052f4ed82ac957cd42e81afcac3c2b55"
+          "fetchedAt": "2026-11-03T14:13:19.204Z",
+          "sha256": "424e1318e91f664e80fe75d9b510b0d6d973124c32989307b024b640287b3f32"
         }
       }
     },
