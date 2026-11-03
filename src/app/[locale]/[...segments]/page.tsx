@@ -3,6 +3,7 @@ import { quizTopics, quizTopicPath } from "@/lib/knowledge-catalog";
 import { kt } from "@/lib/knowledge-i18n";
 import { quizTopicStructuredData } from "@/lib/knowledge-seo";
 import { QuizTopics } from "@/components/quiz-topics";
+import { FootballDiscovery } from "@/components/football-discovery";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronLeft, Info, CalendarDays } from "lucide-react";
 import {
@@ -367,6 +368,7 @@ export default async function GamePage({ params }: Props) {
           )}
         </aside>
       </div>
+      {p.segments[1] !== "practice" && <FootballDiscovery locale={locale} game={game} quizCategory={r.quizCategory} />}
       {game === "quiz" && <QuizTopics locale={locale} selected={r.quizCategory}/>}
       <GameGuide locale={locale} game={game} />
     </>
