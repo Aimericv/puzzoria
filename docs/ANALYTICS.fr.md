@@ -10,6 +10,8 @@ La page est noindex, l’API et les exports sont privés/no-store, protégés pa
 
 ## Ce qui est mesuré
 
+Depuis le 3 novembre 2026, la section **Acquisition et jeu par quiz** et `report.product.quizTopics` dans l'export JSON ventilent les départs/fins serveur, comptes/appareils, premiers joueurs observés sur le site, scores, temps et entrées Google mesurées par sujet/langue. Un nouveau joueur Google mesuré exige son premier départ serveur et une session consentie entrée depuis Google sur ce sujet, reliée par l'événement serveur. Ce n'est ni le nombre de clics Search Console ni une mesure exhaustive des personnes. Duels exclus ; filtres, refus, DNT/GPC, exclusions administrateur et protection du tableau restent identiques. Les anciennes visites regroupées sous `/quiz` ne sont pas réattribuées. [Protocole et jointure des exports Google/Puzzoria](QUIZ-ACQUISITION.fr.md).
+
 - Activité officielle : débuts réels, fins serveur, parties reprenables sous/au-delà de 48 heures, créations de comptes. Les réservations et imports ne sont pas des débuts ou fins vérifiés.
 - Visites facultatives : sessions, appareils/comptes, pages vues, pages d’entrée, source de session et première source observée. Référent limité à son domaine ; UTM source/medium/campaign limités à 64 caractères autorisés. Sans référent : direct/inconnu. Les liens d’invitation sont classés « ami », sans stocker leur code dans la page d’entrée.
 - Activation : sessions avec visite, jeu consulté, début vérifié, fin vérifiée et clic Rejouer. Chaque étape est un compteur distinct, pas une preuve que toutes les étapes ont été accomplies dans cet ordre.

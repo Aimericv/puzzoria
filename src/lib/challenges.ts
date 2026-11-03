@@ -136,7 +136,7 @@ export function validateChallenge(challenge: Challenge): void {
   if (!validDate(challenge.date) || !challenge.id)
     throw new Error("Invalid challenge metadata");
   if (challenge.kind === "quiz") {
-    if (challenge.items.length < 5 || challenge.items.length > 100 || new Set(challenge.items.map(i=>i.id)).size !== challenge.items.length || !Number.isInteger(challenge.seconds) || challenge.seconds < 30 || challenge.seconds > 600 || challenge.items.some(i=>!i.answer || !i.prompt || !i.aliases.length)) throw new Error("Invalid quiz");
+    if (challenge.items.length < 5 || challenge.items.length > 200 || new Set(challenge.items.map(i=>i.id)).size !== challenge.items.length || !Number.isInteger(challenge.seconds) || challenge.seconds < 30 || challenge.seconds > 600 || challenge.items.some(i=>!i.answer || !i.prompt || !i.aliases.length)) throw new Error("Invalid quiz");
   } else if (challenge.kind === "football") {
     if (!challenge.answer || challenge.clubs.length < 2 || challenge.attempts !== 6 || !challenge.sources.length) throw new Error("Invalid football career");
   } else if (challenge.kind === "ranking") {

@@ -1,0 +1,9574 @@
+{
+  "countries-europe": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Albania",
+        "fr": "Albanie",
+        "es": "Albania",
+        "de": "Albanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Andorra",
+        "fr": "Andorre",
+        "es": "Andorra",
+        "de": "Andorra"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Austria",
+        "fr": "Autriche",
+        "es": "Austria",
+        "de": "Österreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Belarus",
+        "fr": "Biélorussie",
+        "es": "Bielorrusia",
+        "de": "Belarus"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Belgium",
+        "fr": "Belgique",
+        "es": "Bélgica",
+        "de": "Belgien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Bosnia & Herzegovina",
+        "fr": "Bosnie-Herzégovine",
+        "es": "Bosnia y Herzegovina",
+        "de": "Bosnien und Herzegowina"
+      },
+      "aliases": [
+        "Bosnia",
+        "Bosnie",
+        "Bosnia Herzegovina",
+        "Bosnien Herzegowina"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Bulgaria",
+        "fr": "Bulgarie",
+        "es": "Bulgaria",
+        "de": "Bulgarien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Croatia",
+        "fr": "Croatie",
+        "es": "Croacia",
+        "de": "Kroatien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Czechia",
+        "fr": "Tchéquie",
+        "es": "Chequia",
+        "de": "Tschechien"
+      },
+      "aliases": [
+        "Czech Republic",
+        "Republique tcheque",
+        "Republica Checa",
+        "Tschechische Republik"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Denmark",
+        "fr": "Danemark",
+        "es": "Dinamarca",
+        "de": "Dänemark"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Estonia",
+        "fr": "Estonie",
+        "es": "Estonia",
+        "de": "Estland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Finland",
+        "fr": "Finlande",
+        "es": "Finlandia",
+        "de": "Finnland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "France",
+        "fr": "France",
+        "es": "Francia",
+        "de": "Frankreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Germany",
+        "fr": "Allemagne",
+        "es": "Alemania",
+        "de": "Deutschland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Greece",
+        "fr": "Grèce",
+        "es": "Grecia",
+        "de": "Griechenland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Hungary",
+        "fr": "Hongrie",
+        "es": "Hungría",
+        "de": "Ungarn"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Iceland",
+        "fr": "Islande",
+        "es": "Islandia",
+        "de": "Island"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Ireland",
+        "fr": "Irlande",
+        "es": "Irlanda",
+        "de": "Irland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Italy",
+        "fr": "Italie",
+        "es": "Italia",
+        "de": "Italien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Latvia",
+        "fr": "Lettonie",
+        "es": "Letonia",
+        "de": "Lettland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Liechtenstein",
+        "fr": "Liechtenstein",
+        "es": "Liechtenstein",
+        "de": "Liechtenstein"
+      }
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Lithuania",
+        "fr": "Lituanie",
+        "es": "Lituania",
+        "de": "Litauen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Luxembourg",
+        "fr": "Luxembourg",
+        "es": "Luxemburgo",
+        "de": "Luxemburg"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Malta",
+        "fr": "Malte",
+        "es": "Malta",
+        "de": "Malta"
+      }
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Moldova",
+        "fr": "Moldavie",
+        "es": "Moldavia",
+        "de": "Republik Moldau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Monaco",
+        "fr": "Monaco",
+        "es": "Mónaco",
+        "de": "Monaco"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Montenegro",
+        "fr": "Monténégro",
+        "es": "Montenegro",
+        "de": "Montenegro"
+      }
+    },
+    {
+      "prompt": {
+        "en": "28",
+        "fr": "28",
+        "es": "28",
+        "de": "28"
+      },
+      "answer": {
+        "en": "Netherlands",
+        "fr": "Pays-Bas",
+        "es": "Países Bajos",
+        "de": "Niederlande"
+      }
+    },
+    {
+      "prompt": {
+        "en": "29",
+        "fr": "29",
+        "es": "29",
+        "de": "29"
+      },
+      "answer": {
+        "en": "North Macedonia",
+        "fr": "Macédoine du Nord",
+        "es": "Macedonia del Norte",
+        "de": "Nordmazedonien"
+      },
+      "aliases": [
+        "Macedonia",
+        "Macedoine",
+        "Mazedonien"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "30",
+        "fr": "30",
+        "es": "30",
+        "de": "30"
+      },
+      "answer": {
+        "en": "Norway",
+        "fr": "Norvège",
+        "es": "Noruega",
+        "de": "Norwegen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "31",
+        "fr": "31",
+        "es": "31",
+        "de": "31"
+      },
+      "answer": {
+        "en": "Poland",
+        "fr": "Pologne",
+        "es": "Polonia",
+        "de": "Polen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "32",
+        "fr": "32",
+        "es": "32",
+        "de": "32"
+      },
+      "answer": {
+        "en": "Portugal",
+        "fr": "Portugal",
+        "es": "Portugal",
+        "de": "Portugal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "33",
+        "fr": "33",
+        "es": "33",
+        "de": "33"
+      },
+      "answer": {
+        "en": "Romania",
+        "fr": "Roumanie",
+        "es": "Rumanía",
+        "de": "Rumänien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "34",
+        "fr": "34",
+        "es": "34",
+        "de": "34"
+      },
+      "answer": {
+        "en": "Russia",
+        "fr": "Russie",
+        "es": "Rusia",
+        "de": "Russland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "35",
+        "fr": "35",
+        "es": "35",
+        "de": "35"
+      },
+      "answer": {
+        "en": "San Marino",
+        "fr": "Saint-Marin",
+        "es": "San Marino",
+        "de": "San Marino"
+      }
+    },
+    {
+      "prompt": {
+        "en": "36",
+        "fr": "36",
+        "es": "36",
+        "de": "36"
+      },
+      "answer": {
+        "en": "Serbia",
+        "fr": "Serbie",
+        "es": "Serbia",
+        "de": "Serbien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "37",
+        "fr": "37",
+        "es": "37",
+        "de": "37"
+      },
+      "answer": {
+        "en": "Slovakia",
+        "fr": "Slovaquie",
+        "es": "Eslovaquia",
+        "de": "Slowakei"
+      }
+    },
+    {
+      "prompt": {
+        "en": "38",
+        "fr": "38",
+        "es": "38",
+        "de": "38"
+      },
+      "answer": {
+        "en": "Slovenia",
+        "fr": "Slovénie",
+        "es": "Eslovenia",
+        "de": "Slowenien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "39",
+        "fr": "39",
+        "es": "39",
+        "de": "39"
+      },
+      "answer": {
+        "en": "Spain",
+        "fr": "Espagne",
+        "es": "España",
+        "de": "Spanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "40",
+        "fr": "40",
+        "es": "40",
+        "de": "40"
+      },
+      "answer": {
+        "en": "Sweden",
+        "fr": "Suède",
+        "es": "Suecia",
+        "de": "Schweden"
+      }
+    },
+    {
+      "prompt": {
+        "en": "41",
+        "fr": "41",
+        "es": "41",
+        "de": "41"
+      },
+      "answer": {
+        "en": "Switzerland",
+        "fr": "Suisse",
+        "es": "Suiza",
+        "de": "Schweiz"
+      }
+    },
+    {
+      "prompt": {
+        "en": "42",
+        "fr": "42",
+        "es": "42",
+        "de": "42"
+      },
+      "answer": {
+        "en": "Ukraine",
+        "fr": "Ukraine",
+        "es": "Ucrania",
+        "de": "Ukraine"
+      }
+    },
+    {
+      "prompt": {
+        "en": "43",
+        "fr": "43",
+        "es": "43",
+        "de": "43"
+      },
+      "answer": {
+        "en": "United Kingdom",
+        "fr": "Royaume-Uni",
+        "es": "Reino Unido",
+        "de": "Vereinigtes Königreich"
+      },
+      "aliases": [
+        "UK",
+        "United Kingdom",
+        "Great Britain",
+        "Grande Bretagne",
+        "Gran Bretaña",
+        "Grossbritannien",
+        "Royaume Uni",
+        "Vereinigtes Koenigreich"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "44",
+        "fr": "44",
+        "es": "44",
+        "de": "44"
+      },
+      "answer": {
+        "en": "Vatican City",
+        "fr": "Vatican",
+        "es": "Ciudad del Vaticano",
+        "de": "Vatikanstadt"
+      },
+      "aliases": [
+        "Holy See",
+        "Saint Siege",
+        "Santa Sede",
+        "Heiliger Stuhl",
+        "Vatican"
+      ]
+    }
+  ],
+  "countries-africa": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Algeria",
+        "fr": "Algérie",
+        "es": "Argelia",
+        "de": "Algerien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Angola",
+        "fr": "Angola",
+        "es": "Angola",
+        "de": "Angola"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Benin",
+        "fr": "Bénin",
+        "es": "Benín",
+        "de": "Benin"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Botswana",
+        "fr": "Botswana",
+        "es": "Botsuana",
+        "de": "Botsuana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Burkina Faso",
+        "fr": "Burkina Faso",
+        "es": "Burkina Faso",
+        "de": "Burkina Faso"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Burundi",
+        "fr": "Burundi",
+        "es": "Burundi",
+        "de": "Burundi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Cape Verde",
+        "fr": "Cap-Vert",
+        "es": "Cabo Verde",
+        "de": "Cabo Verde"
+      },
+      "aliases": [
+        "Cape Verde",
+        "Cap Vert",
+        "Kap Verde"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Cameroon",
+        "fr": "Cameroun",
+        "es": "Camerún",
+        "de": "Kamerun"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Central African Republic",
+        "fr": "République centrafricaine",
+        "es": "República Centroafricana",
+        "de": "Zentralafrikanische Republik"
+      },
+      "aliases": [
+        "CAR",
+        "RCA",
+        "Centrafrique"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Chad",
+        "fr": "Tchad",
+        "es": "Chad",
+        "de": "Tschad"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Comoros",
+        "fr": "Comores",
+        "es": "Comoras",
+        "de": "Komoren"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Republic of the Congo",
+        "fr": "Congo-Brazzaville",
+        "es": "República del Congo",
+        "de": "Republik Kongo"
+      },
+      "aliases": [
+        "Congo Brazzaville",
+        "Congo Republic",
+        "Republic of Congo",
+        "République du Congo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Democratic Republic of the Congo",
+        "fr": "Congo-Kinshasa",
+        "es": "República Democrática del Congo",
+        "de": "Demokratische Republik Kongo"
+      },
+      "aliases": [
+        "DR Congo",
+        "DRC",
+        "RD Congo",
+        "RDC",
+        "Congo Kinshasa",
+        "Democratic Republic of Congo",
+        "République démocratique du Congo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Côte d’Ivoire",
+        "fr": "Côte d’Ivoire",
+        "es": "Côte d’Ivoire",
+        "de": "Côte d’Ivoire"
+      },
+      "aliases": [
+        "Ivory Coast",
+        "Cote Ivoire",
+        "Costa de Marfil",
+        "Elfenbeinkueste"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Djibouti",
+        "fr": "Djibouti",
+        "es": "Yibuti",
+        "de": "Dschibuti"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Egypt",
+        "fr": "Égypte",
+        "es": "Egipto",
+        "de": "Ägypten"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Equatorial Guinea",
+        "fr": "Guinée équatoriale",
+        "es": "Guinea Ecuatorial",
+        "de": "Äquatorialguinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Eritrea",
+        "fr": "Érythrée",
+        "es": "Eritrea",
+        "de": "Eritrea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Eswatini",
+        "fr": "Eswatini",
+        "es": "Esuatini",
+        "de": "Eswatini"
+      },
+      "aliases": [
+        "Swaziland",
+        "Swazilandia",
+        "Swasiland"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Ethiopia",
+        "fr": "Éthiopie",
+        "es": "Etiopía",
+        "de": "Äthiopien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Gabon",
+        "fr": "Gabon",
+        "es": "Gabón",
+        "de": "Gabun"
+      }
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Gambia",
+        "fr": "Gambie",
+        "es": "Gambia",
+        "de": "Gambia"
+      },
+      "aliases": [
+        "Gambia",
+        "The Gambia"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Ghana",
+        "fr": "Ghana",
+        "es": "Ghana",
+        "de": "Ghana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Guinea",
+        "fr": "Guinée",
+        "es": "Guinea",
+        "de": "Guinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Guinea-Bissau",
+        "fr": "Guinée-Bissau",
+        "es": "Guinea-Bisáu",
+        "de": "Guinea-Bissau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Kenya",
+        "fr": "Kenya",
+        "es": "Kenia",
+        "de": "Kenia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Lesotho",
+        "fr": "Lesotho",
+        "es": "Lesoto",
+        "de": "Lesotho"
+      }
+    },
+    {
+      "prompt": {
+        "en": "28",
+        "fr": "28",
+        "es": "28",
+        "de": "28"
+      },
+      "answer": {
+        "en": "Liberia",
+        "fr": "Liberia",
+        "es": "Liberia",
+        "de": "Liberia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "29",
+        "fr": "29",
+        "es": "29",
+        "de": "29"
+      },
+      "answer": {
+        "en": "Libya",
+        "fr": "Libye",
+        "es": "Libia",
+        "de": "Libyen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "30",
+        "fr": "30",
+        "es": "30",
+        "de": "30"
+      },
+      "answer": {
+        "en": "Madagascar",
+        "fr": "Madagascar",
+        "es": "Madagascar",
+        "de": "Madagaskar"
+      }
+    },
+    {
+      "prompt": {
+        "en": "31",
+        "fr": "31",
+        "es": "31",
+        "de": "31"
+      },
+      "answer": {
+        "en": "Malawi",
+        "fr": "Malawi",
+        "es": "Malaui",
+        "de": "Malawi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "32",
+        "fr": "32",
+        "es": "32",
+        "de": "32"
+      },
+      "answer": {
+        "en": "Mali",
+        "fr": "Mali",
+        "es": "Mali",
+        "de": "Mali"
+      }
+    },
+    {
+      "prompt": {
+        "en": "33",
+        "fr": "33",
+        "es": "33",
+        "de": "33"
+      },
+      "answer": {
+        "en": "Mauritania",
+        "fr": "Mauritanie",
+        "es": "Mauritania",
+        "de": "Mauretanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "34",
+        "fr": "34",
+        "es": "34",
+        "de": "34"
+      },
+      "answer": {
+        "en": "Mauritius",
+        "fr": "Maurice",
+        "es": "Mauricio",
+        "de": "Mauritius"
+      }
+    },
+    {
+      "prompt": {
+        "en": "35",
+        "fr": "35",
+        "es": "35",
+        "de": "35"
+      },
+      "answer": {
+        "en": "Morocco",
+        "fr": "Maroc",
+        "es": "Marruecos",
+        "de": "Marokko"
+      }
+    },
+    {
+      "prompt": {
+        "en": "36",
+        "fr": "36",
+        "es": "36",
+        "de": "36"
+      },
+      "answer": {
+        "en": "Mozambique",
+        "fr": "Mozambique",
+        "es": "Mozambique",
+        "de": "Mosambik"
+      }
+    },
+    {
+      "prompt": {
+        "en": "37",
+        "fr": "37",
+        "es": "37",
+        "de": "37"
+      },
+      "answer": {
+        "en": "Namibia",
+        "fr": "Namibie",
+        "es": "Namibia",
+        "de": "Namibia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "38",
+        "fr": "38",
+        "es": "38",
+        "de": "38"
+      },
+      "answer": {
+        "en": "Niger",
+        "fr": "Niger",
+        "es": "Níger",
+        "de": "Niger"
+      }
+    },
+    {
+      "prompt": {
+        "en": "39",
+        "fr": "39",
+        "es": "39",
+        "de": "39"
+      },
+      "answer": {
+        "en": "Nigeria",
+        "fr": "Nigeria",
+        "es": "Nigeria",
+        "de": "Nigeria"
+      }
+    },
+    {
+      "prompt": {
+        "en": "40",
+        "fr": "40",
+        "es": "40",
+        "de": "40"
+      },
+      "answer": {
+        "en": "Rwanda",
+        "fr": "Rwanda",
+        "es": "Ruanda",
+        "de": "Ruanda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "41",
+        "fr": "41",
+        "es": "41",
+        "de": "41"
+      },
+      "answer": {
+        "en": "São Tomé & Príncipe",
+        "fr": "Sao Tomé-et-Principe",
+        "es": "Santo Tomé y Príncipe",
+        "de": "São Tomé und Príncipe"
+      },
+      "aliases": [
+        "Sao Tome and Principe",
+        "Sao Tome et Principe",
+        "Santo Tome y Principe",
+        "Sao Tome und Principe"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "42",
+        "fr": "42",
+        "es": "42",
+        "de": "42"
+      },
+      "answer": {
+        "en": "Senegal",
+        "fr": "Sénégal",
+        "es": "Senegal",
+        "de": "Senegal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "43",
+        "fr": "43",
+        "es": "43",
+        "de": "43"
+      },
+      "answer": {
+        "en": "Seychelles",
+        "fr": "Seychelles",
+        "es": "Seychelles",
+        "de": "Seychellen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "44",
+        "fr": "44",
+        "es": "44",
+        "de": "44"
+      },
+      "answer": {
+        "en": "Sierra Leone",
+        "fr": "Sierra Leone",
+        "es": "Sierra Leona",
+        "de": "Sierra Leone"
+      }
+    },
+    {
+      "prompt": {
+        "en": "45",
+        "fr": "45",
+        "es": "45",
+        "de": "45"
+      },
+      "answer": {
+        "en": "Somalia",
+        "fr": "Somalie",
+        "es": "Somalia",
+        "de": "Somalia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "46",
+        "fr": "46",
+        "es": "46",
+        "de": "46"
+      },
+      "answer": {
+        "en": "South Africa",
+        "fr": "Afrique du Sud",
+        "es": "Sudáfrica",
+        "de": "Südafrika"
+      }
+    },
+    {
+      "prompt": {
+        "en": "47",
+        "fr": "47",
+        "es": "47",
+        "de": "47"
+      },
+      "answer": {
+        "en": "South Sudan",
+        "fr": "Soudan du Sud",
+        "es": "Sudán del Sur",
+        "de": "Südsudan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "48",
+        "fr": "48",
+        "es": "48",
+        "de": "48"
+      },
+      "answer": {
+        "en": "Sudan",
+        "fr": "Soudan",
+        "es": "Sudán",
+        "de": "Sudan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "49",
+        "fr": "49",
+        "es": "49",
+        "de": "49"
+      },
+      "answer": {
+        "en": "Tanzania",
+        "fr": "Tanzanie",
+        "es": "Tanzania",
+        "de": "Tansania"
+      },
+      "aliases": [
+        "United Republic of Tanzania"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "50",
+        "fr": "50",
+        "es": "50",
+        "de": "50"
+      },
+      "answer": {
+        "en": "Togo",
+        "fr": "Togo",
+        "es": "Togo",
+        "de": "Togo"
+      }
+    },
+    {
+      "prompt": {
+        "en": "51",
+        "fr": "51",
+        "es": "51",
+        "de": "51"
+      },
+      "answer": {
+        "en": "Tunisia",
+        "fr": "Tunisie",
+        "es": "Túnez",
+        "de": "Tunesien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "52",
+        "fr": "52",
+        "es": "52",
+        "de": "52"
+      },
+      "answer": {
+        "en": "Uganda",
+        "fr": "Ouganda",
+        "es": "Uganda",
+        "de": "Uganda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "53",
+        "fr": "53",
+        "es": "53",
+        "de": "53"
+      },
+      "answer": {
+        "en": "Zambia",
+        "fr": "Zambie",
+        "es": "Zambia",
+        "de": "Sambia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "54",
+        "fr": "54",
+        "es": "54",
+        "de": "54"
+      },
+      "answer": {
+        "en": "Zimbabwe",
+        "fr": "Zimbabwe",
+        "es": "Zimbabue",
+        "de": "Simbabwe"
+      }
+    }
+  ],
+  "countries-asia": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Afghanistan",
+        "fr": "Afghanistan",
+        "es": "Afganistán",
+        "de": "Afghanistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Armenia",
+        "fr": "Arménie",
+        "es": "Armenia",
+        "de": "Armenien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Azerbaijan",
+        "fr": "Azerbaïdjan",
+        "es": "Azerbaiyán",
+        "de": "Aserbaidschan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Bahrain",
+        "fr": "Bahreïn",
+        "es": "Baréin",
+        "de": "Bahrain"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Bangladesh",
+        "fr": "Bangladesh",
+        "es": "Bangladés",
+        "de": "Bangladesch"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Bhutan",
+        "fr": "Bhoutan",
+        "es": "Bután",
+        "de": "Bhutan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Brunei",
+        "fr": "Brunei",
+        "es": "Brunéi",
+        "de": "Brunei Darussalam"
+      },
+      "aliases": [
+        "Brunei",
+        "Brunei Darussalam"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Cambodia",
+        "fr": "Cambodge",
+        "es": "Camboya",
+        "de": "Kambodscha"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "China",
+        "fr": "Chine",
+        "es": "China",
+        "de": "China"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Cyprus",
+        "fr": "Chypre",
+        "es": "Chipre",
+        "de": "Zypern"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Georgia",
+        "fr": "Géorgie",
+        "es": "Georgia",
+        "de": "Georgien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "India",
+        "fr": "Inde",
+        "es": "India",
+        "de": "Indien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Indonesia",
+        "fr": "Indonésie",
+        "es": "Indonesia",
+        "de": "Indonesien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Iran",
+        "fr": "Iran",
+        "es": "Irán",
+        "de": "Iran"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Iraq",
+        "fr": "Irak",
+        "es": "Irak",
+        "de": "Irak"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Israel",
+        "fr": "Israël",
+        "es": "Israel",
+        "de": "Israel"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Japan",
+        "fr": "Japon",
+        "es": "Japón",
+        "de": "Japan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Jordan",
+        "fr": "Jordanie",
+        "es": "Jordania",
+        "de": "Jordanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Kazakhstan",
+        "fr": "Kazakhstan",
+        "es": "Kazajistán",
+        "de": "Kasachstan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Kuwait",
+        "fr": "Koweït",
+        "es": "Kuwait",
+        "de": "Kuwait"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Kyrgyzstan",
+        "fr": "Kirghizstan",
+        "es": "Kirguistán",
+        "de": "Kirgisistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Laos",
+        "fr": "Laos",
+        "es": "Laos",
+        "de": "Laos"
+      },
+      "aliases": [
+        "Laos",
+        "Lao PDR"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Lebanon",
+        "fr": "Liban",
+        "es": "Líbano",
+        "de": "Libanon"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Malaysia",
+        "fr": "Malaisie",
+        "es": "Malasia",
+        "de": "Malaysia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Maldives",
+        "fr": "Maldives",
+        "es": "Maldivas",
+        "de": "Malediven"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Mongolia",
+        "fr": "Mongolie",
+        "es": "Mongolia",
+        "de": "Mongolei"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Myanmar",
+        "fr": "Myanmar",
+        "es": "Myanmar",
+        "de": "Myanmar"
+      },
+      "aliases": [
+        "Burma",
+        "Birmanie",
+        "Birmania",
+        "Birma"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "28",
+        "fr": "28",
+        "es": "28",
+        "de": "28"
+      },
+      "answer": {
+        "en": "Nepal",
+        "fr": "Népal",
+        "es": "Nepal",
+        "de": "Nepal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "29",
+        "fr": "29",
+        "es": "29",
+        "de": "29"
+      },
+      "answer": {
+        "en": "North Korea",
+        "fr": "Corée du Nord",
+        "es": "Corea del Norte",
+        "de": "Nordkorea"
+      },
+      "aliases": [
+        "DPRK",
+        "DPR Korea",
+        "Coree du Nord",
+        "Nordkorea"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "30",
+        "fr": "30",
+        "es": "30",
+        "de": "30"
+      },
+      "answer": {
+        "en": "Oman",
+        "fr": "Oman",
+        "es": "Omán",
+        "de": "Oman"
+      }
+    },
+    {
+      "prompt": {
+        "en": "31",
+        "fr": "31",
+        "es": "31",
+        "de": "31"
+      },
+      "answer": {
+        "en": "Pakistan",
+        "fr": "Pakistan",
+        "es": "Pakistán",
+        "de": "Pakistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "32",
+        "fr": "32",
+        "es": "32",
+        "de": "32"
+      },
+      "answer": {
+        "en": "Palestine",
+        "fr": "Palestine",
+        "es": "Palestina",
+        "de": "Palästina"
+      },
+      "aliases": [
+        "Palestine",
+        "State of Palestine",
+        "Etat de Palestine",
+        "Estado de Palestina",
+        "Palaestina"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "33",
+        "fr": "33",
+        "es": "33",
+        "de": "33"
+      },
+      "answer": {
+        "en": "Philippines",
+        "fr": "Philippines",
+        "es": "Filipinas",
+        "de": "Philippinen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "34",
+        "fr": "34",
+        "es": "34",
+        "de": "34"
+      },
+      "answer": {
+        "en": "Qatar",
+        "fr": "Qatar",
+        "es": "Catar",
+        "de": "Katar"
+      }
+    },
+    {
+      "prompt": {
+        "en": "35",
+        "fr": "35",
+        "es": "35",
+        "de": "35"
+      },
+      "answer": {
+        "en": "Saudi Arabia",
+        "fr": "Arabie saoudite",
+        "es": "Arabia Saudí",
+        "de": "Saudi-Arabien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "36",
+        "fr": "36",
+        "es": "36",
+        "de": "36"
+      },
+      "answer": {
+        "en": "Singapore",
+        "fr": "Singapour",
+        "es": "Singapur",
+        "de": "Singapur"
+      }
+    },
+    {
+      "prompt": {
+        "en": "37",
+        "fr": "37",
+        "es": "37",
+        "de": "37"
+      },
+      "answer": {
+        "en": "South Korea",
+        "fr": "Corée du Sud",
+        "es": "Corea del Sur",
+        "de": "Südkorea"
+      },
+      "aliases": [
+        "Republic of Korea",
+        "Republique de Coree",
+        "Republica de Corea",
+        "Republik Korea"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "38",
+        "fr": "38",
+        "es": "38",
+        "de": "38"
+      },
+      "answer": {
+        "en": "Sri Lanka",
+        "fr": "Sri Lanka",
+        "es": "Sri Lanka",
+        "de": "Sri Lanka"
+      }
+    },
+    {
+      "prompt": {
+        "en": "39",
+        "fr": "39",
+        "es": "39",
+        "de": "39"
+      },
+      "answer": {
+        "en": "Syria",
+        "fr": "Syrie",
+        "es": "Siria",
+        "de": "Syrien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "40",
+        "fr": "40",
+        "es": "40",
+        "de": "40"
+      },
+      "answer": {
+        "en": "Tajikistan",
+        "fr": "Tadjikistan",
+        "es": "Tayikistán",
+        "de": "Tadschikistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "41",
+        "fr": "41",
+        "es": "41",
+        "de": "41"
+      },
+      "answer": {
+        "en": "Thailand",
+        "fr": "Thaïlande",
+        "es": "Tailandia",
+        "de": "Thailand"
+      }
+    },
+    {
+      "prompt": {
+        "en": "42",
+        "fr": "42",
+        "es": "42",
+        "de": "42"
+      },
+      "answer": {
+        "en": "Timor-Leste",
+        "fr": "Timor oriental",
+        "es": "Timor-Leste",
+        "de": "Timor-Leste"
+      },
+      "aliases": [
+        "East Timor",
+        "Timor oriental",
+        "Timor Oriental",
+        "Osttimor"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "43",
+        "fr": "43",
+        "es": "43",
+        "de": "43"
+      },
+      "answer": {
+        "en": "Türkiye",
+        "fr": "Turquie",
+        "es": "Turquía",
+        "de": "Türkei"
+      },
+      "aliases": [
+        "Turkey",
+        "Türkiye",
+        "Turkiye",
+        "Turquie",
+        "Turquia",
+        "Tuerkei"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "44",
+        "fr": "44",
+        "es": "44",
+        "de": "44"
+      },
+      "answer": {
+        "en": "Turkmenistan",
+        "fr": "Turkménistan",
+        "es": "Turkmenistán",
+        "de": "Turkmenistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "45",
+        "fr": "45",
+        "es": "45",
+        "de": "45"
+      },
+      "answer": {
+        "en": "United Arab Emirates",
+        "fr": "Émirats arabes unis",
+        "es": "Emiratos Árabes Unidos",
+        "de": "Vereinigte Arabische Emirate"
+      },
+      "aliases": [
+        "UAE",
+        "EAU",
+        "VAE",
+        "Emirats arabes unis"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "46",
+        "fr": "46",
+        "es": "46",
+        "de": "46"
+      },
+      "answer": {
+        "en": "Uzbekistan",
+        "fr": "Ouzbékistan",
+        "es": "Uzbekistán",
+        "de": "Usbekistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "47",
+        "fr": "47",
+        "es": "47",
+        "de": "47"
+      },
+      "answer": {
+        "en": "Vietnam",
+        "fr": "Viêt Nam",
+        "es": "Vietnam",
+        "de": "Vietnam"
+      }
+    },
+    {
+      "prompt": {
+        "en": "48",
+        "fr": "48",
+        "es": "48",
+        "de": "48"
+      },
+      "answer": {
+        "en": "Yemen",
+        "fr": "Yémen",
+        "es": "Yemen",
+        "de": "Jemen"
+      }
+    }
+  ],
+  "countries-north-america": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Antigua & Barbuda",
+        "fr": "Antigua-et-Barbuda",
+        "es": "Antigua y Barbuda",
+        "de": "Antigua und Barbuda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Bahamas",
+        "fr": "Bahamas",
+        "es": "Bahamas",
+        "de": "Bahamas"
+      },
+      "aliases": [
+        "Bahamas",
+        "The Bahamas"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Barbados",
+        "fr": "Barbade",
+        "es": "Barbados",
+        "de": "Barbados"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Belize",
+        "fr": "Belize",
+        "es": "Belice",
+        "de": "Belize"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Canada",
+        "fr": "Canada",
+        "es": "Canadá",
+        "de": "Kanada"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Costa Rica",
+        "fr": "Costa Rica",
+        "es": "Costa Rica",
+        "de": "Costa Rica"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Cuba",
+        "fr": "Cuba",
+        "es": "Cuba",
+        "de": "Kuba"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Dominica",
+        "fr": "Dominique",
+        "es": "Dominica",
+        "de": "Dominica"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Dominican Republic",
+        "fr": "République dominicaine",
+        "es": "República Dominicana",
+        "de": "Dominikanische Republik"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "El Salvador",
+        "fr": "Salvador",
+        "es": "El Salvador",
+        "de": "El Salvador"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Grenada",
+        "fr": "Grenade",
+        "es": "Granada",
+        "de": "Grenada"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Guatemala",
+        "fr": "Guatemala",
+        "es": "Guatemala",
+        "de": "Guatemala"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Haiti",
+        "fr": "Haïti",
+        "es": "Haití",
+        "de": "Haiti"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Honduras",
+        "fr": "Honduras",
+        "es": "Honduras",
+        "de": "Honduras"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Jamaica",
+        "fr": "Jamaïque",
+        "es": "Jamaica",
+        "de": "Jamaika"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Mexico",
+        "fr": "Mexique",
+        "es": "México",
+        "de": "Mexiko"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Nicaragua",
+        "fr": "Nicaragua",
+        "es": "Nicaragua",
+        "de": "Nicaragua"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Panama",
+        "fr": "Panama",
+        "es": "Panamá",
+        "de": "Panama"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "St. Kitts & Nevis",
+        "fr": "Saint-Christophe-et-Niévès",
+        "es": "San Cristóbal y Nieves",
+        "de": "St. Kitts und Nevis"
+      },
+      "aliases": [
+        "Saint Kitts and Nevis",
+        "St Kitts and Nevis",
+        "Saint Christophe et Nieves"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "St. Lucia",
+        "fr": "Sainte-Lucie",
+        "es": "Santa Lucía",
+        "de": "St. Lucia"
+      },
+      "aliases": [
+        "Saint Lucia",
+        "St Lucia",
+        "Sainte Lucie"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "St. Vincent & Grenadines",
+        "fr": "Saint-Vincent-et-les Grenadines",
+        "es": "San Vicente y las Granadinas",
+        "de": "St. Vincent und die Grenadinen"
+      },
+      "aliases": [
+        "Saint Vincent and the Grenadines",
+        "St Vincent and the Grenadines",
+        "Saint Vincent et les Grenadines"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Trinidad & Tobago",
+        "fr": "Trinité-et-Tobago",
+        "es": "Trinidad y Tobago",
+        "de": "Trinidad und Tobago"
+      }
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "United States",
+        "fr": "États-Unis",
+        "es": "Estados Unidos",
+        "de": "Vereinigte Staaten"
+      },
+      "aliases": [
+        "USA",
+        "US",
+        "United States of America",
+        "Etats Unis",
+        "EEUU",
+        "Estados Unidos de America",
+        "Vereinigte Staaten von Amerika"
+      ]
+    }
+  ],
+  "countries-south-america": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Argentina",
+        "fr": "Argentine",
+        "es": "Argentina",
+        "de": "Argentinien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Bolivia",
+        "fr": "Bolivie",
+        "es": "Bolivia",
+        "de": "Bolivien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Brazil",
+        "fr": "Brésil",
+        "es": "Brasil",
+        "de": "Brasilien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Chile",
+        "fr": "Chili",
+        "es": "Chile",
+        "de": "Chile"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Colombia",
+        "fr": "Colombie",
+        "es": "Colombia",
+        "de": "Kolumbien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Ecuador",
+        "fr": "Équateur",
+        "es": "Ecuador",
+        "de": "Ecuador"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Guyana",
+        "fr": "Guyana",
+        "es": "Guyana",
+        "de": "Guyana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Paraguay",
+        "fr": "Paraguay",
+        "es": "Paraguay",
+        "de": "Paraguay"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Peru",
+        "fr": "Pérou",
+        "es": "Perú",
+        "de": "Peru"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Suriname",
+        "fr": "Suriname",
+        "es": "Surinam",
+        "de": "Suriname"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Uruguay",
+        "fr": "Uruguay",
+        "es": "Uruguay",
+        "de": "Uruguay"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Venezuela",
+        "fr": "Venezuela",
+        "es": "Venezuela",
+        "de": "Venezuela"
+      }
+    }
+  ],
+  "countries-oceania": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Australia",
+        "fr": "Australie",
+        "es": "Australia",
+        "de": "Australien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Fiji",
+        "fr": "Fidji",
+        "es": "Fiyi",
+        "de": "Fidschi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Kiribati",
+        "fr": "Kiribati",
+        "es": "Kiribati",
+        "de": "Kiribati"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Marshall Islands",
+        "fr": "Îles Marshall",
+        "es": "Islas Marshall",
+        "de": "Marshallinseln"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Micronesia",
+        "fr": "Micronésie",
+        "es": "Micronesia",
+        "de": "Mikronesien"
+      },
+      "aliases": [
+        "Micronesia",
+        "Micronesie",
+        "Mikronesien"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Nauru",
+        "fr": "Nauru",
+        "es": "Nauru",
+        "de": "Nauru"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "New Zealand",
+        "fr": "Nouvelle-Zélande",
+        "es": "Nueva Zelanda",
+        "de": "Neuseeland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Palau",
+        "fr": "Palaos",
+        "es": "Palaos",
+        "de": "Palau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Papua New Guinea",
+        "fr": "Papouasie-Nouvelle-Guinée",
+        "es": "Papúa Nueva Guinea",
+        "de": "Papua-Neuguinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Samoa",
+        "fr": "Samoa",
+        "es": "Samoa",
+        "de": "Samoa"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Solomon Islands",
+        "fr": "Îles Salomon",
+        "es": "Islas Salomón",
+        "de": "Salomonen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Tonga",
+        "fr": "Tonga",
+        "es": "Tonga",
+        "de": "Tonga"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Tuvalu",
+        "fr": "Tuvalu",
+        "es": "Tuvalu",
+        "de": "Tuvalu"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Vanuatu",
+        "fr": "Vanuatu",
+        "es": "Vanuatu",
+        "de": "Vanuatu"
+      }
+    }
+  ],
+  "countries-world": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Andorra",
+        "fr": "Andorre",
+        "es": "Andorra",
+        "de": "Andorra"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "United Arab Emirates",
+        "fr": "Émirats arabes unis",
+        "es": "Emiratos Árabes Unidos",
+        "de": "Vereinigte Arabische Emirate"
+      },
+      "aliases": [
+        "UAE",
+        "EAU",
+        "VAE",
+        "Emirats arabes unis"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Afghanistan",
+        "fr": "Afghanistan",
+        "es": "Afganistán",
+        "de": "Afghanistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Antigua & Barbuda",
+        "fr": "Antigua-et-Barbuda",
+        "es": "Antigua y Barbuda",
+        "de": "Antigua und Barbuda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Albania",
+        "fr": "Albanie",
+        "es": "Albania",
+        "de": "Albanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Armenia",
+        "fr": "Arménie",
+        "es": "Armenia",
+        "de": "Armenien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Angola",
+        "fr": "Angola",
+        "es": "Angola",
+        "de": "Angola"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Argentina",
+        "fr": "Argentine",
+        "es": "Argentina",
+        "de": "Argentinien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Austria",
+        "fr": "Autriche",
+        "es": "Austria",
+        "de": "Österreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Australia",
+        "fr": "Australie",
+        "es": "Australia",
+        "de": "Australien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Azerbaijan",
+        "fr": "Azerbaïdjan",
+        "es": "Azerbaiyán",
+        "de": "Aserbaidschan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Bosnia & Herzegovina",
+        "fr": "Bosnie-Herzégovine",
+        "es": "Bosnia y Herzegovina",
+        "de": "Bosnien und Herzegowina"
+      },
+      "aliases": [
+        "Bosnia",
+        "Bosnie",
+        "Bosnia Herzegovina",
+        "Bosnien Herzegowina"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Barbados",
+        "fr": "Barbade",
+        "es": "Barbados",
+        "de": "Barbados"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Bangladesh",
+        "fr": "Bangladesh",
+        "es": "Bangladés",
+        "de": "Bangladesch"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Belgium",
+        "fr": "Belgique",
+        "es": "Bélgica",
+        "de": "Belgien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Burkina Faso",
+        "fr": "Burkina Faso",
+        "es": "Burkina Faso",
+        "de": "Burkina Faso"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Bulgaria",
+        "fr": "Bulgarie",
+        "es": "Bulgaria",
+        "de": "Bulgarien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Bahrain",
+        "fr": "Bahreïn",
+        "es": "Baréin",
+        "de": "Bahrain"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Burundi",
+        "fr": "Burundi",
+        "es": "Burundi",
+        "de": "Burundi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Benin",
+        "fr": "Bénin",
+        "es": "Benín",
+        "de": "Benin"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Brunei",
+        "fr": "Brunei",
+        "es": "Brunéi",
+        "de": "Brunei Darussalam"
+      },
+      "aliases": [
+        "Brunei",
+        "Brunei Darussalam"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Bolivia",
+        "fr": "Bolivie",
+        "es": "Bolivia",
+        "de": "Bolivien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Brazil",
+        "fr": "Brésil",
+        "es": "Brasil",
+        "de": "Brasilien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Bahamas",
+        "fr": "Bahamas",
+        "es": "Bahamas",
+        "de": "Bahamas"
+      },
+      "aliases": [
+        "Bahamas",
+        "The Bahamas"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Bhutan",
+        "fr": "Bhoutan",
+        "es": "Bután",
+        "de": "Bhutan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Botswana",
+        "fr": "Botswana",
+        "es": "Botsuana",
+        "de": "Botsuana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Belarus",
+        "fr": "Biélorussie",
+        "es": "Bielorrusia",
+        "de": "Belarus"
+      }
+    },
+    {
+      "prompt": {
+        "en": "28",
+        "fr": "28",
+        "es": "28",
+        "de": "28"
+      },
+      "answer": {
+        "en": "Belize",
+        "fr": "Belize",
+        "es": "Belice",
+        "de": "Belize"
+      }
+    },
+    {
+      "prompt": {
+        "en": "29",
+        "fr": "29",
+        "es": "29",
+        "de": "29"
+      },
+      "answer": {
+        "en": "Canada",
+        "fr": "Canada",
+        "es": "Canadá",
+        "de": "Kanada"
+      }
+    },
+    {
+      "prompt": {
+        "en": "30",
+        "fr": "30",
+        "es": "30",
+        "de": "30"
+      },
+      "answer": {
+        "en": "Democratic Republic of the Congo",
+        "fr": "Congo-Kinshasa",
+        "es": "República Democrática del Congo",
+        "de": "Demokratische Republik Kongo"
+      },
+      "aliases": [
+        "DR Congo",
+        "DRC",
+        "RD Congo",
+        "RDC",
+        "Congo Kinshasa",
+        "Democratic Republic of Congo",
+        "République démocratique du Congo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "31",
+        "fr": "31",
+        "es": "31",
+        "de": "31"
+      },
+      "answer": {
+        "en": "Central African Republic",
+        "fr": "République centrafricaine",
+        "es": "República Centroafricana",
+        "de": "Zentralafrikanische Republik"
+      },
+      "aliases": [
+        "CAR",
+        "RCA",
+        "Centrafrique"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "32",
+        "fr": "32",
+        "es": "32",
+        "de": "32"
+      },
+      "answer": {
+        "en": "Republic of the Congo",
+        "fr": "Congo-Brazzaville",
+        "es": "República del Congo",
+        "de": "Republik Kongo"
+      },
+      "aliases": [
+        "Congo Brazzaville",
+        "Congo Republic",
+        "Republic of Congo",
+        "République du Congo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "33",
+        "fr": "33",
+        "es": "33",
+        "de": "33"
+      },
+      "answer": {
+        "en": "Switzerland",
+        "fr": "Suisse",
+        "es": "Suiza",
+        "de": "Schweiz"
+      }
+    },
+    {
+      "prompt": {
+        "en": "34",
+        "fr": "34",
+        "es": "34",
+        "de": "34"
+      },
+      "answer": {
+        "en": "Côte d’Ivoire",
+        "fr": "Côte d’Ivoire",
+        "es": "Côte d’Ivoire",
+        "de": "Côte d’Ivoire"
+      },
+      "aliases": [
+        "Ivory Coast",
+        "Cote Ivoire",
+        "Costa de Marfil",
+        "Elfenbeinkueste"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "35",
+        "fr": "35",
+        "es": "35",
+        "de": "35"
+      },
+      "answer": {
+        "en": "Chile",
+        "fr": "Chili",
+        "es": "Chile",
+        "de": "Chile"
+      }
+    },
+    {
+      "prompt": {
+        "en": "36",
+        "fr": "36",
+        "es": "36",
+        "de": "36"
+      },
+      "answer": {
+        "en": "Cameroon",
+        "fr": "Cameroun",
+        "es": "Camerún",
+        "de": "Kamerun"
+      }
+    },
+    {
+      "prompt": {
+        "en": "37",
+        "fr": "37",
+        "es": "37",
+        "de": "37"
+      },
+      "answer": {
+        "en": "China",
+        "fr": "Chine",
+        "es": "China",
+        "de": "China"
+      }
+    },
+    {
+      "prompt": {
+        "en": "38",
+        "fr": "38",
+        "es": "38",
+        "de": "38"
+      },
+      "answer": {
+        "en": "Colombia",
+        "fr": "Colombie",
+        "es": "Colombia",
+        "de": "Kolumbien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "39",
+        "fr": "39",
+        "es": "39",
+        "de": "39"
+      },
+      "answer": {
+        "en": "Costa Rica",
+        "fr": "Costa Rica",
+        "es": "Costa Rica",
+        "de": "Costa Rica"
+      }
+    },
+    {
+      "prompt": {
+        "en": "40",
+        "fr": "40",
+        "es": "40",
+        "de": "40"
+      },
+      "answer": {
+        "en": "Cuba",
+        "fr": "Cuba",
+        "es": "Cuba",
+        "de": "Kuba"
+      }
+    },
+    {
+      "prompt": {
+        "en": "41",
+        "fr": "41",
+        "es": "41",
+        "de": "41"
+      },
+      "answer": {
+        "en": "Cape Verde",
+        "fr": "Cap-Vert",
+        "es": "Cabo Verde",
+        "de": "Cabo Verde"
+      },
+      "aliases": [
+        "Cape Verde",
+        "Cap Vert",
+        "Kap Verde"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "42",
+        "fr": "42",
+        "es": "42",
+        "de": "42"
+      },
+      "answer": {
+        "en": "Cyprus",
+        "fr": "Chypre",
+        "es": "Chipre",
+        "de": "Zypern"
+      }
+    },
+    {
+      "prompt": {
+        "en": "43",
+        "fr": "43",
+        "es": "43",
+        "de": "43"
+      },
+      "answer": {
+        "en": "Czechia",
+        "fr": "Tchéquie",
+        "es": "Chequia",
+        "de": "Tschechien"
+      },
+      "aliases": [
+        "Czech Republic",
+        "Republique tcheque",
+        "Republica Checa",
+        "Tschechische Republik"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "44",
+        "fr": "44",
+        "es": "44",
+        "de": "44"
+      },
+      "answer": {
+        "en": "Germany",
+        "fr": "Allemagne",
+        "es": "Alemania",
+        "de": "Deutschland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "45",
+        "fr": "45",
+        "es": "45",
+        "de": "45"
+      },
+      "answer": {
+        "en": "Djibouti",
+        "fr": "Djibouti",
+        "es": "Yibuti",
+        "de": "Dschibuti"
+      }
+    },
+    {
+      "prompt": {
+        "en": "46",
+        "fr": "46",
+        "es": "46",
+        "de": "46"
+      },
+      "answer": {
+        "en": "Denmark",
+        "fr": "Danemark",
+        "es": "Dinamarca",
+        "de": "Dänemark"
+      }
+    },
+    {
+      "prompt": {
+        "en": "47",
+        "fr": "47",
+        "es": "47",
+        "de": "47"
+      },
+      "answer": {
+        "en": "Dominica",
+        "fr": "Dominique",
+        "es": "Dominica",
+        "de": "Dominica"
+      }
+    },
+    {
+      "prompt": {
+        "en": "48",
+        "fr": "48",
+        "es": "48",
+        "de": "48"
+      },
+      "answer": {
+        "en": "Dominican Republic",
+        "fr": "République dominicaine",
+        "es": "República Dominicana",
+        "de": "Dominikanische Republik"
+      }
+    },
+    {
+      "prompt": {
+        "en": "49",
+        "fr": "49",
+        "es": "49",
+        "de": "49"
+      },
+      "answer": {
+        "en": "Algeria",
+        "fr": "Algérie",
+        "es": "Argelia",
+        "de": "Algerien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "50",
+        "fr": "50",
+        "es": "50",
+        "de": "50"
+      },
+      "answer": {
+        "en": "Ecuador",
+        "fr": "Équateur",
+        "es": "Ecuador",
+        "de": "Ecuador"
+      }
+    },
+    {
+      "prompt": {
+        "en": "51",
+        "fr": "51",
+        "es": "51",
+        "de": "51"
+      },
+      "answer": {
+        "en": "Estonia",
+        "fr": "Estonie",
+        "es": "Estonia",
+        "de": "Estland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "52",
+        "fr": "52",
+        "es": "52",
+        "de": "52"
+      },
+      "answer": {
+        "en": "Egypt",
+        "fr": "Égypte",
+        "es": "Egipto",
+        "de": "Ägypten"
+      }
+    },
+    {
+      "prompt": {
+        "en": "53",
+        "fr": "53",
+        "es": "53",
+        "de": "53"
+      },
+      "answer": {
+        "en": "Eritrea",
+        "fr": "Érythrée",
+        "es": "Eritrea",
+        "de": "Eritrea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "54",
+        "fr": "54",
+        "es": "54",
+        "de": "54"
+      },
+      "answer": {
+        "en": "Spain",
+        "fr": "Espagne",
+        "es": "España",
+        "de": "Spanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "55",
+        "fr": "55",
+        "es": "55",
+        "de": "55"
+      },
+      "answer": {
+        "en": "Ethiopia",
+        "fr": "Éthiopie",
+        "es": "Etiopía",
+        "de": "Äthiopien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "56",
+        "fr": "56",
+        "es": "56",
+        "de": "56"
+      },
+      "answer": {
+        "en": "Finland",
+        "fr": "Finlande",
+        "es": "Finlandia",
+        "de": "Finnland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "57",
+        "fr": "57",
+        "es": "57",
+        "de": "57"
+      },
+      "answer": {
+        "en": "Fiji",
+        "fr": "Fidji",
+        "es": "Fiyi",
+        "de": "Fidschi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "58",
+        "fr": "58",
+        "es": "58",
+        "de": "58"
+      },
+      "answer": {
+        "en": "Micronesia",
+        "fr": "Micronésie",
+        "es": "Micronesia",
+        "de": "Mikronesien"
+      },
+      "aliases": [
+        "Micronesia",
+        "Micronesie",
+        "Mikronesien"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "59",
+        "fr": "59",
+        "es": "59",
+        "de": "59"
+      },
+      "answer": {
+        "en": "France",
+        "fr": "France",
+        "es": "Francia",
+        "de": "Frankreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "60",
+        "fr": "60",
+        "es": "60",
+        "de": "60"
+      },
+      "answer": {
+        "en": "Gabon",
+        "fr": "Gabon",
+        "es": "Gabón",
+        "de": "Gabun"
+      }
+    },
+    {
+      "prompt": {
+        "en": "61",
+        "fr": "61",
+        "es": "61",
+        "de": "61"
+      },
+      "answer": {
+        "en": "United Kingdom",
+        "fr": "Royaume-Uni",
+        "es": "Reino Unido",
+        "de": "Vereinigtes Königreich"
+      },
+      "aliases": [
+        "UK",
+        "United Kingdom",
+        "Great Britain",
+        "Grande Bretagne",
+        "Gran Bretaña",
+        "Grossbritannien",
+        "Royaume Uni",
+        "Vereinigtes Koenigreich"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "62",
+        "fr": "62",
+        "es": "62",
+        "de": "62"
+      },
+      "answer": {
+        "en": "Grenada",
+        "fr": "Grenade",
+        "es": "Granada",
+        "de": "Grenada"
+      }
+    },
+    {
+      "prompt": {
+        "en": "63",
+        "fr": "63",
+        "es": "63",
+        "de": "63"
+      },
+      "answer": {
+        "en": "Georgia",
+        "fr": "Géorgie",
+        "es": "Georgia",
+        "de": "Georgien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "64",
+        "fr": "64",
+        "es": "64",
+        "de": "64"
+      },
+      "answer": {
+        "en": "Ghana",
+        "fr": "Ghana",
+        "es": "Ghana",
+        "de": "Ghana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "65",
+        "fr": "65",
+        "es": "65",
+        "de": "65"
+      },
+      "answer": {
+        "en": "Gambia",
+        "fr": "Gambie",
+        "es": "Gambia",
+        "de": "Gambia"
+      },
+      "aliases": [
+        "Gambia",
+        "The Gambia"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "66",
+        "fr": "66",
+        "es": "66",
+        "de": "66"
+      },
+      "answer": {
+        "en": "Guinea",
+        "fr": "Guinée",
+        "es": "Guinea",
+        "de": "Guinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "67",
+        "fr": "67",
+        "es": "67",
+        "de": "67"
+      },
+      "answer": {
+        "en": "Equatorial Guinea",
+        "fr": "Guinée équatoriale",
+        "es": "Guinea Ecuatorial",
+        "de": "Äquatorialguinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "68",
+        "fr": "68",
+        "es": "68",
+        "de": "68"
+      },
+      "answer": {
+        "en": "Greece",
+        "fr": "Grèce",
+        "es": "Grecia",
+        "de": "Griechenland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "69",
+        "fr": "69",
+        "es": "69",
+        "de": "69"
+      },
+      "answer": {
+        "en": "Guatemala",
+        "fr": "Guatemala",
+        "es": "Guatemala",
+        "de": "Guatemala"
+      }
+    },
+    {
+      "prompt": {
+        "en": "70",
+        "fr": "70",
+        "es": "70",
+        "de": "70"
+      },
+      "answer": {
+        "en": "Guinea-Bissau",
+        "fr": "Guinée-Bissau",
+        "es": "Guinea-Bisáu",
+        "de": "Guinea-Bissau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "71",
+        "fr": "71",
+        "es": "71",
+        "de": "71"
+      },
+      "answer": {
+        "en": "Guyana",
+        "fr": "Guyana",
+        "es": "Guyana",
+        "de": "Guyana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "72",
+        "fr": "72",
+        "es": "72",
+        "de": "72"
+      },
+      "answer": {
+        "en": "Honduras",
+        "fr": "Honduras",
+        "es": "Honduras",
+        "de": "Honduras"
+      }
+    },
+    {
+      "prompt": {
+        "en": "73",
+        "fr": "73",
+        "es": "73",
+        "de": "73"
+      },
+      "answer": {
+        "en": "Croatia",
+        "fr": "Croatie",
+        "es": "Croacia",
+        "de": "Kroatien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "74",
+        "fr": "74",
+        "es": "74",
+        "de": "74"
+      },
+      "answer": {
+        "en": "Haiti",
+        "fr": "Haïti",
+        "es": "Haití",
+        "de": "Haiti"
+      }
+    },
+    {
+      "prompt": {
+        "en": "75",
+        "fr": "75",
+        "es": "75",
+        "de": "75"
+      },
+      "answer": {
+        "en": "Hungary",
+        "fr": "Hongrie",
+        "es": "Hungría",
+        "de": "Ungarn"
+      }
+    },
+    {
+      "prompt": {
+        "en": "76",
+        "fr": "76",
+        "es": "76",
+        "de": "76"
+      },
+      "answer": {
+        "en": "Indonesia",
+        "fr": "Indonésie",
+        "es": "Indonesia",
+        "de": "Indonesien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "77",
+        "fr": "77",
+        "es": "77",
+        "de": "77"
+      },
+      "answer": {
+        "en": "Ireland",
+        "fr": "Irlande",
+        "es": "Irlanda",
+        "de": "Irland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "78",
+        "fr": "78",
+        "es": "78",
+        "de": "78"
+      },
+      "answer": {
+        "en": "Israel",
+        "fr": "Israël",
+        "es": "Israel",
+        "de": "Israel"
+      }
+    },
+    {
+      "prompt": {
+        "en": "79",
+        "fr": "79",
+        "es": "79",
+        "de": "79"
+      },
+      "answer": {
+        "en": "India",
+        "fr": "Inde",
+        "es": "India",
+        "de": "Indien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "80",
+        "fr": "80",
+        "es": "80",
+        "de": "80"
+      },
+      "answer": {
+        "en": "Iraq",
+        "fr": "Irak",
+        "es": "Irak",
+        "de": "Irak"
+      }
+    },
+    {
+      "prompt": {
+        "en": "81",
+        "fr": "81",
+        "es": "81",
+        "de": "81"
+      },
+      "answer": {
+        "en": "Iran",
+        "fr": "Iran",
+        "es": "Irán",
+        "de": "Iran"
+      }
+    },
+    {
+      "prompt": {
+        "en": "82",
+        "fr": "82",
+        "es": "82",
+        "de": "82"
+      },
+      "answer": {
+        "en": "Iceland",
+        "fr": "Islande",
+        "es": "Islandia",
+        "de": "Island"
+      }
+    },
+    {
+      "prompt": {
+        "en": "83",
+        "fr": "83",
+        "es": "83",
+        "de": "83"
+      },
+      "answer": {
+        "en": "Italy",
+        "fr": "Italie",
+        "es": "Italia",
+        "de": "Italien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "84",
+        "fr": "84",
+        "es": "84",
+        "de": "84"
+      },
+      "answer": {
+        "en": "Jamaica",
+        "fr": "Jamaïque",
+        "es": "Jamaica",
+        "de": "Jamaika"
+      }
+    },
+    {
+      "prompt": {
+        "en": "85",
+        "fr": "85",
+        "es": "85",
+        "de": "85"
+      },
+      "answer": {
+        "en": "Jordan",
+        "fr": "Jordanie",
+        "es": "Jordania",
+        "de": "Jordanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "86",
+        "fr": "86",
+        "es": "86",
+        "de": "86"
+      },
+      "answer": {
+        "en": "Japan",
+        "fr": "Japon",
+        "es": "Japón",
+        "de": "Japan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "87",
+        "fr": "87",
+        "es": "87",
+        "de": "87"
+      },
+      "answer": {
+        "en": "Kenya",
+        "fr": "Kenya",
+        "es": "Kenia",
+        "de": "Kenia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "88",
+        "fr": "88",
+        "es": "88",
+        "de": "88"
+      },
+      "answer": {
+        "en": "Kyrgyzstan",
+        "fr": "Kirghizstan",
+        "es": "Kirguistán",
+        "de": "Kirgisistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "89",
+        "fr": "89",
+        "es": "89",
+        "de": "89"
+      },
+      "answer": {
+        "en": "Cambodia",
+        "fr": "Cambodge",
+        "es": "Camboya",
+        "de": "Kambodscha"
+      }
+    },
+    {
+      "prompt": {
+        "en": "90",
+        "fr": "90",
+        "es": "90",
+        "de": "90"
+      },
+      "answer": {
+        "en": "Kiribati",
+        "fr": "Kiribati",
+        "es": "Kiribati",
+        "de": "Kiribati"
+      }
+    },
+    {
+      "prompt": {
+        "en": "91",
+        "fr": "91",
+        "es": "91",
+        "de": "91"
+      },
+      "answer": {
+        "en": "Comoros",
+        "fr": "Comores",
+        "es": "Comoras",
+        "de": "Komoren"
+      }
+    },
+    {
+      "prompt": {
+        "en": "92",
+        "fr": "92",
+        "es": "92",
+        "de": "92"
+      },
+      "answer": {
+        "en": "St. Kitts & Nevis",
+        "fr": "Saint-Christophe-et-Niévès",
+        "es": "San Cristóbal y Nieves",
+        "de": "St. Kitts und Nevis"
+      },
+      "aliases": [
+        "Saint Kitts and Nevis",
+        "St Kitts and Nevis",
+        "Saint Christophe et Nieves"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "93",
+        "fr": "93",
+        "es": "93",
+        "de": "93"
+      },
+      "answer": {
+        "en": "North Korea",
+        "fr": "Corée du Nord",
+        "es": "Corea del Norte",
+        "de": "Nordkorea"
+      },
+      "aliases": [
+        "DPRK",
+        "DPR Korea",
+        "Coree du Nord",
+        "Nordkorea"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "94",
+        "fr": "94",
+        "es": "94",
+        "de": "94"
+      },
+      "answer": {
+        "en": "South Korea",
+        "fr": "Corée du Sud",
+        "es": "Corea del Sur",
+        "de": "Südkorea"
+      },
+      "aliases": [
+        "Republic of Korea",
+        "Republique de Coree",
+        "Republica de Corea",
+        "Republik Korea"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "95",
+        "fr": "95",
+        "es": "95",
+        "de": "95"
+      },
+      "answer": {
+        "en": "Kuwait",
+        "fr": "Koweït",
+        "es": "Kuwait",
+        "de": "Kuwait"
+      }
+    },
+    {
+      "prompt": {
+        "en": "96",
+        "fr": "96",
+        "es": "96",
+        "de": "96"
+      },
+      "answer": {
+        "en": "Kazakhstan",
+        "fr": "Kazakhstan",
+        "es": "Kazajistán",
+        "de": "Kasachstan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "97",
+        "fr": "97",
+        "es": "97",
+        "de": "97"
+      },
+      "answer": {
+        "en": "Laos",
+        "fr": "Laos",
+        "es": "Laos",
+        "de": "Laos"
+      },
+      "aliases": [
+        "Laos",
+        "Lao PDR"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "98",
+        "fr": "98",
+        "es": "98",
+        "de": "98"
+      },
+      "answer": {
+        "en": "Lebanon",
+        "fr": "Liban",
+        "es": "Líbano",
+        "de": "Libanon"
+      }
+    },
+    {
+      "prompt": {
+        "en": "99",
+        "fr": "99",
+        "es": "99",
+        "de": "99"
+      },
+      "answer": {
+        "en": "St. Lucia",
+        "fr": "Sainte-Lucie",
+        "es": "Santa Lucía",
+        "de": "St. Lucia"
+      },
+      "aliases": [
+        "Saint Lucia",
+        "St Lucia",
+        "Sainte Lucie"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "100",
+        "fr": "100",
+        "es": "100",
+        "de": "100"
+      },
+      "answer": {
+        "en": "Liechtenstein",
+        "fr": "Liechtenstein",
+        "es": "Liechtenstein",
+        "de": "Liechtenstein"
+      }
+    },
+    {
+      "prompt": {
+        "en": "101",
+        "fr": "101",
+        "es": "101",
+        "de": "101"
+      },
+      "answer": {
+        "en": "Sri Lanka",
+        "fr": "Sri Lanka",
+        "es": "Sri Lanka",
+        "de": "Sri Lanka"
+      }
+    },
+    {
+      "prompt": {
+        "en": "102",
+        "fr": "102",
+        "es": "102",
+        "de": "102"
+      },
+      "answer": {
+        "en": "Liberia",
+        "fr": "Liberia",
+        "es": "Liberia",
+        "de": "Liberia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "103",
+        "fr": "103",
+        "es": "103",
+        "de": "103"
+      },
+      "answer": {
+        "en": "Lesotho",
+        "fr": "Lesotho",
+        "es": "Lesoto",
+        "de": "Lesotho"
+      }
+    },
+    {
+      "prompt": {
+        "en": "104",
+        "fr": "104",
+        "es": "104",
+        "de": "104"
+      },
+      "answer": {
+        "en": "Lithuania",
+        "fr": "Lituanie",
+        "es": "Lituania",
+        "de": "Litauen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "105",
+        "fr": "105",
+        "es": "105",
+        "de": "105"
+      },
+      "answer": {
+        "en": "Luxembourg",
+        "fr": "Luxembourg",
+        "es": "Luxemburgo",
+        "de": "Luxemburg"
+      }
+    },
+    {
+      "prompt": {
+        "en": "106",
+        "fr": "106",
+        "es": "106",
+        "de": "106"
+      },
+      "answer": {
+        "en": "Latvia",
+        "fr": "Lettonie",
+        "es": "Letonia",
+        "de": "Lettland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "107",
+        "fr": "107",
+        "es": "107",
+        "de": "107"
+      },
+      "answer": {
+        "en": "Libya",
+        "fr": "Libye",
+        "es": "Libia",
+        "de": "Libyen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "108",
+        "fr": "108",
+        "es": "108",
+        "de": "108"
+      },
+      "answer": {
+        "en": "Morocco",
+        "fr": "Maroc",
+        "es": "Marruecos",
+        "de": "Marokko"
+      }
+    },
+    {
+      "prompt": {
+        "en": "109",
+        "fr": "109",
+        "es": "109",
+        "de": "109"
+      },
+      "answer": {
+        "en": "Monaco",
+        "fr": "Monaco",
+        "es": "Mónaco",
+        "de": "Monaco"
+      }
+    },
+    {
+      "prompt": {
+        "en": "110",
+        "fr": "110",
+        "es": "110",
+        "de": "110"
+      },
+      "answer": {
+        "en": "Moldova",
+        "fr": "Moldavie",
+        "es": "Moldavia",
+        "de": "Republik Moldau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "111",
+        "fr": "111",
+        "es": "111",
+        "de": "111"
+      },
+      "answer": {
+        "en": "Montenegro",
+        "fr": "Monténégro",
+        "es": "Montenegro",
+        "de": "Montenegro"
+      }
+    },
+    {
+      "prompt": {
+        "en": "112",
+        "fr": "112",
+        "es": "112",
+        "de": "112"
+      },
+      "answer": {
+        "en": "Madagascar",
+        "fr": "Madagascar",
+        "es": "Madagascar",
+        "de": "Madagaskar"
+      }
+    },
+    {
+      "prompt": {
+        "en": "113",
+        "fr": "113",
+        "es": "113",
+        "de": "113"
+      },
+      "answer": {
+        "en": "Marshall Islands",
+        "fr": "Îles Marshall",
+        "es": "Islas Marshall",
+        "de": "Marshallinseln"
+      }
+    },
+    {
+      "prompt": {
+        "en": "114",
+        "fr": "114",
+        "es": "114",
+        "de": "114"
+      },
+      "answer": {
+        "en": "North Macedonia",
+        "fr": "Macédoine du Nord",
+        "es": "Macedonia del Norte",
+        "de": "Nordmazedonien"
+      },
+      "aliases": [
+        "Macedonia",
+        "Macedoine",
+        "Mazedonien"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "115",
+        "fr": "115",
+        "es": "115",
+        "de": "115"
+      },
+      "answer": {
+        "en": "Mali",
+        "fr": "Mali",
+        "es": "Mali",
+        "de": "Mali"
+      }
+    },
+    {
+      "prompt": {
+        "en": "116",
+        "fr": "116",
+        "es": "116",
+        "de": "116"
+      },
+      "answer": {
+        "en": "Myanmar",
+        "fr": "Myanmar",
+        "es": "Myanmar",
+        "de": "Myanmar"
+      },
+      "aliases": [
+        "Burma",
+        "Birmanie",
+        "Birmania",
+        "Birma"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "117",
+        "fr": "117",
+        "es": "117",
+        "de": "117"
+      },
+      "answer": {
+        "en": "Mongolia",
+        "fr": "Mongolie",
+        "es": "Mongolia",
+        "de": "Mongolei"
+      }
+    },
+    {
+      "prompt": {
+        "en": "118",
+        "fr": "118",
+        "es": "118",
+        "de": "118"
+      },
+      "answer": {
+        "en": "Mauritania",
+        "fr": "Mauritanie",
+        "es": "Mauritania",
+        "de": "Mauretanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "119",
+        "fr": "119",
+        "es": "119",
+        "de": "119"
+      },
+      "answer": {
+        "en": "Malta",
+        "fr": "Malte",
+        "es": "Malta",
+        "de": "Malta"
+      }
+    },
+    {
+      "prompt": {
+        "en": "120",
+        "fr": "120",
+        "es": "120",
+        "de": "120"
+      },
+      "answer": {
+        "en": "Mauritius",
+        "fr": "Maurice",
+        "es": "Mauricio",
+        "de": "Mauritius"
+      }
+    },
+    {
+      "prompt": {
+        "en": "121",
+        "fr": "121",
+        "es": "121",
+        "de": "121"
+      },
+      "answer": {
+        "en": "Maldives",
+        "fr": "Maldives",
+        "es": "Maldivas",
+        "de": "Malediven"
+      }
+    },
+    {
+      "prompt": {
+        "en": "122",
+        "fr": "122",
+        "es": "122",
+        "de": "122"
+      },
+      "answer": {
+        "en": "Malawi",
+        "fr": "Malawi",
+        "es": "Malaui",
+        "de": "Malawi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "123",
+        "fr": "123",
+        "es": "123",
+        "de": "123"
+      },
+      "answer": {
+        "en": "Mexico",
+        "fr": "Mexique",
+        "es": "México",
+        "de": "Mexiko"
+      }
+    },
+    {
+      "prompt": {
+        "en": "124",
+        "fr": "124",
+        "es": "124",
+        "de": "124"
+      },
+      "answer": {
+        "en": "Malaysia",
+        "fr": "Malaisie",
+        "es": "Malasia",
+        "de": "Malaysia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "125",
+        "fr": "125",
+        "es": "125",
+        "de": "125"
+      },
+      "answer": {
+        "en": "Mozambique",
+        "fr": "Mozambique",
+        "es": "Mozambique",
+        "de": "Mosambik"
+      }
+    },
+    {
+      "prompt": {
+        "en": "126",
+        "fr": "126",
+        "es": "126",
+        "de": "126"
+      },
+      "answer": {
+        "en": "Namibia",
+        "fr": "Namibie",
+        "es": "Namibia",
+        "de": "Namibia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "127",
+        "fr": "127",
+        "es": "127",
+        "de": "127"
+      },
+      "answer": {
+        "en": "Niger",
+        "fr": "Niger",
+        "es": "Níger",
+        "de": "Niger"
+      }
+    },
+    {
+      "prompt": {
+        "en": "128",
+        "fr": "128",
+        "es": "128",
+        "de": "128"
+      },
+      "answer": {
+        "en": "Nigeria",
+        "fr": "Nigeria",
+        "es": "Nigeria",
+        "de": "Nigeria"
+      }
+    },
+    {
+      "prompt": {
+        "en": "129",
+        "fr": "129",
+        "es": "129",
+        "de": "129"
+      },
+      "answer": {
+        "en": "Nicaragua",
+        "fr": "Nicaragua",
+        "es": "Nicaragua",
+        "de": "Nicaragua"
+      }
+    },
+    {
+      "prompt": {
+        "en": "130",
+        "fr": "130",
+        "es": "130",
+        "de": "130"
+      },
+      "answer": {
+        "en": "Netherlands",
+        "fr": "Pays-Bas",
+        "es": "Países Bajos",
+        "de": "Niederlande"
+      }
+    },
+    {
+      "prompt": {
+        "en": "131",
+        "fr": "131",
+        "es": "131",
+        "de": "131"
+      },
+      "answer": {
+        "en": "Norway",
+        "fr": "Norvège",
+        "es": "Noruega",
+        "de": "Norwegen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "132",
+        "fr": "132",
+        "es": "132",
+        "de": "132"
+      },
+      "answer": {
+        "en": "Nepal",
+        "fr": "Népal",
+        "es": "Nepal",
+        "de": "Nepal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "133",
+        "fr": "133",
+        "es": "133",
+        "de": "133"
+      },
+      "answer": {
+        "en": "Nauru",
+        "fr": "Nauru",
+        "es": "Nauru",
+        "de": "Nauru"
+      }
+    },
+    {
+      "prompt": {
+        "en": "134",
+        "fr": "134",
+        "es": "134",
+        "de": "134"
+      },
+      "answer": {
+        "en": "New Zealand",
+        "fr": "Nouvelle-Zélande",
+        "es": "Nueva Zelanda",
+        "de": "Neuseeland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "135",
+        "fr": "135",
+        "es": "135",
+        "de": "135"
+      },
+      "answer": {
+        "en": "Oman",
+        "fr": "Oman",
+        "es": "Omán",
+        "de": "Oman"
+      }
+    },
+    {
+      "prompt": {
+        "en": "136",
+        "fr": "136",
+        "es": "136",
+        "de": "136"
+      },
+      "answer": {
+        "en": "Panama",
+        "fr": "Panama",
+        "es": "Panamá",
+        "de": "Panama"
+      }
+    },
+    {
+      "prompt": {
+        "en": "137",
+        "fr": "137",
+        "es": "137",
+        "de": "137"
+      },
+      "answer": {
+        "en": "Peru",
+        "fr": "Pérou",
+        "es": "Perú",
+        "de": "Peru"
+      }
+    },
+    {
+      "prompt": {
+        "en": "138",
+        "fr": "138",
+        "es": "138",
+        "de": "138"
+      },
+      "answer": {
+        "en": "Papua New Guinea",
+        "fr": "Papouasie-Nouvelle-Guinée",
+        "es": "Papúa Nueva Guinea",
+        "de": "Papua-Neuguinea"
+      }
+    },
+    {
+      "prompt": {
+        "en": "139",
+        "fr": "139",
+        "es": "139",
+        "de": "139"
+      },
+      "answer": {
+        "en": "Philippines",
+        "fr": "Philippines",
+        "es": "Filipinas",
+        "de": "Philippinen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "140",
+        "fr": "140",
+        "es": "140",
+        "de": "140"
+      },
+      "answer": {
+        "en": "Pakistan",
+        "fr": "Pakistan",
+        "es": "Pakistán",
+        "de": "Pakistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "141",
+        "fr": "141",
+        "es": "141",
+        "de": "141"
+      },
+      "answer": {
+        "en": "Poland",
+        "fr": "Pologne",
+        "es": "Polonia",
+        "de": "Polen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "142",
+        "fr": "142",
+        "es": "142",
+        "de": "142"
+      },
+      "answer": {
+        "en": "Palestine",
+        "fr": "Palestine",
+        "es": "Palestina",
+        "de": "Palästina"
+      },
+      "aliases": [
+        "Palestine",
+        "State of Palestine",
+        "Etat de Palestine",
+        "Estado de Palestina",
+        "Palaestina"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "143",
+        "fr": "143",
+        "es": "143",
+        "de": "143"
+      },
+      "answer": {
+        "en": "Portugal",
+        "fr": "Portugal",
+        "es": "Portugal",
+        "de": "Portugal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "144",
+        "fr": "144",
+        "es": "144",
+        "de": "144"
+      },
+      "answer": {
+        "en": "Palau",
+        "fr": "Palaos",
+        "es": "Palaos",
+        "de": "Palau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "145",
+        "fr": "145",
+        "es": "145",
+        "de": "145"
+      },
+      "answer": {
+        "en": "Paraguay",
+        "fr": "Paraguay",
+        "es": "Paraguay",
+        "de": "Paraguay"
+      }
+    },
+    {
+      "prompt": {
+        "en": "146",
+        "fr": "146",
+        "es": "146",
+        "de": "146"
+      },
+      "answer": {
+        "en": "Qatar",
+        "fr": "Qatar",
+        "es": "Catar",
+        "de": "Katar"
+      }
+    },
+    {
+      "prompt": {
+        "en": "147",
+        "fr": "147",
+        "es": "147",
+        "de": "147"
+      },
+      "answer": {
+        "en": "Romania",
+        "fr": "Roumanie",
+        "es": "Rumanía",
+        "de": "Rumänien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "148",
+        "fr": "148",
+        "es": "148",
+        "de": "148"
+      },
+      "answer": {
+        "en": "Serbia",
+        "fr": "Serbie",
+        "es": "Serbia",
+        "de": "Serbien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "149",
+        "fr": "149",
+        "es": "149",
+        "de": "149"
+      },
+      "answer": {
+        "en": "Russia",
+        "fr": "Russie",
+        "es": "Rusia",
+        "de": "Russland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "150",
+        "fr": "150",
+        "es": "150",
+        "de": "150"
+      },
+      "answer": {
+        "en": "Rwanda",
+        "fr": "Rwanda",
+        "es": "Ruanda",
+        "de": "Ruanda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "151",
+        "fr": "151",
+        "es": "151",
+        "de": "151"
+      },
+      "answer": {
+        "en": "Saudi Arabia",
+        "fr": "Arabie saoudite",
+        "es": "Arabia Saudí",
+        "de": "Saudi-Arabien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "152",
+        "fr": "152",
+        "es": "152",
+        "de": "152"
+      },
+      "answer": {
+        "en": "Solomon Islands",
+        "fr": "Îles Salomon",
+        "es": "Islas Salomón",
+        "de": "Salomonen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "153",
+        "fr": "153",
+        "es": "153",
+        "de": "153"
+      },
+      "answer": {
+        "en": "Seychelles",
+        "fr": "Seychelles",
+        "es": "Seychelles",
+        "de": "Seychellen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "154",
+        "fr": "154",
+        "es": "154",
+        "de": "154"
+      },
+      "answer": {
+        "en": "Sudan",
+        "fr": "Soudan",
+        "es": "Sudán",
+        "de": "Sudan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "155",
+        "fr": "155",
+        "es": "155",
+        "de": "155"
+      },
+      "answer": {
+        "en": "Sweden",
+        "fr": "Suède",
+        "es": "Suecia",
+        "de": "Schweden"
+      }
+    },
+    {
+      "prompt": {
+        "en": "156",
+        "fr": "156",
+        "es": "156",
+        "de": "156"
+      },
+      "answer": {
+        "en": "Singapore",
+        "fr": "Singapour",
+        "es": "Singapur",
+        "de": "Singapur"
+      }
+    },
+    {
+      "prompt": {
+        "en": "157",
+        "fr": "157",
+        "es": "157",
+        "de": "157"
+      },
+      "answer": {
+        "en": "Slovenia",
+        "fr": "Slovénie",
+        "es": "Eslovenia",
+        "de": "Slowenien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "158",
+        "fr": "158",
+        "es": "158",
+        "de": "158"
+      },
+      "answer": {
+        "en": "Slovakia",
+        "fr": "Slovaquie",
+        "es": "Eslovaquia",
+        "de": "Slowakei"
+      }
+    },
+    {
+      "prompt": {
+        "en": "159",
+        "fr": "159",
+        "es": "159",
+        "de": "159"
+      },
+      "answer": {
+        "en": "Sierra Leone",
+        "fr": "Sierra Leone",
+        "es": "Sierra Leona",
+        "de": "Sierra Leone"
+      }
+    },
+    {
+      "prompt": {
+        "en": "160",
+        "fr": "160",
+        "es": "160",
+        "de": "160"
+      },
+      "answer": {
+        "en": "San Marino",
+        "fr": "Saint-Marin",
+        "es": "San Marino",
+        "de": "San Marino"
+      }
+    },
+    {
+      "prompt": {
+        "en": "161",
+        "fr": "161",
+        "es": "161",
+        "de": "161"
+      },
+      "answer": {
+        "en": "Senegal",
+        "fr": "Sénégal",
+        "es": "Senegal",
+        "de": "Senegal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "162",
+        "fr": "162",
+        "es": "162",
+        "de": "162"
+      },
+      "answer": {
+        "en": "Somalia",
+        "fr": "Somalie",
+        "es": "Somalia",
+        "de": "Somalia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "163",
+        "fr": "163",
+        "es": "163",
+        "de": "163"
+      },
+      "answer": {
+        "en": "Suriname",
+        "fr": "Suriname",
+        "es": "Surinam",
+        "de": "Suriname"
+      }
+    },
+    {
+      "prompt": {
+        "en": "164",
+        "fr": "164",
+        "es": "164",
+        "de": "164"
+      },
+      "answer": {
+        "en": "South Sudan",
+        "fr": "Soudan du Sud",
+        "es": "Sudán del Sur",
+        "de": "Südsudan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "165",
+        "fr": "165",
+        "es": "165",
+        "de": "165"
+      },
+      "answer": {
+        "en": "São Tomé & Príncipe",
+        "fr": "Sao Tomé-et-Principe",
+        "es": "Santo Tomé y Príncipe",
+        "de": "São Tomé und Príncipe"
+      },
+      "aliases": [
+        "Sao Tome and Principe",
+        "Sao Tome et Principe",
+        "Santo Tome y Principe",
+        "Sao Tome und Principe"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "166",
+        "fr": "166",
+        "es": "166",
+        "de": "166"
+      },
+      "answer": {
+        "en": "El Salvador",
+        "fr": "Salvador",
+        "es": "El Salvador",
+        "de": "El Salvador"
+      }
+    },
+    {
+      "prompt": {
+        "en": "167",
+        "fr": "167",
+        "es": "167",
+        "de": "167"
+      },
+      "answer": {
+        "en": "Syria",
+        "fr": "Syrie",
+        "es": "Siria",
+        "de": "Syrien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "168",
+        "fr": "168",
+        "es": "168",
+        "de": "168"
+      },
+      "answer": {
+        "en": "Eswatini",
+        "fr": "Eswatini",
+        "es": "Esuatini",
+        "de": "Eswatini"
+      },
+      "aliases": [
+        "Swaziland",
+        "Swazilandia",
+        "Swasiland"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "169",
+        "fr": "169",
+        "es": "169",
+        "de": "169"
+      },
+      "answer": {
+        "en": "Chad",
+        "fr": "Tchad",
+        "es": "Chad",
+        "de": "Tschad"
+      }
+    },
+    {
+      "prompt": {
+        "en": "170",
+        "fr": "170",
+        "es": "170",
+        "de": "170"
+      },
+      "answer": {
+        "en": "Togo",
+        "fr": "Togo",
+        "es": "Togo",
+        "de": "Togo"
+      }
+    },
+    {
+      "prompt": {
+        "en": "171",
+        "fr": "171",
+        "es": "171",
+        "de": "171"
+      },
+      "answer": {
+        "en": "Thailand",
+        "fr": "Thaïlande",
+        "es": "Tailandia",
+        "de": "Thailand"
+      }
+    },
+    {
+      "prompt": {
+        "en": "172",
+        "fr": "172",
+        "es": "172",
+        "de": "172"
+      },
+      "answer": {
+        "en": "Tajikistan",
+        "fr": "Tadjikistan",
+        "es": "Tayikistán",
+        "de": "Tadschikistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "173",
+        "fr": "173",
+        "es": "173",
+        "de": "173"
+      },
+      "answer": {
+        "en": "Timor-Leste",
+        "fr": "Timor oriental",
+        "es": "Timor-Leste",
+        "de": "Timor-Leste"
+      },
+      "aliases": [
+        "East Timor",
+        "Timor oriental",
+        "Timor Oriental",
+        "Osttimor"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "174",
+        "fr": "174",
+        "es": "174",
+        "de": "174"
+      },
+      "answer": {
+        "en": "Turkmenistan",
+        "fr": "Turkménistan",
+        "es": "Turkmenistán",
+        "de": "Turkmenistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "175",
+        "fr": "175",
+        "es": "175",
+        "de": "175"
+      },
+      "answer": {
+        "en": "Tunisia",
+        "fr": "Tunisie",
+        "es": "Túnez",
+        "de": "Tunesien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "176",
+        "fr": "176",
+        "es": "176",
+        "de": "176"
+      },
+      "answer": {
+        "en": "Tonga",
+        "fr": "Tonga",
+        "es": "Tonga",
+        "de": "Tonga"
+      }
+    },
+    {
+      "prompt": {
+        "en": "177",
+        "fr": "177",
+        "es": "177",
+        "de": "177"
+      },
+      "answer": {
+        "en": "Türkiye",
+        "fr": "Turquie",
+        "es": "Turquía",
+        "de": "Türkei"
+      },
+      "aliases": [
+        "Turkey",
+        "Türkiye",
+        "Turkiye",
+        "Turquie",
+        "Turquia",
+        "Tuerkei"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "178",
+        "fr": "178",
+        "es": "178",
+        "de": "178"
+      },
+      "answer": {
+        "en": "Trinidad & Tobago",
+        "fr": "Trinité-et-Tobago",
+        "es": "Trinidad y Tobago",
+        "de": "Trinidad und Tobago"
+      }
+    },
+    {
+      "prompt": {
+        "en": "179",
+        "fr": "179",
+        "es": "179",
+        "de": "179"
+      },
+      "answer": {
+        "en": "Tuvalu",
+        "fr": "Tuvalu",
+        "es": "Tuvalu",
+        "de": "Tuvalu"
+      }
+    },
+    {
+      "prompt": {
+        "en": "180",
+        "fr": "180",
+        "es": "180",
+        "de": "180"
+      },
+      "answer": {
+        "en": "Tanzania",
+        "fr": "Tanzanie",
+        "es": "Tanzania",
+        "de": "Tansania"
+      },
+      "aliases": [
+        "United Republic of Tanzania"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "181",
+        "fr": "181",
+        "es": "181",
+        "de": "181"
+      },
+      "answer": {
+        "en": "Ukraine",
+        "fr": "Ukraine",
+        "es": "Ucrania",
+        "de": "Ukraine"
+      }
+    },
+    {
+      "prompt": {
+        "en": "182",
+        "fr": "182",
+        "es": "182",
+        "de": "182"
+      },
+      "answer": {
+        "en": "Uganda",
+        "fr": "Ouganda",
+        "es": "Uganda",
+        "de": "Uganda"
+      }
+    },
+    {
+      "prompt": {
+        "en": "183",
+        "fr": "183",
+        "es": "183",
+        "de": "183"
+      },
+      "answer": {
+        "en": "United States",
+        "fr": "États-Unis",
+        "es": "Estados Unidos",
+        "de": "Vereinigte Staaten"
+      },
+      "aliases": [
+        "USA",
+        "US",
+        "United States of America",
+        "Etats Unis",
+        "EEUU",
+        "Estados Unidos de America",
+        "Vereinigte Staaten von Amerika"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "184",
+        "fr": "184",
+        "es": "184",
+        "de": "184"
+      },
+      "answer": {
+        "en": "Uruguay",
+        "fr": "Uruguay",
+        "es": "Uruguay",
+        "de": "Uruguay"
+      }
+    },
+    {
+      "prompt": {
+        "en": "185",
+        "fr": "185",
+        "es": "185",
+        "de": "185"
+      },
+      "answer": {
+        "en": "Uzbekistan",
+        "fr": "Ouzbékistan",
+        "es": "Uzbekistán",
+        "de": "Usbekistan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "186",
+        "fr": "186",
+        "es": "186",
+        "de": "186"
+      },
+      "answer": {
+        "en": "Vatican City",
+        "fr": "Vatican",
+        "es": "Ciudad del Vaticano",
+        "de": "Vatikanstadt"
+      },
+      "aliases": [
+        "Holy See",
+        "Saint Siege",
+        "Santa Sede",
+        "Heiliger Stuhl",
+        "Vatican"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "187",
+        "fr": "187",
+        "es": "187",
+        "de": "187"
+      },
+      "answer": {
+        "en": "St. Vincent & Grenadines",
+        "fr": "Saint-Vincent-et-les Grenadines",
+        "es": "San Vicente y las Granadinas",
+        "de": "St. Vincent und die Grenadinen"
+      },
+      "aliases": [
+        "Saint Vincent and the Grenadines",
+        "St Vincent and the Grenadines",
+        "Saint Vincent et les Grenadines"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "188",
+        "fr": "188",
+        "es": "188",
+        "de": "188"
+      },
+      "answer": {
+        "en": "Venezuela",
+        "fr": "Venezuela",
+        "es": "Venezuela",
+        "de": "Venezuela"
+      }
+    },
+    {
+      "prompt": {
+        "en": "189",
+        "fr": "189",
+        "es": "189",
+        "de": "189"
+      },
+      "answer": {
+        "en": "Vietnam",
+        "fr": "Viêt Nam",
+        "es": "Vietnam",
+        "de": "Vietnam"
+      }
+    },
+    {
+      "prompt": {
+        "en": "190",
+        "fr": "190",
+        "es": "190",
+        "de": "190"
+      },
+      "answer": {
+        "en": "Vanuatu",
+        "fr": "Vanuatu",
+        "es": "Vanuatu",
+        "de": "Vanuatu"
+      }
+    },
+    {
+      "prompt": {
+        "en": "191",
+        "fr": "191",
+        "es": "191",
+        "de": "191"
+      },
+      "answer": {
+        "en": "Samoa",
+        "fr": "Samoa",
+        "es": "Samoa",
+        "de": "Samoa"
+      }
+    },
+    {
+      "prompt": {
+        "en": "192",
+        "fr": "192",
+        "es": "192",
+        "de": "192"
+      },
+      "answer": {
+        "en": "Yemen",
+        "fr": "Yémen",
+        "es": "Yemen",
+        "de": "Jemen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "193",
+        "fr": "193",
+        "es": "193",
+        "de": "193"
+      },
+      "answer": {
+        "en": "South Africa",
+        "fr": "Afrique du Sud",
+        "es": "Sudáfrica",
+        "de": "Südafrika"
+      }
+    },
+    {
+      "prompt": {
+        "en": "194",
+        "fr": "194",
+        "es": "194",
+        "de": "194"
+      },
+      "answer": {
+        "en": "Zambia",
+        "fr": "Zambie",
+        "es": "Zambia",
+        "de": "Sambia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "195",
+        "fr": "195",
+        "es": "195",
+        "de": "195"
+      },
+      "answer": {
+        "en": "Zimbabwe",
+        "fr": "Zimbabwe",
+        "es": "Zimbabue",
+        "de": "Simbabwe"
+      }
+    }
+  ],
+  "eu-members": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Austria",
+        "fr": "Autriche",
+        "es": "Austria",
+        "de": "Österreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Belgium",
+        "fr": "Belgique",
+        "es": "Bélgica",
+        "de": "Belgien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Bulgaria",
+        "fr": "Bulgarie",
+        "es": "Bulgaria",
+        "de": "Bulgarien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Croatia",
+        "fr": "Croatie",
+        "es": "Croacia",
+        "de": "Kroatien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Cyprus",
+        "fr": "Chypre",
+        "es": "Chipre",
+        "de": "Zypern"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Czechia",
+        "fr": "Tchéquie",
+        "es": "Chequia",
+        "de": "Tschechien"
+      },
+      "aliases": [
+        "Czech Republic",
+        "Republique tcheque",
+        "Republica Checa",
+        "Tschechische Republik"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Denmark",
+        "fr": "Danemark",
+        "es": "Dinamarca",
+        "de": "Dänemark"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Estonia",
+        "fr": "Estonie",
+        "es": "Estonia",
+        "de": "Estland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Finland",
+        "fr": "Finlande",
+        "es": "Finlandia",
+        "de": "Finnland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "France",
+        "fr": "France",
+        "es": "Francia",
+        "de": "Frankreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Germany",
+        "fr": "Allemagne",
+        "es": "Alemania",
+        "de": "Deutschland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Greece",
+        "fr": "Grèce",
+        "es": "Grecia",
+        "de": "Griechenland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Hungary",
+        "fr": "Hongrie",
+        "es": "Hungría",
+        "de": "Ungarn"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Ireland",
+        "fr": "Irlande",
+        "es": "Irlanda",
+        "de": "Irland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Italy",
+        "fr": "Italie",
+        "es": "Italia",
+        "de": "Italien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Latvia",
+        "fr": "Lettonie",
+        "es": "Letonia",
+        "de": "Lettland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Lithuania",
+        "fr": "Lituanie",
+        "es": "Lituania",
+        "de": "Litauen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Luxembourg",
+        "fr": "Luxembourg",
+        "es": "Luxemburgo",
+        "de": "Luxemburg"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Malta",
+        "fr": "Malte",
+        "es": "Malta",
+        "de": "Malta"
+      }
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Netherlands",
+        "fr": "Pays-Bas",
+        "es": "Países Bajos",
+        "de": "Niederlande"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Poland",
+        "fr": "Pologne",
+        "es": "Polonia",
+        "de": "Polen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Portugal",
+        "fr": "Portugal",
+        "es": "Portugal",
+        "de": "Portugal"
+      }
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Romania",
+        "fr": "Roumanie",
+        "es": "Rumanía",
+        "de": "Rumänien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Slovakia",
+        "fr": "Slovaquie",
+        "es": "Eslovaquia",
+        "de": "Slowakei"
+      }
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Slovenia",
+        "fr": "Slovénie",
+        "es": "Eslovenia",
+        "de": "Slowenien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Spain",
+        "fr": "Espagne",
+        "es": "España",
+        "de": "Spanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Sweden",
+        "fr": "Suède",
+        "es": "Suecia",
+        "de": "Schweden"
+      }
+    }
+  ],
+  "us-states": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Alabama",
+        "fr": "Alabama",
+        "es": "Alabama",
+        "de": "Alabama"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Alaska",
+        "fr": "Alaska",
+        "es": "Alaska",
+        "de": "Alaska"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Arizona",
+        "fr": "Arizona",
+        "es": "Arizona",
+        "de": "Arizona"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Arkansas",
+        "fr": "Arkansas",
+        "es": "Arkansas",
+        "de": "Arkansas"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "California",
+        "fr": "Californie",
+        "es": "California",
+        "de": "Kalifornien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Colorado",
+        "fr": "Colorado",
+        "es": "Colorado",
+        "de": "Colorado"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Connecticut",
+        "fr": "Connecticut",
+        "es": "Connecticut",
+        "de": "Connecticut"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Delaware",
+        "fr": "Delaware",
+        "es": "Delaware",
+        "de": "Delaware"
+      }
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Florida",
+        "fr": "Floride",
+        "es": "Florida",
+        "de": "Florida"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Georgia",
+        "fr": "Géorgie",
+        "es": "Georgia",
+        "de": "Georgia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Hawaii",
+        "fr": "Hawaï",
+        "es": "Hawái",
+        "de": "Hawaii"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Idaho",
+        "fr": "Idaho",
+        "es": "Idaho",
+        "de": "Idaho"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Illinois",
+        "fr": "Illinois",
+        "es": "Illinois",
+        "de": "Illinois"
+      }
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Indiana",
+        "fr": "Indiana",
+        "es": "Indiana",
+        "de": "Indiana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Iowa",
+        "fr": "Iowa",
+        "es": "Iowa",
+        "de": "Iowa"
+      }
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Kansas",
+        "fr": "Kansas",
+        "es": "Kansas",
+        "de": "Kansas"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Kentucky",
+        "fr": "Kentucky",
+        "es": "Kentucky",
+        "de": "Kentucky"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Louisiana",
+        "fr": "Louisiane",
+        "es": "Luisiana",
+        "de": "Louisiana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "19",
+        "fr": "19",
+        "es": "19",
+        "de": "19"
+      },
+      "answer": {
+        "en": "Maine",
+        "fr": "Maine",
+        "es": "Maine",
+        "de": "Maine"
+      }
+    },
+    {
+      "prompt": {
+        "en": "20",
+        "fr": "20",
+        "es": "20",
+        "de": "20"
+      },
+      "answer": {
+        "en": "Maryland",
+        "fr": "Maryland",
+        "es": "Maryland",
+        "de": "Maryland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "21",
+        "fr": "21",
+        "es": "21",
+        "de": "21"
+      },
+      "answer": {
+        "en": "Massachusetts",
+        "fr": "Massachusetts",
+        "es": "Massachusetts",
+        "de": "Massachusetts"
+      }
+    },
+    {
+      "prompt": {
+        "en": "22",
+        "fr": "22",
+        "es": "22",
+        "de": "22"
+      },
+      "answer": {
+        "en": "Michigan",
+        "fr": "Michigan",
+        "es": "Michigan",
+        "de": "Michigan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "23",
+        "fr": "23",
+        "es": "23",
+        "de": "23"
+      },
+      "answer": {
+        "en": "Minnesota",
+        "fr": "Minnesota",
+        "es": "Minnesota",
+        "de": "Minnesota"
+      }
+    },
+    {
+      "prompt": {
+        "en": "24",
+        "fr": "24",
+        "es": "24",
+        "de": "24"
+      },
+      "answer": {
+        "en": "Mississippi",
+        "fr": "Mississippi",
+        "es": "Mississippi",
+        "de": "Mississippi"
+      }
+    },
+    {
+      "prompt": {
+        "en": "25",
+        "fr": "25",
+        "es": "25",
+        "de": "25"
+      },
+      "answer": {
+        "en": "Missouri",
+        "fr": "Missouri",
+        "es": "Missouri",
+        "de": "Missouri"
+      }
+    },
+    {
+      "prompt": {
+        "en": "26",
+        "fr": "26",
+        "es": "26",
+        "de": "26"
+      },
+      "answer": {
+        "en": "Montana",
+        "fr": "Montana",
+        "es": "Montana",
+        "de": "Montana"
+      }
+    },
+    {
+      "prompt": {
+        "en": "27",
+        "fr": "27",
+        "es": "27",
+        "de": "27"
+      },
+      "answer": {
+        "en": "Nebraska",
+        "fr": "Nebraska",
+        "es": "Nebraska",
+        "de": "Nebraska"
+      }
+    },
+    {
+      "prompt": {
+        "en": "28",
+        "fr": "28",
+        "es": "28",
+        "de": "28"
+      },
+      "answer": {
+        "en": "Nevada",
+        "fr": "Nevada",
+        "es": "Nevada",
+        "de": "Nevada"
+      }
+    },
+    {
+      "prompt": {
+        "en": "29",
+        "fr": "29",
+        "es": "29",
+        "de": "29"
+      },
+      "answer": {
+        "en": "New Hampshire",
+        "fr": "New Hampshire",
+        "es": "New Hampshire",
+        "de": "New Hampshire"
+      }
+    },
+    {
+      "prompt": {
+        "en": "30",
+        "fr": "30",
+        "es": "30",
+        "de": "30"
+      },
+      "answer": {
+        "en": "New Jersey",
+        "fr": "New Jersey",
+        "es": "New Jersey",
+        "de": "New Jersey"
+      }
+    },
+    {
+      "prompt": {
+        "en": "31",
+        "fr": "31",
+        "es": "31",
+        "de": "31"
+      },
+      "answer": {
+        "en": "New Mexico",
+        "fr": "Nouveau-Mexique",
+        "es": "Nuevo México",
+        "de": "New Mexico"
+      }
+    },
+    {
+      "prompt": {
+        "en": "32",
+        "fr": "32",
+        "es": "32",
+        "de": "32"
+      },
+      "answer": {
+        "en": "New York",
+        "fr": "New York",
+        "es": "Nueva York",
+        "de": "New York"
+      }
+    },
+    {
+      "prompt": {
+        "en": "33",
+        "fr": "33",
+        "es": "33",
+        "de": "33"
+      },
+      "answer": {
+        "en": "North Carolina",
+        "fr": "Caroline du Nord",
+        "es": "Carolina del Norte",
+        "de": "North Carolina"
+      }
+    },
+    {
+      "prompt": {
+        "en": "34",
+        "fr": "34",
+        "es": "34",
+        "de": "34"
+      },
+      "answer": {
+        "en": "North Dakota",
+        "fr": "Dakota du Nord",
+        "es": "Dakota del Norte",
+        "de": "North Dakota"
+      }
+    },
+    {
+      "prompt": {
+        "en": "35",
+        "fr": "35",
+        "es": "35",
+        "de": "35"
+      },
+      "answer": {
+        "en": "Ohio",
+        "fr": "Ohio",
+        "es": "Ohio",
+        "de": "Ohio"
+      }
+    },
+    {
+      "prompt": {
+        "en": "36",
+        "fr": "36",
+        "es": "36",
+        "de": "36"
+      },
+      "answer": {
+        "en": "Oklahoma",
+        "fr": "Oklahoma",
+        "es": "Oklahoma",
+        "de": "Oklahoma"
+      }
+    },
+    {
+      "prompt": {
+        "en": "37",
+        "fr": "37",
+        "es": "37",
+        "de": "37"
+      },
+      "answer": {
+        "en": "Oregon",
+        "fr": "Oregon",
+        "es": "Oregon",
+        "de": "Oregon"
+      }
+    },
+    {
+      "prompt": {
+        "en": "38",
+        "fr": "38",
+        "es": "38",
+        "de": "38"
+      },
+      "answer": {
+        "en": "Pennsylvania",
+        "fr": "Pennsylvanie",
+        "es": "Pensilvania",
+        "de": "Pennsylvania"
+      }
+    },
+    {
+      "prompt": {
+        "en": "39",
+        "fr": "39",
+        "es": "39",
+        "de": "39"
+      },
+      "answer": {
+        "en": "Rhode Island",
+        "fr": "Rhode Island",
+        "es": "Rhode Island",
+        "de": "Rhode Island"
+      }
+    },
+    {
+      "prompt": {
+        "en": "40",
+        "fr": "40",
+        "es": "40",
+        "de": "40"
+      },
+      "answer": {
+        "en": "South Carolina",
+        "fr": "Caroline du Sud",
+        "es": "Carolina del Sur",
+        "de": "South Carolina"
+      }
+    },
+    {
+      "prompt": {
+        "en": "41",
+        "fr": "41",
+        "es": "41",
+        "de": "41"
+      },
+      "answer": {
+        "en": "South Dakota",
+        "fr": "Dakota du Sud",
+        "es": "Dakota del Sur",
+        "de": "South Dakota"
+      }
+    },
+    {
+      "prompt": {
+        "en": "42",
+        "fr": "42",
+        "es": "42",
+        "de": "42"
+      },
+      "answer": {
+        "en": "Tennessee",
+        "fr": "Tennessee",
+        "es": "Tennessee",
+        "de": "Tennessee"
+      }
+    },
+    {
+      "prompt": {
+        "en": "43",
+        "fr": "43",
+        "es": "43",
+        "de": "43"
+      },
+      "answer": {
+        "en": "Texas",
+        "fr": "Texas",
+        "es": "Texas",
+        "de": "Texas"
+      }
+    },
+    {
+      "prompt": {
+        "en": "44",
+        "fr": "44",
+        "es": "44",
+        "de": "44"
+      },
+      "answer": {
+        "en": "Utah",
+        "fr": "Utah",
+        "es": "Utah",
+        "de": "Utah"
+      }
+    },
+    {
+      "prompt": {
+        "en": "45",
+        "fr": "45",
+        "es": "45",
+        "de": "45"
+      },
+      "answer": {
+        "en": "Vermont",
+        "fr": "Vermont",
+        "es": "Vermont",
+        "de": "Vermont"
+      }
+    },
+    {
+      "prompt": {
+        "en": "46",
+        "fr": "46",
+        "es": "46",
+        "de": "46"
+      },
+      "answer": {
+        "en": "Virginia",
+        "fr": "Virginie",
+        "es": "Virginia",
+        "de": "Virginia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "47",
+        "fr": "47",
+        "es": "47",
+        "de": "47"
+      },
+      "answer": {
+        "en": "Washington",
+        "fr": "Washington",
+        "es": "Washington",
+        "de": "Washington"
+      }
+    },
+    {
+      "prompt": {
+        "en": "48",
+        "fr": "48",
+        "es": "48",
+        "de": "48"
+      },
+      "answer": {
+        "en": "West Virginia",
+        "fr": "Virginie-Occidentale",
+        "es": "Virginia Occidental",
+        "de": "West Virginia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "49",
+        "fr": "49",
+        "es": "49",
+        "de": "49"
+      },
+      "answer": {
+        "en": "Wisconsin",
+        "fr": "Wisconsin",
+        "es": "Wisconsin",
+        "de": "Wisconsin"
+      }
+    },
+    {
+      "prompt": {
+        "en": "50",
+        "fr": "50",
+        "es": "50",
+        "de": "50"
+      },
+      "answer": {
+        "en": "Wyoming",
+        "fr": "Wyoming",
+        "es": "Wyoming",
+        "de": "Wyoming"
+      }
+    }
+  ],
+  "us-state-capitals": [
+    {
+      "prompt": {
+        "en": "Alabama",
+        "fr": "Alabama",
+        "es": "Alabama",
+        "de": "Alabama"
+      },
+      "answer": {
+        "en": "Montgomery",
+        "fr": "Montgomery",
+        "es": "Montgomery",
+        "de": "Montgomery"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Alaska",
+        "fr": "Alaska",
+        "es": "Alaska",
+        "de": "Alaska"
+      },
+      "answer": {
+        "en": "Juneau",
+        "fr": "Juneau",
+        "es": "Juneau",
+        "de": "Juneau"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Arizona",
+        "fr": "Arizona",
+        "es": "Arizona",
+        "de": "Arizona"
+      },
+      "answer": {
+        "en": "Phoenix",
+        "fr": "Phoenix",
+        "es": "Phoenix",
+        "de": "Phoenix"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Arkansas",
+        "fr": "Arkansas",
+        "es": "Arkansas",
+        "de": "Arkansas"
+      },
+      "answer": {
+        "en": "Little Rock",
+        "fr": "Little Rock",
+        "es": "Little Rock",
+        "de": "Little Rock"
+      }
+    },
+    {
+      "prompt": {
+        "en": "California",
+        "fr": "Californie",
+        "es": "California",
+        "de": "Kalifornien"
+      },
+      "answer": {
+        "en": "Sacramento",
+        "fr": "Sacramento",
+        "es": "Sacramento",
+        "de": "Sacramento"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Colorado",
+        "fr": "Colorado",
+        "es": "Colorado",
+        "de": "Colorado"
+      },
+      "answer": {
+        "en": "Denver",
+        "fr": "Denver",
+        "es": "Denver",
+        "de": "Denver"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Connecticut",
+        "fr": "Connecticut",
+        "es": "Connecticut",
+        "de": "Connecticut"
+      },
+      "answer": {
+        "en": "Hartford",
+        "fr": "Hartford",
+        "es": "Hartford",
+        "de": "Hartford"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Delaware",
+        "fr": "Delaware",
+        "es": "Delaware",
+        "de": "Delaware"
+      },
+      "answer": {
+        "en": "Dover",
+        "fr": "Dover",
+        "es": "Dover",
+        "de": "Dover"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Florida",
+        "fr": "Floride",
+        "es": "Florida",
+        "de": "Florida"
+      },
+      "answer": {
+        "en": "Tallahassee",
+        "fr": "Tallahassee",
+        "es": "Tallahassee",
+        "de": "Tallahassee"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Georgia",
+        "fr": "Géorgie",
+        "es": "Georgia",
+        "de": "Georgia"
+      },
+      "answer": {
+        "en": "Atlanta",
+        "fr": "Atlanta",
+        "es": "Atlanta",
+        "de": "Atlanta"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Hawaii",
+        "fr": "Hawaï",
+        "es": "Hawái",
+        "de": "Hawaii"
+      },
+      "answer": {
+        "en": "Honolulu",
+        "fr": "Honolulu",
+        "es": "Honolulu",
+        "de": "Honolulu"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Idaho",
+        "fr": "Idaho",
+        "es": "Idaho",
+        "de": "Idaho"
+      },
+      "answer": {
+        "en": "Boise",
+        "fr": "Boise",
+        "es": "Boise",
+        "de": "Boise"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Illinois",
+        "fr": "Illinois",
+        "es": "Illinois",
+        "de": "Illinois"
+      },
+      "answer": {
+        "en": "Springfield",
+        "fr": "Springfield",
+        "es": "Springfield",
+        "de": "Springfield"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Indiana",
+        "fr": "Indiana",
+        "es": "Indiana",
+        "de": "Indiana"
+      },
+      "answer": {
+        "en": "Indianapolis",
+        "fr": "Indianapolis",
+        "es": "Indianapolis",
+        "de": "Indianapolis"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Iowa",
+        "fr": "Iowa",
+        "es": "Iowa",
+        "de": "Iowa"
+      },
+      "answer": {
+        "en": "Des Moines",
+        "fr": "Des Moines",
+        "es": "Des Moines",
+        "de": "Des Moines"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Kansas",
+        "fr": "Kansas",
+        "es": "Kansas",
+        "de": "Kansas"
+      },
+      "answer": {
+        "en": "Topeka",
+        "fr": "Topeka",
+        "es": "Topeka",
+        "de": "Topeka"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Kentucky",
+        "fr": "Kentucky",
+        "es": "Kentucky",
+        "de": "Kentucky"
+      },
+      "answer": {
+        "en": "Frankfort",
+        "fr": "Frankfort",
+        "es": "Frankfort",
+        "de": "Frankfort"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Louisiana",
+        "fr": "Louisiane",
+        "es": "Luisiana",
+        "de": "Louisiana"
+      },
+      "answer": {
+        "en": "Baton Rouge",
+        "fr": "Baton Rouge",
+        "es": "Baton Rouge",
+        "de": "Baton Rouge"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Maine",
+        "fr": "Maine",
+        "es": "Maine",
+        "de": "Maine"
+      },
+      "answer": {
+        "en": "Augusta",
+        "fr": "Augusta",
+        "es": "Augusta",
+        "de": "Augusta"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Maryland",
+        "fr": "Maryland",
+        "es": "Maryland",
+        "de": "Maryland"
+      },
+      "answer": {
+        "en": "Annapolis",
+        "fr": "Annapolis",
+        "es": "Annapolis",
+        "de": "Annapolis"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Massachusetts",
+        "fr": "Massachusetts",
+        "es": "Massachusetts",
+        "de": "Massachusetts"
+      },
+      "answer": {
+        "en": "Boston",
+        "fr": "Boston",
+        "es": "Boston",
+        "de": "Boston"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Michigan",
+        "fr": "Michigan",
+        "es": "Michigan",
+        "de": "Michigan"
+      },
+      "answer": {
+        "en": "Lansing",
+        "fr": "Lansing",
+        "es": "Lansing",
+        "de": "Lansing"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Minnesota",
+        "fr": "Minnesota",
+        "es": "Minnesota",
+        "de": "Minnesota"
+      },
+      "answer": {
+        "en": "Saint Paul",
+        "fr": "Saint Paul",
+        "es": "Saint Paul",
+        "de": "Saint Paul"
+      },
+      "aliases": [
+        "St Paul",
+        "St. Paul"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Mississippi",
+        "fr": "Mississippi",
+        "es": "Mississippi",
+        "de": "Mississippi"
+      },
+      "answer": {
+        "en": "Jackson",
+        "fr": "Jackson",
+        "es": "Jackson",
+        "de": "Jackson"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Missouri",
+        "fr": "Missouri",
+        "es": "Missouri",
+        "de": "Missouri"
+      },
+      "answer": {
+        "en": "Jefferson City",
+        "fr": "Jefferson City",
+        "es": "Jefferson City",
+        "de": "Jefferson City"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Montana",
+        "fr": "Montana",
+        "es": "Montana",
+        "de": "Montana"
+      },
+      "answer": {
+        "en": "Helena",
+        "fr": "Helena",
+        "es": "Helena",
+        "de": "Helena"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Nebraska",
+        "fr": "Nebraska",
+        "es": "Nebraska",
+        "de": "Nebraska"
+      },
+      "answer": {
+        "en": "Lincoln",
+        "fr": "Lincoln",
+        "es": "Lincoln",
+        "de": "Lincoln"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Nevada",
+        "fr": "Nevada",
+        "es": "Nevada",
+        "de": "Nevada"
+      },
+      "answer": {
+        "en": "Carson City",
+        "fr": "Carson City",
+        "es": "Carson City",
+        "de": "Carson City"
+      }
+    },
+    {
+      "prompt": {
+        "en": "New Hampshire",
+        "fr": "New Hampshire",
+        "es": "New Hampshire",
+        "de": "New Hampshire"
+      },
+      "answer": {
+        "en": "Concord",
+        "fr": "Concord",
+        "es": "Concord",
+        "de": "Concord"
+      }
+    },
+    {
+      "prompt": {
+        "en": "New Jersey",
+        "fr": "New Jersey",
+        "es": "New Jersey",
+        "de": "New Jersey"
+      },
+      "answer": {
+        "en": "Trenton",
+        "fr": "Trenton",
+        "es": "Trenton",
+        "de": "Trenton"
+      }
+    },
+    {
+      "prompt": {
+        "en": "New Mexico",
+        "fr": "Nouveau-Mexique",
+        "es": "Nuevo México",
+        "de": "New Mexico"
+      },
+      "answer": {
+        "en": "Santa Fe",
+        "fr": "Santa Fe",
+        "es": "Santa Fe",
+        "de": "Santa Fe"
+      }
+    },
+    {
+      "prompt": {
+        "en": "New York",
+        "fr": "New York",
+        "es": "Nueva York",
+        "de": "New York"
+      },
+      "answer": {
+        "en": "Albany",
+        "fr": "Albany",
+        "es": "Albany",
+        "de": "Albany"
+      }
+    },
+    {
+      "prompt": {
+        "en": "North Carolina",
+        "fr": "Caroline du Nord",
+        "es": "Carolina del Norte",
+        "de": "North Carolina"
+      },
+      "answer": {
+        "en": "Raleigh",
+        "fr": "Raleigh",
+        "es": "Raleigh",
+        "de": "Raleigh"
+      }
+    },
+    {
+      "prompt": {
+        "en": "North Dakota",
+        "fr": "Dakota du Nord",
+        "es": "Dakota del Norte",
+        "de": "North Dakota"
+      },
+      "answer": {
+        "en": "Bismarck",
+        "fr": "Bismarck",
+        "es": "Bismarck",
+        "de": "Bismarck"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Ohio",
+        "fr": "Ohio",
+        "es": "Ohio",
+        "de": "Ohio"
+      },
+      "answer": {
+        "en": "Columbus",
+        "fr": "Columbus",
+        "es": "Columbus",
+        "de": "Columbus"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Oklahoma",
+        "fr": "Oklahoma",
+        "es": "Oklahoma",
+        "de": "Oklahoma"
+      },
+      "answer": {
+        "en": "Oklahoma City",
+        "fr": "Oklahoma City",
+        "es": "Oklahoma City",
+        "de": "Oklahoma City"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Oregon",
+        "fr": "Oregon",
+        "es": "Oregon",
+        "de": "Oregon"
+      },
+      "answer": {
+        "en": "Salem",
+        "fr": "Salem",
+        "es": "Salem",
+        "de": "Salem"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Pennsylvania",
+        "fr": "Pennsylvanie",
+        "es": "Pensilvania",
+        "de": "Pennsylvania"
+      },
+      "answer": {
+        "en": "Harrisburg",
+        "fr": "Harrisburg",
+        "es": "Harrisburg",
+        "de": "Harrisburg"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Rhode Island",
+        "fr": "Rhode Island",
+        "es": "Rhode Island",
+        "de": "Rhode Island"
+      },
+      "answer": {
+        "en": "Providence",
+        "fr": "Providence",
+        "es": "Providence",
+        "de": "Providence"
+      }
+    },
+    {
+      "prompt": {
+        "en": "South Carolina",
+        "fr": "Caroline du Sud",
+        "es": "Carolina del Sur",
+        "de": "South Carolina"
+      },
+      "answer": {
+        "en": "Columbia",
+        "fr": "Columbia",
+        "es": "Columbia",
+        "de": "Columbia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "South Dakota",
+        "fr": "Dakota du Sud",
+        "es": "Dakota del Sur",
+        "de": "South Dakota"
+      },
+      "answer": {
+        "en": "Pierre",
+        "fr": "Pierre",
+        "es": "Pierre",
+        "de": "Pierre"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Tennessee",
+        "fr": "Tennessee",
+        "es": "Tennessee",
+        "de": "Tennessee"
+      },
+      "answer": {
+        "en": "Nashville",
+        "fr": "Nashville",
+        "es": "Nashville",
+        "de": "Nashville"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Texas",
+        "fr": "Texas",
+        "es": "Texas",
+        "de": "Texas"
+      },
+      "answer": {
+        "en": "Austin",
+        "fr": "Austin",
+        "es": "Austin",
+        "de": "Austin"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Utah",
+        "fr": "Utah",
+        "es": "Utah",
+        "de": "Utah"
+      },
+      "answer": {
+        "en": "Salt Lake City",
+        "fr": "Salt Lake City",
+        "es": "Salt Lake City",
+        "de": "Salt Lake City"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Vermont",
+        "fr": "Vermont",
+        "es": "Vermont",
+        "de": "Vermont"
+      },
+      "answer": {
+        "en": "Montpelier",
+        "fr": "Montpelier",
+        "es": "Montpelier",
+        "de": "Montpelier"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Virginia",
+        "fr": "Virginie",
+        "es": "Virginia",
+        "de": "Virginia"
+      },
+      "answer": {
+        "en": "Richmond",
+        "fr": "Richmond",
+        "es": "Richmond",
+        "de": "Richmond"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Washington",
+        "fr": "Washington",
+        "es": "Washington",
+        "de": "Washington"
+      },
+      "answer": {
+        "en": "Olympia",
+        "fr": "Olympia",
+        "es": "Olympia",
+        "de": "Olympia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "West Virginia",
+        "fr": "Virginie-Occidentale",
+        "es": "Virginia Occidental",
+        "de": "West Virginia"
+      },
+      "answer": {
+        "en": "Charleston",
+        "fr": "Charleston",
+        "es": "Charleston",
+        "de": "Charleston"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Wisconsin",
+        "fr": "Wisconsin",
+        "es": "Wisconsin",
+        "de": "Wisconsin"
+      },
+      "answer": {
+        "en": "Madison",
+        "fr": "Madison",
+        "es": "Madison",
+        "de": "Madison"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Wyoming",
+        "fr": "Wyoming",
+        "es": "Wyoming",
+        "de": "Wyoming"
+      },
+      "answer": {
+        "en": "Cheyenne",
+        "fr": "Cheyenne",
+        "es": "Cheyenne",
+        "de": "Cheyenne"
+      }
+    }
+  ],
+  "german-states": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Baden-Württemberg",
+        "fr": "Bade-Wurtemberg",
+        "es": "Baden-Wurtemberg",
+        "de": "Baden-Württemberg"
+      },
+      "aliases": [
+        "Baden-Wuerttemberg",
+        "Bade-Wurtemberg",
+        "Baden-Wurtemberg"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Bavaria",
+        "fr": "Bavière",
+        "es": "Baviera",
+        "de": "Bayern"
+      },
+      "aliases": [
+        "Bavaria",
+        "Bavière",
+        "Baviera",
+        "Bayern"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Berlin",
+        "fr": "Berlin",
+        "es": "Berlin",
+        "de": "Berlin"
+      },
+      "aliases": [
+        "Berlin"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Brandenburg",
+        "fr": "Brandebourg",
+        "es": "Brandeburgo",
+        "de": "Brandenburg"
+      },
+      "aliases": [
+        "Brandenburg",
+        "Brandebourg",
+        "Brandeburgo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Bremen",
+        "fr": "Brême",
+        "es": "Bremen",
+        "de": "Bremen"
+      },
+      "aliases": [
+        "Bremen",
+        "Brême"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Hamburg",
+        "fr": "Hambourg",
+        "es": "Hamburgo",
+        "de": "Hamburg"
+      },
+      "aliases": [
+        "Hamburg",
+        "Hambourg",
+        "Hamburgo"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Hesse",
+        "fr": "Hesse",
+        "es": "Hesse",
+        "de": "Hessen"
+      },
+      "aliases": [
+        "Hesse",
+        "Hessen"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Mecklenburg-Western Pomerania",
+        "fr": "Mecklembourg-Poméranie-Occidentale",
+        "es": "Mecklemburgo-Pomerania Occidental",
+        "de": "Mecklenburg-Vorpommern"
+      },
+      "aliases": [
+        "Mecklenburg-Western Pomerania",
+        "Mecklembourg-Poméranie-Occidentale",
+        "Mecklemburgo-Pomerania Occidental",
+        "Mecklenburg-Vorpommern"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Lower Saxony",
+        "fr": "Basse-Saxe",
+        "es": "Baja Sajonia",
+        "de": "Niedersachsen"
+      },
+      "aliases": [
+        "Lower Saxony",
+        "Basse-Saxe",
+        "Baja Sajonia",
+        "Niedersachsen"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "North Rhine-Westphalia",
+        "fr": "Rhénanie-du-Nord-Westphalie",
+        "es": "Renania del Norte-Westfalia",
+        "de": "Nordrhein-Westfalen"
+      },
+      "aliases": [
+        "North Rhine-Westphalia",
+        "Rhénanie-du-Nord-Westphalie",
+        "Renania del Norte-Westfalia",
+        "Nordrhein-Westfalen",
+        "NRW"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Rhineland-Palatinate",
+        "fr": "Rhénanie-Palatinat",
+        "es": "Renania-Palatinado",
+        "de": "Rheinland-Pfalz"
+      },
+      "aliases": [
+        "Rhineland-Palatinate",
+        "Rhénanie-Palatinat",
+        "Renania-Palatinado",
+        "Rheinland-Pfalz"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Saarland",
+        "fr": "Sarre",
+        "es": "Sarre",
+        "de": "Saarland"
+      },
+      "aliases": [
+        "Saarland",
+        "Sarre"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Saxony",
+        "fr": "Saxe",
+        "es": "Sajonia",
+        "de": "Sachsen"
+      },
+      "aliases": [
+        "Saxony",
+        "Saxe",
+        "Sajonia",
+        "Sachsen"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Saxony-Anhalt",
+        "fr": "Saxe-Anhalt",
+        "es": "Sajonia-Anhalt",
+        "de": "Sachsen-Anhalt"
+      },
+      "aliases": [
+        "Saxony-Anhalt",
+        "Saxe-Anhalt",
+        "Sajonia-Anhalt",
+        "Sachsen-Anhalt"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "Schleswig-Holstein",
+        "fr": "Schleswig-Holstein",
+        "es": "Schleswig-Holstein",
+        "de": "Schleswig-Holstein"
+      },
+      "aliases": [
+        "Schleswig-Holstein"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Thuringia",
+        "fr": "Thuringe",
+        "es": "Turingia",
+        "de": "Thüringen"
+      },
+      "aliases": [
+        "Thuringia",
+        "Thuringe",
+        "Turingia",
+        "Thueringen"
+      ]
+    }
+  ],
+  "french-regions": [
+    {
+      "prompt": {
+        "en": "1",
+        "fr": "1",
+        "es": "1",
+        "de": "1"
+      },
+      "answer": {
+        "en": "Auvergne-Rhône-Alpes",
+        "fr": "Auvergne-Rhône-Alpes",
+        "es": "Auvergne-Rhône-Alpes",
+        "de": "Auvergne-Rhône-Alpes"
+      }
+    },
+    {
+      "prompt": {
+        "en": "2",
+        "fr": "2",
+        "es": "2",
+        "de": "2"
+      },
+      "answer": {
+        "en": "Bourgogne-Franche-Comté",
+        "fr": "Bourgogne-Franche-Comté",
+        "es": "Bourgogne-Franche-Comté",
+        "de": "Bourgogne-Franche-Comté"
+      }
+    },
+    {
+      "prompt": {
+        "en": "3",
+        "fr": "3",
+        "es": "3",
+        "de": "3"
+      },
+      "answer": {
+        "en": "Brittany",
+        "fr": "Bretagne",
+        "es": "Bretaña",
+        "de": "Bretagne"
+      }
+    },
+    {
+      "prompt": {
+        "en": "4",
+        "fr": "4",
+        "es": "4",
+        "de": "4"
+      },
+      "answer": {
+        "en": "Centre-Val de Loire",
+        "fr": "Centre-Val de Loire",
+        "es": "Centre-Val de Loire",
+        "de": "Centre-Val de Loire"
+      }
+    },
+    {
+      "prompt": {
+        "en": "5",
+        "fr": "5",
+        "es": "5",
+        "de": "5"
+      },
+      "answer": {
+        "en": "Corsica",
+        "fr": "Corse",
+        "es": "Córcega",
+        "de": "Korsika"
+      }
+    },
+    {
+      "prompt": {
+        "en": "6",
+        "fr": "6",
+        "es": "6",
+        "de": "6"
+      },
+      "answer": {
+        "en": "Grand Est",
+        "fr": "Grand Est",
+        "es": "Grand Est",
+        "de": "Grand Est"
+      }
+    },
+    {
+      "prompt": {
+        "en": "7",
+        "fr": "7",
+        "es": "7",
+        "de": "7"
+      },
+      "answer": {
+        "en": "Hauts-de-France",
+        "fr": "Hauts-de-France",
+        "es": "Hauts-de-France",
+        "de": "Hauts-de-France"
+      }
+    },
+    {
+      "prompt": {
+        "en": "8",
+        "fr": "8",
+        "es": "8",
+        "de": "8"
+      },
+      "answer": {
+        "en": "Île-de-France",
+        "fr": "Île-de-France",
+        "es": "Île-de-France",
+        "de": "Île-de-France"
+      },
+      "aliases": [
+        "IDF"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "9",
+        "fr": "9",
+        "es": "9",
+        "de": "9"
+      },
+      "answer": {
+        "en": "Normandy",
+        "fr": "Normandie",
+        "es": "Normandía",
+        "de": "Normandie"
+      }
+    },
+    {
+      "prompt": {
+        "en": "10",
+        "fr": "10",
+        "es": "10",
+        "de": "10"
+      },
+      "answer": {
+        "en": "Nouvelle-Aquitaine",
+        "fr": "Nouvelle-Aquitaine",
+        "es": "Nouvelle-Aquitaine",
+        "de": "Nouvelle-Aquitaine"
+      }
+    },
+    {
+      "prompt": {
+        "en": "11",
+        "fr": "11",
+        "es": "11",
+        "de": "11"
+      },
+      "answer": {
+        "en": "Occitanie",
+        "fr": "Occitanie",
+        "es": "Occitania",
+        "de": "Okzitanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "12",
+        "fr": "12",
+        "es": "12",
+        "de": "12"
+      },
+      "answer": {
+        "en": "Pays de la Loire",
+        "fr": "Pays de la Loire",
+        "es": "Pays de la Loire",
+        "de": "Pays de la Loire"
+      }
+    },
+    {
+      "prompt": {
+        "en": "13",
+        "fr": "13",
+        "es": "13",
+        "de": "13"
+      },
+      "answer": {
+        "en": "Provence-Alpes-Côte d’Azur",
+        "fr": "Provence-Alpes-Côte d’Azur",
+        "es": "Provence-Alpes-Côte d’Azur",
+        "de": "Provence-Alpes-Côte d’Azur"
+      },
+      "aliases": [
+        "PACA"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "14",
+        "fr": "14",
+        "es": "14",
+        "de": "14"
+      },
+      "answer": {
+        "en": "Guadeloupe",
+        "fr": "Guadeloupe",
+        "es": "Guadalupe",
+        "de": "Guadeloupe"
+      }
+    },
+    {
+      "prompt": {
+        "en": "15",
+        "fr": "15",
+        "es": "15",
+        "de": "15"
+      },
+      "answer": {
+        "en": "French Guiana",
+        "fr": "Guyane",
+        "es": "Guayana Francesa",
+        "de": "Französisch-Guayana"
+      },
+      "aliases": [
+        "Guyane française"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "16",
+        "fr": "16",
+        "es": "16",
+        "de": "16"
+      },
+      "answer": {
+        "en": "Martinique",
+        "fr": "Martinique",
+        "es": "Martinica",
+        "de": "Martinique"
+      }
+    },
+    {
+      "prompt": {
+        "en": "17",
+        "fr": "17",
+        "es": "17",
+        "de": "17"
+      },
+      "answer": {
+        "en": "Mayotte",
+        "fr": "Mayotte",
+        "es": "Mayotte",
+        "de": "Mayotte"
+      }
+    },
+    {
+      "prompt": {
+        "en": "18",
+        "fr": "18",
+        "es": "18",
+        "de": "18"
+      },
+      "answer": {
+        "en": "Réunion",
+        "fr": "La Réunion",
+        "es": "Reunión",
+        "de": "Réunion"
+      },
+      "aliases": [
+        "La Reunion"
+      ]
+    }
+  ],
+  "general-knowledge": [
+    {
+      "prompt": {
+        "en": "Capital of Australia?",
+        "fr": "Capitale de l’Australie ?",
+        "es": "¿Capital de Australia?",
+        "de": "Hauptstadt Australiens?"
+      },
+      "answer": {
+        "en": "Canberra",
+        "fr": "Canberra",
+        "es": "Canberra",
+        "de": "Canberra"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Chemical symbol Au?",
+        "fr": "Élément de symbole Au ?",
+        "es": "¿Elemento de símbolo Au?",
+        "de": "Element mit dem Symbol Au?"
+      },
+      "answer": {
+        "en": "Gold",
+        "fr": "Or",
+        "es": "Oro",
+        "de": "Gold"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Largest planet in our Solar System?",
+        "fr": "Plus grande planète du Système solaire ?",
+        "es": "¿Planeta más grande del sistema solar?",
+        "de": "Größter Planet unseres Sonnensystems?"
+      },
+      "answer": {
+        "en": "Jupiter",
+        "fr": "Jupiter",
+        "es": "Júpiter",
+        "de": "Jupiter"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Author of Don Quixote?",
+        "fr": "Auteur de Don Quichotte ?",
+        "es": "¿Autor de Don Quijote?",
+        "de": "Autor von Don Quijote?"
+      },
+      "answer": {
+        "en": "Miguel de Cervantes",
+        "fr": "Miguel de Cervantes",
+        "es": "Miguel de Cervantes",
+        "de": "Miguel de Cervantes"
+      },
+      "aliases": [
+        "Cervantes",
+        "Miguel de Cervantes Saavedra"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Country of the Giza pyramids?",
+        "fr": "Pays des pyramides de Gizeh ?",
+        "es": "¿País de las pirámides de Guiza?",
+        "de": "Land der Pyramiden von Gizeh?"
+      },
+      "answer": {
+        "en": "Egypt",
+        "fr": "Égypte",
+        "es": "Egipto",
+        "de": "Ägypten"
+      }
+    },
+    {
+      "prompt": {
+        "en": "First person to walk on the Moon?",
+        "fr": "Premier humain à marcher sur la Lune ?",
+        "es": "¿Primera persona en pisar la Luna?",
+        "de": "Erster Mensch auf dem Mond?"
+      },
+      "answer": {
+        "en": "Neil Armstrong",
+        "fr": "Neil Armstrong",
+        "es": "Neil Armstrong",
+        "de": "Neil Armstrong"
+      },
+      "aliases": [
+        "Armstrong"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Sport played at Wimbledon?",
+        "fr": "Sport joué à Wimbledon ?",
+        "es": "¿Deporte de Wimbledon?",
+        "de": "Sportart in Wimbledon?"
+      },
+      "answer": {
+        "en": "Tennis",
+        "fr": "Tennis",
+        "es": "Tenis",
+        "de": "Tennis"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Largest ocean?",
+        "fr": "Plus grand océan ?",
+        "es": "¿Océano más grande?",
+        "de": "Größter Ozean?"
+      },
+      "answer": {
+        "en": "Pacific Ocean",
+        "fr": "Océan Pacifique",
+        "es": "Océano Pacífico",
+        "de": "Pazifischer Ozean"
+      },
+      "aliases": [
+        "Pacific",
+        "Pacifique",
+        "Pacifico",
+        "Pazifik"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Composer of The Four Seasons?",
+        "fr": "Compositeur des Quatre Saisons ?",
+        "es": "¿Compositor de Las cuatro estaciones?",
+        "de": "Komponist der Vier Jahreszeiten?"
+      },
+      "answer": {
+        "en": "Antonio Vivaldi",
+        "fr": "Antonio Vivaldi",
+        "es": "Antonio Vivaldi",
+        "de": "Antonio Vivaldi"
+      },
+      "aliases": [
+        "Vivaldi"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Bony shell protecting the brain?",
+        "fr": "Ensemble osseux protégeant le cerveau ?",
+        "es": "¿Estructura ósea que protege el cerebro?",
+        "de": "Knöcherne Hülle des Gehirns?"
+      },
+      "answer": {
+        "en": "Skull",
+        "fr": "Crâne",
+        "es": "Cráneo",
+        "de": "Schädel"
+      },
+      "aliases": [
+        "Cranium"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Language mainly spoken in Brazil?",
+        "fr": "Langue principalement parlée au Brésil ?",
+        "es": "¿Idioma principal de Brasil?",
+        "de": "Hauptsprache Brasiliens?"
+      },
+      "answer": {
+        "en": "Portuguese",
+        "fr": "Portugais",
+        "es": "Portugués",
+        "de": "Portugiesisch"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Painter of Guernica?",
+        "fr": "Peintre de Guernica ?",
+        "es": "¿Pintor de Guernica?",
+        "de": "Maler von Guernica?"
+      },
+      "answer": {
+        "en": "Pablo Picasso",
+        "fr": "Pablo Picasso",
+        "es": "Pablo Picasso",
+        "de": "Pablo Picasso"
+      },
+      "aliases": [
+        "Picasso"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Country of Mount Fuji?",
+        "fr": "Pays du mont Fuji ?",
+        "es": "¿País del monte Fuji?",
+        "de": "Land des Berges Fuji?"
+      },
+      "answer": {
+        "en": "Japan",
+        "fr": "Japon",
+        "es": "Japón",
+        "de": "Japan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Roman numeral for 1000?",
+        "fr": "Chiffre romain pour 1000 ?",
+        "es": "¿Número romano para 1000?",
+        "de": "Römisches Zahlzeichen für 1000?"
+      },
+      "answer": {
+        "en": "M",
+        "fr": "M",
+        "es": "M",
+        "de": "M"
+      }
+    },
+    {
+      "prompt": {
+        "en": "City of the Colosseum?",
+        "fr": "Ville du Colisée ?",
+        "es": "¿Ciudad del Coliseo?",
+        "de": "Stadt des Kolosseums?"
+      },
+      "answer": {
+        "en": "Rome",
+        "fr": "Rome",
+        "es": "Roma",
+        "de": "Rom"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Instrument with 88 keys in its standard modern form?",
+        "fr": "Instrument à 88 touches dans sa forme moderne standard ?",
+        "es": "¿Instrumento con 88 teclas en su forma moderna estándar?",
+        "de": "Instrument mit 88 Tasten in seiner modernen Standardform?"
+      },
+      "answer": {
+        "en": "Piano",
+        "fr": "Piano",
+        "es": "Piano",
+        "de": "Klavier"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Unit of electrical resistance?",
+        "fr": "Unité de résistance électrique ?",
+        "es": "¿Unidad de resistencia eléctrica?",
+        "de": "Einheit des elektrischen Widerstands?"
+      },
+      "answer": {
+        "en": "Ohm",
+        "fr": "Ohm",
+        "es": "Ohmio",
+        "de": "Ohm"
+      },
+      "aliases": [
+        "Ohm",
+        "Ω"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Animals studied by ornithology?",
+        "fr": "Animaux étudiés en ornithologie ?",
+        "es": "¿Animales que estudia la ornitología?",
+        "de": "Welche Tiere erforscht die Ornithologie?"
+      },
+      "answer": {
+        "en": "Birds",
+        "fr": "Oiseaux",
+        "es": "Aves",
+        "de": "Vögel"
+      },
+      "aliases": [
+        "Bird",
+        "Oiseau",
+        "Ave",
+        "Vogel",
+        "Voegel"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Who wrote The Little Prince?",
+        "fr": "Auteur du Petit Prince ?",
+        "es": "¿Autor de El principito?",
+        "de": "Autor von Der kleine Prinz?"
+      },
+      "answer": {
+        "en": "Antoine de Saint-Exupéry",
+        "fr": "Antoine de Saint-Exupéry",
+        "es": "Antoine de Saint-Exupéry",
+        "de": "Antoine de Saint-Exupéry"
+      },
+      "aliases": [
+        "Saint Exupery",
+        "Saint-Exupéry",
+        "Antoine de Saint Exupery"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Currency of Japan?",
+        "fr": "Monnaie du Japon ?",
+        "es": "¿Moneda de Japón?",
+        "de": "Währung Japans?"
+      },
+      "answer": {
+        "en": "Yen",
+        "fr": "Yen",
+        "es": "Yen",
+        "de": "Yen"
+      },
+      "aliases": [
+        "Japanese yen",
+        "JPY"
+      ]
+    }
+  ],
+  "champions-league-winners": [
+    {
+      "prompt": {
+        "en": "1956",
+        "fr": "1956",
+        "es": "1956",
+        "de": "1956"
+      },
+      "answer": {
+        "en": "Real Madrid",
+        "fr": "Real Madrid",
+        "es": "Real Madrid",
+        "de": "Real Madrid"
+      },
+      "aliases": [
+        "Real"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1961",
+        "fr": "1961",
+        "es": "1961",
+        "de": "1961"
+      },
+      "answer": {
+        "en": "Benfica",
+        "fr": "Benfica",
+        "es": "Benfica",
+        "de": "Benfica"
+      },
+      "aliases": [
+        "SL Benfica"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1963",
+        "fr": "1963",
+        "es": "1963",
+        "de": "1963"
+      },
+      "answer": {
+        "en": "AC Milan",
+        "fr": "AC Milan",
+        "es": "AC Milan",
+        "de": "AC Milan"
+      },
+      "aliases": [
+        "Milan"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1964",
+        "fr": "1964",
+        "es": "1964",
+        "de": "1964"
+      },
+      "answer": {
+        "en": "Inter Milan",
+        "fr": "Inter Milan",
+        "es": "Inter Milan",
+        "de": "Inter Milan"
+      },
+      "aliases": [
+        "Inter",
+        "Internazionale",
+        "Inter de Milan",
+        "Inter Mailand"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1967",
+        "fr": "1967",
+        "es": "1967",
+        "de": "1967"
+      },
+      "answer": {
+        "en": "Celtic",
+        "fr": "Celtic",
+        "es": "Celtic",
+        "de": "Celtic"
+      },
+      "aliases": [
+        "Celtic FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1968",
+        "fr": "1968",
+        "es": "1968",
+        "de": "1968"
+      },
+      "answer": {
+        "en": "Manchester United",
+        "fr": "Manchester United",
+        "es": "Manchester United",
+        "de": "Manchester United"
+      },
+      "aliases": [
+        "Man United",
+        "Man Utd"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1970",
+        "fr": "1970",
+        "es": "1970",
+        "de": "1970"
+      },
+      "answer": {
+        "en": "Feyenoord",
+        "fr": "Feyenoord",
+        "es": "Feyenoord",
+        "de": "Feyenoord"
+      }
+    },
+    {
+      "prompt": {
+        "en": "1971",
+        "fr": "1971",
+        "es": "1971",
+        "de": "1971"
+      },
+      "answer": {
+        "en": "Ajax",
+        "fr": "Ajax",
+        "es": "Ajax",
+        "de": "Ajax"
+      },
+      "aliases": [
+        "AFC Ajax"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1974",
+        "fr": "1974",
+        "es": "1974",
+        "de": "1974"
+      },
+      "answer": {
+        "en": "Bayern Munich",
+        "fr": "Bayern Munich",
+        "es": "Bayern de Múnich",
+        "de": "Bayern München"
+      },
+      "aliases": [
+        "Bayern",
+        "Bayern Munchen",
+        "Bayern Muenchen"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1977",
+        "fr": "1977",
+        "es": "1977",
+        "de": "1977"
+      },
+      "answer": {
+        "en": "Liverpool",
+        "fr": "Liverpool",
+        "es": "Liverpool",
+        "de": "Liverpool"
+      },
+      "aliases": [
+        "Liverpool FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1979",
+        "fr": "1979",
+        "es": "1979",
+        "de": "1979"
+      },
+      "answer": {
+        "en": "Nottingham Forest",
+        "fr": "Nottingham Forest",
+        "es": "Nottingham Forest",
+        "de": "Nottingham Forest"
+      },
+      "aliases": [
+        "Forest"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1982",
+        "fr": "1982",
+        "es": "1982",
+        "de": "1982"
+      },
+      "answer": {
+        "en": "Aston Villa",
+        "fr": "Aston Villa",
+        "es": "Aston Villa",
+        "de": "Aston Villa"
+      }
+    },
+    {
+      "prompt": {
+        "en": "1983",
+        "fr": "1983",
+        "es": "1983",
+        "de": "1983"
+      },
+      "answer": {
+        "en": "Hamburger SV",
+        "fr": "Hambourg SV",
+        "es": "Hamburgo SV",
+        "de": "Hamburger SV"
+      },
+      "aliases": [
+        "Hamburg",
+        "Hambourg",
+        "Hamburgo",
+        "HSV"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1985",
+        "fr": "1985",
+        "es": "1985",
+        "de": "1985"
+      },
+      "answer": {
+        "en": "Juventus",
+        "fr": "Juventus",
+        "es": "Juventus",
+        "de": "Juventus"
+      },
+      "aliases": [
+        "Juve",
+        "Juventus Turin"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1986",
+        "fr": "1986",
+        "es": "1986",
+        "de": "1986"
+      },
+      "answer": {
+        "en": "Steaua București",
+        "fr": "Steaua București",
+        "es": "Steaua București",
+        "de": "Steaua București"
+      },
+      "aliases": [
+        "Steaua",
+        "Steaua Bucharest",
+        "Steaua Bucarest",
+        "Steaua Bukarest"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1987",
+        "fr": "1987",
+        "es": "1987",
+        "de": "1987"
+      },
+      "answer": {
+        "en": "FC Porto",
+        "fr": "FC Porto",
+        "es": "FC Porto",
+        "de": "FC Porto"
+      },
+      "aliases": [
+        "Porto"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1988",
+        "fr": "1988",
+        "es": "1988",
+        "de": "1988"
+      },
+      "answer": {
+        "en": "PSV Eindhoven",
+        "fr": "PSV Eindhoven",
+        "es": "PSV Eindhoven",
+        "de": "PSV Eindhoven"
+      },
+      "aliases": [
+        "PSV"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1991",
+        "fr": "1991",
+        "es": "1991",
+        "de": "1991"
+      },
+      "answer": {
+        "en": "Red Star Belgrade",
+        "fr": "Étoile rouge de Belgrade",
+        "es": "Estrella Roja de Belgrado",
+        "de": "Roter Stern Belgrad"
+      },
+      "aliases": [
+        "Red Star",
+        "Etoile rouge",
+        "Estrella Roja",
+        "Roter Stern",
+        "Crvena Zvezda"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1992",
+        "fr": "1992",
+        "es": "1992",
+        "de": "1992"
+      },
+      "answer": {
+        "en": "FC Barcelona",
+        "fr": "FC Barcelona",
+        "es": "FC Barcelona",
+        "de": "FC Barcelona"
+      },
+      "aliases": [
+        "Barcelona",
+        "Barca",
+        "Barça",
+        "FC Barcelone"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1993",
+        "fr": "1993",
+        "es": "1993",
+        "de": "1993"
+      },
+      "answer": {
+        "en": "Olympique de Marseille",
+        "fr": "Olympique de Marseille",
+        "es": "Olympique de Marseille",
+        "de": "Olympique de Marseille"
+      },
+      "aliases": [
+        "Marseille",
+        "OM"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "1997",
+        "fr": "1997",
+        "es": "1997",
+        "de": "1997"
+      },
+      "answer": {
+        "en": "Borussia Dortmund",
+        "fr": "Borussia Dortmund",
+        "es": "Borussia Dortmund",
+        "de": "Borussia Dortmund"
+      },
+      "aliases": [
+        "Dortmund",
+        "BVB"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "2012",
+        "fr": "2012",
+        "es": "2012",
+        "de": "2012"
+      },
+      "answer": {
+        "en": "Chelsea",
+        "fr": "Chelsea",
+        "es": "Chelsea",
+        "de": "Chelsea"
+      },
+      "aliases": [
+        "Chelsea FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "2023",
+        "fr": "2023",
+        "es": "2023",
+        "de": "2023"
+      },
+      "answer": {
+        "en": "Manchester City",
+        "fr": "Manchester City",
+        "es": "Manchester City",
+        "de": "Manchester City"
+      },
+      "aliases": [
+        "Man City"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "2025",
+        "fr": "2025",
+        "es": "2025",
+        "de": "2025"
+      },
+      "answer": {
+        "en": "Paris Saint-Germain",
+        "fr": "Paris Saint-Germain",
+        "es": "Paris Saint-Germain",
+        "de": "Paris Saint-Germain"
+      },
+      "aliases": [
+        "PSG",
+        "Paris SG"
+      ]
+    }
+  ],
+  "football-stadiums": [
+    {
+      "prompt": {
+        "en": "Camp Nou",
+        "fr": "Camp Nou",
+        "es": "Camp Nou",
+        "de": "Camp Nou"
+      },
+      "answer": {
+        "en": "FC Barcelona",
+        "fr": "FC Barcelona",
+        "es": "FC Barcelona",
+        "de": "FC Barcelona"
+      },
+      "aliases": [
+        "Barcelona",
+        "Barca",
+        "Barça",
+        "FC Barcelone"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Santiago Bernabéu",
+        "fr": "Santiago Bernabéu",
+        "es": "Santiago Bernabéu",
+        "de": "Santiago Bernabéu"
+      },
+      "answer": {
+        "en": "Real Madrid",
+        "fr": "Real Madrid",
+        "es": "Real Madrid",
+        "de": "Real Madrid"
+      },
+      "aliases": [
+        "Real"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Anfield",
+        "fr": "Anfield",
+        "es": "Anfield",
+        "de": "Anfield"
+      },
+      "answer": {
+        "en": "Liverpool",
+        "fr": "Liverpool",
+        "es": "Liverpool",
+        "de": "Liverpool"
+      },
+      "aliases": [
+        "Liverpool FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Old Trafford",
+        "fr": "Old Trafford",
+        "es": "Old Trafford",
+        "de": "Old Trafford"
+      },
+      "answer": {
+        "en": "Manchester United",
+        "fr": "Manchester United",
+        "es": "Manchester United",
+        "de": "Manchester United"
+      },
+      "aliases": [
+        "Man United",
+        "Man Utd"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Stamford Bridge",
+        "fr": "Stamford Bridge",
+        "es": "Stamford Bridge",
+        "de": "Stamford Bridge"
+      },
+      "answer": {
+        "en": "Chelsea",
+        "fr": "Chelsea",
+        "es": "Chelsea",
+        "de": "Chelsea"
+      },
+      "aliases": [
+        "Chelsea FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Emirates Stadium",
+        "fr": "Emirates Stadium",
+        "es": "Emirates Stadium",
+        "de": "Emirates Stadium"
+      },
+      "answer": {
+        "en": "Arsenal",
+        "fr": "Arsenal",
+        "es": "Arsenal",
+        "de": "Arsenal"
+      },
+      "aliases": [
+        "Arsenal FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Signal Iduna Park / Westfalenstadion",
+        "fr": "Signal Iduna Park / Westfalenstadion",
+        "es": "Signal Iduna Park / Westfalenstadion",
+        "de": "Signal Iduna Park / Westfalenstadion"
+      },
+      "answer": {
+        "en": "Borussia Dortmund",
+        "fr": "Borussia Dortmund",
+        "es": "Borussia Dortmund",
+        "de": "Borussia Dortmund"
+      },
+      "aliases": [
+        "Dortmund",
+        "BVB"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Allianz Arena (Bundesliga 2025–26)",
+        "fr": "Allianz Arena (Bundesliga 2025–26)",
+        "es": "Allianz Arena (Bundesliga 2025–26)",
+        "de": "Allianz Arena (Bundesliga 2025–26)"
+      },
+      "answer": {
+        "en": "Bayern Munich",
+        "fr": "Bayern Munich",
+        "es": "Bayern de Múnich",
+        "de": "Bayern München"
+      },
+      "aliases": [
+        "Bayern",
+        "Bayern Munchen",
+        "Bayern Muenchen"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Parc des Princes",
+        "fr": "Parc des Princes",
+        "es": "Parc des Princes",
+        "de": "Parc des Princes"
+      },
+      "answer": {
+        "en": "Paris Saint-Germain",
+        "fr": "Paris Saint-Germain",
+        "es": "Paris Saint-Germain",
+        "de": "Paris Saint-Germain"
+      },
+      "aliases": [
+        "PSG",
+        "Paris SG"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Stade Vélodrome",
+        "fr": "Stade Vélodrome",
+        "es": "Stade Vélodrome",
+        "de": "Stade Vélodrome"
+      },
+      "answer": {
+        "en": "Olympique de Marseille",
+        "fr": "Olympique de Marseille",
+        "es": "Olympique de Marseille",
+        "de": "Olympique de Marseille"
+      },
+      "aliases": [
+        "Marseille",
+        "OM"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Stade de Gerland",
+        "fr": "Stade de Gerland",
+        "es": "Stade de Gerland",
+        "de": "Stade de Gerland"
+      },
+      "answer": {
+        "en": "Olympique Lyonnais",
+        "fr": "Olympique Lyonnais",
+        "es": "Olympique Lyonnais",
+        "de": "Olympique Lyonnais"
+      },
+      "aliases": [
+        "Lyon",
+        "OL"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Villa Park",
+        "fr": "Villa Park",
+        "es": "Villa Park",
+        "de": "Villa Park"
+      },
+      "answer": {
+        "en": "Aston Villa",
+        "fr": "Aston Villa",
+        "es": "Aston Villa",
+        "de": "Aston Villa"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Goodison Park",
+        "fr": "Goodison Park",
+        "es": "Goodison Park",
+        "de": "Goodison Park"
+      },
+      "answer": {
+        "en": "Everton",
+        "fr": "Everton",
+        "es": "Everton",
+        "de": "Everton"
+      },
+      "aliases": [
+        "Everton FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "St James’ Park (Tyneside)",
+        "fr": "St James’ Park (Tyneside)",
+        "es": "St James’ Park (Tyneside)",
+        "de": "St James’ Park (Tyneside)"
+      },
+      "answer": {
+        "en": "Newcastle United",
+        "fr": "Newcastle United",
+        "es": "Newcastle United",
+        "de": "Newcastle United"
+      },
+      "aliases": [
+        "Newcastle"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Celtic Park",
+        "fr": "Celtic Park",
+        "es": "Celtic Park",
+        "de": "Celtic Park"
+      },
+      "answer": {
+        "en": "Celtic",
+        "fr": "Celtic",
+        "es": "Celtic",
+        "de": "Celtic"
+      },
+      "aliases": [
+        "Celtic FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Ibrox",
+        "fr": "Ibrox",
+        "es": "Ibrox",
+        "de": "Ibrox"
+      },
+      "answer": {
+        "en": "Rangers",
+        "fr": "Rangers",
+        "es": "Rangers",
+        "de": "Rangers"
+      },
+      "aliases": [
+        "Glasgow Rangers",
+        "Rangers FC"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "De Kuip",
+        "fr": "De Kuip",
+        "es": "De Kuip",
+        "de": "De Kuip"
+      },
+      "answer": {
+        "en": "Feyenoord",
+        "fr": "Feyenoord",
+        "es": "Feyenoord",
+        "de": "Feyenoord"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Johan Cruyff Arena",
+        "fr": "Johan Cruyff Arena",
+        "es": "Johan Cruyff Arena",
+        "de": "Johan Cruyff Arena"
+      },
+      "answer": {
+        "en": "Ajax",
+        "fr": "Ajax",
+        "es": "Ajax",
+        "de": "Ajax"
+      },
+      "aliases": [
+        "AFC Ajax"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Estádio da Luz",
+        "fr": "Estádio da Luz",
+        "es": "Estádio da Luz",
+        "de": "Estádio da Luz"
+      },
+      "answer": {
+        "en": "Benfica",
+        "fr": "Benfica",
+        "es": "Benfica",
+        "de": "Benfica"
+      },
+      "aliases": [
+        "SL Benfica"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Estádio do Dragão",
+        "fr": "Estádio do Dragão",
+        "es": "Estádio do Dragão",
+        "de": "Estádio do Dragão"
+      },
+      "answer": {
+        "en": "FC Porto",
+        "fr": "FC Porto",
+        "es": "FC Porto",
+        "de": "FC Porto"
+      },
+      "aliases": [
+        "Porto"
+      ]
+    }
+  ],
+  "football-national-teams": [
+    {
+      "prompt": {
+        "en": "Pelé",
+        "fr": "Pelé",
+        "es": "Pelé",
+        "de": "Pelé"
+      },
+      "answer": {
+        "en": "Brazil",
+        "fr": "Brésil",
+        "es": "Brasil",
+        "de": "Brasilien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Diego Maradona",
+        "fr": "Diego Maradona",
+        "es": "Diego Maradona",
+        "de": "Diego Maradona"
+      },
+      "answer": {
+        "en": "Argentina",
+        "fr": "Argentine",
+        "es": "Argentina",
+        "de": "Argentinien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Zinédine Zidane",
+        "fr": "Zinédine Zidane",
+        "es": "Zinédine Zidane",
+        "de": "Zinédine Zidane"
+      },
+      "answer": {
+        "en": "France",
+        "fr": "France",
+        "es": "Francia",
+        "de": "Frankreich"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Johan Cruyff",
+        "fr": "Johan Cruyff",
+        "es": "Johan Cruyff",
+        "de": "Johan Cruyff"
+      },
+      "answer": {
+        "en": "Netherlands",
+        "fr": "Pays-Bas",
+        "es": "Países Bajos",
+        "de": "Niederlande"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Franz Beckenbauer",
+        "fr": "Franz Beckenbauer",
+        "es": "Franz Beckenbauer",
+        "de": "Franz Beckenbauer"
+      },
+      "answer": {
+        "en": "Germany",
+        "fr": "Allemagne",
+        "es": "Alemania",
+        "de": "Deutschland"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Gianluigi Buffon",
+        "fr": "Gianluigi Buffon",
+        "es": "Gianluigi Buffon",
+        "de": "Gianluigi Buffon"
+      },
+      "answer": {
+        "en": "Italy",
+        "fr": "Italie",
+        "es": "Italia",
+        "de": "Italien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Andrés Iniesta",
+        "fr": "Andrés Iniesta",
+        "es": "Andrés Iniesta",
+        "de": "Andrés Iniesta"
+      },
+      "answer": {
+        "en": "Spain",
+        "fr": "Espagne",
+        "es": "España",
+        "de": "Spanien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Didier Drogba",
+        "fr": "Didier Drogba",
+        "es": "Didier Drogba",
+        "de": "Didier Drogba"
+      },
+      "answer": {
+        "en": "Côte d’Ivoire",
+        "fr": "Côte d’Ivoire",
+        "es": "Côte d’Ivoire",
+        "de": "Côte d’Ivoire"
+      },
+      "aliases": [
+        "Ivory Coast",
+        "Cote Ivoire",
+        "Costa de Marfil",
+        "Elfenbeinkueste"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Samuel Eto’o",
+        "fr": "Samuel Eto’o",
+        "es": "Samuel Eto’o",
+        "de": "Samuel Eto’o"
+      },
+      "answer": {
+        "en": "Cameroon",
+        "fr": "Cameroun",
+        "es": "Camerún",
+        "de": "Kamerun"
+      }
+    },
+    {
+      "prompt": {
+        "en": "George Weah",
+        "fr": "George Weah",
+        "es": "George Weah",
+        "de": "George Weah"
+      },
+      "answer": {
+        "en": "Liberia",
+        "fr": "Liberia",
+        "es": "Liberia",
+        "de": "Liberia"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Hristo Stoichkov",
+        "fr": "Hristo Stoichkov",
+        "es": "Hristo Stoichkov",
+        "de": "Hristo Stoichkov"
+      },
+      "answer": {
+        "en": "Bulgaria",
+        "fr": "Bulgarie",
+        "es": "Bulgaria",
+        "de": "Bulgarien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Gheorghe Hagi",
+        "fr": "Gheorghe Hagi",
+        "es": "Gheorghe Hagi",
+        "de": "Gheorghe Hagi"
+      },
+      "answer": {
+        "en": "Romania",
+        "fr": "Roumanie",
+        "es": "Rumanía",
+        "de": "Rumänien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Andriy Shevchenko",
+        "fr": "Andriy Shevchenko",
+        "es": "Andriy Shevchenko",
+        "de": "Andriy Shevchenko"
+      },
+      "answer": {
+        "en": "Ukraine",
+        "fr": "Ukraine",
+        "es": "Ucrania",
+        "de": "Ukraine"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Carlos Valderrama",
+        "fr": "Carlos Valderrama",
+        "es": "Carlos Valderrama",
+        "de": "Carlos Valderrama"
+      },
+      "answer": {
+        "en": "Colombia",
+        "fr": "Colombie",
+        "es": "Colombia",
+        "de": "Kolumbien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Hidetoshi Nakata",
+        "fr": "Hidetoshi Nakata",
+        "es": "Hidetoshi Nakata",
+        "de": "Hidetoshi Nakata"
+      },
+      "answer": {
+        "en": "Japan",
+        "fr": "Japon",
+        "es": "Japón",
+        "de": "Japan"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Park Ji-sung",
+        "fr": "Park Ji-sung",
+        "es": "Park Ji-sung",
+        "de": "Park Ji-sung"
+      },
+      "answer": {
+        "en": "South Korea",
+        "fr": "Corée du Sud",
+        "es": "Corea del Sur",
+        "de": "Südkorea"
+      },
+      "aliases": [
+        "Republic of Korea",
+        "Republique de Coree",
+        "Republica de Corea",
+        "Republik Korea"
+      ]
+    },
+    {
+      "prompt": {
+        "en": "Mark Viduka",
+        "fr": "Mark Viduka",
+        "es": "Mark Viduka",
+        "de": "Mark Viduka"
+      },
+      "answer": {
+        "en": "Australia",
+        "fr": "Australie",
+        "es": "Australia",
+        "de": "Australien"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Jerzy Dudek",
+        "fr": "Jerzy Dudek",
+        "es": "Jerzy Dudek",
+        "de": "Jerzy Dudek"
+      },
+      "answer": {
+        "en": "Poland",
+        "fr": "Pologne",
+        "es": "Polonia",
+        "de": "Polen"
+      }
+    },
+    {
+      "prompt": {
+        "en": "Steven Gerrard",
+        "fr": "Steven Gerrard",
+        "es": "Steven Gerrard",
+        "de": "Steven Gerrard"
+      },
+      "answer": {
+        "en": "England",
+        "fr": "Angleterre",
+        "es": "Inglaterra",
+        "de": "England"
+      }
+    },
+    {
+      "prompt": {
+        "en": "George Best",
+        "fr": "George Best",
+        "es": "George Best",
+        "de": "George Best"
+      },
+      "answer": {
+        "en": "Northern Ireland",
+        "fr": "Irlande du Nord",
+        "es": "Irlanda del Norte",
+        "de": "Nordirland"
+      }
+    }
+  ]
+}

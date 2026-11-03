@@ -4,6 +4,10 @@ import { initialKnowledge, normalizeAnswer, type KnowledgeChallenge, type Knowle
 export function replayKnowledge(c: KnowledgeChallenge, input: unknown): KnowledgeState {
   if (!Array.isArray(input) || input.length > (c.kind === "football" ? 7 : 501)) throw new Error("invalid");
   const s = initialKnowledge();
+  // Build the same first-match lookup once per authoritative replay. A 195-country
+  // quiz must not repeatedly normalise every answer for every accepted action.
+  const byAnswer=new Map<string,{id:string;answer:string}>(),foundIds=new Set<string>();
+  if(c.kind==="quiz")for(const item of c.items)for(const value of [item.answer,...item.aliases]){const key=normalizeAnswer(value);if(!byAnswer.has(key))byAnswer.set(key,item);}
   for (const a of input) {
     if (s.completed || !a || typeof a !== "object") throw new Error("invalid");
     if (a.kind === "finish") {
@@ -14,9 +18,9 @@ export function replayKnowledge(c: KnowledgeChallenge, input: unknown): Knowledg
       const value = a.value.trim(), normalized = normalizeAnswer(value);
       s.actions.push({ kind: "answer", value });
       if (c.kind === "quiz") {
-        const item = c.items.find(i => [i.answer, ...i.aliases].some(v => normalizeAnswer(v) === normalized));
-        s.feedback = !item ? "unknown" : s.found.some(i => i.id === item.id) ? "duplicate" : "correct";
-        if (item && s.feedback === "correct") s.found.push({ id: item.id, answer: item.answer });
+        const item = byAnswer.get(normalized);
+        s.feedback = !item ? "unknown" : foundIds.has(item.id) ? "duplicate" : "correct";
+        if (item && s.feedback === "correct") {s.found.push({ id: item.id, answer: item.answer });foundIds.add(item.id);}
         s.success = s.found.length === c.items.length;
         s.completed = s.success;
         s.score = Math.round(s.found.length * 1000 / c.items.length);
