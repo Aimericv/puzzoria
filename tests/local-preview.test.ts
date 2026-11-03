@@ -36,8 +36,13 @@ it("previews every game and language without recording runs, results or communit
     expect(data.challenge).not.toHaveProperty("solution");
     expect(data.challenge).not.toHaveProperty("answer");
     expect(data.challenge).not.toHaveProperty("secret");
-    expect(data.comparison.successRate).toBeGreaterThanOrEqual(60);
+    expect(data.comparison.successRate).toBeGreaterThanOrEqual(game === "quiz" ? 0 : 60);
     expect(data.comparison.successRate).toBeLessThanOrEqual(100);
+    if (game === "quiz") {
+      expect(data.comparison.successRate).toBeCloseTo(data.comparison.successes * 100 / data.comparison.samples);
+      expect(data.comparison.quizAverageAnswers).toBeLessThanOrEqual(data.completion.answersTotal);
+      expect(data.comparison.successes).toBeGreaterThanOrEqual(20);
+    }
     if (game === "rareword") expect(normalizeWord(data.discovery.word)).toBe(normalizeWord(data.answer));
     if (["ranking", "rather", "guess"].includes(game)) expect(data.state.completed).toBe(true);
   }

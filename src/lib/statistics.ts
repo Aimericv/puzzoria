@@ -67,12 +67,21 @@ export function comparisonStatistics(
       counts.set(r.attempts, (counts.get(r.attempts) ?? 0) + 1);
   });
   const maxCount = Math.max(0, ...counts.values());
+  const quizAnswers = current.game === "quiz" && current.answersTotal !== undefined
+    ? others.filter(r => r.answersTotal === current.answersTotal && Number.isInteger(r.answersFound) && r.answersFound! >= 0 && r.answersFound! <= current.answersTotal!) : [];
+  const footballTimes = current.game === "football" && current.success && current.attempts !== undefined
+    ? won.filter(r => r.attempts === current.attempts) : [];
   const commonAttempts = [...counts]
     .filter(([, count]) => count === maxCount)
     .map(([n]) => n)
     .sort((a, b) => a - b);
   return {
     samples: others.length,
+    quizAnswerSamples: quizAnswers.length,
+    quizAverageAnswers: quizAnswers.length >= COMPARISON_MIN_SAMPLES ? mean(quizAnswers.map(r => r.answersFound!)) : null,
+    footballTimeSamples: footballTimes.length,
+    footballFasterThanPercent: footballTimes.length >= COMPARISON_MIN_SAMPLES ? footballTimes.filter(r => r.duration > current.duration).length * 100 / footballTimes.length : null,
+    footballMedianTime: footballTimes.length >= COMPARISON_MIN_SAMPLES ? median(footballTimes.map(r => r.duration)) : null,
     medianTime: won.length >= COMPARISON_MIN_SAMPLES ? median(won.map(r=>r.duration)) : null,
     attemptDistribution: won.length >= COMPARISON_MIN_SAMPLES ? [...won.reduce((counts,r)=>{
       if(r.attempts!==undefined) counts.set(r.attempts,(counts.get(r.attempts)??0)+1);
@@ -118,7 +127,7 @@ export function comparisonStatistics(
   };
 }
 type ComputedComparison = NonNullable<ReturnType<typeof comparisonStatistics>>;
-type AddedMetrics = "medianTime" | "attemptDistribution" | "precisionSamples" | "closerThanPercent" | "fewerAttemptsThanPercent";
+type AddedMetrics = "medianTime" | "attemptDistribution" | "precisionSamples" | "closerThanPercent" | "fewerAttemptsThanPercent" | "quizAnswerSamples" | "quizAverageAnswers" | "footballTimeSamples" | "footballFasterThanPercent" | "footballMedianTime";
 export type Comparison = Omit<ComputedComparison, AddedMetrics> & Partial<Pick<ComputedComparison, AddedMetrics>> & {source?: "starter"};
 export function achievements(results: Completion[]) {
   const wins = results.filter((r) => r.success).length;

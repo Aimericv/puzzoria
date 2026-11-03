@@ -5,7 +5,7 @@ import { isDifficulty, isGameId, isLocale } from "./types";
 import { canonicalGamePath } from "./seo";
 import { practicePath } from "./play-path";
 import { hasDaily } from "./game-modes";
-import { hasTimeComparison } from "./result-metrics";
+import { hasResultTimeComparison } from "./result-metrics";
 export type Visit = {
   game: GameId;
   mode: PlayMode;
@@ -120,7 +120,7 @@ export function personalProgress(all: Completion[], current: Completion) {
   const records: ("timeRecord" | "attemptsRecord" | "scoreRecord")[] = [];
   if (current.provenance === "server") {
     if (
-      hasTimeComparison(current.game) &&
+      hasResultTimeComparison(current) &&
       current.success &&
       currentTimeValid &&
       times.length &&
@@ -152,7 +152,7 @@ export function personalProgress(all: Completion[], current: Completion) {
         ? Math.max(0, mean(attempts) - current.attempts)
         : null,
     timeImprovement:
-      hasTimeComparison(current.game) &&
+      hasResultTimeComparison(current) &&
       current.success &&
       currentTimeValid &&
       times.length >= 3

@@ -7,7 +7,8 @@ import { t } from "@/lib/i18n";
 import { rt } from "@/lib/retention-i18n";
 import { useStats, clockText } from "./storage";
 import { useLocalPreview } from "./local-preview-context";
-import { hasWinRate, hasTimeComparison, resultCopy } from "@/lib/result-metrics";
+import { hasWinRate, hasResultTimeComparison, resultCopy } from "@/lib/result-metrics";
+import { knowledgeStatisticsCopy } from "@/lib/knowledge-statistics-i18n";
 import { gameStatisticsCopy } from "@/lib/game-statistics-i18n";
 import { dateLabel } from "@/lib/date";
 export function PersonalProgress({
@@ -39,18 +40,21 @@ export function PersonalProgress({
     : completion.game === "quiz" ? [kt(locale).best, stats.bestScore===null?null:`${format(stats.bestScore/10)}%`]
     : completion.game === "2048" ? [m.scoreRecord,stats.bestScore]
     : completion.game === "math" ? completion.success ? [labels.exactRecord,stats.bestTime===null?null:clockText(stats.bestTime)] : [labels.bestGap,stats.bestDistance]
-    : hasTimeComparison(completion.game) ? [resultCopy(locale).best,stats.bestTime===null?null:clockText(stats.bestTime)] : null;
-  const visibleRecords=p.records.filter(key => (key !== "timeRecord" || hasTimeComparison(completion.game)) && (key!=="scoreRecord" || completion.game!=="math")).sort((a,b)=>(a==="attemptsRecord"?-1:b==="attemptsRecord"?1:0));
+    : hasResultTimeComparison(completion) ? [resultCopy(locale).best,stats.bestTime===null?null:clockText(stats.bestTime)] : null;
+  const timeRecordLabel=completion.game === "quiz" ? knowledgeStatisticsCopy(locale).perfectRecord : completion.game === "math" ? labels.exactRecord : m.timeRecord;
+  const recordLabel=(key: typeof p.records[number])=>key === "timeRecord" ? timeRecordLabel : m[key];
+  const visibleRecords=p.records.filter(key => (key !== "timeRecord" || hasResultTimeComparison(completion)) && (key!=="scoreRecord" || completion.game!=="math")).sort((a,b)=>(a==="attemptsRecord"?-1:b==="attemptsRecord"?1:0));
   return (
     <section className="personal-progress" data-personal-progress>
       <h3>{m.personalProgress}</h3>
       <dl className="personal-record-summary" data-personal-record>
         {record && <div><dt>{record[0]}</dt><dd>{record[1]??"—"}</dd></div>}
+        {completion.game === "quiz" && <div data-quiz-time-record><dt>{knowledgeStatisticsCopy(locale).perfectRecord}</dt><dd>{stats.bestTime === null ? "—" : clockText(stats.bestTime)}</dd></div>}
         {completion.mode==="daily" && <div><dt>{t(locale).currentStreak}</dt><dd>{stats.currentStreak}</dd></div>}
         {!record && <div><dt>{t(locale).played}</dt><dd>{stats.played}</dd></div>}
       </dl>
       {p.first && <p>{m.firstRecord}</p>}
-      {visibleRecords.slice(0,1).map(key=><p className="personal-record" key={key}>★ {m.newRecord} · {completion.game==="math"&&key==="timeRecord"?labels.exactRecord:m[key]}</p>)}
+      {visibleRecords.slice(0,1).map(key=><p className="personal-record" key={key}>★ {m.newRecord} · {recordLabel(key)}</p>)}
       <details className="progress-details">
         <summary>{labels.personalDetails}</summary>
       <dl className="personal-summary" data-personal-summary>
@@ -66,8 +70,8 @@ export function PersonalProgress({
           <dt>{completion.game === "math" ? resultCopy(locale).exactPersonal : t(locale).winRate}</dt>
           <dd>{format(stats.winRate ?? 0)}%</dd>
         </div>}
-        {hasTimeComparison(completion.game) && <div>
-          <dt>{completion.game === "math" ? resultCopy(locale).exactTime : rt(locale).averageTime}</dt>
+        {(hasResultTimeComparison(completion) || completion.game === "quiz") && <div>
+          <dt>{completion.game === "quiz" ? knowledgeStatisticsCopy(locale).perfectAverage : completion.game === "math" ? resultCopy(locale).exactTime : rt(locale).averageTime}</dt>
           <dd>
             {stats.averageTime === null
               ? "—"
@@ -90,13 +94,13 @@ export function PersonalProgress({
       </dl>
       {completion.game==="math"&&<dl><div><dt>{labels.bestGap}</dt><dd>{stats.bestDistance??"—"}</dd></div><div><dt>{labels.averageGap}</dt><dd>{stats.averageDistance===null?"—":format(stats.averageDistance)}</dd></div><div><dt>{labels.exactRecord}</dt><dd>{stats.bestTime===null?"—":clockText(stats.bestTime)}</dd></div></dl>}
       {completion.game==="2048"&&stats.largestTile!==null&&<dl><div><dt>{labels.largestTile}</dt><dd>{stats.largestTile}</dd></div></dl>}
-      {visibleRecords.slice(1).map(key=><p className="personal-record" key={key}>★ {m.newRecord} · {m[key]}</p>)}
+      {visibleRecords.slice(1).map(key=><p className="personal-record" key={key}>★ {m.newRecord} · {recordLabel(key)}</p>)}
       {!!p.attemptsImprovement && p.attemptsImprovement >= 0.1 && (
         <p>
           {m.belowAverage.replace("{count}", format(p.attemptsImprovement))}
         </p>
       )}
-      {hasTimeComparison(completion.game) && !!p.timeImprovement && p.timeImprovement >= 1 && (
+      {hasResultTimeComparison(completion) && !!p.timeImprovement && p.timeImprovement >= 1 && (
         <p>{m.fasterAverage.replace("{count}", format(p.timeImprovement))}</p>
       )}
       {p.badges.filter(() => completion.game !== "ranking" && completion.game !== "rather").map((key) => (

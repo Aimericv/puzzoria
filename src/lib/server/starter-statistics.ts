@@ -32,7 +32,8 @@ export function starterComparison(current: Completion): Comparison {
   const peers: Completion[] = Array.from({length:count},(_,i)=>{
     if (current.game === "quiz") {
       const topic=quizTopic(current.knowledgeSet?.split(":")[1] ?? ""), total=current.answersTotal ?? topic?.count ?? 1;
-      const found=Math.min(total,Math.floor(Math.pow(random(),.48)*(total+1)));
+      const perfect=random()<.16+Math.min(.22,4/total);
+      const found=perfect?total:Math.min(total-1,Math.floor(Math.pow(random(),.48)*total));
       const success=found===total, limit=topic?.seconds ?? 120;
       return {...current,runId:`starter:${cohort}:${i}`,success,answersFound:found,answersTotal:total,
         score:Math.round(found*1000/total),attempts:undefined,duration:success?Math.max(3,Math.round(limit*(.35+random()*.65))):limit};

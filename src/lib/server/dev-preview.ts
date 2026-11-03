@@ -11,6 +11,7 @@ import { initialPuzzle, replayPuzzle } from "../new-play";
 import { neighbors } from "../mines";
 import { evaluateExpression } from "../math";
 import { verifiedResultDetails } from "./result-details";
+import { starterComparison } from "./starter-statistics";
 
 // Local presentation only: never creates runs, results, votes or account data.
 export function localPreviewFixture(game: GameId, locale: Locale, difficulty: Difficulty, mode: PlayMode = "practice", source?: Challenge, progress?: {guesses?: string[]; state?: import("../social-types").SocialState}): LocalPreviewFixture {
@@ -77,7 +78,7 @@ export function localPreviewFixture(game: GameId, locale: Locale, difficulty: Di
     puzzleState, knowledgeState,
     ...(c.kind === "sudoku" ? {grid:c.solution} : {}),
     ...(c.kind === "math" ? {expression:c.reference, mathResult:{...evaluateExpression(c.reference,c.numbers,c.target),reference:c.reference}} : {}),
-    comparison: {samples, successes, successRate: successes * 100 / samples, averageTime: 280, medianTime:250, precisionSamples:samples,closerThanPercent:game==="math"?randomInt(60,90):null,fewerAttemptsThanPercent:completion.attempts===undefined?null:randomInt(60,90),attemptDistribution:game==="word"||game==="rareword"?[{attempts:2,count:successes*.2,percent:20},{attempts:3,count:successes*.4,percent:40},{attempts:4,count:successes*.4,percent:40}]:[],fasterThanPercent: randomInt(60, 98),
+    comparison: c.kind === "quiz" || c.kind === "football" ? starterComparison(completion) : {samples, successes, successRate: successes * 100 / samples, averageTime: 280, medianTime:250, precisionSamples:samples,closerThanPercent:game==="math"?randomInt(60,90):null,fewerAttemptsThanPercent:completion.attempts===undefined?null:randomInt(60,90),attemptDistribution:game==="word"||game==="rareword"?[{attempts:2,count:successes*.2,percent:20},{attempts:3,count:successes*.4,percent:40},{attempts:4,count:successes*.4,percent:40}]:[],fasterThanPercent: randomInt(60, 98),
       betterScoreThanPercent: game === "2048" || game === "quiz" ? randomInt(60, 98) : null, averageAttempts: completion.attempts === undefined ? null : completion.attempts + 1.4,
       fewerAttemptsThanAverage: completion.attempts === undefined ? null : 1.4, commonAttempts: completion.attempts === undefined ? [] : [completion.attempts + 1]},
     ...(c.kind === "word" || c.kind === "rareword" ? {answer: c.answer,

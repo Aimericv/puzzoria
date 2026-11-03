@@ -1,14 +1,15 @@
 import type { Completion, Locale } from "@/lib/types";
 import type { Comparison } from "@/lib/statistics";
-import { kt } from "@/lib/knowledge-i18n";
 import { rt } from "@/lib/retention-i18n";
 import { comparisonCopy } from "@/lib/comparison-i18n";
 import { gameStatisticsCopy } from "@/lib/game-statistics-i18n";
 import { hasWinRate, hasTimeComparison, resultCopy } from "@/lib/result-metrics";
 import { OutcomeBar } from "./outcome-bar";
 import { clockText } from "./storage";
+import { KnowledgeComparison } from "./knowledge-comparison";
 
 export function GameComparison({completion:c,comparison:p,locale}:{completion:Completion;comparison:Comparison;locale:Locale}) {
+  if(c.game === "quiz" || c.game === "football") return <KnowledgeComparison completion={c} comparison={p} locale={locale}/>;
   const m=rt(locale), labels=gameStatisticsCopy(locale), copy=comparisonCopy(locale);
   const format=(n:number)=>new Intl.NumberFormat(locale,{maximumFractionDigits:1}).format(n);
   let highlight:string|null=null;
@@ -16,10 +17,9 @@ export function GameComparison({completion:c,comparison:p,locale}:{completion:Co
     if(c.success&&p.fasterThanPercent!==null) highlight=labels.exactSpeed.replace("{n}",String(Math.round(p.fasterThanPercent)));
     else if(!c.success&&p.closerThanPercent!==null&&p.closerThanPercent!==undefined) highlight=labels.precision.replace("{n}",String(Math.round(p.closerThanPercent)));
   } else if(c.game==="2048"&&p.betterScoreThanPercent!==null) highlight=copy.score.replace("{n}",String(Math.round(p.betterScoreThanPercent)));
-  else if(c.game==="quiz"&&p.betterScoreThanPercent!==null) highlight=kt(locale).better.replace("{n}",String(Math.round(p.betterScoreThanPercent)));
-  else if((c.game==="word"||c.game==="rareword"||c.game==="football")&&p.fewerAttemptsThanPercent!==null&&p.fewerAttemptsThanPercent!==undefined) highlight=labels.fewerGuesses.replace("{n}",String(Math.round(p.fewerAttemptsThanPercent)));
+  else if((c.game==="word"||c.game==="rareword")&&p.fewerAttemptsThanPercent!==null&&p.fewerAttemptsThanPercent!==undefined) highlight=labels.fewerGuesses.replace("{n}",String(Math.round(p.fewerAttemptsThanPercent)));
   else if(hasTimeComparison(c.game)&&p.fasterThanPercent!==null) highlight=copy.faster.replace("{n}",String(Math.round(p.fasterThanPercent)));
-  const word=c.game==="word"||c.game==="rareword"||c.game==="football";
+  const word=c.game==="word"||c.game==="rareword";
   return <section className="comparison-panel" data-game-comparison={c.game}>
     <h3>{m.comparison}</h3>
     {highlight&&<p className="comparison-highlight">{highlight}</p>}
