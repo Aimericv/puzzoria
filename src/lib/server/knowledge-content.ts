@@ -1,5 +1,6 @@
 import { quizTopics, quizTopic, languages as l, type Localized } from "../knowledge-catalog";
 import { footballDailyPlayersV1 } from "./football-daily-content";
+import expandedContents from "./data/quiz-expansion.v1.json";
 import { seededRandom, shuffled } from "../random";
 import type { ClubSpell, KnowledgeChallenge, QuizItem } from "../knowledge-types";
 import { normalizeAnswer } from "../knowledge-types";
@@ -11,6 +12,7 @@ const country = {
   france:l("France","France","Francia","Frankreich"), spain:l("Spain","Espagne","España","Spanien"), germany:l("Germany","Allemagne","Alemania","Deutschland"), italy:l("Italy","Italie","Italia","Italien"), portugal:l("Portugal","Portugal","Portugal","Portugal"), belgium:l("Belgium","Belgique","Bélgica","Belgien"), netherlands:l("Netherlands","Pays-Bas","Países Bajos","Niederlande"), switzerland:l("Switzerland","Suisse","Suiza","Schweiz"), austria:l("Austria","Autriche","Austria","Österreich"), poland:l("Poland","Pologne","Polonia","Polen"), greece:l("Greece","Grèce","Grecia","Griechenland"), sweden:l("Sweden","Suède","Suecia","Schweden"), norway:l("Norway","Norvège","Noruega","Norwegen"), denmark:l("Denmark","Danemark","Dinamarca","Dänemark"), finland:l("Finland","Finlande","Finlandia","Finnland"), ireland:l("Ireland","Irlande","Irlanda","Irland"), iceland:l("Iceland","Islande","Islandia","Island"), hungary:l("Hungary","Hongrie","Hungría","Ungarn"), czechia:l("Czechia","Tchéquie","Chequia","Tschechien"), romania:l("Romania","Roumanie","Rumanía","Rumänien"), brazil:l("Brazil","Brésil","Brasil","Brasilien"), argentina:l("Argentina","Argentine","Argentina","Argentinien"), england:l("England","Angleterre","Inglaterra","England"), uruguay:l("Uruguay","Uruguay","Uruguay","Uruguay"), japan:l("Japan","Japon","Japón","Japan"), canada:l("Canada","Canada","Canadá","Kanada"), usa:l("United States","États-Unis","Estados Unidos","Vereinigte Staaten"), mexico:l("Mexico","Mexique","México","Mexiko"), india:l("India","Inde","India","Indien"), china:l("China","Chine","China","China"), australia:l("Australia","Australie","Australia","Australien"), southafrica:l("South Africa","Afrique du Sud","Sudáfrica","Südafrika"), southkorea:l("South Korea","Corée du Sud","Corea del Sur","Südkorea"), egypt:l("Egypt","Égypte","Egipto","Ägypten"), peru:l("Peru","Pérou","Perú","Peru"), jordan:l("Jordan","Jordanie","Jordania","Jordanien"),
 };
 const contents: Record<string, Answer[]> = {
+  ...expandedContents,
   "europe-capitals": [
     row(country.france,"Paris"),row(country.spain,l("Madrid","Madrid","Madrid","Madrid")),row(country.germany,l("Berlin","Berlin","Berlín","Berlin")),row(country.italy,l("Rome","Rome","Roma","Rom")),row(country.portugal,l("Lisbon","Lisbonne","Lisboa","Lissabon")),row(country.belgium,l("Brussels","Bruxelles","Bruselas","Brüssel")),row(country.netherlands,"Amsterdam"),row(country.switzerland,l("Bern","Berne","Berna","Bern")),row(country.austria,l("Vienna","Vienne","Viena","Wien")),row(country.poland,l("Warsaw","Varsovie","Varsovia","Warschau")),row(country.greece,l("Athens","Athènes","Atenas","Athen")),row(country.sweden,l("Stockholm","Stockholm","Estocolmo","Stockholm")),row(country.norway,"Oslo"),row(country.denmark,l("Copenhagen","Copenhague","Copenhague","Kopenhagen")),row(country.finland,"Helsinki"),row(country.ireland,l("Dublin","Dublin","Dublín","Dublin")),row(country.iceland,l("Reykjavík","Reykjavik","Reikiavik","Reykjavík"),["Reykjavik","Reykjavik"]),row(country.hungary,"Budapest"),row(country.czechia,l("Prague","Prague","Praga","Prag")),row(country.romania,l("Bucharest","Bucarest","Bucarest","Bukarest")),
   ],
@@ -73,6 +75,8 @@ export function generateKnowledge(game: "quiz" | "football", locale: Locale, dat
 }
 
 export function validateKnowledgeContent() {
+  if(new Set(quizTopics.map(t=>t.id)).size!==quizTopics.length||Object.keys(contents).some(id=>!quizTopic(id)))throw new Error("Invalid quiz catalogue");
+  for(const locale of ["en","fr","es","de"] as const)if(new Set(quizTopics.map(t=>t.slug[locale])).size!==quizTopics.length||quizTopics.some(t=>!/^[-a-z0-9]+$/.test(t.slug[locale])||!t.title[locale]||!t.description[locale]||t.scope&&!t.scope[locale]))throw new Error("Invalid translated quiz metadata");
   for (const topic of quizTopics) {
     const rows = contents[topic.id];
     if (!rows || rows.length !== topic.count) throw new Error(`Invalid quiz size: ${topic.id}`);

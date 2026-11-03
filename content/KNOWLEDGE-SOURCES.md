@@ -4,6 +4,8 @@ Sélection éditoriale initiale : 1er novembre 2026. Les indices, traductions et
 
 ## Quiz
 
+Extension du 3 novembre 2026 : seize quiz supplémentaires (635 réponses), documentés séparément dans [QUIZ-EXPANSION-SOURCES.md](QUIZ-EXPANSION-SOURCES.md). Les huit sujets initiaux ci-dessous sont conservés ; le total actuel est de vingt-quatre quiz. Voir [la sélection acquisition et sa méthode](../docs/QUIZ-ACQUISITION.fr.md).
+
 Les huit sujets ont des identifiants stables et quatre traductions dans `src/lib/knowledge-catalog.ts`. Les réponses et variantes sont privées dans `src/lib/server/knowledge-content.ts`. Ajouter un sujet implique une traduction complète, un nombre exact de réponses, un délai, une URL localisée et un test de résolution intégrale. Modifier les réponses d'un sujet nécessite une nouvelle version de sa cohorte ; les runs existants gardent leur contenu JSON.
 
 - Planètes : [NASA, les huit planètes](https://science.nasa.gov/solar-system/planets/). Pluton n'est pas accepté. L'ordre demandé est celui des distances au Soleil.

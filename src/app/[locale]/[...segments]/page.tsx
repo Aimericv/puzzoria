@@ -267,6 +267,7 @@ export default async function GamePage({ params }: Props) {
             : dailyGoal(game, locale)}
       </p>
       <p className="game-intro">{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.description[locale]+" "+kt(locale).topicIntro.replace("{n}",String(quizTopics.find(t=>t.id===r.quizCategory)!.count)).replace("{seconds}",String(quizTopics.find(t=>t.id===r.quizCategory)!.seconds)) : seoCopy(locale).games[game].intro}</p>
+      {r.quizCategory&&quizTopics.find(t=>t.id===r.quizCategory)?.scope&&<p className="quiz-scope" data-quiz-scope>{quizTopics.find(t=>t.id===r.quizCategory)!.scope![locale]}</p>}
       {((game === "sudoku" && (practice || archived && dailyDifficulties(game, date).length > 1)) || game === "mines" || game === "guess") && (
         <nav className="difficulty-nav" aria-label={m.difficulty}>
           {difficulties.map((d) => (

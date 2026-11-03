@@ -2,6 +2,7 @@ import { database } from "./database";
 import { digest } from "./http";
 import { analyticsAdmins, type AnalyticsFilters } from "./site-analytics";
 import type { GameId } from "../types";
+import { quizAnalytics } from "./quiz-analytics";
 type Event={session_id:string;name:string;at:number;page:string;game:GameId|null;mode:string|null;locale:string;puzzle_locale:string|null;difficulty:string|null;challenge_id:string|null;value:number;detail:string|null};
 type Session={id:string;owner_hash:string;created_at:number;updated_at:number;entry_page:string;locale:string;device:string;channel:string;referrer:string|null;source:string|null;medium:string|null;campaign:string|null};
 const ratio=(n:number,d:number)=>d?Math.round(n*1000/d)/10:null;
@@ -68,6 +69,7 @@ export function productAnalytics(filters:AnalyticsFilters,now=new Date()) {
     totals:{sessions:sessions.length,visitors:unique(sessions.map(s=>s.owner_hash)),pageViews:count("page_view"),activeSeconds:activeSessions.reduce((n,s)=>n+s.seconds,0),activeMedian:median(activeSessions.map(s=>s.seconds)),activeSamples:activeSessions.length,activeMean:activeSessions.length?activeSessions.reduce((n,s)=>n+s.seconds,0)/activeSessions.length:null,activePerPlayerMedian:median([...activeByPlayer.values()]),gamesPerSession:sessions.length?totalsBySession.reduce((n,s)=>n+s.games,0)/sessions.length:null,multiGamePercent:ratio(totalsBySession.filter(s=>s.games>=2).length,sessions.length),finishesPerSession:sessions.length?Math.round(count("run_finished")/sessions.length*100)/100:null,resumed,observedExits:count("game_abandon")},
     funnel:stages,acquisition:groupSources(sessions),firstTouch:groupSources(firstTouch),entries,transitions:[...transitions.values()].sort((a,b)=>b.count-a.count),games:[...gameGroups.values()],
     frequency:{dau:players(1),wau:players(7),mau:players(30),stickiness:ratio(players(1),players(30)),daysPerWeek:perOwner.length?Math.round(perOwner.reduce((n,d)=>n+d,0)/perOwner.length*10)/10:null,multiGameWeekly:ratio(weeklyOwners.filter(o=>unique(weekly.filter(a=>a.owner===o).map(a=>a.game))>=2).length,weeklyOwners.length)},
+    quizTopics:quizAnalytics(filters,now),
     sameGameRetention,breakdown,social:socialNames.map(name=>({name,count:count(name),sessions:sessionCount(e=>e.name===name)})),
     distribution:[activeSessions.filter(s=>s.seconds<60).length,activeSessions.filter(s=>s.seconds>=60&&s.seconds<300).length,activeSessions.filter(s=>s.seconds>=300&&s.seconds<900).length,activeSessions.filter(s=>s.seconds>=900).length],
     quality:{coverage:ratio(measuredStarts,officialStartKeys.size),measuredStarts,serverStarts:officialStartKeys.size,failedRequests:count("client_error"),failedLatencyMedian:median(events.filter(e=>e.name==="client_error").map(e=>e.value)),counters:db.prepare("SELECT kind,SUM(count) AS count FROM measurement_quality WHERE day>=? AND day<=? GROUP BY kind").all(new Date(start).toISOString().slice(0,10),now.toISOString().slice(0,10)) as {kind:string;count:number}[]},

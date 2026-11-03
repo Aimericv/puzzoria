@@ -11,6 +11,7 @@ import { analyticsFilters, requireAnalyticsAdmin, siteAnalytics } from "@/lib/se
 import { productAnalytics } from "@/lib/server/product-analytics";
 import { ProductAnalyticsPanel } from "@/components/product-analytics-panel";
 import { measurementCopy } from "@/lib/measurement-i18n";
+import { QuizAnalyticsPanel } from "@/components/quiz-analytics-panel";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{locale:string}> }) {
   const {locale}=await params;
@@ -51,6 +52,7 @@ export default async function Analytics({ params, searchParams }: {params:Promis
     <dl className="analytics-metrics">{stats.map(([label,value])=><div key={label}><dt>{label}</dt><dd>{typeof value==="number"?fmt.format(value):value}</dd></div>)}</dl>
     <p className="analytics-note">{m.scope}</p>
     <ProductAnalyticsPanel data={product} locale={locale}/>
+    <QuizAnalyticsPanel data={product.quizTopics} locale={locale}/>
     <a className="secondary-button" download href={`/api/admin/analytics?${exportQuery}&dataset=visits`}>{m.export} · {measurementCopy(locale).telemetry}</a>
     <section><h2>{m.retention} · {measurementCopy(locale).returnsAny}</h2><div className="analytics-retention">{(["d1","d7","d30"] as const).map(key=>{const r=data.retention[key],label=key==="d30"?measurementCopy(locale).d30:m[key];return <div key={key}><h3>{label}</h3><strong>{r.percent===null?"—":`${fmt.format(r.percent)} %`}</strong><p>{r.percent===null?m.unavailable:`${fmt.format(r.returned)} ${m.returned} / ${fmt.format(r.mature)} ${m.mature}`}</p><div className="analytics-bar" role="img" aria-label={`${label}: ${r.percent??"—"}%`}><span style={{width:`${r.percent??0}%`}}/></div></div>;})}</div><p className="analytics-note">{m.returns}</p></section>
     <section><h2>{m.games}</h2>{!data.games.length?<p>{m.empty}</p>:<div className="analytics-table"><table><thead><tr>{[m.game,m.players,m.starts,m.finishes,m.finishRate].map(h=><th key={h}>{h}</th>)}</tr></thead><tbody>{data.games.map(r=><tr key={r.game}><th scope="row">{common[registry[r.game].name]}</th><td>{fmt.format(r.players)}</td><td>{fmt.format(r.starts)}</td><td>{fmt.format(r.finishes)}</td><td>{percent(r.finishes,r.starts)}</td></tr>)}</tbody></table></div>}</section>

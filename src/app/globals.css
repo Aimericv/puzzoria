@@ -23,6 +23,10 @@
 .knowledge-card-preview > span { padding: 6px 10px; border: 1px solid currentColor; border-radius: 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
 .knowledge-game { max-width: 760px; width: 100%; margin: 0 auto; --knowledge-accent: #965235; }
 .knowledge-football { --knowledge-accent: #14735c; }
+.quiz-scope { border-left: 3px solid #c8a78d; padding: 10px 15px; margin: -8px 0 26px; color: #596479; font-size: .86rem; line-height: 1.65; }
+.quiz-topic-group { margin: 22px 0; }
+.quiz-topic-group h3 { font-size: 1rem; margin: 0 0 12px; }
+.quiz-all-link { display: inline-block; margin-top: 14px; color: #244eac; font-weight: 700; }
 .football-mode { padding: 16px 18px; margin-bottom: 22px; border: 1px solid #bedbcf; border-radius: 14px; background: #edf7f1; text-align: left; }
 .football-mode > strong { display: flex; align-items: center; gap: 8px; color: #14735c; }
 .football-mode > p { margin: 8px 0 0; font-size: .85rem; line-height: 1.6; color: #52617a; }
@@ -57,7 +61,7 @@
 .knowledge-answer-form input:focus-visible { outline: 3px solid #d7e3ff; border-color: var(--blue); outline-offset: 1px; }
 .knowledge-answer-form button { flex-shrink: 0; min-height: 48px; }
 .knowledge-feedback { min-height: 24px; margin: 7px 0; font-size: .84rem; color: var(--muted); }
-.knowledge-feedback.correct { color: #14735c; }
+.knowledge-feedback.correct { color: #14735c; background: transparent; }
 .knowledge-answer-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
 .knowledge-answer-row { display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 11px 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); text-align: left; font-size: .83rem; overflow-wrap: anywhere; transition: background .2s ease, border-color .2s ease; }
 .knowledge-clue { color: var(--muted); flex: 1; min-width: 0; }
