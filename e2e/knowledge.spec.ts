@@ -4,7 +4,7 @@ import { quizTopics, quizTopicPath } from "../src/lib/knowledge-catalog";
 import { footballPlayers } from "../src/lib/server/knowledge-content";
 import { clubBadge } from "../src/lib/football-badges";
 import { rt } from "../src/lib/retention-i18n";
-import { gamePath } from "../src/lib/i18n";
+import { practicePath } from "../src/lib/play-path";
 import { locales } from "../src/lib/types";
 import { recordUnhandledRejections, unhandledRejections } from "./browser-errors";
 
@@ -49,7 +49,7 @@ for(const locale of locales) {
   });
   test(`football in ${locale}: complete career, attempts, saved result and spoiler-free sharing`,async({page},info)=>{
     const m=kt(locale);await recordUnhandledRejections(page);
-    await page.goto(gamePath(locale,"football"));const game=page.locator('[data-knowledge-game="football"]');
+    await page.goto(practicePath(locale,"football"));const game=page.locator('[data-knowledge-game="football"]');
     await expect(game.locator(".football-timeline")).toHaveCount(0);
     await game.getByRole("button",{name:m.start,exact:true}).click();
     await expect(game.locator(".football-timeline")).toBeVisible();
@@ -82,7 +82,7 @@ for(const locale of locales) {
 
 test('football keeps club names usable when badge loading fails',async({page})=>{
   await page.route('**/club-badges/*.svg',route=>route.abort());
-  await page.goto(gamePath('fr','football'));
+  await page.goto(practicePath('fr','football'));
   const game=page.locator('[data-knowledge-game="football"]');
   await game.getByRole('button',{name:kt('fr').start,exact:true}).click();
   await expect(game.locator('.football-timeline')).toBeVisible();

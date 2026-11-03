@@ -118,7 +118,7 @@ export async function createRun(body: Record<string, unknown>, who: Identity) {
   if (game === "rareword" && mode === "practice" && utcDay() >= "2026-10-05") throw new ApiError("invalid");
   if (
     !["daily", "archive", "practice"].includes(String(mode)) ||
-    (mode === "daily" && (date !== utcDay() || !hasDaily(game))) ||
+    (mode === "daily" && (date !== utcDay() || !hasDaily(game) || !historicalDailyAvailable(game,date))) ||
     (mode === "archive" && !historicalDailyAvailable(game, date)) ||
     (mode === "practice" && date !== utcDay())
   )

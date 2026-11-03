@@ -89,7 +89,7 @@ function resolve(
   if (!gameAvailable(game, date)) return null;
   if (practice && archived) return null;
   if (archived && !historicalDailyAvailable(game, date)) return null;
-  if (!hasDaily(game) && !archived) practice = true;
+  if ((!hasDaily(game) || !historicalDailyAvailable(game,date)) && !archived) practice = true;
   if (game === "sudoku" && archived && !dailyDifficulties(game, date).includes(difficulty)) return null;
   if (game === "sudoku" && !practice && !archived && difficulty !== "easy")
     permanentRedirect(gamePath(locale, "sudoku"));
@@ -201,7 +201,7 @@ export default async function GamePage({ params }: Props) {
           {!practice && <small>{dateLabel(date, locale)}</small>}
         </span>
       </div>
-      {!practice && !archived && game !== "word" && game !== "rareword" && (
+      {!practice && !archived && game !== "word" && game !== "rareword" && game !== "football" && (
         <p className="daily-challenge-notice" data-daily-challenge>
           {pg(locale).dailyHelp}
         </p>

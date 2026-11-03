@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays } from "lucide-react";
 import { isLocale } from "@/lib/types";
-import { dailyGameIds } from "@/lib/game-modes";
+import { dailyGameIds, historicalDailyAvailable } from "@/lib/game-modes";
 import { archiveDates, dateLabel, challengeNumber } from "@/lib/date";
 import { t, gamePath } from "@/lib/i18n";
 import { gameName } from "@/lib/registry";
@@ -51,7 +51,7 @@ export default async function Archive({
               </div>
               <div className="archive-games">
                 {dailyGameIds
-                  .filter((game) => gameAvailable(game, date))
+                  .filter((game) => gameAvailable(game, date) && historicalDailyAvailable(game,date))
                   .map((game) => (
                     <Link
                       key={game}

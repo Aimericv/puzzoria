@@ -1,4 +1,5 @@
 import { generateKnowledge } from "./server/knowledge-content";
+import { generateDailyFootball } from "./server/football-daily-content";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type {
@@ -39,6 +40,7 @@ export function generateChallenge(
 ): Challenge {
   if (!validDate(date)) throw new Error("Invalid date");
   if (game === "quiz" || game === "football") {
+    if (game === "football" && !practiceSeed) return generateDailyFootball(locale,date);
     if (!practiceSeed) throw new Error("Knowledge games are Practice-only");
     return generateKnowledge(game, locale, date, practiceSeed, category);
   }

@@ -19,6 +19,14 @@
       "sha256": "fdbdebe3d6fd5768298c5f62976403977101d313eb729c0791aa2f80d3d220d4"
     },
     {
+      "club": "AEK Athens",
+      "file": "aek-athens.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/greece/AEK_Athens.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/greece/AEK_Athens.svg",
+      "sha256": "c533f58356096edbd089bdbf95a10fbd8c4b33792b81ec05644187b4008bc083",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "AS Cannes",
       "file": "as-cannes.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/AS_Cannes.svg",
@@ -40,11 +48,59 @@
       "sha256": "aae895156d6b5f997b21ba2fd60c050f2bfa35905c3e31467df3042ea995f964"
     },
     {
+      "club": "Al Ittihad",
+      "file": "al-ittihad.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Ittihad.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Ittihad.svg",
+      "sha256": "942509ea433e469559068f754a726a9b54a01887ce8fa13c82abf9377ab2f842",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Al Sadd",
       "file": "al-sadd.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/qatar/Al_Sadd.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/qatar/Al_Sadd.svg",
       "sha256": "61c5e3f7956423e3d47f01ef5ffb7d18453d49ab15e72bcddbe67f379b5a4efb"
+    },
+    {
+      "club": "Al-Ahli",
+      "file": "al-ahli.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Ahli.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Ahli.svg",
+      "sha256": "ae01b4dca07e1b0f14c9dcedd23e9ed0a82bcbec067d92bec7ec2771cb571614",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Al-Raed",
+      "file": "al-raed.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Raed.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/saudi-arabia/Al_Raed.svg",
+      "sha256": "bc0635b7202e0db3a32b34da11796f8567cb976d6d0ab43387d799faca78f49f",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Albacete",
+      "file": "albacete.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Albacete.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Albacete.svg",
+      "sha256": "2ec50afa19226aafd03d95ab2184fa66b89c5daa46700d74bc1f02f3691ed942",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Amiens",
+      "file": "amiens.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Amiens_SC.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Amiens_SC.svg",
+      "sha256": "e835f0b8e2c93b4e2f6a7ccf93aea24eaface0c3dcce82ae55733c664642d505",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Anderlecht",
+      "file": "anderlecht.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/RSC_Anderlecht.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/RSC_Anderlecht.svg",
+      "sha256": "b61c4baac03de7770fe5453ba15bacf6676cfcc7719462e8c9386a58239b519f",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Arsenal",
@@ -61,6 +117,14 @@
       "sha256": "e7cc1d577eeb99f45f81fa0d1219284a25882f8a8f56298f5d951f79d4f6200f"
     },
     {
+      "club": "Atlético San Luis",
+      "file": "atletico-san-luis.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/mexico/Atletico_de_San_Luis.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/mexico/Atletico_de_San_Luis.svg",
+      "sha256": "95c1825da937cf49bf01899b84c8b153c0538f30e23d02a741eb2e769e5d19ff",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Atlético de Madrid",
       "file": "atletico-de-madrid.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Atletico_Madrid.svg",
@@ -68,11 +132,115 @@
       "sha256": "afbb267079e9c3372afd2c75f0aa79015d63dcd9949d2f585466051677c42b41"
     },
     {
+      "club": "BK Häcken",
+      "file": "bk-hacken.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/sweden/H%C3%A4cken.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/sweden/H%C3%A4cken.svg",
+      "sha256": "7c81a7e0f32edd9614675820b0a7686a2faff9173998495caf7ac24df8785e03",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Bastia",
+      "file": "bastia.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/SC_Bastia.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/SC_Bastia.svg",
+      "sha256": "95cf3778e293127b1316371f9cd63b76c47e904bfc778cfeeb85139692591137",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Bayern München",
       "file": "bayern-munchen.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Bayern_Munich.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Bayern_Munich.svg",
       "sha256": "4fbc89226f2eef517ebd01e6b03ebe2705314e20e91a1d097efe5dc5faecd328"
+    },
+    {
+      "club": "Beijing Guoan",
+      "file": "beijing-guoan.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/china/Beijing_Guoan.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/china/Beijing_Guoan.svg",
+      "sha256": "ee62bac8ce6f4b7bbeaec3fcbceca1dc90e9656dbd6b12a2966a13187a28e5d5",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Benfica",
+      "file": "benfica.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/portugal/Benfica.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/portugal/Benfica.svg",
+      "sha256": "c489e8eb190ec223b18d82a9b796df09c388859d5325c4bb46664921cefd9288",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Beşiktaş",
+      "file": "besiktas.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Be%C5%9Fikta%C5%9F.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Be%C5%9Fikta%C5%9F.svg",
+      "sha256": "0a3bda54e786490dc587a427addb1a1fb2d640434207b939fee5668bf841b27e",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Blackburn Rovers",
+      "file": "blackburn-rovers.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Blackburn_Rovers.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Blackburn_Rovers.svg",
+      "sha256": "5cc56ee21bfc532f12294ea7c3450d19de1837f4cb2292c0de72919b7394bb38",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Bologna",
+      "file": "bologna.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Bologna.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Bologna.svg",
+      "sha256": "76e0bc2c5868d5f6b6eadd32fa43c4984787681d19235f9a8f317a19873a0083",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Bolton Wanderers",
+      "file": "bolton-wanderers.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Bolton_Wanderers.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Bolton_Wanderers.svg",
+      "sha256": "51e443b30aa1e111d388b17533220debdd5f72d114c58eaca353206eb842b1c2",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Borussia Dortmund",
+      "file": "borussia-dortmund.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Borussia_Dortmund.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Borussia_Dortmund.svg",
+      "sha256": "102f69566ef39212824cc5273541372cb96a2ba5dc95d9056471116c0c6f3b39",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Borussia Mönchengladbach",
+      "file": "borussia-monchengladbach.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Borussia_M%C3%B6nchengladbach.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Borussia_M%C3%B6nchengladbach.svg",
+      "sha256": "b625fa7dcc33cfc55e68bc66abdfbd734773ad83f61294fda7136e8c2a99e54f",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Caen",
+      "file": "caen.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Stade_Malherbe_Caen.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Stade_Malherbe_Caen.svg",
+      "sha256": "9dcb4732289a2e4c38ef5c60e1917c25c3cef6feea421f9f331a8b7d0ade3926",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Cercle Brugge",
+      "file": "cercle-brugge.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/Cercle_Brugge_KSV.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/Cercle_Brugge_KSV.svg",
+      "sha256": "e5c54c25521e2e7f45d46c672ace873d510f586859be8df64fe04918fc423bc7",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Charlton Athletic",
+      "file": "charlton-athletic.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Charlton_Athletic.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Charlton_Athletic.svg",
+      "sha256": "192a08e22e9f71e9d286dc40f316508326320cc016c742cb642013eb4b23227b",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Chelsea",
@@ -87,6 +255,22 @@
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/Chicago_Fire_FC.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/Chicago_Fire_FC.svg",
       "sha256": "23742e03ad8a39ca6b9fa992015c54a687f93b3e2120b4a0f6244ae2ae809c51"
+    },
+    {
+      "club": "Chievo",
+      "file": "chievo.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/AC_ChievoVerona.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/AC_ChievoVerona.svg",
+      "sha256": "6b113152dc6c77065a410335d441fe5b65f2fcf83fe64d2ae665d302dd194ac5",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Club Brugge",
+      "file": "club-brugge.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/Club_Brugge.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/belgium/Club_Brugge.svg",
+      "sha256": "2e64b3cb3da9bd0f93b23d37f35aa4f395c7838cc88fe775f4dcbf39f97f2473",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Corinthians",
@@ -110,11 +294,59 @@
       "sha256": "3db8a22cbd9eaeaaf6f760c71fc9e2922e5c0824012367d7c070396b4cd64dcb"
     },
     {
+      "club": "Deportivo La Coruña",
+      "file": "deportivo-la-coruna.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Deportivo_La_Coru%C3%B1a.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Deportivo_La_Coru%C3%B1a.svg",
+      "sha256": "c40b6c3387a3690bfafe7fa28e2d759f9a3c10b106f55dc57171a12c411aad87",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Derby County",
       "file": "derby-county.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Derby_County.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Derby_County.svg",
       "sha256": "ade67907c4b7f3e7c5a8b46cc919eb36aa0cfb4712228229662c839f148450a4"
+    },
+    {
+      "club": "Dinamo Zagreb",
+      "file": "dinamo-zagreb.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/croatia/GNK_Dinamo_Zagreb.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/croatia/GNK_Dinamo_Zagreb.svg",
+      "sha256": "5e71edf24a6f69f4de987c5b60476272e0c74ce7abd45472d11844263ed96371",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Djurgårdens IF",
+      "file": "djurgardens-if.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/sweden/Djurg%C3%A5rden.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/sweden/Djurg%C3%A5rden.svg",
+      "sha256": "dbdcf898165e9468a6abe9385160ba95585e583f2a74529affe2f118a28dbdcb",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Dundee United",
+      "file": "dundee-united.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/scotland/Dundee_United.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/scotland/Dundee_United.svg",
+      "sha256": "7be1b19ad1abcdaa88a4758828305b9232413d903dbe333592a0f78889354e08",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Dynamo Kyiv",
+      "file": "dynamo-kyiv.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/ukraine/Dynamo_Kyiv.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/ukraine/Dynamo_Kyiv.svg",
+      "sha256": "d7436d5628ce05abc2750697997209acda8ef542fc0b69c3e8252488bbb3f152",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Eintracht Frankfurt",
+      "file": "eintracht-frankfurt.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Eintracht_Frankfurt.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Eintracht_Frankfurt.svg",
+      "sha256": "00c1c5455dddb8c9667771a37be3ae09868cb424a86aee8b2f02db3f6312b9cf",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Everton",
@@ -152,11 +384,27 @@
       "sha256": "d8d130bcc644c3ec8131f939c886a3873fa44acc24634e7df776bbf0df2b6e88"
     },
     {
+      "club": "Ferencváros",
+      "file": "ferencvaros.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/hungary/Ferencv%C3%A1ros.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/hungary/Ferencv%C3%A1ros.svg",
+      "sha256": "1b7e6c07b3588d07076a0b33affe5c454bbfb66aa1930708ae313320acde6940",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Feyenoord",
       "file": "feyenoord.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/netherlands/Feyenoord.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/netherlands/Feyenoord.svg",
       "sha256": "5bb6168852dfce26072c9c5614b9e2926cf4695d05e0eae7eb74157560dd2287"
+    },
+    {
+      "club": "Fiorentina",
+      "file": "fiorentina.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Fiorentina.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Fiorentina.svg",
+      "sha256": "36b3e12d68f652d6dd6035e40d0fcc5c1f4440f0c9c0cb5695d3d6638a2ae7e3",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Flamengo",
@@ -173,6 +421,30 @@
       "sha256": "d0103adaa72b7fa8ea533d5dbdf356dfc6df9fe2eedd8025b8595d418f553b25"
     },
     {
+      "club": "Fulham",
+      "file": "fulham.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Fulham.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Fulham.svg",
+      "sha256": "8163c0b75b0b1996bdae3c6197174ca0c4ba57e2f7a85c5357063c169c3b9972",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Galatasaray",
+      "file": "galatasaray.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Galatasaray.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Galatasaray.svg",
+      "sha256": "af5e8c93fca90d502e8af52a235c8bf43d28faa486e1c320aa90b3989d2a39c3",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Genoa",
+      "file": "genoa.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Genoa.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Genoa.svg",
+      "sha256": "f6d297cd85d0cdf4e498851ea03d8367f3a34aab5e2a271637d20605c935a3c6",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Girondins de Bordeaux",
       "file": "girondins-de-bordeaux.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Bordeaux.svg",
@@ -180,11 +452,59 @@
       "sha256": "6b4bcf09ead1a900800d94c766996f863c8c87dfa9cd9c1657f308b0043cc67f"
     },
     {
+      "club": "Grasshoppers",
+      "file": "grasshoppers.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Grasshoppers.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Grasshoppers.svg",
+      "sha256": "8b68601a0bd2d4411d162a06f2d0750aa628490609759356d624bbcbf49fbb4e",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Grêmio",
       "file": "gremio.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/brazil/Gr%C3%AAmio.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/brazil/Gr%C3%AAmio.svg",
       "sha256": "6e6af771c82ac95cb27e191f49bdd726b1aa1d4a7bf65e679392958165829ffb"
+    },
+    {
+      "club": "Guingamp",
+      "file": "guingamp.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/EA_Guingamp.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/EA_Guingamp.svg",
+      "sha256": "8833ccc96492509fe0a5bb0405f94abd549118ada140d2f0fc38552aeb0fe330",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Hajduk Split",
+      "file": "hajduk-split.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/croatia/Hajduk_Split.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/croatia/Hajduk_Split.svg",
+      "sha256": "87cbcff25b5d8a03cffa428f5714fe6401be77889feda2b5b2ab16efa56efab8",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Hearts of Oak",
+      "file": "hearts-of-oak.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/ghana/Hearts_of_Oak.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/ghana/Hearts_of_Oak.svg",
+      "sha256": "7bbac80f65ef767eb4bba4dafacf7db7e3fd699229c8981aa6c3b5eae10e30ee",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Hellas Verona",
+      "file": "hellas-verona.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Hellas_Verona.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Hellas_Verona.svg",
+      "sha256": "87f075d61cd95728dba530649e077b5afbd9a8692dd22d1ea54c0b100df8e20c",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Hertha BSC",
+      "file": "hertha-bsc.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Hertha_BSC.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Hertha_BSC.svg",
+      "sha256": "c6d440bebe6c1f3759fe252d9ef90d678ad8863daca189d13e9db20b8811cdfc",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Inter Milan",
@@ -201,11 +521,35 @@
       "sha256": "e4477f3de62ec7fdf4c66d6f2a269a6a1315d514e900a8df2a201a25c4463a10"
     },
     {
+      "club": "KR Reykjavík",
+      "file": "kr-reykjavik.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/iceland/KR.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/iceland/KR.svg",
+      "sha256": "7ce5f5707db66639e076fdc4f14a4ffd5ddd087eb8cacf715c7be340dd9df9f2",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Kitchee",
+      "file": "kitchee.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/hong-kong/Kitchee.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/hong-kong/Kitchee.svg",
+      "sha256": "2e850dc623b860b2e803fcf55d94ddfa95b9343af1af4cac2d894a42fbea86ea",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "LA Galaxy",
       "file": "la-galaxy.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/Los_Angeles_Galaxy.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/Los_Angeles_Galaxy.svg",
       "sha256": "4f4f7c1e5d001863343c674ccf563bb88222876e83717d505ee9cd804ab4d9fa"
+    },
+    {
+      "club": "Las Palmas",
+      "file": "las-palmas.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Las_Palmas.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Las_Palmas.svg",
+      "sha256": "d6e0da40b5902dd03eda5fc4ff9292d5e1f98955167f5a08d442daa7f0250c8c",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Lazio",
@@ -215,11 +559,67 @@
       "sha256": "47d4359c1982666f4613f03eff493de212ac9d0b01ffc2e911fba34483ff0973"
     },
     {
+      "club": "Le Havre",
+      "file": "le-havre.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Le_Havre_AC.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Le_Havre_AC.svg",
+      "sha256": "f6b39eadc441e2e1ac0f5539ced3b0320ceb1ecc83e1f6dc91fef8e9be12d52d",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Leicester City",
+      "file": "leicester-city.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Leicester.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Leicester.svg",
+      "sha256": "d572d5b91b21a996d0c4a9212d8b8c16dc8752b49a6a4bc2ebda71f5ea594ae5",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Lens",
+      "file": "lens.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/RC_Lens.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/RC_Lens.svg",
+      "sha256": "6856c668ef8fa704365bf0b754dc695daa7bc77e0c7b5a39284d96142ae39ac5",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Levante",
+      "file": "levante.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Levante.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Levante.svg",
+      "sha256": "e11841de9904268a7b7dc2a7505ed58a0d12a9c45374ffecf7d31783a493851d",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Lille",
+      "file": "lille.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Lille.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Lille.svg",
+      "sha256": "7137afddbbe8ba774e4de11dfc7d7af4835b208fa61b27578fa5b8d3e45b25a9",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Liverpool",
       "file": "liverpool.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/uruguay/Liverpool.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/uruguay/Liverpool.svg",
       "sha256": "f9250388d000eb1d78c44fb7caf0a5bca56f9991d14cb2ff3740c68be200e0c0"
+    },
+    {
+      "club": "Louhans-Cuiseaux",
+      "file": "louhans-cuiseaux.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Louhans-Cuiseaux_FC.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Louhans-Cuiseaux_FC.svg",
+      "sha256": "ec1ad831f13b1041d9c0c6cfcbd4bca4e884c06bebc06182f1a2d3dc9c75d2b2",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Lyon",
+      "file": "lyon.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Olympique_Lyonnais.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Olympique_Lyonnais.svg",
+      "sha256": "919f35a8f76ffbf30f02ab08791cf2eb8117957e644511beb832faafdc9f9665",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Manchester City",
@@ -236,11 +636,67 @@
       "sha256": "779c3906f6b506f93311912c454d583d6e013aafbd66fd7e5b066519221ec86a"
     },
     {
+      "club": "Marseille",
+      "file": "marseille.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Marseille.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Marseille.svg",
+      "sha256": "97e2b6d90489c5f82bd66d56e53db2e81fec06775626cae9e1558601c3f8a5c8",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Melbourne City",
       "file": "melbourne-city.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/australia/Melbourne_City_FC.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/australia/Melbourne_City_FC.svg",
       "sha256": "8317047f0f3d5812b7337cf86d86d6d2797817e53b66f581fe7d95f488a83334"
+    },
+    {
+      "club": "Molde",
+      "file": "molde.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/norway/Molde.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/norway/Molde.svg",
+      "sha256": "5134af81e2c6066e7d55ad02a1ab4005dfe07a3ecc1d49f14402786b994bec93",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Montreal Impact",
+      "file": "montreal-impact.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/brazil/Monte_Roraima.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/brazil/Monte_Roraima.svg",
+      "sha256": "21b1c9d4da046d2383f94a8238408413c4da077212e9acdda00c710d507399cd",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Monza",
+      "file": "monza.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/AC_Monza.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/AC_Monza.svg",
+      "sha256": "d5fc7c09f6b1efd99a6defc17cb5c396b62fee077f280c13f08e34aa63d7df94",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Málaga",
+      "file": "malaga.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/M%C3%A1laga.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/M%C3%A1laga.svg",
+      "sha256": "d53e1587197391b4221fccbaa197c49667398fd43853988d59c2400bc17ab9a7",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Nancy",
+      "file": "nancy.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Nancy_Lorraine.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Nancy_Lorraine.svg",
+      "sha256": "209bdc130128a277c56a2c94b875f4edfc3cbf5d768ea4751d9c9b962c9c20b0",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Napoli",
+      "file": "napoli.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Napoli.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Napoli.svg",
+      "sha256": "ac6ead259d9f90322eff6fe8a998484eae287eac68891edf6d179c1050734936",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "New York City FC",
@@ -262,6 +718,22 @@
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/New_York_Red_Bulls.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/usa/New_York_Red_Bulls.svg",
       "sha256": "407892669e1cd6f0983385e09c565ee9014cf87e87c4f4d1af4619aa5c8f6e0a"
+    },
+    {
+      "club": "Nice",
+      "file": "nice.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Nice.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Nice.svg",
+      "sha256": "7c817027f322ed725330123690265f9499443682af7d7cec19f79301ed78d53e",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Olympiacos",
+      "file": "olympiacos.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/greece/Olympiacos.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/greece/Olympiacos.svg",
+      "sha256": "502dc5d6a7e80e537d613d473a25ce53f0b203d415dd47d75e3ed5396b40223a",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Orlando City",
@@ -292,6 +764,22 @@
       "sha256": "f184f2dff105f88f3cf1f0af36d9ceff8745ece8ddbd1543f8e9f0c01f89222d"
     },
     {
+      "club": "Pescara",
+      "file": "pescara.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Pescara.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Pescara.svg",
+      "sha256": "6acc9640347556c4f9b503b809c5971fa277859ad1ca2aa34c5406f0fa9aa9df",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Portsmouth",
+      "file": "portsmouth.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Portsmouth.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Portsmouth.svg",
+      "sha256": "4023bbc2a4397b3701a6216b5dce203c9a66cc551a38679b7ca49f4cee19fd2d",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Preston North End",
       "file": "preston-north-end.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Preston_North_End.svg",
@@ -299,11 +787,27 @@
       "sha256": "82b53b952ff21fb5a99132a4055cf5b252f8422553c07dde6e93f419d460d53f"
     },
     {
+      "club": "Queens Park Rangers",
+      "file": "queens-park-rangers.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Queens_Park_Rangers.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Queens_Park_Rangers.svg",
+      "sha256": "cf9f0d8adc918212e133f1c3e88e8a2e2bf517686efbecf785379f3bb1f05b16",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Querétaro",
       "file": "queretaro.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/mexico/Queretaro_FC.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/mexico/Queretaro_FC.svg",
       "sha256": "0f9407889343df798e65a172d38dd754bd415369717db0495fbbcaeda549ca43"
+    },
+    {
+      "club": "Rangers",
+      "file": "rangers.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/scotland/Rangers.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/scotland/Rangers.svg",
+      "sha256": "29e0789e4934e5a605029487a60590e6d72e6709cac29ee620895cb104d37823",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Real Madrid",
@@ -320,11 +824,123 @@
       "sha256": "5409db80f377c2b742ec85e38435aba11fa551e0addaaf4a4658a41e022c8c7d"
     },
     {
+      "club": "Recreativo de Huelva",
+      "file": "recreativo-de-huelva.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Recreativo_de_Huelva.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Recreativo_de_Huelva.svg",
+      "sha256": "ea904454db3a2a631698f89cdecdc7d123ea9d9e6e72023a6f8035519d0ccb4b",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Red Star Belgrade",
+      "file": "red-star-belgrade.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/serbia/Crvena_Zvezda.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/serbia/Crvena_Zvezda.svg",
+      "sha256": "56b81e4d3ed2a6727e7c3373c078adf5d0bed777b9b8e0cf8860ab6203e2a2e7",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Rennes",
+      "file": "rennes.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Rennes.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/Rennes.svg",
+      "sha256": "71f0d89cdc17f62c0708ba2c62689dc44aace079b4be5ae1ee10eed5d859db6f",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "River Plate",
+      "file": "river-plate.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/argentina/River_Plate.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/argentina/River_Plate.svg",
+      "sha256": "cbd8824aa0d09e475e0050af2027a31914260c9a502ce29a30679c1d3985f8ff",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Rostov",
+      "file": "rostov.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/russia/Rostov.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/russia/Rostov.svg",
+      "sha256": "76c32e5d6d4c6f73ff362d1ff0646887ca88f8f35ea3ac883fcec24a22d15f99",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "SC Freiburg",
+      "file": "sc-freiburg.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Freiburg.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Freiburg.svg",
+      "sha256": "ecdef6022be3023474d8977d24d671fe46198edae24a206fa92640ad7efcf896",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Saint-Étienne",
+      "file": "saint-etienne.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/AS_Saint-%C3%89tienne.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/AS_Saint-%C3%89tienne.svg",
+      "sha256": "ff4d52bee417461bf8c0c46261a4996b35bbcd05ad16e5e65f911d41367e6aa8",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Sassuolo",
+      "file": "sassuolo.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Sassuolo.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Sassuolo.svg",
+      "sha256": "86493ec891c6b574cf396752b24deaba3e854e6ae06194a4a512323fc949ba92",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Schalke 04",
       "file": "schalke-04.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Schalke_04.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/germany/Schalke_04.svg",
       "sha256": "abe1b0991c79832a85067a5f897c00267dc6fe5fce2259c61ffb01924d900cc2"
+    },
+    {
+      "club": "Sevilla",
+      "file": "sevilla.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Sevilla.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Sevilla.svg",
+      "sha256": "1c144f70daafc093df9d9e64ff5a7393943117ad6c7250bdc355bac68c6a6430",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Shanghai Shenhua",
+      "file": "shanghai-shenhua.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/china/Shanghai_Shenhua.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/china/Shanghai_Shenhua.svg",
+      "sha256": "c3771c2b479a8c9d60882c8488b9396afe348aec52fcb0c8d4a6994917e08942",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Sion",
+      "file": "sion.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Sion.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Sion.svg",
+      "sha256": "f7f482befdfdff1500f771d6155d6e0f9370a6cbc31d12aafa5d30beac0a2454",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Sochaux",
+      "file": "sochaux.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/FC_Sochaux-Montb%C3%A9liard.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/france/FC_Sochaux-Montb%C3%A9liard.svg",
+      "sha256": "5b1c5527bb41926d263c41960ad86a7a2c6480d9595a20b92c9e157a38443ef6",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Sparta Prague",
+      "file": "sparta-prague.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/czech-republic/AC_Sparta_Praha.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/czech-republic/AC_Sparta_Praha.svg",
+      "sha256": "7892a549bd3d542d9f8785c32f172be4e254c6a88e760bb29804be530f40a4ee",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Spartak Moscow",
+      "file": "spartak-moscow.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/russia/Spartak_Moscow.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/russia/Spartak_Moscow.svg",
+      "sha256": "bfe0913828eea3a3c9b524dc60f87d531d5cce751477535c4052d3836f4fff00",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Sporting CP",
@@ -341,6 +957,22 @@
       "sha256": "7289bef63107288cdaa18f4d29a3b4e7e4cce0bca0796c7163a41ef7f859cd03"
     },
     {
+      "club": "Stoke City",
+      "file": "stoke-city.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Stoke_City.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Stoke_City.svg",
+      "sha256": "0a05ad154a68a59474367d64e4a2b4905b52282b0e12e9baadaa3ea0f1fe3573",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Sunderland",
+      "file": "sunderland.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Sunderland.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Sunderland.svg",
+      "sha256": "cb852749d255be240c97612c01a90a339702ad69dae564f00e997787274d49fa",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Swansea City",
       "file": "swansea-city.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Swansea_City.svg",
@@ -355,11 +987,59 @@
       "sha256": "2984a2b91115e3777e863832b949658906fa5ccbbe47314d71672376d9ae20ad"
     },
     {
+      "club": "Ternana",
+      "file": "ternana.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Ternana.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Ternana.svg",
+      "sha256": "7ddd63d1cc27eea2a6dd835cb29479645ab16ad64047642179b34222dc71992b",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Torino",
+      "file": "torino.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Torino.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Torino.svg",
+      "sha256": "c64de70f03f31d99354454e603040a5a391e1183b417c772030624a4fa1312f2",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Tottenham Hotspur",
+      "file": "tottenham-hotspur.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Tottenham.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/Tottenham.svg",
+      "sha256": "e719547a9ebedb25547ce31336339b6e2705eb3e05ab1c268807b2217a06f348",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Trabzonspor",
+      "file": "trabzonspor.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Trabzonspor.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/turkey/Trabzonspor.svg",
+      "sha256": "3cb9e0a7bb392d000ecd9c931977e7c454f0390565041ca6318acc7f0f77ee77",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "club": "Udinese",
+      "file": "udinese.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Udinese.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/italy/Udinese.svg",
+      "sha256": "c738febb1bc1c5fdc5abf4d603cc5ac2c5420c8c8eedcf6a0458216e96741d10",
+      "retrieved": "2026-11-03"
+    },
+    {
       "club": "Valencia",
       "file": "valencia.svg",
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Valencia.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/spain/Valencia.svg",
       "sha256": "77bc2550fb3323e2df3badebaa210dc7db51029126ebf02ae105d745a927ca32"
+    },
+    {
+      "club": "Valur",
+      "file": "valur.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/iceland/Valur.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/iceland/Valur.svg",
+      "sha256": "214e2d54acd5ddc7e027cfdeff65396b3655d7167708bbb7a1725ad369edfdf6",
+      "retrieved": "2026-11-03"
     },
     {
       "club": "Vissel Kobe",
@@ -381,6 +1061,14 @@
       "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/West_Ham.svg",
       "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/england/West_Ham.svg",
       "sha256": "247c21bad9bdc49217ae5456707e1c286be55f3e97f7a9faf460220d58e289d7"
+    },
+    {
+      "club": "Zürich",
+      "file": "zurich.svg",
+      "source": "https://github.com/JoseArroyave/football-logos/blob/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Z%C3%BCrich.svg",
+      "download": "https://raw.githubusercontent.com/JoseArroyave/football-logos/5ab11fed47427b3003f4b276554491fe683387b1/logos/switzerland/Z%C3%BCrich.svg",
+      "sha256": "0fd76a913962297285f8d9a3124fe51b906e424a2ef74bac0a9c72bd33aa84c4",
+      "retrieved": "2026-11-03"
     }
   ]
 }

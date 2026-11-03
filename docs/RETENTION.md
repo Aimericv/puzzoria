@@ -1,5 +1,7 @@
 # Rétention, comptes et résultats — version livrée
 
+Depuis le 3 novembre 2026, **Footballeur du jour** ajoute un sixième jeu quotidien, avec une sélection plus difficile partagée entre les quatre langues. Une seule partie officielle par propriétaire/date UTC ; reprise et séries suivent les règles existantes. L'illimité et les duels conservent les vingt joueurs initiaux et restent exclus des résultats quotidiens. Les archives commencent à cette date. Voir [la mécanique, les sources et la conservation des défis](QUIZ-FOOTBALL.fr.md).
+
 Depuis le 7 octobre, **Défier un ami** ouvre des salons simultanés pour les neuf jeux du catalogue : [règles, autorité, reconnexion et mesure](DUELS.fr.md). Les anciennes invitations asynchrones restent lisibles. Les duels entre amis sont actifs ; Ranked, matchmaking public, paiements et récompenses restent futurs.
 
 Le tableau privé de [statistiques internes](ANALYTICS.fr.md) combine les parties serveur et une mesure navigateur facultative : acquisition, temps actif, replays, transitions, fréquence et rétention J+1/J+7/J+30. La migration 5 conserve cette mesure interne dans SQLite, sans fournisseur externe. Le jeu reste utilisable après refus ; les données officielles restent distinctes.

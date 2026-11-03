@@ -8,7 +8,7 @@ import {
   publicChallenge,
   gameAvailable,
 } from "@/lib/challenges";
-import { hasDaily } from "@/lib/game-modes";
+import { hasDaily, historicalDailyAvailable } from "@/lib/game-modes";
 import { dateLabel, utcDay } from "@/lib/date";
 import { t } from "@/lib/i18n";
 import { homeMetadata } from "@/lib/seo";
@@ -40,7 +40,7 @@ export default async function Home({
   const challenges = await Promise.all(
     catalogGameIds.filter(game => gameAvailable(game, today)).map(async (game) =>
       publicChallenge(
-        hasDaily(game)
+        hasDaily(game) && historicalDailyAvailable(game,today)
           ? await getChallenge(game, locale, today)
           : generateChallenge(game, locale, today, "easy", "home-preview-v1"),
       ),
