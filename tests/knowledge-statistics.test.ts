@@ -60,6 +60,10 @@ it("explains missing speed samples instead of inventing a percentile or reusing 
   const footballHtml = renderToStaticMarkup(createElement(GameComparison, { completion: football, comparison: p, locale: "fr" }));
   expect(footballHtml).toContain(knowledgeStatisticsCopy("fr").pendingFootball);
   expect(footballHtml).not.toContain(knowledgeStatisticsCopy("fr").footballSpeed.split("{n}")[0]);
+  const failed = { ...football, success: false, attempts: 6 };
+  const failedHtml = renderToStaticMarkup(createElement(GameComparison, { completion: failed, comparison: comparisonStatistics(peers, failed)!, locale: "fr" }));
+  expect(failedHtml).not.toContain("data-knowledge-speed");
+  expect(failedHtml).not.toContain(knowledgeStatisticsCopy("fr").firstGuess);
 });
 it("tracks perfect quiz time records only within the matching personal cohort", () => {
   const history = [peer(1, { duration: 60 }), peer(2, { success: false, score: 500, answersFound: 4, duration: 2 }), peer(3, { duration: 3, knowledgeSet: "quiz:flags:v1:fr" }), peer(4, { duration: 3, locale: "en" }), peer(5, { duration: 3, mode: "daily" })];

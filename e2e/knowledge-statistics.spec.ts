@@ -46,6 +46,7 @@ for (const locale of locales) {
 
 test('knowledge local previews use the same coherent comparison UI in every locale', async ({ page }, info) => {
   test.setTimeout(120000);
+  await page.addInitScript(() => localStorage.setItem('puzzoria:measurement-choice', 'no'));
   for (const locale of locales) for (const game of ["quiz", "football"] as const) {
     await page.goto(game === "quiz" ? quizTopicPath(locale, quizTopics.find(t => t.id === "countries-world")!) : practicePath(locale, game));
     if (await page.locator('.measurement-notice').isVisible()) await page.locator('.measurement-notice').getByRole('button', { name: measurementCopy(locale).decline, exact: true }).click();
