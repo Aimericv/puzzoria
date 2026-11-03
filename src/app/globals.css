@@ -15,8 +15,9 @@
 .football { --game-color: #14735c; }
 .quiz .game-preview, .game-heading.quiz .game-heading-icon, .mini-game-icon.quiz { background: #fff0e6; color: #874329; }
 .football .game-preview, .game-heading.football .game-heading-icon, .mini-game-icon.football { background: #e8f5ee; color: #14735c; }
-.quiz .category, .quiz .card-play { color: #874329; }
-.football .category, .football .card-play { color: #14735c; }
+.quiz .category { color: #874329; }
+.football .category { color: #14735c; }
+.quiz .card-play, .football .card-play { background: var(--game-color); }
 .knowledge-card-preview { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .knowledge-card-preview strong { font-size: 1.4rem; }
 .knowledge-card-preview > span { padding: 6px 10px; border: 1px solid currentColor; border-radius: 8px; font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -115,9 +116,9 @@
 .tiles .game-preview { background: #fbf0df; }
 .mines .game-preview { background: #eaf2f5; }
 .wordsearch .game-preview { background: #f1ebf8; }
-.tiles .category, .tiles .card-play { color: #805019; }
-.mines .category, .mines .card-play { color: #315566; }
-.wordsearch .category, .wordsearch .card-play { color: #694199; }
+.tiles .category { color: #805019; }
+.mines .category { color: #315566; }
+.wordsearch .category { color: #694199; }
 .game-heading.\32 048 .game-heading-icon, .mini-game-icon.\32 048 { background: #fbf0df; color: #805019; }
 .game-heading.mines .game-heading-icon, .mini-game-icon.mines { background: #eaf2f5; color: #315566; }
 .game-heading.wordsearch .game-heading-icon, .mini-game-icon.wordsearch { background: #f1ebf8; color: #694199; }
@@ -562,8 +563,7 @@ h1 {
   background: var(--blue);
 }
 .math .card-play {
-  background: #f7d264;
-  color: #523d12;
+  background: #8a641e;
 }
 .daily-progress {
   background: white;
@@ -2281,7 +2281,7 @@ tr:last-child td {
 .game-card h2 { gap: 16px; line-height: 1.2; }
 .card-play { justify-content: center; min-height: 44px; min-width: 88px; white-space: nowrap; transition: transform .15s, filter .15s; }
 .card-play:hover { transform: translateY(-1px); filter: brightness(1.08); }
-.tiles .card-play { background: #f4d799; color: #51380c; }
+.tiles .card-play { background: #805019; }
 .mines .card-play { background: #315566; color: #fff; }
 .wordsearch .card-play { background: #694199; color: #fff; }
 .ranking { --game-color: #784dbe; }
