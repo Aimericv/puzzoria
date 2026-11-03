@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 242,
+  "generation": 243,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4403,7 +4403,7 @@
         "candidateSha": "e130b1808d5efe6935c6c28048915e4ed4fb362a",
         "prNumber": 40,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/40",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -4552,7 +4552,11 @@
         "experimentId": "football-world-cup-discovery",
         "verified": true,
         "runId": "41651167373",
-        "status": "proposed"
+        "status": "manual_review",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:e2e/football-discovery.spec.ts"
+        }
       },
       {
         "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
@@ -4883,38 +4887,6 @@
     "totalArchived": 1
   },
   "releaseValidationHistory": [
-    {
-      "at": "2026-10-26T22:39:19.107Z",
-      "runId": "40413975908",
-      "sha": "5a6437d0b0c7e4aa703876df5d7d566eb83caf7f",
-      "minutes": 18,
-      "reservedMinutes": 90,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-job-timestamps",
-        "jobId": 121891919223,
-        "attempt": 1,
-        "startedAt": "2026-10-26T22:39:27Z",
-        "completedAt": "2026-10-26T22:55:07Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-26T23:16:04.791Z",
-      "runId": "40418453890",
-      "sha": "3524bab3d352b09375da0075133d1a13cf8f365b",
-      "minutes": 20,
-      "reservedMinutes": 90,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-job-timestamps",
-        "jobId": 121906940014,
-        "attempt": 1,
-        "startedAt": "2026-10-26T23:16:14Z",
-        "completedAt": "2026-10-26T23:33:41Z",
-        "marginMinutes": 2
-      }
-    },
     {
       "at": "2026-10-27T16:05:49Z",
       "runId": "40537512719",
