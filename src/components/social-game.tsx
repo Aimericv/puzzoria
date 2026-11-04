@@ -370,17 +370,19 @@ export function SocialGame({
           ) : (
             <>
               {c.kind === "ranking" && (
-                <>
-                  <p className="social-round">
-                    {sf(m.count, { n: state.moves + 1, total: 5 })}
-                  </p>
-                  <div className="blind-item" key={state.moves}>
-                    <span>{state.visibleItems[state.moves]?.emoji}</span>
-                    <strong>
-                      {state.visibleItems[state.moves]?.label[locale]}
-                    </strong>
+                <div className="blind-ranking-board">
+                  <div className="blind-ranking-prompt">
+                    <p className="social-round">
+                      {sf(m.count, { n: state.moves + 1, total: 5 })}
+                    </p>
+                    <div className="blind-item" key={state.moves}>
+                      <span>{state.visibleItems[state.moves]?.emoji}</span>
+                      <strong>
+                        {state.visibleItems[state.moves]?.label[locale]}
+                      </strong>
+                    </div>
+                    <p className="ranking-place-label">{m.place}</p>
                   </div>
-                  <p>{m.place}</p>
                   <div className="ranking-places">
                     {state.ranking.map((id, i) => {
                       const item = state.visibleItems.find((v) => v.id === id);
@@ -404,15 +406,7 @@ export function SocialGame({
                       );
                     })}
                   </div>
-                  <div className="blind-queue" aria-hidden="true">
-                    {Array.from(
-                      { length: Math.max(0, 4 - state.moves) },
-                      (_, i) => (
-                        <span key={i}>?</span>
-                      ),
-                    )}
-                  </div>
-                </>
+                </div>
               )}
               {c.kind === "rather" && q && (
                 <>

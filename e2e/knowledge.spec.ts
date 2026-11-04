@@ -21,6 +21,8 @@ for(const locale of locales) {
     expect(await page.locator('link[rel="alternate"][hreflang]').count()).toBe(5);
     await game.getByRole("button",{name:m.start,exact:true}).click();
     await expect(game.locator('[data-quiz-item]')).toHaveCount(8);
+    await game.locator('.knowledge-scoreboard').scrollIntoViewIfNeeded();
+    await page.screenshot({path:`test-results/quiz-active-${locale}-${info.project.name}.png`});
     const input=game.getByLabel(m.answer,{exact:true});
     await game.locator('[data-quiz-item]').last().scrollIntoViewIfNeeded();
     await expect(input).toBeInViewport();await expect(game.locator('.knowledge-form-clock')).toBeInViewport();
@@ -54,6 +56,10 @@ for(const locale of locales) {
     await game.getByRole("button",{name:m.start,exact:true}).click();
     await expect(game.locator(".football-timeline")).toBeVisible();
     const clubs=await game.locator(".football-timeline strong").allTextContents();
+    const firstStop=await game.locator('.football-timeline li').nth(0).boundingBox(),secondStop=await game.locator('.football-timeline li').nth(1).boundingBox();
+    expect(secondStop!.x).toBeGreaterThan(firstStop!.x);expect(Math.abs(secondStop!.y-firstStop!.y)).toBeLessThan(2);
+    await game.locator('.knowledge-scoreboard').scrollIntoViewIfNeeded();
+    await page.screenshot({path:`test-results/football-active-${locale}-${info.project.name}.png`});
     const badges=game.locator('.football-club-badge');
     await expect(badges).toHaveCount(clubs.filter(club=>clubBadge(club)).length);
     await expect.poll(()=>badges.evaluateAll(images=>images.every(image=>(image as HTMLImageElement).complete&&(image as HTMLImageElement).naturalWidth>0))).toBe(true);
@@ -81,6 +87,7 @@ for(const locale of locales) {
 }
 
 test('football keeps club names usable when badge loading fails',async({page})=>{
+  await page.addInitScript(()=>localStorage.setItem('puzzoria:measurement-choice','no'));
   await page.route('**/club-badges/*.svg',route=>route.abort());
   await page.goto(practicePath('fr','football'));
   const game=page.locator('[data-knowledge-game="football"]');
@@ -89,4 +96,6 @@ test('football keeps club names usable when badge loading fails',async({page})=>
   await expect(game.locator('.football-club-badge')).toHaveCount(0);
   await expect(game.locator('.football-club-name-hidden')).toHaveCount(0);
   for(const name of await game.locator('.football-timeline strong').allTextContents())await expect(game.locator('.football-timeline').getByText(name,{exact:true}).first()).toBeVisible();
+  await game.locator('.football-timeline').scrollIntoViewIfNeeded();
+  await page.screenshot({path:`test-results/football-fallback-${test.info().project.name}.png`});
 });

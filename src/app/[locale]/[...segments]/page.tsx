@@ -295,7 +295,7 @@ export default async function GamePage({ params }: Props) {
           ))}
         </nav>
       )}
-      <div className="game-layout">
+      <div className={`game-layout${game === "quiz" || game === "football" ? " game-layout-knowledge" : ""}`}>
         <section className={`play-surface ${game}`}>
           {practice ? (
             <PracticePlayer

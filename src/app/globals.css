@@ -1097,6 +1097,14 @@ h1 {
   display: grid;
   gap: 20px;
 }
+.game-layout-knowledge {
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 20px;
+}
+.game-layout-knowledge > .play-surface { padding: 22px; }
+.game-layout-knowledge .rules-panel, .game-layout-knowledge .other-games { padding: 18px; }
+.game-layout-knowledge .rules-panel p { font-size: .82rem; line-height: 1.6; }
+.game-layout-knowledge .other-games a { padding-top: 10px; padding-bottom: 10px; }
 .rules-panel,
 .other-games {
   background: white;
@@ -2471,8 +2479,6 @@ tr:last-child td {
 .ranking-places button:not(:disabled):hover { background: #784dbe; color: white; }
 .ranking-places button b { font-size: 1.1rem; min-width: 32px; }
 .ranking-places .locked { opacity: 1; background: #ede7f7; color: #534172; border-style: dashed; cursor: default; }
-.blind-queue { display: flex; gap: 12px; justify-content: center; margin: 22px 0; }
-.blind-queue span { display: grid; place-items: center; width: 36px; height: 42px; background: #f0edf6; border: 1px dashed #bcacd0; border-radius: 8px; color: #756285; }
 .social-result h2 { font-size: 1.7rem; line-height: 1.25; margin: 15px 0; }
 .community-result { text-align: left; padding: 18px 0; }
 .community-result h3 { margin: 23px 0 12px; }
@@ -3128,7 +3134,74 @@ tr:last-child td {
 .knowledge-duel-answers dd { margin: 0; font-weight: 700; text-align: right; }
 
 .football-name-toggle { display: block; margin: 22px 0 0; padding: 8px 0; min-height: 44px; border: 0; background: none; color: var(--knowledge-accent); font-size: .82rem; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
-.football-timeline .football-club-spell { display: flex; align-items: center; gap: 18px; min-height: 90px; padding: 0 0 18px; }
-.football-club-badge { width: 72px; height: 72px; flex-shrink: 0; object-fit: contain; padding: 4px; background: white; border: 1px solid var(--line); border-radius: 12px; }
+.football-timeline { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0 16px; }
+.football-timeline li { flex: 0 1 104px; min-width: 0; min-height: 106px; display: flex; flex-direction: column; align-items: center; gap: 0; padding: 10px 7px 8px; border: 1px solid #d8e6de; border-radius: 11px; background: #f7faf8; text-align: center; }
+.football-timeline li:not(:last-child)::before { content: none; }
+.football-timeline .football-stop { position: absolute; top: 5px; left: 5px; width: 20px; height: 20px; font-size: .65rem; }
+.football-timeline .football-club-spell { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 0; width: 100%; padding: 0; }
+.football-club-badge { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; padding: 3px; background: white; border: 1px solid var(--line); border-radius: 9px; }
+.football-club-spell > div { width: 100%; min-width: 0; }
+.football-timeline .football-club-spell:not(:has(img)) { padding-top: 16px; }
+.football-timeline strong { font-size: .78rem; line-height: 1.35; }
+.football-timeline div > span { justify-content: center; gap: 3px 6px; margin-top: 0; font-size: .73rem; }
+.football-name-toggle { margin-top: 8px; }
 .football-timeline strong.football-club-name-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-@media(max-width: 600px) { .football-timeline .football-club-spell { gap: 12px; } .football-club-badge { width: 64px; height: 64px; } }
+.game-layout-knowledge .knowledge-text-quiz, .game-layout-knowledge .knowledge-football { max-width: none; }
+.knowledge-game .knowledge-heading { margin-bottom: 14px; gap: 10px; }
+.knowledge-game .knowledge-heading h2 { font-size: clamp(1.05rem, 2vw, 1.3rem); }
+.knowledge-game .knowledge-mark { flex-basis: 40px; height: 40px; border-radius: 11px; }
+.knowledge-game .knowledge-scoreboard { padding: 10px 14px; margin-bottom: 10px; border-radius: 11px; }
+.knowledge-game .knowledge-scoreboard strong { font-size: 1.5rem; }
+.knowledge-game .knowledge-progress { margin-bottom: 10px; height: 5px; }
+.knowledge-game .knowledge-answer-form { margin: 10px 0 6px; padding-top: 8px; }
+.knowledge-game .knowledge-feedback { min-height: 18px; margin: 4px 0; font-size: .8rem; }
+.knowledge-game .knowledge-answer-form label { margin-bottom: 5px; }
+.knowledge-game .knowledge-answer-grid { gap: 0 12px; }
+.knowledge-game .knowledge-answer-row { min-height: 36px; padding: 6px 8px; border-width: 0 0 1px; border-radius: 0; font-size: .875rem; line-height: 1.4; gap: 8px; }
+.knowledge-answer-row > svg { width: 13px; height: 13px; }
+.knowledge-game .numbered-answers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.numbered-answers .knowledge-clue { flex: 0 0 1.8em; font-size: .72rem; font-variant-numeric: tabular-nums; }
+.knowledge-game .numbered-answers .knowledge-answer-row { min-height: 30px; padding: 4px 6px; }
+.long-answer-list { max-height: min(60dvh, 32rem); overflow-y: auto; scrollbar-gutter: stable; border: 1px solid var(--line); border-radius: 9px; }
+.long-answer-list:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.knowledge-game .football-mode { padding: 12px 14px; margin-bottom: 14px; }
+.knowledge-game .football-mode p { margin-top: 5px; font-size: .8rem; }
+.knowledge-game .football-daily-clock { margin-top: 7px; }
+.social-game[data-social-game="ranking"] .ranking-theme { display: flex; gap: 4px 10px; align-items: baseline; padding: 10px 12px; margin-bottom: 12px; }
+.social-game[data-social-game="ranking"] .ranking-theme > strong { margin: 0; font-size: 1.05rem; }
+.ranking-theme .ranking-criteria { flex-basis: 100%; margin: 2px 0 0; font-size: .8rem; }
+.blind-ranking-board { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center; gap: 18px; }
+.blind-ranking-prompt { min-width: 0; }
+.blind-ranking-prompt .social-round { margin: 0 0 6px; }
+.blind-ranking-prompt .blind-item { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 10px; margin: 8px 0; min-height: 80px; border-radius: 13px; }
+.blind-ranking-prompt .blind-item > span { font-size: 2.2rem; }
+.blind-ranking-prompt .blind-item > strong { font-size: 1.1rem; min-width: 0; overflow-wrap: anywhere; }
+.ranking-place-label { font-size: .82rem; line-height: 1.5; margin: 8px 0 0; color: var(--muted); }
+.blind-ranking-board .ranking-places { margin: 0; gap: 6px; }
+.blind-ranking-board .ranking-places button { min-height: 44px; padding: 9px 12px; gap: 10px; font-size: .85rem; }
+.social-game[data-social-game="ranking"] .ranking-result { gap: 6px; margin: 12px 0; }
+.social-game[data-social-game="ranking"] .ranking-result li { padding: 10px 12px; font-size: .9rem; }
+@media(max-width: 1000px) {
+  .game-layout.game-layout-knowledge { grid-template-columns: minmax(0, 1fr) 200px; }
+  .game-layout-knowledge > .play-surface { padding: 20px 16px; }
+}
+@media(max-width: 900px) {
+  .game-layout.game-layout-knowledge { grid-template-columns: minmax(0, 1fr); }
+  .game-layout-knowledge .game-sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .game-layout-knowledge .sidebar-archive { grid-column: 1 / -1; }
+}
+@media(max-width: 600px) {
+  .game-layout-knowledge .game-sidebar { grid-template-columns: minmax(0, 1fr); }
+  .game-layout-knowledge > .play-surface { padding: 18px 12px; }
+  .football-timeline { gap: 8px; }
+  .football-timeline li { flex-basis: calc((100% - 16px) / 3); padding: 10px 5px 8px; }
+  .knowledge-game .numbered-answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .knowledge-game .knowledge-answer-form > div { flex-wrap: nowrap; }
+  .knowledge-game .knowledge-answer-form input { flex: 1 1 0; }
+  .knowledge-game .knowledge-answer-form button { flex: 0 0 auto; padding-left: 12px; padding-right: 12px; }
+}
+@media(max-width: 539px) {
+  .blind-ranking-board { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .blind-ranking-prompt .blind-item { min-height: 64px; padding: 10px 12px; }
+  .blind-ranking-prompt .blind-item > strong { text-align: left; }
+}

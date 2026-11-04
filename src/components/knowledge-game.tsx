@@ -80,7 +80,9 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
   const shown=preview?.knowledgeState??state, completion=preview?.completion??session.session.completion, started=!!startedAt||!!preview;
   const disabled=busy||!loaded||!draft.ready||!session.ready||shown.completed||!started||seconds===0;
   const title=c.kind==="quiz"?c.title:m.footballName;
-  return <div className={`knowledge-game knowledge-${c.kind}`} data-knowledge-game={c.kind}>
+  const numbered=c.kind==="quiz"&&!map&&c.items.every(item=>/^\d+$/.test(item.prompt));
+  const longAnswers=c.kind==="quiz"&&c.items.length>16;
+  return <div className={`knowledge-game knowledge-${c.kind}${c.kind==="quiz"&&!map?" knowledge-text-quiz":""}`} data-knowledge-game={c.kind}>
     {c.kind==="football"&&<FootballMode challenge={c} locale={locale} serverOffset={serverOffset}/>}
     <header className="knowledge-heading"><span className="knowledge-mark" aria-hidden="true">{c.kind==="quiz"?<Timer size={27}/>:<Goal size={27}/>}</span><div><small>{c.kind==="quiz"?m.theme:m.footballCategory}</small><h2>{title}</h2></div></header>
     {!started ? <div className="knowledge-start"><p>{map?mapText.ready:c.kind==="quiz"?m.readyQuiz:c.mode!=="practice"?footballDailyCopy(locale).ready:m.readyFootball}</p>{c.kind==="quiz"&&<p className="knowledge-format"><strong>{c.items.length}</strong> {m.total.toLocaleLowerCase(locale)} <span>·</span> <Clock3 size={17}/> {clockText(c.seconds)}</p>}<button type="button" className="primary-button" disabled={!loaded||busy||!session.ready||!draft.ready||map&&!geometry.asset} onClick={()=>void start()}>{loaded?m.start:m.loading}</button></div> : <>
@@ -93,7 +95,7 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
         <label htmlFor={`knowledge-answer-${c.id}`}>{c.kind==="quiz"?m.answer:m.player}</label><div><input id={`knowledge-answer-${c.id}`} ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} maxLength={100} autoComplete="off" autoCapitalize="words" spellCheck={false} readOnly={busy} disabled={!started} enterKeyHint="go"/><button className="primary-button" disabled={disabled||!input.trim()}><Send size={17}/>{m.submit}</button></div>
         <p className={`knowledge-feedback ${shown.feedback??""}`} role="status">{shown.feedback?m[shown.feedback]:"\u00a0"}</p>
       </form>}
-      {c.kind==="quiz"?!map&&<div className="knowledge-answer-grid" aria-label={m.solution}>{c.items.map(item=>{
+      {c.kind==="quiz"?!map&&<div className={`knowledge-answer-grid${numbered?" numbered-answers":""}${longAnswers?" long-answer-list":""}`} aria-label={m.solution} role={longAnswers?"region":undefined} tabIndex={longAnswers?0:undefined}>{c.items.map(item=>{
         const found=shown.found.find(a=>a.id===item.id),answer=found?.answer??shown.reveal?.find(a=>a.id===item.id)?.answer;
         const flag=c.topic==="flags"?[...item.prompt].map(v=>String.fromCharCode(v.codePointAt(0)!-0x1f1e6+97)).join(""):null;
         return <div key={item.id} className={`knowledge-answer-row${found?" found":shown.completed?" missed":""}`} data-quiz-item={item.id}><span className="knowledge-clue">{flag?<Image src={`/flags/${flag}.svg`} width={44} height={30} alt={`${m.quizCategory} ${Number(item.id)+1}`} unoptimized/>:item.prompt}</span><span>{answer??"—"}</span>{found&&<Check size={15} aria-hidden="true"/>}</div>;
