@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 248,
-  "status": "running",
+  "generation": 249,
+  "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
-  "codeSha": "e130b1808d5efe6935c6c28048915e4ed4fb362a",
+  "codeSha": "09f0b1c9a692620059dc668096498431022f2d45",
   "checkpoint": {
     "artifactId": 13300538111,
     "runId": "41784584925",
@@ -22,7 +22,7 @@
     "digest": "98f7ff7636e570f110c8c1058da5163562517eb18d79e7e5272a7827ddd7993c"
   },
   "lastMessageId": 6606279051,
-  "completedSessions": 32,
+  "completedSessions": 33,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
   "lastRun": {
@@ -30,10 +30,10 @@
     "url": "https://github.com/Aimericv/puzzoria/actions/runs/41784584925"
   },
   "memory": {
-    "STATE.md": "## Owner priority and verified catalogue release, 2026-11-03\n\nThe owner explicitly prioritised researched quiz acquisition, rapid development and subsequent measurement. PR 42 publishes 16 new complete topics / 64 translated pages / 635 answer records; catalogue total 24. See the latest manual deployment receipt and docs/QUIZ-ACQUISITION.fr.md. This instruction supersedes the generic traffic-decline/guide audit as the immediate product priority; keep existing experiments and their observation windows intact.\n\nResearch limits are explicit: current Search Console aggregate evidence is small; this session could read its protected summary, not current query/page breakdowns. Trends returned HTTP 429; Keyword Planner and direct Google SERPs were inaccessible. Selection used multilingual public search and competitor play signals, not invented volumes or keyword difficulty. No acquisition gain has yet been measured.\n\nThe dashboard and trusted analytics export now include report.product.quizTopics, verified starts/new observed players and consented same-topic Google acquisition. The offline script scripts/report-quiz-acquisition.ts joins existing read-only Google/Puzzoria exports without credentials or raw queries. Missing Google top-100 rows stay null; do not infer non-indexation or zero. Review after at least seven complete reported days, then around four weeks. Respect each source's dates/timezone, reporting lag and partial-day flags; 7/30/90-day aggregate exports do not magically become aligned complete 28-day cohorts. Do not claim causal growth from aggregate movement or add hundreds of quizzes without actual impressions/starts. Continue high-impact catalogue opportunities as evidence arrives; avoid cosmetic busywork. No autonomous merge/deploy permission, budget rule, credential or infrastructure policy was changed.\n\n# État — 3 novembre 2026, session 14:13 UTC\n\nBase exportée 34a006d411cc6696496c51953b84cb9712e27fad. AGENTS.md, mandat, inbox vide, quatre mémoires et rapports readonly lus ; champs utiles extraits après sorties initialement tronquées. Budget novembre : plafond 1700, charged 401, reserved 48. Aucun réseau externe, Git, achat, merge ou déploiement exécuté ; aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Guide Next Link installé consulté.\n\nMission héritée réévaluée : les nouveaux Quiz/Football ont déjà liens catalogue, sujets traduits, descriptions, canoniques, hreflang et sitemap. Pas de défaut général de couverture établi. Intervention choisie : maillage contextuel réciproque entre Football et le sujet vainqueurs du Mondial masculin 1930–2022. Le lien latéral existant menait au quiz général ; la nouvelle section offre la destination précise et distingue les formats (six essais sans chrono solo / huit nations en 60 s). Quatre langues, destinations existantes ; portée limitée aux deux pages publiques, sans alias Practice. Aucune preuve de friction ou demande établie : expérience SEO, pas correction de panne. Nouveau composant FootballDiscovery, intégration page, tests unitaires et scénario E2E, note docs/FOOTBALL-DISCOVERY-EXPERIMENT.fr.md. Aucun changement de corpus privé, run, stockage, collecte, preuve serveur ou métadonnées.\n\nVérifications finales : 47 tests ciblés passent (football-discovery, seo, knowledge), dont huit nouveaux. Premier passage : une fixture de route allemande erronée, corrigée vers /de/fussballspieler-erraten sans changer la route. Lint/typecheck réussis, y compris après ajout E2E. npm run content:validate échoue EPERM IPC tsx ; même script via node --import tsx réussit (quiz/carrières, 92 défis, 32 articles). Playwright --list découvre quatre projets du scénario sans JavaScript ; aucun navigateur exécuté. Ni suite complète ni build : contrôles indépendants réservés au superviseur. Aucune publication de cette contribution revendiquée.\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba à 2026-11-03T14:13:22.594Z : lastFailure/unverifiedWork null. Guides Sudoku/Démineur désormais déployés ensemble le 2 novembre à 15:58:17.755Z (SHA 0a446ce...), fenêtres immatures. Word/vocabulaire toujours en attente de fenêtres complètes. Audits sitemap et post-Word cancelled selon le superviseur ; ne pas revendiquer leur publication. Capitales suspendues et prototype manual_review. Critères historiques conservés.\n\nAnalytics available collecté à 14:13:17.857Z : trente jours UTC 5 octobre–3 novembre, jour courant partiel, six identités compte/appareil, vingt départs/dix-huit fins ; dix-huit départs Word, aucun Quiz/Football dans le rapport. Mesure facultative : trois sessions/deux visiteurs. Google available à 14:13:19.204Z : 180 impressions/six clics sur 4 octobre–2 novembre demandé, dernière date 1er novembre Pacific. Aucun diagnostic de conversion ou indexation établi avec ces faibles volumes. Trends RSS quatre pays disponibles, TikTok indisponible ; événements sportifs sans preuve de demande Puzzoria.\n\nNouvelle expérience football-world-cup-discovery proposée : google.impressions, 30 jours complets finalisés par fenêtre, minimum 100 dans chacune, +20 %, baseline/dates au superviseur. Métrique globale non causale ; aucun gain mesuré. Prochaine mission choisie : étudier le recul récent des impressions Google sur deux fenêtres complètes de même durée et le dater par rapport aux publications, avant toute retouche. Nonce conservé.\n",
-    "DECISIONS.md": "# Décisions — 30 octobre 2026\n\n## Enseignements conservés\n\nLes travaux antérieurs ont isolé caches et brouillons par propriétaire, protégé les réponses tardives par générations et les démontages. Tests simulés réussis historiquement ; pas de preuve navigateur universelle. Gardes clavier Word/Sudoku, Alt/IME, dialogues et sélection de liens de secours : conserver les protections et distinguer simulations et OS réel. Les règles éditoriales live distinguent salons simultanés et anciens liens /friend asynchrones. Aucun moteur ni tracking à reprendre automatiquement.\n\nLes guides Word et les liens de vocabulaire sont déployés ensemble depuis le 27 octobre ; protocoles fixes dans EXPERIMENTS. Pas d’attribution séparée ni d’évaluation avant fenêtres complètes. Mots mêlés reste PR 29 en revue humaine ; ne pas recopier son correctif absent de cette base. L’audit allemand précédent n’a trouvé aucun manque concret ; recherche arrêtée, pas de retouche.\n\n## Choix de cette session\n\nObservation 89599514453ab342db33974abd28835a811774409690d7f8e7ef1afcd9fab7f2 collectée le 30 octobre à 19:13:12.254Z : aucun échec ni instantané non vérifié. L’inbox impose l’essentiel des efforts à l’acquisition ; différer la mission héritée de rétention Word. Ne pas poursuivre une série d’audits sans intervention utile.\n\nChoisir une expérience éditoriale distincte sur Sudoku : guide existant avec candidats, sans exemple complet ni position unique. Ajouter deux exemples fictifs par langue dans les sections existantes, sans nouveaux chemins ni moteur. Signal Google faible (pages Sudoku EN/ES/FR : 4/2/1 impressions) : opportunité à tester, pas demande démontrée. Les tendances RSS surtout actualités/sport ne justifient pas un jeu opportuniste. Aucun gain acquis ; métrique globale non causale.\n\nSuite choisie : évaluer un quiz de géographie à saisie libre, en réponse à la piste JetPunk du propriétaire. Examiner différenciation, faisabilité des données multilingues et réutilisation serveur avant implémentation. Ne pas multiplier automatiquement les ajouts de guides. Mémoire condensée pour rester bornée ; aucun archivage Git revendiqué.\n\n## Réévaluation — session 22:17 UTC\n\nInbox vide sur disque ; la piste JetPunk est héritée, aucune nouvelle instruction propriétaire ni observation concurrente. Observation 34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76 : mêmes faibles volumes, SEO encore immature ; ne pas multiplier les paragraphes de guides. Recherche géographie choisie pour réduire les inconnues avant de construire un nouveau jeu.\n\nRetenir un prototype isolé de cinq capitales, sans temps limite ; écarter provisoirement liste mondiale, cartes et géopolitique exhaustive. Les vingt destinations multilingues existantes ne constituent pas un corpus de capitales. Ne pas détourner Word/classement ni modifier les preuves serveur sans revue. Aucune popularité concurrente ou demande Puzzoria établie. Prochaine étape concrète : règles Unicode/alias, contrôles de corpus et tests négatifs sur fixtures synthétiques, sans route/API. La source/licence des faits demeure à établir ; abandon possible si elle ne peut être vérifiée.\n\n## 31 octobre — prototype borné, pas d’intégration\n\nObservation 0a70b390c915b3ee47e7063e2dd7977d6ed7f529d6db77396a514e0e55c6a76a : recherche précédente merged, aucun échec/non-vérifié ; volumes et fenêtres ne permettent toujours pas de conclure sur la croissance. Nouveau slug five-capitals-answer-prototype pour cette contribution distincte. Choix : tester les ambiguïtés de saisie avant tout jeu ; conserver les accents plutôt que fusionner silencieusement ñ/n ou ß/ss. Les exonymes restent déclarés par langue, collisions inter-pays bloquantes, corpus compilé indépendant des mutations. Aucun moteur de score ni preuve serveur modifié. 44 tests ciblés, lint/typecheck verts après correction des fixtures TypeScript. Source/licence factuelle non établie ; prochaine mission de décision sur les données, pas une série automatique de raffinements techniques. Aucun gain direct attendu du prototype isolé.\n\n## 1er novembre — suspendre les capitales, essai Démineur\n\nObservation 963823d5071f3e0d1503659ffd65b8785c0abcb2454997762fcb9bec8f2e2c7b : aucun échec/non-vérifié. Ressources content/social sans capitales ; notices trouvées limitées aux dictionnaires/mots rares. Sans réseau autorisé, aucune source factuelle vérifiable : suspendre l’intégration plutôt que prolonger un prototype. Aucun constat sur l’existence mondiale de données ouvertes.\n\nChoisir un essai éditorial Démineur : le guide décrit les chiffres sans déduction concrète. Trois impressions/un clic sur une archive ES, sans jointure requête/page, signal faible. Ajouter deux exemples génériques et expliciter qu’un drapeau n’est pas une preuve, sans activer d’indice. Aucun besoin démontré ni gain promis. Nouvelle expérience distincte ; anciennes fenêtres et critères inchangés. Prochaine mission : examiner couverture SEO Daily/sitemap avant autre intervention, pas une série de guides automatique.\n\n## 1er novembre — session 20:01 UTC, couverture SEO\n\nObservation df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726 : aucun échec/non-vérifié ; guides Sudoku/Démineur fusionnés sans déploiement confirmé, fenêtres Word/vocabulaire immatures. Inbox réellement présente : quiz et parcours de footballeur développés séparément ; abandon de toute reprise autonome du quiz. Audit hérité réévalué puis borné à couverture/canoniques/UTC. Aucun défaut établi : ne pas étendre artificiellement la fenêtre de 31 jours ni produire encore des guides. Google ne fournit pas d’inspection d’URL ; absence de ligne ≠ non-indexation. Deux tests de frontière et note d’audit apportent une preuve locale, pas une preuve de crawl. Prochaine mission : découverte des autres jeux après Word, à partir du parcours réel et des agrégats ; aucune friction encore démontrée.\n\n## 2 novembre — découverte après Word\n\nObservation c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f : aucun échec/non-vérifié. Inbox vide. Word concentre 18 des 20 départs ; trois sessions consenties ne permettent pas de diagnostiquer la conversion vers un autre jeu. Bouton existant avant les statistiques, langue/mode préservés et famille Word exclue. Arrêter cet audit sans CTA supplémentaire ni changement arbitraire de recommandation. Le choix déterministe Sudoku et le filtre Daily peuvent être étudiés ultérieurement si une friction est établie. Documentation et 14 tests Daily existants réussis, aucune preuve navigateur ou croissance. Prochaine mission acquisition choisie sur Quiz/Football déjà livrés dans la base, sans refaire les jeux ni prolonger automatiquement la série des guides.\n\n## 3 novembre — passerelle Football / Mondial\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba, 14:13:22.594Z : aucun échec/non-vérifié. Inbox vide. Audit hérité confirmé : couverture générale Quiz/Football déjà présente. Ne pas reconstruire les jeux ni ajouter une nouvelle série de guides. Choisir un essai de maillage contextuel limité aux deux formats football : depuis la carrière, accès direct au sujet Mondial plutôt qu’au seul quiz général ; retour vers les carrières depuis ce sujet. Les autres sujets ont déjà leurs liens mutuels. Quatre langues, routes stables, borne 1930–2022 préservée. Aucun besoin mesuré : hypothèse SEO explicite, pas panne ou gain revendiqué.\n\nTrente jours : vingt départs dont dix-huit Word, seulement trois sessions consenties ; Google 180 impressions/six clics, dernière date 1er novembre Pacific. Les tendances sportives du 3 novembre ne prouvent pas une demande pour Puzzoria. Garder les règles serveur et les métriques existantes. Huit nouveaux tests de rendu/portée/URL ; 47 ciblés passent, lint/typecheck réussis. Scénario E2E préparé et découvert, pas exécuté. Guides Sudoku/Démineur confirmés déployés le 2 novembre ; anciennes fenêtres et critères inchangés. Prochaine mission : analyser le recul des impressions sur des fenêtres égales complètes, sans attribuer automatiquement le mouvement aux releases ni multiplier les liens thématiques.\n",
-    "EXPERIMENTS.md": "# Expériences — registre condensé au 30 octobre 2026\n\n## Historique technique, sans mesure de croissance\n\nStockage : trois tests initiaux échouaient après écriture partielle, puis passaient après correction. Caches start/results/restore : isolation propriétaire et réponses différées reproduites par doubles unitaires ; générations ajoutées pour reset et A → B → A. Création/démarrage : 12 nouveaux échecs avant correction, 39 tests ciblés après. Nettoyage entre générations : 12 cas déjà verts ; retrait temporaire des gardes les faisait échouer, code original restauré, 32 tests verts. Aucun effet utilisateur mesuré.\n\nClavier/dialogues, liens/édition, bords Sudoku, Alt et IME : chemins établis par lecture et scénarios navigateur préparés, non exécutés par l’agent. Copie invitation/salon historique : refus/absence simulés, sélection du champ et reprise prévues dans quatre langues/quatre profils ; intégration OS inconnue. Textes des règles live alignés sans changement du moteur. Historique général : délai récurrent operations.test.ts:55, ponctuellement retention.test.ts:490 (relance ciblée réussie). Ne pas convertir ces résultats historiques en résultats de cette session.\n\n## shared-puzzle-own-pace — proposition historique non évaluée\n\nHypothèse : expliciter /friend jouable plus tard favorise les départs. Protocole ancien conservé : playing.starts, 14 journées UTC complètes ; référence 12–25 octobre = 10 départs, observation 8937a2fa332f581d4a1333e1fc9e59410043802c2fb2d87410c867866e9d2bf8 ; +20 %, minimum 100 départs combinés. Ce seuil combiné ne respecte pas le mandat actuel : ne pas l’utiliser pour revendiquer une réussite, ni le réécrire rétrospectivement. Déploiement non établi par le registre actuel. 91 tests ciblés historiques réussis, aucun résultat produit.\n\n## word-guide-worked-deductions — observer\n\nHypothèse : méthode et exemples localisés améliorent la visibilité des pages Word existantes. Protocole fixe : google.impressions, 30 jours complets finalisés, minimum 100 dans chaque fenêtre, amélioration relative 0,2 ; baseline au superviseur. Observation initiale 2eda27878cb715e26ba3c88e2149051197f0895d0c6411d084bb6144c3098861. Exemples vérifiés par moteur, 28 tests SEO historiques verts.\n\nContexte du 30 octobre : merged, déploiement commun confirmé le 27 octobre 21:52:23.088Z, SHA f1cc44089db87644299ea88a09fae7d9d25be18c ; waiting_complete_windows. Pas de résultat mature ni d’attribution causale.\n\n## published-vocabulary-discovery — observer\n\nHypothèse : relier les huit fiches publiques par langue depuis le guide Mot insolite améliore leur découverte. Protocole fixe : google.impressions, 30 jours complets finalisés, minimum 100 par fenêtre, +20 %, référence au superviseur. Observation initiale 267259312775e58d5555e5f8979fbcdcc801efe841e7491c7c075cac7122dade. 43 tests ciblés historiques verts dont huit de rendu/frontières UTC.\n\nMême déploiement commun et attente que Word ; impossible d’isoler les effets des deux ajouts par un avant/après global. Aucun effet mesuré.\n\n## first-play-entry-audit — arrêté, documentation fusionnée\n\nHypothèse : friction preview → première interaction. Entrées sans compte existantes, abandon non localisé. Observation initiale 228dc69c307fcf4c5d61a7cbea34dfef20b3c7327f96c63f336f8ec43908522c. Suivi fixé : playing.starts, 14 jours UTC complets, minimum 20 par fenêtre, +20 %, référence au superviseur. Aucun effet immédiat attendu d’un audit, aucun correctif produit issu de cette seule recherche. 33 tests historiques verts. Ne pas qualifier l’absence de diagnostic d’absence de friction.\n\n## first-play-browser-protocol — recherche, documentation fusionnée\n\nHypothèse : établir une friction concrète avant intervention ; aucun effet direct attendu. Observation initiale 48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78. Protocole fixe : playing.starts, 14 jours UTC complets, minimum 20 par fenêtre, +20 %, baseline au superviseur. Trois scénarios × quatre langues × quatre profils : 48 cas découverts historiquement, aucun résultat navigateur fourni. Word première lettre ; Mots mêlés preview distinct, départ explicite, refus/reprises et pièces ARIA. Le travail d’intervention ci-dessous possède son propre identifiant.\n\n## wordsearch-prestart-accessible-mask — intervention proposée\n\nHypothèse : préserver le masquage textuel et accessible jusqu’à confirmation du départ rend cohérent le parcours Mots mêlés, sans gain de conversion démontré. Kind reliability, objective acquisition. Le correctif fourni utilise waiting pour retirer texte et lettre du libellé accessible avant départ ; les données restent inspectables techniquement. Source 19f2e29b non vérifiée, compatible et reprise, pas de publication revendiquée.\n\nObservation actuelle aaf13f186facecec3bb37fc676f821d22888b497fd8dc55c6bcee4203722da8b, collecte 2026-10-30T05:43:16.611Z. Échec superviseur : mémoire trop volumineuse. Cette session condense la mémoire, enrichit le scénario pour retenir le départ en vol puis vérifier verrouillage/masquage/startedAt nul avant libération vers l’API réelle. Avant départ et après refus restent couverts, contrôle positif après succès conservé.\n\nProtocole exploratoire : playing.starts, 14 journées UTC complètes, minimum 20 dans chaque fenêtre, amélioration relative 0,2. Baseline et dates au superviseur ; échantillon insuffisant => inconclusif. La métrique globale n’isole pas le masquage et aucune demande Mots mêlés n’est démontrée. Résultats locaux de cette session dans STATE ; exécution navigateur/build au superviseur.\n\n## Mise à jour 12:50 UTC — états actuels\n\nwordsearch-prestart-accessible-mask : contexte 708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c, manual_review PR 29 ; pas de déploiement établi. Le travail décrit plus haut appartient à la session précédente et est absent de cette base exportée. Aucun résultat navigateur supplémentaire fourni.\n\ngerman-word-entry-fit-audit — recherche arrêtée : vérifier un éventuel écart Google → première lettre avant intervention. Signal /de/wort dix impressions/deux clics ; aucune jointure requête/page. Audit documentaire ajouté, guide déjà complet, aucune retouche produit justifiée. Suivi exploratoire playing.starts, 14 jours complets, minimum 20 par fenêtre, +20 %, baseline au superviseur ; aucun effet direct attendu et aucune attribution causale. 36 tests SEO/guide passent, deux fichiers ; aucun E2E. Aucun résultat de croissance. Protocoles des deux expériences SEO déployées inchangés et fenêtres immatures.\n\n## sudoku-guide-single-deductions — proposé, session 19:13 UTC\n\nObjectif SEO, product. Hypothèse : exemples de candidat unique et position unique rendent les pages Sudoku plus utiles et peuvent améliorer leur visibilité. Deux sections littérales ajoutées par langue, sans autre logique ni URL. Observation 89599514453ab342db33974abd28835a811774409690d7f8e7ef1afcd9fab7f2 (30 octobre 19:13:12.254Z). Google available : 179 impressions/six clics sur 30 jours demandés, dernière date 28 octobre Pacific ; lignes Sudoku EN/ES/FR 4/2/1 impressions sans clic. Pas de demande de tutoriel établie.\n\nProtocole fixé : google.impressions, 30 journées complètes finalisées par fenêtre, minimum 100 dans chacune, +20 %. Baseline et dates au superviseur ; seuil insuffisant => inconclusif. Les impressions globales et interventions SEO concomitantes empêchent une attribution exclusive. Critères des expériences précédentes inchangés.\n\nRésultats locaux : 36 tests SEO/rendu + 59 moteurs passent, lint/typecheck passent. Vérification ponctuelle des exemples via moteur/listes. Validation contenu npm bloquée par IPC ; même script via node --import tsx passe (92 défis, 32 articles). Aucun E2E/build, publication ou gain de trafic revendiqué. Détail : docs/SUDOKU-GUIDE-EXPERIMENT.fr.md. Prochaine exploration acquisition : quiz de géographie, pas une nouvelle retouche de guide automatique.\n\n## five-capitals-feasibility — recherche, session 22:17 UTC\n\nObservation 34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76 (30 octobre 22:17:35.527Z). Hypothèse acquisition : cinq capitales à saisir pourraient élargir les entrées ; aucune demande démontrée. Étude dans docs/GEOGRAPHY-QUIZ-FEASIBILITY.fr.md : labels existants réutilisables, réponses factuelles absentes, extensions explicites aux preuves nécessaires. Aucun jeu développé/déployé. Décision continue vers prototype pur hors application ; la recherche seule n’a aucun effet direct attendu.\n\nProtocole exploratoire : playing.starts, quatorze jours UTC complets par fenêtre, minimum vingt départs dans chacune, +20 %. Baseline/dates au superviseur ; lancement éventuel avec nouvel identifiant. Métrique globale non attributive, volumes insuffisants => inconclusif. Protocoles antérieurs inchangés. Google available : 179 impressions/six clics sur période demandée de trente jours, dernière date 28 octobre Pacific ; analytics vingt départs sur 1–30 octobre partiel, pas une baseline de quatorze jours.\n\nRésultat local : 29 tests existants social-games/play-reservation passent, deux fichiers. Aucun test du futur quiz ni navigateur/build. Prochaine mission : validation Unicode/alias/corpus avec fixtures synthétiques, puis évaluer source et licence du corpus réel. Aucun effet de production revendiqué.\n\n## five-capitals-answer-prototype — recherche proposée, 31 octobre\n\nNouvel identifiant pour le module isolé et ses fixtures synthétiques ; ne remplace pas les critères five-capitals-feasibility. Objectif acquisition/research : tester la faisabilité des alias multilingues avant intégration. Observation 0a70b390c915b3ee47e7063e2dd7977d6ed7f529d6db77396a514e0e55c6a76a, 2026-10-31T05:37:01.109Z. Aucun signal de demande géographique établi ; corpus factuel encore absent.\n\nProtocole exploratoire fixé : playing.starts, quatorze journées UTC complètes par fenêtre, minimum vingt départs dans chacune, +20 %. Baseline/dates au superviseur. Aucun effet direct attendu sans intégration/déploiement ; métrique globale non attributive et seuil insuffisant => inconclusif. Protocoles SEO antérieurs inchangés.\n\nRésultats locaux : 44 tests passent (normalisation/refus, alias par langue/pays, collisions, schéma, déduplication et mutation), lint/typecheck passent ; premier typecheck a détecté deux erreurs de fixtures ensuite corrigées. Pas de test de scoring, passage ou preuve de run ; aucune route, donnée factuelle, collecte ou persistance ajoutée. Ni E2E ni build exécuté. Source et licence restent à vérifier avant suite ; aucune publication ou croissance revendiquée. Documentation : GEOGRAPHY-QUIZ-FEASIBILITY.fr.md, section prototype.\n\n## mines-guide-certain-neighbours — proposé, 1er novembre\n\nSEO/product : deux déductions génériques dans les paragraphes existants EN/FR/ES/DE pourraient améliorer l’utilité et la visibilité du guide Démineur. Observation 963823d5071f3e0d1503659ffd65b8785c0abcb2454997762fcb9bec8f2e2c7b, 13:22:52.696Z. Google available, 180 impressions/six clics, période demandée 2–31 octobre, dernière date 30 octobre Pacific ; archive ES Démineur trois impressions/un clic. Pas de demande tutoriel établie ni jointure page/requête.\n\nProtocole fixé : google.impressions, trente journées complètes finalisées par fenêtre, cent impressions minimum dans chacune, +20 %. Baseline/dates au superviseur. Insuffisant => inconclusif ; métrique globale non causale, effets des interventions concomitantes non séparables. Aucun déploiement ou effet produit établi.\n\n95 tests ciblés passent (seo, game-guide, engines), typecheck passe. Deux exemples confirmés par énumération des affectations et lecture du solveur. Aucun E2E/build. Lint réussi, sortie 0. Docs MINES-GUIDE-EXPERIMENT.fr.md. Capitales : intégration suspendue faute de corpus sourcé dans les ressources autorisées ; prototype reste manual_review, sans changer ses critères historiques. Autres protocoles inchangés.\n\n## daily-sitemap-coverage-audit — recherche arrêtée, 1er novembre 20:01 UTC\n\nSEO/research. Hypothèse : un défaut de couverture des Daily pourrait limiter la découverte. Observation df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726 à 20:01:20.132Z. Google available : trente jours demandés 2–31 octobre, 180 impressions/six clics, dernière date 30 octobre Pacific ; lignes partielles, aucune inspection d’indexation. Aucun défaut établi par lecture et tests. Pas de modification produit ni effet direct attendu. Recherche arrêtée, pas de nouvelle série de retouches.\n\nProtocole exploratoire fixé : google.impressions, trente jours complets finalisés par fenêtre, cent impressions minimum dans chacune, +20 %, baseline et dates au superviseur. Audit seul non causal ; insuffisant => inconclusif. Anciens critères inchangés. 37 tests seo/word-articles passent dont deux nouveaux cas (fenêtre moderne/UTC), typecheck et lint réussis. Aucun E2E/build ni résultat production. Détail docs/DAILY-SITEMAP-AUDIT.fr.md. Suite : parcours de découverte après Word, sans doublonner quiz/footballeur confiés séparément.\n\n## post-word-discovery-audit — recherche arrêtée, 2 novembre\n\nAcquisition/research : vérifier si le parcours fin Word vers un autre jeu présente une friction concrète. Observation c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f à 15:50:31.446Z. Analytics available : 20 départs dont 18 Word, trois sessions facultatives, zéro next_game_click ; données insuffisantes pour attribuer un abandon. Bouton et liens localisés déjà présents, aucune intervention produit justifiée. Note docs/POST-WORD-DISCOVERY-AUDIT.fr.md ; 14 tests Daily existants passent, aucune exécution navigateur/build. Aucun gain direct attendu ou mesuré.\n\nProtocole exploratoire fixe : playing.starts, 14 journées UTC complètes par fenêtre, minimum 20 départs dans chacune, +20 %, baseline/dates au superviseur. Métrique globale non causale ; seuil insuffisant => inconclusif. Critères antérieurs inchangés. Suite : découvrabilité organique de Quiz/Football présents dans cette base, sans nouveau jeu ni tracking.\n\n## football-world-cup-discovery — proposé, 3 novembre\n\nSEO/product : relier contextuellement Football au sujet du Mondial masculin 1930–2022, avec retour réciproque, pourrait faciliter découverte et visibilité organique. Quatre langues ; nouvelles sections avant QuizTopics/guide, destinations existantes, pas d’alias Practice ni autre sujet. Lien général déjà présent en barre latérale : aucun défaut de couverture globale ou besoin utilisateur établi. Documentation FOOTBALL-DISCOVERY-EXPERIMENT.fr.md.\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba à 14:13:22.594Z. Google available collecté à 14:13:19.204Z : 180 impressions/six clics, 4 octobre–2 novembre demandé, dernière date 1er novembre Pacific. Analytics available à 14:13:17.857Z : 5 octobre–3 novembre UTC partiel, vingt départs dont dix-huit Word, aucun Quiz/Football, trois sessions consenties. Pas de demande ou causalité établie. Trends RSS disponibles, TikTok indisponible ; sport d’actualité distinct d’une demande de quiz.\n\nProtocole fixe : google.impressions, trente journées complètes finalisées par fenêtre, cent impressions minimum dans chacune, amélioration relative 0,2. Baseline/dates au superviseur ; seuil insuffisant => inconclusif. Métrique globale non attributive, interventions concomitantes non séparables. Aucun déploiement ni effet de production de cette contribution revendiqué.\n\n47 tests ciblés passent, dont huit nouveaux ; première fixture allemande erronée corrigée selon route existante. Lint/typecheck réussis sur état final. Validation contenu npm échoue IPC ; même script via node --import tsx réussit, quiz/carrières + 92 défis + 32 articles. Quatre projets E2E découverts, aucun navigateur exécuté, ni suite complète/build. Contrôles indépendants au superviseur. Suite : analyse des fenêtres Google, pas déclinaison automatique de cette intervention.\n\nMise à jour des expériences historiques : le contexte confirme le déploiement commun Sudoku/Démineur (et documentation capitales) le 2 novembre 15:58:17.755Z, SHA 0a446ce01c67f43dc272fc40f5b1176aadd1bea9 ; waiting_complete_windows, sans gain attribué. Audits sitemap/post-Word cancelled selon registre. Critères antérieurs inchangés.\n",
-    "PLAN.json": "{\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\",\n  \"summary\": \"Passerelle contextuelle Football ↔ quiz Mondial 1930–2022 développée dans quatre langues sur les routes existantes. 47 tests ciblés, lint/typecheck réussis ; validation contenu réussie via node --import tsx après échec IPC npm. E2E découvert seulement, aucun déploiement revendiqué.\",\n  \"nextMission\": \"Analyser le recul récent des impressions Google sur deux fenêtres finalisées de durée identique, à partir des rapports readonly. Le dater par rapport aux publications confirmées, distinguer collecte incomplète et hypothèses produit, vérifier uniquement les causes techniques reproductibles dans la base. Ne pas attribuer le recul aux releases sans preuve ni décliner automatiquement de nouveaux liens ou guides.\",\n  \"blockedReason\": null,\n  \"experiment\": {\n    \"id\": \"football-world-cup-discovery\",\n    \"objective\": \"seo\",\n    \"kind\": \"product\",\n    \"hypothesis\": \"Un lien contextuel réciproque entre Football et le sujet Mondial masculin 1930–2022 pourrait faciliter la découverte du sujet profond et sa visibilité organique.\",\n    \"expectedImpact\": \"Hausse exploratoire des impressions Google ; aucun besoin utilisateur démontré ni effet causal attribuable avec cette métrique globale.\",\n    \"evidence\": [\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/growth-context.json\",\n        \"observationId\": \"120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba\",\n        \"collectedAt\": \"2026-11-03T14:13:22.594Z\",\n        \"finding\": \"lastFailure/unverifiedWork null ; guides Sudoku/Démineur déployés ensemble le 2 novembre, fenêtres immatures. Audits sitemap/post-Word cancelled.\"\n      },\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/search-console.json; /opt/puzzoria-pilot/readonly/puzzoria-analytics.json\",\n        \"finding\": \"Available le 3 novembre 14:13 UTC : Google 180 impressions/six clics, 4 octobre–2 novembre demandé, dernière date 1er novembre Pacific. Analytics vingt départs dont dix-huit Word sur trente jours UTC partiels, trois sessions consenties. Aucune demande Quiz/Football établie.\"\n      },\n      {\n        \"source\": \"src/components/football-discovery.tsx; src/app/[locale]/[...segments]/page.tsx; docs/FOOTBALL-DISCOVERY-EXPERIMENT.fr.md\",\n        \"finding\": \"La barre latérale offre déjà le quiz général ; ajout d’un accès contextuel au sujet Mondial et retour Football, quatre langues et routes existantes. 47 tests ciblés, lint/typecheck passent ; navigateur non exécuté.\"\n      },\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/trends.json\",\n        \"collectedAt\": \"2026-11-03T14:13:21.906Z\",\n        \"finding\": \"RSS FR/US/DE/ES disponibles, sujets sportifs sans preuve de demande Puzzoria ; TikTok indisponible.\"\n      }\n    ],\n    \"metric\": \"google.impressions\",\n    \"observationDays\": 30,\n    \"minimumSamples\": 100,\n    \"minimumRelativeImprovement\": 0.2,\n    \"decision\": \"propose\"\n  }\n}\n"
+    "STATE.md": "## Owner priority and verified catalogue release, 2026-11-03\n\nThe owner explicitly prioritised researched quiz acquisition, rapid development and subsequent measurement. PR 42 publishes 16 new complete topics / 64 translated pages / 635 answer records; catalogue total 24. See the latest manual deployment receipt and docs/QUIZ-ACQUISITION.fr.md. This instruction supersedes the generic traffic-decline/guide audit as the immediate product priority; keep existing experiments and their observation windows intact.\n\nResearch limits are explicit: current Search Console aggregate evidence is small; this session could read its protected summary, not current query/page breakdowns. Trends returned HTTP 429; Keyword Planner and direct Google SERPs were inaccessible. Selection used multilingual public search and competitor play signals, not invented volumes or keyword difficulty. No acquisition gain has yet been measured.\n\nThe dashboard and trusted analytics export now include report.product.quizTopics, verified starts/new observed players and consented same-topic Google acquisition. The offline script scripts/report-quiz-acquisition.ts joins existing read-only Google/Puzzoria exports without credentials or raw queries. Missing Google top-100 rows stay null; do not infer non-indexation or zero. Review after at least seven complete reported days, then around four weeks. Respect each source's dates/timezone, reporting lag and partial-day flags; 7/30/90-day aggregate exports do not magically become aligned complete 28-day cohorts. Do not claim causal growth from aggregate movement or add hundreds of quizzes without actual impressions/starts. Continue high-impact catalogue opportunities as evidence arrives; avoid cosmetic busywork. No autonomous merge/deploy permission, budget rule, credential or infrastructure policy was changed.\n\n# État — 3 novembre 2026, session 14:13 UTC\n\nBase exportée 34a006d411cc6696496c51953b84cb9712e27fad. AGENTS.md, mandat, inbox vide, quatre mémoires et rapports readonly lus ; champs utiles extraits après sorties initialement tronquées. Budget novembre : plafond 1700, charged 401, reserved 48. Aucun réseau externe, Git, achat, merge ou déploiement exécuté ; aucun script/workflow, manifest/verrou, instruction, protection ou secret modifié. Guide Next Link installé consulté.\n\nMission héritée réévaluée : les nouveaux Quiz/Football ont déjà liens catalogue, sujets traduits, descriptions, canoniques, hreflang et sitemap. Pas de défaut général de couverture établi. Intervention choisie : maillage contextuel réciproque entre Football et le sujet vainqueurs du Mondial masculin 1930–2022. Le lien latéral existant menait au quiz général ; la nouvelle section offre la destination précise et distingue les formats (six essais sans chrono solo / huit nations en 60 s). Quatre langues, destinations existantes ; portée limitée aux deux pages publiques, sans alias Practice. Aucune preuve de friction ou demande établie : expérience SEO, pas correction de panne. Nouveau composant FootballDiscovery, intégration page, tests unitaires et scénario E2E, note docs/FOOTBALL-DISCOVERY-EXPERIMENT.fr.md. Aucun changement de corpus privé, run, stockage, collecte, preuve serveur ou métadonnées.\n\nVérifications finales : 47 tests ciblés passent (football-discovery, seo, knowledge), dont huit nouveaux. Premier passage : une fixture de route allemande erronée, corrigée vers /de/fussballspieler-erraten sans changer la route. Lint/typecheck réussis, y compris après ajout E2E. npm run content:validate échoue EPERM IPC tsx ; même script via node --import tsx réussit (quiz/carrières, 92 défis, 32 articles). Playwright --list découvre quatre projets du scénario sans JavaScript ; aucun navigateur exécuté. Ni suite complète ni build : contrôles indépendants réservés au superviseur. Aucune publication de cette contribution revendiquée.\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba à 2026-11-03T14:13:22.594Z : lastFailure/unverifiedWork null. Guides Sudoku/Démineur désormais déployés ensemble le 2 novembre à 15:58:17.755Z (SHA 0a446ce...), fenêtres immatures. Word/vocabulaire toujours en attente de fenêtres complètes. Audits sitemap et post-Word cancelled selon le superviseur ; ne pas revendiquer leur publication. Capitales suspendues et prototype manual_review. Critères historiques conservés.\n\nAnalytics available collecté à 14:13:17.857Z : trente jours UTC 5 octobre–3 novembre, jour courant partiel, six identités compte/appareil, vingt départs/dix-huit fins ; dix-huit départs Word, aucun Quiz/Football dans le rapport. Mesure facultative : trois sessions/deux visiteurs. Google available à 14:13:19.204Z : 180 impressions/six clics sur 4 octobre–2 novembre demandé, dernière date 1er novembre Pacific. Aucun diagnostic de conversion ou indexation établi avec ces faibles volumes. Trends RSS quatre pays disponibles, TikTok indisponible ; événements sportifs sans preuve de demande Puzzoria.\n\nNouvelle expérience football-world-cup-discovery proposée : google.impressions, 30 jours complets finalisés par fenêtre, minimum 100 dans chacune, +20 %, baseline/dates au superviseur. Métrique globale non causale ; aucun gain mesuré. Prochaine mission choisie : étudier le recul récent des impressions Google sur deux fenêtres complètes de même durée et le dater par rapport aux publications, avant toute retouche. Nonce conservé.\n\n## Session autonome du 4 novembre, observation 06:19 UTC\n\nBase fournie 0ea05965b93e86257e080842281711e2b78f666c. Consignes disque, mandat, inbox vide, quatre mémoires et cinq rapports readonly lus. Budget 1700 / charged 796 / reserved 41. Observation 1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d ; aucun échec ni travail non vérifié. La priorité propriétaire Quiz de la mémoire prévaut sur l’ancienne mission de recul Google. Pas de nouvelle série de guides ni modification produit sans signal.\n\nRapport existant exécuté vers /tmp seulement : 96 lignes sujet/langue et huit thèmes ; aucune ligne Google retournée pour ces URL, donc valeurs Google inconnues. Les 96 lignes playing sont présentes avec starts=0. Analytics available à 06:19:36.133Z, période trente jours 6 octobre–4 novembre UTC partiel ; Google available à 06:19:37.898Z, période demandée 4 octobre–2 novembre Pacific, dernière date 1er novembre. La collecte précède donc la livraison catalogue du 3 dans ses journées rapportées. Aucun verdict acquisition ou indexation.\n\nAnalyse secondaire des lignes quotidiennes Google explicitement présentes : 12–18 octobre 72 impressions/3 clics ; 19–25 octobre 62/1 ; 26 octobre–1er novembre 3/0, sept lignes par fenêtre sans remplissage. Recul descriptif réel dans ces lignes, antérieur au catalogue ; pas de causalité attribuée aux releases. Trends RSS quatre pays disponibles, TikTok indisponible ; aucune demande quiz déduite des titres d’actualité.\n\nContribution : docs/QUIZ-OBSERVATION-READINESS.fr.md, protocole reprenant les seuils existants et la borne théorique 4–10 novembre pour sept jours complets après catalogue. Le rapport et les agrégats privés ne sont pas publiés dans la note. Sept tests quiz-acquisition passent ; aucun test ajouté, aucun code modifié. Ni lint/typecheck/build/E2E relancés pour cette documentation seule. Pas de réseau, merge ou déploiement. Nouvel identifiant de mesure, sans effet direct attendu ; seuil insuffisant reste inconclusif et critères historiques inchangés.\n\nSuite choisie : vérifier le pilote drapeaux existant avant tout nouveau format ; quinze SVG locaux trouvés dans public/flags, pas encore inspectés ni provenance vérifiée pendant ce tour. Ne pas annoncer ces actifs comme manquants ou leur intégration comme absente. Nonce conservé.\n",
+    "DECISIONS.md": "# Décisions — 30 octobre 2026\n\n## Enseignements conservés\n\nLes travaux antérieurs ont isolé caches et brouillons par propriétaire, protégé les réponses tardives par générations et les démontages. Tests simulés réussis historiquement ; pas de preuve navigateur universelle. Gardes clavier Word/Sudoku, Alt/IME, dialogues et sélection de liens de secours : conserver les protections et distinguer simulations et OS réel. Les règles éditoriales live distinguent salons simultanés et anciens liens /friend asynchrones. Aucun moteur ni tracking à reprendre automatiquement.\n\nLes guides Word et les liens de vocabulaire sont déployés ensemble depuis le 27 octobre ; protocoles fixes dans EXPERIMENTS. Pas d’attribution séparée ni d’évaluation avant fenêtres complètes. Mots mêlés reste PR 29 en revue humaine ; ne pas recopier son correctif absent de cette base. L’audit allemand précédent n’a trouvé aucun manque concret ; recherche arrêtée, pas de retouche.\n\n## Choix de cette session\n\nObservation 89599514453ab342db33974abd28835a811774409690d7f8e7ef1afcd9fab7f2 collectée le 30 octobre à 19:13:12.254Z : aucun échec ni instantané non vérifié. L’inbox impose l’essentiel des efforts à l’acquisition ; différer la mission héritée de rétention Word. Ne pas poursuivre une série d’audits sans intervention utile.\n\nChoisir une expérience éditoriale distincte sur Sudoku : guide existant avec candidats, sans exemple complet ni position unique. Ajouter deux exemples fictifs par langue dans les sections existantes, sans nouveaux chemins ni moteur. Signal Google faible (pages Sudoku EN/ES/FR : 4/2/1 impressions) : opportunité à tester, pas demande démontrée. Les tendances RSS surtout actualités/sport ne justifient pas un jeu opportuniste. Aucun gain acquis ; métrique globale non causale.\n\nSuite choisie : évaluer un quiz de géographie à saisie libre, en réponse à la piste JetPunk du propriétaire. Examiner différenciation, faisabilité des données multilingues et réutilisation serveur avant implémentation. Ne pas multiplier automatiquement les ajouts de guides. Mémoire condensée pour rester bornée ; aucun archivage Git revendiqué.\n\n## Réévaluation — session 22:17 UTC\n\nInbox vide sur disque ; la piste JetPunk est héritée, aucune nouvelle instruction propriétaire ni observation concurrente. Observation 34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76 : mêmes faibles volumes, SEO encore immature ; ne pas multiplier les paragraphes de guides. Recherche géographie choisie pour réduire les inconnues avant de construire un nouveau jeu.\n\nRetenir un prototype isolé de cinq capitales, sans temps limite ; écarter provisoirement liste mondiale, cartes et géopolitique exhaustive. Les vingt destinations multilingues existantes ne constituent pas un corpus de capitales. Ne pas détourner Word/classement ni modifier les preuves serveur sans revue. Aucune popularité concurrente ou demande Puzzoria établie. Prochaine étape concrète : règles Unicode/alias, contrôles de corpus et tests négatifs sur fixtures synthétiques, sans route/API. La source/licence des faits demeure à établir ; abandon possible si elle ne peut être vérifiée.\n\n## 31 octobre — prototype borné, pas d’intégration\n\nObservation 0a70b390c915b3ee47e7063e2dd7977d6ed7f529d6db77396a514e0e55c6a76a : recherche précédente merged, aucun échec/non-vérifié ; volumes et fenêtres ne permettent toujours pas de conclure sur la croissance. Nouveau slug five-capitals-answer-prototype pour cette contribution distincte. Choix : tester les ambiguïtés de saisie avant tout jeu ; conserver les accents plutôt que fusionner silencieusement ñ/n ou ß/ss. Les exonymes restent déclarés par langue, collisions inter-pays bloquantes, corpus compilé indépendant des mutations. Aucun moteur de score ni preuve serveur modifié. 44 tests ciblés, lint/typecheck verts après correction des fixtures TypeScript. Source/licence factuelle non établie ; prochaine mission de décision sur les données, pas une série automatique de raffinements techniques. Aucun gain direct attendu du prototype isolé.\n\n## 1er novembre — suspendre les capitales, essai Démineur\n\nObservation 963823d5071f3e0d1503659ffd65b8785c0abcb2454997762fcb9bec8f2e2c7b : aucun échec/non-vérifié. Ressources content/social sans capitales ; notices trouvées limitées aux dictionnaires/mots rares. Sans réseau autorisé, aucune source factuelle vérifiable : suspendre l’intégration plutôt que prolonger un prototype. Aucun constat sur l’existence mondiale de données ouvertes.\n\nChoisir un essai éditorial Démineur : le guide décrit les chiffres sans déduction concrète. Trois impressions/un clic sur une archive ES, sans jointure requête/page, signal faible. Ajouter deux exemples génériques et expliciter qu’un drapeau n’est pas une preuve, sans activer d’indice. Aucun besoin démontré ni gain promis. Nouvelle expérience distincte ; anciennes fenêtres et critères inchangés. Prochaine mission : examiner couverture SEO Daily/sitemap avant autre intervention, pas une série de guides automatique.\n\n## 1er novembre — session 20:01 UTC, couverture SEO\n\nObservation df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726 : aucun échec/non-vérifié ; guides Sudoku/Démineur fusionnés sans déploiement confirmé, fenêtres Word/vocabulaire immatures. Inbox réellement présente : quiz et parcours de footballeur développés séparément ; abandon de toute reprise autonome du quiz. Audit hérité réévalué puis borné à couverture/canoniques/UTC. Aucun défaut établi : ne pas étendre artificiellement la fenêtre de 31 jours ni produire encore des guides. Google ne fournit pas d’inspection d’URL ; absence de ligne ≠ non-indexation. Deux tests de frontière et note d’audit apportent une preuve locale, pas une preuve de crawl. Prochaine mission : découverte des autres jeux après Word, à partir du parcours réel et des agrégats ; aucune friction encore démontrée.\n\n## 2 novembre — découverte après Word\n\nObservation c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f : aucun échec/non-vérifié. Inbox vide. Word concentre 18 des 20 départs ; trois sessions consenties ne permettent pas de diagnostiquer la conversion vers un autre jeu. Bouton existant avant les statistiques, langue/mode préservés et famille Word exclue. Arrêter cet audit sans CTA supplémentaire ni changement arbitraire de recommandation. Le choix déterministe Sudoku et le filtre Daily peuvent être étudiés ultérieurement si une friction est établie. Documentation et 14 tests Daily existants réussis, aucune preuve navigateur ou croissance. Prochaine mission acquisition choisie sur Quiz/Football déjà livrés dans la base, sans refaire les jeux ni prolonger automatiquement la série des guides.\n\n## 3 novembre — passerelle Football / Mondial\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba, 14:13:22.594Z : aucun échec/non-vérifié. Inbox vide. Audit hérité confirmé : couverture générale Quiz/Football déjà présente. Ne pas reconstruire les jeux ni ajouter une nouvelle série de guides. Choisir un essai de maillage contextuel limité aux deux formats football : depuis la carrière, accès direct au sujet Mondial plutôt qu’au seul quiz général ; retour vers les carrières depuis ce sujet. Les autres sujets ont déjà leurs liens mutuels. Quatre langues, routes stables, borne 1930–2022 préservée. Aucun besoin mesuré : hypothèse SEO explicite, pas panne ou gain revendiqué.\n\nTrente jours : vingt départs dont dix-huit Word, seulement trois sessions consenties ; Google 180 impressions/six clics, dernière date 1er novembre Pacific. Les tendances sportives du 3 novembre ne prouvent pas une demande pour Puzzoria. Garder les règles serveur et les métriques existantes. Huit nouveaux tests de rendu/portée/URL ; 47 ciblés passent, lint/typecheck réussis. Scénario E2E préparé et découvert, pas exécuté. Guides Sudoku/Démineur confirmés déployés le 2 novembre ; anciennes fenêtres et critères inchangés. Prochaine mission : analyser le recul des impressions sur des fenêtres égales complètes, sans attribuer automatiquement le mouvement aux releases ni multiplier les liens thématiques.\n\n## 4 novembre — observer le catalogue avant de le retoucher\n\nObservation 1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d : sources disponibles, Google arrêté au 1er novembre, avant catalogue du 3 novembre. La priorité propriétaire Quiz consignée dans STATE prévaut sur la mission historique d’audit général. Rapport joint exécuté, couverture 96+8 sans lignes Google : inconnu, pas zéro ni non-indexation. Zéro départ sujet dans le rapport UTC partiel : pas de demande démontrée. Choisir une contribution de mesure/documentation plutôt que créer artificiellement un correctif ou un nouveau sujet. Première lecture au plus tôt après sept jours complets réellement couverts ; critères antérieurs inchangés. Sept tests existants passent. Pilote drapeaux à réévaluer sur les actifs locaux déjà présents et leur usage, sans présumer un manque.\n",
+    "EXPERIMENTS.md": "# Expériences — registre condensé au 30 octobre 2026\n\n## Historique technique, sans mesure de croissance\n\nStockage : trois tests initiaux échouaient après écriture partielle, puis passaient après correction. Caches start/results/restore : isolation propriétaire et réponses différées reproduites par doubles unitaires ; générations ajoutées pour reset et A → B → A. Création/démarrage : 12 nouveaux échecs avant correction, 39 tests ciblés après. Nettoyage entre générations : 12 cas déjà verts ; retrait temporaire des gardes les faisait échouer, code original restauré, 32 tests verts. Aucun effet utilisateur mesuré.\n\nClavier/dialogues, liens/édition, bords Sudoku, Alt et IME : chemins établis par lecture et scénarios navigateur préparés, non exécutés par l’agent. Copie invitation/salon historique : refus/absence simulés, sélection du champ et reprise prévues dans quatre langues/quatre profils ; intégration OS inconnue. Textes des règles live alignés sans changement du moteur. Historique général : délai récurrent operations.test.ts:55, ponctuellement retention.test.ts:490 (relance ciblée réussie). Ne pas convertir ces résultats historiques en résultats de cette session.\n\n## shared-puzzle-own-pace — proposition historique non évaluée\n\nHypothèse : expliciter /friend jouable plus tard favorise les départs. Protocole ancien conservé : playing.starts, 14 journées UTC complètes ; référence 12–25 octobre = 10 départs, observation 8937a2fa332f581d4a1333e1fc9e59410043802c2fb2d87410c867866e9d2bf8 ; +20 %, minimum 100 départs combinés. Ce seuil combiné ne respecte pas le mandat actuel : ne pas l’utiliser pour revendiquer une réussite, ni le réécrire rétrospectivement. Déploiement non établi par le registre actuel. 91 tests ciblés historiques réussis, aucun résultat produit.\n\n## word-guide-worked-deductions — observer\n\nHypothèse : méthode et exemples localisés améliorent la visibilité des pages Word existantes. Protocole fixe : google.impressions, 30 jours complets finalisés, minimum 100 dans chaque fenêtre, amélioration relative 0,2 ; baseline au superviseur. Observation initiale 2eda27878cb715e26ba3c88e2149051197f0895d0c6411d084bb6144c3098861. Exemples vérifiés par moteur, 28 tests SEO historiques verts.\n\nContexte du 30 octobre : merged, déploiement commun confirmé le 27 octobre 21:52:23.088Z, SHA f1cc44089db87644299ea88a09fae7d9d25be18c ; waiting_complete_windows. Pas de résultat mature ni d’attribution causale.\n\n## published-vocabulary-discovery — observer\n\nHypothèse : relier les huit fiches publiques par langue depuis le guide Mot insolite améliore leur découverte. Protocole fixe : google.impressions, 30 jours complets finalisés, minimum 100 par fenêtre, +20 %, référence au superviseur. Observation initiale 267259312775e58d5555e5f8979fbcdcc801efe841e7491c7c075cac7122dade. 43 tests ciblés historiques verts dont huit de rendu/frontières UTC.\n\nMême déploiement commun et attente que Word ; impossible d’isoler les effets des deux ajouts par un avant/après global. Aucun effet mesuré.\n\n## first-play-entry-audit — arrêté, documentation fusionnée\n\nHypothèse : friction preview → première interaction. Entrées sans compte existantes, abandon non localisé. Observation initiale 228dc69c307fcf4c5d61a7cbea34dfef20b3c7327f96c63f336f8ec43908522c. Suivi fixé : playing.starts, 14 jours UTC complets, minimum 20 par fenêtre, +20 %, référence au superviseur. Aucun effet immédiat attendu d’un audit, aucun correctif produit issu de cette seule recherche. 33 tests historiques verts. Ne pas qualifier l’absence de diagnostic d’absence de friction.\n\n## first-play-browser-protocol — recherche, documentation fusionnée\n\nHypothèse : établir une friction concrète avant intervention ; aucun effet direct attendu. Observation initiale 48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78. Protocole fixe : playing.starts, 14 jours UTC complets, minimum 20 par fenêtre, +20 %, baseline au superviseur. Trois scénarios × quatre langues × quatre profils : 48 cas découverts historiquement, aucun résultat navigateur fourni. Word première lettre ; Mots mêlés preview distinct, départ explicite, refus/reprises et pièces ARIA. Le travail d’intervention ci-dessous possède son propre identifiant.\n\n## wordsearch-prestart-accessible-mask — intervention proposée\n\nHypothèse : préserver le masquage textuel et accessible jusqu’à confirmation du départ rend cohérent le parcours Mots mêlés, sans gain de conversion démontré. Kind reliability, objective acquisition. Le correctif fourni utilise waiting pour retirer texte et lettre du libellé accessible avant départ ; les données restent inspectables techniquement. Source 19f2e29b non vérifiée, compatible et reprise, pas de publication revendiquée.\n\nObservation actuelle aaf13f186facecec3bb37fc676f821d22888b497fd8dc55c6bcee4203722da8b, collecte 2026-10-30T05:43:16.611Z. Échec superviseur : mémoire trop volumineuse. Cette session condense la mémoire, enrichit le scénario pour retenir le départ en vol puis vérifier verrouillage/masquage/startedAt nul avant libération vers l’API réelle. Avant départ et après refus restent couverts, contrôle positif après succès conservé.\n\nProtocole exploratoire : playing.starts, 14 journées UTC complètes, minimum 20 dans chaque fenêtre, amélioration relative 0,2. Baseline et dates au superviseur ; échantillon insuffisant => inconclusif. La métrique globale n’isole pas le masquage et aucune demande Mots mêlés n’est démontrée. Résultats locaux de cette session dans STATE ; exécution navigateur/build au superviseur.\n\n## Mise à jour 12:50 UTC — états actuels\n\nwordsearch-prestart-accessible-mask : contexte 708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c, manual_review PR 29 ; pas de déploiement établi. Le travail décrit plus haut appartient à la session précédente et est absent de cette base exportée. Aucun résultat navigateur supplémentaire fourni.\n\ngerman-word-entry-fit-audit — recherche arrêtée : vérifier un éventuel écart Google → première lettre avant intervention. Signal /de/wort dix impressions/deux clics ; aucune jointure requête/page. Audit documentaire ajouté, guide déjà complet, aucune retouche produit justifiée. Suivi exploratoire playing.starts, 14 jours complets, minimum 20 par fenêtre, +20 %, baseline au superviseur ; aucun effet direct attendu et aucune attribution causale. 36 tests SEO/guide passent, deux fichiers ; aucun E2E. Aucun résultat de croissance. Protocoles des deux expériences SEO déployées inchangés et fenêtres immatures.\n\n## sudoku-guide-single-deductions — proposé, session 19:13 UTC\n\nObjectif SEO, product. Hypothèse : exemples de candidat unique et position unique rendent les pages Sudoku plus utiles et peuvent améliorer leur visibilité. Deux sections littérales ajoutées par langue, sans autre logique ni URL. Observation 89599514453ab342db33974abd28835a811774409690d7f8e7ef1afcd9fab7f2 (30 octobre 19:13:12.254Z). Google available : 179 impressions/six clics sur 30 jours demandés, dernière date 28 octobre Pacific ; lignes Sudoku EN/ES/FR 4/2/1 impressions sans clic. Pas de demande de tutoriel établie.\n\nProtocole fixé : google.impressions, 30 journées complètes finalisées par fenêtre, minimum 100 dans chacune, +20 %. Baseline et dates au superviseur ; seuil insuffisant => inconclusif. Les impressions globales et interventions SEO concomitantes empêchent une attribution exclusive. Critères des expériences précédentes inchangés.\n\nRésultats locaux : 36 tests SEO/rendu + 59 moteurs passent, lint/typecheck passent. Vérification ponctuelle des exemples via moteur/listes. Validation contenu npm bloquée par IPC ; même script via node --import tsx passe (92 défis, 32 articles). Aucun E2E/build, publication ou gain de trafic revendiqué. Détail : docs/SUDOKU-GUIDE-EXPERIMENT.fr.md. Prochaine exploration acquisition : quiz de géographie, pas une nouvelle retouche de guide automatique.\n\n## five-capitals-feasibility — recherche, session 22:17 UTC\n\nObservation 34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76 (30 octobre 22:17:35.527Z). Hypothèse acquisition : cinq capitales à saisir pourraient élargir les entrées ; aucune demande démontrée. Étude dans docs/GEOGRAPHY-QUIZ-FEASIBILITY.fr.md : labels existants réutilisables, réponses factuelles absentes, extensions explicites aux preuves nécessaires. Aucun jeu développé/déployé. Décision continue vers prototype pur hors application ; la recherche seule n’a aucun effet direct attendu.\n\nProtocole exploratoire : playing.starts, quatorze jours UTC complets par fenêtre, minimum vingt départs dans chacune, +20 %. Baseline/dates au superviseur ; lancement éventuel avec nouvel identifiant. Métrique globale non attributive, volumes insuffisants => inconclusif. Protocoles antérieurs inchangés. Google available : 179 impressions/six clics sur période demandée de trente jours, dernière date 28 octobre Pacific ; analytics vingt départs sur 1–30 octobre partiel, pas une baseline de quatorze jours.\n\nRésultat local : 29 tests existants social-games/play-reservation passent, deux fichiers. Aucun test du futur quiz ni navigateur/build. Prochaine mission : validation Unicode/alias/corpus avec fixtures synthétiques, puis évaluer source et licence du corpus réel. Aucun effet de production revendiqué.\n\n## five-capitals-answer-prototype — recherche proposée, 31 octobre\n\nNouvel identifiant pour le module isolé et ses fixtures synthétiques ; ne remplace pas les critères five-capitals-feasibility. Objectif acquisition/research : tester la faisabilité des alias multilingues avant intégration. Observation 0a70b390c915b3ee47e7063e2dd7977d6ed7f529d6db77396a514e0e55c6a76a, 2026-10-31T05:37:01.109Z. Aucun signal de demande géographique établi ; corpus factuel encore absent.\n\nProtocole exploratoire fixé : playing.starts, quatorze journées UTC complètes par fenêtre, minimum vingt départs dans chacune, +20 %. Baseline/dates au superviseur. Aucun effet direct attendu sans intégration/déploiement ; métrique globale non attributive et seuil insuffisant => inconclusif. Protocoles SEO antérieurs inchangés.\n\nRésultats locaux : 44 tests passent (normalisation/refus, alias par langue/pays, collisions, schéma, déduplication et mutation), lint/typecheck passent ; premier typecheck a détecté deux erreurs de fixtures ensuite corrigées. Pas de test de scoring, passage ou preuve de run ; aucune route, donnée factuelle, collecte ou persistance ajoutée. Ni E2E ni build exécuté. Source et licence restent à vérifier avant suite ; aucune publication ou croissance revendiquée. Documentation : GEOGRAPHY-QUIZ-FEASIBILITY.fr.md, section prototype.\n\n## mines-guide-certain-neighbours — proposé, 1er novembre\n\nSEO/product : deux déductions génériques dans les paragraphes existants EN/FR/ES/DE pourraient améliorer l’utilité et la visibilité du guide Démineur. Observation 963823d5071f3e0d1503659ffd65b8785c0abcb2454997762fcb9bec8f2e2c7b, 13:22:52.696Z. Google available, 180 impressions/six clics, période demandée 2–31 octobre, dernière date 30 octobre Pacific ; archive ES Démineur trois impressions/un clic. Pas de demande tutoriel établie ni jointure page/requête.\n\nProtocole fixé : google.impressions, trente journées complètes finalisées par fenêtre, cent impressions minimum dans chacune, +20 %. Baseline/dates au superviseur. Insuffisant => inconclusif ; métrique globale non causale, effets des interventions concomitantes non séparables. Aucun déploiement ou effet produit établi.\n\n95 tests ciblés passent (seo, game-guide, engines), typecheck passe. Deux exemples confirmés par énumération des affectations et lecture du solveur. Aucun E2E/build. Lint réussi, sortie 0. Docs MINES-GUIDE-EXPERIMENT.fr.md. Capitales : intégration suspendue faute de corpus sourcé dans les ressources autorisées ; prototype reste manual_review, sans changer ses critères historiques. Autres protocoles inchangés.\n\n## daily-sitemap-coverage-audit — recherche arrêtée, 1er novembre 20:01 UTC\n\nSEO/research. Hypothèse : un défaut de couverture des Daily pourrait limiter la découverte. Observation df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726 à 20:01:20.132Z. Google available : trente jours demandés 2–31 octobre, 180 impressions/six clics, dernière date 30 octobre Pacific ; lignes partielles, aucune inspection d’indexation. Aucun défaut établi par lecture et tests. Pas de modification produit ni effet direct attendu. Recherche arrêtée, pas de nouvelle série de retouches.\n\nProtocole exploratoire fixé : google.impressions, trente jours complets finalisés par fenêtre, cent impressions minimum dans chacune, +20 %, baseline et dates au superviseur. Audit seul non causal ; insuffisant => inconclusif. Anciens critères inchangés. 37 tests seo/word-articles passent dont deux nouveaux cas (fenêtre moderne/UTC), typecheck et lint réussis. Aucun E2E/build ni résultat production. Détail docs/DAILY-SITEMAP-AUDIT.fr.md. Suite : parcours de découverte après Word, sans doublonner quiz/footballeur confiés séparément.\n\n## post-word-discovery-audit — recherche arrêtée, 2 novembre\n\nAcquisition/research : vérifier si le parcours fin Word vers un autre jeu présente une friction concrète. Observation c83acb5aebc58c755fc35e7cb35dd734d14059856bf4f362365eaff178522a7f à 15:50:31.446Z. Analytics available : 20 départs dont 18 Word, trois sessions facultatives, zéro next_game_click ; données insuffisantes pour attribuer un abandon. Bouton et liens localisés déjà présents, aucune intervention produit justifiée. Note docs/POST-WORD-DISCOVERY-AUDIT.fr.md ; 14 tests Daily existants passent, aucune exécution navigateur/build. Aucun gain direct attendu ou mesuré.\n\nProtocole exploratoire fixe : playing.starts, 14 journées UTC complètes par fenêtre, minimum 20 départs dans chacune, +20 %, baseline/dates au superviseur. Métrique globale non causale ; seuil insuffisant => inconclusif. Critères antérieurs inchangés. Suite : découvrabilité organique de Quiz/Football présents dans cette base, sans nouveau jeu ni tracking.\n\n## football-world-cup-discovery — proposé, 3 novembre\n\nSEO/product : relier contextuellement Football au sujet du Mondial masculin 1930–2022, avec retour réciproque, pourrait faciliter découverte et visibilité organique. Quatre langues ; nouvelles sections avant QuizTopics/guide, destinations existantes, pas d’alias Practice ni autre sujet. Lien général déjà présent en barre latérale : aucun défaut de couverture globale ou besoin utilisateur établi. Documentation FOOTBALL-DISCOVERY-EXPERIMENT.fr.md.\n\nObservation 120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba à 14:13:22.594Z. Google available collecté à 14:13:19.204Z : 180 impressions/six clics, 4 octobre–2 novembre demandé, dernière date 1er novembre Pacific. Analytics available à 14:13:17.857Z : 5 octobre–3 novembre UTC partiel, vingt départs dont dix-huit Word, aucun Quiz/Football, trois sessions consenties. Pas de demande ou causalité établie. Trends RSS disponibles, TikTok indisponible ; sport d’actualité distinct d’une demande de quiz.\n\nProtocole fixe : google.impressions, trente journées complètes finalisées par fenêtre, cent impressions minimum dans chacune, amélioration relative 0,2. Baseline/dates au superviseur ; seuil insuffisant => inconclusif. Métrique globale non attributive, interventions concomitantes non séparables. Aucun déploiement ni effet de production de cette contribution revendiqué.\n\n47 tests ciblés passent, dont huit nouveaux ; première fixture allemande erronée corrigée selon route existante. Lint/typecheck réussis sur état final. Validation contenu npm échoue IPC ; même script via node --import tsx réussit, quiz/carrières + 92 défis + 32 articles. Quatre projets E2E découverts, aucun navigateur exécuté, ni suite complète/build. Contrôles indépendants au superviseur. Suite : analyse des fenêtres Google, pas déclinaison automatique de cette intervention.\n\nMise à jour des expériences historiques : le contexte confirme le déploiement commun Sudoku/Démineur (et documentation capitales) le 2 novembre 15:58:17.755Z, SHA 0a446ce01c67f43dc272fc40f5b1176aadd1bea9 ; waiting_complete_windows, sans gain attribué. Audits sitemap/post-Word cancelled selon registre. Critères antérieurs inchangés.\n\n## quiz-acquisition-first-readiness — mesure, 4 novembre\n\nAcquisition/measurement, décision observe ; observation 1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d, collecte 06:19:40.798Z. Hypothèse : dater les exports empêche une décision prématurée sur le catalogue livré le 3 novembre. Aucun effet direct de croissance attendu de cette note. Rapport exécuté : 96 sujets/langues et 8 thèmes ; zéro ligne Google retournée pour eux reste inconnu, 96 lignes playing présentes à zéro départ. Dernière journée Google 1er novembre ; période analytics trente jours jusqu’au 4 novembre UTC partiel. Les fenêtres post-livraison sont absentes, pas une preuve d’échec.\n\nProtocole exploratoire : playing.starts, sept jours complets par fenêtre, minimum vingt départs dans chacune, +20 %, baseline/dates laissées au superviseur. Une référence sous seuil restera insuffisante ; ne pas revendiquer une réussite si elle est nulle. Critères des expériences historiques et seuils par page du catalogue inchangés. Documentation QUIZ-OBSERVATION-READINESS.fr.md ; sept tests quiz-acquisition réussis, rapport local hors Git. Ni navigateur/build ni modification produit ni déploiement. Football-world-cup-discovery reste manual_review selon contexte, sans déploiement établi.\n",
+    "PLAN.json": "{\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\",\n  \"summary\": \"Observation acquisition Quiz exécutée : 96 sujets/langues et 8 thèmes ; Google sans lignes de quiz reste inconnu, zéro départ exporté. Google arrêté au 1er novembre, avant livraison du 3. Sept tests ciblés passent. Protocole de reprise documenté, aucun changement produit ou déploiement.\",\n  \"nextMission\": \"Étudier le pilote drapeaux déjà présent : inventorier les quinze SVG locaux public/flags, leur provenance et leur utilisation effective dans le rendu quiz, puis décider si un problème de jouabilité reproductible subsiste avant tout nouveau format. Lire les observations récentes ; si sept jours post-livraison sont effectivement rapportés, analyser en priorité les acquisitions par sujet. Ne pas télécharger de données ni réécrire les réponses v1.\",\n  \"blockedReason\": null,\n  \"experiment\": {\n    \"id\": \"quiz-acquisition-first-readiness\",\n    \"objective\": \"acquisition\",\n    \"kind\": \"measurement\",\n    \"hypothesis\": \"Une lecture datée des exports par sujet permet de différer les décisions de catalogue lorsque la couverture après livraison est absente.\",\n    \"expectedImpact\": \"Aucun gain direct de trafic attendu de cette étude ; éviter une attribution et des modifications prématurées.\",\n    \"evidence\": [\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/growth-context.json\",\n        \"observationId\": \"1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d\",\n        \"collectedAt\": \"2026-11-04T06:19:40.798Z\",\n        \"finding\": \"lastFailure et unverifiedWork null ; expériences précédentes sans nouvelles fenêtres matures.\"\n      },\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/search-console.json; /opt/puzzoria-pilot/readonly/puzzoria-analytics.json\",\n        \"finding\": \"Available collectés à 06:19 UTC le 4 novembre. Google dernière date 1er novembre ; rapport joint 96 sujets et 8 thèmes sans ligne Google retournée, zéro départ sujet dans export UTC partiel.\"\n      },\n      {\n        \"source\": \"docs/QUIZ-ACQUISITION.fr.md; docs/QUIZ-THEMES.fr.md; agent/autonomy/memory/STATE.md\",\n        \"finding\": \"Priorité propriétaire catalogue déjà livré le 3 novembre ; protocole sept jours complets et seuils de tri conservés.\"\n      }\n    ],\n    \"metric\": \"playing.starts\",\n    \"observationDays\": 7,\n    \"minimumSamples\": 20,\n    \"minimumRelativeImprovement\": 0.2,\n    \"decision\": \"observe\"\n  }\n}\n"
   },
   "controlSha": "0ea05965b93e86257e080842281711e2b78f666c",
   "pendingMessages": [],
@@ -41,7 +41,7 @@
   "blockedReason": null,
   "lastSession": {
     "schemaVersion": 1,
-    "runId": "41651167373",
+    "runId": "41784584925",
     "job": "first",
     "mode": "autonomous",
     "funding": {
@@ -49,7 +49,7 @@
       "source": "owner-declaration",
       "verifiedAt": "2026-10-21T14:33:40.997Z"
     },
-    "startedAt": "2026-11-03T14:13:08.094Z",
+    "startedAt": "2026-11-04T06:19:27.685Z",
     "status": "verified",
     "commands": [
       {
@@ -78,8 +78,8 @@
       }
     ],
     "productionDeployment": false,
-    "baseMain": "34a006d411cc6696496c51953b84cb9712e27fad",
-    "sourceCommit": "34a006d411cc6696496c51953b84cb9712e27fad",
+    "baseMain": "0ea05965b93e86257e080842281711e2b78f666c",
+    "sourceCommit": "0ea05965b93e86257e080842281711e2b78f666c",
     "isolationCanaries": true,
     "quotaBefore": {
       "status": "ready",
@@ -87,14 +87,14 @@
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 13,
+            "usedPercent": 0,
             "windowDurationMins": 300,
-            "resetsAt": 1793722602
+            "resetsAt": 1793791175
           },
           "secondary": {
-            "usedPercent": 67,
+            "usedPercent": 16,
             "windowDurationMins": 10080,
-            "resetsAt": 1793802631
+            "resetsAt": 1794341052
           }
         }
       ]
@@ -102,26 +102,26 @@
     "actionsBudget": {
       "month": "2026-11",
       "limit": 1700,
-      "charged": 401,
-      "reserved": 48,
-      "modelMilliseconds": 544616
+      "charged": 796,
+      "reserved": 41,
+      "modelMilliseconds": 160263
     },
     "analytics": {
       "status": "available",
       "source": "https://puzzoria.com/api/agent/analytics",
-      "fetchedAt": "2026-11-03T14:13:17.857Z",
-      "sha256": "e1ad4c6032fe6cd315ff500cdd20fcb5f9ea37856a63ea8667ee266952470bd1",
+      "fetchedAt": "2026-11-04T06:19:36.133Z",
+      "sha256": "2af189d5894ac1107354233c2e1c87828c0702e341665cf503947a60b0b19439",
       "readOnlySnapshot": true
     },
     "searchConsole": {
       "status": "available",
       "property": "sc-domain:puzzoria.com",
-      "fetchedAt": "2026-11-03T14:13:19.204Z",
+      "fetchedAt": "2026-11-04T06:19:37.898Z",
       "sha256": "424e1318e91f664e80fe75d9b510b0d6d973124c32989307b024b640287b3f32",
       "readOnlySnapshot": true
     },
     "growth": {
-      "observationId": "120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba",
+      "observationId": "1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d",
       "trendStatus": "available",
       "trendSources": [
         {
@@ -150,139 +150,79 @@
     },
     "modelCommands": [
       {
-        "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g '*MANDATE*' -g '*autonomy*'\"",
+        "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -70\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat /opt/puzzoria-pilot/readonly/actions-budget.json'",
+        "command": "/bin/bash -lc 'cat agent/autonomy/INBOX.json; cat agent/autonomy/memory/*'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent'",
+        "command": "/bin/bash -lc 'cat /opt/puzzoria-pilot/readonly/growth-context.json; cat /opt/puzzoria-pilot/readonly/trends.json; cat /opt/puzzoria-pilot/readonly/puzzoria-analytics.json; cat /opt/puzzoria-pilot/readonly/search-console.json'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat agent/autonomy/memory/STATE.md agent/autonomy/memory/DECISIONS.md agent/autonomy/memory/EXPERIMENTS.md agent/autonomy/memory/PLAN.json'",
+        "command": "/bin/bash -lc 'cat agent/autonomy/memory/PLAN.json; cat agent/autonomy/memory/STATE.md; tail -45 agent/autonomy/memory/EXPERIMENTS.md'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc 'cat /opt/puzzoria-pilot/readonly/growth-context.json /opt/puzzoria-pilot/readonly/trends.json /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
+        "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfor name in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+name+'.json'))\n print('\\\\nFILE',name)\n if name=='growth-context': print(json.dumps(d,ensure_ascii=False))\n else:\n  print('KEYS',list(d))\n  if name=='search-console':\n   for k,v in d.items():\n    if k\"'!='\"'breakdowns': print(k,json.dumps(v,ensure_ascii=False)[:16000])\n  elif name=='trends': print(json.dumps(d,ensure_ascii=Fal",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"cat agent/autonomy/memory/PLAN.json; tail -65 agent/autonomy/memory/EXPERIMENTS.md; python - <<'PY'\nimport json\nfor n in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'))\n print('\\\\nREPORT',n)\n if n=='growth-context': print(json.dumps(d,ensure_ascii=False))\n elif n=='trends': print(json.dumps(d,ensure_ascii=False)[:12000])\n else:\n  print('keys',list(d));print(json.dumps({k:v for k,v in d.items() if k no",
+        "command": "/bin/bash -lc \"cat docs/QUIZ-ACQUISITION.fr.md; rg --files src tests | rg 'quiz|acquisition'; cat src/lib/quiz-expansion.ts | head -85; cat src/components/quiz-topics.tsx | head -160; cat scripts/report-quiz-acquisition.ts | head -90\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"rg --files src tests | rg 'knowledge|quiz|football|seo|sitemap|catalog|game-guide'; cat docs/QUIZ-FOOTBALL.fr.md; cat src/lib/knowledge.ts; cat src/app/sitemap.ts\"",
+        "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nc=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\nprint('observation',c['observation'].get('id'),c['observation']['collectedAt'])\nprint('lastFailure',c.get('lastFailure'),'unverified',c.get('unverifiedWork'))\nprint('keys',list(c))\na=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nfor days,r in a['reports'].items():\n print(days,r['period'],'topics',json.dumps(r['report']['product'].get('quizTopics'),ensure_asc",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"python - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json')); print('observation', {k:v for k,v in x['observation'].items() if k\"'!='\"'series'}); print('states',[(e['id'],e['status'],e.get('deployment'),e.get('assessment')) for e in x['experiments']]);print('lastFailure',x['lastFailure'],'unverifiedWork',x['unverifiedWork'])\nfor n in ['puzzoria-analytics','search-console']:\n x=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json')); print(n)",
+        "command": "/bin/bash -lc 'cat src/lib/quiz-acquisition.ts; cat tests/quiz-acquisition.test.ts; cat docs/QUIZ-THEMES.fr.md | head -90'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"cat src/lib/knowledge-seo.ts src/components/quiz-topics.tsx src/lib/knowledge-catalog.ts src/components/game-guide.tsx; rg -n 'quiz|football|QuizTopics|knowledge' src/app src/components/game-card.tsx src/lib/seo.ts tests/seo.test.ts tests/knowledge.test.ts; rg --files node_modules/next/dist/docs | rg '(link|metadata|sitemap)'\"",
+        "command": "/bin/bash -lc \"node --import tsx scripts/report-quiz-acquisition.ts --google /opt/puzzoria-pilot/readonly/search-console.json --analytics /opt/puzzoria-pilot/readonly/puzzoria-analytics.json > /tmp/puzzoria-quiz-observation.json\npython3 - <<'PY'\nimport json\nr=json.load(open('/tmp/puzzoria-quiz-observation.json')); print('KEYS',list(r)); print(json.dumps(r,ensure_ascii=False)[:4500])\nc=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\nfor e in c['experiments']: print(e['id'],e.g",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"sed -n '1,180p' src/app/'[locale]'/'[...segments]'/page.tsx; cat src/lib/knowledge-i18n.ts; sed -n '1,180p' src/app/'[locale]'/page.tsx; cat tests/game-guide.test.ts; cat package.json\"",
+        "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json,datetime\nr=json.load(open('/tmp/puzzoria-quiz-observation.json'))\nprint('coverage',len(r['rows']),len(r['themes']),'Google returned topics',sum(x['google']['rowReturned'] for x in r['rows']),'themes',sum(x['google']['rowReturned'] for x in r['themes']))\nprint('starts',sum(x['playing']['starts'] for x in r['rows'] if x['playing']),'unknown playing',sum(x['playing'] is None for x in r['rows']))\ng=json.load(open('/opt/puzzoria-pilot/readonly/search-consol",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"sed -n '345,400p' src/app/'[locale]'/'[...segments]'/page.tsx; cat node_modules/next/dist/docs/01-app/03-api-reference/02-components/link.md | head -100; sed -n '1,140p' src/lib/seo.ts; cat tests/football-badges.test.ts | head -65; cat vitest.config.ts; rg -n 'world-cup|football|quiz' src/components/cards.tsx src/components/game-common.tsx src/lib/stats.ts\"",
+        "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/quiz-acquisition.test.ts'",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"python - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/puzzoria-analytics.json'))\nr=x['reports']['30']; print(r['period']);print(r['report']['official']['totals']); print(r['report']['product']['totals']);print('official games',r['report']['official']['games'])\nPY\"",
+        "command": "/bin/bash -lc \"rg --files public content src | rg -i 'flag|licen|attribut|twemoji' | head -45; rg -n 'flag|emoji' src/components/games/quiz* src/lib/knowledge-catalog.ts src/lib/server/knowledge-content.ts | head -30\"",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"sed -n '1,100p' src/lib/types.ts; rg -n 'game-guide' src/app/globals.css; rg -n 'server-only' src/lib/server/word-articles.ts src/lib/challenges.ts; sed -n '1,40p' tests/knowledge.test.ts; sed -n '1,40p' tests/seo.test.ts\"",
+        "command": "/bin/bash -lc \"cat > docs/QUIZ-OBSERVATION-READINESS.fr.md <<'EOF'\n# Quiz : décider après des journées réellement observées\n\nCette note complète [le protocole d’acquisition](QUIZ-ACQUISITION.fr.md) et [le lot thématique](QUIZ-THEMES.fr.md). Elle ne change aucun seuil existant, aucune collecte ni aucune permission de publication.\n\n## Première lecture, 4 novembre 2026\n\nLe rapport hors ligne existant a été exécuté sur les deux exports du superviseur, sans accès réseau ni identifiants Google. Il pro",
         "exitCode": 0
       },
       {
-        "command": "/bin/bash -lc \"sed -n '670,698p' src/app/globals.css; cat src/lib/game-modes.ts | head -45; rg -n 'AVAILABLE|2026-11|gameAvailable' src/lib/challenges.ts\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/football-discovery.test.ts tests/seo.test.ts tests/knowledge.test.ts'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc \"cat e2e/knowledge.spec.ts; rg -n 'football.*slug|fussballspieler-erraten' src/lib/registry.ts; cat e2e/seo.spec.ts | head -55\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"python - <<'PY'\np='tests/football-discovery.test.ts'\ns=open(p).read().replace('/de/errate-den-fussballspieler','/de/fussballspieler-erraten');open(p,'w').write(s)\nPY\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"rg -n '\\\\.game-guide' tests e2e; rg -n 'football' src/lib/i18n.ts | head; cat playwright.config.ts | head -70\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm run typecheck'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm run lint'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/football-discovery.test.ts tests/seo.test.ts tests/knowledge.test.ts'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm exec playwright test e2e/football-discovery.spec.ts -- --list'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm run content:validate'",
-        "exitCode": 1
-      },
-      {
-        "command": "/bin/bash -lc 'npm run typecheck'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"rg -n 'quiz|category|choose|select' src/components/practice-player.tsx | head -45; cat src/lib/locale-path.ts | head -70; wc -c agent/autonomy/memory/*\"",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc 'npm run lint'",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"python - <<'PY'\nfrom pathlib import Path\nimport json\nroot=Path('agent/autonomy/memory')\n(root/'STATE.md').write_text('''# État — 3 novembre 2026, session 14:13 UTC\n\nBase exportée 34a006d411cc6696496c51953b84cb9712e27fad. AGENTS.md, mandat, inbox vide, quatre mémoires et rapports readonly lus ; champs utiles extraits après sorties initialement tronquées. Budget novembre : plafond 1700, charged 401, reserved 48. Aucun réseau externe, Git, achat, merge ou déploiement exécuté ; aucun ",
-        "exitCode": 0
-      },
-      {
-        "command": "/bin/bash -lc \"python - <<'PY'\nimport json\nfrom pathlib import Path\np=json.loads(Path('agent/autonomy/memory/PLAN.json').read_text())\nassert p['continuityNonce']=='1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1'\nassert p['experiment']['evidence'][0]['observationId']=='120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba'\nassert p['experiment']['minimumSamples']>0\nfor f in ['STATE.md','DECISIONS.md','EXPERIMENTS.md','PLAN.json']:\n assert Path('agent/autonomy/memory',f).stat().st_siz",
+        "command": "/bin/bash -lc \"wc -c agent/autonomy/memory/*; python3 - <<'PY'\nimport json,pathlib\np=pathlib.Path('agent/autonomy/memory/PLAN.json'); d=json.loads(p.read_text()); assert d['continuityNonce']=='1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1'; assert d['blockedReason'] is None\nr=json.load(open('/tmp/puzzoria-quiz-observation.json')); assert len(r['rows'])==96 and len(r['themes'])==8\nassert len({(x['topic'],x['locale']) for x in r['rows']})==96\nassert all(x['google']['impressions'] is None for x ",
         "exitCode": 0
       }
     ],
-    "threadId": "01a1a1c1-fb24-7a53-a85f-2a85a615c63b",
+    "threadId": "01a1a536-a6e5-7c11-9472-bc7ed1e93c66",
     "model": "gpt-6.1-sol",
-    "previousCompletedSessions": 31,
+    "previousCompletedSessions": 32,
     "quotaAfter": {
       "status": "ready",
       "quotas": [
         {
           "id": "codex",
           "primary": {
-            "usedPercent": 25,
+            "usedPercent": 3,
             "windowDurationMins": 300,
-            "resetsAt": 1793722602
+            "resetsAt": 1793791190
           },
           "secondary": {
-            "usedPercent": 69,
+            "usedPercent": 16,
             "windowDurationMins": 10080,
-            "resetsAt": 1793802631
+            "resetsAt": 1794341052
           }
         }
       ]
@@ -295,21 +235,21 @@
       "uid": 3050
     },
     "tests": {
-      "passed": 382,
+      "passed": 401,
       "failed": 0,
       "skipped": 0
     },
     "publication": {
-      "sha": "e130b1808d5efe6935c6c28048915e4ed4fb362a",
-      "url": "https://github.com/Aimericv/puzzoria/pull/40",
-      "number": 40
+      "sha": "09f0b1c9a692620059dc668096498431022f2d45",
+      "url": "https://github.com/Aimericv/puzzoria/pull/44",
+      "number": 44
     },
-    "toolCommands": 29,
+    "toolCommands": 14,
     "experiment": {
-      "id": "football-world-cup-discovery",
-      "objective": "seo",
-      "metric": "google.impressions",
-      "decision": "propose"
+      "id": "quiz-acquisition-first-readiness",
+      "objective": "acquisition",
+      "metric": "playing.starts",
+      "decision": "observe"
     }
   },
   "validation": {
@@ -2497,407 +2437,6 @@
         }
       },
       {
-        "id": "german-word-entry-fit-audit",
-        "objective": "acquisition",
-        "kind": "research",
-        "hypothesis": "Un écart entre promesse Google et première interaction allemande pourrait freiner les départs ; vérifier le parcours existant avant intervention.",
-        "expectedImpact": "Aucun gain direct attendu de la recherche ; éviter une page ou un ajout éditorial redondant. Aucun effet causal mesurable attribué à cet audit.",
-        "metric": "playing.starts",
-        "observationDays": 14,
-        "minimumSamples": 20,
-        "minimumRelativeImprovement": 0.2,
-        "decision": "stop",
-        "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c\",\"collectedAt\":\"2026-10-30T12:50:05.341Z\",\"finding\":\"lastFailure et unverifiedWork null ; masquage Mots mêlés manual_review ; deux expériences SEO déployées ensemble, fenêtres immatures.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/search-console.json\",\"collectedAt\":\"2026-10-30T12:50:02.628Z\",\"finding\":\"Available : 179 impressions, six clics sur 30 jours demandés 30 septembre–29 octobre ; dernière date 28 octobre Pacific. /de/wort dix impressions, deux clics ; aucune jointure page/requête.\"},{\"source\":\"docs/WORD-DE-ENTRY-AUDIT.fr.md\",\"finding\":\"Guide complet et première lettre déclenchant session.start établis par lecture ; 36 tests SEO/guide passent, aucun navigateur exécuté. Pas de manque concret justifiant une retouche.\"}]",
-        "createdAt": "2026-10-30T12:53:48.253Z",
-        "baseline": {
-          "id": "708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c",
-          "collectedAt": "2026-10-30T12:50:05.341Z",
-          "sources": {
-            "puzzoria": {
-              "status": "available",
-              "fetchedAt": "2026-10-30T12:50:01.269Z",
-              "sha256": "eb855467beb7fd69ece610c72f8733411d8e2b2436b4ecbb37942a1232ea792d"
-            },
-            "google": {
-              "status": "available",
-              "fetchedAt": "2026-10-30T12:50:02.628Z",
-              "sha256": "1d5a0d7c5919837a7a092935b8b2dc4e7d1a00e2c50d1e037da4c3c20eb51373"
-            }
-          },
-          "series": {
-            "playing.starts": [
-              {
-                "date": "2026-08-02",
-                "value": 0
-              },
-              {
-                "date": "2026-08-03",
-                "value": 0
-              },
-              {
-                "date": "2026-08-04",
-                "value": 0
-              },
-              {
-                "date": "2026-08-05",
-                "value": 0
-              },
-              {
-                "date": "2026-08-06",
-                "value": 0
-              },
-              {
-                "date": "2026-08-07",
-                "value": 0
-              },
-              {
-                "date": "2026-08-08",
-                "value": 0
-              },
-              {
-                "date": "2026-08-09",
-                "value": 0
-              },
-              {
-                "date": "2026-08-10",
-                "value": 0
-              },
-              {
-                "date": "2026-08-11",
-                "value": 0
-              },
-              {
-                "date": "2026-08-12",
-                "value": 0
-              },
-              {
-                "date": "2026-08-13",
-                "value": 0
-              },
-              {
-                "date": "2026-08-14",
-                "value": 0
-              },
-              {
-                "date": "2026-08-15",
-                "value": 0
-              },
-              {
-                "date": "2026-08-16",
-                "value": 0
-              },
-              {
-                "date": "2026-08-17",
-                "value": 0
-              },
-              {
-                "date": "2026-08-18",
-                "value": 0
-              },
-              {
-                "date": "2026-08-19",
-                "value": 0
-              },
-              {
-                "date": "2026-08-20",
-                "value": 0
-              },
-              {
-                "date": "2026-08-21",
-                "value": 0
-              },
-              {
-                "date": "2026-08-22",
-                "value": 0
-              },
-              {
-                "date": "2026-08-23",
-                "value": 0
-              },
-              {
-                "date": "2026-08-24",
-                "value": 0
-              },
-              {
-                "date": "2026-08-25",
-                "value": 0
-              },
-              {
-                "date": "2026-08-26",
-                "value": 0
-              },
-              {
-                "date": "2026-08-27",
-                "value": 0
-              },
-              {
-                "date": "2026-08-28",
-                "value": 0
-              },
-              {
-                "date": "2026-08-29",
-                "value": 0
-              },
-              {
-                "date": "2026-08-30",
-                "value": 0
-              },
-              {
-                "date": "2026-08-31",
-                "value": 0
-              },
-              {
-                "date": "2026-09-01",
-                "value": 0
-              },
-              {
-                "date": "2026-09-02",
-                "value": 0
-              },
-              {
-                "date": "2026-09-03",
-                "value": 0
-              },
-              {
-                "date": "2026-09-04",
-                "value": 0
-              },
-              {
-                "date": "2026-09-05",
-                "value": 0
-              },
-              {
-                "date": "2026-09-06",
-                "value": 0
-              },
-              {
-                "date": "2026-09-07",
-                "value": 0
-              },
-              {
-                "date": "2026-09-08",
-                "value": 0
-              },
-              {
-                "date": "2026-09-09",
-                "value": 0
-              },
-              {
-                "date": "2026-09-10",
-                "value": 0
-              },
-              {
-                "date": "2026-09-11",
-                "value": 0
-              },
-              {
-                "date": "2026-09-12",
-                "value": 0
-              },
-              {
-                "date": "2026-09-13",
-                "value": 0
-              },
-              {
-                "date": "2026-09-14",
-                "value": 0
-              },
-              {
-                "date": "2026-09-15",
-                "value": 0
-              },
-              {
-                "date": "2026-09-16",
-                "value": 0
-              },
-              {
-                "date": "2026-09-17",
-                "value": 0
-              },
-              {
-                "date": "2026-09-18",
-                "value": 0
-              },
-              {
-                "date": "2026-09-19",
-                "value": 0
-              },
-              {
-                "date": "2026-09-20",
-                "value": 0
-              },
-              {
-                "date": "2026-09-21",
-                "value": 0
-              },
-              {
-                "date": "2026-09-22",
-                "value": 0
-              },
-              {
-                "date": "2026-09-23",
-                "value": 0
-              },
-              {
-                "date": "2026-09-24",
-                "value": 0
-              },
-              {
-                "date": "2026-09-25",
-                "value": 0
-              },
-              {
-                "date": "2026-09-26",
-                "value": 0
-              },
-              {
-                "date": "2026-09-27",
-                "value": 0
-              },
-              {
-                "date": "2026-09-28",
-                "value": 0
-              },
-              {
-                "date": "2026-09-29",
-                "value": 0
-              },
-              {
-                "date": "2026-09-30",
-                "value": 0
-              },
-              {
-                "date": "2026-10-01",
-                "value": 0
-              },
-              {
-                "date": "2026-10-02",
-                "value": 0
-              },
-              {
-                "date": "2026-10-03",
-                "value": 0
-              },
-              {
-                "date": "2026-10-04",
-                "value": 0
-              },
-              {
-                "date": "2026-10-05",
-                "value": 0
-              },
-              {
-                "date": "2026-10-06",
-                "value": 0
-              },
-              {
-                "date": "2026-10-07",
-                "value": 1
-              },
-              {
-                "date": "2026-10-08",
-                "value": 0
-              },
-              {
-                "date": "2026-10-09",
-                "value": 0
-              },
-              {
-                "date": "2026-10-10",
-                "value": 0
-              },
-              {
-                "date": "2026-10-11",
-                "value": 9
-              },
-              {
-                "date": "2026-10-12",
-                "value": 1
-              },
-              {
-                "date": "2026-10-13",
-                "value": 6
-              },
-              {
-                "date": "2026-10-14",
-                "value": 2
-              },
-              {
-                "date": "2026-10-15",
-                "value": 0
-              },
-              {
-                "date": "2026-10-16",
-                "value": 0
-              },
-              {
-                "date": "2026-10-17",
-                "value": 0
-              },
-              {
-                "date": "2026-10-18",
-                "value": 0
-              },
-              {
-                "date": "2026-10-19",
-                "value": 0
-              },
-              {
-                "date": "2026-10-20",
-                "value": 0
-              },
-              {
-                "date": "2026-10-21",
-                "value": 0
-              },
-              {
-                "date": "2026-10-22",
-                "value": 1
-              },
-              {
-                "date": "2026-10-23",
-                "value": 0
-              },
-              {
-                "date": "2026-10-24",
-                "value": 0
-              },
-              {
-                "date": "2026-10-25",
-                "value": 0
-              },
-              {
-                "date": "2026-10-26",
-                "value": 0
-              },
-              {
-                "date": "2026-10-27",
-                "value": 0
-              },
-              {
-                "date": "2026-10-28",
-                "value": 0
-              },
-              {
-                "date": "2026-10-29",
-                "value": 0
-              }
-            ]
-          },
-          "retention": {
-            "playing.starts": null
-          }
-        },
-        "candidateSha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
-        "prNumber": 30,
-        "prUrl": "https://github.com/Aimericv/puzzoria/pull/30",
-        "status": "cancelled",
-        "assessment": {
-          "status": "awaiting_verified_deployment",
-          "causalClaim": false
-        }
-      },
-      {
         "id": "sudoku-guide-single-deductions",
         "objective": "seo",
         "kind": "product",
@@ -4408,6 +3947,403 @@
           "status": "awaiting_verified_deployment",
           "causalClaim": false
         }
+      },
+      {
+        "id": "quiz-acquisition-first-readiness",
+        "objective": "acquisition",
+        "kind": "measurement",
+        "hypothesis": "Une lecture datée des exports par sujet permet de différer les décisions de catalogue lorsque la couverture après livraison est absente.",
+        "expectedImpact": "Aucun gain direct de trafic attendu de cette étude ; éviter une attribution et des modifications prématurées.",
+        "metric": "playing.starts",
+        "observationDays": 7,
+        "minimumSamples": 20,
+        "minimumRelativeImprovement": 0.2,
+        "decision": "observe",
+        "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d\",\"collectedAt\":\"2026-11-04T06:19:40.798Z\",\"finding\":\"lastFailure et unverifiedWork null ; expériences précédentes sans nouvelles fenêtres matures.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/search-console.json; /opt/puzzoria-pilot/readonly/puzzoria-analytics.json\",\"finding\":\"Available collectés à 06:19 UTC le 4 novembre. Google dernière date 1er novembre ; rapport joint 96 sujets et 8 thèmes sans ligne Google retournée, zéro départ sujet dans export UTC partiel.\"},{\"source\":\"docs/QUIZ-ACQUISITION.fr.md; docs/QUIZ-THEMES.fr.md; agent/autonomy/memory/STATE.md\",\"finding\":\"Priorité propriétaire catalogue déjà livré le 3 novembre ; protocole sept jours complets et seuils de tri conservés.\"}]",
+        "createdAt": "2026-11-04T06:23:44.438Z",
+        "baseline": {
+          "id": "1ecbcd6fc2db2aedec3b51ae5a5861071134673a34ea391c19c3a7c892a4801d",
+          "collectedAt": "2026-11-04T06:19:40.798Z",
+          "sources": {
+            "puzzoria": {
+              "status": "available",
+              "fetchedAt": "2026-11-04T06:19:36.133Z",
+              "sha256": "2af189d5894ac1107354233c2e1c87828c0702e341665cf503947a60b0b19439"
+            },
+            "google": {
+              "status": "available",
+              "fetchedAt": "2026-11-04T06:19:37.898Z",
+              "sha256": "424e1318e91f664e80fe75d9b510b0d6d973124c32989307b024b640287b3f32"
+            }
+          },
+          "series": {
+            "playing.starts": [
+              {
+                "date": "2026-08-07",
+                "value": 0
+              },
+              {
+                "date": "2026-08-08",
+                "value": 0
+              },
+              {
+                "date": "2026-08-09",
+                "value": 0
+              },
+              {
+                "date": "2026-08-10",
+                "value": 0
+              },
+              {
+                "date": "2026-08-11",
+                "value": 0
+              },
+              {
+                "date": "2026-08-12",
+                "value": 0
+              },
+              {
+                "date": "2026-08-13",
+                "value": 0
+              },
+              {
+                "date": "2026-08-14",
+                "value": 0
+              },
+              {
+                "date": "2026-08-15",
+                "value": 0
+              },
+              {
+                "date": "2026-08-16",
+                "value": 0
+              },
+              {
+                "date": "2026-08-17",
+                "value": 0
+              },
+              {
+                "date": "2026-08-18",
+                "value": 0
+              },
+              {
+                "date": "2026-08-19",
+                "value": 0
+              },
+              {
+                "date": "2026-08-20",
+                "value": 0
+              },
+              {
+                "date": "2026-08-21",
+                "value": 0
+              },
+              {
+                "date": "2026-08-22",
+                "value": 0
+              },
+              {
+                "date": "2026-08-23",
+                "value": 0
+              },
+              {
+                "date": "2026-08-24",
+                "value": 0
+              },
+              {
+                "date": "2026-08-25",
+                "value": 0
+              },
+              {
+                "date": "2026-08-26",
+                "value": 0
+              },
+              {
+                "date": "2026-08-27",
+                "value": 0
+              },
+              {
+                "date": "2026-08-28",
+                "value": 0
+              },
+              {
+                "date": "2026-08-29",
+                "value": 0
+              },
+              {
+                "date": "2026-08-30",
+                "value": 0
+              },
+              {
+                "date": "2026-08-31",
+                "value": 0
+              },
+              {
+                "date": "2026-09-01",
+                "value": 0
+              },
+              {
+                "date": "2026-09-02",
+                "value": 0
+              },
+              {
+                "date": "2026-09-03",
+                "value": 0
+              },
+              {
+                "date": "2026-09-04",
+                "value": 0
+              },
+              {
+                "date": "2026-09-05",
+                "value": 0
+              },
+              {
+                "date": "2026-09-06",
+                "value": 0
+              },
+              {
+                "date": "2026-09-07",
+                "value": 0
+              },
+              {
+                "date": "2026-09-08",
+                "value": 0
+              },
+              {
+                "date": "2026-09-09",
+                "value": 0
+              },
+              {
+                "date": "2026-09-10",
+                "value": 0
+              },
+              {
+                "date": "2026-09-11",
+                "value": 0
+              },
+              {
+                "date": "2026-09-12",
+                "value": 0
+              },
+              {
+                "date": "2026-09-13",
+                "value": 0
+              },
+              {
+                "date": "2026-09-14",
+                "value": 0
+              },
+              {
+                "date": "2026-09-15",
+                "value": 0
+              },
+              {
+                "date": "2026-09-16",
+                "value": 0
+              },
+              {
+                "date": "2026-09-17",
+                "value": 0
+              },
+              {
+                "date": "2026-09-18",
+                "value": 0
+              },
+              {
+                "date": "2026-09-19",
+                "value": 0
+              },
+              {
+                "date": "2026-09-20",
+                "value": 0
+              },
+              {
+                "date": "2026-09-21",
+                "value": 0
+              },
+              {
+                "date": "2026-09-22",
+                "value": 0
+              },
+              {
+                "date": "2026-09-23",
+                "value": 0
+              },
+              {
+                "date": "2026-09-24",
+                "value": 0
+              },
+              {
+                "date": "2026-09-25",
+                "value": 0
+              },
+              {
+                "date": "2026-09-26",
+                "value": 0
+              },
+              {
+                "date": "2026-09-27",
+                "value": 0
+              },
+              {
+                "date": "2026-09-28",
+                "value": 0
+              },
+              {
+                "date": "2026-09-29",
+                "value": 0
+              },
+              {
+                "date": "2026-09-30",
+                "value": 0
+              },
+              {
+                "date": "2026-10-01",
+                "value": 0
+              },
+              {
+                "date": "2026-10-02",
+                "value": 0
+              },
+              {
+                "date": "2026-10-03",
+                "value": 0
+              },
+              {
+                "date": "2026-10-04",
+                "value": 0
+              },
+              {
+                "date": "2026-10-05",
+                "value": 0
+              },
+              {
+                "date": "2026-10-06",
+                "value": 0
+              },
+              {
+                "date": "2026-10-07",
+                "value": 1
+              },
+              {
+                "date": "2026-10-08",
+                "value": 0
+              },
+              {
+                "date": "2026-10-09",
+                "value": 0
+              },
+              {
+                "date": "2026-10-10",
+                "value": 0
+              },
+              {
+                "date": "2026-10-11",
+                "value": 9
+              },
+              {
+                "date": "2026-10-12",
+                "value": 1
+              },
+              {
+                "date": "2026-10-13",
+                "value": 6
+              },
+              {
+                "date": "2026-10-14",
+                "value": 2
+              },
+              {
+                "date": "2026-10-15",
+                "value": 0
+              },
+              {
+                "date": "2026-10-16",
+                "value": 0
+              },
+              {
+                "date": "2026-10-17",
+                "value": 0
+              },
+              {
+                "date": "2026-10-18",
+                "value": 0
+              },
+              {
+                "date": "2026-10-19",
+                "value": 0
+              },
+              {
+                "date": "2026-10-20",
+                "value": 0
+              },
+              {
+                "date": "2026-10-21",
+                "value": 0
+              },
+              {
+                "date": "2026-10-22",
+                "value": 1
+              },
+              {
+                "date": "2026-10-23",
+                "value": 0
+              },
+              {
+                "date": "2026-10-24",
+                "value": 0
+              },
+              {
+                "date": "2026-10-25",
+                "value": 0
+              },
+              {
+                "date": "2026-10-26",
+                "value": 0
+              },
+              {
+                "date": "2026-10-27",
+                "value": 0
+              },
+              {
+                "date": "2026-10-28",
+                "value": 0
+              },
+              {
+                "date": "2026-10-29",
+                "value": 0
+              },
+              {
+                "date": "2026-10-30",
+                "value": 0
+              },
+              {
+                "date": "2026-10-31",
+                "value": 0
+              },
+              {
+                "date": "2026-11-01",
+                "value": 0
+              },
+              {
+                "date": "2026-11-02",
+                "value": 0
+              },
+              {
+                "date": "2026-11-03",
+                "value": 0
+              }
+            ]
+          },
+          "retention": {
+            "playing.starts": null
+          }
+        },
+        "candidateSha": "09f0b1c9a692620059dc668096498431022f2d45",
+        "prNumber": 44,
+        "prUrl": "https://github.com/Aimericv/puzzoria/pull/44",
+        "status": "proposed"
       }
     ],
     "legacyWork": {
@@ -4432,12 +4368,12 @@
       }
     },
     "releaseCandidate": {
-      "sha": "e130b1808d5efe6935c6c28048915e4ed4fb362a",
-      "base": "34a006d411cc6696496c51953b84cb9712e27fad",
-      "prNumber": 40,
-      "experimentId": "football-world-cup-discovery",
+      "sha": "09f0b1c9a692620059dc668096498431022f2d45",
+      "base": "0ea05965b93e86257e080842281711e2b78f666c",
+      "prNumber": 44,
+      "experimentId": "quiz-acquisition-first-readiness",
       "verified": true,
-      "runId": "41651167373",
+      "runId": "41784584925",
       "status": "proposed"
     },
     "releaseQueue": [
@@ -4561,6 +4497,15 @@
           "risk": "manual",
           "reason": "review_required:e2e/football-discovery.spec.ts"
         }
+      },
+      {
+        "sha": "09f0b1c9a692620059dc668096498431022f2d45",
+        "base": "0ea05965b93e86257e080842281711e2b78f666c",
+        "prNumber": 44,
+        "experimentId": "quiz-acquisition-first-readiness",
+        "verified": true,
+        "runId": "41784584925",
+        "status": "proposed"
       },
       {
         "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
@@ -4826,9 +4771,14 @@
         "id": "first-play-entry-audit",
         "path": "agent/autonomy/experiments/23e27346906c296ddde5f67ffb5f59f34ce7d01a60182e578cc8bfc88d38142c.json",
         "status": "awaiting_verified_deployment"
+      },
+      {
+        "id": "german-word-entry-fit-audit",
+        "path": "agent/autonomy/experiments/fa4dc72c8e3a09c643dbacaccaa79f61be0e0fe3b8d452164ddb7be0afae38b0.json",
+        "status": "awaiting_verified_deployment"
       }
     ],
-    "totalArchived": 1,
+    "totalArchived": 2,
     "manualApplicationDeploymentHistory": [
       {
         "automaticDeploymentRemainsDisabled": true,

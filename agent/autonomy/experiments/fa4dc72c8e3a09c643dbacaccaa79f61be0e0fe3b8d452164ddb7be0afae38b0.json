@@ -1,0 +1,401 @@
+{
+  "id": "german-word-entry-fit-audit",
+  "objective": "acquisition",
+  "kind": "research",
+  "hypothesis": "Un écart entre promesse Google et première interaction allemande pourrait freiner les départs ; vérifier le parcours existant avant intervention.",
+  "expectedImpact": "Aucun gain direct attendu de la recherche ; éviter une page ou un ajout éditorial redondant. Aucun effet causal mesurable attribué à cet audit.",
+  "metric": "playing.starts",
+  "observationDays": 14,
+  "minimumSamples": 20,
+  "minimumRelativeImprovement": 0.2,
+  "decision": "stop",
+  "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c\",\"collectedAt\":\"2026-10-30T12:50:05.341Z\",\"finding\":\"lastFailure et unverifiedWork null ; masquage Mots mêlés manual_review ; deux expériences SEO déployées ensemble, fenêtres immatures.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/search-console.json\",\"collectedAt\":\"2026-10-30T12:50:02.628Z\",\"finding\":\"Available : 179 impressions, six clics sur 30 jours demandés 30 septembre–29 octobre ; dernière date 28 octobre Pacific. /de/wort dix impressions, deux clics ; aucune jointure page/requête.\"},{\"source\":\"docs/WORD-DE-ENTRY-AUDIT.fr.md\",\"finding\":\"Guide complet et première lettre déclenchant session.start établis par lecture ; 36 tests SEO/guide passent, aucun navigateur exécuté. Pas de manque concret justifiant une retouche.\"}]",
+  "createdAt": "2026-10-30T12:53:48.253Z",
+  "baseline": {
+    "id": "708cd66a5192b52e487e4ec4e5108ae802e8dc9e3a66219444e3fc5cc1dc6b3c",
+    "collectedAt": "2026-10-30T12:50:05.341Z",
+    "sources": {
+      "puzzoria": {
+        "status": "available",
+        "fetchedAt": "2026-10-30T12:50:01.269Z",
+        "sha256": "eb855467beb7fd69ece610c72f8733411d8e2b2436b4ecbb37942a1232ea792d"
+      },
+      "google": {
+        "status": "available",
+        "fetchedAt": "2026-10-30T12:50:02.628Z",
+        "sha256": "1d5a0d7c5919837a7a092935b8b2dc4e7d1a00e2c50d1e037da4c3c20eb51373"
+      }
+    },
+    "series": {
+      "playing.starts": [
+        {
+          "date": "2026-08-02",
+          "value": 0
+        },
+        {
+          "date": "2026-08-03",
+          "value": 0
+        },
+        {
+          "date": "2026-08-04",
+          "value": 0
+        },
+        {
+          "date": "2026-08-05",
+          "value": 0
+        },
+        {
+          "date": "2026-08-06",
+          "value": 0
+        },
+        {
+          "date": "2026-08-07",
+          "value": 0
+        },
+        {
+          "date": "2026-08-08",
+          "value": 0
+        },
+        {
+          "date": "2026-08-09",
+          "value": 0
+        },
+        {
+          "date": "2026-08-10",
+          "value": 0
+        },
+        {
+          "date": "2026-08-11",
+          "value": 0
+        },
+        {
+          "date": "2026-08-12",
+          "value": 0
+        },
+        {
+          "date": "2026-08-13",
+          "value": 0
+        },
+        {
+          "date": "2026-08-14",
+          "value": 0
+        },
+        {
+          "date": "2026-08-15",
+          "value": 0
+        },
+        {
+          "date": "2026-08-16",
+          "value": 0
+        },
+        {
+          "date": "2026-08-17",
+          "value": 0
+        },
+        {
+          "date": "2026-08-18",
+          "value": 0
+        },
+        {
+          "date": "2026-08-19",
+          "value": 0
+        },
+        {
+          "date": "2026-08-20",
+          "value": 0
+        },
+        {
+          "date": "2026-08-21",
+          "value": 0
+        },
+        {
+          "date": "2026-08-22",
+          "value": 0
+        },
+        {
+          "date": "2026-08-23",
+          "value": 0
+        },
+        {
+          "date": "2026-08-24",
+          "value": 0
+        },
+        {
+          "date": "2026-08-25",
+          "value": 0
+        },
+        {
+          "date": "2026-08-26",
+          "value": 0
+        },
+        {
+          "date": "2026-08-27",
+          "value": 0
+        },
+        {
+          "date": "2026-08-28",
+          "value": 0
+        },
+        {
+          "date": "2026-08-29",
+          "value": 0
+        },
+        {
+          "date": "2026-08-30",
+          "value": 0
+        },
+        {
+          "date": "2026-08-31",
+          "value": 0
+        },
+        {
+          "date": "2026-09-01",
+          "value": 0
+        },
+        {
+          "date": "2026-09-02",
+          "value": 0
+        },
+        {
+          "date": "2026-09-03",
+          "value": 0
+        },
+        {
+          "date": "2026-09-04",
+          "value": 0
+        },
+        {
+          "date": "2026-09-05",
+          "value": 0
+        },
+        {
+          "date": "2026-09-06",
+          "value": 0
+        },
+        {
+          "date": "2026-09-07",
+          "value": 0
+        },
+        {
+          "date": "2026-09-08",
+          "value": 0
+        },
+        {
+          "date": "2026-09-09",
+          "value": 0
+        },
+        {
+          "date": "2026-09-10",
+          "value": 0
+        },
+        {
+          "date": "2026-09-11",
+          "value": 0
+        },
+        {
+          "date": "2026-09-12",
+          "value": 0
+        },
+        {
+          "date": "2026-09-13",
+          "value": 0
+        },
+        {
+          "date": "2026-09-14",
+          "value": 0
+        },
+        {
+          "date": "2026-09-15",
+          "value": 0
+        },
+        {
+          "date": "2026-09-16",
+          "value": 0
+        },
+        {
+          "date": "2026-09-17",
+          "value": 0
+        },
+        {
+          "date": "2026-09-18",
+          "value": 0
+        },
+        {
+          "date": "2026-09-19",
+          "value": 0
+        },
+        {
+          "date": "2026-09-20",
+          "value": 0
+        },
+        {
+          "date": "2026-09-21",
+          "value": 0
+        },
+        {
+          "date": "2026-09-22",
+          "value": 0
+        },
+        {
+          "date": "2026-09-23",
+          "value": 0
+        },
+        {
+          "date": "2026-09-24",
+          "value": 0
+        },
+        {
+          "date": "2026-09-25",
+          "value": 0
+        },
+        {
+          "date": "2026-09-26",
+          "value": 0
+        },
+        {
+          "date": "2026-09-27",
+          "value": 0
+        },
+        {
+          "date": "2026-09-28",
+          "value": 0
+        },
+        {
+          "date": "2026-09-29",
+          "value": 0
+        },
+        {
+          "date": "2026-09-30",
+          "value": 0
+        },
+        {
+          "date": "2026-10-01",
+          "value": 0
+        },
+        {
+          "date": "2026-10-02",
+          "value": 0
+        },
+        {
+          "date": "2026-10-03",
+          "value": 0
+        },
+        {
+          "date": "2026-10-04",
+          "value": 0
+        },
+        {
+          "date": "2026-10-05",
+          "value": 0
+        },
+        {
+          "date": "2026-10-06",
+          "value": 0
+        },
+        {
+          "date": "2026-10-07",
+          "value": 1
+        },
+        {
+          "date": "2026-10-08",
+          "value": 0
+        },
+        {
+          "date": "2026-10-09",
+          "value": 0
+        },
+        {
+          "date": "2026-10-10",
+          "value": 0
+        },
+        {
+          "date": "2026-10-11",
+          "value": 9
+        },
+        {
+          "date": "2026-10-12",
+          "value": 1
+        },
+        {
+          "date": "2026-10-13",
+          "value": 6
+        },
+        {
+          "date": "2026-10-14",
+          "value": 2
+        },
+        {
+          "date": "2026-10-15",
+          "value": 0
+        },
+        {
+          "date": "2026-10-16",
+          "value": 0
+        },
+        {
+          "date": "2026-10-17",
+          "value": 0
+        },
+        {
+          "date": "2026-10-18",
+          "value": 0
+        },
+        {
+          "date": "2026-10-19",
+          "value": 0
+        },
+        {
+          "date": "2026-10-20",
+          "value": 0
+        },
+        {
+          "date": "2026-10-21",
+          "value": 0
+        },
+        {
+          "date": "2026-10-22",
+          "value": 1
+        },
+        {
+          "date": "2026-10-23",
+          "value": 0
+        },
+        {
+          "date": "2026-10-24",
+          "value": 0
+        },
+        {
+          "date": "2026-10-25",
+          "value": 0
+        },
+        {
+          "date": "2026-10-26",
+          "value": 0
+        },
+        {
+          "date": "2026-10-27",
+          "value": 0
+        },
+        {
+          "date": "2026-10-28",
+          "value": 0
+        },
+        {
+          "date": "2026-10-29",
+          "value": 0
+        }
+      ]
+    },
+    "retention": {
+      "playing.starts": null
+    }
+  },
+  "candidateSha": "8cf19b0f0544b15851be5e3fffa390c13fd65ead",
+  "prNumber": 30,
+  "prUrl": "https://github.com/Aimericv/puzzoria/pull/30",
+  "status": "cancelled",
+  "assessment": {
+    "status": "awaiting_verified_deployment",
+    "causalClaim": false
+  }
+}
