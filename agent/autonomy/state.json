@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 250,
+  "generation": 251,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4358,7 +4358,13 @@
       "experimentId": "quiz-acquisition-first-readiness",
       "verified": true,
       "runId": "41784584925",
-      "status": "proposed"
+      "status": "validating",
+      "risk": {
+        "risk": "low",
+        "kind": "documentation",
+        "requiresDeployment": false,
+        "reason": "unchanged executable code; bounded text edits or pure section insertions"
+      }
     },
     "releaseQueue": [
       {
@@ -4489,7 +4495,13 @@
         "experimentId": "quiz-acquisition-first-readiness",
         "verified": true,
         "runId": "41784584925",
-        "status": "proposed"
+        "status": "validating",
+        "risk": {
+          "risk": "low",
+          "kind": "documentation",
+          "requiresDeployment": false,
+          "reason": "unchanged executable code; bounded text edits or pure section insertions"
+        }
       },
       {
         "sha": "5e5bc0ce60ecb994e90649b042bade08fc33344c",
@@ -4886,228 +4898,6 @@
   },
   "releaseValidationHistory": [
     {
-      "at": "2026-10-27T16:05:49Z",
-      "runId": "40537512719",
-      "sha": "67309ca867c415c50889a30558d79cd848f9cfcb",
-      "minutes": 7,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122306645194,
-        "startedAt": "2026-10-27T16:05:49Z",
-        "completedAt": "2026-10-27T16:09:53Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T16:16:39Z",
-      "runId": "40539308357",
-      "sha": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
-      "minutes": 70,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122313025311,
-        "startedAt": "2026-10-27T16:16:39Z",
-        "completedAt": "2026-10-27T17:24:04Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T17:19:42Z",
-      "runId": "40549513756",
-      "sha": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122349131474,
-        "startedAt": "2026-10-27T17:19:42Z",
-        "completedAt": "2026-10-27T17:20:27Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T17:50:22Z",
-      "runId": "40554329376",
-      "sha": "71af9ebe30e911d57bd2df5f43b79727190e46d3",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122366197417,
-        "startedAt": "2026-10-27T17:50:22Z",
-        "completedAt": "2026-10-27T17:51:14Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T18:31:16Z",
-      "runId": "40560728749",
-      "sha": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122388699077,
-        "startedAt": "2026-10-27T18:31:16Z",
-        "completedAt": "2026-10-27T18:31:49Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T18:37:01Z",
-      "runId": "40561621248",
-      "sha": "97ea6b381e8d10644d0dcff20c8ed8ffb0ed1444",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122391861853,
-        "startedAt": "2026-10-27T18:37:01Z",
-        "completedAt": "2026-10-27T18:37:43Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T20:02:04Z",
-      "runId": "40574398950",
-      "sha": "65ccdbc11a49d3e7a4aa47a202a679455505bd1b",
-      "minutes": 4,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122436816262,
-        "startedAt": "2026-10-27T20:02:04Z",
-        "completedAt": "2026-10-27T20:03:05Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T20:14:12Z",
-      "runId": "40576205097",
-      "sha": "15451511cccdeb573cf224d6082818d39336764b",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122443199831,
-        "startedAt": "2026-10-27T20:14:12Z",
-        "completedAt": "2026-10-27T20:15:10Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T20:19:18Z",
-      "runId": "40576971865",
-      "sha": "32c2e4b043c819a5326ec6e2d9ab856e9297512e",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122445894418,
-        "startedAt": "2026-10-27T20:19:18Z",
-        "completedAt": "2026-10-27T20:19:59Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T21:06:47Z",
-      "runId": "40583971296",
-      "sha": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122470438422,
-        "startedAt": "2026-10-27T21:06:47Z",
-        "completedAt": "2026-10-27T21:07:44Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T21:10:19.014Z",
-      "runId": "40584407324",
-      "sha": "684d86c654e9b606181b5dca7cd87d153587d4b9",
-      "minutes": 3,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobs": [
-          {
-            "id": 122471953469,
-            "name": "stage",
-            "startedAt": "2026-10-27T21:09:48Z",
-            "completedAt": "2026-10-27T21:10:34Z"
-          }
-        ],
-        "marginMinutesPerJob": 2
-      }
-    },
-    {
-      "at": "2026-10-27T21:27:15.513Z",
-      "runId": "40586884415",
-      "sha": "ab8de8936b20065134f6405ca11fb405ca3d1de4",
-      "minutes": 12,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobs": [
-          {
-            "id": 122480599078,
-            "name": "reserve",
-            "startedAt": "2026-10-27T21:27:05Z",
-            "completedAt": "2026-10-27T21:27:22Z"
-          },
-          {
-            "id": 122480750136,
-            "name": "gate",
-            "startedAt": "2026-10-27T21:27:24Z",
-            "completedAt": "2026-10-27T21:27:26Z"
-          },
-          {
-            "id": 122480789387,
-            "name": "fixed",
-            "startedAt": "2026-10-27T21:27:29Z",
-            "completedAt": "2026-10-27T21:27:32Z"
-          },
-          {
-            "id": 122480839377,
-            "name": "validate",
-            "startedAt": "2026-10-27T21:27:35Z",
-            "completedAt": "2026-10-27T21:28:20Z"
-          }
-        ],
-        "marginMinutesPerJob": 2
-      }
-    },
-    {
-      "at": "2026-10-27T21:31:15Z",
-      "runId": "40587465644",
-      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
-      "minutes": 4,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122482628958,
-        "startedAt": "2026-10-27T21:31:15Z",
-        "completedAt": "2026-10-27T21:32:22Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-27T21:40:31.951Z",
-      "runId": "40588678094",
-      "sha": "c322fd20dd9d3188065fef48bf332fb740c0617e",
-      "minutes": 5,
-      "settled": false,
-      "accounting": {
-        "source": "bounded-windows-installer-staging-reservation",
-        "maximumJobMinutes": 3,
-        "marginMinutes": 2
-      }
-    },
-    {
       "at": "2026-10-28T15:31:26.575Z",
       "runId": "40716770155",
       "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
@@ -5183,6 +4973,13 @@
         "completedAt": "2026-11-01T15:38:44Z",
         "marginMinutes": 2
       }
+    },
+    {
+      "at": "2026-11-04T06:24:25.747Z",
+      "runId": "41784584925",
+      "attempt": 1,
+      "sha": "09f0b1c9a692620059dc668096498431022f2d45",
+      "minutes": 7
     }
   ]
 }
