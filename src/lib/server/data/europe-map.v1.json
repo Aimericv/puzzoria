@@ -1,0 +1,442 @@
+[
+  {
+    "iso": "AD",
+    "region": "zd2df01fe",
+    "name": {
+      "en": "Andorra",
+      "fr": "Andorre",
+      "es": "Andorra",
+      "de": "Andorra"
+    }
+  },
+  {
+    "iso": "AL",
+    "region": "z88de98ea",
+    "name": {
+      "en": "Albania",
+      "fr": "Albanie",
+      "es": "Albania",
+      "de": "Albanien"
+    }
+  },
+  {
+    "iso": "AT",
+    "region": "z708211a4",
+    "name": {
+      "en": "Austria",
+      "fr": "Autriche",
+      "es": "Austria",
+      "de": "Österreich"
+    }
+  },
+  {
+    "iso": "BA",
+    "region": "z86f931ef",
+    "name": {
+      "en": "Bosnia & Herzegovina",
+      "fr": "Bosnie-Herzégovine",
+      "es": "Bosnia y Herzegovina",
+      "de": "Bosnien und Herzegowina"
+    }
+  },
+  {
+    "iso": "BE",
+    "region": "z2edcc6ac",
+    "name": {
+      "en": "Belgium",
+      "fr": "Belgique",
+      "es": "Bélgica",
+      "de": "Belgien"
+    }
+  },
+  {
+    "iso": "BG",
+    "region": "zeee33738",
+    "name": {
+      "en": "Bulgaria",
+      "fr": "Bulgarie",
+      "es": "Bulgaria",
+      "de": "Bulgarien"
+    }
+  },
+  {
+    "iso": "BY",
+    "region": "zadb8e426",
+    "name": {
+      "en": "Belarus",
+      "fr": "Biélorussie",
+      "es": "Bielorrusia",
+      "de": "Belarus"
+    }
+  },
+  {
+    "iso": "CH",
+    "region": "z4361c12b",
+    "name": {
+      "en": "Switzerland",
+      "fr": "Suisse",
+      "es": "Suiza",
+      "de": "Schweiz"
+    }
+  },
+  {
+    "iso": "CZ",
+    "region": "z0fd90de0",
+    "name": {
+      "en": "Czechia",
+      "fr": "Tchéquie",
+      "es": "Chequia",
+      "de": "Tschechien"
+    }
+  },
+  {
+    "iso": "DE",
+    "region": "z42b42ecd",
+    "name": {
+      "en": "Germany",
+      "fr": "Allemagne",
+      "es": "Alemania",
+      "de": "Deutschland"
+    }
+  },
+  {
+    "iso": "DK",
+    "region": "z6236aa2d",
+    "name": {
+      "en": "Denmark",
+      "fr": "Danemark",
+      "es": "Dinamarca",
+      "de": "Dänemark"
+    }
+  },
+  {
+    "iso": "EE",
+    "region": "z97ac2fc0",
+    "name": {
+      "en": "Estonia",
+      "fr": "Estonie",
+      "es": "Estonia",
+      "de": "Estland"
+    }
+  },
+  {
+    "iso": "ES",
+    "region": "zadaeeb30",
+    "name": {
+      "en": "Spain",
+      "fr": "Espagne",
+      "es": "España",
+      "de": "Spanien"
+    }
+  },
+  {
+    "iso": "FI",
+    "region": "zd2fc8ae4",
+    "name": {
+      "en": "Finland",
+      "fr": "Finlande",
+      "es": "Finlandia",
+      "de": "Finnland"
+    }
+  },
+  {
+    "iso": "FR",
+    "region": "z4a75db07",
+    "name": {
+      "en": "France",
+      "fr": "France",
+      "es": "Francia",
+      "de": "Frankreich"
+    }
+  },
+  {
+    "iso": "GB",
+    "region": "z4e07bfd9",
+    "name": {
+      "en": "United Kingdom",
+      "fr": "Royaume-Uni",
+      "es": "Reino Unido",
+      "de": "Vereinigtes Königreich"
+    }
+  },
+  {
+    "iso": "GR",
+    "region": "zafe47312",
+    "name": {
+      "en": "Greece",
+      "fr": "Grèce",
+      "es": "Grecia",
+      "de": "Griechenland"
+    }
+  },
+  {
+    "iso": "HR",
+    "region": "z7d39a04f",
+    "name": {
+      "en": "Croatia",
+      "fr": "Croatie",
+      "es": "Croacia",
+      "de": "Kroatien"
+    }
+  },
+  {
+    "iso": "HU",
+    "region": "z9aafa179",
+    "name": {
+      "en": "Hungary",
+      "fr": "Hongrie",
+      "es": "Hungría",
+      "de": "Ungarn"
+    }
+  },
+  {
+    "iso": "IE",
+    "region": "zac75c6f2",
+    "name": {
+      "en": "Ireland",
+      "fr": "Irlande",
+      "es": "Irlanda",
+      "de": "Irland"
+    }
+  },
+  {
+    "iso": "IS",
+    "region": "z41f01816",
+    "name": {
+      "en": "Iceland",
+      "fr": "Islande",
+      "es": "Islandia",
+      "de": "Island"
+    }
+  },
+  {
+    "iso": "IT",
+    "region": "zc9391699",
+    "name": {
+      "en": "Italy",
+      "fr": "Italie",
+      "es": "Italia",
+      "de": "Italien"
+    }
+  },
+  {
+    "iso": "LI",
+    "region": "z473ee700",
+    "name": {
+      "en": "Liechtenstein",
+      "fr": "Liechtenstein",
+      "es": "Liechtenstein",
+      "de": "Liechtenstein"
+    }
+  },
+  {
+    "iso": "LT",
+    "region": "z9261d4f9",
+    "name": {
+      "en": "Lithuania",
+      "fr": "Lituanie",
+      "es": "Lituania",
+      "de": "Litauen"
+    }
+  },
+  {
+    "iso": "LU",
+    "region": "z94b0f150",
+    "name": {
+      "en": "Luxembourg",
+      "fr": "Luxembourg",
+      "es": "Luxemburgo",
+      "de": "Luxemburg"
+    }
+  },
+  {
+    "iso": "LV",
+    "region": "zca3ac63b",
+    "name": {
+      "en": "Latvia",
+      "fr": "Lettonie",
+      "es": "Letonia",
+      "de": "Lettland"
+    }
+  },
+  {
+    "iso": "MC",
+    "region": "z3293a02d",
+    "name": {
+      "en": "Monaco",
+      "fr": "Monaco",
+      "es": "Mónaco",
+      "de": "Monaco"
+    }
+  },
+  {
+    "iso": "MD",
+    "region": "z0969b076",
+    "name": {
+      "en": "Moldova",
+      "fr": "Moldavie",
+      "es": "Moldavia",
+      "de": "Republik Moldau"
+    }
+  },
+  {
+    "iso": "ME",
+    "region": "z7f2588b2",
+    "name": {
+      "en": "Montenegro",
+      "fr": "Monténégro",
+      "es": "Montenegro",
+      "de": "Montenegro"
+    }
+  },
+  {
+    "iso": "MK",
+    "region": "z9104d2f4",
+    "name": {
+      "en": "North Macedonia",
+      "fr": "Macédoine du Nord",
+      "es": "Macedonia del Norte",
+      "de": "Nordmazedonien"
+    }
+  },
+  {
+    "iso": "MT",
+    "region": "zce29aec8",
+    "name": {
+      "en": "Malta",
+      "fr": "Malte",
+      "es": "Malta",
+      "de": "Malta"
+    }
+  },
+  {
+    "iso": "NL",
+    "region": "z2e1bafb5",
+    "name": {
+      "en": "Netherlands",
+      "fr": "Pays-Bas",
+      "es": "Países Bajos",
+      "de": "Niederlande"
+    }
+  },
+  {
+    "iso": "NO",
+    "region": "z0c559d9c",
+    "name": {
+      "en": "Norway",
+      "fr": "Norvège",
+      "es": "Noruega",
+      "de": "Norwegen"
+    }
+  },
+  {
+    "iso": "PL",
+    "region": "z35b4faa9",
+    "name": {
+      "en": "Poland",
+      "fr": "Pologne",
+      "es": "Polonia",
+      "de": "Polen"
+    }
+  },
+  {
+    "iso": "PT",
+    "region": "za75b89c2",
+    "name": {
+      "en": "Portugal",
+      "fr": "Portugal",
+      "es": "Portugal",
+      "de": "Portugal"
+    }
+  },
+  {
+    "iso": "RO",
+    "region": "z9b3da46b",
+    "name": {
+      "en": "Romania",
+      "fr": "Roumanie",
+      "es": "Rumanía",
+      "de": "Rumänien"
+    }
+  },
+  {
+    "iso": "RS",
+    "region": "zd079afbc",
+    "name": {
+      "en": "Serbia",
+      "fr": "Serbie",
+      "es": "Serbia",
+      "de": "Serbien"
+    }
+  },
+  {
+    "iso": "RU",
+    "region": "z9e8248df",
+    "name": {
+      "en": "Russia",
+      "fr": "Russie",
+      "es": "Rusia",
+      "de": "Russland"
+    }
+  },
+  {
+    "iso": "SE",
+    "region": "z84e41e3d",
+    "name": {
+      "en": "Sweden",
+      "fr": "Suède",
+      "es": "Suecia",
+      "de": "Schweden"
+    }
+  },
+  {
+    "iso": "SI",
+    "region": "zc097e40b",
+    "name": {
+      "en": "Slovenia",
+      "fr": "Slovénie",
+      "es": "Eslovenia",
+      "de": "Slowenien"
+    }
+  },
+  {
+    "iso": "SK",
+    "region": "z0131ea8a",
+    "name": {
+      "en": "Slovakia",
+      "fr": "Slovaquie",
+      "es": "Eslovaquia",
+      "de": "Slowakei"
+    }
+  },
+  {
+    "iso": "SM",
+    "region": "z133879b4",
+    "name": {
+      "en": "San Marino",
+      "fr": "Saint-Marin",
+      "es": "San Marino",
+      "de": "San Marino"
+    }
+  },
+  {
+    "iso": "UA",
+    "region": "zcdb33bc8",
+    "name": {
+      "en": "Ukraine",
+      "fr": "Ukraine",
+      "es": "Ucrania",
+      "de": "Ukraine"
+    }
+  },
+  {
+    "iso": "VA",
+    "region": "z82b30758",
+    "name": {
+      "en": "Vatican City",
+      "fr": "Vatican",
+      "es": "Ciudad del Vaticano",
+      "de": "Vatikanstadt"
+    }
+  }
+]

@@ -7,6 +7,7 @@ import { QuizThemeNav, QuizThemePage, QuizEditorial } from "@/components/quiz-th
 import { resolveQuizTheme } from "@/lib/quiz-themes";
 import { quizThemeMetadata } from "@/lib/knowledge-seo";
 import { quizEditorial } from "@/lib/quiz-editorial";
+import { mapCopy } from "@/lib/map-i18n";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronLeft, Info, CalendarDays } from "lucide-react";
 import {
@@ -274,7 +275,7 @@ export default async function GamePage({ params }: Props) {
             ? rt(locale).dailyIntro
             : dailyGoal(game, locale)}
       </p>
-      <p className="game-intro">{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.description[locale]+" "+kt(locale).topicIntro.replace("{n}",String(quizTopics.find(t=>t.id===r.quizCategory)!.count)).replace("{seconds}",String(quizTopics.find(t=>t.id===r.quizCategory)!.seconds)) : seoCopy(locale).games[game].intro}</p>
+      <p className="game-intro">{r.quizCategory ? quizTopics.find(t=>t.id===r.quizCategory)!.format === "map" ? mapCopy(locale).intro : quizTopics.find(t=>t.id===r.quizCategory)!.description[locale]+" "+kt(locale).topicIntro.replace("{n}",String(quizTopics.find(t=>t.id===r.quizCategory)!.count)).replace("{seconds}",String(quizTopics.find(t=>t.id===r.quizCategory)!.seconds)) : seoCopy(locale).games[game].intro}</p>
       {r.quizCategory&&quizTopics.find(t=>t.id===r.quizCategory)?.scope&&<p className="quiz-scope" data-quiz-scope>{quizTopics.find(t=>t.id===r.quizCategory)!.scope![locale]}</p>}
       {(game === "quiz" || game === "football") && <QuizThemeNav locale={locale}/>}
       {((game === "sudoku" && (practice || archived && dailyDifficulties(game, date).length > 1)) || game === "mines" || game === "guess") && (
@@ -323,7 +324,7 @@ export default async function GamePage({ params }: Props) {
               <Info size={17} />
               {m.howTo}
             </h2>
-            <p>{m[meta.rules]}</p>
+            <p>{r.quizCategory&&quizTopics.find(t=>t.id===r.quizCategory)?.format === "map" ? mapCopy(locale).ready : m[meta.rules]}</p>
             {(game === "word" || game === "rareword") && (
               <div className="word-legend">
                 <span className="correct">A</span>

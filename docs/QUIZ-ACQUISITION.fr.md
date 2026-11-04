@@ -1,5 +1,12 @@
 # Acquisition par les quiz — première sélection, 3 novembre 2026
 
+Suite visuelle préparée après intégration de la PR #43 : [carte interactive des
+44 pays d’Europe](MAP-QUIZ.fr.md). Elle ajoute quatre pages de sujet au catalogue
+(25 sujets / 100 pages au total). Les chiffres ci-dessous décrivent la sélection
+textuelle initiale et ne sont pas réécrits comme résultats du pilote. Le rapport
+inclut les quatre nouvelles routes automatiquement ; mesurer leur acquisition à
+partir de leur publication effective, sans attribuer de croissance avant observation.
+
 Suite autorisée après l’analyse concurrentielle : [pages thématiques, maillage éditorial et premiers enrichissements](QUIZ-THEMES.fr.md). Le rapport ajoute les URL thématiques sans changer les 96 lignes de sujets ni les définitions de nouveaux joueurs.
 
 ## Décision et limites des données

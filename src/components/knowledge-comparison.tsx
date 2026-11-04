@@ -6,9 +6,12 @@ import { rt } from "@/lib/retention-i18n";
 import { kt } from "@/lib/knowledge-i18n";
 import { clockText } from "./storage";
 import { OutcomeBar } from "./outcome-bar";
+import { mapCopy } from "@/lib/map-i18n";
 
 export function KnowledgeComparison({ completion: c, comparison: p, locale }: { completion: Completion; comparison: Comparison; locale: Locale }) {
-  const m = knowledgeStatisticsCopy(locale), common = rt(locale), labels = gameStatisticsCopy(locale);
+  const standard = knowledgeStatisticsCopy(locale), map = mapCopy(locale), isMap = c.mapErrors !== undefined;
+  const m = isMap ? { ...standard, perfect: map.perfect, average: map.average, split: map.split, incompleteShare: map.other, perfectShare: map.perfectShare, quizCohort: map.cohort } : standard;
+  const common = rt(locale), labels = gameStatisticsCopy(locale);
   const format = (n: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 1 }).format(n);
   const speed = c.game === "quiz" ? p.fasterThanPercent : p.footballFasterThanPercent;
   const median = c.game === "quiz" ? p.medianTime : p.footballMedianTime;
@@ -16,7 +19,7 @@ export function KnowledgeComparison({ completion: c, comparison: p, locale }: { 
   return <section className="comparison-panel knowledge-comparison" data-game-comparison={c.game}>
     <h3>{common.comparison}</h3>
     {quiz ? <>
-      {c.success ? <p className="comparison-highlight">{m.perfect}</p> : p.betterScoreThanPercent !== null && <p className="comparison-highlight">{kt(locale).better.replace("{n}", String(Math.floor(p.betterScoreThanPercent)))}</p>}
+      {c.success ? <p className="comparison-highlight">{m.perfect}</p> : p.betterScoreThanPercent !== null && <p className="comparison-highlight">{(isMap?map.better:kt(locale).better).replace("{n}", String(Math.floor(p.betterScoreThanPercent)))}</p>}
       {c.answersFound !== undefined && !!c.answersTotal && <div className="quiz-answer-comparison" data-quiz-answer-comparison>
         {[{ label: m.you, value: c.answersFound }, ...(p.quizAverageAnswers != null ? [{ label: m.average, value: p.quizAverageAnswers }] : [])].map(row => <div key={row.label}>
           <div><span>{row.label}</span><strong>{format(row.value)}/{c.answersTotal}</strong></div>

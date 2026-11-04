@@ -1,8 +1,9 @@
 import type { Locale } from "./types";
 import { expandedQuizTopics } from "./quiz-expansion";
+import { europeMapTopic } from "./map-quiz-catalog";
 export type Localized = Record<Locale, string>;
 export const languages = (en: string, fr: string, es: string, de: string): Localized => ({ en, fr, es, de });
-export type QuizTopic = { id: string; slug: Localized; title: Localized; description: Localized; scope?: Localized; emoji: string; count: number; seconds: number; category: Localized };
+export type QuizTopic = { id: string; format?: "map"; slug: Localized; title: Localized; description: Localized; scope?: Localized; emoji: string; count: number; seconds: number; category: Localized };
 const geography = languages("Geography", "Géographie", "Geografía", "Erdkunde"), science = languages("Science", "Sciences", "Ciencias", "Wissenschaft");
 export const quizTopics: QuizTopic[] = [
   { id: "europe-capitals", slug: languages("european-capitals", "capitales-europe", "capitales-europa", "hauptstaedte-europas"), title: languages("20 European capitals", "20 capitales d’Europe", "20 capitales de Europa", "20 Hauptstädte Europas"), description: languages("Name the capital of each of these twenty European countries.", "Retrouve la capitale de chacun de ces vingt pays européens.", "Encuentra la capital de cada uno de estos veinte países europeos.", "Nenne die Hauptstadt jedes dieser zwanzig europäischen Länder."), emoji: "🌍", count: 20, seconds: 120, category: geography },
@@ -14,6 +15,7 @@ export const quizTopics: QuizTopic[] = [
   { id: "authors", slug: languages("famous-book-authors", "auteurs-livres-celebres", "autores-libros-famosos", "autoren-beruehmter-buecher"), title: languages("Who wrote these books?", "Qui a écrit ces livres ?", "¿Quién escribió estos libros?", "Wer schrieb diese Bücher?"), description: languages("Match twelve famous books to their authors. A surname is enough.", "Associe douze livres célèbres à leur auteur. Le nom de famille suffit.", "Relaciona doce libros famosos con sus autores. Basta el apellido.", "Ordne zwölf berühmten Büchern ihre Autoren zu. Der Nachname genügt."), emoji: "📚", count: 12, seconds: 120, category: languages("Literature", "Littérature", "Literatura", "Literatur") },
   { id: "greek-gods", slug: languages("greek-gods", "dieux-grecs", "dioses-griegos", "griechische-goetter"), title: languages("Greek gods and goddesses", "Dieux et déesses grecs", "Dioses y diosas griegos", "Griechische Götter und Göttinnen"), description: languages("Twelve clues from Greek mythology. Use Greek names rather than their Roman equivalents.", "Douze indices de mythologie grecque. Utilise les noms grecs, pas leurs équivalents romains.", "Doce pistas de mitología griega. Usa los nombres griegos, no los romanos.", "Zwölf Hinweise zur griechischen Mythologie. Gesucht sind die griechischen, nicht die römischen Namen."), emoji: "⚡", count: 12, seconds: 90, category: languages("Mythology", "Mythologie", "Mitología", "Mythologie") },
   ...expandedQuizTopics,
+  europeMapTopic,
 ];
 export const quizTopic = (id: string) => quizTopics.find(t => t.id === id);
 export const validQuizTopic = (id: unknown): id is string => typeof id === "string" && (id === "all" || !!quizTopic(id));

@@ -122,6 +122,7 @@ export type ResultDetails = {
   choicesCount?: number;
   answersFound?: number;
   answersTotal?: number;
+  mapErrors?: number;
 };
 export type Completion = ResultDetails & {
   knowledgeSet?: string;

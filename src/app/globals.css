@@ -24,6 +24,48 @@
 .knowledge-game { max-width: 760px; width: 100%; margin: 0 auto; --knowledge-accent: #965235; }
 .knowledge-football { --knowledge-accent: #14735c; }
 .quiz-scope { border-left: 3px solid #c8a78d; padding: 10px 15px; margin: -8px 0 26px; color: #596479; font-size: .86rem; line-height: 1.65; }
+.map-quiz-preview { margin: 20px 0; }
+.map-quiz-preview img { width: 100%; height: auto; border-radius: 16px; border: 1px solid #cadce8; }
+.map-quiz-preview figcaption { color: var(--muted); font-size: .75rem; margin-top: 8px; }
+.map-target { min-height: 140px; padding: 18px; border: 1px solid #d6dfeb; border-radius: 14px; background: #f4f7fc; margin: 18px 0; text-align: center; }
+.map-target h3 { margin: 8px 0 12px; font-size: clamp(1.1rem,3vw,1.45rem); line-height: 1.4; }
+.map-target p { font-size: .86rem; color: #53637a; margin: 8px 0; }
+.map-target small { color: #53637a; font-weight: 700; }
+.map-toolbar { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.map-toolbar button { min-width: 44px; min-height: 44px; padding: 9px 12px; }
+.map-toolbar > span { font-variant-numeric: tabular-nums; min-width: 65px; font-size: .85rem; text-align: center; }
+.map-pan-help, .map-inspection { color: #5b6880; font-size: .8rem; line-height: 1.5; margin: 12px 0; }
+.map-viewport { width: 100%; aspect-ratio: 1000 / 760; overflow: auto; border: 1px solid #bfd2e0; border-radius: 14px; background: #eaf3fa; scrollbar-gutter: stable; }
+.map-viewport.zoomed { cursor: grab; overscroll-behavior: contain; }
+.map-viewport.zoomed:active { cursor: grabbing; }
+.europe-map { display: block; height: auto; max-width: none; user-select: none; }
+.map-water { fill: #eaf3fa; }
+.map-context, .map-neutral { fill: #d2dae5; stroke: #f5f8fc; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.map-region { outline: none; cursor: pointer; }
+.map-region > path { fill: #d2e2cf; stroke: #fff; stroke-width: 1.2; vector-effect: non-scaling-stroke; transition: fill .15s; }
+.map-region:hover > path, .map-region:focus-visible > path { fill: #a9c6d7; stroke: #1749a1; stroke-width: 2; }
+.map-region.correct > path { fill: #61b59a; }
+.map-region.incorrect > path { fill: #e4a28f; }
+.map-region.selected > path { fill: #90b8fa; stroke: #1749a1; stroke-width: 2.5; }
+.map-region.reviewing > path { stroke: #965235; stroke-width: 3; }
+.map-small-hit { fill: transparent; }
+.map-small-marker { fill: #fff; stroke: #536d93; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.map-region.selected .map-small-marker, .map-region:focus-visible .map-small-marker { fill: #2149e7; stroke: #fff; }
+.map-region.correct .map-small-marker { fill: #14735c; }
+.map-region.incorrect .map-small-marker { fill: #c65e44; }
+.map-region.reviewing .map-small-marker { stroke: #172039; stroke-width: 3; }
+.map-confirm-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 14px 0; }
+.map-confirm-actions > button { min-height: 46px; }
+.map-confirm-actions > small { flex-basis: 100%; color: var(--muted); font-size: .75rem; }
+.map-help, .map-review-list { font-size: .8rem; color: #53637a; line-height: 1.7; margin: 18px 0; text-align: left; }
+.map-help summary, .map-review-list summary { cursor: pointer; font-weight: 700; }
+.map-help a { color: #244eac; }
+.map-review-list > div { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 12px; }
+.map-review-list button { max-width: 100%; white-space: normal; overflow-wrap: anywhere; text-align: left; }
+.map-review-list .secondary-button.correct { color: #14735c; background: #eaf6f0; }
+.map-review-list .secondary-button.incorrect { color: #8e402a; background: #fff0e9; }
+.map-load-error { border: 1px solid #e7c1b8; background: #fff4ee; border-radius: 12px; padding: 16px; margin: 15px 0; }
+@media(prefers-reduced-motion:reduce) { .map-region > path { transition: none; } }
 .quiz-answer-comparison { display: grid; gap: 13px; margin: 18px 0; }
 .quiz-answer-comparison > div > div:first-child { display: flex; justify-content: space-between; gap: 12px; font-size: .85rem; margin-bottom: 6px; }
 .quiz-answer-comparison strong { color: var(--ink); font-variant-numeric: tabular-nums; }

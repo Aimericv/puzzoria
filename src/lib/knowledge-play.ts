@@ -1,7 +1,9 @@
 import { initialKnowledge, normalizeAnswer, type KnowledgeChallenge, type KnowledgeState } from "./knowledge-types";
+import { replayMapQuiz } from "./map-play";
 
 // Pure replay. The server additionally enforces sequence, ownership and quiz deadlines.
 export function replayKnowledge(c: KnowledgeChallenge, input: unknown): KnowledgeState {
+  if (c.kind === "quiz" && c.format === "map") return replayMapQuiz(c, input);
   if (!Array.isArray(input) || input.length > (c.kind === "football" ? 7 : 501)) throw new Error("invalid");
   const s = initialKnowledge();
   // Build the same first-match lookup once per authoritative replay. A 195-country
