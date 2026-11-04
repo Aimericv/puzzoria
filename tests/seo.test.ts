@@ -141,6 +141,51 @@ describe("SEO canonicalization and international versions", () => {
       ).toBe(canonicalGamePath("en", game));
     }
   });
+  it("keeps current Daily coverage and reciprocal alternatives after historical games leave the rolling window", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-11-05T00:00:00Z"));
+    const entries = sitemap();
+    const byUrl = new Map(entries.map(entry => [entry.url, entry]));
+    expect(byUrl.size).toBe(entries.length);
+    for (const locale of locales) {
+      for (const game of ["word", "rareword", "sudoku", "math", "mines"] as const) {
+        for (const date of [undefined, "2026-10-05", "2026-11-04"]) {
+          const path = canonicalGamePath(locale, game, date);
+          expect(byUrl.has(siteOrigin + path), path).toBe(true);
+        }
+        expect(byUrl.has(siteOrigin + canonicalGamePath(locale, game, "2026-10-04"))).toBe(false);
+        expect(byUrl.has(siteOrigin + canonicalGamePath(locale, game, "2026-11-05"))).toBe(false);
+      }
+      for (const game of ["2048", "wordsearch", "ranking", "guess", "rather"] as const) {
+        expect(byUrl.has(siteOrigin + canonicalGamePath(locale, game))).toBe(true);
+        expect(entries.some(entry => entry.url.startsWith(siteOrigin + canonicalGamePath(locale, game) + "/archive/"))).toBe(false);
+      }
+    }
+    for (const entry of entries) {
+      expect(entry.url).not.toMatch(/\/easy$|\/practice|\/account|\/stats|\/leaderboards|[?#]/);
+      const languages = entry.alternates?.languages;
+      expect(languages?.["x-default"]).toBe(languages?.en);
+      for (const url of Object.values(languages ?? {})) {
+        expect(byUrl.get(String(url))?.alternates?.languages).toEqual(languages);
+      }
+    }
+  });
+  it("advances the archive window at UTC midnight while retaining the Daily landing page", () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-11-01T23:59:59.999Z"));
+    const before = new Set(sitemap().map(entry => entry.url));
+    vi.setSystemTime(new Date("2026-11-02T00:00:00Z"));
+    const after = new Set(sitemap().map(entry => entry.url));
+    for (const locale of locales) {
+      const url = (date?: string) => siteOrigin + canonicalGamePath(locale, "word", date);
+      expect(before.has(url())).toBe(true);
+      expect(after.has(url())).toBe(true);
+      expect(before.has(url("2026-11-01"))).toBe(false);
+      expect(after.has(url("2026-11-01"))).toBe(true);
+      expect(before.has(url("2026-10-01"))).toBe(true);
+      expect(after.has(url("2026-10-01"))).toBe(false);
+    }
+  });
   it("lets robots fetch noindex pages and rendering endpoints", () => {
     expect(robots().rules).toEqual({
       userAgent: "*",
