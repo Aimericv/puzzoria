@@ -5,17 +5,12 @@ import { devPreviewCopy } from "../src/lib/dev-preview-i18n";
 import { resultCopy } from "../src/lib/result-metrics";
 import { generateChallenge } from "../src/lib/challenges";
 import type { PublicChallenge } from "../src/lib/types";
+import { savedGameId, savedPracticeChallenge } from "./saved-play";
 
-const savedChallengeId = (page: Page) => page.evaluate(() => {
-  const preferences = localStorage.getItem("dailygrid:preferences:v1");
-  return preferences ? JSON.parse(preferences)?.last?.challengeId ?? null : null;
-});
 async function savedPractice(page: Page) {
   const root=page.locator("[data-game-root]");
   await expect(root).toHaveAttribute("data-challenge-id",/^practice:/);
-  const id=(await root.getAttribute("data-challenge-id"))!;
-  await expect.poll(()=>savedChallengeId(page)).toBe(id);
-  return id;
+  return savedGameId(page);
 }
 
 test("Daily replay replaces an existing Unlimited draft with a fresh seed for every Daily game", async ({page}) => {
@@ -41,7 +36,7 @@ test("one-click finish keeps the real Word draft and owned puzzle; Replay starts
   await page.emulateMedia({reducedMotion:"reduce"});
   await page.goto(practicePath("fr","word"));
   await savedPractice(page);
-  const c = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:practice:word:fr:easy")!).challenge as PublicChallenge);
+  const c = await savedPracticeChallenge<PublicChallenge>(page,"dailygrid:practice:word:fr:easy");
   const full = generateChallenge("word","fr",c.date,"easy",c.id.split(":")[2]);
   if (full.kind !== "word") throw new Error();
   const wrong = full.answer === "OUTIL" ? "AIMER" : "OUTIL";

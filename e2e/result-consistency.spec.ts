@@ -8,15 +8,14 @@ import { devPreviewCopy } from "../src/lib/dev-preview-i18n";
 import { generateChallenge } from "../src/lib/challenges";
 import { gameName } from "../src/lib/registry";
 import { rt } from "../src/lib/retention-i18n";
+import { savedGameId, savedPracticeChallenge } from "./saved-play";
 
 test("all result screens share the same actions, preserve boards and replay a fresh Unlimited game", async ({page}, info) => {
   test.setTimeout(150000); await page.emulateMedia({reducedMotion:"reduce"});
   for (const game of gameIds) {
-    await page.goto(hasDaily(game) ? gamePath("fr",game) : practicePath("fr",game),{waitUntil:"networkidle"});
-    // networkidle does not wait for account hydration and prepareCompletedPlay.
-    await expect(page.locator("[data-game-root]")).toHaveCount(1);
+    await page.goto(hasDaily(game) ? gamePath("fr",game) : practicePath("fr",game));
+    const old = await savedGameId(page);
     const before = await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"));
-    const old = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId);
     await page.getByRole("button",{name:devPreviewCopy("fr").finish,exact:true}).click();
     const panel = page.locator(".completion-panel"); await expect(panel).toBeVisible(); await expect(panel).toBeFocused();
     await expect(panel.locator(".result-utility-actions .share-button")).toBeEnabled();
@@ -44,14 +43,16 @@ test("all result screens share the same actions, preserve boards and replay a fr
     const next = game === "rareword" ? "word" : game;
     await expect(page).toHaveURL(new RegExp(practicePath("fr",next) + "(?:/easy)?$"));
     await expect(page.locator(".completion-panel")).toHaveCount(0);
-    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId)).not.toBe(old);
+    await expect(page.locator("[data-game-root]")).toHaveAttribute("data-challenge-id",/^practice:/);
+    await expect(page.locator("[data-game-root]")).not.toHaveAttribute("data-challenge-id",old);
+    expect(await savedGameId(page)).not.toBe(old);
   }
 });
 
 test("word-search grid stays masked and timer starts only on Start, including after reload", async ({page}) => {
-  await page.goto(practicePath("fr","wordsearch"),{waitUntil:"networkidle"});
+  await page.goto(practicePath("fr","wordsearch"));
   const key = "dailygrid:practice:wordsearch:fr:easy";
-  const c = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).challenge as PublicChallenge,key);
+  const c = await savedPracticeChallenge<PublicChallenge>(page,key);
   await expect(page.locator(".board-wordsearch")).toHaveAttribute("data-locked","true");
   await expect(page.locator(".classic-status strong").first()).toHaveText("00:00");
   const saved = await page.evaluate(c => JSON.parse(localStorage.getItem(`dailygrid:session:${c.id}`) ?? "null"),c);

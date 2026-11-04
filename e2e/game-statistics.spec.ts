@@ -5,6 +5,7 @@ import {devPreviewCopy} from "../src/lib/dev-preview-i18n";
 import {t} from "../src/lib/i18n";
 import type {MathChallenge} from "../src/lib/types";
 import {measurementCopy} from "../src/lib/measurement-i18n";
+import {savedPracticeChallenge} from "./saved-play";
 
 test("game statistics show calculation precision, tile records and proposal counts in four languages",async({page},info)=>{
  test.setTimeout(120000); // Sixteen distinct game/locale previews, including WebKit.
@@ -41,7 +42,7 @@ test("an approximate calculation shows its actual distance and precision compari
  await page.route(/\/api\/play\?comparison=1&runId=/,route=>route.fulfill({json:{comparison:{samples:25,successes:20,successRate:80,averageTime:100,medianTime:80,fasterThanPercent:null,betterScoreThanPercent:null,averageAttempts:null,fewerAttemptsThanAverage:null,commonAttempts:[],closerThanPercent:64,precisionSamples:25}}}));
  await page.goto(practicePath("fr","math"));
  await expect(page.locator("#math-expression")).toBeEnabled();
- const c=await page.evaluate(()=>JSON.parse(localStorage.getItem("dailygrid:practice:math:fr:easy")!).challenge as MathChallenge);
+ const c=await savedPracticeChallenge<MathChallenge>(page,"dailygrid:practice:math:fr:easy");
  const value=c.numbers.find(n=>n!==c.target)!;
  await page.locator("#math-expression").fill(String(value));
  await page.getByRole("button",{name:t("fr").submit,exact:true}).click();
