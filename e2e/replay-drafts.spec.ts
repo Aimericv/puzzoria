@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { gamePath } from "../src/lib/i18n";
 import { practicePath } from "../src/lib/play-path";
 import { devPreviewCopy } from "../src/lib/dev-preview-i18n";
@@ -6,26 +6,41 @@ import { resultCopy } from "../src/lib/result-metrics";
 import { generateChallenge } from "../src/lib/challenges";
 import type { PublicChallenge } from "../src/lib/types";
 
+const savedChallengeId = (page: Page) => page.evaluate(() => {
+  const preferences = localStorage.getItem("dailygrid:preferences:v1");
+  return preferences ? JSON.parse(preferences)?.last?.challengeId ?? null : null;
+});
+async function savedPractice(page: Page) {
+  const root=page.locator("[data-game-root]");
+  await expect(root).toHaveAttribute("data-challenge-id",/^practice:/);
+  const id=(await root.getAttribute("data-challenge-id"))!;
+  await expect.poll(()=>savedChallengeId(page)).toBe(id);
+  return id;
+}
+
 test("Daily replay replaces an existing Unlimited draft with a fresh seed for every Daily game", async ({page}) => {
   test.setTimeout(90000);
   await page.emulateMedia({reducedMotion:"reduce"});
   for (const game of ["word","rareword","sudoku","math","mines"] as const) {
     const next = game === "rareword" ? "word" : game;
-    await page.goto(practicePath("fr",next),{waitUntil:"networkidle"});
-    const old = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId);
-    await page.goto(gamePath("fr",game),{waitUntil:"networkidle"});
+    await page.goto(practicePath("fr",next));
+    const old = await savedPractice(page);
+    await page.goto(gamePath("fr",game));
     await page.getByRole("button",{name:devPreviewCopy("fr").finish,exact:true}).click();
     const label = game === "rareword" ? resultCopy("fr").wordPractice : "Rejouer";
     await page.locator(".completion-panel").getByRole("link",{name:label,exact:true}).click();
     await expect(page).toHaveURL(new RegExp(practicePath("fr",next)+"(?:/easy)?$"));
     await expect(page.locator(".completion-panel")).toHaveCount(0);
-    await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId)).not.toBe(old);
+    await expect(page.locator("[data-game-root]")).toHaveAttribute("data-challenge-id",/^practice:/);
+    await expect(page.locator("[data-game-root]")).not.toHaveAttribute("data-challenge-id",old);
+    expect(await savedPractice(page)).not.toBe(old);
   }
 });
 
 test("one-click finish keeps the real Word draft and owned puzzle; Replay starts empty instead of restoring it", async ({page}) => {
   await page.emulateMedia({reducedMotion:"reduce"});
-  await page.goto(practicePath("fr","word"),{waitUntil:"networkidle"});
+  await page.goto(practicePath("fr","word"));
+  await savedPractice(page);
   const c = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:practice:word:fr:easy")!).challenge as PublicChallenge);
   const full = generateChallenge("word","fr",c.date,"easy",c.id.split(":")[2]);
   if (full.kind !== "word") throw new Error();
@@ -53,5 +68,5 @@ test("one-click finish keeps the real Word draft and owned puzzle; Replay starts
   await page.locator(".completion-panel").getByRole("button",{name:"Rejouer",exact:true}).click();
   await expect(page.locator(".completion-panel")).toHaveCount(0);
   await expect(page.locator(".word-row").first()).toHaveText("");
-  await expect.poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:preferences:v1")!).last.challengeId)).not.toBe(c.id);
+  expect(await savedPractice(page)).not.toBe(c.id);
 });
