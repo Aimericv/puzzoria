@@ -96,6 +96,8 @@ test("blind ranking locks picks, hides upcoming items, restores and shares in fo
         .locator(".ranking-theme")
         .screenshot({ path: info.outputPath("ranking-theme.png") });
     await expect(page.locator(".blind-item strong")).not.toBeEmpty();
+    await page.locator('.blind-ranking-board').scrollIntoViewIfNeeded();
+    await page.screenshot({path:`test-results/ranking-active-${locale}-${info.project.name}.png`});
     await page.locator(".ranking-places button").nth(3).click();
     await saved(page);
     await expect(page.locator(".ranking-places button").nth(3)).toBeDisabled();

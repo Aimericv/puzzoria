@@ -27,7 +27,7 @@ describe("editorial content and tolerant answers",()=>{
       expect(publicChallenge(c)).toHaveProperty("items");
       expect(JSON.stringify(publicChallenge(c))).not.toContain('"aliases"');
       expect(JSON.stringify(publicChallenge(c))).not.toContain('"answer"');
-      const answers=c.items.map(item=>({kind:"answer",value:item.answer}));
+      const answers=c.items.map(item=>c.format === "map" ? {kind:"place",region:item.answer} : {kind:"answer",value:item.answer});
       expect(replayKnowledge(c,answers)).toMatchObject({completed:true,success:true,score:1000});
     }
     for(const p of footballPlayers){

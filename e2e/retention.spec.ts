@@ -11,6 +11,7 @@ import { nt } from "../src/lib/new-games-i18n";
 import { rt } from "../src/lib/retention-i18n";
 import { utcDay } from "../src/lib/date";
 import type { Challenge, PublicChallenge } from "../src/lib/types";
+import { savedPracticeChallenge } from "./saved-play";
 import {
   isWebKitFetchDiagnostic,
   recordUnhandledRejections,
@@ -553,10 +554,7 @@ test("new routes preserve all four locales, canonical URLs and noindex practice 
     await expect(page.locator("link[hreflang]")).toHaveCount(4);
     await expect(page.locator(".word-board")).toBeVisible();
     await expect(page.locator(".hint-control")).toHaveCount(0);
-    const challenge: PublicChallenge = await page.evaluate(
-      (key) => JSON.parse(localStorage.getItem(key)!).challenge,
-      `dailygrid:practice:word:${locale}:easy`,
-    );
+    const challenge = await savedPracticeChallenge(page,`dailygrid:practice:word:${locale}:easy`);
     const puzzle = full(challenge);
     if (puzzle.kind !== "word") throw new Error();
     // Use the shared board's physical-keyboard path in every locale.

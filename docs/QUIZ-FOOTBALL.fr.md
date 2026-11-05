@@ -12,6 +12,13 @@ Les pages principales restent canoniques, indexables et réciproques dans les qu
 
 ## Contenus et acquisition
 
+Le premier format carte ajoute ensuite `europe-map`, 44 pays en dix minutes, dans
+le même moteur Quiz : le catalogue atteint 25 sujets / 100 pages traduites.
+Sélection puis confirmation, correction immédiate, une tentative par pays ; les
+réponses textuelles des autres sujets sont inchangées. Voir [le pilote et ses
+sources géographiques](MAP-QUIZ.fr.md). Les règles de réponse libre ci-dessous
+décrivent les quiz textuels, pas ce format de placement.
+
 Depuis le 3 novembre 2026, seize sujets supplémentaires portent le catalogue à **24 quiz**, avec **64 nouvelles pages traduites** et 635 nouvelles réponses. Ils couvrent pays et continents, UE, États américains et capitales, Länder, régions françaises, culture générale et trois formats football. L'étude, les limites d'accès aux outils de mots-clés et le protocole de mesure sont dans [QUIZ-ACQUISITION.fr.md](QUIZ-ACQUISITION.fr.md). Les huit sujets initiaux ci-dessous restent inchangés. La limite de contenu est désormais 200 réponses, avec un délai maximal conservé de 600 secondes.
 
 Huit quiz (107 réponses) : capitales européennes, drapeaux, planètes, éléments chimiques, vainqueurs du Mondial masculin 1930–2022, pays des monuments, auteurs et mythologie grecque. Le catalogue public contient seulement les titres, descriptions, délais et nombres de réponses. Les réponses, variantes et vingt parcours de joueurs retraités restent dans le module serveur privé. Voir [les sources et conventions éditoriales](../content/KNOWLEDGE-SOURCES.md).

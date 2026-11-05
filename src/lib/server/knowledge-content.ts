@@ -1,6 +1,7 @@
 import { quizTopics, quizTopic, languages as l, type Localized } from "../knowledge-catalog";
 import { footballDailyPlayersV1 } from "./football-daily-content";
 import expandedContents from "./data/quiz-expansion.v1.json" with { type: "json" };
+import mapCountries from "./data/europe-map.v1.json" with { type: "json" };
 import { seededRandom, shuffled } from "../random";
 import type { ClubSpell, KnowledgeChallenge, QuizItem } from "../knowledge-types";
 import { normalizeAnswer } from "../knowledge-types";
@@ -70,6 +71,10 @@ export function generateKnowledge(game: "quiz" | "football", locale: Locale, dat
   }
   const topic = category === "all" ? shuffled(quizTopics.filter(t=>previous?.kind !== "quiz" || t.id !== previous.topic), random)[0] : quizTopic(category);
   if (!topic) throw new Error("invalid");
+  if (topic.format === "map") {
+    const items = shuffled(mapCountries, random).map((r, i) => ({ id: String(i), prompt: r.name[locale], answer: r.region, aliases: [r.region] }));
+    return { ...base, kind: game, topic: topic.id, title: topic.title[locale], seconds: topic.seconds, items, format: "map", mapId: "europe-v1", cohortKey: `quiz:${topic.id}:v1:${locale}` };
+  }
   const items: QuizItem[] = contents[topic.id].map((r,i) => ({ id:String(i), prompt:r.prompt[locale], answer:r.answer[locale], aliases:[...Object.values(r.answer), ...(r.aliases ?? [])] }));
   return { ...base, kind:game, topic:topic.id, title:topic.title[locale], seconds:topic.seconds, items, cohortKey:`quiz:${topic.id}:v1:${locale}` };
 }
@@ -78,6 +83,10 @@ export function validateKnowledgeContent() {
   if(new Set(quizTopics.map(t=>t.id)).size!==quizTopics.length||Object.keys(contents).some(id=>!quizTopic(id)))throw new Error("Invalid quiz catalogue");
   for(const locale of ["en","fr","es","de"] as const)if(new Set(quizTopics.map(t=>t.slug[locale])).size!==quizTopics.length||quizTopics.some(t=>!/^[-a-z0-9]+$/.test(t.slug[locale])||!t.title[locale]||!t.description[locale]||t.scope&&!t.scope[locale]))throw new Error("Invalid translated quiz metadata");
   for (const topic of quizTopics) {
+    if (topic.format === "map") {
+      if (mapCountries.length !== topic.count || new Set(mapCountries.map(r=>r.region)).size !== topic.count || mapCountries.some(r=>!["en","fr","es","de"].every(l=>!!r.name[l as Locale]))) throw Error("Invalid map content");
+      continue;
+    }
     const rows = contents[topic.id];
     if (!rows || rows.length !== topic.count) throw new Error(`Invalid quiz size: ${topic.id}`);
     for (const locale of ["en","fr","es","de"] as const) {

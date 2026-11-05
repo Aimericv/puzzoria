@@ -15,6 +15,7 @@ Les fins de partie conservent le panneau commun : actions de jeu, partage près 
 | Tu préfères | Votes, répartition A/B et choix majoritaires/rares ; couverture explicite des questions disposant d’agrégats | Parties et choix enregistrés ; pas de victoire ou vitesse |
 | Quiz chrono | Réponses/total, moyenne du même sujet et proportion de sans-faute. Un sans-faute met en avant le temps et son percentile parmi les autres sans-faute, pas « plus de réponses ». Un résultat incomplet peut comparer son score, sans percentile de vitesse. | Meilleur score et meilleur temps pour un sans-faute du même sujet/version/langue ; moyenne et nombre de sans-faute en détail. Aucun record de temps mélangeant les sujets. |
 | Devine le footballeur | Essais, temps, joueur trouvé/non trouvé et distribution des essais. Vitesse parmi les réussites avec le **même nombre d’essais**, séparée du percentile des essais. | Meilleur nombre d’essais, historique, victoires et temps personnel ; Daily et Practice gardent leurs cohortes distinctes. |
+| Carte d’Europe | Pays bien placés/44, erreurs confirmées, pays à revoir et temps. Un passage ne compte pas comme erreur de placement, mais reste à revoir. Moyenne des placements et part de cartes sans faute ; vitesse seulement entre sans-faute compatibles. | Meilleur score et temps sans faute de `europe-map` v1 dans la même langue, séparés des quiz textuels et autres sujets. |
 
 ## Données et compatibilité
 

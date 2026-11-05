@@ -2,6 +2,11 @@
 
 Autorisé par l’éditeur le 3 novembre 2026 après la comparaison JetPunk/Puzzoria. Objectif : améliorer la découverte des jeux existants, sans migration d’URL, nouvelle collection de réponses, nouvelle permission de mesure ni promesse de classement.
 
+Suite autorisée : le [pilote carte d’Europe](MAP-QUIZ.fr.md) ajoute désormais un
+seizième sujet Géographie et quatre pages, soit 25 sujets / 100 pages au total.
+L’ordre proposé en fin de ce document est historique : l’éditeur a choisi la carte
+comme premier nouveau format, les autres déclinaisons restent préparées seulement.
+
 ## Pages et parcours
 
 Deux pages, chacune en quatre langues :

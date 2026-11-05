@@ -9,6 +9,9 @@ import { liveGames, type LiveGame } from "../src/lib/live-types";
 import { lt } from "../src/lib/live-i18n";
 import { st } from "../src/lib/social-i18n";
 import { t } from "../src/lib/i18n";
+import { mapCopy } from "../src/lib/map-i18n";
+import { kt } from "../src/lib/knowledge-i18n";
+import mapCountries from "../src/lib/server/data/europe-map.v1.json" with { type: "json" };
 const m = lt("fr"),
   s = st("fr");
 async function pair(
@@ -16,6 +19,7 @@ async function pair(
   browser: Browser,
   info: TestInfo,
   game: LiveGame,
+  category = game === "quiz" ? "planets" : undefined,
 ) {
   await page.addInitScript(() =>
     localStorage.setItem("puzzoria:measurement-choice", "no"),
@@ -27,7 +31,7 @@ async function pair(
   const decline = page.getByRole("button", { name: "Non merci", exact: true });
   if (await decline.count()) await decline.click();
   const res = await page.request.post("/api/live-rooms", {
-    data: { action: "create", game, locale: "fr", name: "Aimeric test" },
+    data: { action: "create", game, locale: "fr", name: "Aimeric test", ...(category ? { category } : {}) },
   });
   expect(res.ok()).toBe(true);
   const room = await res.json();
@@ -209,6 +213,52 @@ for (const game of liveGames)
       await peerContext.close();
     }
   });
+test("Europe map duel keeps placements private, resolves both real runs and rematches on a fresh map", async ({page,browser},info) => {
+  const map=mapCopy("fr"),quiz=kt("fr"),{peer,peerContext,code}=await pair(page,browser,info,"quiz","europe-map");
+  try {
+    const oldId=await page.locator('[data-game-root]').getAttribute('data-challenge-id');
+    for(const player of [page,peer]){
+      await expect(player.locator('[data-map-region]')).toHaveCount(44);
+      await expect(player.getByRole('button',{name:map.skip,exact:true})).toBeEnabled();
+      await expect(player.locator('.knowledge-answer-form')).toHaveCount(0);
+      await expect(player.locator('.knowledge-duel-answers')).toHaveCount(0);
+      await noOverflow(player);
+    }
+    await expect(peer.locator('.map-target strong')).toHaveText((await page.locator('.map-target strong').textContent())!);
+    const prompt=await page.locator('.map-target strong').textContent(),country=mapCountries.find(c=>c.name.fr===prompt)!;
+    const region=page.locator(`[data-map-region="${country.region}"]`);
+    await region.focus();await page.keyboard.press('Enter');
+    await page.getByRole('button',{name:map.confirm,exact:true}).click();
+    await expect(region).toHaveClass(/correct/);
+    await expect(peer.locator('.live-player').first().locator('.live-player-metric b')).toHaveText('1');
+    await expect(peer.locator(`[data-map-region="${country.region}"]`)).not.toHaveClass(/correct|incorrect/);
+    await expect(peer.locator('.knowledge-scoreboard strong').first()).toHaveText('0/44');
+    const peerView=await(await peer.request.get(`/api/live-rooms?code=${code}`)).json();
+    expect(JSON.stringify(peerView)).not.toContain(country.region);
+    for(const player of [page,peer]){
+      player.once('dialog',dialog=>dialog.accept());
+      await player.getByRole('button',{name:quiz.finish,exact:true}).click();
+      await expect(player.locator('.map-target')).toContainText(map.ended);
+    }
+    for(const player of [page,peer]){
+      await expect(player.locator('[data-live-room]')).toHaveAttribute('data-phase','finished');
+      await expect(player.locator('[data-map-region]')).toHaveCount(44);
+      await expect(player.locator('.completion-panel')).toHaveCount(1);
+      await expect(player.locator('.knowledge-duel-answers')).toHaveCount(0);
+      await noOverflow(player);
+    }
+    await expect(page.locator('.completion-panel h2')).toHaveText(m.won);
+    await expect(peer.locator('.completion-panel h2')).toHaveText(m.lost);
+    await page.getByRole('button',{name:m.rematch,exact:true}).click();
+    await peer.getByRole('button',{name:m.rematch,exact:true}).click();
+    await expect(page.locator('[data-live-room]')).toHaveAttribute('data-phase','lobby');
+    await page.getByRole('button',{name:m.ready,exact:true}).click();
+    await peer.getByRole('button',{name:m.ready,exact:true}).click();
+    await expect(page.locator('[data-game-root]')).not.toHaveAttribute('data-challenge-id',oldId!);
+    await expect(page.locator('[data-map-region]')).toHaveCount(44);
+    await expect(page.locator('.knowledge-scoreboard strong').first()).toHaveText('0/44');
+  } finally { await peerContext.close(); }
+});
 test("Wordle exchanges live attempts, retains both grids and waits for the second finish", async ({
   page,
   browser,

@@ -36,6 +36,7 @@ export function starterComparison(current: Completion): Comparison {
       const found=perfect?total:Math.min(total-1,Math.floor(Math.pow(random(),.48)*total));
       const success=found===total, limit=topic?.seconds ?? 120;
       return {...current,runId:`starter:${cohort}:${i}`,success,answersFound:found,answersTotal:total,
+        ...(current.mapErrors!==undefined?{mapErrors:total-found}:{}),
         score:Math.round(found*1000/total),attempts:undefined,duration:success?Math.max(3,Math.round(limit*(.35+random()*.65))):limit};
     }
     const success = random() < winRate;

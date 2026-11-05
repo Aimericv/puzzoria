@@ -8,7 +8,7 @@ export function readResultDetails(game: GameId, value: unknown): ResultDetails {
     ? ["mathTarget", "mathValue", "mathDistance", "operations"]
     : game === "2048" ? ["largestTile", "moves"]
     : game === "wordsearch" ? ["wordsFound", "wordsTotal"]
-    : game === "quiz" ? ["answersFound", "answersTotal"]
+    : game === "quiz" ? ["answersFound", "answersTotal", "mapErrors"]
     : game === "guess" ? ["botAttempts"]
     : game === "rather" || game === "ranking" ? ["choicesCount"] : [];
   for (const key of keys) {

@@ -288,7 +288,7 @@ function view(code: string, room: Room, who: Identity): LiveView {
       result.footballAnswer = room.challenge.answer;
       result.footballSources = room.challenge.sources;
     }
-    if (room.done && room.challenge.kind === "quiz")
+    if (room.done && room.challenge.kind === "quiz" && room.challenge.format !== "map")
       result.quizAnswers = room.challenge.items.map(({prompt,answer})=>({prompt,answer}));
     if (room.game === "guess") {
       result.ownSecret = me.secret;

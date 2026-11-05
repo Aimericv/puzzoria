@@ -62,7 +62,7 @@ export function localPreviewFixture(game: GameId, locale: Locale, difficulty: Di
     state.events=Array.from({length:4},(_,i)=>({actor:"bot" as const,action:{kind:"try" as const,value:20+i*10},answer:false,direction:"higher" as const,eliminated:10,remaining:90-i*10}));
     community = {kind: "guess", samples, faster: randomInt(60, 96), fooled: randomInt(60, 96)};
   }
-  const knowledgeState=c.kind === "quiz" ? replayKnowledge(c,c.items.map(i=>({kind:"answer",value:i.answer}))) : c.kind === "football" ? replayKnowledge(c,[{kind:"answer",value:c.answer}]) : undefined;
+  const knowledgeState=c.kind === "quiz" ? replayKnowledge(c,c.items.map(i=>c.format === "map" ? {kind:"place",region:i.answer} : {kind:"answer",value:i.answer})) : c.kind === "football" ? replayKnowledge(c,[{kind:"answer",value:c.answer}]) : undefined;
   if (c.kind === "quiz" || c.kind === "football") {
     completion.knowledgeSet=c.cohortKey;completion.score=knowledgeState!.score;if(c.kind === "football")completion.attempts=1;
     for (const prior of history) {

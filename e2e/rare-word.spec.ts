@@ -10,6 +10,7 @@ import { comparisonPreviewCopy } from "../src/lib/comparison-preview-i18n";
 import { wordArticlePath } from "../src/lib/word-article-path";
 import { wordArticleCopy } from "../src/lib/word-article-i18n";
 import { articleIsPublished } from "./word-article-publication";
+import { savedPracticeChallenge } from "./saved-play";
 
 async function guess(page: Page, word: string, locale: Locale) {
   const enter = page.getByRole("button",{name:t(locale).enter,exact:true});
@@ -114,7 +115,7 @@ test("results scroll into view, keep Word metrics on one row, and compare before
   await page.emulateMedia({reducedMotion:"reduce"});
   await page.goto(practicePath("fr","word"));
   await expect(page.locator(".touch-keyboard")).toBeVisible();
-  const c = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:practice:word:fr:easy")!).challenge as PublicChallenge);
+  const c = await savedPracticeChallenge<PublicChallenge>(page,"dailygrid:practice:word:fr:easy");
   const full = generateChallenge("word","fr",c.date,"easy",c.id.split(":")[2]);
   if(full.kind !== "word") throw new Error();
   await guess(page,full.answer,"fr");
@@ -153,6 +154,6 @@ test("results scroll into view, keep Word metrics on one row, and compare before
   await expect(page.locator(".word-board")).toBeFocused();
   await expect.poll(async () => (await page.locator("[data-word-mode]").boundingBox())!.y).toBeGreaterThanOrEqual(0);
   expect((await page.locator("[data-word-mode]").boundingBox())!.y).toBeLessThan(50);
-  const fresh = await page.evaluate(() => JSON.parse(localStorage.getItem("dailygrid:practice:word:fr:easy")!).challenge.id);
-  expect(fresh).not.toBe(c.id);
+  const fresh = await savedPracticeChallenge(page,"dailygrid:practice:word:fr:easy");
+  expect(fresh.id).not.toBe(c.id);
 });

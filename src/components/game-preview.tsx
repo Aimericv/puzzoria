@@ -3,6 +3,8 @@ import { t } from "@/lib/i18n";
 import { seoCopy } from "@/lib/seo-content";
 import { st } from "@/lib/social-i18n";
 import { WordModeLabel } from "./word-mode-label";
+import Image from "next/image";
+import { mapCopy } from "@/lib/map-i18n";
 export function GamePreview({
   challenge,
   locale,
@@ -14,6 +16,7 @@ export function GamePreview({
   return (
     <div className={`puzzle-preview ${challenge.kind}`} data-game-preview>
       <p role="status">{m.loading}</p>
+      {challenge.kind === "quiz" && challenge.format === "map" && <figure className="map-quiz-preview"><Image src="/maps/europe-outline-v1.svg" width={1000} height={760} loading="eager" alt={mapCopy(locale).preview} unoptimized/><figcaption>{mapCopy(locale).sources}</figcaption></figure>}
       {challenge.kind === "ranking" && (
         <div className="blind-item">
           <span>{challenge.items[0].emoji}</span>
