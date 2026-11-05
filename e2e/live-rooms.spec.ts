@@ -228,7 +228,7 @@ test("Europe map duel keeps placements private, resolves both real runs and rema
     const prompt=await page.locator('.map-target strong').textContent(),country=mapCountries.find(c=>c.name.fr===prompt)!;
     const region=page.locator(`[data-map-region="${country.region}"]`);
     await region.focus();await page.keyboard.press('Enter');
-    await page.getByRole('button',{name:map.confirm,exact:true}).click();
+    await expect(page.getByRole('button',{name:map.confirm,exact:true})).toHaveCount(0);
     await expect(region).toHaveClass(/correct/);
     await expect(peer.locator('.live-player').first().locator('.live-player-metric b')).toHaveText('1');
     await expect(peer.locator(`[data-map-region="${country.region}"]`)).not.toHaveClass(/correct|incorrect/);

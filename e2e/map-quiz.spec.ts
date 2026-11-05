@@ -10,6 +10,16 @@ import geometry from "../public/maps/europe-v1.json" with { type: "json" };
 import countries from "../src/lib/server/data/europe-map.v1.json" with { type: "json" };
 
 const newRun=(page:Page)=>page.waitForResponse(r=>r.url().endsWith('/api/play')&&r.request().method()==='POST'&&r.request().postDataJSON()?.action==='new');
+async function expectMapFits(page:Page){
+  await expect.poll(()=>page.locator('.knowledge-map-active').evaluate(root=>{
+    const r=root.getBoundingClientRect(),box=root.querySelector('.map-viewport')!.getBoundingClientRect(),svg=root.querySelector('.europe-map')!.getBoundingClientRect();
+    return {frame:r.top>=-1&&r.bottom<=innerHeight+1,usable:box.height>80&&svg.width>0,wholeMap:svg.left>=box.left-1&&svg.right<=box.right+1&&svg.top>=box.top-1&&svg.bottom<=box.bottom+1};
+  })).toEqual({frame:true,usable:true,wholeMap:true});
+  for(const selector of ['.knowledge-scoreboard','.map-target','.map-toolbar','.map-actions']){
+    const bounds=await page.locator(selector).boundingBox();expect(bounds).not.toBeNull();expect(bounds!.y).toBeGreaterThanOrEqual(-1);expect(bounds!.y+bounds!.height).toBeLessThanOrEqual((await page.evaluate(()=>innerHeight))+1);
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+}
 async function tapRegion(page:Page,id:string,touch:boolean){
   const viewport=page.locator('.map-viewport');await viewport.scrollIntoViewIfNeeded();
   const point=geometry.regions.find(r=>r.id===id)!.point;
@@ -35,8 +45,25 @@ test('Europe map pages have distinct server HTML, accessible preview, reciprocal
   }finally{await context.close();}
 });
 
-for(const locale of locales)test(`Europe map in ${locale}: keyboard, touch confirmation, correction, resume, score, speed, sharing and replay`,async({page},info)=>{
-  test.setTimeout(120000);await page.addInitScript(()=>localStorage.setItem('puzzoria:measurement-choice','no'));
+test('active map fits small desktops, phones and landscape without page scrolling; zoom dragging never answers',async({page},info)=>{
+  await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>localStorage.setItem('puzzoria:measurement-choice','no'));
+  const created=newRun(page);await page.goto(quizTopicPath('de',europeMapTopic));const run=await(await created).json();
+  await page.getByRole('button',{name:kt('de').start,exact:true}).click();await expect(page.locator('[data-map-region]')).toHaveCount(44);
+  for(const size of [{width:1366,height:768},{width:1280,height:600},{width:320,height:568},{width:390,height:844},{width:844,height:390}]){
+    await page.setViewportSize(size);await expectMapFits(page);
+    await page.screenshot({path:`test-results/map-fit-${size.width}x${size.height}-${info.project.name}.png`});
+  }
+  if(info.project.name==='desktop'){
+    await page.getByRole('button',{name:mapCopy('de').zoomIn,exact:true}).click();
+    const box=(await page.locator('.map-viewport').boundingBox())!;
+    await page.mouse.move(box.x+box.width*.6,box.y+box.height*.6);await page.mouse.down();await page.mouse.move(box.x+box.width*.3,box.y+box.height*.3,{steps:10});await page.mouse.up();
+    const owned=await(await page.request.get(`/api/play?runId=${run.runId}`)).json();expect(owned.startedAt).toBeTruthy();expect(owned.progress).toBeNull();expect(owned.result).toBeUndefined();
+    const first=countries.find(c=>c.name.de===run.challenge.items[0].prompt)!;await tapRegion(page,first.region,false);await expect(page.locator('.map-target')).toContainText(mapCopy('de').correct);
+  }
+});
+
+for(const locale of locales)test(`Europe map in ${locale}: direct keyboard/touch answers, correction, resume, score, speed, sharing and replay`,async({page},info)=>{
+  test.setTimeout(120000);await page.emulateMedia({reducedMotion:'reduce'});await page.addInitScript(()=>localStorage.setItem('puzzoria:measurement-choice','no'));
   // Presentation peers only; current placements always go through the real owned server proof.
   await page.route(/\/api\/play\?comparison=1&runId=/,async route=>{
     const url=new URL(route.request().url());url.searchParams.delete('comparison');const owned=await(await page.request.get(url.toString())).json(),current:Completion=owned.result.completion;
@@ -46,15 +73,21 @@ for(const locale of locales)test(`Europe map in ${locale}: keyboard, touch confi
   const m=mapCopy(locale),k=kt(locale),path=quizTopicPath(locale,europeMapTopic),created=newRun(page);
   await page.goto(path);let run=await(await created).json();const game=page.locator('[data-knowledge-game="quiz"]');
   await game.getByRole('button',{name:k.start,exact:true}).click();await expect(page.locator('[data-map-region]')).toHaveCount(44);await expect(game.locator('.knowledge-answer-form')).toHaveCount(0);
+  await expect(page.getByRole('button',{name:m.confirm,exact:true})).toHaveCount(0);
+  await expectMapFits(page);
+  await page.screenshot({path:`test-results/map-active-${locale}-${info.project.name}.png`});
+  let placements=0;page.on('request',request=>{if(request.method()==='POST'&&request.url().endsWith('/api/play')&&request.postDataJSON()?.step?.kind==='place')placements++;});
   const region=(prompt:string)=>countries.find(c=>c.name[locale]===prompt)!.region;
   const first=region(run.challenge.items[0].prompt);
   await page.locator(`[data-map-region="${first}"]`).focus();await page.keyboard.press('Enter');
-  await expect(game.locator('.knowledge-scoreboard')).toContainText('0');await expect(page.getByRole('button',{name:m.confirm,exact:true})).toBeEnabled();
-  await page.getByRole('button',{name:m.confirm,exact:true}).click();await expect(page.locator('.map-target')).toContainText(m.correct);
+  await expect(page.locator('.map-target')).toContainText(m.correct);await expect(game.locator('.knowledge-scoreboard')).toContainText('1/44');
+  await expectMapFits(page);
+  await page.keyboard.press('Enter');await page.keyboard.press('Space');expect(placements).toBe(1);
   await page.getByRole('button',{name:`${m.next} →`,exact:true}).click();
   const second=region(run.challenge.items[1].prompt),wrong=countries.find(c=>c.region!==first&&c.region!==second)!.region;
-  await tapRegion(page,wrong,info.project.name!=='desktop');await page.getByRole('button',{name:m.confirm,exact:true}).click();
+  await tapRegion(page,wrong,info.project.name!=='desktop');
   await expect(page.locator('.map-target')).toContainText(m.wrong);await expect(page.locator('.map-target h3')).toHaveText(run.challenge.items[1].prompt);
+  await expectMapFits(page);
   await page.getByRole('button',{name:`${m.next} →`,exact:true}).click();await page.getByRole('button',{name:m.skip,exact:true}).click();
   await page.reload();await expect(page.getByRole('button',{name:k.start,exact:true})).toHaveCount(0);await page.getByRole('button',{name:`${m.next} →`,exact:true}).click();
   await expect(page.locator('.map-target strong')).toHaveText(run.challenge.items[3].prompt);
@@ -64,9 +97,9 @@ for(const locale of locales)test(`Europe map in ${locale}: keyboard, touch confi
   await expect(page.locator('[data-knowledge-speed]')).toHaveCount(0);await expect(page.locator('[data-map-region]')).toHaveCount(44);
   const nextRun=newRun(page),previousId=run.challenge.id;
   await page.getByRole('button',{name:rt(locale).playAgain,exact:true}).click();run=await(await nextRun).json();
-  expect(run.challenge.id).not.toBe(previousId);await expect(page).toHaveURL(new RegExp(path+'$'));await game.getByRole('button',{name:k.start,exact:true}).click();
+  expect(run.challenge.id).not.toBe(previousId);await expect(page).toHaveURL(new RegExp(path+'$'));await game.getByRole('button',{name:k.start,exact:true}).click();await expect(game.locator('.knowledge-scoreboard')).toContainText('0/44');
   for(let sequence=0;sequence<44;sequence++){
-    const response=await page.request.post('/api/play',{data:{action:'submit',runId:run.runId,sequence,step:{kind:'place',region:region(run.challenge.items[sequence].prompt)}}});expect(response.ok()).toBe(true);
+    const response=await page.request.post('/api/play',{data:{action:'submit',runId:run.runId,sequence,step:{kind:'place',region:region(run.challenge.items[sequence].prompt)}}});expect(response.ok(),await response.text()).toBe(true);
   }
   await page.reload();const compare=page.locator('[data-game-comparison="quiz"]');await expect(compare).toContainText(m.perfect);
   await expect(page.locator('[data-result-metrics="quiz"]')).toContainText('44/44');await expect(compare.locator('[data-knowledge-speed]')).toBeVisible();
@@ -98,7 +131,7 @@ test('small states support zoom and precise touch selection, and asset failure n
   }
   await page.screenshot({path:`test-results/map-board-${info.project.name}.png`});
   for(let i=0;i<3;i++)await page.getByRole('button',{name:m.zoomIn,exact:true}).click();
-  await tapRegion(page,vatican.region,info.project.name!=='desktop');await page.getByRole('button',{name:m.confirm,exact:true}).click();
+  await tapRegion(page,vatican.region,info.project.name!=='desktop');
   await expect(page.locator('.map-target')).toContainText(index===43?m.ended:m.correct);
   await page.locator('.map-viewport').scrollIntoViewIfNeeded();await page.screenshot({path:`test-results/map-zoom-${info.project.name}.png`});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
