@@ -9,19 +9,21 @@ pas le site en production.
 Le nouveau sujet `europe-map` étend le jeu `quiz` existant : 44 pays, 10 minutes,
 ordre mélangé par partie, uniquement en illimité. Le téléchargement local de la
 géométrie doit réussir avant de pouvoir démarrer le chrono serveur. Le joueur
-sélectionne une zone puis confirme : une seule tentative par pays. Une erreur ou
+clique sur une zone pour envoyer directement sa réponse : une seule tentative par pays. Une erreur ou
 un passage ne rapporte aucun point et révèle l’emplacement correct avant de
 continuer. Chaque pays est demandé une fois. Terminer ou atteindre le délai
 révèle la carte complète ; la carte reste à l’écran après le résultat.
 
 Zoom ×1…×6, déplacement natif au toucher et à la souris, repères agrandis pour sept
-petits États. Les flèches parcourent les zones au clavier, Entrée/Espace sélectionne,
-puis Tab permet de confirmer. Aucun nom d’un pays non résolu n’est attaché aux
+petits États. Les flèches parcourent les zones au clavier ; Entrée ou Espace
+envoie directement la réponse, sans bouton de validation. Aucun nom d’un pays non résolu n’est attaché aux
 zones. Les corrections sont consultables par nom après la partie. Le périmètre
 géographique et les zones grises sont explicités, sans pénaliser un clic sur le
 contexte. [Sources et choix géographiques](../content/maps/SOURCES.md).
 
 ## Architecture conservée
+
+Sur instruction du propriétaire du 5 novembre 2026, le clic/toucher est la validation immédiate. La zone de jeu active (score, temps, consigne, carte, zoom et commandes) s'adapte à la hauteur visible ; le démarrage/rechargement recadre cette zone. L'aide reste repliée et le zoom permet d'atteindre les petits États. Les corrections et le passage au pays suivant restent explicites. Cette évolution d'interface conserve les actions serveur, le contenu et la géométrie `europe-v1`, le score et les cohortes existants.
 
 - Catalogue : `map-quiz-catalog.ts`, sous-type `format: "map"` de `quiz` ; pas de
   nouvelle famille de jeu, route aléatoire, base de données ou dépendance.
@@ -85,6 +87,11 @@ dans les quatre langues : souris/clavier/toucher, correction, reprise, Replay,
 partage, statistiques, zoom Vatican, panne de téléchargement avant départ,
 absence de débordement mobile et SEO sans JavaScript. Les profils simulés ne
 remplacent pas une vérification sur un téléphone physique.
+
+L'interface compacte vérifie aussi les fenêtres 1366×768, 1280×600, 320×568,
+390×844 et 844×390 : carte entière au zoom initial, chrono/consigne/commandes
+visibles, recadrage au démarrage et à la rotation, réponse immédiate au clic ou
+au clavier, et déplacement à la souris sans envoyer de réponse.
 
 ## Déclinaisons préparées, non développées
 

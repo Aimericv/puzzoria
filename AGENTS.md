@@ -10,6 +10,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Daily Grid architecture
 
+- On explicit owner instruction dated 2026-11-05, the Europe map submits a placement immediately on click/tap/Enter/Space, without a separate confirmation button. Fit the active map, question, score/timer and controls within the visible screen, retaining zoom, keyboard navigation, explicit correction review, server action guards and the frozen `europe-v1` data/rules. This is an interaction/layout change, not a new geography deck or scoring cohort.
+
 - On explicit owner instruction dated 2026-11-03, after PR #43 was validated and merged, `europe-map` pilots interactive geography inside the existing Practice-only `quiz` engine. It asks 44 UN M49 European countries, one confirmed placement per country, 600 seconds; mistakes/skips reveal that target and score zero. Keep `europe-v1` geometry/private mapping/rules frozen, preserve old text quizzes and use a new version/cohort for future revisions. Ship the four translated topic pages, matching statistics and mobile/keyboard tests. Future world/continent/region/flag/badge variants are documented, not yet implemented. See `docs/MAP-QUIZ.fr.md` and `content/maps/SOURCES.md`.
 
 - Every new game or format must ship coherent completion statistics in EN/FR/ES/DE, including tests for perfect/partial/failed rounds, ties, low samples and compatible personal records. Quiz speed compares perfect rounds of the same topic/version/language only; a perfect result leads with completion and speed, not the score percentile. Football compares speed among wins with the same guess count, separately from attempts. Never mix quiz topic times in global records. See `docs/GAME-STATS.fr.md`.

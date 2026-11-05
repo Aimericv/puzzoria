@@ -17,6 +17,7 @@ import { CompletionPanel, ErrorMessage, SaveNotice } from "./game-common";
 import { useLocalPreview } from "./local-preview-context";
 import { MapQuiz, useMapGeometry } from "./map-quiz";
 import { mapCopy } from "@/lib/map-i18n";
+import { smoothScrollTo } from "@/lib/smooth-scroll";
 
 const validDraft = (v: unknown): v is {result: KnowledgeState | null} => !!v && typeof v === "object" && "result" in v && (v.result === null || typeof v.result === "object");
 export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;locale:Locale}) {
@@ -26,6 +27,16 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
   const [state,setState]=useState<KnowledgeState>(initialKnowledge), [loaded,setLoaded]=useState(false), [startedAt,setStartedAt]=useState<string|null>(c.roomStartedAt??null), [now,setNow]=useState(0), [input,setInput]=useState(""), [busy,setBusy]=useState(false), [error,setError]=useState("");
   const current=useRef(state), locked=useRef(false), inputRef=useRef<HTMLInputElement>(null), offset=useRef(0), lastAuto=useRef("");
   const [serverOffset,setServerOffset]=useState(0);
+  const mapRoot=useRef<HTMLDivElement>(null), scrolledMap=useRef('');
+  useEffect(()=>{
+    if(!map||!loaded||!startedAt||!geometry.asset||state.completed||preview)return;
+    const root=mapRoot.current;if(!root)return;
+    let cancel:(()=>void)|undefined;
+    const frame=requestAnimationFrame(()=>{if(scrolledMap.current!==c.id){scrolledMap.current=c.id;root.focus({preventScroll:true});cancel=smoothScrollTo(root);}});
+    const resized=()=>{const box=root.getBoundingClientRect();if(root.contains(document.activeElement)||box.bottom>0&&box.top<window.innerHeight)root.scrollIntoView({block:'start',behavior:'instant'});};
+    window.addEventListener('resize',resized);
+    return()=>{cancelAnimationFrame(frame);cancel?.();window.removeEventListener('resize',resized);};
+  },[map,loaded,startedAt,geometry.asset,state.completed,c.id,preview]);
   useEffect(()=>{sessionRef.current=session;});
   const accept=useCallback((data:Awaited<ReturnType<typeof reservePlay>>)=>{
     const result=(data.result?.state??data.progress??initialKnowledge()) as KnowledgeState;
@@ -82,7 +93,7 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
   const title=c.kind==="quiz"?c.title:m.footballName;
   const numbered=c.kind==="quiz"&&!map&&c.items.every(item=>/^\d+$/.test(item.prompt));
   const longAnswers=c.kind==="quiz"&&c.items.length>16;
-  return <div className={`knowledge-game knowledge-${c.kind}${c.kind==="quiz"&&!map?" knowledge-text-quiz":""}`} data-knowledge-game={c.kind}>
+  return <div ref={mapRoot} tabIndex={map?-1:undefined} className={`knowledge-game knowledge-${c.kind}${map?` knowledge-map${started&&!shown.completed?' knowledge-map-active':''}`:c.kind==="quiz"?" knowledge-text-quiz":""}`} data-knowledge-game={c.kind}>
     {c.kind==="football"&&<FootballMode challenge={c} locale={locale} serverOffset={serverOffset}/>}
     <header className="knowledge-heading"><span className="knowledge-mark" aria-hidden="true">{c.kind==="quiz"?<Timer size={27}/>:<Goal size={27}/>}</span><div><small>{c.kind==="quiz"?m.theme:m.footballCategory}</small><h2>{title}</h2></div></header>
     {!started ? <div className="knowledge-start"><p>{map?mapText.ready:c.kind==="quiz"?m.readyQuiz:c.mode!=="practice"?footballDailyCopy(locale).ready:m.readyFootball}</p>{c.kind==="quiz"&&<p className="knowledge-format"><strong>{c.items.length}</strong> {m.total.toLocaleLowerCase(locale)} <span>·</span> <Clock3 size={17}/> {clockText(c.seconds)}</p>}<button type="button" className="primary-button" disabled={!loaded||busy||!session.ready||!draft.ready||map&&!geometry.asset} onClick={()=>void start()}>{loaded?m.start:m.loading}</button></div> : <>
@@ -106,7 +117,6 @@ export function KnowledgeGame({challenge:c,locale}:{challenge:PublicKnowledge;lo
       {geometry.error&&<div role="alert" className="map-load-error"><p>{started?mapText.failedActive:mapText.failed}</p><button type="button" className="secondary-button" onClick={geometry.reload}>{mapText.retry}</button></div>}
       {!geometry.asset&&!geometry.error&&<p role="status">{mapText.loading}</p>}
       <MapQuiz challenge={c} state={shown} locale={locale} asset={geometry.asset} started={started} disabled={disabled} onAction={step=>void act(step)}/>
-      {started&&!shown.completed&&<button type="button" className="knowledge-give-up" disabled={disabled} onClick={()=>{if(window.confirm(m.confirmFinish))void act({kind:"finish"});}}>{m.finish}</button>}
     </>}
     <ErrorMessage error={error} locale={locale}/>{error&&<button className="secondary-button" onClick={()=>{setError("");void reservePlay(c).then(data=>{accept(data);setLoaded(true);}).catch(()=>setError("networkError"));}}>{m.retry}</button>}
     <p className="knowledge-help">{c.kind==="quiz"?m.timeHelp:m.footballHelp}</p><SaveNotice locale={locale} saved={draft.saved}/>

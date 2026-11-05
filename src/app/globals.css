@@ -27,9 +27,9 @@
 .map-quiz-preview { margin: 20px 0; }
 .map-quiz-preview img { width: 100%; height: auto; border-radius: 16px; border: 1px solid #cadce8; }
 .map-quiz-preview figcaption { color: var(--muted); font-size: .75rem; margin-top: 8px; }
-.map-target { min-height: 140px; padding: 18px; border: 1px solid #d6dfeb; border-radius: 14px; background: #f4f7fc; margin: 18px 0; text-align: center; }
-.map-target h3 { margin: 8px 0 12px; font-size: clamp(1.1rem,3vw,1.45rem); line-height: 1.4; }
-.map-target p { font-size: .86rem; color: #53637a; margin: 8px 0; }
+.map-target { min-height: 64px; padding: 8px 12px; border: 1px solid #d6dfeb; border-radius: 12px; background: #f4f7fc; margin: 0; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.map-target h3 { margin: 3px 0; font-size: clamp(1rem,2vw,1.2rem); line-height: 1.25; }
+.map-target p { font-size: .75rem; color: #53637a; margin: 3px 0; line-height: 1.3; }
 .map-target small { color: #53637a; font-weight: 700; }
 .map-toolbar { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
 .map-toolbar button { min-width: 44px; min-height: 44px; padding: 9px 12px; }
@@ -46,17 +46,13 @@
 .map-region:hover > path, .map-region:focus-visible > path { fill: #a9c6d7; stroke: #1749a1; stroke-width: 2; }
 .map-region.correct > path { fill: #61b59a; }
 .map-region.incorrect > path { fill: #e4a28f; }
-.map-region.selected > path { fill: #90b8fa; stroke: #1749a1; stroke-width: 2.5; }
 .map-region.reviewing > path { stroke: #965235; stroke-width: 3; }
 .map-small-hit { fill: transparent; }
 .map-small-marker { fill: #fff; stroke: #536d93; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.map-region.selected .map-small-marker, .map-region:focus-visible .map-small-marker { fill: #2149e7; stroke: #fff; }
+.map-region:focus-visible .map-small-marker { fill: #2149e7; stroke: #fff; }
 .map-region.correct .map-small-marker { fill: #14735c; }
 .map-region.incorrect .map-small-marker { fill: #c65e44; }
 .map-region.reviewing .map-small-marker { stroke: #172039; stroke-width: 3; }
-.map-confirm-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 14px 0; }
-.map-confirm-actions > button { min-height: 46px; }
-.map-confirm-actions > small { flex-basis: 100%; color: var(--muted); font-size: .75rem; }
 .map-help, .map-review-list { font-size: .8rem; color: #53637a; line-height: 1.7; margin: 18px 0; text-align: left; }
 .map-help summary, .map-review-list summary { cursor: pointer; font-weight: 700; }
 .map-help a { color: #244eac; }
@@ -3204,4 +3200,48 @@ tr:last-child td {
   .blind-ranking-board { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .blind-ranking-prompt .blind-item { min-height: 64px; padding: 10px 12px; }
   .blind-ranking-prompt .blind-item > strong { text-align: left; }
+}
+
+/* Keep the complete active map, target and controls inside the visible screen. */
+.knowledge-map { max-width: none; outline: none; scroll-margin-top: 12px; }
+.knowledge-map .map-quiz-preview img { max-height: min(40svh, 280px); object-fit: contain; }
+.knowledge-map-active { display: flex; flex-direction: column; height: min(820px, calc(100svh - 24px)); min-height: 0; }
+.knowledge-map-active > .knowledge-heading, .knowledge-map-active > .knowledge-help { display: none; }
+.knowledge-map-active > .knowledge-scoreboard { flex: 0 0 auto; padding: 6px 10px; margin: 0 0 5px; }
+.knowledge-map-active .knowledge-scoreboard > div { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.knowledge-map-active .knowledge-scoreboard > div:last-child { justify-content: flex-end; }
+.knowledge-map-active .knowledge-scoreboard span { font-size: .7rem; }
+.knowledge-map-active .knowledge-scoreboard strong { font-size: 1.2rem; margin: 0; }
+.knowledge-map-active > .knowledge-progress { flex: 0 0 4px; margin: 0 0 6px; }
+.knowledge-map-active > .save-notice { flex: 0 0 auto; margin: 4px 0 0; font-size: .68rem; }
+.map-quiz { display: grid; grid-template-areas: "target" "toolbar" "viewport" "actions"; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 8px; min-height: 0; height: min(75svh, 650px); }
+.knowledge-map-active > .map-quiz { flex: 1 1 0; height: auto; }
+.map-quiz .map-target { grid-area: target; }
+.map-target > div { min-width: 0; }
+.map-target > button { flex: 0 0 auto; min-height: 44px; max-width: 135px; padding: 8px 10px; font-size: .78rem; }
+.map-quiz .map-toolbar { grid-area: toolbar; gap: 6px; justify-content: center; }
+.map-quiz .map-toolbar button { padding: 6px 10px; font-size: .78rem; }
+.map-quiz .map-viewport { grid-area: viewport; min-height: 0; height: 100%; aspect-ratio: auto; display: flex; justify-content: center; align-items: center; }
+.map-quiz .map-viewport.zoomed { display: block; }
+.map-quiz .europe-map { flex: none; }
+.map-actions { grid-area: actions; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; }
+.map-actions > button, .map-help > summary { min-height: 44px; padding: 8px 10px; font-size: .78rem; }
+.map-actions .map-help { position: relative; margin: 0; }
+.map-help > summary { display: flex; align-items: center; justify-content: center; gap: 5px; list-style: none; background: #f6f8fc; border: 1px solid var(--line); border-radius: 10px; }
+.map-help > summary::-webkit-details-marker { display: none; }
+.map-help-body { position: absolute; z-index: 8; bottom: calc(100% + 8px); right: 0; width: min(320px, calc(100vw - 48px)); max-height: min(320px, 65svh); overflow: auto; padding: 12px 15px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 8px 30px #17203926; }
+.map-help-body p { margin: 0 0 8px; }
+.map-quiz[data-map-completed="true"] { height: auto; grid-template-rows: auto auto min(55svh, 500px) auto auto; }
+.map-quiz .map-review-list { grid-row: 5; margin: 8px 0; }
+@media(max-width: 600px) {
+  .knowledge-map-active .map-reset > span, .knowledge-map-active .map-help > summary > span { display: none; }
+  .knowledge-map-active .map-help > summary { min-width: 44px; }
+}
+@media(max-height: 520px) and (min-width: 600px) {
+  .knowledge-map-active .map-quiz { grid-template-areas: "target viewport" "toolbar viewport" "actions viewport"; grid-template-columns: minmax(170px, 220px) minmax(0, 1fr); grid-template-rows: auto auto 1fr; }
+  .knowledge-map-active .map-toolbar > span { display: none; }
+  .knowledge-map-active .map-target { min-height: 0; flex-wrap: wrap; }
+  .knowledge-map-active .map-target > button { max-width: none; width: 100%; }
+  .knowledge-map-active .map-actions { align-self: start; }
+  .knowledge-map-active .map-help-body { right: auto; left: 0; }
 }
