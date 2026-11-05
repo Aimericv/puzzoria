@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 256,
+  "generation": 257,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -195,223 +195,6 @@
     "unverifiedSnapshot": "03cb0d485ff41fc1014062d2a3afa29404e6d132"
   },
   "validation": {
-    "41344498054": {
-      "sourceSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "41344498054",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-11-01T20:01:06.577Z",
-          "status": "verified",
-          "commands": [
-            {
-              "name": "isolation",
-              "status": "passed"
-            },
-            {
-              "name": "lint",
-              "status": "passed"
-            },
-            {
-              "name": "typecheck",
-              "status": "passed"
-            },
-            {
-              "name": "unit",
-              "status": "passed"
-            },
-            {
-              "name": "content",
-              "status": "passed"
-            },
-            {
-              "name": "build",
-              "status": "passed"
-            }
-          ],
-          "productionDeployment": false,
-          "baseMain": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
-          "sourceCommit": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 7,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793581048
-                },
-                "secondary": {
-                  "usedPercent": 34,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793802631
-                }
-              }
-            ]
-          },
-          "actionsBudget": {
-            "month": "2026-11",
-            "limit": 1700,
-            "charged": 144,
-            "reserved": 42,
-            "modelMilliseconds": 209382
-          },
-          "analytics": {
-            "status": "available",
-            "source": "https://puzzoria.com/api/agent/analytics",
-            "fetchedAt": "2026-11-01T20:01:16.154Z",
-            "sha256": "d9693ebe196c80d9cdb427b6220b5e102b62307dda03e8d66ce09a0dbb5f988d",
-            "readOnlySnapshot": true
-          },
-          "searchConsole": {
-            "status": "available",
-            "property": "sc-domain:puzzoria.com",
-            "fetchedAt": "2026-11-01T20:01:18.023Z",
-            "sha256": "0d0ab4634b13a37008384b8fae93645eafe28da637fb1859a386930e02767f33",
-            "readOnlySnapshot": true
-          },
-          "growth": {
-            "observationId": "df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726",
-            "trendStatus": "available",
-            "trendSources": [
-              {
-                "id": "google-fr",
-                "status": "available"
-              },
-              {
-                "id": "google-us",
-                "status": "available"
-              },
-              {
-                "id": "google-de",
-                "status": "available"
-              },
-              {
-                "id": "google-es",
-                "status": "available"
-              },
-              {
-                "id": "tiktok-creative-center",
-                "status": "unavailable",
-                "reason": "request_failed"
-              }
-            ],
-            "readOnlySnapshots": true
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*autonomy*'\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/INBOX.json; cat agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/growth-context.json; cat /opt/puzzoria-pilot/readonly/trends.json; cat /opt/puzzoria-pilot/readonly/puzzoria-analytics.json; cat /opt/puzzoria-pilot/readonly/search-console.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat agent/autonomy/memory/STATE.md; cat agent/autonomy/memory/PLAN.json; ls /opt/puzzoria-pilot/readonly; rg --files src tests | rg 'seo|sitemap|archive|game-modes'; cat src/app/sitemap.ts\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfor n in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'))\n print(n, list(d))\n if n=='growth-context': print(json.dumps(d,ensure_ascii=False)[:16000])\n else: print(json.dumps(d,ensure_ascii=False)[:2400])\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat tests/seo.test.ts; cat src/lib/date.ts; cat src/lib/game-modes.ts; cat docs/SEO.fr.md; cat node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/01-metadata/sitemap.mdx'",
-              "exitCode": 1
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\nprint('failures',x['lastFailure'],x['unverifiedWork'])\nfor e in x['experiments']: print(e['id'],e['status'],e.get('assessment'))\nt=json.load(open('/opt/puzzoria-pilot/readonly/trends.json'))\nfor s in t['sources']: print(s['id'],s['status'],[i['title'] for i in s.get('items',[])])\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'sitemap|metadata' | head -15; cat src/lib/challenges.ts | head -100; cat src/lib/seo.ts | head -140; cat src/lib/server/word-articles.ts | head -100; cat src/app/'[locale]'/archive/page.tsx | head -120\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat node_modules/next/dist/docs/01-app/03-api-reference/03-file-conventions/01-metadata/sitemap.md | head -90; rg --files tests | rg 'article|rare'\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='tests/seo.test.ts'\ns=open(p).read(); marker='  it(\\\"lets robots fetch noindex pages and rendering endpoints\\\", () => {'\naddition='''  it(\\\"keeps current Daily coverage and reciprocal alternatives after historical games leave the rolling window\\\", () => {\n    vi.useFakeTimers();\n    vi.setSystemTime(new Date(\\\"2026-11-05T00:00:00Z\\\"));\n    const entries = sitemap();\n    const byUrl = new Map(entries.map(entry => [entry.url, entry]));\n    expect(byUrl.size).toBe(",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > docs/DAILY-SITEMAP-AUDIT.fr.md <<'EOF'\n# Couverture Daily et sitemap — 1er novembre 2026\n\nAudit du code exporté d2ac94395c69fab70202bc7f33dfdf4cbe960a07, sans accès réseau ni inspection Google en direct. Objectif : vérifier un frein technique à la découverte avant de multiplier les ajouts éditoriaux.\n\n## Preuves disponibles\n\nContexte superviseur collecté à 20:01:20.132Z, observation \"'`df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726` : aucun lastFailure ni u",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nimport json\nfrom pathlib import Path\nm=Path('agent/autonomy/memory')\nob='df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726'\nnextmission='Examiner le chemin fin de partie Word → découverte d’un autre jeu via CompletionPanel et les rapports agrégés disponibles. Établir une friction concrète avant intervention ; ne modifier ni collecte, preuves ou persistance. Ne pas dupliquer les deux jeux confiés séparément par le propriétaire. Attendre les fenêtres ",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\nfrom pathlib import Path\np=Path('agent/autonomy/memory/STATE.md'); s=p.read_text().replace('Lint en cours au moment de cette écriture, résultat à compléter.','Lint réussi (sortie 0).'); p.write_text(s)\np=Path('agent/autonomy/memory/EXPERIMENTS.md'); s=p.read_text().replace('typecheck réussi ; lint suivi dans STATE.','typecheck et lint réussis.'); p.write_text(s)\np=Path('docs/DAILY-SITEMAP-AUDIT.fr.md'); s=p.read_text().replace('Ce sont des appels locaux au générat",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a198b3-d366-7212-b95b-d7983d69c643",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 29,
-          "quotaAfter": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 12,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793581048
-                },
-                "secondary": {
-                  "usedPercent": 35,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1793802631
-                }
-              }
-            ]
-          },
-          "verifier": {
-            "image": "node:24.15.0-bookworm-slim@sha256:4e6b70dd6cbfc88c8157ba19aa3d9f9cce6ba4703576d55459e45efcbc9c5f5d",
-            "network": "none",
-            "credentials": false,
-            "dependencies": "read-only",
-            "uid": 3050
-          },
-          "tests": {
-            "passed": 361,
-            "failed": 0,
-            "skipped": 0
-          },
-          "publication": {
-            "sha": "69130d0934408fd69a0f7d3f4be29d86a3c8a149",
-            "url": "https://github.com/Aimericv/puzzoria/pull/36",
-            "number": 36
-          },
-          "toolCommands": 13,
-          "experiment": {
-            "id": "daily-sitemap-coverage-audit",
-            "objective": "seo",
-            "metric": "google.impressions",
-            "decision": "stop"
-          },
-          "finishedAt": "2026-11-01T20:05:01.36Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/41344498054"
-        }
-      }
-    },
     "41397154265": {
       "sourceSha": "d2ac94395c69fab70202bc7f33dfdf4cbe960a07",
       "jobs": {
@@ -1267,6 +1050,158 @@
           "finishedAt": "2026-11-04T06:23:47.493Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/41784584925"
+        }
+      }
+    },
+    "41982318818": {
+      "sourceSha": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "41982318818",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-11-05T06:45:16.988Z",
+          "status": "deferred_runner_window",
+          "commands": [],
+          "productionDeployment": false,
+          "baseMain": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
+          "sourceCommit": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1793879126
+                },
+                "secondary": {
+                  "usedPercent": 32,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1794341052
+                }
+              }
+            ]
+          },
+          "actionsBudget": {
+            "month": "2026-11",
+            "limit": 1700,
+            "charged": 1303,
+            "reserved": 41,
+            "modelMilliseconds": 135199
+          },
+          "analytics": {
+            "status": "available",
+            "source": "https://puzzoria.com/api/agent/analytics",
+            "fetchedAt": "2026-11-05T06:45:27.239Z",
+            "sha256": "dce780c3a4f12dff8b2b25fc89497867a5789ea8aadcb5c160353138182258d5",
+            "readOnlySnapshot": true
+          },
+          "searchConsole": {
+            "status": "available",
+            "property": "sc-domain:puzzoria.com",
+            "fetchedAt": "2026-11-05T06:45:29.351Z",
+            "sha256": "8471ee3913de7ca11f291b66353a33a512a0e93fc79489a98c60ad725271d263",
+            "readOnlySnapshot": true
+          },
+          "growth": {
+            "observationId": "d432efb6ff70714707f27190e2ec900ba1a8029a78c06046d841007603d7a0a1",
+            "trendStatus": "available",
+            "trendSources": [
+              {
+                "id": "google-fr",
+                "status": "available"
+              },
+              {
+                "id": "google-us",
+                "status": "available"
+              },
+              {
+                "id": "google-de",
+                "status": "available"
+              },
+              {
+                "id": "google-es",
+                "status": "available"
+              },
+              {
+                "id": "tiktok-creative-center",
+                "status": "unavailable",
+                "reason": "request_failed"
+              }
+            ],
+            "readOnlySnapshots": true
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent; cat /opt/puzzoria-pilot/readonly/actions-budget.json\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/growth-context.json /opt/puzzoria-pilot/readonly/trends.json /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat agent/autonomy/memory/PLAN.json; tail -45 agent/autonomy/memory/STATE.md; tail -22 agent/autonomy/memory/EXPERIMENTS.md; python3 - <<'PY'\nimport json\nfor n in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'));print(n, str(d)[:11500] if n=='growth-context' else str(d)[:1300])\nPY\nrg -n 'european|europe-capital|ligue-1|difficile|hard-flags' src/lib/quiz* src/components/*quiz*; ls node_modules/next/dist",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat src/lib/quiz-topics.ts | head -100; cat src/lib/quiz-editorial.ts | head -100; cat src/components/quiz-topics.tsx | head -90; python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json')); print('ROOT',list(x)); print('observation',str(x.get('observation'))[:700]); print('fail',x.get('lastFailure'),x.get('unverifiedWork'))\nPY\ncat node_modules/next/dist/docs/01-app/02-guides/ai-agents.md | head -45\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'europe-capitals|flags|ligue' src/lib/knowledge-catalog.ts; cat src/components/quiz-guide.tsx; ls tests/*quiz*; head -60 tests/quiz-editorial.test.ts; cat content/KNOWLEDGE-SOURCES.md | head -60\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'quizEditorial|method\\\\[' src/components tests/quiz-themes.test.ts; head -65 tests/quiz-themes.test.ts; rg -n 'capitals|Berne|Bern' src/lib/server/knowledge-content.ts | head; cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.mdx | head -25\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/quiz-editorial.ts'\ns=open(p).read(); marker='  \\\"countries-world\\\": {'\naddition='''  \\\"europe-capitals\\\": {\n    method: l(\\\"Read each country prompt and type its capital, in any order. Make a first pass through the pairs you know, then revisit the gaps by region: Nordic countries, western Europe, central Europe and the south-east. After the round, review the missed pairs before replaying; the twenty prompts stay the same.\\\", \\\"Lis chaque pays et saisis ",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'generate-metadata'; sed -n '50,65p' src/components/quiz-theme.tsx; python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json')); print(x['observation']['id'],x['observation']['collectedAt']); print([(e['id'],e.get('status')) for e in x['experiments']]);\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"head -45 node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.md; cat package.json | sed -n '5,38p'; rg -n 'quizTopicMetadata|title' src/lib/knowledge-seo.ts | head -16; rg -n 'QuizEditorial' src/app\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/quiz-editorial.ts';s=open(p).read().replace('sources: [eu, { name: \\\"Swiss Confederation · Bern, federal city\\\", url: \\\"https://www.aboutswitzerland.eda.admin.ch/en/bern\\\" }],','sources: [eu],');open(p,'w').write(s)\nPY\nnpm run lint\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat > docs/EUROPE-CAPITALS-SEO.fr.md <<'EOF'\n# Capitales européennes : améliorer le quiz existant\n\nContribution du 5 novembre 2026, base 95fcf0943502d4bfb46133546a9662d06d5e89ce.\n\nIntention : « quiz capitales européennes ». Estimation fournie par le propriétaire le 4 novembre : 5 000 recherches mensuelles, KD Ahrefs 0. Le propriétaire rapporte des résultats de sites DR 17–27 sur plusieurs SERP P1 ; aucune nouvelle SERP n’a été consultée ici. Ces estimations ne garantissent ni clas",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a1aa74-b244-70b1-ac8e-c99f38d2249a",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 33,
+          "error": "Session time boundary reached; preserve work for the next wake",
+          "unverifiedSnapshot": "03cb0d485ff41fc1014062d2a3afa29404e6d132",
+          "finishedAt": "2026-11-05T06:47:52.296Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/41982318818"
         }
       }
     }
