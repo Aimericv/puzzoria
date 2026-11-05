@@ -47,7 +47,7 @@ it("gives themed collection pages reciprocal metadata and a structured list matc
   }
 });
 it("supplies original topic-specific methods, boundaries and primary references in every language",()=>{
-  expect(Object.keys(quizEditorial)).toHaveLength(11);
+  expect(Object.keys(quizEditorial)).toHaveLength(12);
   for(const [id,guide] of Object.entries(quizEditorial)){
     expect(quizTopics.some(t=>t.id===id)).toBe(true);expect(guide.sources.length).toBeGreaterThan(0);
     for(const source of guide.sources)expect(new URL(source.url).protocol).toBe("https:");
