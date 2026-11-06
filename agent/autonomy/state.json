@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 264,
+  "generation": 265,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4345,7 +4345,7 @@
         "candidateSha": "564234ffb6a35df5435612d3a4983864fff836b6",
         "prNumber": 47,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/47",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -4507,7 +4507,11 @@
         "experimentId": "europe-capitals-intent-guide",
         "verified": true,
         "runId": "42279174295",
-        "status": "proposed"
+        "status": "manual_review",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:src/lib/knowledge-catalog.ts"
+        }
       },
       {
         "sha": "09f0b1c9a692620059dc668096498431022f2d45",
@@ -4994,32 +4998,6 @@
   },
   "releaseValidationHistory": [
     {
-      "at": "2026-10-28T15:31:26.575Z",
-      "runId": "40716770155",
-      "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
-      "minutes": 4,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-review-job-timestamps",
-        "jobId": 122916466984,
-        "startedAt": "2026-10-28T15:31:12Z",
-        "completedAt": "2026-10-28T15:32:38Z",
-        "marginMinutes": 2
-      }
-    },
-    {
-      "at": "2026-10-28T15:53:03.596Z",
-      "runId": "40720356714",
-      "sha": "ef98d986c060a207222ae6d604e00e95f94b8cd9",
-      "minutes": 5,
-      "settled": false,
-      "accounting": {
-        "source": "bounded-reviewed-maintenance-staging",
-        "maximumJobMinutes": 3,
-        "marginMinutes": 2
-      }
-    },
-    {
       "at": "2026-10-30T22:22:25.76Z",
       "runId": "41136871984",
       "attempt": 1,
@@ -5075,7 +5053,17 @@
       "runId": "41784584925",
       "attempt": 1,
       "sha": "09f0b1c9a692620059dc668096498431022f2d45",
-      "minutes": 7
+      "minutes": 3,
+      "reservedMinutes": 7,
+      "settled": true,
+      "accounting": {
+        "source": "github-completed-job-timestamps",
+        "jobId": 126426003379,
+        "attempt": 1,
+        "startedAt": "2026-11-04T06:24:35Z",
+        "completedAt": "2026-11-04T06:25:01Z",
+        "marginMinutes": 2
+      }
     }
   ]
 }
