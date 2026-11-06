@@ -1,0 +1,145 @@
+{
+  "id": "daily-sitemap-coverage-audit",
+  "objective": "seo",
+  "kind": "research",
+  "hypothesis": "Un défaut de couverture des pages Daily et de leurs alternatives pourrait limiter leur découverte ; vérifier avant intervention.",
+  "expectedImpact": "Aucun effet direct attendu de cet audit sans changement produit ; éviter une intervention SEO non justifiée.",
+  "metric": "google.impressions",
+  "observationDays": 30,
+  "minimumSamples": 100,
+  "minimumRelativeImprovement": 0.2,
+  "decision": "stop",
+  "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726\",\"collectedAt\":\"2026-11-01T20:01:20.132Z\",\"finding\":\"lastFailure/unverifiedWork null ; fenêtres SEO déployées encore immatures, Sudoku/Démineur merged sans déploiement confirmé.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/search-console.json\",\"collectedAt\":\"2026-11-01T20:01:18.023Z\",\"finding\":\"Available : 180 impressions/six clics, 2–31 octobre demandé, dernière date 30 octobre Pacific. Lignes partielles sans inspection de couverture ni jointure page/requête.\"},{\"source\":\"src/app/sitemap.ts; src/lib/date.ts; src/lib/game-modes.ts; tests/seo.test.ts; docs/DAILY-SITEMAP-AUDIT.fr.md\",\"finding\":\"Fenêtre de 31 archives explicite, pas de défaut établi. 37 tests ciblés réussis, dont deux nouveaux cas modernes/UTC ; typecheck réussi. Générateur local, pas réponse XML de production.\"},{\"source\":\"agent/autonomy/INBOX.json; /opt/puzzoria-pilot/readonly/trends.json\",\"finding\":\"Propriétaire signale quiz et parcours de footballeur développés séparément, éviter doublons. RSS disponibles et TikTok indisponible ne démontrent pas de demande de correction SEO.\"}]",
+  "createdAt": "2026-11-01T20:04:57.217Z",
+  "baseline": {
+    "id": "df22ae27a57dac297f91251ced795b85e4e6408d1c2846ad9ac51e365fd21726",
+    "collectedAt": "2026-11-01T20:01:20.132Z",
+    "sources": {
+      "puzzoria": {
+        "status": "available",
+        "fetchedAt": "2026-11-01T20:01:16.154Z",
+        "sha256": "d9693ebe196c80d9cdb427b6220b5e102b62307dda03e8d66ce09a0dbb5f988d"
+      },
+      "google": {
+        "status": "available",
+        "fetchedAt": "2026-11-01T20:01:18.023Z",
+        "sha256": "0d0ab4634b13a37008384b8fae93645eafe28da637fb1859a386930e02767f33"
+      }
+    },
+    "series": {
+      "google.impressions": [
+        {
+          "date": "2026-10-06",
+          "value": 0
+        },
+        {
+          "date": "2026-10-07",
+          "value": 0
+        },
+        {
+          "date": "2026-10-08",
+          "value": 3
+        },
+        {
+          "date": "2026-10-09",
+          "value": 7
+        },
+        {
+          "date": "2026-10-10",
+          "value": 18
+        },
+        {
+          "date": "2026-10-11",
+          "value": 15
+        },
+        {
+          "date": "2026-10-12",
+          "value": 12
+        },
+        {
+          "date": "2026-10-13",
+          "value": 19
+        },
+        {
+          "date": "2026-10-14",
+          "value": 15
+        },
+        {
+          "date": "2026-10-15",
+          "value": 8
+        },
+        {
+          "date": "2026-10-16",
+          "value": 5
+        },
+        {
+          "date": "2026-10-17",
+          "value": 6
+        },
+        {
+          "date": "2026-10-18",
+          "value": 7
+        },
+        {
+          "date": "2026-10-19",
+          "value": 11
+        },
+        {
+          "date": "2026-10-20",
+          "value": 16
+        },
+        {
+          "date": "2026-10-21",
+          "value": 18
+        },
+        {
+          "date": "2026-10-22",
+          "value": 17
+        },
+        {
+          "date": "2026-10-23",
+          "value": 0
+        },
+        {
+          "date": "2026-10-24",
+          "value": 0
+        },
+        {
+          "date": "2026-10-25",
+          "value": 0
+        },
+        {
+          "date": "2026-10-26",
+          "value": 1
+        },
+        {
+          "date": "2026-10-27",
+          "value": 0
+        },
+        {
+          "date": "2026-10-28",
+          "value": 1
+        },
+        {
+          "date": "2026-10-29",
+          "value": 1
+        },
+        {
+          "date": "2026-10-30",
+          "value": 0
+        }
+      ]
+    },
+    "retention": {
+      "google.impressions": null
+    }
+  },
+  "candidateSha": "69130d0934408fd69a0f7d3f4be29d86a3c8a149",
+  "prNumber": 36,
+  "prUrl": "https://github.com/Aimericv/puzzoria/pull/36",
+  "status": "cancelled",
+  "assessment": {
+    "status": "awaiting_verified_deployment",
+    "causalClaim": false
+  }
+}
