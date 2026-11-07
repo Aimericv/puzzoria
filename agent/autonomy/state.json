@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 270,
+  "generation": 271,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -4365,7 +4365,7 @@
         "candidateSha": "466b0b14b69ee9db65d31508c72c596ca0329c53",
         "prNumber": 48,
         "prUrl": "https://github.com/Aimericv/puzzoria/pull/48",
-        "status": "proposed"
+        "status": "manual_review"
       }
     ],
     "legacyWork": {
@@ -4540,7 +4540,11 @@
         "experimentId": "europe-map-immediate-answer-guide",
         "verified": true,
         "runId": "42417595186",
-        "status": "proposed"
+        "status": "manual_review",
+        "risk": {
+          "risk": "manual",
+          "reason": "review_required:src/lib/quiz-editorial.ts"
+        }
       },
       {
         "sha": "09f0b1c9a692620059dc668096498431022f2d45",
@@ -5031,23 +5035,6 @@
     }
   },
   "releaseValidationHistory": [
-    {
-      "at": "2026-10-30T22:22:25.76Z",
-      "runId": "41136871984",
-      "attempt": 1,
-      "sha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
-      "minutes": 3,
-      "reservedMinutes": 7,
-      "settled": true,
-      "accounting": {
-        "source": "github-completed-job-timestamps",
-        "jobId": 124344112790,
-        "attempt": 1,
-        "startedAt": "2026-10-30T22:22:34Z",
-        "completedAt": "2026-10-30T22:23:01Z",
-        "marginMinutes": 2
-      }
-    },
     {
       "at": "2026-11-01T13:28:23.85Z",
       "runId": "41310807978",
