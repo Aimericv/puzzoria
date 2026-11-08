@@ -7,6 +7,7 @@ import { gamePath } from "@/lib/i18n";
 import type { Locale } from "@/lib/types";
 import { StructuredData } from "./structured-data";
 import { quizThemeStructuredData } from "@/lib/knowledge-seo";
+import { FootballProfileLinks } from "./football-profile-page";
 
 const copy = {
   en: { themes: "Explore by subject", all: "All timed quizzes", play: "Play", career: "Guess the football player", careerText: "One harder player each day, plus unlimited career puzzles. Find the player in six guesses from his clubs in chronological order." },
@@ -45,6 +46,7 @@ export function QuizThemePage({ locale, theme }: { locale: Locale; theme: QuizTh
       })}</div>
     </section>)}
     {theme.id === "football" && <section className="quiz-career-link"><h2>{m.career}</h2><p>{m.careerText}</p><Link className="primary-button" href={gamePath(locale, "football")}>{m.play} →</Link></section>}
+    {theme.id === "football" && <FootballProfileLinks locale={locale} />}
     <section className="quiz-editorial"><h2>{theme.methodTitle[locale]}</h2><p>{theme.method[locale]}</p></section>
     <QuizThemeNav locale={locale} selected={theme.id} />
   </>;

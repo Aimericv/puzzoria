@@ -8,6 +8,8 @@ import { resolveQuizTheme } from "@/lib/quiz-themes";
 import { quizThemeMetadata } from "@/lib/knowledge-seo";
 import { quizEditorial } from "@/lib/quiz-editorial";
 import { mapCopy } from "@/lib/map-i18n";
+import { FootballProfilePage, footballProfileMetadata } from "@/components/football-profile-page";
+import { resolveFootballProfile } from "@/lib/server/football-profiles";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ChevronLeft, Info, CalendarDays } from "lucide-react";
 import {
@@ -102,6 +104,10 @@ function resolve(
 }
 export async function generateMetadata({ params }: Props) {
   const p = await params;
+  if (isLocale(p.locale)) {
+    const profile = resolveFootballProfile(p.locale, p.segments);
+    if (profile) return footballProfileMetadata(p.locale, profile);
+  }
   const theme = isLocale(p.locale) ? resolveQuizTheme(p.locale, p.segments) : undefined;
   if (theme && isLocale(p.locale) && gameAvailable("quiz", utcDay())) return quizThemeMetadata(p.locale, theme);
   const r = resolve(p.locale, p.segments);
@@ -153,6 +159,10 @@ export async function generateMetadata({ params }: Props) {
 }
 export default async function GamePage({ params }: Props) {
   const p = await params;
+  if (isLocale(p.locale)) {
+    const profile = resolveFootballProfile(p.locale, p.segments);
+    if (profile) return <FootballProfilePage locale={p.locale} profile={profile} />;
+  }
   const theme = isLocale(p.locale) ? resolveQuizTheme(p.locale, p.segments) : undefined;
   if (theme && isLocale(p.locale) && gameAvailable("quiz", utcDay())) return <QuizThemePage locale={p.locale} theme={theme}/>;
   const r = resolve(p.locale, p.segments);
