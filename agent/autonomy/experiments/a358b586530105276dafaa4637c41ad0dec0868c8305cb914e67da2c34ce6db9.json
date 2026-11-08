@@ -1,0 +1,118 @@
+{
+  "id": "five-capitals-feasibility",
+  "objective": "acquisition",
+  "kind": "research",
+  "hypothesis": "Un quiz court de cinq capitales à saisir pourrait élargir les entrées vers Puzzoria ; un prototype isolé peut déterminer la faisabilité multilingue avant intégration.",
+  "expectedImpact": "Aucun effet direct attendu de cette étude documentaire. Gain exploratoire de départs seulement après un éventuel produit distinct et déployé ; demande non démontrée.",
+  "metric": "playing.starts",
+  "observationDays": 14,
+  "minimumSamples": 20,
+  "minimumRelativeImprovement": 0.2,
+  "decision": "stop",
+  "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76\",\"collectedAt\":\"2026-10-30T22:17:35.527Z\",\"finding\":\"lastFailure/unverifiedWork null ; deux expériences SEO déployées en attente de fenêtres complètes, Sudoku proposed, Mots mêlés manual_review.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/puzzoria-analytics.json; /opt/puzzoria-pilot/readonly/search-console.json; /opt/puzzoria-pilot/readonly/trends.json\",\"finding\":\"Collectes available 30 octobre 22:17 UTC ; analytics 1–30 octobre UTC partiel : six identités compte/appareil, vingt départs, dix-huit fins ; Google 30 septembre–29 octobre demandé, dernière date 28 octobre Pacific : 179 impressions/six clics. Requêtes partielles sans signal explicite de quiz géographique. RSS quatre pays disponibles ; TikTok indisponible. Aucune demande de quiz démontrée.\"},{\"source\":\"docs/GEOGRAPHY-QUIZ-FEASIBILITY.fr.md; src/lib/server/play.ts; src/lib/types.ts; content/social/ranking-pools.v2.json\",\"finding\":\"Vingt labels de pays traduits, aucune capitale/alias. Branches de preuve explicites à étendre avec revue propriétaire. Proposition de cinq questions Practice sans compte à rebours et prototype isolé ; 29 tests existants social-games/play-reservation réussis, sans valider un quiz inexistant.\"}]",
+  "createdAt": "2026-10-30T22:21:37.345Z",
+  "baseline": {
+    "id": "34c4d14de9674960020c41efbcf1327529ca4d924411964ab2b335d544f9af76",
+    "collectedAt": "2026-10-30T22:17:35.527Z",
+    "sources": {
+      "puzzoria": {
+        "status": "available",
+        "fetchedAt": "2026-10-30T22:17:30.57Z",
+        "sha256": "3dd644b4f0334403f4fed2ad87a34b7b75ddc1cd565c44bf26746926b02b353b"
+      },
+      "google": {
+        "status": "available",
+        "fetchedAt": "2026-10-30T22:17:32.259Z",
+        "sha256": "1d5a0d7c5919837a7a092935b8b2dc4e7d1a00e2c50d1e037da4c3c20eb51373"
+      }
+    },
+    "series": {
+      "playing.starts": [
+        {
+          "date": "2026-10-19",
+          "value": 0
+        },
+        {
+          "date": "2026-10-20",
+          "value": 0
+        },
+        {
+          "date": "2026-10-21",
+          "value": 0
+        },
+        {
+          "date": "2026-10-22",
+          "value": 1
+        },
+        {
+          "date": "2026-10-23",
+          "value": 0
+        },
+        {
+          "date": "2026-10-24",
+          "value": 0
+        },
+        {
+          "date": "2026-10-25",
+          "value": 0
+        },
+        {
+          "date": "2026-10-26",
+          "value": 0
+        },
+        {
+          "date": "2026-10-27",
+          "value": 0
+        },
+        {
+          "date": "2026-10-28",
+          "value": 0
+        },
+        {
+          "date": "2026-10-29",
+          "value": 0
+        },
+        {
+          "date": "2026-10-30",
+          "value": 0
+        },
+        {
+          "date": "2026-10-31",
+          "value": 0
+        },
+        {
+          "date": "2026-11-01",
+          "value": 0
+        }
+      ]
+    },
+    "retention": {
+      "playing.starts": null
+    },
+    "frozen": true,
+    "completedFromObservation": "120e9018312fb5ebd653f1783947aba71544a7bbff3bea5967bd0f377fe0ccba"
+  },
+  "candidateSha": "d344b5b8fb947cacb53556d71ece2afd827d1eff",
+  "prNumber": 32,
+  "prUrl": "https://github.com/Aimericv/puzzoria/pull/32",
+  "status": "merged",
+  "mergeSha": "88b38e1b0c898a29a4335f083cecc29495b2b543",
+  "assessment": {
+    "status": "waiting_complete_windows",
+    "causalClaim": false
+  },
+  "deployment": {
+    "status": "deployed",
+    "finishedAt": "2026-11-02T15:58:17.755Z",
+    "releasedAt": "2026-11-02T15:58:17.755Z",
+    "previousCommit": "debb36f663cf027e91425d98420dd62467e54175",
+    "sha": "0a446ce01c67f43dc272fc40f5b1176aadd1bea9",
+    "sharedRollout": true
+  },
+  "closure": {
+    "closedAt": "2026-11-08T22:17:55.163Z",
+    "reason": "Feasibility report delivered in merged PR #32. The separate prototype and editorial proposal remain in review.",
+    "previousDecision": "continue",
+    "mergeCommit": "88b38e1b0c898a29a4335f083cecc29495b2b543"
+  }
+}

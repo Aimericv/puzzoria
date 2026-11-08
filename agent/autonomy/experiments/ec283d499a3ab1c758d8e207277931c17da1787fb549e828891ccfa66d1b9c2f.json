@@ -1,0 +1,415 @@
+{
+  "id": "first-play-browser-protocol",
+  "objective": "acquisition",
+  "kind": "research",
+  "hypothesis": "Une vérification navigateur des pages de base Word et Mots mêlés peut établir une friction concrète avant de modifier le parcours de première partie.",
+  "expectedImpact": "Pas de gain immédiat attendu : préparer des preuves de parcours et de rendu accessible, sans intervention produit.",
+  "metric": "playing.starts",
+  "observationDays": 14,
+  "minimumSamples": 20,
+  "minimumRelativeImprovement": 0.2,
+  "decision": "stop",
+  "evidence": "[{\"source\":\"/opt/puzzoria-pilot/readonly/growth-context.json\",\"observationId\":\"48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78\",\"collectedAt\":\"2026-10-27T12:23:28.570Z\",\"finding\":\"Trois expériences précédentes awaiting_verified_deployment ; lastFailure et unverifiedWork null. Pas de résultat de production attribuable.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/search-console.json\",\"collectedAt\":\"2026-10-27T12:23:24.955Z\",\"finding\":\"Available : 177 impressions et six clics sur 30 jours demandés 27 septembre–26 octobre ; dernière date rapportée 25 octobre, America/Los_Angeles. Lignes partielles sans jointure page/requête.\"},{\"source\":\"/opt/puzzoria-pilot/readonly/puzzoria-analytics.json\",\"collectedAt\":\"2026-10-27T12:23:23.397Z\",\"finding\":\"Available : six identités compte/appareil, 20 départs et 18 fins sur 30 jours UTC 28 septembre–27 octobre, jour courant partiel. Aucun funnel séquentiel permettant de localiser une friction.\"},{\"source\":\"e2e/first-play-entry.spec.ts; src/components/classic-games.tsx; src/components/game-preview.tsx\",\"finding\":\"Scénarios préparés pour première saisie, preview, départ explicite et refus/reprise. Instantanés ARIA à collecter ; code pré-départ contient des lettres dans les libellés, sans reproduction navigateur exécutée.\"}]",
+  "createdAt": "2026-10-27T12:28:57.423Z",
+  "baseline": {
+    "id": "48b38c582bb32b27c687ee6c248828e60aacffeb9d8e62d77e6d2233b12fcc78",
+    "collectedAt": "2026-10-27T12:23:28.57Z",
+    "sources": {
+      "puzzoria": {
+        "status": "available",
+        "fetchedAt": "2026-10-27T12:23:23.397Z",
+        "sha256": "e653b88e3827dbde0b4fc5d25f129ccaeda90964b344487da0e5c836a408483e"
+      },
+      "google": {
+        "status": "available",
+        "fetchedAt": "2026-10-27T12:23:24.955Z",
+        "sha256": "e3a144ffbcf47ee0eee0c1ba399266a67518cf47944a6fe513d8a238a5b6d5c0"
+      }
+    },
+    "series": {
+      "playing.starts": [
+        {
+          "date": "2026-07-30",
+          "value": 0
+        },
+        {
+          "date": "2026-07-31",
+          "value": 0
+        },
+        {
+          "date": "2026-08-01",
+          "value": 0
+        },
+        {
+          "date": "2026-08-02",
+          "value": 0
+        },
+        {
+          "date": "2026-08-03",
+          "value": 0
+        },
+        {
+          "date": "2026-08-04",
+          "value": 0
+        },
+        {
+          "date": "2026-08-05",
+          "value": 0
+        },
+        {
+          "date": "2026-08-06",
+          "value": 0
+        },
+        {
+          "date": "2026-08-07",
+          "value": 0
+        },
+        {
+          "date": "2026-08-08",
+          "value": 0
+        },
+        {
+          "date": "2026-08-09",
+          "value": 0
+        },
+        {
+          "date": "2026-08-10",
+          "value": 0
+        },
+        {
+          "date": "2026-08-11",
+          "value": 0
+        },
+        {
+          "date": "2026-08-12",
+          "value": 0
+        },
+        {
+          "date": "2026-08-13",
+          "value": 0
+        },
+        {
+          "date": "2026-08-14",
+          "value": 0
+        },
+        {
+          "date": "2026-08-15",
+          "value": 0
+        },
+        {
+          "date": "2026-08-16",
+          "value": 0
+        },
+        {
+          "date": "2026-08-17",
+          "value": 0
+        },
+        {
+          "date": "2026-08-18",
+          "value": 0
+        },
+        {
+          "date": "2026-08-19",
+          "value": 0
+        },
+        {
+          "date": "2026-08-20",
+          "value": 0
+        },
+        {
+          "date": "2026-08-21",
+          "value": 0
+        },
+        {
+          "date": "2026-08-22",
+          "value": 0
+        },
+        {
+          "date": "2026-08-23",
+          "value": 0
+        },
+        {
+          "date": "2026-08-24",
+          "value": 0
+        },
+        {
+          "date": "2026-08-25",
+          "value": 0
+        },
+        {
+          "date": "2026-08-26",
+          "value": 0
+        },
+        {
+          "date": "2026-08-27",
+          "value": 0
+        },
+        {
+          "date": "2026-08-28",
+          "value": 0
+        },
+        {
+          "date": "2026-08-29",
+          "value": 0
+        },
+        {
+          "date": "2026-08-30",
+          "value": 0
+        },
+        {
+          "date": "2026-08-31",
+          "value": 0
+        },
+        {
+          "date": "2026-09-01",
+          "value": 0
+        },
+        {
+          "date": "2026-09-02",
+          "value": 0
+        },
+        {
+          "date": "2026-09-03",
+          "value": 0
+        },
+        {
+          "date": "2026-09-04",
+          "value": 0
+        },
+        {
+          "date": "2026-09-05",
+          "value": 0
+        },
+        {
+          "date": "2026-09-06",
+          "value": 0
+        },
+        {
+          "date": "2026-09-07",
+          "value": 0
+        },
+        {
+          "date": "2026-09-08",
+          "value": 0
+        },
+        {
+          "date": "2026-09-09",
+          "value": 0
+        },
+        {
+          "date": "2026-09-10",
+          "value": 0
+        },
+        {
+          "date": "2026-09-11",
+          "value": 0
+        },
+        {
+          "date": "2026-09-12",
+          "value": 0
+        },
+        {
+          "date": "2026-09-13",
+          "value": 0
+        },
+        {
+          "date": "2026-09-14",
+          "value": 0
+        },
+        {
+          "date": "2026-09-15",
+          "value": 0
+        },
+        {
+          "date": "2026-09-16",
+          "value": 0
+        },
+        {
+          "date": "2026-09-17",
+          "value": 0
+        },
+        {
+          "date": "2026-09-18",
+          "value": 0
+        },
+        {
+          "date": "2026-09-19",
+          "value": 0
+        },
+        {
+          "date": "2026-09-20",
+          "value": 0
+        },
+        {
+          "date": "2026-09-21",
+          "value": 0
+        },
+        {
+          "date": "2026-09-22",
+          "value": 0
+        },
+        {
+          "date": "2026-09-23",
+          "value": 0
+        },
+        {
+          "date": "2026-09-24",
+          "value": 0
+        },
+        {
+          "date": "2026-09-25",
+          "value": 0
+        },
+        {
+          "date": "2026-09-26",
+          "value": 0
+        },
+        {
+          "date": "2026-09-27",
+          "value": 0
+        },
+        {
+          "date": "2026-09-28",
+          "value": 0
+        },
+        {
+          "date": "2026-09-29",
+          "value": 0
+        },
+        {
+          "date": "2026-09-30",
+          "value": 0
+        },
+        {
+          "date": "2026-10-01",
+          "value": 0
+        },
+        {
+          "date": "2026-10-02",
+          "value": 0
+        },
+        {
+          "date": "2026-10-03",
+          "value": 0
+        },
+        {
+          "date": "2026-10-04",
+          "value": 0
+        },
+        {
+          "date": "2026-10-05",
+          "value": 0
+        },
+        {
+          "date": "2026-10-06",
+          "value": 0
+        },
+        {
+          "date": "2026-10-07",
+          "value": 1
+        },
+        {
+          "date": "2026-10-08",
+          "value": 0
+        },
+        {
+          "date": "2026-10-09",
+          "value": 0
+        },
+        {
+          "date": "2026-10-10",
+          "value": 0
+        },
+        {
+          "date": "2026-10-11",
+          "value": 9
+        },
+        {
+          "date": "2026-10-12",
+          "value": 1
+        },
+        {
+          "date": "2026-10-13",
+          "value": 6
+        },
+        {
+          "date": "2026-10-14",
+          "value": 2
+        },
+        {
+          "date": "2026-10-15",
+          "value": 0
+        },
+        {
+          "date": "2026-10-16",
+          "value": 0
+        },
+        {
+          "date": "2026-10-17",
+          "value": 0
+        },
+        {
+          "date": "2026-10-18",
+          "value": 0
+        },
+        {
+          "date": "2026-10-19",
+          "value": 0
+        },
+        {
+          "date": "2026-10-20",
+          "value": 0
+        },
+        {
+          "date": "2026-10-21",
+          "value": 0
+        },
+        {
+          "date": "2026-10-22",
+          "value": 1
+        },
+        {
+          "date": "2026-10-23",
+          "value": 0
+        },
+        {
+          "date": "2026-10-24",
+          "value": 0
+        },
+        {
+          "date": "2026-10-25",
+          "value": 0
+        },
+        {
+          "date": "2026-10-26",
+          "value": 0
+        }
+      ]
+    },
+    "retention": {
+      "playing.starts": null
+    }
+  },
+  "candidateSha": "ef37c973f567bd2241f4542684905c4fa32b5fc6",
+  "prNumber": 19,
+  "prUrl": "https://github.com/Aimericv/puzzoria/pull/19",
+  "status": "merged_documentation",
+  "requiresDeployment": false,
+  "validatedInBatch": {
+    "source": "bbcd110d7ee6390a3fb55ab7de16d9edb504e60b",
+    "appSource": "8b8d23691427c4ba78e4fabbc2de45cfb6987fd9",
+    "fullRunId": "40539308357",
+    "controllerRunId": "40549513756"
+  },
+  "publicationMergeSha": "45bef6497b0d6e2afc3e46e307d21e0ce0f255c0",
+  "assessment": {
+    "status": "awaiting_verified_deployment",
+    "causalClaim": false
+  },
+  "closure": {
+    "closedAt": "2026-11-08T22:17:55.163Z",
+    "reason": "Browser protocol and regression test delivered in merged PR #19. No live product treatment to evaluate.",
+    "previousDecision": "continue",
+    "mergeCommit": "c5646a51932b7246874afae1c1279eb54fb45a45"
+  }
+}
