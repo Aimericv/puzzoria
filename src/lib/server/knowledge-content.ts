@@ -14,6 +14,19 @@ const country = {
 };
 const contents: Record<string, Answer[]> = {
   ...expandedContents,
+  // Frozen Ligue 1 clubs v1: historical first-team spells from the sourced local careers.
+  "ligue-1-clubs": [
+    row("Zinédine Zidane · 1992–1996", "Girondins de Bordeaux", ["Bordeaux", "FC Girondins de Bordeaux"]),
+    row("Thierry Henry · 1994–1999", "AS Monaco", ["Monaco", "AS Monaco FC"]),
+    row("David Beckham · 2013", "Paris Saint-Germain", ["PSG", "Paris SG"]),
+    row("Kim Källström · 2004–2006", "Stade Rennais", ["Rennes", "Stade Rennais FC"]),
+    row("Kim Källström · 2006–2012", "Olympique Lyonnais", ["Lyon", "OL"]),
+    row("Mathieu Bodmer · 2003–2007", "Lille OSC", ["Lille", "LOSC"]),
+    row("Mathieu Bodmer · 2013–2017", "OGC Nice", ["Nice"]),
+    row("Mathieu Bodmer · 2013", "AS Saint-Étienne", ["Saint-Étienne", "ASSE"]),
+    row("Alou Diarra · 2011–2012", "Olympique de Marseille", ["Marseille", "OM"]),
+    row("Alou Diarra · 2005–2006", "RC Lens", ["Lens", "Racing Club de Lens"]),
+  ],
   "europe-capitals": [
     row(country.france,"Paris"),row(country.spain,l("Madrid","Madrid","Madrid","Madrid")),row(country.germany,l("Berlin","Berlin","Berlín","Berlin")),row(country.italy,l("Rome","Rome","Roma","Rom")),row(country.portugal,l("Lisbon","Lisbonne","Lisboa","Lissabon")),row(country.belgium,l("Brussels","Bruxelles","Bruselas","Brüssel")),row(country.netherlands,"Amsterdam"),row(country.switzerland,l("Bern","Berne","Berna","Bern")),row(country.austria,l("Vienna","Vienne","Viena","Wien")),row(country.poland,l("Warsaw","Varsovie","Varsovia","Warschau")),row(country.greece,l("Athens","Athènes","Atenas","Athen")),row(country.sweden,l("Stockholm","Stockholm","Estocolmo","Stockholm")),row(country.norway,"Oslo"),row(country.denmark,l("Copenhagen","Copenhague","Copenhague","Kopenhagen")),row(country.finland,"Helsinki"),row(country.ireland,l("Dublin","Dublin","Dublín","Dublin")),row(country.iceland,l("Reykjavík","Reykjavik","Reikiavik","Reykjavík"),["Reykjavik","Reykjavik"]),row(country.hungary,"Budapest"),row(country.czechia,l("Prague","Prague","Praga","Prag")),row(country.romania,l("Bucharest","Bucarest","Bucarest","Bukarest")),
   ],
