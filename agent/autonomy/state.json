@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 277,
+  "generation": 278,
   "status": "retrying",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -21,7 +21,7 @@
     "expiresAt": "2027-02-06T22:01:53Z",
     "digest": "7e6fd27d0bf7a3754a2dc376ab5f726562abad404033a80856c5457400be8b20"
   },
-  "lastMessageId": 6713507681,
+  "lastMessageId": 6727841356,
   "completedSessions": 35,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": "2026-11-08T22:20:49.830Z",
@@ -36,7 +36,13 @@
     "PLAN.json": "{\n  \"continuityNonce\": \"1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1\",\n  \"summary\": \"Recherche drapeaux expert terminée : inventaire des quinze SVG, comparaisons et limites de provenance documentés. Intégration différée ; aucun changement produit. 17 tests existants passent. Travaux capitales/carte déjà en revue non dupliqués.\",\n  \"nextMission\": \"Après couverture effective de sept journées complètes après le catalogue du 3 novembre, réexécuter le rapport acquisition existant ; vérifier dates Google Pacific/UTC, départs par sujet et échantillons avant de choisir une intervention. Ne pas forcer un sujet drapeaux expert sans actifs sourcés ni multiplier les guides.\",\n  \"blockedReason\": null,\n  \"experiment\": {\n    \"id\": \"flags-expert-corpus-feasibility\",\n    \"objective\": \"acquisition\",\n    \"kind\": \"research\",\n    \"hypothesis\": \"Un inventaire des confusions et des sources locales permet de décider si un sujet drapeaux difficile distinct peut soutenir de nouveaux départs sans dénaturer le pilote.\",\n    \"expectedImpact\": \"Réduction des inconnues avant investissement ; aucun effet direct attendu de la note documentaire.\",\n    \"evidence\": [\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/growth-context.json\",\n        \"observationId\": \"58c03e553a7aa17c8fa2c14d4ae9eec1cda90d15065a617195d6d325015a4c18\",\n        \"collectedAt\": \"2026-11-08T22:03:56.734Z\",\n        \"finding\": \"Aucun échec ni travail non vérifié ; capitales et guide carte en revue, pas de reprise à dupliquer.\"\n      },\n      {\n        \"source\": \"public/flags ; content/KNOWLEDGE-SOURCES.md ; src/lib/server/knowledge-content.ts ; src/components/knowledge-game.tsx\",\n        \"finding\": \"Quinze SVG du pilote, comparaison Italie/Mexique disponible ; notice collective mais provenance individuelle non établie localement. Niveau expert non démontré.\"\n      },\n      {\n        \"source\": \"/opt/puzzoria-pilot/readonly/search-console.json ; /opt/puzzoria-pilot/readonly/puzzoria-analytics.json\",\n        \"collectedAt\": \"2026-11-08T22:03:53.398Z\",\n        \"finding\": \"Google available, 178 impressions/6 clics sur trente jours demandés, dernière date 6 novembre Pacific ; flags zéro départ dans quatre lignes du rapport UTC partiel. Pas de demande démontrée ni effet attribué.\"\n      }\n    ],\n    \"metric\": \"playing.starts\",\n    \"observationDays\": 14,\n    \"minimumSamples\": 20,\n    \"minimumRelativeImprovement\": 0.2,\n    \"decision\": \"stop\"\n  }\n}\n"
   },
   "controlSha": "ab06fe8278192404da9a065c22f53419de6bb39e",
-  "pendingMessages": [],
+  "pendingMessages": [
+    {
+      "id": 6727841356,
+      "text": "## Directive propriétaire — priorité aux jeux à potentiel SEO (8 novembre 2026)\n\nPour les prochaines sessions, donne la priorité à **une amélioration jouable et publiable** répondant à une recherche précise, plutôt qu'à de nouvelles PR consacrées uniquement à des guides, retouches de présentation ou audits sans anomalie démontrée.\n\n1. **Priorité P1 : « quiz drapeau difficile »** (estimation fournie : 500 recherches/mois, KD 0). Construis un **vrai quiz de niveau difficile**, distinct du pilote de 15 drapeaux : confusions visuelles pertinentes, données vérifiées, droits/licences des images contrôlés, contenu utile et traductions EN/FR/ES/DE. Préserve les versions et résultats existants.\n2. Si le corpus ou les licences ne permettent pas de réaliser ce quiz correctement **avec les ressources déjà disponibles**, explique brièvement le blocage et passe directement au **quiz Ligue 1** (estimation fournie : 500 recherches/mois, KD 0), avec un jeu réel correspondant à l'intention de recherche. N'attends pas de nouveaux accès, achats ou secrets.\n3. La PR #47 (capitales européennes) et la PR #48 (guide carte Europe) sont déjà ouvertes : **ne duplique pas ces chantiers**. Laisse leur validation/fusion aux contrôles prévus et avance sur la prochaine fonctionnalité sûre.\n4. Termine par une PR ciblée, avec tests, SEO technique, sources et maillage internes adaptés. Dans ton bilan, précise l'URL, le jeu concret ajouté ou amélioré, la requête visée et les états **PR / fusion / production**. Ne revendique aucun gain Google avant mesure effective.\n\nL'objectif reste **l'acquisition organique de nouveaux joueurs**, pas l'accumulation de petites PR. Respecte les contrôles, validations propriétaires et verrous de production existants.",
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6727841356"
+    }
+  ],
   "retryCount": 1,
   "blockedReason": null,
   "lastSession": {
