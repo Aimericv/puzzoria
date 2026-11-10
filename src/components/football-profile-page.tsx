@@ -9,10 +9,10 @@ import { pageMetadata } from "@/lib/seo";
 import { locales, type Locale } from "@/lib/types";
 
 const copy = {
-  en: { profiles: "Football player careers", title: "Clubs and career", clubs: "Clubs in chronological order", theme: "Football quizzes", play: "Guess the football player", source: "Source", more: "Another player’s career" },
-  fr: { profiles: "Parcours de footballeurs", title: "Clubs et carrière", clubs: "Les clubs dans l’ordre chronologique", theme: "Quiz football", play: "Devine le footballeur", source: "Source", more: "Un autre parcours" },
-  es: { profiles: "Trayectorias de futbolistas", title: "Clubes y trayectoria", clubs: "Clubes en orden cronológico", theme: "Quizzes de fútbol", play: "Adivina el futbolista", source: "Fuente", more: "La trayectoria de otro jugador" },
-  de: { profiles: "Karrieren von Fußballspielern", title: "Vereine und Karriere", clubs: "Vereine in chronologischer Reihenfolge", theme: "Fußball-Quiz", play: "Errate den Fußballspieler", source: "Quelle", more: "Eine weitere Spielerkarriere" },
+  en: { profiles: "Football player careers", title: "Clubs and career", clubs: "Clubs in chronological order", scope: "First-team spells featured in the game, including loans and returns.", theme: "Football quizzes", play: "Guess the football player", sources: "References", more: "Another player’s career" },
+  fr: { profiles: "Parcours de footballeurs", title: "Clubs et carrière", clubs: "Les clubs dans l’ordre chronologique", scope: "Passages en équipe première retenus dans le jeu, prêts et retours compris.", theme: "Quiz football", play: "Devine le footballeur", sources: "Références", more: "Un autre parcours" },
+  es: { profiles: "Trayectorias de futbolistas", title: "Clubes y trayectoria", clubs: "Clubes en orden cronológico", scope: "Etapas con el primer equipo incluidas en el juego, con cesiones y regresos.", theme: "Quizzes de fútbol", play: "Adivina el futbolista", sources: "Referencias", more: "La trayectoria de otro jugador" },
+  de: { profiles: "Karrieren von Fußballspielern", title: "Vereine und Karriere", clubs: "Vereine in chronologischer Reihenfolge", scope: "Stationen in der ersten Mannschaft aus dem Spiel, einschließlich Leihen und Rückkehr.", theme: "Fußball-Quiz", play: "Errate den Fußballspieler", sources: "Quellen", more: "Eine weitere Spielerkarriere" },
 };
 
 export function footballProfileMetadata(locale: Locale, profile: FootballProfile) {
@@ -70,7 +70,8 @@ export function FootballProfilePage({ locale, profile }: { locale: Locale; profi
         <div className="word-article-body">
           <section id="clubs">
             <h2>{m.clubs}</h2>
-            <ol className="football-timeline">
+            <p>{m.scope}</p>
+            <ol className="football-timeline" role="list" aria-label={m.clubs}>
               {profile.clubs.map(({ club, years, loan }, i) => (
                 <li key={i}>
                   <span className="football-stop" aria-hidden="true">{i + 1}</span>
@@ -81,11 +82,15 @@ export function FootballProfilePage({ locale, profile }: { locale: Locale; profi
               ))}
             </ol>
           </section>
-          {profile.sections.map(({ title, body, source }, i) => (
+          {profile.sections.map(({ title, body, sources }, i) => (
             <section id={`career-${i + 1}`} key={i}>
               <h2>{title[locale]}</h2>
               <p>{body[locale]}</p>
-              <small>{m.source} · <a href={source.url}>{source.name}</a></small>
+              <small>
+                {m.sources} · {sources.map((source, index) => (
+                  <span key={source.url}>{index > 0 && " · "}<a href={source.url}>{source.name}</a></span>
+                ))}
+              </small>
             </section>
           ))}
           <FootballProfileLinks locale={locale} except={profile.slug} />
