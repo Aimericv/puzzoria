@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 282,
+  "generation": 283,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -21,7 +21,7 @@
     "expiresAt": "2027-02-07T22:19:53Z",
     "digest": "64faaa79dd49f43bb9814766f53684a1e3c2315ee7513de16e7497f771434d53"
   },
-  "lastMessageId": 6727841356,
+  "lastMessageId": 6778802898,
   "completedSessions": 35,
   "continuityNonce": "1fe87426a22dac04e1d0173a38b943a48cab6b205b258cb1",
   "nextEligibleAt": null,
@@ -41,6 +41,11 @@
       "id": 6727841356,
       "text": "## Directive propriétaire — priorité aux jeux à potentiel SEO (8 novembre 2026)\n\nPour les prochaines sessions, donne la priorité à **une amélioration jouable et publiable** répondant à une recherche précise, plutôt qu'à de nouvelles PR consacrées uniquement à des guides, retouches de présentation ou audits sans anomalie démontrée.\n\n1. **Priorité P1 : « quiz drapeau difficile »** (estimation fournie : 500 recherches/mois, KD 0). Construis un **vrai quiz de niveau difficile**, distinct du pilote de 15 drapeaux : confusions visuelles pertinentes, données vérifiées, droits/licences des images contrôlés, contenu utile et traductions EN/FR/ES/DE. Préserve les versions et résultats existants.\n2. Si le corpus ou les licences ne permettent pas de réaliser ce quiz correctement **avec les ressources déjà disponibles**, explique brièvement le blocage et passe directement au **quiz Ligue 1** (estimation fournie : 500 recherches/mois, KD 0), avec un jeu réel correspondant à l'intention de recherche. N'attends pas de nouveaux accès, achats ou secrets.\n3. La PR #47 (capitales européennes) et la PR #48 (guide carte Europe) sont déjà ouvertes : **ne duplique pas ces chantiers**. Laisse leur validation/fusion aux contrôles prévus et avance sur la prochaine fonctionnalité sûre.\n4. Termine par une PR ciblée, avec tests, SEO technique, sources et maillage internes adaptés. Dans ton bilan, précise l'URL, le jeu concret ajouté ou amélioré, la requête visée et les états **PR / fusion / production**. Ne revendique aucun gain Google avant mesure effective.\n\nL'objectif reste **l'acquisition organique de nouveaux joueurs**, pas l'accumulation de petites PR. Respecte les contrôles, validations propriétaires et verrous de production existants.",
       "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6727841356"
+    },
+    {
+      "id": 6778802898,
+      "text": "## Coordination après déblocage — 10 novembre 2026\n\nCodex vient de lever le blocage des 12 expériences : trois travaux achevés archivés avec preuves (commit `0dcd06b`), **9 expériences actives** selon son contrôle, test d'admission passé. Les PR #47 et #48 ainsi que le brouillon du quiz drapeaux difficiles sont conservés. Merci de **vérifier cet état au prochain réveil normal** ; ne déclenche pas de run supplémentaire ni de dépenses.\n\nPeux-tu confirmer dans ton prochain bilan :\n1. si tu as repris une session utile (et si la limite d'expériences ou la limite de durée bloque encore), avec le nombre de sessions validées ;\n2. le **livrable concret** en cours, sa PR et ce qui reste à faire, en reprenant les checkpoints existants ;\n3. les états exacts **PR / fusion / production**, sans présenter une PR ouverte comme publiée.\n\nLa priorité propriétaire du [8 novembre](https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6727841356) reste inchangée : **vrai quiz drapeaux difficile jouable** et distinct du pilote ; si corpus/licences insuffisants, passer au **quiz Ligue 1**. Évite de refaire des guides mineurs ou de dupliquer les PR #47/#48.\n\nEn parallèle, Codex prépare séparément un pilote de fiches Thierry Henry/Miroslav Klose (8 pages EN/FR/ES/DE) sur `codex/football-player-profiles`, **pas fusionné** : ne reprends pas ce chantier. Préserve les contrôles CI, les quotas et le verrou de déploiement.",
+      "url": "https://github.com/Aimericv/puzzoria/issues/3#issuecomment-6778802898"
     }
   ],
   "retryCount": 0,
