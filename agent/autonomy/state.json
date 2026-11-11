@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 286,
+  "generation": 287,
   "status": "ready",
   "issueNumber": 3,
   "ownerId": 103512403,
@@ -211,158 +211,6 @@
     "unverifiedSnapshot": "e8bce76ef6b8a38dd427cce3b96858a92c21afb7"
   },
   "validation": {
-    "41982318818": {
-      "sourceSha": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
-      "jobs": {
-        "first": {
-          "schemaVersion": 1,
-          "runId": "41982318818",
-          "job": "first",
-          "mode": "autonomous",
-          "funding": {
-            "mode": "no-payment-method",
-            "source": "owner-declaration",
-            "verifiedAt": "2026-10-21T14:33:40.997Z"
-          },
-          "startedAt": "2026-11-05T06:45:16.988Z",
-          "status": "deferred_runner_window",
-          "commands": [],
-          "productionDeployment": false,
-          "baseMain": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
-          "sourceCommit": "95fcf0943502d4bfb46133546a9662d06d5e89ce",
-          "isolationCanaries": true,
-          "quotaBefore": {
-            "status": "ready",
-            "quotas": [
-              {
-                "id": "codex",
-                "primary": {
-                  "usedPercent": 0,
-                  "windowDurationMins": 300,
-                  "resetsAt": 1793879126
-                },
-                "secondary": {
-                  "usedPercent": 32,
-                  "windowDurationMins": 10080,
-                  "resetsAt": 1794341052
-                }
-              }
-            ]
-          },
-          "actionsBudget": {
-            "month": "2026-11",
-            "limit": 1700,
-            "charged": 1303,
-            "reserved": 41,
-            "modelMilliseconds": 135199
-          },
-          "analytics": {
-            "status": "available",
-            "source": "https://puzzoria.com/api/agent/analytics",
-            "fetchedAt": "2026-11-05T06:45:27.239Z",
-            "sha256": "dce780c3a4f12dff8b2b25fc89497867a5789ea8aadcb5c160353138182258d5",
-            "readOnlySnapshot": true
-          },
-          "searchConsole": {
-            "status": "available",
-            "property": "sc-domain:puzzoria.com",
-            "fetchedAt": "2026-11-05T06:45:29.351Z",
-            "sha256": "8471ee3913de7ca11f291b66353a33a512a0e93fc79489a98c60ad725271d263",
-            "readOnlySnapshot": true
-          },
-          "growth": {
-            "observationId": "d432efb6ff70714707f27190e2ec900ba1a8029a78c06046d841007603d7a0a1",
-            "trendStatus": "available",
-            "trendSources": [
-              {
-                "id": "google-fr",
-                "status": "available"
-              },
-              {
-                "id": "google-us",
-                "status": "available"
-              },
-              {
-                "id": "google-de",
-                "status": "available"
-              },
-              {
-                "id": "google-es",
-                "status": "available"
-              },
-              {
-                "id": "tiktok-creative-center",
-                "status": "unavailable",
-                "reason": "request_failed"
-              }
-            ],
-            "readOnlySnapshots": true
-          },
-          "modelCommands": [
-            {
-              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent; cat /opt/puzzoria-pilot/readonly/actions-budget.json\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat AGENTS.md agent/autonomy/MANDATE.md agent/autonomy/INBOX.json; rg --files agent; ls'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'cat agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/growth-context.json /opt/puzzoria-pilot/readonly/trends.json /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat agent/autonomy/memory/PLAN.json; tail -45 agent/autonomy/memory/STATE.md; tail -22 agent/autonomy/memory/EXPERIMENTS.md; python3 - <<'PY'\nimport json\nfor n in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+n+'.json'));print(n, str(d)[:11500] if n=='growth-context' else str(d)[:1300])\nPY\nrg -n 'european|europe-capital|ligue-1|difficile|hard-flags' src/lib/quiz* src/components/*quiz*; ls node_modules/next/dist",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat src/lib/quiz-topics.ts | head -100; cat src/lib/quiz-editorial.ts | head -100; cat src/components/quiz-topics.tsx | head -90; python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json')); print('ROOT',list(x)); print('observation',str(x.get('observation'))[:700]); print('fail',x.get('lastFailure'),x.get('unverifiedWork'))\nPY\ncat node_modules/next/dist/docs/01-app/02-guides/ai-agents.md | head -45\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'europe-capitals|flags|ligue' src/lib/knowledge-catalog.ts; cat src/components/quiz-guide.tsx; ls tests/*quiz*; head -60 tests/quiz-editorial.test.ts; cat content/KNOWLEDGE-SOURCES.md | head -60\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg -n 'quizEditorial|method\\\\[' src/components tests/quiz-themes.test.ts; head -65 tests/quiz-themes.test.ts; rg -n 'capitals|Berne|Bern' src/lib/server/knowledge-content.ts | head; cat node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.mdx | head -25\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/quiz-editorial.ts'\ns=open(p).read(); marker='  \\\"countries-world\\\": {'\naddition='''  \\\"europe-capitals\\\": {\n    method: l(\\\"Read each country prompt and type its capital, in any order. Make a first pass through the pairs you know, then revisit the gaps by region: Nordic countries, western Europe, central Europe and the south-east. After the round, review the missed pairs before replaying; the twenty prompts stay the same.\\\", \\\"Lis chaque pays et saisis ",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"rg --files node_modules/next/dist/docs | rg 'generate-metadata'; sed -n '50,65p' src/components/quiz-theme.tsx; python3 - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json')); print(x['observation']['id'],x['observation']['collectedAt']); print([(e['id'],e.get('status')) for e in x['experiments']]);\nPY\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"head -45 node_modules/next/dist/docs/01-app/03-api-reference/04-functions/generate-metadata.md; cat package.json | sed -n '5,38p'; rg -n 'quizTopicMetadata|title' src/lib/knowledge-seo.ts | head -16; rg -n 'QuizEditorial' src/app\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc 'npm run typecheck'",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"python3 - <<'PY'\np='src/lib/quiz-editorial.ts';s=open(p).read().replace('sources: [eu, { name: \\\"Swiss Confederation · Bern, federal city\\\", url: \\\"https://www.aboutswitzerland.eda.admin.ch/en/bern\\\" }],','sources: [eu],');open(p,'w').write(s)\nPY\nnpm run lint\"",
-              "exitCode": 0
-            },
-            {
-              "command": "/bin/bash -lc \"cat > docs/EUROPE-CAPITALS-SEO.fr.md <<'EOF'\n# Capitales européennes : améliorer le quiz existant\n\nContribution du 5 novembre 2026, base 95fcf0943502d4bfb46133546a9662d06d5e89ce.\n\nIntention : « quiz capitales européennes ». Estimation fournie par le propriétaire le 4 novembre : 5 000 recherches mensuelles, KD Ahrefs 0. Le propriétaire rapporte des résultats de sites DR 17–27 sur plusieurs SERP P1 ; aucune nouvelle SERP n’a été consultée ici. Ces estimations ne garantissent ni clas",
-              "exitCode": 0
-            }
-          ],
-          "threadId": "01a1aa74-b244-70b1-ac8e-c99f38d2249a",
-          "model": "gpt-6.1-sol",
-          "previousCompletedSessions": 33,
-          "error": "Session time boundary reached; preserve work for the next wake",
-          "unverifiedSnapshot": "03cb0d485ff41fc1014062d2a3afa29404e6d132",
-          "finishedAt": "2026-11-05T06:47:52.296Z",
-          "workflowOutcome": "success",
-          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/41982318818"
-        }
-      }
-    },
     "42279174295": {
       "sourceSha": "ab06fe8278192404da9a065c22f53419de6bb39e",
       "jobs": {
@@ -1128,6 +976,174 @@
           "finishedAt": "2026-11-09T22:24:24.932Z",
           "workflowOutcome": "success",
           "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/42710895710"
+        }
+      }
+    },
+    "42971029632": {
+      "sourceSha": "ab06fe8278192404da9a065c22f53419de6bb39e",
+      "jobs": {
+        "first": {
+          "schemaVersion": 1,
+          "runId": "42971029632",
+          "job": "first",
+          "mode": "autonomous",
+          "funding": {
+            "mode": "no-payment-method",
+            "source": "owner-declaration",
+            "verifiedAt": "2026-10-21T14:33:40.997Z"
+          },
+          "startedAt": "2026-11-11T06:16:15.103Z",
+          "status": "deferred_runner_window",
+          "commands": [],
+          "productionDeployment": false,
+          "baseMain": "ab06fe8278192404da9a065c22f53419de6bb39e",
+          "sourceCommit": "d8520f76b4f475acf362a5c32e2db936c36b8b70",
+          "isolationCanaries": true,
+          "quotaBefore": {
+            "status": "ready",
+            "quotas": [
+              {
+                "id": "codex",
+                "primary": {
+                  "usedPercent": 0,
+                  "windowDurationMins": 300,
+                  "resetsAt": 1794395782
+                },
+                "secondary": {
+                  "usedPercent": 2,
+                  "windowDurationMins": 10080,
+                  "resetsAt": 1794948723
+                }
+              }
+            ]
+          },
+          "actionsBudget": {
+            "month": "2026-11",
+            "limit": 1700,
+            "charged": 1446,
+            "reserved": 41,
+            "modelMilliseconds": 144297
+          },
+          "analytics": {
+            "status": "available",
+            "source": "https://puzzoria.com/api/agent/analytics",
+            "fetchedAt": "2026-11-11T06:16:22.971Z",
+            "sha256": "43ac6b3bbd1ee9b3995b8374c41cdbdff6a4fb94ce4524ecb309a72a5d2e5330",
+            "readOnlySnapshot": true
+          },
+          "searchConsole": {
+            "status": "available",
+            "property": "sc-domain:puzzoria.com",
+            "fetchedAt": "2026-11-11T06:16:24.576Z",
+            "sha256": "f3b4f5b3fc01bb7272fa11db9570a59ab21921da4e01e7a7ccab4464cdab181c",
+            "readOnlySnapshot": true
+          },
+          "growth": {
+            "observationId": "ac4c0ba9cdc72c0746d02c76cc67aae45c05e9ab7a92498f659f90093d302dad",
+            "trendStatus": "available",
+            "trendSources": [
+              {
+                "id": "google-fr",
+                "status": "available"
+              },
+              {
+                "id": "google-us",
+                "status": "available"
+              },
+              {
+                "id": "google-de",
+                "status": "available"
+              },
+              {
+                "id": "google-es",
+                "status": "available"
+              },
+              {
+                "id": "tiktok-creative-center",
+                "status": "unavailable",
+                "reason": "request_failed"
+              }
+            ],
+            "readOnlySnapshots": true
+          },
+          "modelCommands": [
+            {
+              "command": "/bin/bash -lc \"pwd; rg --files -g 'AGENTS.md' -g '*MEMORY*' -g '*memory*' -g 'INBOX.json' -g 'MANDATE.md' -g '*NEXT*' agent . | head -60\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'cat agent/autonomy/INBOX.json agent/autonomy/memory/*; cat /opt/puzzoria-pilot/readonly/growth-context.json /opt/puzzoria-pilot/readonly/trends.json /opt/puzzoria-pilot/readonly/puzzoria-analytics.json /opt/puzzoria-pilot/readonly/search-console.json'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat agent/autonomy/memory/PLAN.json; tail -65 agent/autonomy/memory/STATE.md; rg --files | rg 'hard.flag|flags|FLAG|drapeau'\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python - <<'PY'\nimport json\nfor name in ['growth-context','trends','puzzoria-analytics','search-console']:\n d=json.load(open('/opt/puzzoria-pilot/readonly/'+name+'.json'))\n print(name, list(d))\n if name=='growth-context':\n  for k,v in d.items():\n   if k not in ['experiments','analytics','searchConsole','trends']: print(k,str(v)[:12000])\n else: print(str(d)[:2000])\nPY\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'expert|diffic|hard-flags|flags-hard' src/lib/knowledge* src/lib/quiz* tests/*flags* docs/FLAGS*; rg --files src tests | rg 'flag|ligue'; cat docs/FLAGS-EXPERT-FEASIBILITY.fr.md; cat content/KNOWLEDGE-SOURCES.md | tail -45; ls agent/autonomy/memory; ls node_modules/next/dist/docs/01-app/03-api-reference/01-directives\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat src/lib/knowledge-catalog.ts | head -90; head -65 src/lib/quiz-expansion.ts; head -70 src/lib/server/knowledge-content.ts; rg -n 'expansion|europe-map' src/lib/server/knowledge-content.ts src/lib/knowledge-catalog.ts; head -50 tests/knowledge.test.ts; cat node_modules/next/dist/docs/01-app/03-api-reference/01-directives/use-server.md | head -30; python - <<'PY'\nimport json\nx=json.load(open('/opt/puzzoria-pilot/readonly/growth-context.json'))\nprint([(e.get('id'),e.get('status')",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"rg -n 'ligue' src/lib/server/knowledge-content.ts src/lib/quiz-editorial.ts src/lib/quiz-themes.ts tests/* e2e/* docs/*LIGUE*; rg --files | rg 'LIGUE|ligue'; sed -n '1,42p' src/lib/server/knowledge-content.ts\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat tests/ligue-1.test.ts docs/LIGUE-1-QUIZ.fr.md; rg -n 'quiz|perfect|ties|low' tests/*stat* | head -35; cat package.json | head -45; rg -n 'ligue' e2e/* src/components/* src/lib/quiz-editorial.ts; cat agent/autonomy/memory/EXPERIMENTS.md | tail -20\"",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"ls e2e; cat e2e/knowledge.spec.ts | head -100; cat tests/knowledge-statistics.test.ts | head -84; rg -n 'ligue|26|25' tests/quiz-themes.test.ts\"",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc 'npm test -- --configLoader=runner tests/ligue-1.test.ts tests/knowledge.test.ts tests/knowledge-statistics.test.ts tests/quiz-themes.test.ts tests/seo.test.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'head -12 tests/knowledge-statistics.test.ts; cat src/lib/quiz-themes.ts | tail -20; npx playwright test e2e/ligue-1.spec.ts --list'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'node --import tsx scripts/validate-content.ts'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc 'npm run typecheck'",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat > e2e/ligue-1.spec.ts <<'EOF'\nimport { expect, test } from \\\"@playwright/test\\\";\nimport { kt } from \\\"../src/lib/knowledge-i18n\\\";\nimport { quizTopic, quizTopicPath } from \\\"../src/lib/knowledge-catalog\\\";\nimport { locales } from \\\"../src/lib/types\\\";\n\nfor (const locale of locales) {\n  test(\"'`Ligue 1 in ${locale}: club answers, saved progress and correction`, async ({ page }) => {\n    const topic = quizTopic(\"ligue-1-clubs\")!, m = kt(locale);\n    await page.goto(quizTopicPath",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"cat >> tests/knowledge-statistics.test.ts <<'EOF'\n\nit(\\\"keeps Ligue 1 completion counts, tied perfect times and personal records coherent\\\", () => {\n  const current: Completion = { ...base, knowledgeSet: \\\"quiz:ligue-1-clubs:v1:fr\\\", answersFound: 10, answersTotal: 10 };\n  const peers = Array.from({ length: 20 }, (_, i) => ({ ...peer(i), knowledgeSet: current.knowledgeSet, answersFound: 10, answersTotal: 10 }));\n  expect(comparisonStatistics(peers, current)).toMatchObject({ faster",
+              "exitCode": 1
+            },
+            {
+              "command": "/bin/bash -lc \"python - <<'PY'\nimport json\nfrom pathlib import Path\np=Path('agent/autonomy/memory')\nx=json.loads((p/'PLAN.json').read_text())\nx.update(summary='Reprise du brouillon Ligue 1 présent dans d8520f7 : jeu dix clubs/quatre langues, validation ciblée et ajout E2E/statistiques. Aucune publication revendiquée.',nextMission='Finaliser le quiz Ligue 1 existant après contrôles indépendants : exécuter les 16 scénarios navigateur et corriger uniquement les anomalies observées ; vérifier la PR ",
+              "exitCode": 0
+            },
+            {
+              "command": "/bin/bash -lc \"python - <<'PY'\np='tests/knowledge-statistics.test.ts'\ns=open(p).read().replace('expect(comparisonStatistics(peers.slice(1), current)?.fasterThanPercent).toBeNull();','expect(comparisonStatistics(peers.slice(1), current)).toBeNull();')\nopen(p,'w').write(s)\nPY\nnpm test -- --configLoader=runner tests/knowledge-statistics.test.ts\"",
+              "exitCode": 0
+            }
+          ],
+          "threadId": "01a1c940-3f8f-7072-a295-5cc91476e328",
+          "model": "gpt-6.1-sol",
+          "previousCompletedSessions": 35,
+          "error": "Session time boundary reached; preserve work for the next wake",
+          "unverifiedSnapshot": "e8bce76ef6b8a38dd427cce3b96858a92c21afb7",
+          "finishedAt": "2026-11-11T06:18:55.174Z",
+          "workflowOutcome": "success",
+          "runUrl": "https://github.com/Aimericv/puzzoria/actions/runs/42971029632"
         }
       }
     }
