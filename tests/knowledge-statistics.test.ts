@@ -97,3 +97,19 @@ it("selects observed server quiz cohorts, excluding the current owner, other top
   await finish("peer-19");
   expect(compareRun(current.run.runId,current.who)).toMatchObject({ samples: 20, successes: 20, fasterThanPercent: 0, quizAverageAnswers: 8 });
 });
+
+it("keeps Ligue 1 completion counts, tied perfect times and personal records coherent", () => {
+  const current: Completion = { ...base, knowledgeSet: "quiz:ligue-1-clubs:v1:fr", answersFound: 10, answersTotal: 10 };
+  const peers = Array.from({ length: 20 }, (_, i) => ({ ...peer(i), knowledgeSet: current.knowledgeSet, answersFound: 10, answersTotal: 10 }));
+  expect(comparisonStatistics(peers, current)).toMatchObject({ fasterThanPercent: 0, quizAverageAnswers: 10 });
+  expect(comparisonStatistics(peers.slice(1), current)).toBeNull();
+  for (const locale of locales) {
+    for (const found of [0, 4, 10]) {
+      const result = { ...current, locale, answersFound: found, success: found === 10, score: found * 100 };
+      const html = renderToStaticMarkup(createElement(GameComparison, { completion: result, comparison: comparisonStatistics(peers, result)!, locale }));
+      expect(html.includes("data-knowledge-speed")).toBe(found === 10);
+    }
+  }
+  const history = [{ ...peers[0], duration: 60 }, { ...peers[1], knowledgeSet: "quiz:world-cup:v1:fr", duration: 1 }, { ...peers[2], knowledgeSet: "quiz:ligue-1-clubs:v2:fr", duration: 1 }];
+  expect(personalResultStatistics(history, current)).toMatchObject({ bestTime: 30, averageTime: 45 });
+});
