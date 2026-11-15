@@ -41,14 +41,14 @@ test('job-level accounting includes failed/cancelled attempts, rounds separately
 test('UTC calendar rollover creates a new ledger without zeroing the previous month or confusing DST',()=>{
   assert.equal(monthWindow(Date.parse('2026-10-31T23:59:59Z')).month,'2026-10');
   assert.equal(monthWindow(Date.parse('2026-11-01T00:00:00Z')).month,'2026-11');
-  const old=spent(1800,Date.parse('2026-10-31T23:59:59Z'));
+  const old=spent(ACTIONS_LIMIT+100,Date.parse('2026-10-31T23:59:59Z'));
   assert.equal(allocation(old,{kind:'session',now:Date.parse('2026-10-31T23:59:59Z')}).halt,true);
-  assert.throws(()=>checkedUsage(old,now));assert.equal(chargedMinutes(old),1800);
+  assert.throws(()=>checkedUsage(old,now));assert.equal(chargedMinutes(old),ACTIONS_LIMIT+100);
   assert.equal(allocation(emptyUsage(now),{kind:'session',now}).allowed,true);
   const overlap=job(7,7,60,{started_at:'2026-10-31T23:59:40Z',completed_at:'2026-11-01T00:00:40Z'});
   const u=emptyUsage(now);observeJobs(u,run(7),[overlap],now);assert.equal(chargedMinutes(u),1);
 });
-test('corrupted counters and forged totals cannot raise the protected 1700 minute limit',()=>{
+test('corrupted counters and forged totals cannot raise the protected 1900 minute limit',()=>{
   for(const mutate of [u=>u.jobs=[],u=>u.jobs.x={run:'1',minutes:-1},u=>u.limit=999999,u=>u.runs[1]={attempt:1,completed:'true'},u=>u.reservations['1:1']={run:'1',attempt:1,at:new Date(now).toISOString(),total:0,before:0,jobs:{first:90}},u=>u.reservations['1:1']={run:'1',attempt:1,at:new Date(now).toISOString(),total:0,before:0,jobs:{},reason:'untracked_running_job_worst_case'}]) {
     const u=emptyUsage(now);mutate(u);assert.throws(()=>allocation(u,{kind:'ci',now}));
   }
@@ -60,6 +60,28 @@ test('daily self-recovery is reserved through month end, then releases its elaps
   assert.equal(recoveryAllowance(Date.parse('2026-11-30T12:00:00Z')),8);
   const u=emptyUsage(now),p=allocation(u,{kind:'session',now});reserveAllocation(u,p,100,1,now);
   assert.ok(chargedMinutes(u)+reservedMinutes(u)+recoveryAllowance(now)<=ACTIONS_LIMIT);
+});
+
+test('owner-approved cap migrates the old ledger without losing charges, holds or deferred CI',async()=>{
+  const u=spent(1461);u.limit=1700;
+  reserveAllocation(u,allocation(u,{kind:'ci',scope:'controller',now}),100,1,now);
+  u.deferredCI=[{pr:49,head:'a'.repeat(40),run:'99',attempt:1,scope:'application'}];
+  const original=structuredClone(u),f=fixture(u),loaded=await loadUsage(f.api,now);
+  assert.equal(chargedMinutes(loaded.usage),1461);assert.equal(reservedMinutes(loaded.usage),26);
+  await saveUsage(f.api,loaded,now);
+  assert.deepEqual(f.usage,{...original,limit:1900,observedAt:new Date(now).toISOString(),source:'GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential'});
+  for(const limit of [0,1699,1701,1899,1901,2000,'1900'])assert.throws(()=>checkedUsage({...u,limit},now));
+});
+
+test('one full CI fits the reviewed November balance while further admissions still respect reservations',()=>{
+  const time=Date.parse('2026-11-15T12:00:00Z'),u=spent(1461,time);u.limit=1700;
+  const policy=allocation(u,{kind:'ci',scope:'controller',now:time});assert.equal(policy.allowed,true);
+  reserveAllocation(u,policy,100,1,time);
+  const full=allocation(u,{kind:'ci',now:time});assert.equal(full.allowed,true);
+  reserveAllocation(u,full,101,1,time);
+  assert.equal(reservedMinutes(u),196);
+  assert.ok(chargedMinutes(u)+reservedMinutes(u)+recoveryAllowance(time)+8<=1900);
+  assert.equal(allocation(u,{kind:'ci',now:time}).allowed,false);
 });
 
 test('deferred compute retries only its failed admission and persists cooldown before dispatch',async()=>{
@@ -79,7 +101,7 @@ test('deferred compute retries only its failed admission and persists cooldown b
   await retryDeferredCI(failingTestAPI,loaded,now);assert.equal(dispatched,1);assert.deepEqual(loaded.usage.deferredCI,[]);
 });
 test('all expensive paths reserve worst-case runner and cancellation time before they are granted',()=>{
-  for(const kind of ['ci','analytics','search-console','session','validation','deployment'])for(let used=0;used<=1750;used+=7) {
+  for(const kind of ['ci','analytics','search-console','session','validation','deployment'])for(let used=0;used<=ACTIONS_LIMIT+50;used+=7) {
     const u=spent(used),p=allocation(u,{kind,now,manual:true});
     reserveAllocation(u,p,99,1,now);
     if(p.allowed)assert.ok(chargedMinutes(u)+reservedMinutes(u)+recoveryAllowance(now)<=ACTIONS_LIMIT);
@@ -99,7 +121,7 @@ test('completed attempts release unused reservation only after observable GitHub
 });
 test('four daily opportunities remain possible; reduced headroom changes cadence without per-experiment limits',()=>{
   const fresh=allocation(emptyUsage(now),{kind:'session',now});assert.equal(fresh.cadence,6);assert.ok(fresh.sessionTimeout>=8);
-  const u=spent(1300);u.lastModelAt=new Date(now-6*3600000).toISOString();
+  const u=spent(ACTIONS_LIMIT-400);u.lastModelAt=new Date(now-6*3600000).toISOString();
   const slow=allocation(u,{kind:'session',now});assert.ok(slow.cadence>6);assert.equal(slow.allowed,false);
   assert.equal(allocation(u,{kind:'session',now:now+24*3600000}).allowed,true);
   const metadata=allocation(emptyUsage(now),{kind:'validation',now});assert.equal(metadata.sessionTimeout,3);assert.equal(metadata.jobs.first,3);
@@ -141,7 +163,7 @@ test('stopping compute also cancels queued admissions while preserving reserved 
 });
 
 test('daily recovery never resets current spending and reopens a genuinely fresh month without altering pause/auth',async()=>{
-  for(const amount of [0,1500]){
+  for(const amount of [0,ACTIONS_LIMIT-200]){
     const f=fixture(spent(amount)),api=async(path,...rest)=>{
       if(path.startsWith('/contents/agent/operations/actions-2026-10.json'))throw Object.assign(Error('absent previous month'),{status:404});
       return f.api(path,...rest);

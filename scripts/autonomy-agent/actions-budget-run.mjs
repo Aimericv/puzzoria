@@ -1,6 +1,6 @@
 import {readFileSync,appendFileSync} from 'node:fs';
 import {github} from '../autonomy-pilot/github.mjs';
-import {monthWindow,MANAGED_WORKFLOWS,chargedMinutes,reservedMinutes} from './actions-budget.mjs';
+import {ACTIONS_LIMIT,monthWindow,MANAGED_WORKFLOWS,chargedMinutes,reservedMinutes} from './actions-budget.mjs';
 import {admitUsage,loadUsage,suspendWorkflows,changedScope,requireJobBudget,extendUsage,recoverUsage} from './actions-budget-runtime.mjs';
 
 if(process.env.GITHUB_REPOSITORY!=='Aimericv/puzzoria')throw Error('Fixed Puzzoria repository required');
@@ -15,7 +15,7 @@ try {
   } else if(mode==='reset') {
     // Never zero an existing month or change pause, quota, release or production authorization.
     const {usage,enabled}=await recoverUsage(api,{now,run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1)});
-    summary(`Actions ${monthWindow(now).month} : ${chargedMinutes(usage)} min observées, ${reservedMinutes(usage)} réservées. Réactivation : ${enabled}. Plafond Puzzoria : 1 700 min. Workflows concernés : ${MANAGED_WORKFLOWS.join(', ')}.`);
+    summary(`Actions ${monthWindow(now).month} : ${chargedMinutes(usage)} min observées, ${reservedMinutes(usage)} réservées. Réactivation : ${enabled}. Plafond Puzzoria : ${ACTIONS_LIMIT} min. Workflows concernés : ${MANAGED_WORKFLOWS.join(', ')}.`);
   } else if(mode==='admit') {
     const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     let kind=process.env.PUZZORIA_BUDGET_KIND,scope='application';

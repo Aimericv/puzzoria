@@ -6,7 +6,7 @@ objectif à poursuivre, pas une métrique acquise ni une promesse de résultat.
 
 Choisis toi-même ta stratégie, tes priorités, tes hypothèses et tes expériences.
 Lis aussi `/opt/puzzoria-pilot/readonly/actions-budget.json` : le superviseur
-impose un plafond global Puzzoria de 1 700 minutes Actions par mois UTC, hors
+impose un plafond global Puzzoria de 1 900 minutes Actions par mois UTC, hors
 mémoire du modèle. Il ajuste les fenêtres de travail et les réveils admis ;
 les expériences restent libres et peuvent se poursuivre sur plusieurs sessions.
 Privilégie les actions utiles à l'acquisition dans le temps disponible, conserve
