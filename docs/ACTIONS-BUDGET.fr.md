@@ -1,8 +1,13 @@
 # Budget mensuel GitHub Actions de Puzzoria
 
-Politique du propriétaire du 31 octobre 2026 : au plus **1 700 minutes Linux
-standard par mois UTC** pour Puzzoria, dans les 2 000 minutes incluses du compte.
-SiteProbe représente environ 100 minutes et la marge partagée vaut 200 minutes.
+Politique du propriétaire mise à jour le 15 novembre 2026 : au plus **1 900 minutes
+Linux standard par mois UTC** pour Puzzoria (ancien plafond : 1 700).
+Le propriétaire a vérifié manuellement Billing, GitHub Actions, mois de novembre :
+environ 9 $ bruts consommés au 15 novembre sur 12 $ inclus. Ce relevé du compte
+sert de référence, sans exiger un accès API Billing supplémentaire.
+Au tarif Linux standard de 0,006 $/minute, le plafond Puzzoria représente 11,40 $ ;
+il ne remplace pas la vérification de la consommation des autres dépôts.
+Le bot autonome reste désactivé et aucun déploiement n'est autorisé par cette mise à jour.
 DashSort est désactivé séparément par le propriétaire. Aucun achat de minutes,
 crédits Codex, nouveau serveur ou augmentation de forfait n'est autorisé.
 
@@ -41,8 +46,11 @@ de budget à 0 $ ne constitue pas une preuve API de facturation.
 
 ## Admission et arrêt automatiques
 
-- Le code protégé `scripts/autonomy-agent/actions-budget*.mjs` impose 1 700.
-  Le modèle ne peut modifier ni ces fichiers, ni les workflows, ni leurs accès.
+- Le code protégé `scripts/autonomy-agent/actions-budget*.mjs` impose 1 900.
+  Sa modification exige une autorisation explicite du propriétaire, comme celle
+  du 15 novembre pour ce seul relèvement. Les autres protections restent intactes.
+- Le registre historique à 1 700 reste lisible ; la prochaine écriture comptable
+  normale inscrit 1 900 sans effacer les jobs, réservations ou CI différées.
 - La branche `codex/actions-usage` conserve
   `agent/operations/actions-YYYY-MM.json` : jobs observés, tentatives, réservations
   actives, cadence et CI différées. Aucun secret ni identifiant de joueur.
@@ -121,8 +129,8 @@ permet de vérifier le détail ; le [ticket de l'agent](https://github.com/Aimer
 conserve ses contributions. Le modèle reçoit aussi un instantané en lecture
 seule du budget global pour adapter librement sa stratégie.
 
-Le contrôle ne couvre pas les dépenses d'autres dépôts au-delà des hypothèses
-ci-dessus, ni le trafic produit Hetzner, traité séparément. Il n'ajoute aucun
+Le contrôle ne couvre pas les nouvelles dépenses d'autres dépôts après le relevé
+manuel du compte, ni le trafic produit Hetzner, traité séparément. Il n'ajoute aucun
 moyen de paiement et n'active aucun recours payant. Le plafond technique concerne
 les workflows gérés de Puzzoria ; un administrateur peut évidemment modifier
 les réglages du compte ou lancer une infrastructure différente.

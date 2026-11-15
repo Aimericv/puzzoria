@@ -1,5 +1,6 @@
 // Protected operator policy. The model cannot edit this module or its ledger.
-export const ACTIONS_LIMIT=1700;
+// Owner authorization, 2026-11-15: raise only the internal cap; no paid overage.
+export const ACTIONS_LIMIT=1900;
 export const ACTIONS_BRANCH='codex/actions-usage';
 export const CONTROL_ALLOWANCE=8; // 2 minute guard + cancellation/rounding margin.
 // Reserve every remaining daily recovery, including cancellation margin.
@@ -16,7 +17,9 @@ export function emptyUsage(now=Date.now()) {
 }
 export function checkedUsage(value,now=Date.now()) {
   const record=v=>v&&typeof v==='object'&&!Array.isArray(v);
-  if(value?.schemaVersion!==1||value.month!==monthWindow(now).month||value.limit!==undefined&&value.limit!==ACTIONS_LIMIT||!record(value.jobs)||!record(value.runs)||!record(value.reservations)||
+  // Accept the previous protected cap without resetting any spending or holds.
+  // saveUsage writes the current cap on the next ordinary accounting commit.
+  if(value?.schemaVersion!==1||value.month!==monthWindow(now).month||value.limit!==undefined&&value.limit!==1700&&value.limit!==ACTIONS_LIMIT||!record(value.jobs)||!record(value.runs)||!record(value.reservations)||
      Object.entries(value.jobs).some(([id,j])=>!/^\d+$/.test(id)||!record(j)||!Number.isSafeInteger(j.minutes)||j.minutes<0||!/^\d+$/.test(String(j.run))))throw Error('Invalid monthly Actions ledger');
   for(const [id,entry] of Object.entries(value.runs))if(!/^\d+$/.test(id)||!record(entry)||!Number.isSafeInteger(entry.attempt)||entry.attempt<1||typeof entry.completed!=='boolean')throw Error('Invalid observed run');
   for(const [key,entry] of Object.entries(value.reservations)) {
