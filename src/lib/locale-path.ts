@@ -3,10 +3,14 @@ import { slugs } from "./i18n";
 import type { GameId, Locale } from "./types";
 import { articleSection } from "./word-article-path";
 import { resolveQuizTheme, quizThemePath } from "./quiz-themes";
+import { footballProfilePath, footballProfileSection } from "./football-profile-path";
 
 export function localizedPath(pathname: string, current: Locale, next: Locale) {
   const parts = pathname.split("/");
   if (parts[2] === articleSection[current]) return `/${next}/${slugs[next].rareword}`;
+  if (parts.length === 4 && parts[2] === footballProfileSection[current]) {
+    return footballProfilePath(next, parts[3]);
+  }
   if (parts[2] === "quiz" && parts[3]) {
     const theme=resolveQuizTheme(current,parts.slice(2));
     if(theme)return quizThemePath(next,theme);
