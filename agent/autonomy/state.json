@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "repository": "Aimericv/puzzoria",
-  "generation": 290,
-  "status": "retrying",
+  "generation": 291,
+  "status": "paused",
   "issueNumber": 3,
   "ownerId": 103512403,
   "sourceSha": "d55a0111ac4751dc17dc8d04552fec3c0a9e37d3",
@@ -3659,5 +3659,6 @@
         "marginMinutes": 2
       }
     }
-  ]
+  ],
+  "paused": true
 }
