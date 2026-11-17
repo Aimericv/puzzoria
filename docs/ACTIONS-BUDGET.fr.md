@@ -104,6 +104,14 @@ redondant de la CI est supprimé : ses assertions sont déjà dans la suite comp
 Les téléchargements npm et binaires Playwright sont mis en cache ; jamais les
 tokens, bases, `node_modules`, builds, traces ou résultats de tests.
 
+Le lot d'optimisation décrit dans [CI.fr.md](CI.fr.md) distingue les contrôles de
+développement des finales applicatives : unitaires ciblés en brouillon, quatre
+profils complets avant fusion, et un reçu final lié à la tête/base/run/tentative.
+Il ne change ni les 1 900 minutes, ni le validateur isolé de publication, ni les
+autorisations. Les réservations applicatives deviennent 34 minutes en développement
+et 178 en finale, contrôle final et marges inclus. Les périmètres contrôleur et
+documentation conservent leurs réservations et leurs obligations existantes.
+
 Les réveils lisent la pause et les quotas **avant** les installations lourdes.
 Les tests du contrôleur ne sont plus répétés à chaque session inchangée.
 Les anciens pilotes et workflows manuels de diagnostic restent désactivés.

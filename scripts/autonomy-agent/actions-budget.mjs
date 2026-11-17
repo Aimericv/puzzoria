@@ -68,16 +68,17 @@ export function ciScope(files) {
   if(files.every(path=>/^(?:scripts\/|deploy\/|agent\/|\.github\/|tests\/infrastructure\/|docs\/)/.test(path)||['AGENTS.md','README.md'].includes(path)))return 'controller';
   return 'application'; // Unknown files, manifests, runtime code, tests and browser changes get full validation.
 }
-export function allocation(usage,{kind,scope='application',now=Date.now(),manual=false}={}) {
+export function allocation(usage,{kind,scope='application',mode='final',now=Date.now(),manual=false}={}) {
   if(!['ci','analytics','search-console','session','validation','deployment'].includes(kind))throw Error('Unknown budgeted operation');
+  if(kind==='ci'&&!['development','final'].includes(mode))throw Error('Unknown CI validation mode');
   checkedUsage(usage,now);
   const used=chargedMinutes(usage),held=reservedMinutes(usage),remaining=ACTIONS_LIMIT-used-held;
-  const base={kind,scope,used,held,remaining,month:usage.month,limit:ACTIONS_LIMIT,allowed:false,jobs:{budget:CONTROL_ALLOWANCE},reason:'monthly_limit'};
+  const base={kind,scope,mode,used,held,remaining,month:usage.month,limit:ACTIONS_LIMIT,allowed:false,jobs:{budget:CONTROL_ALLOWANCE},reason:'monthly_limit'};
   const safe=remaining-CONTROL_ALLOWANCE-recoveryAllowance(now)-CONTROL_ALLOWANCE;
   if(safe<0)return {...base,halt:true};
   const grant=jobs=>({...base,allowed:true,reason:null,jobs:{budget:CONTROL_ALLOWANCE,...jobs}});
   if(kind==='ci') {
-    const jobs=scope==='documentation'?{checks:3}:scope==='controller'?{checks:12}:{checks:12,...Object.fromEntries(['desktop','mobile','android','iphone-webkit'].map(p=>[`E2E (${p})`,30]))};
+    const jobs=scope==='documentation'?{checks:3}:scope==='controller'?{checks:12}:{checks:12,...(mode==='final'?Object.fromEntries(['desktop','mobile','android','iphone-webkit'].map(p=>[`E2E (${p})`,30])):{}),'Final validation':2};
     return Object.values(jobs).reduce((s,n)=>s+jobReservation(n),0)<=safe?grant(jobs):base;
   }
   if(kind==='analytics'||kind==='search-console')return jobReservation(3)<=safe?grant({[kind==='analytics'?'check':'search-console-check']:3}):base;

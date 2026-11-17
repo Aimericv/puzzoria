@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {monthWindow,emptyUsage,checkedUsage,chargedMinutes,reservedMinutes,observeJobs,allocation,reserveAllocation,assertGrant,ciScope,ACTIONS_LIMIT,recoveryAllowance} from './actions-budget.mjs';
-import {loadUsage,saveUsage,admitUsage,extendUsage,reconcileUsage,resumeWorkflows,suspendWorkflows,changedScope,retryDeferredCI,recoverUsage} from './actions-budget-runtime.mjs';
+import {loadUsage,saveUsage,admitUsage,extendUsage,reconcileUsage,resumeWorkflows,suspendWorkflows,changedScope,changedCI,retryDeferredCI,recoverUsage} from './actions-budget-runtime.mjs';
 const now=Date.parse('2026-11-01T00:07:00Z');
 const run=(id,status='completed',attempt=1)=>({id,run_attempt:attempt,status});
 const job=(id,runId,seconds,extra={})=>({id,run_id:runId,status:'completed',conclusion:'success',runner_id:5,labels:['ubuntu-24.04'],started_at:new Date(now).toISOString(),completed_at:new Date(now+seconds*1000).toISOString(),steps:[{name:'work'}],...extra});
@@ -79,7 +79,7 @@ test('one full CI fits the reviewed November balance while further admissions st
   reserveAllocation(u,policy,100,1,time);
   const full=allocation(u,{kind:'ci',now:time});assert.equal(full.allowed,true);
   reserveAllocation(u,full,101,1,time);
-  assert.equal(reservedMinutes(u),196);
+  assert.equal(reservedMinutes(u),204);
   assert.ok(chargedMinutes(u)+reservedMinutes(u)+recoveryAllowance(time)+8<=1900);
   assert.equal(allocation(u,{kind:'ci',now:time}).allowed,false);
 });
@@ -192,13 +192,47 @@ test('prior-month reruns remain observable even outside the created-date search'
   await reconcileUsage(api,f.usage,{now,currentRun:'200'});assert.equal(chargedMinutes(f.usage),2);
 });
 test('live PR heads are checked before scope classification and stale budget retries are discarded',async()=>{
-  const f=fixture(),head='a'.repeat(40);
-  const event={pull_request:{number:5,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}}}};
-  assert.equal(await changedScope(async path=>path==='/pulls/5'?{head:{sha:head},base:{ref:'main'}}:[{filename:'docs/a.md'}],event),'documentation');
+  const f=fixture(),head='a'.repeat(40),base='b'.repeat(40);
+  const event={pull_request:{number:5,draft:false,base:{sha:base},head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}}}};
+  assert.equal(await changedScope(async path=>path==='/pulls/5'?{draft:false,head:{sha:head},base:{ref:'main',sha:base}}:[{filename:'docs/a.md'}],event),'documentation');
   await assert.rejects(changedScope(async()=>({head:{sha:'b'.repeat(40)}}),event),/changed/);
   const loaded=await loadUsage(f.api,now);loaded.usage.deferredCI=[{run:'10',attempt:1,pr:5,head,scope:'controller'}];
   await retryDeferredCI(async(path,...rest)=>path==='/pulls/5'?{state:'closed'}:f.api(path,...rest),loaded,now);
   assert.deepEqual(loaded.usage.deferredCI,[]);
+});
+
+test('draft CI reserves its final refusal gate but never grants a browser job',()=>{
+  const u=emptyUsage(now),plan=allocation(u,{kind:'ci',mode:'development',now});
+  assert.deepEqual(plan.jobs,{budget:8,checks:12,'Final validation':2});
+  reserveAllocation(u,plan,100,1,now);assert.equal(reservedMinutes(u),34);
+  assert.equal(assertGrant(u,{run:'100',attempt:1,job:'Final validation',minutes:2,now}),2);
+  assert.throws(()=>assertGrant(u,{run:'100',attempt:1,job:'E2E (desktop)',minutes:30,now}));
+  assert.throws(()=>allocation(u,{kind:'ci',mode:'fast',now}));
+  assert.equal(allocation(emptyUsage(now),{kind:'ci',now}).jobs['E2E (iphone-webkit)'],30);
+});
+
+test('CI mode comes from the live PR, with stale base/draft and renames checked',async()=>{
+  const head='a'.repeat(40),base='b'.repeat(40);
+  const pr={number:5,draft:true,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'main',sha:base}};
+  const api=async path=>path==='/pulls/5'?structuredClone(pr):[{filename:'src/components/card.tsx'}];
+  assert.deepEqual(await changedCI(api,{pull_request:pr}),{scope:'application',mode:'development',head,base});
+  for(const mutate of [p=>p.base.sha='c'.repeat(40),p=>p.draft=false,p=>delete p.base.sha,p=>delete p.draft]){
+    const stale=structuredClone(pr);mutate(stale);await assert.rejects(changedCI(api,{pull_request:stale}),/changed/);
+  }
+  const renamed=path=>path==='/pulls/5'?api(path):Promise.resolve([{filename:'docs/example.md',previous_filename:'src/components/card.tsx'}]);
+  assert.equal((await changedCI(renamed,{pull_request:pr})).scope,'application');
+  const ready={...pr,draft:false};
+  assert.equal((await changedCI(path=>path==='/pulls/5'?Promise.resolve(ready):api(path),{pull_request:ready})).mode,'final');
+});
+
+test('deferred draft admissions never rerun an event with a changed base or review state',async()=>{
+  for(const changed of ['base','review']){
+    const f=fixture(),loaded=await loadUsage(f.api,now),head='a'.repeat(40),base='b'.repeat(40);
+    loaded.usage.deferredCI=[{run:'10',attempt:1,pr:5,head,base,scope:'application',mode:'development'}];
+    const api=(path,...rest)=>path==='/pulls/5'?Promise.resolve({state:'open',head:{sha:head},base:{sha:changed==='base'?'c'.repeat(40):base},draft:changed!=='review'}):f.api(path,...rest);
+    await retryDeferredCI(api,loaded,now);assert.deepEqual(loaded.usage.deferredCI,[]);
+    assert.ok(!f.calls.some(c=>c.path.includes('/rerun')));
+  }
 });
 test('workflow contracts keep every expensive job guarded and do not claim skipped browser checks as passing',()=>{
   for(const name of ['ci.yml','autonomy-agent.yml','analytics-check.yml']){

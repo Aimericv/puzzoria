@@ -1,7 +1,7 @@
 import {readFileSync,appendFileSync} from 'node:fs';
 import {github} from '../autonomy-pilot/github.mjs';
 import {ACTIONS_LIMIT,monthWindow,MANAGED_WORKFLOWS,chargedMinutes,reservedMinutes} from './actions-budget.mjs';
-import {admitUsage,loadUsage,suspendWorkflows,changedScope,requireJobBudget,extendUsage,recoverUsage} from './actions-budget-runtime.mjs';
+import {admitUsage,loadUsage,suspendWorkflows,changedCI,requireJobBudget,extendUsage,recoverUsage} from './actions-budget-runtime.mjs';
 
 if(process.env.GITHUB_REPOSITORY!=='Aimericv/puzzoria')throw Error('Fixed Puzzoria repository required');
 const api=github(process.env.GITHUB_TOKEN,'Aimericv/puzzoria'),mode=process.argv[2]??'admit',now=Date.now();
@@ -18,11 +18,11 @@ try {
     summary(`Actions ${monthWindow(now).month} : ${chargedMinutes(usage)} min observées, ${reservedMinutes(usage)} réservées. Réactivation : ${enabled}. Plafond Puzzoria : ${ACTIONS_LIMIT} min. Workflows concernés : ${MANAGED_WORKFLOWS.join(', ')}.`);
   } else if(mode==='admit') {
     const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
-    let kind=process.env.PUZZORIA_BUDGET_KIND,scope='application';
-    if(kind==='ci')scope=await changedScope(api,event);
+    let kind=process.env.PUZZORIA_BUDGET_KIND;
+    const context=kind==='ci'?await changedCI(api,event):{scope:'application',mode:'final'};
     if(kind==='autonomy')kind=event.inputs?.['check-search-console']===true||event.inputs?.['check-search-console']==='true'?'search-console':event.inputs?.['deploy-pending']===true||event.inputs?.['deploy-pending']==='true'?'deployment':event.inputs?.['validate-pending']===true||event.inputs?.['validate-pending']==='true'?'validation':'session';
-    const plan=await admitUsage(api,{kind,scope,now,run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),manual:process.env.GITHUB_EVENT_NAME==='workflow_dispatch',ci:kind==='ci'?{pr:event.pull_request.number,head:event.pull_request.head.sha}:undefined});
-    for(const [key,value] of Object.entries({allowed:plan.allowed,scope:plan.scope,session_timeout:plan.sessionTimeout??3,release_allowed:Boolean(plan.releaseAllowed),production_allowed:Boolean(plan.productionAllowed||kind==='deployment'&&plan.allowed)}))output(key,value);
+    const plan=await admitUsage(api,{kind,...context,now,run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),manual:process.env.GITHUB_EVENT_NAME==='workflow_dispatch',ci:kind==='ci'?{pr:event.pull_request.number,head:event.pull_request.head.sha,base:context.base}:undefined});
+    for(const [key,value] of Object.entries({allowed:plan.allowed,scope:plan.scope,mode:plan.mode,head:context.head??'',base:context.base??'',session_timeout:plan.sessionTimeout??3,release_allowed:Boolean(plan.releaseAllowed),production_allowed:Boolean(plan.productionAllowed||kind==='deployment'&&plan.allowed)}))output(key,value);
     summary(`Actions ${plan.month} : **${plan.used} / ${plan.limit} min observées**, ${plan.held} min déjà réservées. Admission : ${plan.allowed} (${plan.reason??kind}). Les limites, arrondis, tentatives et marges d'annulation sont appliqués hors mémoire du modèle. [Comptabilité](https://github.com/Aimericv/puzzoria/tree/codex/actions-usage/agent/operations).`);
     console.log(JSON.stringify(plan));
     if(kind==='ci'&&!plan.allowed)process.exitCode=1; // Deferred compute is never a green application validation.

@@ -1,16 +1,19 @@
-import {readFileSync,writeFileSync,readdirSync,mkdirSync,existsSync} from "node:fs";
+import {readFileSync,writeFileSync,readdirSync,mkdirSync,existsSync,appendFileSync} from "node:fs";
 import {execFileSync} from "node:child_process";
 import {github} from "../autonomy-pilot/github.mjs";
 import {REPOSITORY,redact} from "./policy.mjs";
+import {unitSummary} from './ci-diagnostics.mjs';
 
 const mode=process.argv[2];
 if(mode==="summarize") {
   mkdirSync(".ci-results",{recursive:true});
-  const result={project:process.env.CI_PROOF_PROJECT,sha:execFileSync("git",["rev-parse","HEAD"],{encoding:"utf8"}).trim(),reports:[]};
+  const result={project:process.env.CI_PROOF_PROJECT,sha:execFileSync("git",["rev-parse","HEAD"],{encoding:"utf8"}).trim(),mode:process.env.CI_VALIDATION_MODE??'final',reports:[]};
+  if(existsSync('.ci-results/development-selection.json'))result.selection=JSON.parse(readFileSync('.ci-results/development-selection.json','utf8'));
+  if(result.mode==='final'&&result.selection)throw Error('A development selection cannot supply final evidence');
   for(const name of ["unit","preflight","full"]) {
     const file=`.ci-results/${name}.json`;if(!existsSync(file))continue;
     const report=JSON.parse(readFileSync(file,"utf8"));
-    if(name==="unit") result.reports.push({name,success:report.success,passed:report.numPassedTests,failed:report.numFailedTests,skipped:report.numPendingTests});
+    if(name==="unit") result.reports.push(unitSummary(report));
     else {
       const failures=[];
       function walk(suite) {
@@ -24,6 +27,8 @@ if(mode==="summarize") {
     }
   }
   writeFileSync(".ci-results/summary.json",JSON.stringify(result,null,2)+"\n");
+  const failures=result.reports.flatMap(report=>report.failures??[]);
+  if(failures.length&&process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,'\nTest failures (bounded and redacted):\n```json\n'+JSON.stringify(failures,null,2).replaceAll('`','\\u0060').slice(0,12000)+'\n```\n');
   console.log(JSON.stringify(result));
 } else if(["publish","inspect"].includes(mode)) {
   if(process.env.GITHUB_REPOSITORY!==REPOSITORY)throw Error("Unexpected repository");
