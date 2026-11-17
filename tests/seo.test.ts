@@ -86,7 +86,16 @@ describe("SEO canonicalization and international versions", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-03T12:00:00Z"));
     const entries = sitemap();
-    expect(entries).toHaveLength(684);
+    expect(entries).toHaveLength(692);
+    const profileUrls = entries.filter(entry =>
+      /\/(?:football-players|footballeurs|futbolistas|fussballspieler)\//.test(entry.url),
+    ).map(entry => entry.url).sort();
+    expect(profileUrls).toEqual([
+      "/de/fussballspieler/miroslav-klose", "/de/fussballspieler/thierry-henry",
+      "/en/football-players/miroslav-klose", "/en/football-players/thierry-henry",
+      "/es/futbolistas/miroslav-klose", "/es/futbolistas/thierry-henry",
+      "/fr/footballeurs/miroslav-klose", "/fr/footballeurs/thierry-henry",
+    ].map(path => siteOrigin + path).sort());
     expect(new Set(entries.map((entry) => entry.url)).size).toBe(
       entries.length,
     );

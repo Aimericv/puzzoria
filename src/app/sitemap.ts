@@ -8,6 +8,8 @@ import { canonicalGamePath, siteOrigin } from "@/lib/seo";
 import { hasDaily, historicalDailyAvailable, dailyDifficulties } from "@/lib/game-modes";
 import { publishedWordArticles, articleAlternatives } from "@/lib/server/word-articles";
 import { wordArticlePath } from "@/lib/word-article-path";
+import { footballProfilePath } from "@/lib/football-profile-path";
+import { footballProfiles } from "@/lib/server/football-profiles";
 export const dynamic = "force-dynamic";
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];
@@ -71,6 +73,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   if (gameAvailable("quiz",utcDay())) {
     for (const topic of quizTopics) add(Object.fromEntries(locales.map(l=>[l,quizTopicPath(l,topic)])),"monthly",.8);
     for (const theme of quizThemes) add(Object.fromEntries(locales.map(l=>[l,quizThemePath(l,theme)])),"monthly",.8);
+  }
+  for (const profile of footballProfiles) {
+    add(Object.fromEntries(locales.map(locale => [locale, footballProfilePath(locale, profile.slug)])), "monthly", 0.6);
   }
   for (const locale of locales) for (const article of publishedWordArticles(locale)) {
     const languages = Object.fromEntries(Object.entries(articleAlternatives(article)).map(([l, p]) => [l, siteOrigin + p]));
