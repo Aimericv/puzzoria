@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {relatedUnitFiles,runDevelopmentUnits,assertFinalCI,browserJobs} from './ci-validation.mjs';
+import {relatedUnitFiles,runDevelopmentUnits,assertFinalCI,verifyFinalRun,browserJobs} from './ci-validation.mjs';
 import {changedCI} from './actions-budget-runtime.mjs';
 import {allocation,assertGrant,emptyUsage,reserveAllocation} from './actions-budget.mjs';
 
@@ -114,4 +114,22 @@ test('draft to review to draft requires a fresh final reservation and rejects st
   assert.equal(await admit(converted, '101'), 'development');
   await assert.rejects(changedCI(budgetApi, ready), /changed/);
   await assert.rejects(assertFinalCI(api, { ...options, event: ready }), /stale/);
+});
+
+test('the operator check requires a positive final job and a run associated with the exact PR', async () => {
+  const { rows, api, options } = finalFixture();
+  const pr = rows['/pulls/5'];
+  pr.merge_commit_sha = options.merge;
+  const run = rows['/actions/runs/100'];
+  Object.assign(run, { status: 'completed', conclusion: 'success', pull_requests: [structuredClone(pr)] });
+  const result = rows['/actions/runs/100/attempts/2/jobs?per_page=100'];
+  await assert.rejects(verifyFinalRun(api, 5, 100), /Final validation/);
+  const final = { name: 'Final validation', run_id: 100, status: 'completed', conclusion: 'skipped' };
+  result.jobs.push(final);
+  result.total_count++;
+  await assert.rejects(verifyFinalRun(api, 5, 100), /Final validation/);
+  final.conclusion = 'success';
+  assert.equal((await verifyFinalRun(api, 5, 100)).eligibleForMerge, true);
+  run.pull_requests[0].base.sha = 'd'.repeat(40);
+  await assert.rejects(verifyFinalRun(api, 5, 100), /current PR and base/);
 });

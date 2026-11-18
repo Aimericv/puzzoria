@@ -52,6 +52,12 @@ une règle sur `main`, sans exception administrateur, qui exige `budget`, `check
 et `Final validation` de GitHub Actions et une branche à jour. Exiger aussi une
 revue des changements de workflow et de politique selon les accès disponibles.
 Les branches documentation/contrôleur conservent le statut ignoré du job final.
+GitHub considère les jobs ignorés comme réussis pour une règle de branche.
+Une PR externe ou une admission désactivée peut donc produire des statuts
+ignorés. Avant toute fusion applicative, lancer depuis la base de confiance
+`node scripts/autonomy-agent/ci-validation.mjs verify NUMERO_PR ID_RUN`. Cette
+commande en lecture seule exige le succès effectif du job final et de tous les
+jobs de la même tentative. Un code de sortie non nul bloque la fusion opérateur.
 Le validateur isolé du superviseur conserve ses exigences indépendantes.
 
 Les timeouts, contrôles de financement, écritures comptables atomiques, gardes
@@ -111,6 +117,8 @@ nécessite l'accord du propriétaire pour la règle GitHub et les exécutions.
 3. Passer prête pour revue. Vérifier une nouvelle exécution pour la même tête,
    la réservation de 178 minutes et le refus de fusion dans GitHub tant que le
    job final manque. Attendre les quatre profils et le reçu de cette tentative.
+   Exécuter aussi le vérificateur opérateur sur le run de brouillon puis sur le
+   run final. Il doit refuser le premier et accepter uniquement le second.
 4. Repasser en brouillon pendant la finale ou après son succès. Vérifier que la
    nouvelle exécution reprend le mode ciblé et que l'ancien reçu est refusé quand
    la PR est en brouillon. Avancer la base du test et vérifier que l'exigence de

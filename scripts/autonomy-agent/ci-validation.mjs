@@ -6,6 +6,18 @@ import {github} from '../autonomy-pilot/github.mjs';
 const sha=value=>/^[a-f0-9]{40}$/.test(value??'');
 export const browserJobs=['desktop','mobile','android','iphone-webkit'].map(name=>`E2E (${name})`);
 
+function requireSuccessfulJobs(rows, runId, names) {
+  if (!Array.isArray(rows.jobs) || rows.total_count !== rows.jobs.length || rows.jobs.length >= 100) {
+    throw Error('Incomplete final job evidence');
+  }
+  for (const name of names) {
+    const jobs = rows.jobs.filter(job => job.name === name);
+    if (jobs.length !== 1 || String(jobs[0].run_id) !== String(runId) || jobs[0].status !== 'completed' || jobs[0].conclusion !== 'success') {
+      throw Error('Required final job did not pass: ' + name);
+    }
+  }
+}
+
 export function relatedUnitFiles(files) {
   if(!Array.isArray(files)||files.length>3000||files.some(p=>typeof p!=='string'||p.length>1024||/[\r\n\0\\]/.test(p)||p.startsWith('-')||p.split('/').some(part=>part==='..'||part==='.'||!part)))throw Error('Invalid changed paths');
   // Shared/server/configuration changes and unknown files retain all unit tests.
@@ -48,16 +60,32 @@ export async function assertFinalCI(api,{event,runId,attempt,merge,mode}) {
   const run=await api(`/actions/runs/${runId}`),commit=await api(`/git/commits/${merge}`);
   if(run.event!=='pull_request'||run.path!=='.github/workflows/ci.yml'||run.head_sha!==pr.head.sha||run.run_attempt!==attempt||run.repository?.full_name!=='Aimericv/puzzoria'||JSON.stringify(commit.parents?.map(p=>p.sha))!==JSON.stringify([pr.base.sha,pr.head.sha]))throw Error('Final run or tested merge provenance mismatch');
   const rows=await api(`/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100`);
-  if(!Array.isArray(rows.jobs)||rows.total_count!==rows.jobs.length||rows.jobs.length>=100)throw Error('Incomplete final job evidence');
-  for(const name of ['budget','checks',...browserJobs]){
-    const jobs=rows.jobs.filter(job=>job.name===name);
-    if(jobs.length!==1||String(jobs[0].run_id)!==String(runId)||jobs[0].status!=='completed'||jobs[0].conclusion!=='success')throw Error('Required final job did not pass: '+name);
-  }
+  requireSuccessfulJobs(rows, runId, ['budget', 'checks', ...browserJobs]);
   if(!matches(await api(`/pulls/${pr.number}`),await api('/git/ref/heads/main')))throw Error('PR changed while final evidence was collected');
   return {mode:'final',run:String(runId),attempt,head:pr.head.sha,base:pr.base.sha,merge,eligibleForMerge:true};
 }
 
+// Operator check before an application merge. GitHub treats skipped checks as passing.
+// Fetch the current PR and insist on actual successes from its exact final attempt.
+export async function verifyFinalRun(api, prNumber, runId) {
+  if (!/^[1-9]\d*$/.test(String(prNumber)) || !/^[1-9]\d*$/.test(String(runId))) throw Error('PR and run numbers required');
+  const pr = await api(`/pulls/${prNumber}`);
+  if (pr.state !== 'open' || pr.draft !== false) throw Error('An open PR ready for review is required');
+  const run = await api(`/actions/runs/${runId}`);
+  const associated = run.pull_requests?.some(row => row.number === Number(prNumber) && row.head?.sha === pr.head?.sha && row.base?.sha === pr.base?.sha);
+  if (!associated || run.status !== 'completed' || run.conclusion !== 'success' || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) {
+    throw Error('No successful final run for the current PR and base');
+  }
+  requireSuccessfulJobs(await api(`/actions/runs/${runId}/attempts/${run.run_attempt}/jobs?per_page=100`), runId, ['Final validation']);
+  return assertFinalCI(api, { event: { pull_request: pr }, runId, attempt: run.run_attempt, merge: pr.merge_commit_sha, mode: 'final' });
+}
+
 export async function main(mode=process.argv[2],env=process.env) {
+  if (mode === 'verify') {
+    const api = async path => JSON.parse(execFileSync('gh', ['api', 'repos/Aimericv/puzzoria' + path], { encoding: 'utf8' }));
+    console.log(JSON.stringify(await verifyFinalRun(api, process.argv[3], process.argv[4])));
+    return 0;
+  }
   if(mode==='development'){
     if(!sha(env.PUZZORIA_CI_BASE))throw Error('Pinned CI base required');
     const files=execFileSync('git',['diff','--no-renames','--name-only','-z',`${env.PUZZORIA_CI_BASE}...HEAD`],{encoding:'utf8',maxBuffer:4*1024*1024}).split('\0').filter(Boolean);
