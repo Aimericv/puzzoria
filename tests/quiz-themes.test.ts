@@ -61,7 +61,7 @@ it("keeps only recognised thematic routes in optional measurement, without treat
 });
 it("adds eight theme rows to the acquisition export without inventing unavailable Google results or summing players",()=>{
   const report=quizAcquisitionReport({status:"available",breakdowns:{page:{rows:[{key:"https://puzzoria.com/fr/quiz/geographie",impressions:30,clicks:2,position:18}]},query:{rows:[{key:"secret query"}]}}},{schema:"puzzoria.analytics",report:{product:{quizTopics:[]}}});
-  expect(report.rows).toHaveLength(100);expect(report.themes).toHaveLength(8);
+  expect(report.rows).toHaveLength(104);expect(report.themes).toHaveLength(8);
   expect(report.themes.find(r=>r.locale==="fr"&&r.theme==="geography")?.google).toEqual({impressions:30,clicks:2,position:18,rowReturned:true});
   expect(report.themes.find(r=>r.locale==="de")?.google).toEqual({impressions:null,clicks:null,position:null,rowReturned:false});
   expect(JSON.stringify(report)).not.toContain("secret query");expect(report.themes.every(t=>!("players" in t))).toBe(true);

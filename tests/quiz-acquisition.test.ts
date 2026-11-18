@@ -24,7 +24,7 @@ const who=(id="one")=>({user:null,guestId:id,owner:`g:${id}`});
 beforeEach(()=>{closeDatabase();vi.stubEnv("DAILYGRID_DB_PATH",":memory:");vi.stubEnv("ANALYTICS_ADMIN_USERNAMES","admin");vi.useFakeTimers({toFake:["Date"]});vi.setSystemTime(now);});
 afterEach(()=>{closeDatabase();vi.useRealTimers();vi.unstubAllEnvs();});
 it("adds sixteen complete four-language playable topics without exposing answers, with matching translated routes",()=>{
- expect(expandedQuizTopics).toHaveLength(16);expect(quizTopics).toHaveLength(25);validateKnowledgeContent();
+ expect(expandedQuizTopics).toHaveLength(16);expect(quizTopics).toHaveLength(26);validateKnowledgeContent();
  for(const locale of locales){const paths=new Set<string>();
   for(const t of expandedQuizTopics){
    const path=quizTopicPath(locale,t);expect(paths.has(path)).toBe(false);paths.add(path);
@@ -90,6 +90,6 @@ it("joins trusted page-level Google and playing exports without treating missing
  const r=quizAcquisitionReport(google,analytics);
  expect(r.rows.find(p=>p.topic==="countries-world"&&p.locale==="fr")?.google).toEqual({clicks:4,impressions:120,position:14,rowReturned:true});
  expect(r.rows.find(p=>p.topic==="countries-africa"&&p.locale==="fr")?.google).toEqual({clicks:null,impressions:null,position:null,rowReturned:false});
- expect(r.rows).toHaveLength(100);expect(JSON.stringify(r)).not.toContain("PRIVATE QUERY");
+ expect(r.rows).toHaveLength(104);expect(JSON.stringify(r)).not.toContain("PRIVATE QUERY");
  expect(()=>quizAcquisitionReport(google,{})).toThrow();
 });
