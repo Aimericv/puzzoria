@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {relatedUnitFiles,runDevelopmentUnits,assertFinalCI,browserJobs} from './ci-validation.mjs';
+import {changedCI} from './actions-budget-runtime.mjs';
+import {allocation,assertGrant,emptyUsage,reserveAllocation} from './actions-budget.mjs';
 
 test('development selection widens shared, sensitive, configuration and unknown changes',()=>{
   assert.deepEqual(relatedUnitFiles(['src/components/football-profile-page.tsx','tests/seo.test.ts']),['src/components/football-profile-page.tsx','tests/seo.test.ts']);
@@ -69,4 +71,47 @@ test('workflow preserves guards and runs four browsers only for final applicatio
   assert.doesNotMatch(final,/contents: write|actions: write/);
   for(const project of ['desktop','mobile','android','iphone-webkit'])assert.match(text,new RegExp('project: '+project));
   assert.match(text,/npm run build/);assert.match(text,/npm run seo:check/);assert.match(text,/node --test --test-isolation=none/);
+});
+
+test('draft to review to draft requires a fresh final reservation and rejects stale evidence', async () => {
+  const { rows, api, options } = finalFixture();
+  const live = rows['/pulls/5'];
+  const budgetApi = path => path.startsWith('/pulls/5/files?')
+    ? [{ filename: 'src/components/example.tsx' }]
+    : api(path);
+  const event = action => ({ action, pull_request: structuredClone(live) });
+  const now = Date.parse('2026-11-18T12:00:00Z');
+  const usage = emptyUsage(now);
+  const admit = async (payload, run) => {
+    const context = await changedCI(budgetApi, payload);
+    const plan = allocation(usage, { kind: 'ci', ...context, now });
+    assert.equal(plan.allowed, true);
+    reserveAllocation(usage, plan, run, 2, now);
+    return context.mode;
+  };
+
+  live.draft = true;
+  const opened = event('opened');
+  assert.equal(await admit(opened, '99'), 'development');
+  assert.throws(() => assertGrant(usage, { run: '99', attempt: 2, job: browserJobs[0], minutes: 30, now }));
+  await assert.rejects(assertFinalCI(api, { ...options, event: opened, mode: 'development' }), /Development validation only/);
+
+  live.draft = false;
+  const ready = event('ready_for_review');
+  await assert.rejects(changedCI(budgetApi, opened), /changed/);
+  assert.equal(await admit(ready, '100'), 'final');
+  for (const job of browserJobs) assert.equal(assertGrant(usage, { run: '100', attempt: 2, job, minutes: 30, now }), 30);
+  const lastBrowser = rows['/actions/runs/100/attempts/2/jobs?per_page=100'].jobs.at(-1);
+  lastBrowser.status = 'in_progress';
+  lastBrowser.conclusion = null;
+  await assert.rejects(assertFinalCI(api, { ...options, event: ready }), /Required final job did not pass/);
+  lastBrowser.status = 'completed';
+  lastBrowser.conclusion = 'success';
+  assert.equal((await assertFinalCI(api, { ...options, event: ready })).eligibleForMerge, true);
+
+  live.draft = true;
+  const converted = event('converted_to_draft');
+  assert.equal(await admit(converted, '101'), 'development');
+  await assert.rejects(changedCI(budgetApi, ready), /changed/);
+  await assert.rejects(assertFinalCI(api, { ...options, event: ready }), /stale/);
 });

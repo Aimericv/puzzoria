@@ -18,8 +18,8 @@ Les dépendances dynamiques et les composants serveur asynchrones ne sont pas
 entièrement couverts par cette sélection : les navigateurs restent obligatoires
 avant fusion. Aucun résultat ciblé ne vaut validation finale.
 
-En brouillon, **le job `Final validation` refuse explicitement la fusion** après
-les contrôles de développement : son état rouge indique « validation finale
+En brouillon, **le job `Final validation` refuse de délivrer une preuve finale** après
+les contrôles de développement. Son état rouge indique « validation finale
 requise », pas une autorisation de supprimer des tests. Passer la PR prête pour
 revue déclenche une nouvelle validation complète. Les pushes suivants en revue
 relancent le complet. Repasser en brouillon annule le run devenu obsolète via la
@@ -45,11 +45,14 @@ Il n'existe aucun cache de succès ni réutilisation entre révisions dans ce lo
 Les caches de téléchargements npm/Playwright sont conservés ; les bases, sessions
 et résultats ne sont pas mis en cache.
 
-Le forfait GitHub Free du dépôt privé ne propose pas la protection de branche
-observée lors de l'audit. Ce lot ne prétend pas ajouter une interdiction de fusion
-à l'interface GitHub. L'accord du propriétaire et les preuves imposées par les
-outils de publication restent requis. Le validateur indépendant isolé du
-superviseur n'est ni modifié ni remplacé par une CI ordinaire, même verte.
+Le dépôt est public et `main` n'a pas de protection de branche active au
+18 novembre 2026. Le workflow seul ne bloque donc pas une fusion dans l'interface.
+Pour faire appliquer la politique par GitHub, le propriétaire doit autoriser
+une règle sur `main`, sans exception administrateur, qui exige `budget`, `checks`
+et `Final validation` de GitHub Actions et une branche à jour. Exiger aussi une
+revue des changements de workflow et de politique selon les accès disponibles.
+Les branches documentation/contrôleur conservent le statut ignoré du job final.
+Le validateur isolé du superviseur conserve ses exigences indépendantes.
 
 Les timeouts, contrôles de financement, écritures comptables atomiques, gardes
 par job et marges d'annulation restent en place. Le nouveau job final de deux
@@ -89,6 +92,31 @@ et revue de cette PR, afin de conserver la CI actuelle de #49. L'empreinte de
 politique inclut les nouveaux modules de validation/diagnostic ; toute activation
 du contrôleur de publication reste soumise à sa maintenance revue et à l'accord
 du propriétaire. Le bot n'est pas réactivé par cette modification.
+
+## Test GitHub de bout en bout
+
+Le job budget lit `main` et le job final lit la base de la PR. Basculer #51 en
+revue sur le `main` actuel n'exercerait que sa CI contrôleur. Pour valider avant
+intégration, utiliser une branche de test protégée dans le même dépôt avec la
+politique de #51 comme base et adapter uniquement les références à `main` dans
+la copie de test. Conserver le même registre et le même garde de financement,
+sans secrets de production ou déploiement. La copie est réservée aux tests et
+nécessite l'accord du propriétaire pour la règle GitHub et les exécutions.
+
+1. Exiger `budget`, `checks` et `Final validation` sur la branche de test,
+   source GitHub Actions, branche à jour et aucun contournement.
+2. Ouvrir une PR applicative brouillon contenant un changement réversible.
+   Vérifier la réservation de 34 minutes, les contrôles ciblés, les navigateurs
+   ignorés et le refus de `Final validation` après les contrôles.
+3. Passer prête pour revue. Vérifier une nouvelle exécution pour la même tête,
+   la réservation de 178 minutes et le refus de fusion dans GitHub tant que le
+   job final manque. Attendre les quatre profils et le reçu de cette tentative.
+4. Repasser en brouillon pendant la finale ou après son succès. Vérifier que la
+   nouvelle exécution reprend le mode ciblé et que l'ancien reçu est refusé quand
+   la PR est en brouillon. Avancer la base du test et vérifier que l'exigence de
+   mise à jour bloque la PR jusqu'à une nouvelle validation de la combinaison.
+5. Fermer la PR de test sans la fusionner. Si les résultats concordent, appliquer
+   après accord la même règle à `main` lors de l'intégration de la politique.
 
 Références : [Vitest related](https://vitest.dev/guide/cli.html#vitest-related),
 [événements de PR](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request),
