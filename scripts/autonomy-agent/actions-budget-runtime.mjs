@@ -101,9 +101,10 @@ export async function retryDeferredCI(api,loaded,now=Date.now()) {
   for(const row of loaded.usage.deferredCI??[]) {
     if(row.nextRetryAt&&Date.parse(row.nextRetryAt)>now)continue;
     if(!Number.isSafeInteger(row.pr)||!/^\d+$/.test(row.run)||!/^[a-f0-9]{40}$/.test(row.head))throw Error('Invalid deferred CI receipt');
-    if(!allocation(loaded.usage,{kind:'ci',scope:row.scope,now}).allowed)return;
+    if(!allocation(loaded.usage,{kind:'ci',scope:row.scope,mode:row.mode??'final',now}).allowed)return;
     const pr=await api(`/pulls/${row.pr}`);
-    if(pr.state!=='open'||pr.head?.sha!==row.head){loaded.usage.deferredCI=loaded.usage.deferredCI.filter(r=>r!==row);await saveUsage(api,loaded,now);continue;}
+    const currentMode=row.scope==='application'&&pr.draft?'development':'final';
+    if(pr.state!=='open'||pr.head?.sha!==row.head||row.base&&pr.base?.sha!==row.base||row.mode&&row.mode!==currentMode){loaded.usage.deferredCI=loaded.usage.deferredCI.filter(r=>r!==row);await saveUsage(api,loaded,now);continue;}
     const run=await api(`/actions/runs/${row.run}`);
     if(run.status!=='completed')return;
     const {jobs}=await api(`/actions/runs/${row.run}/jobs?per_page=100`),gate=jobs.find(job=>job.name==='budget'&&job.conclusion==='failure');
@@ -114,13 +115,13 @@ export async function retryDeferredCI(api,loaded,now=Date.now()) {
     await api(`/actions/jobs/${gate.id}/rerun`,'POST',{});return;
   }
 }
-export async function admitUsage(api,{kind,scope='application',now=Date.now(),run,attempt,manual=false,ci}={}) {
+export async function admitUsage(api,{kind,scope='application',mode='final',now=Date.now(),run,attempt,manual=false,ci}={}) {
   const loaded=await loadUsage(api,now);
   await reconcileUsage(api,loaded.usage,{now,currentRun:run});
-  const plan=allocation(loaded.usage,{kind,scope,now,manual});
+  const plan=allocation(loaded.usage,{kind,scope,mode,now,manual});
   if(kind==='ci'&&ci){
     loaded.usage.deferredCI=(loaded.usage.deferredCI??[]).filter(row=>row.pr!==ci.pr);
-    if(!plan.allowed)loaded.usage.deferredCI.push({pr:ci.pr,head:ci.head,run:String(run),attempt,scope,nextRetryAt:new Date(now+6*3600000).toISOString()});
+    if(!plan.allowed)loaded.usage.deferredCI.push({pr:ci.pr,head:ci.head,...(ci.base?{base:ci.base}:{}),run:String(run),attempt,scope,mode,nextRetryAt:new Date(now+6*3600000).toISOString()});
   }
   reserveAllocation(loaded.usage,plan,run,attempt,now);
   await saveUsage(api,loaded,now); // No expensive output before durable CAS succeeds.
@@ -147,11 +148,17 @@ export async function extendUsage(api,requirements,{env=process.env,now=Date.now
   return available;
 }
 export async function changedScope(api,event) {
+  return (await changedCI(api,event)).scope;
+}
+export async function changedCI(api,event) {
   const pr=event?.pull_request;
   if(!pr||pr.head?.repo?.full_name!=='Aimericv/puzzoria')throw Error('Same-repository PR is required for budgeted CI');
   const latest=await api(`/pulls/${pr.number}`);
-  if(latest.head?.sha!==pr.head.sha||latest.base?.ref!=='main')throw Error('PR changed before budget classification');
+  if(latest.head?.sha!==pr.head.sha||latest.base?.ref!=='main'||
+    !/^[a-f0-9]{40}$/.test(pr.base?.sha??'')||latest.base.sha!==pr.base.sha||
+    typeof pr.draft!=='boolean'||latest.draft!==pr.draft)throw Error('PR changed before budget classification');
   const files=[];
   for(let page=1;;page++){const rows=await api(`/pulls/${pr.number}/files?per_page=100&page=${page}`);if(!Array.isArray(rows))throw Error('Invalid diff');for(const row of rows){files.push(row.filename);if(row.previous_filename)files.push(row.previous_filename);}if(rows.length<100)break;if(page>=30)throw Error('Incomplete PR diff');}
-  return ciScope(files);
+  const scope=ciScope(files);
+  return {scope,mode:scope==='application'&&latest.draft?'development':'final',head:pr.head.sha,base:pr.base.sha};
 }
