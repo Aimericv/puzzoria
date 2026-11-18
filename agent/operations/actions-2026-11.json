@@ -861,6 +861,34 @@
     "135160604483": {
       "run": "44405571783",
       "minutes": 1
+    },
+    "135161211883": {
+      "run": "44405987102",
+      "minutes": 1
+    },
+    "135161411137": {
+      "run": "44405987102",
+      "minutes": 2
+    },
+    "135162270836": {
+      "run": "44405987102",
+      "minutes": 20
+    },
+    "135162270926": {
+      "run": "44405987102",
+      "minutes": 21
+    },
+    "135162270958": {
+      "run": "44405987102",
+      "minutes": 24
+    },
+    "135162271214": {
+      "run": "44405987102",
+      "minutes": 19
+    },
+    "135176078000": {
+      "run": "44405987102",
+      "minutes": 1
     }
   },
   "runs": {
@@ -1221,6 +1249,10 @@
       "completed": true
     },
     "44405987102": {
+      "attempt": 1,
+      "completed": true
+    },
+    "44410614732": {
       "attempt": 1,
       "completed": false
     }
@@ -2182,11 +2214,23 @@
         "E2E (iphone-webkit)": 45,
         "Final validation": 2
       }
+    },
+    "44410614732:1": {
+      "run": "44410614732",
+      "attempt": 1,
+      "total": 34,
+      "before": 0,
+      "at": "2026-11-18T22:20:42.224Z",
+      "jobs": {
+        "budget": 8,
+        "checks": 12,
+        "Final validation": 2
+      }
     }
   },
   "lastModelAt": "2026-11-12T15:12:01.692Z",
   "deferredCI": [],
-  "observedAt": "2026-11-18T21:52:59.172Z",
+  "observedAt": "2026-11-18T22:20:42.224Z",
   "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
   "limit": 1900,
   "ci51ValidationCampaign": {
@@ -2195,7 +2239,8 @@
     "base": "79bd569b53da48f3412d51e19057ed303d9751ea",
     "runs": [
       "44405571783",
-      "44405987102"
+      "44405987102",
+      "44410614732"
     ]
   }
 }
