@@ -21,7 +21,7 @@ try {
     let kind=process.env.PUZZORIA_BUDGET_KIND;
     const context=kind==='ci'?await changedCI(api,event):{scope:'application',mode:'final'};
     if(kind==='autonomy')kind=event.inputs?.['check-search-console']===true||event.inputs?.['check-search-console']==='true'?'search-console':event.inputs?.['deploy-pending']===true||event.inputs?.['deploy-pending']==='true'?'deployment':event.inputs?.['validate-pending']===true||event.inputs?.['validate-pending']==='true'?'validation':'session';
-    const plan=await admitUsage(api,{kind,...context,now,run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),manual:process.env.GITHUB_EVENT_NAME==='workflow_dispatch',ci:kind==='ci'?{pr:event.pull_request.number,head:event.pull_request.head.sha,base:context.base}:undefined});
+    const plan=await admitUsage(api,{kind,...context,now,run:process.env.GITHUB_RUN_ID,attempt:Number(process.env.GITHUB_RUN_ATTEMPT??1),manual:process.env.GITHUB_EVENT_NAME==='workflow_dispatch',ci:kind==='ci'?{pr:event.pull_request.number,head:event.pull_request.head.sha,base:context.base}:undefined,campaignEvent:kind==='ci'?event:undefined});
     for(const [key,value] of Object.entries({allowed:plan.allowed,scope:plan.scope,mode:plan.mode,head:context.head??'',base:context.base??'',session_timeout:plan.sessionTimeout??3,release_allowed:Boolean(plan.releaseAllowed),production_allowed:Boolean(plan.productionAllowed||kind==='deployment'&&plan.allowed)}))output(key,value);
     summary(`Actions ${plan.month} : **${plan.used} / ${plan.limit} min observées**, ${plan.held} min déjà réservées. Admission : ${plan.allowed} (${plan.reason??kind}). Les limites, arrondis, tentatives et marges d'annulation sont appliqués hors mémoire du modèle. [Comptabilité](https://github.com/Aimericv/puzzoria/tree/codex/actions-usage/agent/operations).`);
     console.log(JSON.stringify(plan));
@@ -33,6 +33,6 @@ try {
 } catch(error) {
   output('allowed',false);output('release_allowed',false);output('production_allowed',false);
   // Failure to account never authorizes compute. Try the external stop switches.
-  if(mode!=='assert')try{await suspendWorkflows(api);}catch{/* The job remains failed and cannot admit downstream work. */}
+  if(mode!=='assert'&&process.env.PUZZORIA_BUDGET_KIND!=='ci')try{await suspendWorkflows(api);}catch{/* The job remains failed and cannot admit downstream work. */}
   console.error(`Actions budget refused: ${error.message}`);process.exitCode=1;
 }

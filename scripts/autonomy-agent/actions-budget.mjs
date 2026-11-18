@@ -1,6 +1,7 @@
 // Protected operator policy. The model cannot edit this module or its ledger.
 // Owner authorization, 2026-11-15: raise only the internal cap; no paid overage.
 export const ACTIONS_LIMIT=1900;
+export const CI51_TEMPORARY_LIMIT=2040;
 export const ACTIONS_BRANCH='codex/actions-usage';
 export const CONTROL_ALLOWANCE=8; // 2 minute guard + cancellation/rounding margin.
 // Reserve every remaining daily recovery, including cancellation margin.
@@ -69,12 +70,13 @@ export function ciScope(files) {
   if(files.every(path=>/^(?:scripts\/|deploy\/|agent\/|\.github\/|tests\/infrastructure\/|docs\/)/.test(path)||['AGENTS.md','README.md'].includes(path)))return 'controller';
   return 'application'; // Unknown files, manifests, runtime code, tests and browser changes get full validation.
 }
-export function allocation(usage,{kind,scope='application',mode='final',now=Date.now(),manual=false}={}) {
+export function allocation(usage,{kind,scope='application',mode='final',now=Date.now(),manual=false,limit=ACTIONS_LIMIT}={}) {
   if(!['ci','analytics','search-console','session','validation','deployment'].includes(kind))throw Error('Unknown budgeted operation');
   if(kind==='ci'&&!['development','final'].includes(mode))throw Error('Unknown CI validation mode');
+  if(limit!==ACTIONS_LIMIT&&(limit!==CI51_TEMPORARY_LIMIT||kind!=='ci'||scope!=='application'))throw Error('Invalid CI51 temporary limit');
   checkedUsage(usage,now);
-  const used=chargedMinutes(usage),held=reservedMinutes(usage),remaining=ACTIONS_LIMIT-used-held;
-  const base={kind,scope,mode,used,held,remaining,month:usage.month,limit:ACTIONS_LIMIT,allowed:false,jobs:{budget:CONTROL_ALLOWANCE},reason:'monthly_limit'};
+  const used=chargedMinutes(usage),held=reservedMinutes(usage),remaining=limit-used-held;
+  const base={kind,scope,mode,used,held,remaining,month:usage.month,limit,allowed:false,jobs:{budget:CONTROL_ALLOWANCE},reason:'monthly_limit'};
   const safe=remaining-CONTROL_ALLOWANCE-recoveryAllowance(now)-CONTROL_ALLOWANCE;
   if(safe<0)return {...base,halt:true};
   const grant=jobs=>({...base,allowed:true,reason:null,jobs:{budget:CONTROL_ALLOWANCE,...jobs}});
@@ -111,10 +113,10 @@ export function reserveAllocation(usage,plan,run,attempt,now=Date.now()) {
   if(plan.allowed&&plan.kind==='session')usage.lastModelAt=new Date(now).toISOString();
   return usage.reservations[key];
 }
-export function assertGrant(usage,{run,attempt,job,minutes,now=Date.now()}) {
+export function assertGrant(usage,{run,attempt,job,minutes,now=Date.now(),limit=ACTIONS_LIMIT}) {
   checkedUsage(usage,now);
   const entry=usage.reservations[`${run}:${attempt}`];
   if(!entry||!Number.isSafeInteger(minutes)||minutes<1||entry.jobs?.[job]<minutes||!Object.hasOwn(entry.jobs??{},job))throw Error('No protected monthly reservation for this job and attempt');
-  if(chargedMinutes(usage)+reservedMinutes(usage)+recoveryAllowance(now)>ACTIONS_LIMIT)throw Error('Monthly Actions envelope is unavailable');
+  if(chargedMinutes(usage)+reservedMinutes(usage)+recoveryAllowance(now)>limit)throw Error('Monthly Actions envelope is unavailable');
   return entry.jobs[job];
 }

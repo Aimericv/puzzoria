@@ -1,4 +1,5 @@
-import {ACTIONS_LIMIT,ACTIONS_BRANCH,CONTROL_ALLOWANCE,recoveryAllowance,MANAGED_WORKFLOWS,RETIRED_WORKFLOWS,monthWindow,emptyUsage,checkedUsage,observeJobs,chargedMinutes,reservedMinutes,allocation,reserveAllocation,ciScope,assertGrant} from './actions-budget.mjs';
+import {ACTIONS_LIMIT,CI51_TEMPORARY_LIMIT,ACTIONS_BRANCH,CONTROL_ALLOWANCE,recoveryAllowance,MANAGED_WORKFLOWS,RETIRED_WORKFLOWS,monthWindow,emptyUsage,checkedUsage,observeJobs,chargedMinutes,reservedMinutes,allocation,reserveAllocation,ciScope,assertGrant} from './actions-budget.mjs';
+import {campaignBase,campaignJobLimit,campaignStage} from './ci51-campaign.mjs';
 
 export const usagePath=now=>`agent/operations/actions-${monthWindow(now).month}.json`;
 async function optional(api,path) {try{return await api(path);}catch(e){if(e.status===404)return null;throw e;}}
@@ -115,10 +116,15 @@ export async function retryDeferredCI(api,loaded,now=Date.now()) {
     await api(`/actions/jobs/${gate.id}/rerun`,'POST',{});return;
   }
 }
-export async function admitUsage(api,{kind,scope='application',mode='final',now=Date.now(),run,attempt,manual=false,ci}={}) {
+export async function admitUsage(api,{kind,scope='application',mode='final',now=Date.now(),run,attempt,manual=false,ci,campaignEvent}={}) {
   const loaded=await loadUsage(api,now);
   await reconcileUsage(api,loaded.usage,{now,currentRun:run});
-  const plan=allocation(loaded.usage,{kind,scope,mode,now,manual});
+  const campaign=campaignEvent?await campaignStage(api,loaded.usage,{event:campaignEvent,scope,mode,now,run,attempt}):null;
+  const plan=allocation(loaded.usage,{kind,scope,mode,now,manual,limit:campaign?CI51_TEMPORARY_LIMIT:ACTIONS_LIMIT});
+  if(campaign){
+    if(!plan.allowed)throw Error('CI51 admission refused');
+    loaded.usage.ci51ValidationCampaign=campaign;
+  }
   if(kind==='ci'&&ci){
     loaded.usage.deferredCI=(loaded.usage.deferredCI??[]).filter(row=>row.pr!==ci.pr);
     if(!plan.allowed)loaded.usage.deferredCI.push({pr:ci.pr,head:ci.head,...(ci.base?{base:ci.base}:{}),run:String(run),attempt,scope,mode,nextRetryAt:new Date(now+6*3600000).toISOString()});
@@ -131,7 +137,9 @@ export async function admitUsage(api,{kind,scope='application',mode='final',now=
 }
 export async function requireJobBudget(api,job,minutes,{env=process.env,now=Date.now()}={}) {
   const {usage}=await loadUsage(api,now);
-  return assertGrant(usage,{run:env.GITHUB_RUN_ID,attempt:Number(env.GITHUB_RUN_ATTEMPT??1),job,minutes,now});
+  const run=env.GITHUB_RUN_ID,attempt=Number(env.GITHUB_RUN_ATTEMPT??1);
+  const limit=await campaignJobLimit(api,usage,{run,attempt,now});
+  return assertGrant(usage,{run,attempt,job,minutes,now,limit});
 }
 export async function extendUsage(api,requirements,{env=process.env,now=Date.now()}={}) {
   const loaded=await loadUsage(api,now);await reconcileUsage(api,loaded.usage,{now,currentRun:env.GITHUB_RUN_ID});
@@ -154,7 +162,7 @@ export async function changedCI(api,event) {
   const pr=event?.pull_request;
   if(!pr||pr.head?.repo?.full_name!=='Aimericv/puzzoria')throw Error('Same-repository PR is required for budgeted CI');
   const latest=await api(`/pulls/${pr.number}`);
-  if(latest.head?.sha!==pr.head.sha||latest.base?.ref!=='main'||
+  if(latest.head?.sha!==pr.head.sha||latest.base?.ref!==campaignBase||pr.base?.ref!==campaignBase||
     !/^[a-f0-9]{40}$/.test(pr.base?.sha??'')||latest.base.sha!==pr.base.sha||
     typeof pr.draft!=='boolean'||latest.draft!==pr.draft)throw Error('PR changed before budget classification');
   const files=[];

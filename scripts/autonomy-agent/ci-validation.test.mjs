@@ -6,6 +6,8 @@ import {deflateRawSync} from 'node:zlib';
 import {relatedUnitFiles,runDevelopmentUnits,assertFinalCI,verifyFinalRun,browserJobs} from './ci-validation.mjs';
 import {changedCI} from './actions-budget-runtime.mjs';
 import {allocation,assertGrant,browserTimeouts,emptyUsage,reserveAllocation} from './actions-budget.mjs';
+import {campaignBase} from './ci51-campaign.mjs';
+const baseRef=`/git/ref/heads/${campaignBase}`;
 
 test('development selection widens shared, sensitive, configuration and unknown changes',()=>{
   assert.deepEqual(relatedUnitFiles(['src/components/football-profile-page.tsx','tests/seo.test.ts']),['src/components/football-profile-page.tsx','tests/seo.test.ts']);
@@ -28,9 +30,9 @@ test('an empty related set falls back to real full unit tests, and failures cann
 
 function finalFixture() {
   const head='a'.repeat(40),base='b'.repeat(40),merge='c'.repeat(40),tree='e'.repeat(40);
-  const pr={number:5,state:'open',draft:false,merge_commit_sha:merge,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'main',sha:base}};
+  const pr={number:5,state:'open',draft:false,merge_commit_sha:merge,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:campaignBase,sha:base}};
   const rows={
-    '/pulls/5':pr,'/git/ref/heads/main':{object:{sha:base}},
+    '/pulls/5':pr,[baseRef]:{object:{sha:base}},
     '/actions/runs/100':{event:'pull_request',path:'.github/workflows/ci.yml',head_sha:head,run_attempt:2,repository:{full_name:'Aimericv/puzzoria'}},
     ['/git/commits/'+merge]:{sha:merge,tree:{sha:tree},parents:[{sha:base},{sha:head}]},
     '/actions/runs/100/attempts/2/jobs?per_page=100':{total_count:6,jobs:['budget','checks',...browserJobs].map(name=>({name,run_id:100,status:'completed',conclusion:'success'}))},
@@ -48,7 +50,7 @@ test('final evidence requires one exact head/base/merge and every browser in thi
     f=>f.rows['/pulls/5'].draft=true,f=>f.rows['/pulls/5'].state='closed',
     f=>f.rows['/pulls/5'].head.sha='d'.repeat(40),f=>f.rows['/pulls/5'].base.sha='d'.repeat(40),
     f=>f.rows['/pulls/5'].merge_commit_sha='d'.repeat(40),
-    f=>f.rows['/git/ref/heads/main'].object.sha='d'.repeat(40),
+    f=>f.rows[baseRef].object.sha='d'.repeat(40),
     f=>f.rows['/actions/runs/100'].head_sha='d'.repeat(40),f=>f.rows['/actions/runs/100'].run_attempt=1,
     f=>f.rows['/actions/runs/100'].event='workflow_dispatch',f=>f.rows['/actions/runs/100'].path='other.yml',
     f=>f.rows['/actions/runs/100'].repository.full_name='other/project',
@@ -197,7 +199,7 @@ test('rewritten run association cannot authorize an untested base or merge',asyn
   const base='d'.repeat(40),merge='f'.repeat(40);
   f.pr.base.sha=base;
   f.pr.merge_commit_sha=merge;
-  f.rows['/git/ref/heads/main'].object.sha=base;
+  f.rows[baseRef].object.sha=base;
   f.rows['/git/commits/'+merge]={sha:merge,tree:{sha:'9'.repeat(40)},parents:[{sha:base},{sha:f.pr.head.sha}]};
   f.run.pull_requests=[structuredClone(f.pr)]; // GitHub rewrites this on retarget.
   // The old verifier could construct fresh passing evidence out of those mutable values.
