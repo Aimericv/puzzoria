@@ -849,6 +849,18 @@
     "135121210899": {
       "run": "44394598263",
       "minutes": 1
+    },
+    "135159760594": {
+      "run": "44405571783",
+      "minutes": 1
+    },
+    "135159970632": {
+      "run": "44405571783",
+      "minutes": 2
+    },
+    "135160604483": {
+      "run": "44405571783",
+      "minutes": 1
     }
   },
   "runs": {
@@ -1205,6 +1217,10 @@
       "completed": true
     },
     "44405571783": {
+      "attempt": 1,
+      "completed": true
+    },
+    "44405987102": {
       "attempt": 1,
       "completed": false
     }
@@ -2150,11 +2166,27 @@
         "checks": 12,
         "Final validation": 2
       }
+    },
+    "44405987102:1": {
+      "run": "44405987102",
+      "attempt": 1,
+      "total": 193,
+      "before": 0,
+      "at": "2026-11-18T21:52:59.172Z",
+      "jobs": {
+        "budget": 8,
+        "checks": 12,
+        "E2E (desktop)": 30,
+        "E2E (mobile)": 30,
+        "E2E (android)": 30,
+        "E2E (iphone-webkit)": 45,
+        "Final validation": 2
+      }
     }
   },
   "lastModelAt": "2026-11-12T15:12:01.692Z",
   "deferredCI": [],
-  "observedAt": "2026-11-18T21:50:33.759Z",
+  "observedAt": "2026-11-18T21:52:59.172Z",
   "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
   "limit": 1900,
   "ci51ValidationCampaign": {
@@ -2162,7 +2194,8 @@
     "head": "b40f7e6a1caa8b9bec762fad9e352fb512480cbe",
     "base": "79bd569b53da48f3412d51e19057ed303d9751ea",
     "runs": [
-      "44405571783"
+      "44405571783",
+      "44405987102"
     ]
   }
 }
