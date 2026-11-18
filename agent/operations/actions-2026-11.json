@@ -889,6 +889,18 @@
     "135176078000": {
       "run": "44405987102",
       "minutes": 1
+    },
+    "135177426637": {
+      "run": "44410614732",
+      "minutes": 1
+    },
+    "135177681182": {
+      "run": "44410614732",
+      "minutes": 2
+    },
+    "135178441890": {
+      "run": "44410614732",
+      "minutes": 1
     }
   },
   "runs": {
@@ -1254,7 +1266,7 @@
     },
     "44410614732": {
       "attempt": 1,
-      "completed": false
+      "completed": true
     }
   },
   "reservations": {
@@ -2230,7 +2242,7 @@
   },
   "lastModelAt": "2026-11-12T15:12:01.692Z",
   "deferredCI": [],
-  "observedAt": "2026-11-18T22:20:42.224Z",
+  "observedAt": "2026-11-18T22:22:57.616Z",
   "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
   "limit": 1900,
   "ci51ValidationCampaign": {
