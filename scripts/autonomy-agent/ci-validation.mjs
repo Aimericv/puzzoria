@@ -1,9 +1,13 @@
 import {execFileSync,spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
+import {inflateRawSync} from 'node:zlib';
 import {github} from '../autonomy-pilot/github.mjs';
 
+const repository='Aimericv/puzzoria';
 const sha=value=>/^[a-f0-9]{40}$/.test(value??'');
+const receiptLimit=8192;
 export const browserJobs=['desktop','mobile','android','iphone-webkit'].map(name=>`E2E (${name})`);
 
 function requireSuccessfulJobs(rows, runId, names) {
@@ -54,36 +58,77 @@ export function runDevelopmentUnits(files,{run,read,record}={}) {
 export async function assertFinalCI(api,{event,runId,attempt,merge,mode}) {
   const pr=event?.pull_request;
   if(mode!=='final')throw Error('Development validation only: mark the PR ready for review to run final validation');
-  if(!pr||pr.draft!==false||pr.head?.repo?.full_name!=='Aimericv/puzzoria'||pr.base?.ref!=='main'||!sha(pr.head.sha)||!sha(pr.base.sha)||!sha(merge)||!/^\d+$/.test(String(runId))||!Number.isSafeInteger(attempt)||attempt<1)throw Error('Pinned final PR validation is required');
-  const matches=(current,tip)=>current.state==='open'&&current.draft===false&&current.head?.sha===pr.head.sha&&current.head?.repo?.full_name==='Aimericv/puzzoria'&&current.base?.ref==='main'&&current.base?.sha===pr.base.sha&&tip.object?.sha===pr.base.sha;
+  if(!pr||!Number.isSafeInteger(pr.number)||pr.number<1||pr.draft!==false||pr.head?.repo?.full_name!==repository||pr.base?.ref!=='main'||!sha(pr.head.sha)||!sha(pr.base.sha)||!sha(merge)||!/^\d+$/.test(String(runId))||!Number.isSafeInteger(attempt)||attempt<1)throw Error('Pinned final PR validation is required');
+  const matches=(current,tip)=>current.state==='open'&&current.draft===false&&current.head?.sha===pr.head.sha&&current.head?.repo?.full_name===repository&&current.base?.ref==='main'&&current.base?.sha===pr.base.sha&&current.merge_commit_sha===merge&&tip.object?.sha===pr.base.sha;
   if(!matches(await api(`/pulls/${pr.number}`),await api('/git/ref/heads/main')))throw Error('PR head, base or review state changed; final validation is stale');
   const run=await api(`/actions/runs/${runId}`),commit=await api(`/git/commits/${merge}`);
-  if(run.event!=='pull_request'||run.path!=='.github/workflows/ci.yml'||run.head_sha!==pr.head.sha||run.run_attempt!==attempt||run.repository?.full_name!=='Aimericv/puzzoria'||JSON.stringify(commit.parents?.map(p=>p.sha))!==JSON.stringify([pr.base.sha,pr.head.sha]))throw Error('Final run or tested merge provenance mismatch');
+  if(run.event!=='pull_request'||run.path!=='.github/workflows/ci.yml'||run.head_sha!==pr.head.sha||run.run_attempt!==attempt||run.repository?.full_name!==repository||commit.sha!==merge||!sha(commit.tree?.sha)||JSON.stringify(commit.parents?.map(p=>p.sha))!==JSON.stringify([pr.base.sha,pr.head.sha]))throw Error('Final run or tested merge provenance mismatch');
   const rows=await api(`/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100`);
   requireSuccessfulJobs(rows, runId, ['budget', 'checks', ...browserJobs]);
   if(!matches(await api(`/pulls/${pr.number}`),await api('/git/ref/heads/main')))throw Error('PR changed while final evidence was collected');
-  return {mode:'final',run:String(runId),attempt,head:pr.head.sha,base:pr.base.sha,merge,eligibleForMerge:true};
+  return {schemaVersion:1,repository,pr:pr.number,mode:'final',run:String(runId),attempt,head:pr.head.sha,base:pr.base.sha,merge,tree:commit.tree.sha,eligibleForMerge:true};
+}
+
+// The upload action archives a single, small JSON. Read it in memory, never
+// extract paths, and use the central directory for data-descriptor ZIP entries.
+function parseReceipt(zip) {
+  const invalid=()=>Error('Invalid final validation receipt ZIP');
+  const end=zip.length-22;
+  if(end<0||zip.readUInt32LE(end)!==0x06054b50||zip.readUInt16LE(end+4)!==0||zip.readUInt16LE(end+6)!==0||
+     zip.readUInt16LE(end+8)!==1||zip.readUInt16LE(end+10)!==1||zip.readUInt16LE(end+20)!==0)throw invalid();
+  const directory=zip.readUInt32LE(end+16);
+  if(directory+46>end||directory+zip.readUInt32LE(end+12)!==end||zip.readUInt32LE(directory)!==0x02014b50)throw invalid();
+  const nameLength=zip.readUInt16LE(directory+28),name=Buffer.from('final.json');
+  if(nameLength!==name.length||directory+46+nameLength+zip.readUInt16LE(directory+30)+zip.readUInt16LE(directory+32)!==end||
+     !zip.subarray(directory+46,directory+46+nameLength).equals(name)||zip.readUInt32LE(directory+42)!==0)throw invalid();
+  const flags=zip.readUInt16LE(directory+8),method=zip.readUInt16LE(directory+10);
+  if(directory<30+name.length||zip.readUInt32LE(0)!==0x04034b50||(flags&1)!==0||zip.readUInt16LE(6)!==flags||
+     zip.readUInt16LE(8)!==method||zip.readUInt16LE(26)!==nameLength||!zip.subarray(30,30+nameLength).equals(name))throw invalid();
+  const size=zip.readUInt32LE(directory+24),compressedSize=zip.readUInt32LE(directory+20);
+  const start=30+nameLength+zip.readUInt16LE(28);
+  if(size<1||size>receiptLimit||compressedSize<1||start+compressedSize>directory||(method!==0&&method!==8))throw invalid();
+  const compressed=zip.subarray(start,start+compressedSize);
+  const bytes=method===8?inflateRawSync(compressed,{maxOutputLength:receiptLimit}):compressed;
+  if(bytes.length!==size)throw invalid();
+  return JSON.parse(bytes.toString('utf8'));
 }
 
 // Operator check before an application merge. GitHub treats skipped checks as passing.
-// Fetch the current PR and insist on actual successes from its exact final attempt.
-export async function verifyFinalRun(api, prNumber, runId) {
+// Use the receipt from the successful attempt as the source of the tested commits.
+export async function verifyFinalRun(api, prNumber, runId, download) {
   if (!/^[1-9]\d*$/.test(String(prNumber)) || !/^[1-9]\d*$/.test(String(runId))) throw Error('PR and run numbers required');
   const pr = await api(`/pulls/${prNumber}`);
   if (pr.state !== 'open' || pr.draft !== false) throw Error('An open PR ready for review is required');
   const run = await api(`/actions/runs/${runId}`);
-  const associated = run.pull_requests?.some(row => row.number === Number(prNumber) && row.head?.sha === pr.head?.sha && row.base?.sha === pr.base?.sha);
-  if (!associated || run.status !== 'completed' || run.conclusion !== 'success' || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) {
+  const completed = value => value.status === 'completed' && value.conclusion === 'success' && value.run_attempt === run.run_attempt;
+  if (!completed(run) || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1) {
     throw Error('No successful final run for the current PR and base');
   }
   requireSuccessfulJobs(await api(`/actions/runs/${runId}/attempts/${run.run_attempt}/jobs?per_page=100`), runId, ['Final validation']);
-  return assertFinalCI(api, { event: { pull_request: pr }, runId, attempt: run.run_attempt, merge: pr.merge_commit_sha, mode: 'final' });
+  const name=`ci-final-evidence-${runId}-${run.run_attempt}`;
+  const artifacts=await api(`/actions/runs/${runId}/artifacts?name=${name}&per_page=100`);
+  const artifact=artifacts.artifacts?.[0];
+  if(artifacts.total_count!==1||artifacts.artifacts?.length!==1||artifact?.name!==name||artifact.expired!==false||
+     !Number.isSafeInteger(artifact.id)||artifact.id<1||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<1||
+     artifact.size_in_bytes>receiptLimit||!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||
+     String(artifact.workflow_run?.id)!==String(runId)||artifact.workflow_run?.head_sha!==run.head_sha)throw Error('Missing, expired or invalid final validation artifact');
+  const zip=await download(artifact.id);
+  if(!Buffer.isBuffer(zip)||zip.length!==artifact.size_in_bytes||`sha256:${createHash('sha256').update(zip).digest('hex')}`!==artifact.digest)throw Error('Final validation artifact digest mismatch');
+  const receipt=parseReceipt(zip);
+  if(receipt?.schemaVersion!==1||receipt.repository!==repository||receipt.pr!==Number(prNumber)||receipt.mode!=='final'||
+     receipt.run!==String(runId)||receipt.attempt!==run.run_attempt||receipt.eligibleForMerge!==true||!sha(receipt.tree)||
+     receipt.head!==pr.head?.sha||receipt.base!==pr.base?.sha||!sha(receipt.merge)||receipt.merge!==pr.merge_commit_sha)throw Error('Final validation receipt does not cover the current PR, base and merge');
+  const tested=await assertFinalCI(api,{event:{pull_request:pr},runId,attempt:receipt.attempt,merge:receipt.merge,mode:'final'});
+  if(receipt.tree!==tested.tree)throw Error('Final validation receipt tree differs from the tested Git tree');
+  if(!completed(await api(`/actions/runs/${runId}`)))throw Error('Final run changed while checking its receipt');
+  return tested;
 }
 
 export async function main(mode=process.argv[2],env=process.env) {
   if (mode === 'verify') {
-    const api = async path => JSON.parse(execFileSync('gh', ['api', 'repos/Aimericv/puzzoria' + path], { encoding: 'utf8' }));
-    console.log(JSON.stringify(await verifyFinalRun(api, process.argv[3], process.argv[4])));
+    const api = async path => JSON.parse(execFileSync('gh', ['api', `repos/${repository}${path}`], { encoding: 'utf8' }));
+    const download = id => execFileSync('gh',['api',`repos/${repository}/actions/artifacts/${id}/zip`],{maxBuffer:receiptLimit});
+    console.log(JSON.stringify(await verifyFinalRun(api, process.argv[3], process.argv[4], download)));
     return 0;
   }
   if(mode==='development'){

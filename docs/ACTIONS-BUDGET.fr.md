@@ -109,7 +109,8 @@ développement des finales applicatives : unitaires ciblés en brouillon, quatre
 profils complets avant fusion, et un reçu final lié à la tête/base/run/tentative.
 Il ne change ni les 1 900 minutes, ni le validateur isolé de publication, ni les
 autorisations. Les réservations applicatives deviennent 34 minutes en développement
-et 178 en finale, contrôle final et marges inclus. Les périmètres contrôleur et
+et 193 en finale, contrôle final et marges inclus. WebKit est limité à 45
+minutes, les trois profils Chromium à 30. Les périmètres contrôleur et
 documentation conservent leurs réservations et leurs obligations existantes.
 
 Les réveils lisent la pause et les quotas **avant** les installations lourdes.

@@ -57,14 +57,28 @@ Une PR externe ou une admission désactivée peut donc produire des statuts
 ignorés. Avant toute fusion applicative, lancer depuis la base de confiance
 `node scripts/autonomy-agent/ci-validation.mjs verify NUMERO_PR ID_RUN`. Cette
 commande en lecture seule exige le succès effectif du job final et de tous les
-jobs de la même tentative. Un code de sortie non nul bloque la fusion opérateur.
+jobs de la même tentative. Elle télécharge par identifiant le reçu immuable
+`ci-final-evidence-RUN-TENTATIVE`, vérifie son SHA-256 et compare la tête, la
+base, le commit de fusion testé et son arbre Git à la combinaison actuelle.
+GitHub peut réécrire la base dans les métadonnées de l'exécution après un
+changement de branche cible. La commande prend donc les commits testés dans le
+reçu d'origine. Un reçu manquant, expiré ou périmé bloque la fusion opérateur.
 Le validateur isolé du superviseur conserve ses exigences indépendantes.
 
 Les timeouts, contrôles de financement, écritures comptables atomiques, gardes
 par job et marges d'annulation restent en place. Le nouveau job final de deux
-minutes est réservé lui aussi : 34 minutes maximum par CI de développement,
-178 par CI applicative finale, marges techniques comprises. Les refus de budget
+minutes est réservé lui aussi. Le maximum est de 34 minutes par CI de
+développement et 193 par CI applicative finale, marges techniques comprises.
+L'admission garde en plus 8 minutes libres, hors réserve de récupération.
+Les refus de budget
 restent des échecs ; aucun recours payant et aucun relèvement du plafond.
+
+Seul le profil iPhone WebKit passe de 30 à 45 minutes. Lors du premier essai
+GitHub, l'installation système a pris près de 28 minutes. Le job utilise
+désormais l'image Playwright Noble épinglée du vérificateur de publication,
+avec le navigateur et ses bibliothèques préinstallés. Le téléchargement est
+limité à 8 minutes et la suite complète à 32 minutes. Les trois profils
+Chromium conservent leur limite de 30 minutes.
 
 ## Diagnostics
 
@@ -89,9 +103,9 @@ Quatre brouillons et une finale passeraient d'environ 430 à 99–107 minutes
 La PR d'optimisation ne change que le contrôleur et la documentation : sa CI
 conserve ce périmètre, environ 2–5 minutes réelles, réservation maximale de 26.
 Si sa base change après fusion de #49, prévoir un autre contrôle ciblé de 2–5
-minutes pour la synchronisation. Les événements brouillon → revue et le nouveau
-reçu final devront ensuite être confirmés sur la prochaine vraie PR applicative,
-dans sa validation finale normale ; aucun run complet de démonstration n'est lancé.
+minutes pour la synchronisation. Le premier essai sur #52 a confirmé les
+contrôles ciblés en brouillon et trois profils sur quatre en revue. Il reste
+à confirmer le WebKit corrigé et le reçu final sur la branche de test protégée.
 
 Ordre conseillé : fusion/publication autorisée de #49 d'abord, puis synchronisation
 et revue de cette PR, afin de conserver la CI actuelle de #49. L'empreinte de
@@ -115,14 +129,15 @@ nécessite l'accord du propriétaire pour la règle GitHub et les exécutions.
    Vérifier la réservation de 34 minutes, les contrôles ciblés, les navigateurs
    ignorés et le refus de `Final validation` après les contrôles.
 3. Passer prête pour revue. Vérifier une nouvelle exécution pour la même tête,
-   la réservation de 178 minutes et le refus de fusion dans GitHub tant que le
+   la réservation de 193 minutes et le refus de fusion dans GitHub tant que le
    job final manque. Attendre les quatre profils et le reçu de cette tentative.
    Exécuter aussi le vérificateur opérateur sur le run de brouillon puis sur le
    run final. Il doit refuser le premier et accepter uniquement le second.
-4. Repasser en brouillon pendant la finale ou après son succès. Vérifier que la
-   nouvelle exécution reprend le mode ciblé et que l'ancien reçu est refusé quand
-   la PR est en brouillon. Avancer la base du test et vérifier que l'exigence de
-   mise à jour bloque la PR jusqu'à une nouvelle validation de la combinaison.
+4. Après succès, changer la base en conservant la PR en revue. Vérifier que le
+   vérificateur refuse l'ancien reçu même si GitHub a réécrit les métadonnées
+   du run. Remettre la base d'origine puis repasser en brouillon et vérifier
+   séparément le retour aux tests ciblés et le refus de l'ancien reçu. Aucun de
+   ces contrôles ne nécessite une seconde finale.
 5. Fermer la PR de test sans la fusionner. Si les résultats concordent, appliquer
    après accord la même règle à `main` lors de l'intégration de la politique.
 

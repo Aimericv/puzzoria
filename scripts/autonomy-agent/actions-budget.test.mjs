@@ -79,7 +79,7 @@ test('one full CI fits the reviewed November balance while further admissions st
   reserveAllocation(u,policy,100,1,time);
   const full=allocation(u,{kind:'ci',now:time});assert.equal(full.allowed,true);
   reserveAllocation(u,full,101,1,time);
-  assert.equal(reservedMinutes(u),204);
+  assert.equal(reservedMinutes(u),219);
   assert.ok(chargedMinutes(u)+reservedMinutes(u)+recoveryAllowance(time)+8<=1900);
   assert.equal(allocation(u,{kind:'ci',now:time}).allowed,false);
 });
@@ -208,7 +208,17 @@ test('draft CI reserves its final refusal gate but never grants a browser job',(
   assert.equal(assertGrant(u,{run:'100',attempt:1,job:'Final validation',minutes:2,now}),2);
   assert.throws(()=>assertGrant(u,{run:'100',attempt:1,job:'E2E (desktop)',minutes:30,now}));
   assert.throws(()=>allocation(u,{kind:'ci',mode:'fast',now}));
-  assert.equal(allocation(emptyUsage(now),{kind:'ci',now}).jobs['E2E (iphone-webkit)'],30);
+  assert.equal(allocation(emptyUsage(now),{kind:'ci',now}).jobs['E2E (iphone-webkit)'],45);
+});
+
+test('final CI requires the new WebKit worst case plus the admission margin',()=>{
+  const available=ACTIONS_LIMIT-recoveryAllowance(now);
+  const availableForFinal=201;
+  const u=spent(available-availableForFinal,now);
+  const final=allocation(u,{kind:'ci',now});
+  assert.equal(final.allowed,true);
+  assert.equal(reserveAllocation(u,final,100,1,now).total,193);
+  assert.equal(allocation(spent(available-availableForFinal+1,now),{kind:'ci',now}).allowed,false);
 });
 
 test('CI mode comes from the live PR, with stale base/draft and renames checked',async()=>{

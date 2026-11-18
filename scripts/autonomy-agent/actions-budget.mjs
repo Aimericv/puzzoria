@@ -8,6 +8,7 @@ export const recoveryAllowance=(now=Date.now())=>Math.max(1,Math.ceil((monthWind
 export const MANAGED_WORKFLOWS=['autonomy-agent.yml','ci.yml','analytics-check.yml'];
 export const RETIRED_WORKFLOWS=['autonomy-pilot.yml','cloud-handoff-smoke.yml','growth-check.yml','agent-diagnostics.yml','ci-inspection.yml'];
 export const jobReservation=minutes=>minutes+6;
+export const browserTimeouts={'E2E (desktop)':30,'E2E (mobile)':30,'E2E (android)':30,'E2E (iphone-webkit)':45};
 export function monthWindow(now=Date.now()) {
   const d=new Date(now),start=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),1),end=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1);
   return {month:new Date(start).toISOString().slice(0,7),start,end};
@@ -78,7 +79,7 @@ export function allocation(usage,{kind,scope='application',mode='final',now=Date
   if(safe<0)return {...base,halt:true};
   const grant=jobs=>({...base,allowed:true,reason:null,jobs:{budget:CONTROL_ALLOWANCE,...jobs}});
   if(kind==='ci') {
-    const jobs=scope==='documentation'?{checks:3}:scope==='controller'?{checks:12}:{checks:12,...(mode==='final'?Object.fromEntries(['desktop','mobile','android','iphone-webkit'].map(p=>[`E2E (${p})`,30])):{}),'Final validation':2};
+    const jobs=scope==='documentation'?{checks:3}:scope==='controller'?{checks:12}:{checks:12,...(mode==='final'?browserTimeouts:{}),'Final validation':2};
     return Object.values(jobs).reduce((s,n)=>s+jobReservation(n),0)<=safe?grant(jobs):base;
   }
   if(kind==='analytics'||kind==='search-console')return jobReservation(3)<=safe?grant({[kind==='analytics'?'check':'search-console-check']:3}):base;

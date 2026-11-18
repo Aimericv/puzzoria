@@ -52,6 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
           fetch-depth: 0
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
@@ -117,7 +118,7 @@ jobs:
     needs: [budget, checks]
     if: needs.budget.outputs.allowed == 'true' && needs.budget.outputs.scope == 'application' && needs.budget.outputs.mode != 'development'
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: ${{ matrix.timeout }}
     permissions:
       contents: read
       actions: read
@@ -127,17 +128,24 @@ jobs:
         include:
           - project: desktop
             browser: chromium
+            timeout: 30
           - project: mobile
             browser: chromium
+            timeout: 30
           - project: android
             browser: chromium
+            timeout: 30
           - project: iphone-webkit
             browser: webkit
+            timeout: 45
     env:
       NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3100
+      # Same version and digest as the release verifier.
+      WEBKIT_IMAGE: mcr.microsoft.com/playwright:v1.63.0-noble@sha256:eff16c30e6f3f4af0a03fa4b706120d5e9b0891c344a27d64559aff5900a4a27
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
+          ref: ${{ github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
@@ -148,17 +156,34 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PUZZORIA_BUDGET_JOB: E2E (${{ matrix.project }})
-          PUZZORIA_JOB_TIMEOUT: 30
+          PUZZORIA_JOB_TIMEOUT: ${{ matrix.timeout }}
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - if: matrix.browser == 'chromium'
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
-      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - if: matrix.browser == 'chromium'
+        run: npx playwright install --with-deps chromium
       # Every assertion from the old preflight is already in this full suite.
-      - run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line,json
+      - if: matrix.browser == 'chromium'
+        run: npm run test:e2e -- --project=${{ matrix.project }} --reporter=line,json
         env:
           PLAYWRIGHT_JSON_OUTPUT_FILE: .ci-results/full.json
+      - name: Pull pinned Playwright WebKit image with system dependencies
+        if: matrix.browser == 'webkit'
+        timeout-minutes: 8
+        run: docker pull "$WEBKIT_IMAGE"
+      - name: Run the complete iPhone WebKit suite
+        if: matrix.browser == 'webkit'
+        timeout-minutes: 32
+        run: |
+          docker run --rm --pull=never --user "$(id -u):$(id -g)" \
+            --mount "type=bind,src=$GITHUB_WORKSPACE,dst=/work" \
+            --mount "type=bind,src=$(command -v node),dst=/usr/local/bin/node,readonly" \
+            --workdir /work --env XDG_CACHE_HOME=/tmp/puzzoria-cache --env CI=true --env NEXT_PUBLIC_SITE_URL \
+            --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright --env PLAYWRIGHT_JSON_OUTPUT_FILE=.ci-results/full.json \
+            "$WEBKIT_IMAGE" node scripts/run-e2e.mjs --project=iphone-webkit --reporter=line,json
       - if: always()
         run: node scripts/autonomy-agent/ci-proof.mjs summarize
         env:
@@ -202,7 +227,7 @@ jobs:
           PUZZORIA_CI_MODE: ${{ needs.budget.outputs.mode }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: ci-final-evidence-${{ github.run_id }}
+          name: ci-final-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           path: .ci-results/final.json
           if-no-files-found: error
           retention-days: 7
