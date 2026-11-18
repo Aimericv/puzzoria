@@ -237,3 +237,5 @@ describe("structured data", () => {
     ]);
   });
 });
+
+// Isolated fixture for the CI review transition campaign.
