@@ -1,7 +1,7 @@
 name: Repository checks
 on:
   pull_request:
-    branches: [main]
+    branches: [codex/ci51-test-base, codex/ci51-test-rebased]
     types: [opened, synchronize, reopened, ready_for_review, converted_to_draft]
 permissions: {}
 concurrency:
@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   budget:
-    if: github.event.pull_request.head.repo.full_name == github.repository && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true'
+    if: github.event.pull_request.head.repo.full_name == github.repository && vars.PUZZORIA_ACTIONS_NO_PAYMENT_METHOD == 'true' && github.event.pull_request.head.ref == 'codex/ci51-test-fixture'
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     concurrency:
@@ -29,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.base.sha }}
           persist-credentials: false
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
         with:
@@ -69,7 +69,9 @@ jobs:
       - name: Verify source and funding
         run: |
           node --input-type=module -e 'import {readFileSync} from "node:fs";import {assertFunding} from "./scripts/autonomy-agent/policy.mjs";assertFunding(JSON.parse(readFileSync("agent/autonomy/control.json")))'
-          git merge-base --is-ancestor origin/main HEAD
+          git merge-base --is-ancestor "$PUZZORIA_STAGING_BASE_SHA" HEAD
+        env:
+          PUZZORIA_STAGING_BASE_SHA: ${{ github.event.pull_request.base.sha }}
       - if: needs.budget.outputs.scope != 'documentation'
         run: npm ci --ignore-scripts --no-audit --no-fund
       - if: needs.budget.outputs.scope != 'documentation'

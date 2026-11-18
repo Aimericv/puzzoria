@@ -154,7 +154,7 @@ export async function changedCI(api,event) {
   const pr=event?.pull_request;
   if(!pr||pr.head?.repo?.full_name!=='Aimericv/puzzoria')throw Error('Same-repository PR is required for budgeted CI');
   const latest=await api(`/pulls/${pr.number}`);
-  if(latest.head?.sha!==pr.head.sha||latest.base?.ref!=='main'||
+  if(latest.head?.sha!==pr.head.sha||!['codex/ci51-test-base', 'codex/ci51-test-rebased'].includes(latest.base?.ref)||pr.base?.ref!==latest.base.ref||
     !/^[a-f0-9]{40}$/.test(pr.base?.sha??'')||latest.base.sha!==pr.base.sha||
     typeof pr.draft!=='boolean'||latest.draft!==pr.draft)throw Error('PR changed before budget classification');
   const files=[];

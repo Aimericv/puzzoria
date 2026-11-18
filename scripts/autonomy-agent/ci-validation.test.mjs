@@ -26,9 +26,9 @@ test('an empty related set falls back to real full unit tests, and failures cann
 
 function finalFixture() {
   const head='a'.repeat(40),base='b'.repeat(40),merge='c'.repeat(40);
-  const pr={number:5,state:'open',draft:false,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'main',sha:base}};
+  const pr={number:5,state:'open',draft:false,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'codex/ci51-test-base',sha:base}};
   const rows={
-    '/pulls/5':pr,'/git/ref/heads/main':{object:{sha:base}},
+    '/pulls/5':pr,'/git/ref/heads/codex/ci51-test-base':{object:{sha:base}},
     '/actions/runs/100':{event:'pull_request',path:'.github/workflows/ci.yml',head_sha:head,run_attempt:2,repository:{full_name:'Aimericv/puzzoria'}},
     ['/git/commits/'+merge]:{parents:[{sha:base},{sha:head}]},
     '/actions/runs/100/attempts/2/jobs?per_page=100':{total_count:6,jobs:['budget','checks',...browserJobs].map(name=>({name,run_id:100,status:'completed',conclusion:'success'}))},
@@ -45,7 +45,7 @@ test('final evidence requires one exact head/base/merge and every browser in thi
     f=>f.options.mode='development',f=>f.options.event.pull_request.draft=true,
     f=>f.rows['/pulls/5'].draft=true,f=>f.rows['/pulls/5'].state='closed',
     f=>f.rows['/pulls/5'].head.sha='d'.repeat(40),f=>f.rows['/pulls/5'].base.sha='d'.repeat(40),
-    f=>f.rows['/git/ref/heads/main'].object.sha='d'.repeat(40),
+    f=>f.rows['/git/ref/heads/codex/ci51-test-base'].object.sha='d'.repeat(40),
     f=>f.rows['/actions/runs/100'].head_sha='d'.repeat(40),f=>f.rows['/actions/runs/100'].run_attempt=1,
     f=>f.rows['/actions/runs/100'].event='workflow_dispatch',f=>f.rows['/actions/runs/100'].path='other.yml',
     f=>f.rows['/actions/runs/100'].repository.full_name='other/project',

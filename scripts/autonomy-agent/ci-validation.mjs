@@ -54,14 +54,14 @@ export function runDevelopmentUnits(files,{run,read,record}={}) {
 export async function assertFinalCI(api,{event,runId,attempt,merge,mode}) {
   const pr=event?.pull_request;
   if(mode!=='final')throw Error('Development validation only: mark the PR ready for review to run final validation');
-  if(!pr||pr.draft!==false||pr.head?.repo?.full_name!=='Aimericv/puzzoria'||pr.base?.ref!=='main'||!sha(pr.head.sha)||!sha(pr.base.sha)||!sha(merge)||!/^\d+$/.test(String(runId))||!Number.isSafeInteger(attempt)||attempt<1)throw Error('Pinned final PR validation is required');
-  const matches=(current,tip)=>current.state==='open'&&current.draft===false&&current.head?.sha===pr.head.sha&&current.head?.repo?.full_name==='Aimericv/puzzoria'&&current.base?.ref==='main'&&current.base?.sha===pr.base.sha&&tip.object?.sha===pr.base.sha;
-  if(!matches(await api(`/pulls/${pr.number}`),await api('/git/ref/heads/main')))throw Error('PR head, base or review state changed; final validation is stale');
+  if(!pr||pr.draft!==false||pr.head?.repo?.full_name!=='Aimericv/puzzoria'||!['codex/ci51-test-base', 'codex/ci51-test-rebased'].includes(pr.base?.ref)||!sha(pr.head.sha)||!sha(pr.base.sha)||!sha(merge)||!/^\d+$/.test(String(runId))||!Number.isSafeInteger(attempt)||attempt<1)throw Error('Pinned final PR validation is required');
+  const matches=(current,tip)=>current.state==='open'&&current.draft===false&&current.head?.sha===pr.head.sha&&current.head?.repo?.full_name==='Aimericv/puzzoria'&&current.base?.ref===pr.base.ref&&current.base?.sha===pr.base.sha&&tip.object?.sha===pr.base.sha;
+  if(!matches(await api(`/pulls/${pr.number}`),await api(`/git/ref/heads/${pr.base.ref}`)))throw Error('PR head, base or review state changed; final validation is stale');
   const run=await api(`/actions/runs/${runId}`),commit=await api(`/git/commits/${merge}`);
   if(run.event!=='pull_request'||run.path!=='.github/workflows/ci.yml'||run.head_sha!==pr.head.sha||run.run_attempt!==attempt||run.repository?.full_name!=='Aimericv/puzzoria'||JSON.stringify(commit.parents?.map(p=>p.sha))!==JSON.stringify([pr.base.sha,pr.head.sha]))throw Error('Final run or tested merge provenance mismatch');
   const rows=await api(`/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100`);
   requireSuccessfulJobs(rows, runId, ['budget', 'checks', ...browserJobs]);
-  if(!matches(await api(`/pulls/${pr.number}`),await api('/git/ref/heads/main')))throw Error('PR changed while final evidence was collected');
+  if(!matches(await api(`/pulls/${pr.number}`),await api(`/git/ref/heads/${pr.base.ref}`)))throw Error('PR changed while final evidence was collected');
   return {mode:'final',run:String(runId),attempt,head:pr.head.sha,base:pr.base.sha,merge,eligibleForMerge:true};
 }
 
