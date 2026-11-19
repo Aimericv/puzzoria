@@ -193,8 +193,8 @@ test('prior-month reruns remain observable even outside the created-date search'
 });
 test('live PR heads are checked before scope classification and stale budget retries are discarded',async()=>{
   const f=fixture(),head='a'.repeat(40),base='b'.repeat(40);
-  const event={pull_request:{number:5,draft:false,base:{sha:base},head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}}}};
-  assert.equal(await changedScope(async path=>path==='/pulls/5'?{draft:false,head:{sha:head},base:{ref:'main',sha:base}}:[{filename:'docs/a.md'}],event),'documentation');
+  const event={pull_request:{number:5,draft:false,base:{ref:'codex/ci51-receipt-base',sha:base},head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}}}};
+  assert.equal(await changedScope(async path=>path==='/pulls/5'?{draft:false,head:{sha:head},base:event.pull_request.base}:[{filename:'docs/a.md'}],event),'documentation');
   await assert.rejects(changedScope(async()=>({head:{sha:'b'.repeat(40)}}),event),/changed/);
   const loaded=await loadUsage(f.api,now);loaded.usage.deferredCI=[{run:'10',attempt:1,pr:5,head,scope:'controller'}];
   await retryDeferredCI(async(path,...rest)=>path==='/pulls/5'?{state:'closed'}:f.api(path,...rest),loaded,now);
@@ -223,7 +223,7 @@ test('final CI requires the new WebKit worst case plus the admission margin',()=
 
 test('CI mode comes from the live PR, with stale base/draft and renames checked',async()=>{
   const head='a'.repeat(40),base='b'.repeat(40);
-  const pr={number:5,draft:true,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'main',sha:base}};
+  const pr={number:5,draft:true,head:{sha:head,repo:{full_name:'Aimericv/puzzoria'}},base:{ref:'codex/ci51-receipt-base',sha:base}};
   const api=async path=>path==='/pulls/5'?structuredClone(pr):[{filename:'src/components/card.tsx'}];
   assert.deepEqual(await changedCI(api,{pull_request:pr}),{scope:'application',mode:'development',head,base});
   for(const mutate of [p=>p.base.sha='c'.repeat(40),p=>p.draft=false,p=>delete p.base.sha,p=>delete p.draft]){

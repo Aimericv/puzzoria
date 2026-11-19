@@ -1,0 +1,43 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {campaignBase,campaignHead,campaignJobLimit,campaignStage,expiresAt} from './ci51-campaign.mjs';
+import {allocation,emptyUsage,reserveAllocation} from './actions-budget.mjs';
+
+test('temporary ceiling is spent only by the pinned three-stage campaign and one first-attempt final',async()=>{
+  const now=expiresAt-3600000,usage=emptyUsage(now),repository={full_name:'Aimericv/puzzoria',visibility:'public'};
+  const pr={number:42,state:'open',draft:true,head:{repo:repository,ref:campaignHead,sha:'a'.repeat(40)},base:{ref:campaignBase,sha:'b'.repeat(40)}};
+  const api=async path=>{
+    if(path==='')return repository;
+    if(path==='/pulls/42')return pr;
+    if(path.startsWith('/actions/runs/'))return {event:'pull_request',path:'.github/workflows/ci.yml',head_sha:pr.head.sha,head_branch:campaignHead,repository,run_attempt:1};
+    throw Error('Unexpected request '+path);
+  };
+  const authorize=(action,run,mode,overrides={})=>campaignStage(api,usage,{event:{action,pull_request:pr},run,attempt:1,scope:'application',mode,now,...overrides});
+  await assert.rejects(authorize('opened','10','development',{now:expiresAt}),/expiry/);
+  await assert.rejects(authorize('ready_for_review','10','final'),/stage/);
+  usage.jobs[100]={run:'1',minutes:1790};
+  await assert.rejects(authorize('opened','10','development'),/does not cover/);
+  usage.jobs[100].minutes=1665;
+  repository.visibility='private';
+  await assert.rejects(authorize('opened','10','development'),/public repository/);
+  repository.visibility='public';
+  usage.ci51ReceiptCampaign=await authorize('opened','10','development');
+  const first=allocation(usage,{kind:'ci',mode:'development',limit:2130,now});
+  assert.equal(reserveAllocation(usage,first,'10',1,now).total,34);
+  await assert.rejects(authorize('ready_for_review','11','final'),/stage/);
+  usage.runs[10]={attempt:1,completed:true};
+  pr.draft=false;
+  await assert.rejects(authorize('ready_for_review','11','final',{attempt:2}),/stage/);
+  usage.ci51ReceiptCampaign=await authorize('ready_for_review','11','final');
+  assert.equal(await campaignJobLimit(api,usage,{run:'11',attempt:1,now}),2130);
+  assert.equal(await campaignJobLimit(api,usage,{run:'99',attempt:1,now}),1900);
+  await assert.rejects(authorize('ready_for_review','12','final'),/stage/);
+  await assert.rejects(campaignJobLimit(api,usage,{run:'11',attempt:1,now:expiresAt}),/expired/);
+  usage.runs[11]={attempt:1,completed:true};
+  pr.draft=true;
+  usage.ci51ReceiptCampaign=await authorize('converted_to_draft','12','development');
+  assert.equal(await campaignJobLimit(api,usage,{run:'12',attempt:1,now}),2130);
+  await assert.rejects(authorize('ready_for_review','13','final'),/stage/);
+  pr.state='closed';
+  await assert.rejects(campaignJobLimit(api,usage,{run:'12',attempt:1,now}),/no longer matches/);
+});
