@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {resolve} from 'node:path';
-import {unitSummary} from './ci-diagnostics.mjs';
+import {resultLayoutSummary,unitSummary} from './ci-diagnostics.mjs';
 
 test('unit diagnostics identify assertions and suites while bounding and redacting content',()=>{
   const report={success:false,numPassedTests:409,numFailedTests:1,numPendingTests:0,testResults:[
@@ -15,4 +15,19 @@ test('unit diagnostics identify assertions and suites while bounding and redacti
   const many=structuredClone(report);many.testResults[0].assertionResults=Array(1000).fill(report.testResults[0].assertionResults[0]);
   assert.equal(unitSummary(many).failures.length,20);
   assert.deepEqual(unitSummary({success:true,numPassedTests:1,numFailedTests:0,numPendingTests:0}).failures,[]);
+});
+
+test('result diagnostics publish bounded numeric measurements and exclude raw trace data',()=>{
+  const encode=value=>[{name:'trace',path:'/private/trace.zip'},{name:'result-layout',contentType:'application/json',
+    body:Buffer.from(JSON.stringify(value)).toString('base64')}];
+  const layout={viewport:[393,727,393,727,0,1,1],samples:[[100,[16,20,120,44,1,1,1,0,1],null]],
+    html:'private browser data'};
+  const result=resultLayoutSummary(encode(layout));
+  assert.equal(result.viewport.width,393);
+  assert.deepEqual(result.samples,[{scrollY:100,close:{x:16,y:20,width:120,height:44,enabled:1,visible:1,centerHit:1,runningAnimations:0,sameNode:1},share:null}]);
+  assert.doesNotMatch(JSON.stringify(result),/private|trace/);
+  for(const damaged of [{...layout,viewport:['token',...layout.viewport.slice(1)]},{...layout,samples:[...Array(4).fill(layout.samples[0])]},
+    {...layout,samples:[[0,null,[0,0,101000,44,1,1,0,0,1]]]},{...layout,html:'x'.repeat(4000)}]){
+    assert.equal(resultLayoutSummary(encode(damaged)),undefined);
+  }
 });

@@ -9,26 +9,33 @@ import { generateChallenge } from "../src/lib/challenges";
 import { gameName } from "../src/lib/registry";
 import { rt } from "../src/lib/retention-i18n";
 import { savedGameId, savedPracticeChallenge } from "./saved-play";
+import { attachResultLayout } from "./result-layout";
 
-test("all result screens share the same actions, preserve boards and replay a fresh Unlimited game", async ({page}, info) => {
-  test.setTimeout(150000); await page.emulateMedia({reducedMotion:"reduce"});
-  for (const game of gameIds) {
+test.afterEach(async ({ page }, info) => attachResultLayout(page, info));
+
+for (const game of gameIds) {
+  test(`result for ${game} preserves the board, shares and replays a fresh Unlimited game`, async ({ page }, info) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "share", { configurable: true, value: undefined });
+      Object.defineProperty(navigator, "clipboard", { configurable: true, value: {
+        writeText: async (text: string) => { document.documentElement.dataset.previewShare = text; },
+      } });
+    });
     await page.goto(hasDaily(game) ? gamePath("fr",game) : practicePath("fr",game));
     const old = await savedGameId(page);
     const before = await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"));
     await page.getByRole("button",{name:devPreviewCopy("fr").finish,exact:true}).click();
     const panel = page.locator(".completion-panel"); await expect(panel).toBeVisible(); await expect(panel).toBeFocused();
-    await expect(panel.locator(".result-utility-actions .share-button")).toBeEnabled();
+    const share = panel.locator(".result-utility-actions .share-button");
+    await expect(share).toBeEnabled();
     await expect(panel.locator(".result-utility-actions a")).toHaveAttribute("href","/fr/stats");
-    await page.evaluate(() => {
-      Object.defineProperty(navigator,"share",{configurable:true,value:undefined});
-      Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async(text:string)=>{document.documentElement.dataset.previewShare=text;}}});
-    });
-    await panel.locator(".share-button").click();
+    await share.click();
+    await expect(page.locator("html")).toHaveAttribute("data-preview-share", /[\s\S]+/);
     const shared = await page.locator("html").getAttribute("data-preview-share");
     expect(shared).toContain(devPreviewCopy("fr").local);
     expect(shared).toContain(["ranking","rather","guess","quiz","football"].includes(game) ? gamePath("fr",game) : `/play/${game}?`);
-    await expect(panel.locator(".share-button")).toBeEnabled();
+    await expect(share).toBeEnabled();
     if (["ranking","rather"].includes(game)) await expect(page.locator("[data-finished-board]")).toBeVisible();
     if (game === "guess") await expect(page.locator(".number-arena")).toBeVisible();
     if (game === "word" || game === "rareword") await expect(page.locator(".word-board")).toBeVisible();
@@ -46,8 +53,8 @@ test("all result screens share the same actions, preserve boards and replay a fr
     await expect(page.locator("[data-game-root]")).toHaveAttribute("data-challenge-id",/^practice:/);
     await expect(page.locator("[data-game-root]")).not.toHaveAttribute("data-challenge-id",old);
     expect(await savedGameId(page)).not.toBe(old);
-  }
-});
+  });
+}
 
 test("word-search grid stays masked and timer starts only on Start, including after reload", async ({page}) => {
   await page.goto(practicePath("fr","wordsearch"));

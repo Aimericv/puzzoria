@@ -4,13 +4,16 @@ import { gamePath } from "../src/lib/i18n";
 import { practicePath } from "../src/lib/play-path";
 import { hasWinRate } from "../src/lib/result-metrics";
 import { devPreviewCopy } from "../src/lib/dev-preview-i18n";
+import { attachResultLayout } from "./result-layout";
+
+test.afterEach(async ({ page }, info) => attachResultLayout(page, info));
 
 // Independent contexts and per-game timeouts keep one slow cold route from
 // consuming the entire catalogue's timeout and identify the actual failing game.
 for (const game of gameIds) {
   test(`local finish preview for ${game} preserves progress`, async ({page}, info) => {
     await page.emulateMedia({reducedMotion: "reduce"});
-    await page.goto(practicePath("fr", game), {waitUntil: "networkidle"});
+    await page.goto(practicePath("fr", game));
     const finish = page.getByRole("button", {name: devPreviewCopy("fr").finish, exact: true});
     await expect(finish).toBeVisible();
     const before = await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"));
@@ -20,7 +23,9 @@ for (const game of gameIds) {
     };
     page.on("request", collect);
     await finish.click();
-    await expect(page.locator(".completion-panel")).toBeVisible();
+    const panel = page.locator(".completion-panel");
+    await expect(panel).toBeVisible();
+    await expect(panel).toBeFocused();
     if (hasWinRate(game) && game !== "math" && game !== "guess") await expect(page.locator("[data-outcome-bar]")).toBeVisible();
     else await expect(page.locator("[data-outcome-bar]")).toHaveCount(0);
     await expect(page.locator("[data-personal-progress]")).toBeVisible();
@@ -28,8 +33,10 @@ for (const game of gameIds) {
     expect(await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"))).toBe(before);
     expect(submitted).toEqual([]);
     if (game === "word") await page.screenshot({path: info.outputPath("local-finish.png"), fullPage: true});
-    await page.getByRole("button", {name: devPreviewCopy("fr").close, exact: true}).click();
-    await expect(page.locator(".completion-panel")).toHaveCount(0);
+    const close = page.getByRole("button", {name: devPreviewCopy("fr").close, exact: true});
+    await expect(close).toBeEnabled();
+    await close.click();
+    await expect(panel).toHaveCount(0);
     await expect(finish).toBeVisible();
     expect(await page.evaluate(() => localStorage.getItem("dailygrid:stats:v1"))).toBe(before);
     page.off("request", collect);

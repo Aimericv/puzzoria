@@ -2,7 +2,7 @@ import {readFileSync,writeFileSync,readdirSync,mkdirSync,existsSync,appendFileSy
 import {execFileSync} from "node:child_process";
 import {github} from "../autonomy-pilot/github.mjs";
 import {REPOSITORY,redact} from "./policy.mjs";
-import {unitSummary} from './ci-diagnostics.mjs';
+import {resultLayoutSummary,unitSummary} from './ci-diagnostics.mjs';
 
 const mode=process.argv[2];
 if(mode==="summarize") {
@@ -18,7 +18,7 @@ if(mode==="summarize") {
       const failures=[];
       function walk(suite) {
         for(const spec of suite.specs ?? []) for(const test of spec.tests ?? []) {
-          for(const run of test.results ?? []) if(!["passed","skipped"].includes(run.status)) failures.push({title:spec.title,file:spec.file,line:spec.line,status:run.status,errors:(run.errors ?? []).map(error=>redact(error.message ?? "",[]).slice(0,2000))});
+          for(const run of test.results ?? []) if(!["passed","skipped"].includes(run.status)) failures.push({title:spec.title,file:spec.file,line:spec.line,status:run.status,errors:(run.errors ?? []).map(error=>redact(error.message ?? "",[]).slice(0,2000)),resultLayout:resultLayoutSummary(run.attachments)});
         }
         for(const child of suite.suites ?? [])walk(child);
       }

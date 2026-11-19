@@ -88,7 +88,14 @@ les erreurs de chaque test défaillant : au plus 20 cas, trois messages de
 l'environnement, Bearer/JWT, paramètres d'URL, affectations sensibles et codes
 de contrôle sont masqués. Le résumé du job est borné à 12 000 caractères.
 Les rapports JSON et les échecs de suites sans assertion sont conservés. Aucun
-secret, base, état de navigateur ou donnée de joueur n'est ajouté aux artefacts.
+secret, base, état de session du navigateur ou donnée de joueur n'est ajouté
+aux artefacts.
+Les tests de partage et de retour à la grille sont isolés par jeu. En cas
+d'échec, leur résumé peut joindre la géométrie du viewport et des boutons,
+les animations actives et le résultat du test de pointage au centre du bouton
+sur trois images au maximum. Pour le diagnostic local, Playwright garde la
+trace complète dans `test-results`. Le workflow public ne publie que les
+mesures numériques sélectionnées et le résumé des erreurs.
 
 ## Coût attendu et mise en service
 
