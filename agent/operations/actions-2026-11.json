@@ -1267,6 +1267,10 @@
     "44410614732": {
       "attempt": 1,
       "completed": true
+    },
+    "44935657204": {
+      "attempt": 1,
+      "completed": false
     }
   },
   "reservations": {
@@ -2238,11 +2242,23 @@
         "checks": 12,
         "Final validation": 2
       }
+    },
+    "44935657204:1": {
+      "run": "44935657204",
+      "attempt": 1,
+      "total": 34,
+      "before": 0,
+      "at": "2026-11-21T18:27:57.868Z",
+      "jobs": {
+        "budget": 8,
+        "checks": 12,
+        "Final validation": 2
+      }
     }
   },
   "lastModelAt": "2026-11-12T15:12:01.692Z",
   "deferredCI": [],
-  "observedAt": "2026-11-18T22:22:57.616Z",
+  "observedAt": "2026-11-21T18:27:57.868Z",
   "source": "GitHub allocated job timestamps; per-job rounding; all attempts; no billing API credential",
   "limit": 1900,
   "ci51ValidationCampaign": {
@@ -2253,6 +2269,14 @@
       "44405571783",
       "44405987102",
       "44410614732"
+    ]
+  },
+  "ci51ReceiptCampaign": {
+    "pr": 54,
+    "head": "13b978117aa65fb9bf918c63da2d3f67a211e1ce",
+    "base": "087848df83608ee88afb4281278e8bee1e389233",
+    "runs": [
+      "44935657204"
     ]
   }
 }
