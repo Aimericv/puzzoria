@@ -188,6 +188,18 @@ jobs:
             --workdir /work --env XDG_CACHE_HOME=/tmp/puzzoria-cache --env CI=true --env NEXT_PUBLIC_SITE_URL \
             --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright --env PLAYWRIGHT_JSON_OUTPUT_FILE=.ci-results/full.json \
             "$WEBKIT_IMAGE" node scripts/run-e2e.mjs --project=iphone-webkit --reporter=line,json
+      - name: Encrypt complete failure traces for the campaign operator
+        if: failure() && !cancelled()
+        run: bash scripts/autonomy-agent/ci51-seal-traces.sh
+      - name: Retain encrypted Playwright failure traces
+        if: failure() && !cancelled()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ci51-traces-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.project }}
+          path: .ci-results/playwright-traces.cms
+          if-no-files-found: ignore
+          retention-days: 1
+          compression-level: 0
       - if: always()
         run: node scripts/autonomy-agent/ci-proof.mjs summarize
         env:

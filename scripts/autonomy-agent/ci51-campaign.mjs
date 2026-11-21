@@ -3,7 +3,7 @@ import {ACTIONS_LIMIT,CI51_TEMPORARY_LIMIT,CONTROL_ALLOWANCE,allocation,chargedM
 export const campaignBase='codex/ci51-receipt-base';
 export const campaignAlternate='codex/ci51-receipt-alternate';
 export const campaignHead='codex/ci51-receipt-candidate';
-export const expiresAt=Date.parse('2026-11-19T18:00:00Z');
+export const expiresAt=Date.parse('2026-11-22T18:20:00Z');
 const repository='Aimericv/puzzoria';
 const stages=['opened','ready_for_review','converted_to_draft'];
 
