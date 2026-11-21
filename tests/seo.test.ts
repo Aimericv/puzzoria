@@ -237,3 +237,5 @@ describe("structured data", () => {
     ]);
   });
 });
+
+// Select existing SEO tests for the isolated receipt validation.
